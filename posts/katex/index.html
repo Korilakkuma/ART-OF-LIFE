@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
 <head>
-    <title>ART OF LIFE</title>
+    <title>KaTex で数式を表示する &middot; ART OF LIFE</title>
     <meta name="generator" content="Hugo 0.55.6" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
     
-      <meta name="description" content="Art (Computer Science と Music) についての Blog">
+      <meta name="description" content="Web ページで数式を表示するために, KaTex を導入してみた">
     
     
-      <link href="https://art-of-life.jp/index.xml" rel="alternate" type="application/rss+xml" title="ART OF LIFE" />
-      <link href="https://art-of-life.jp/index.xml" rel="feed" type="application/rss+xml" title="ART OF LIFE" />
-    
-    <link rel="canonical" href="https://art-of-life.jp/"/>
+    <link rel="canonical" href="https://art-of-life.jp/posts/katex/"/>
     <link rel="icon" href="https://art-of-life.jp/favicon.ico">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
@@ -23,22 +20,30 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="ART OF LIFE" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://art-of-life.jp/" />
-
-<meta property="og:updated_time" content="2019-05-28T19:46:00&#43;09:00"/>
+    <meta property="og:title" content="KaTex で数式を表示する" />
+<meta property="og:description" content="Web ページで数式を表示するために, KaTex を導入してみた" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://art-of-life.jp/posts/katex/" />
+<meta property="article:published_time" content="2019-05-28T19:46:00&#43;09:00"/>
+<meta property="article:modified_time" content="2019-05-28T19:46:00&#43;09:00"/>
 
     
     
-<meta itemprop="name" content="ART OF LIFE">
-<meta itemprop="description" content="">
+<meta itemprop="name" content="KaTex で数式を表示する">
+<meta itemprop="description" content="Web ページで数式を表示するために, KaTex を導入してみた">
 
+
+<meta itemprop="datePublished" content="2019-05-28T19:46:00&#43;09:00" />
+<meta itemprop="dateModified" content="2019-05-28T19:46:00&#43;09:00" />
+<meta itemprop="wordCount" content="439">
+
+
+
+<meta itemprop="keywords" content="JavaScript,Mathematics," />
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="ART OF LIFE"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="KaTex で数式を表示する"/>
+<meta name="twitter:description" content="Web ページで数式を表示するために, KaTex を導入してみた"/>
 <meta name="twitter:site" content="@xsoundjs"/>
 
     
@@ -78,7 +83,7 @@
           
           <a class="main-nav-link" href="https://art-of-life.jp/about/">About</a>
           
-          <a class="main-nav-link" href="https://art-of-life.jp/posts/mathjax/">MathJax で数式を表示する</a>
+          <a class="main-nav-link" href="https://art-of-life.jp/posts/katex/">KaTex で数式を表示する</a>
           
 
           
@@ -127,7 +132,7 @@
           
           <td><a class="main-nav-link" href="https://art-of-life.jp/about/">About</a></td>
           
-          <td><a class="main-nav-link" href="https://art-of-life.jp/posts/mathjax/">MathJax で数式を表示する</a></td>
+          <td><a class="main-nav-link" href="https://art-of-life.jp/posts/katex/">KaTex で数式を表示する</a></td>
           
 
           
@@ -257,17 +262,14 @@
 
     <section id="main">
     
-    
-
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
-        </a>
 
         <header class="article-header">
-    <a href="https://art-of-life.jp/posts/mathjax/">
+    <a href="https://art-of-life.jp/posts/katex/">
     <h1 class="article-title" itemprop="name">
-        MathJax で数式を表示する
+        KaTex で数式を表示する
     </h1>
     </a>
     <div class="article-meta">
@@ -277,7 +279,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-05-28 19:46:00 &#43;0900 JST" itemprop="datePublished">2019-05-28</time>
             &middot;
-            392
+            439
             words
             &middot;
             1
@@ -323,22 +325,71 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            <p>
-                Web ページで数式を表示するために, MathJax を導入してみた
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/mathjax/">
-                    Read more
-                </a>
-            </p>
+            
+
+<h1 id="katex">KaTex</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>Web ページ (HTML) で数式を表示するための JavaScript ライブラリです. 同様のものに, <a href="https://plugins.jquery.com/jsLaTeX/">jsLatex</a> がありますが, こちらは jQuery のプラグインであるので, jQuery を利用しないことが多い, SPA (Single Page Application) では使えません. <a href="https://katex.org/">KaTex</a> は, 単体で利用可能で, SSR (Server Side Rendering) にも対応しているそうです.</p>
+
+<h2 id="usage">Usage</h2>
+
+<p><a href="https://github.com/KaTeX/KaTeX">README</a> にあるように, 1 つの CSS と 2 つの JavaScript ファイルを読み込みます.</p>
+
+<pre><code class="language-HTML">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css&quot; integrity=&quot;sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j&quot; crossorigin=&quot;anonymous&quot;&gt;
+&lt;script defer src=&quot;https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js&quot; integrity=&quot;sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>必要な JavaScript ファイルを読み込むと, <code>katex</code> というグローバルオブジェクトが参照できるので, その <code>render</code> メソッドを利用します. 引数には,以下の 3 つを指定します.</p>
+
+<ol>
+<li>数式の LaTex</li>
+<li>数式を表示する DOM</li>
+<li><code>{ throwOnError : false }</code> を指定します</li>
+</ol>
+
+<p>もう, 1 つ <code>renderToString</code> というメソッドもあり, こちらは戻り値として, 数式を表現するための HTML が返ってきます. 引数には, 以下の 2 つを使用します</p>
+
+<ol>
+<li>数式の LaTex</li>
+<li><code>{ throwOnError : false }</code> を指定します</li>
+</ol>
+
+<h2 id="example">Example</h2>
+
+<h3 id="フーリエ変換">フーリエ変換</h3>
+
+<div>$X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt\ \ (-\infty \leqq f \leqq \infty)$</div>
+
+<pre><code class="language-HTML">&lt;div&gt;$X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt\ \ (-\infty \leqq f \leqq \infty)$&lt;/div&gt;
+</code></pre>
+
+<h3 id="離散フーリエ変換">離散フーリエ変換</h3>
+
+<div>$X(k) = \sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)\ \ (0 \leqq k \leqq N-1)$<div>
+
+```HTML
+<div>$X(k) = \sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)\ \ (0 \leqq k \leqq N-1)$<div>
+```
+
+### コンボリューション積分
+
+<div>$s_1(n) = \sum_{m=0}^{J}b(m)s_0(n-m)$</div>
+
+<pre><code class="language-HTML">&lt;div&gt;$s_1(n) = \sum_{m=0}^{J}b(m)s_0(n-m)$&lt;/div&gt;
+</code></pre>
+
+<p>以上です. 初回は, 簡単に, そして, プログラミングと数学ということをテーマにしてみました.</p>
+
         </div>
         <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/mathjax/" data-id="2809ea3426156f4b4c8d1f4e6019b6e2" class="article-share-link">
+    <a data-url="https://art-of-life.jp/posts/katex/" data-id="b0c91845510d947d2c1fce9234e9c44d" class="article-share-link">
         <i class="fa fa-share"></i>
         Share
     </a>
     
-    <a href="https://art-of-life.jp/posts/mathjax/#disqus_thread" class="article-comment-link">
+    <a href="https://art-of-life.jp/posts/katex/#disqus_thread" class="article-comment-link">
         Comments
     </a>
     
@@ -410,139 +461,49 @@
 </footer>
 
     </div>
-</article>
 
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/art-of-2019/">
-    <h1 class="article-title" itemprop="name">
-        2019 年度の ART OF LIFE
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-05-26 23:58:23 &#43;0900 JST" itemprop="datePublished">2019-05-26</time>
-            &middot;
-            801
-            words
-            &middot;
-            2
-            minute read
-        </div>
-        
-        
-            
-            
-        
-
-        
-            
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                2019 年度の ART 目標
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/art-of-2019/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/art-of-2019/" data-id="8799bd0b3aa354021e78bf40eb5264f9" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
     
-    <a href="https://art-of-life.jp/posts/art-of-2019/#disqus_thread" class="article-comment-link">
-        Comments
+<nav id="article-nav">
+    
+    <a href="https://art-of-life.jp/posts/art-of-2019/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">2019 年度の ART OF LIFE</div>
     </a>
     
 
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
-
-<nav id="page-nav">
-
+    
 </nav>
+
+
+</article>
+
+
+<section id="comments">
+    <div id="disqus_thread">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Korilakkuma" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+</section>
 
 
     </section>

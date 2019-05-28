@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>プログラミング on ART OF LIFE</title>
+    <link>https://art-of-life.jp/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/</link>
+    <description>Recent content in プログラミング on ART OF LIFE</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Tue, 28 May 2019 19:46:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://art-of-life.jp/categories/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>KaTex で数式を表示する</title>
+      <link>https://art-of-life.jp/posts/katex/</link>
+      <pubDate>Tue, 28 May 2019 19:46:00 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/katex/</guid>
+      <description>KaTex Overview Web ページ (HTML) で数式を表示するための JavaScript ライブラリです. 同様のものに, jsLatex がありますが, こちらは jQuery のプラグインであるので, jQuery を利用しないことが多</description>
+    </item>
+    
+  </channel>
+</rss>
