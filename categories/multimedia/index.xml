@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Programming on ART OF LIFE</title>
-    <link>https://art-of-life.jp/categories/programming/</link>
-    <description>Recent content in Programming on ART OF LIFE</description>
+    <title>Multimedia on ART OF LIFE</title>
+    <link>https://art-of-life.jp/categories/multimedia/</link>
+    <description>Recent content in Multimedia on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <lastBuildDate>Wed, 29 May 2019 20:00:59 +0900</lastBuildDate>
     
-	<atom:link href="https://art-of-life.jp/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://art-of-life.jp/categories/multimedia/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://art-of-life.jp/posts/webrtc-overview/</guid>
       <description>WebRTC Overview WebRTC (Web Real-Time Communication) は, ブラウザ (ピア) での音声・動画通信, データ共有を可能にする技術です. したがって, 様々な標準プロトコル (UDP など) や JavaScript API の集合体で</description>
-    </item>
-    
-    <item>
-      <title>MathJax で数式を表示する</title>
-      <link>https://art-of-life.jp/posts/mathjax/</link>
-      <pubDate>Tue, 28 May 2019 19:46:00 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/mathjax/</guid>
-      <description>MathJax Overview Web ページ (HTML) で数式を表示するための JavaScript ライブラリです. 同様のものに, jsLatex がありますが, こちらは jQuery のプラグインであるので, jQuery を利用しないことが多</description>
     </item>
     
   </channel>

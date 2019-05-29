@@ -6,10 +6,19 @@
     <description>Recent content on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 28 May 2019 19:46:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 29 May 2019 20:00:59 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>WebRTC の概要</title>
+      <link>https://art-of-life.jp/posts/webrtc-overview/</link>
+      <pubDate>Wed, 29 May 2019 20:00:59 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/webrtc-overview/</guid>
+      <description>WebRTC Overview WebRTC (Web Real-Time Communication) は, ブラウザ (ピア) での音声・動画通信, データ共有を可能にする技術です. したがって, 様々な標準プロトコル (UDP など) や JavaScript API の集合体で</description>
+    </item>
     
     <item>
       <title>MathJax で数式を表示する</title>

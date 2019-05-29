@@ -6,7 +6,7 @@
     <description>Recent content in Tags on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 28 May 2019 19:46:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 29 May 2019 20:00:59 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>JavaScript</title>
       <link>https://art-of-life.jp/tags/javascript/</link>
-      <pubDate>Tue, 28 May 2019 19:46:00 +0900</pubDate>
+      <pubDate>Wed, 29 May 2019 20:00:59 +0900</pubDate>
       
       <guid>https://art-of-life.jp/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WebRTC</title>
+      <link>https://art-of-life.jp/tags/webrtc/</link>
+      <pubDate>Wed, 29 May 2019 20:00:59 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/webrtc/</guid>
       <description></description>
     </item>
     

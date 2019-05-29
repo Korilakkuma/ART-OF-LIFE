@@ -28,7 +28,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://art-of-life.jp/" />
 
-<meta property="og:updated_time" content="2019-05-28T19:46:00&#43;09:00"/>
+<meta property="og:updated_time" content="2019-05-29T20:00:59&#43;09:00"/>
 
     
     
@@ -178,7 +178,7 @@
       </div>
       <div class="article-info-block">
         
-          2
+          3
         
         <span>
             Tags
@@ -258,6 +258,167 @@
     <section id="main">
     
     
+
+<article class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        </a>
+
+        <header class="article-header">
+    <a href="https://art-of-life.jp/posts/webrtc-overview/">
+    <h1 class="article-title" itemprop="name">
+        WebRTC の概要
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2019-05-29 20:00:59 &#43;0900 JST" itemprop="datePublished">2019-05-29</time>
+            &middot;
+            2626
+            words
+            &middot;
+            6
+            minute read
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/multimedia">Multimedia</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/video">Video</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/audio">Audio</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/javascript">JavaScript</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/webrtc">WebRTC</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>
+                WebRTC による P2P の概要を整理してみた
+            </p>
+            <p class="article-more-link">
+                <a href="https://art-of-life.jp/posts/webrtc-overview/">
+                    Read more
+                </a>
+            </p>
+        </div>
+        <footer class="article-footer">
+    <a data-url="https://art-of-life.jp/posts/webrtc-overview/" data-id="a766a89ba7344f0534e79ef5b5831cef" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+    <a href="https://art-of-life.jp/posts/webrtc-overview/#disqus_thread" class="article-comment-link">
+        Comments
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+</article>
 
 <article class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
@@ -572,6 +733,14 @@
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
+                    audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
@@ -580,8 +749,24 @@
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
+                    multimedia
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/video">
+                    video
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -608,13 +793,21 @@
                 <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
                     javascript
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webrtc">
+                    webrtc
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -640,6 +833,9 @@
         
         
         <a href="https://art-of-life.jp/tags/mathematics" style="font-size: 12px;">mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
     </div>
 </div>
