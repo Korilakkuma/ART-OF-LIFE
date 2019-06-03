@@ -4,7 +4,7 @@ categories = []
 date = "2019-05-26T23:58:23+09:00"
 description = "2019 年度の ART 目標"
 images = []
-menu = "main"
+menu = ""
 tags = []
 title = "2019 年度の ART OF LIFE"
 +++

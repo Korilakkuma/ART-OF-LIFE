@@ -4,7 +4,7 @@ categories = ["Programming", "Mathematics"]
 date = "2019-05-28T19:46:00+09:00"
 description = "Web ページで数式を表示するために, MathJax を導入してみた"
 images = []
-menu = "main"
+menu = ""
 tags = ["JavaScript", "Mathematics"]
 title = "MathJax で数式を表示する"
 +++
