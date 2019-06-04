@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Computer Sience on ART OF LIFE</title>
+    <link>https://art-of-life.jp/categories/computer-sience/</link>
+    <description>Recent content in Computer Sience on ART OF LIFE</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Tue, 04 Jun 2019 22:28:54 +0900</lastBuildDate>
+    
+	<atom:link href="https://art-of-life.jp/categories/computer-sience/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ホワイトボードコーディングを支える技術</title>
+      <link>https://art-of-life.jp/posts/coding-exam/</link>
+      <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/coding-exam/</guid>
+      <description>ホワイトボードコーディングとは ? プログラマとして就職活動や転職活動をしていると頻繁に課される選考試験の 1 つです. その名前のとおり, ひととおり</description>
+    </item>
+    
+  </channel>
+</rss>

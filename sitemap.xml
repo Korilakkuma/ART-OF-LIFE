@@ -4,18 +4,65 @@
   
   <url>
     <loc>https://art-of-life.jp/</loc>
-    <lastmod>2019-05-29T20:00:59+09:00</lastmod>
+    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/categories/audio/</loc>
-    <lastmod>2019-05-29T20:00:59+09:00</lastmod>
+    <loc>https://art-of-life.jp/tags/algorithm/</loc>
+    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/</loc>
+    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/computer-sience/</loc>
+    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/data-structures/</loc>
+    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/jobs/</loc>
+    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/</loc>
+    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/programming/</loc>
+    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/</loc>
+    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/coding-exam/</loc>
+    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/audio/</loc>
     <lastmod>2019-05-29T20:00:59+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -28,24 +75,6 @@
   
   <url>
     <loc>https://art-of-life.jp/categories/multimedia/</loc>
-    <lastmod>2019-05-29T20:00:59+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/posts/</loc>
-    <lastmod>2019-05-29T20:00:59+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/programming/</loc>
-    <lastmod>2019-05-29T20:00:59+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/</loc>
     <lastmod>2019-05-29T20:00:59+09:00</lastmod>
     <priority>0</priority>
   </url>
