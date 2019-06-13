@@ -4,18 +4,77 @@
   
   <url>
     <loc>https://art-of-life.jp/</loc>
-    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/algorithm/</loc>
-    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/</loc>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/javascript/</loc>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/media-source-extensions/</loc>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/multimedia/</loc>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/oss/</loc>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/</loc>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/programming/</loc>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/</loc>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/video/</loc>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/hls.js/</loc>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/hlsjs-contributor/</loc>
+    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/algorithm/</loc>
     <lastmod>2019-06-04T22:28:54+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -39,48 +98,12 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/posts/</loc>
-    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/programming/</loc>
-    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/</loc>
-    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://art-of-life.jp/posts/coding-exam/</loc>
     <lastmod>2019-06-04T22:28:54+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/audio/</loc>
-    <lastmod>2019-05-29T20:00:59+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/javascript/</loc>
-    <lastmod>2019-05-29T20:00:59+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/multimedia/</loc>
-    <lastmod>2019-05-29T20:00:59+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/video/</loc>
     <lastmod>2019-05-29T20:00:59+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -102,13 +125,13 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/categories/mathematics/</loc>
+    <loc>https://art-of-life.jp/tags/mathematics/</loc>
     <lastmod>2019-05-28T19:46:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/tags/mathematics/</loc>
+    <loc>https://art-of-life.jp/categories/mathematics/</loc>
     <lastmod>2019-05-28T19:46:00+09:00</lastmod>
     <priority>0</priority>
   </url>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Multimedia on ART OF LIFE</title>
-    <link>https://art-of-life.jp/categories/multimedia/</link>
-    <description>Recent content in Multimedia on ART OF LIFE</description>
+    <title>Media Source Extensions on ART OF LIFE</title>
+    <link>https://art-of-life.jp/tags/media-source-extensions/</link>
+    <description>Recent content in Media Source Extensions on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <lastBuildDate>Wed, 12 Jun 2019 23:30:29 +0900</lastBuildDate>
     
-	<atom:link href="https://art-of-life.jp/categories/multimedia/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://art-of-life.jp/tags/media-source-extensions/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://art-of-life.jp/posts/hlsjs-contributor/</guid>
       <description>HLS 正式には, HTTP Live Streaming の略で, Apple が開発したストリーミングプロトコルです. ストリーミングとは, 動画のように容量の大きなデータをすべてダウンロードし</description>
-    </item>
-    
-    <item>
-      <title>WebRTC の概要</title>
-      <link>https://art-of-life.jp/posts/webrtc-overview/</link>
-      <pubDate>Wed, 29 May 2019 20:00:59 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/webrtc-overview/</guid>
-      <description>WebRTC Overview WebRTC (Web Real-Time Communication) は, ブラウザ (ピア) での音声・動画通信, データ共有を可能にする技術です. したがって, 様々な標準プロトコル (UDP など) や JavaScript API の集合体で</description>
     </item>
     
   </channel>

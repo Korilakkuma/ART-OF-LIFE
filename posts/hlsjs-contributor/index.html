@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
 <head>
-    <title>WebRTC の概要 &middot; ART OF LIFE</title>
+    <title>hls.js のコントリビューターになろう &middot; ART OF LIFE</title>
     <meta name="generator" content="Hugo 0.55.6" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
     
-      <meta name="description" content="WebRTC による P2P の概要を整理してみた">
+      <meta name="description" content="hls.js のコントリビューターになるための道標">
     
     
-    <link rel="canonical" href="https://art-of-life.jp/posts/webrtc-overview/"/>
+    <link rel="canonical" href="https://art-of-life.jp/posts/hlsjs-contributor/"/>
     <link rel="icon" href="https://art-of-life.jp/favicon.ico">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
@@ -20,30 +20,30 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="WebRTC の概要" />
-<meta property="og:description" content="WebRTC による P2P の概要を整理してみた" />
+    <meta property="og:title" content="hls.js のコントリビューターになろう" />
+<meta property="og:description" content="hls.js のコントリビューターになるための道標" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://art-of-life.jp/posts/webrtc-overview/" />
-<meta property="article:published_time" content="2019-05-29T20:00:59&#43;09:00"/>
-<meta property="article:modified_time" content="2019-05-29T20:00:59&#43;09:00"/>
+<meta property="og:url" content="https://art-of-life.jp/posts/hlsjs-contributor/" />
+<meta property="article:published_time" content="2019-06-12T23:30:29&#43;09:00"/>
+<meta property="article:modified_time" content="2019-06-12T23:30:29&#43;09:00"/>
 
     
     
-<meta itemprop="name" content="WebRTC の概要">
-<meta itemprop="description" content="WebRTC による P2P の概要を整理してみた">
+<meta itemprop="name" content="hls.js のコントリビューターになろう">
+<meta itemprop="description" content="hls.js のコントリビューターになるための道標">
 
 
-<meta itemprop="datePublished" content="2019-05-29T20:00:59&#43;09:00" />
-<meta itemprop="dateModified" content="2019-05-29T20:00:59&#43;09:00" />
-<meta itemprop="wordCount" content="2626">
+<meta itemprop="datePublished" content="2019-06-12T23:30:29&#43;09:00" />
+<meta itemprop="dateModified" content="2019-06-12T23:30:29&#43;09:00" />
+<meta itemprop="wordCount" content="2593">
 
 
 
-<meta itemprop="keywords" content="JavaScript,WebRTC," />
+<meta itemprop="keywords" content="JavaScript,Media Source Extensions,hls.js," />
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="WebRTC の概要"/>
-<meta name="twitter:description" content="WebRTC による P2P の概要を整理してみた"/>
+<meta name="twitter:title" content="hls.js のコントリビューターになろう"/>
+<meta name="twitter:description" content="hls.js のコントリビューターになるための道標"/>
 <meta name="twitter:site" content="@xsoundjs"/>
 
     
@@ -259,9 +259,9 @@
         
 
         <header class="article-header">
-    <a href="https://art-of-life.jp/posts/webrtc-overview/">
+    <a href="https://art-of-life.jp/posts/hlsjs-contributor/">
     <h1 class="article-title" itemprop="name">
-        WebRTC の概要
+        hls.js のコントリビューターになろう
     </h1>
     </a>
     <div class="article-meta">
@@ -269,9 +269,9 @@
         
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2019-05-29 20:00:59 &#43;0900 JST" itemprop="datePublished">2019-05-29</time>
+            <time datetime="2019-06-12 23:30:29 &#43;0900 JST" itemprop="datePublished">2019-06-12</time>
             &middot;
-            2626
+            2593
             words
             &middot;
             6
@@ -297,7 +297,7 @@
                 &middot;
                 
                 
-                <a class="article-category-link" href="https://art-of-life.jp/categories/audio">Audio</a>
+                <a class="article-category-link" href="https://art-of-life.jp/categories/oss">OSS</a>
                 
                 
             </div>
@@ -315,7 +315,11 @@
                 &middot;
                 
                 
-                <a class="article-category-link" href="https://art-of-life.jp/tags/webrtc">WebRTC</a>
+                <a class="article-category-link" href="https://art-of-life.jp/tags/media-source-extensions">Media Source Extensions</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/hls.js">hls.js</a>
                 
                 
             </div>
@@ -327,349 +331,106 @@
         <div class="article-entry" itemprop="articleBody">
             
 
-<h1 id="webrtc">WebRTC</h1>
+<h1 id="hls">HLS</h1>
 
-<h2 id="overview">Overview</h2>
+<p>正式には, HTTP Live Streaming の略で, Apple が開発したストリーミングプロトコルです.
+ストリーミングとは, 動画のように容量の大きなデータをすべてダウンロードしてから再生開始するのではなく, ダウンロードしたデータから再生を開始し, 再生している間も残りのデータをダウンロードし続ける仕組みです.</p>
 
-<p>WebRTC (Web Real-Time Communication) は, ブラウザ (ピア) での音声・動画通信, データ共有を可能にする技術です.
-したがって, 様々な標準プロトコル (UDP など) や JavaScript API の集合体で定義されています.
-&hellip; とは言え, ブラウザ API (JavaScript API) の視点では, 大きく 2 つの API に集約されます.</p>
+<p>HLS は, HTTP という名前が付いているように, HTTP を利用したストリーミングプロトコルなので, Web サーバーで配信することも可能です.</p>
 
-<h3 id="mediastream">MediaStream</h3>
+<p>HLS を構成するファイルは, 分割されたデータ (<b>セグメントファイル</b>) と, これらのセグメントファイルをどの順番で再生するかを記したファイル (<b>プレイリストファイル</b>). セグメントファイルは, MPEG2-TS (Transport Stream) 形式のバイナリデータ, プレイリストファイルは拡張子が m3u8 というテキストデータとなっています.</p>
 
-<p>音声や動画のストリームを取得.</p>
+<h1 id="hls-js-と-media-source-extensions">hls.js と Media Source Extensions</h1>
 
-<h3 id="rtcpeerconnection">RTCPeerConnection</h3>
+<p>HLS は Apple が開発したプロトコルであるので, Safari のみプレイリストファイルを, <code>HTMLVideoElement#src</code> に設定するだけで再生することが可能です. しかしながら, Chrome や Firefox, Edge や IE11 では直接プレイリストファイルを解釈したり, 分割されたデータを再生可能な単位に再構築することができないので, <a href="https://www.w3.org/TR/media-source/">Media Source Extensions</a> を利用します. Media Source Extensions は, HTTP ダウンロードを利用してストリーミングするための JavaScript API です.</p>
 
-<p>音声や動画の通信.</p>
+<p>hls.js は, この Media Source Extensions を利用してセグメントファイルを再生する以外にも, プレイリストファイルやセグメントファイルの取得, プレイリストファイルのパース, WebWorker を利用して MP4 を demux (映像と音声の分離), ビットレートの調整 (Adaptive Bitrate Streaming) など数多くのタスクを裏側で実行してくれます. hls.js を利用する開発者からすると, <code>video</code> タグと, hls.js が提供するいくつかの API を知っているだけで, HLS によるストリーミング再生がブラウザで可能になります.</p>
 
-<!--
-### RTCDataChannel
+<h1 id="hls-js-のコントリビューターになろう">hls.js のコントリビューターになろう</h1>
 
-アプリケーションデータの通信.
+<p>ここからが本題ですね. hls.js のコントリビューターになるためにはどうすればいいのでしょうか &hellip; ?</p>
 
--->
+<h2 id="小さなことから始めよう">小さなことから始めよう</h2>
 
-<h2 id="ストリームの取得">ストリームの取得</h2>
+<p>例えば, README の間違いを修正して, PR を送って, マージされるだけでもコントリビュートすることにはなります.
+hls.js に限らず, ある程度規模のある OSS にコントリビュートするには, まずはそういった小さなことから, その OSS における雰囲気みたいなのを知ることが, 今後コントリビュートしていくうえでの敷居を下げると思います (例えば, ブランチの命名や, issue や PR のフォーマットしたがった記述, また, 英語が苦手な方であれば少しずつ英語に慣れる &hellip; etc). そして, さいわい, hls.js のコラボレーターの方はみんな優しいです w.</p>
 
-<p><code>navigator.mediaDecives.getUserMedia</code> メソッドを利用して, 音声や動画を取得します
-(<code>navigator.getUserMedia</code> メソッドは, 古い仕様なので利用しないでください).
-引数に渡すプレインオブジェクトには, 様々な<a href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API/Constraints#Result">オプション</a>を設定できます (ノイズ除去, 画像補正 &hellip; etc).
-戻り値は, <code>Promise</code> で, 成功した場合のコールバックの引数には, <code>MediaStream</code> インスタンスが渡されます.</p>
-
-<p>また, よくあるコード例がここから <code>HTMLVideoElement</code> で表示することですが, 最新の仕様と, 古い仕様で処理が大きく異なる点に注意してください.</p>
-
-<pre><code class="language-JavaScript">const constraints = {
-  audio: true,
-  video: true
-};
-
-navigator.mediaDecives.getUserMedia(constraints)
-  .then((stream) =&gt; {
-    const video = document.querySelector('video#local');
-
-    if ('srcObject' in video) {
-      video.srcObject = stream;
-    } else {
-      // legacy
-      video.src = window.URL.createObjectURL(stream);
-    }
-  })
-  .catch((error)) =&gt; {
-    console.error(error);
-  });
-</code></pre>
-
-<p>WebRTC は, 音声や動画に対して, 音質や画質の最適化, 音声と映像の同期, 出力ビットレートの調整などの複雑な処理を隠蔽しているので, アプリケーション実装側で, それらを意識することなく, 最適化されたストリームを取得できます.</p>
-
-<h3 id="mediastream-1">MediaStream</h3>
+<p>狙い目は以下のようなところでしょうか &hellip;</p>
 
 <ul>
-<li><code>MediaStream</code> は 1 つ以上のトラック (<code>MediaStreamTrack</code>) によって構成される</li>
-<li><code>MediaStream</code> に格納されている複数のトラックは同期されている</li>
-<li>入力ソースは, マイクロフォンや Web カメラなどの物理デバイス, ディスクファイルなど</li>
-<li><code>MediaStream</code> は, ローカルの動画や音声要素, ポストプロセスを実行する JavaScript, リモートピアなど 1 つ以上の出力先に送信可能</li>
+<li>README などドキュメント系の更新や修正</li>
+<li>環境構築系 (ビルド環境や CI など)</li>
+<li>Lint 対応</li>
 </ul>
 
-<h4 id="gettracks">getTracks</h4>
+<p>勉強会などでもよく言われる, OSS にコントリビュートするにはなどでよく言われることです.</p>
 
-<p>MediaStream にはいくつかのトラックが含まれています (例えば, 動画と音声なら 2 つ). <code>MediaStream#getTracks</code> は, それらを <code>MediaStreamTrack</code> として個別に取得します. また, <code>MediaStream#getAudioTracks</code>, <code>MediaStream#getVideoTracks</code> メソッドでは, それぞれ, 音声のみ, 映像のみの <code>MediaStreamTrack</code> を取得することが可能です.</p>
+<p>ちなみに, わたしの例だと, 初めてのコントリビュートは, <a href="https://github.com/video-dev/hls.js/pull/1693">CI の修正</a>です.
+そして, 意外にも, 最も大きなコントリビュートが, <a href="https://github.com/video-dev/hls.js/pull/1762">webpack のバージョンアップと TypeScript コンパイラに移行</a> したことです.</p>
 
-<p>また, 後述する <code>RTCPeerConnection</code> には <code>addTrack</code> というメソッドがあるので, これを利用してトラックを自身に設定します.</p>
+<h2 id="コア部分へのコントリビュート">コア部分へのコントリビュート</h2>
 
-<pre><code class="language-JavaScript">const constraints = {
-  audio: true,
-  video: true
-};
+<p>コントリビュートが増えていくと, コア部分 (<code>/src</code> 以下) へコントリビュートしたくなるものです. しかし, 規模のある OSS ではやみくもにソースコードをリーディングしても (たまたま, 見つかるかもしれないですが) ヒット率は極めて低いでしょう.</p>
 
-navigator.mediaDecives.getUserMedia(constraints)
-  .then((stream) =&gt; {
-    for (const track of stream.getTracks()) {
-      peerConnection.addTrack(track, stream);
-    }
-
-    const video = document.querySelector('video#local');
-
-    if ('srcObject' in video) {
-      video.srcObject = stream;
-    } else {
-      // legacy
-      video.src = window.URL.createObjectURL(stream);
-    }
-  })
-  .catch((error)) =&gt; {
-    console.error(error);
-  });
-</code></pre>
-
-<h2 id="rtcpeerconnection-1">RTCPeerConnection</h2>
-
-<h3 id="udp">UDP</h3>
-
-<p>WebRTC は, データの転送に UDP (User Datagram Protocol) を利用します.
-その理由は, データの信頼性よりも適時性が要求されるからです.
-UDP は, TCP とは対照的です.</p>
-
-<dl>
-  <dt>メッセージの到着を保証しない</dt>
-  <dd>通知, 再送, タイムアウトは存在しない</dd>
-  <dt>到着順序を保証しない</dt>
-  <dd>パケットのシーケンス番号, 再構成, HoL ブロッキングは存在しない</dd>
-  <dt>接続状況の追跡をしない</dt>
-  <dd>接続確立や中継のステートマシンは存在しない</dd>
-  <dt>輻輳制御をしない</dt>
-  <dd>ビルトインのクライアントやネットワークフィードバックの仕組みをもたない</dd>
-</dl>
-
-<p>実際には, DTLS (Datagram Transport Layer Security), SRTP (Secure Real-Time Transport Protocol) や SCTP (Stream Control Transmission Protocol) が追加で利用されており, UDP でありながら, TCP ライクなデータ転送を実現します.</p>
-
-<h3 id="rtcpeerconnection-api">RTCPeerConnection API</h3>
-
-<p>しかしながら, 上記にあげたプロトコルのほとんどは, <code>RTCPeerConnection</code> という JavaScript API に隠蔽されており, アプリケーション開発者が意識することはほとんどありません.</p>
-
-<pre><code class="language-JavaScript">const options = {
-};
-
-const peerConnection = new RTCPeerConnection(options);
-</code></pre>
-
-<p>まずは, オプションを引数にインスタンスを生成する必要がありますが, このオプションしてには, ICE を理解しておく必要があります.</p>
-
-<h4 id="ice">ICE</h4>
-
-<p>ICE (Interactive Connective Establishment) とは, WebRTC の通信経路候補を収集します.
-デフォルトでは, プライベートネットワーク限定で経路を収集しますが, 多くの場合, インターネット間で通信をしたいはずです.</p>
-
-<p>そのためには, ホストの IP アドレスが, インターネット側からどうなっているのかを, サーバーに問い合わせます.
-このサーバーを STUN (Session Traversal Utilities for NAT) と呼びます.</p>
-
-<p>また, ファイアウォールなど, 制約の多いネットワークでは, 自由に通信経路を選択できないので, 中継サーバーを利用します.
-このサーバーを TURN (Traversal Using Relays around NAT) と呼びます.</p>
-
-<h4 id="シグナリング">シグナリング</h4>
-
-<p>P2P 通信を確立するための手順です. 一般的には, シグナリングサーバーを構築します.
-WebSocket を利用した簡易的なシグナリンサーバーの実装例です.</p>
-
-<pre><code class="language-JavaScript">const WebSocketServer = require('ws').Server;
-const port = (process.argv[2] &gt; 0) &amp;&amp; (process.argv[2] &lt;= 65535) ? process.argv[2] : 3000;
-
-const ws = new WebSocketServer({ port });
-
-console.log(`Wait port (${port}) ...`);
-
-const sockets = [];
-
-ws.on('connection', (socket) =&gt; {
-  sockets.push(socket);
-
-  socket.on('message', (message) =&gt; {
-    ws.clients.forEach((client) =&gt; {
-      if (socket !== client) {
-        client.send(message);
-      } else {
-        console.log('--- Skip Sender ---');
-      }
-    });
-  });
-});
-</code></pre>
-
-<p>P2P 通信を確立するためには, 通信要件をネゴシエーションする必要があります.</p>
+<p>やはり, やみくもによりは,</p>
 
 <ul>
-<li>送受信の対象 (動画 ? 音声 ? データ ?, コーデックは ? &hellip; etc)</li>
-<li>通信経路 (IP アドレスとポート番号)</li>
+<li>コントリビュートするためのスキル</li>
+<li><code>/src</code> 以下の構成の把握</li>
+<li>issue 対応</li>
 </ul>
 
-<p>これらの通信要件は, SDP (Session Description Protocol) というフォーマットに記述され, P2P の確立のために送受信されます.</p>
+<p>これらを順に, あるいは, 同時的に進めていくのが, 結果としてはヒット率が高くなると思います.</p>
 
-<p>まずは, オファーの SDP を生成してシグナリングします.
-そのためには, <code>RTCPeerConnection#createOffer</code> メソッドを利用します.
-戻り値は, <code>Promise</code> で成功時のコールバックに <code>RTCSessionDescription</code> が渡されます (古い仕様では <code>Promise</code> は返らないので注意してください).
-また, シグナリングと同時に, 自身の設定として <code>RTCPeerConnection</code> に反映するために, <code>RTCPeerConnection#setLocalDescription</code> メソッドを利用します.</p>
+<h3 id="コントリビュートするためのスキル">コントリビュートするためのスキル</h3>
 
-<pre><code class="language-JavaScript">const ice = {
-  iceServers: [
-    { url: 'stun:stunserver.com:12345' },
-    { url: 'turn:user@turnserver.com'. creadentials: 'pass' }
-  ]
-};
+<h4 id="javascript">JavaScript</h4>
 
-const signalingChannel = new SignalingChannel('ws://localhost:3000/');
-const peerConnection = new RTCPeerConnection(ice);
+<p>ES5 のコードがところどころ混ざっていますが, おおよそは ES2015 ~ で記述されています. また, 現在, <a href="https://github.com/video-dev/hls.js/issues/2070">TypeScript への以降</a> が進められているので, 今後, TypeScript が必須となってきます.</p>
 
-peerConnection.createOffer()
-  .then((offer) =&gt; {
-    peerConnection.setLocalDescription(offer);
-    signalingChannel.send(offer);
-  });
-  .catch((error) =&gt; {
-    console.error(error);
-  });
-</code></pre>
+<h4 id="javascript-api">JavaScript API</h4>
 
-<p><code>SignalingChannel</code> は, クライアントにおけるシグナリング処理をまとめたクラスです (以下は, 実装例です).</p>
+<p>Media Source Extensions を利用していることは述べましたが, そのほかにも, XMLHttpRequest や fetch, WebWorker, そして, HTMLVideoElement が利用されているので, これらの API についての理解も必要になってきます.</p>
 
-<pre><code class="language-JavaScript">class SignalingChannel {
-  constructor(url, onopen, onerror) {
-    this.websocket = new WebSocket(url);
+<h4 id="コンテナ-コーデック">コンテナ・コーデック</h4>
 
-    this.websocket.onopen  = Object.prototype.toString.call(onopen) === '[object Function]' ? onopen  : () =&gt; {};
-    this.websocket.onerror = Object.prototype.toString.call(onopen) === '[object Function]' ? onerror : () =&gt; {};
-  }
+<p>有名な JavaScript の OSS (例えば, React など) と決定的に異なるのは, 動画コンテナやコーデックの理解が必要になることと, そのために数学を要することです. 動画コンテナとは, 映像と音声のファイルのまとめ方や映像と音声の同期情報のことで, 例えば, MP4, MOV, MPEG などが該当します. また, コーデックとは, 映像や音声を圧縮するアルゴリズムのことで, 例えば, 映像であれば, H.265, VP9, MPEG-4, 音声であれば, AAC, MP3, WAV などが該当します.</p>
 
-  send(sessionDescription) {
-    this.websocket.send(JSON.stringify(sessionDescription));
-  }
+<p>HLS で利用されるセグメントファイルは, MPEG2-TS 形式と述べました. したがって, 最低でも MPEG2-TS のコンテナフォーマットについては理解しておく必要があるでしょう. また, コーデック, つまり, 圧縮アルゴリズムを理解するためには, 情報理論 (ハフマン符号, DPCM 符号, エントロピー符号) と数学 (離散コサイン変換) の基礎が必要になってきます.</p>
 
-  message(offer, answer, candidate) {
-    this.websocket.onmessage = (event) =&gt; {
-      const message = JSON.parse(event.data);
+<p>コントリビュートするソースにもよりますが, demuxer などにコントリビュートする場合には, バイナリプログラミングに対する慣れ (?) みたいなのも必要になってくるかなと思います.</p>
 
-      switch (message.type) {
-        case 'offer':
-          if (Object.prototype.toString.call(offer) === '[object Function]') {
-            offer(message);
-          }
+<h3 id="src-以下の構成の把握"><code>/src</code> 以下の構成の把握</h3>
 
-          break;
-        case 'answer':
-          if (Object.prototype.toString.call(answer) === '[object Function]') {
-            answer(message);
-          }
+<p>現状, <code>/src</code> 以下の構成は,</p>
 
-          break;
-        default:
-          if (message.candidate &amp;&amp; (Object.prototype.toString.call(candidate) === '[object Function]')) {
-            candidate(message);
-          }
+<p><img src="https://user-images.githubusercontent.com/4006693/59401049-6646a600-8dd4-11e9-8e63-336af5873e27.png" alt="hls.js /src" /></p>
 
-          break;
-      }
-    };
-  }
-}
-</code></pre>
+<p>上記のようになっています. 実際に見ていただくと理解できるかもしれませんが, <code>src/loader</code> と <code>/src/controller</code> は比較的理解がしやすく, issue も比較的多いのでコントリビュートチャンスの多いソースになるのではないでしょうか.</p>
 
-<h4 id="トランスポートの候補">トランスポートの候補</h4>
+<h3 id="issue-対応">issue 対応</h3>
 
-<p>SDP を送信しても, トランスポート (IP アドレスとポート番号) の候補がないので通信できません.
-そこで, <code>RTCPeerConnection#onicecandidate</code> イベントを監視することで取得できます.</p>
+<p>必要なスキルを習得し, <code>/src</code> 以下の構成を把握しても, やはり, やみくもに進めてはヒット率は低いままです. 上記 2 つのことがある程度できていれば, issue の理解もある程度可能になっていると思われますので, あとは, issue どおりにデモを動作させてみて, チャンス ! と思えば, あとは修正するコードを書いて, PR を送ってみましょう. とは言え, 最初は結構な確率でクローズをくらいます w でも, 多くの人はそれが普通なので, めげずに継続あるのみです.</p>
 
-<pre><code class="language-JavaScript">peerConnection.onicecandidate = (event) =&gt; {
-  if (event.candidate) {
-    signalingChannel.send(event.candidate);
-  }
-};
-</code></pre>
+<h2 id="最大のチャンス">最大のチャンス</h2>
 
-<h4 id="アンサー側の処理">アンサー側の処理</h4>
+<p>先ほど, 少し述べましたが, hls.js では現在, <a href="https://github.com/video-dev/hls.js/issues/2070">TypeScript に移行</a> する issue があります. 何が言いたいかと言いますと, 既存のコードを TypeScript に書き換えるだけで, PR を送ることができるのです ! つまり, TypeScript が書ければ誰でも可能と言っていいでしょう. もちろん, 型情報が必要になるので, 単純に書き換え &hellip; というわけにはいきませんが, 既存のコードを移行する作業のなかで, コードリーディングもできるので, まさに一石二鳥です. これから, 動画エンジニアとして一歩踏み出したいけど &hellip; まだできていない方は, ぜひ PR を送ってみてください.</p>
 
-<p>シグナリングやトランスポート候補の監視は, 対となるピア (アンサー側と呼ぶことにします) でも実行する必要があります.
-対となるので, やっていることはほぼ同じなのですが, 対となるがゆえに, メソッドが異なる部分 (<code>RTCPeerConnection#setRemoteDescription,</code>RTCPeerConnection#createAnswer<code>) や,</code>WebSocket#onmessage` のイベントハンドラで処理を開始する部分などがオファー側と異なってきます.</p>
-
-<p>また, <code>RTCPeerConnection#addIceCandidate</code> メソッドは, 経路候補を即時に取り込みます.</p>
-
-<pre><code class="language-JavaScript">const ice = {
-  iceServers: [
-    { url: 'stun:stunserver.com:12345' },
-    { url: 'turn:user@turnserver.com'. creadentials: 'pass' }
-  ]
-};
-
-const signalingChannel = new SignalingChannel('ws://localhost:3000/');
-
-let peerConnection = null;
-
-const offer = (message) =&gt; {
-  peerConnection = new RTCPeerConnection(ice);
-  peerConnection.setRemoteDescription(message);
-
-  peerConnection.onicecandidate = (event) =&gt; {
-    if (event.candidate) {
-      signalingChannel.send(event.candidate);
-    }
-  };
-
-  navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-    .then((stream) =&gt; {
-      peerConnection.createAnswer()
-        .then((answer) =&gt; {
-          peerConnection.setLocalDescription(answer);
-          signalingChannel.send(answer);
-        })
-        .catch((error) =&gt; {
-          console.error(error);
-        });
-    })
-    .catch((error) =&gt; {
-      console.error(error);
-    });
-};
-
-const answer = (message) =&gt; peerConnection.setRemoteDescription(message);
-
-const candidate = (message) =&gt; peerConnection.addIceCandidate(message);
-
-signalingChannel.message(offer, answer, candidate);
-</code></pre>
-
-<h4 id="ontrack">ontrack</h4>
-
-<p>最後に &hellip; メディアが送受信されたときのイベントの監視です. そのためには, <code>RTCPeerConnection#ontrack</code> イベントを監視します (古い仕様では, <code>RTCPeerConnection#onaddstream</code> となっているので注意してください).</p>
-
-<pre><code class="language-JavaScript">peerConnection.ontrack = (event) =&gt; {
-  const remote = document.querySelector('video#remote');
-  remote.srcObject = event.streams[0] ? event.streams[0] : null;
-
-  remote.play()
-    .then(() =&gt; {})
-    .catch(() =&gt; {});
-};
-</code></pre>
-
-<h2 id="コード例-全体像">コード例 (全体像)</h2>
-
-<p>記事にした WebRTC の概要を, ローカルでデモできるリポジトリを作成したので, よかったら参考にしてみてください !</p>
-
-<p><a href="https://github.com/Korilakkuma/Signaling">Signaling</a></p>
-
-<h2 id="参考記事">参考記事</h2>
+<h1 id="リファレンス">リファレンス</h1>
 
 <ul>
-<li><a href="https://html5experts.jp/mganeko/20013/">シグナリングサーバーを動かそう ーWebRTC入門2016</a></li>
-<li><a href="https://lealog.hateblo.jp/entry/2019/04/22/095422">WebRTCやるのに最低限必要なJavaScriptのAPIについて</a></li>
+<li><a href="https://developer.apple.com/streaming/">HLS 仕様</a></li>
+<li><a href="https://ygoto3.com/posts/streaming-technology-basics-for-frontend-engineers/">フロントエンドエンジニアのための動画ストリーミング技術基礎</a></li>
 </ul>
 
         </div>
         <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/webrtc-overview/" data-id="a766a89ba7344f0534e79ef5b5831cef" class="article-share-link">
+    <a data-url="https://art-of-life.jp/posts/hlsjs-contributor/" data-id="ff792a00b01efc0ac5948d4049656ca3" class="article-share-link">
         <i class="fa fa-share"></i>
         Share
     </a>
     
-    <a href="https://art-of-life.jp/posts/webrtc-overview/#disqus_thread" class="article-comment-link">
+    <a href="https://art-of-life.jp/posts/hlsjs-contributor/#disqus_thread" class="article-comment-link">
         Comments
     </a>
     
@@ -745,21 +506,14 @@ signalingChannel.message(offer, answer, candidate);
     
 <nav id="article-nav">
     
-    <a href="https://art-of-life.jp/posts/mathjax/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="https://art-of-life.jp/posts/coding-exam/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">MathJax で数式を表示する</div>
+      <div class="article-nav-title">ホワイトボードコーディングを支える技術</div>
     </a>
     
 
-    
-    <a href="https://art-of-life.jp/posts/coding-exam/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">ホワイトボードコーディングを支える技術</div>
-    </a>
     
 </nav>
 
