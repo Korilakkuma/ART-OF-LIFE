@@ -78,7 +78,7 @@ hasCJKLanguage = true
     gitlab          = ""
     bitbucket       = ""
     jsfiddle        = ""
-    codepen         = ""
+    codepen         = "Korilakkuma"
     foursquare      = ""
     dribbble        = ""
     deviantart      = ""
@@ -101,7 +101,7 @@ hasCJKLanguage = true
     facebook        = ""
     facebook_admin  = ""
     twitter_domain  = ""
-    twitter         = "xsoundjs"
+    twitter         = "forever120527"
 
 # Enable and disable widgets for the right sidebar
 [params.widgets]
