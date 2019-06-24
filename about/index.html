@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>About &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.40.1" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -28,7 +28,18 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://art-of-life.jp/about/" />
 
+
+
 <meta property="og:updated_time" content="2019-05-26T17:27:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
 
     
     
@@ -269,9 +280,9 @@
         
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2019-05-26 17:27:00 &#43;0900 JST" itemprop="datePublished">2019-05-26</time>
+            <time datetime="2019-05-26 17:27:00 &#43;0900 DST" itemprop="datePublished">2019-05-26</time>
             &middot;
-            764
+            758
             words
             &middot;
             2
@@ -290,7 +301,7 @@
 <h1 id="art-of-life">ART OF LIFE</h1>
 
 <p><b>ART</b> には, <b>技術</b>と<b>芸術</b>という 2 つの意味があります.
-わたしにとって, 技術とはコンピュータ技術 (特に, <b>メディア技術</b>) であり, 芸術とは<b>音楽</b>が ART だと思っています.</p>
+わたしにとって, 技術とはコンピュータ技術 (特に, <b>メディア技術</b>) であり, 芸術とは<b>音楽</b>です.</p>
 
 <p>こんな理由から, X JAPAN の楽曲である <b>ART OF LIFE</b> をそのままブログのタイトルにしました.</p>
 
@@ -302,21 +313,10 @@
 
 <ul>
 <li>WebRTC</li>
-<li>hls.js (contributor)</li>
+<li>Streaming (hls.js)</li>
 </ul>
 
-<p>WebRTC は業務で利用したことはありませんが, 基本はおさえています.</p>
-
-<ul>
-<li>メディアストリームの取得 (<code>navigator.mediaDevices.getUserMedia</code>)</li>
-<li>SDP のオファー・アンサー</li>
-<li>ICE の経路候補探索
-
-<ul>
-<li>STUN サーバーの役割 (インターネット側からみたときの IP アドレスを伝える)</li>
-<li>TURN サーバーの役割 (純粋な P2P できない場合に, 中継サーバーとして働く)</li>
-</ul></li>
-</ul>
+<p>WebRTC は業務で利用したことはありませんが, JavaScript API はひととおり理解して実装可能なレベルです.</p>
 
 <p>hls.js の <a href="https://github.com/video-dev/hls.js/graphs/contributors">contributor</a> をやっていますが, まだまだ <code>src</code> 以下への contribute が少ないです &hellip;</p>
 
@@ -328,7 +328,7 @@
 </ul>
 
 <p>機能性の高いプロダクトを実装することが得意です.
-<a href="https://xsound.jp/">ライブラリ</a>, <a href="https://xsound.app/">Web アプリケーション</a>, <a href="https://web-sounder.net/">Web サイト</a>を実装・運用しています. 音楽理論よりは, 信号処理を得意としています.</p>
+<a href="https://xsound.jp/">ライブラリ</a>, <a href="https://xsound.app/">Web アプリケーション</a>, <a href="https://web-sounder.net/">Web サイト</a>を実装・運用しています. 作曲機能 (DAW) の実装よりは, 音信号処理をもとにした機能 (アナライザーやエフェクターなど) の実装を得意としています.</p>
 
 <h2 id="コンピュータサイエンス">コンピュータサイエンス</h2>
 
@@ -339,7 +339,14 @@
 <li>アルゴリズムとデータ構造</li>
 <li>OS (システムコールなど)</li>
 <li>ネットワーク (TCP/IP)</li>
-<li>基礎数学 (微分積分, 線形代数, 確率統計, 離散数学)</li>
+<li>基礎数学
+
+<ul>
+<li>微分積分</li>
+<li>線形代数</li>
+<li>確率統計</li>
+<li>離散数学</li>
+</ul></li>
 </ul>
 
 <h2 id="プログラミング言語">プログラミング言語</h2>
@@ -350,6 +357,16 @@
 <li>JavaScript (TypeScript)</li>
 <li>C / C++</li>
 </ul>
+
+<p>経験があって, ある程度利用可能な言語は,</p>
+
+<ul>
+<li>PHP</li>
+<li>Go</li>
+<li>Java</li>
+</ul>
+
+<p>などがありますが, JavaScript と C / C++ の学びに投資するため, 現在は, ほぼ利用しません.</p>
 
 <h2 id="ツール">ツール</h2>
 
@@ -369,7 +386,7 @@
 
 <ul>
 <li>アーキテクチャ設計</li>
-<li>技術選定や最新技術の追従</li>
+<li>最新技術の追従・技術選定</li>
 <li>開発環境構築</li>
 <li>UI / UX</li>
 <li>デザイン</li>
@@ -378,7 +395,7 @@
 <li>インフラ</li>
 </ul>
 
-<p>これらは, 仕事運用上必要なこと以外は, やらない方針です.</p>
+<p>これらは, 仕事運用上必要なこと以外は, ふれない方針です.</p>
 
 <h1 id="music">Music</h1>
 
@@ -706,17 +723,14 @@
 </footer>
 
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-41390233-1', 'auto');
-	
-	ga('send', 'pageview');
-}
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41390233-1', 'auto');
+ga('send', 'pageview');
 </script>
 
 <script src="https://art-of-life.jp/fancybox/jquery.fancybox.pack.js"></script>
