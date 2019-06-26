@@ -31,6 +31,7 @@ WebRTC (Web Real-Time Communication) は, ブラウザ (ピア) での音声・�
 アプリケーションデータの通信.
 
 -->
+
 ## ストリームの取得
 
 `navigator.mediaDecives.getUserMedia` メソッドを利用して, 音声や動画を取得します
@@ -150,8 +151,9 @@ ICE (Interactive Connective Establishment) とは, WebRTC の通信経路候補�
 
 #### シグナリング
 
-P2P 通信を確立するための手順です. 一般的には, シグナリングサーバーを構築します.
-WebSocket を利用した簡易的なシグナリンサーバーの実装例です.
+シグナリングとは, P2P 通信を確立するための手順です.  一般的には, シグナリングサーバーを構築します. 通信開始時点では, 通信相手となるホストの情報がわからないので, シグナリングサーバーに探してもらう必要があります.
+
+以下のコードは, WebSocket を利用した簡易的なシグナリングサーバーの実装例です.
 
 ```JavaScript
 const WebSocketServer = require('ws').Server;
@@ -271,7 +273,7 @@ peerConnection.onicecandidate = (event) => {
 #### アンサー側の処理
 
 シグナリングやトランスポート候補の監視は, 対となるピア (アンサー側と呼ぶことにします) でも実行する必要があります.
-対となるので, やっていることはほぼ同じなのですが, 対となるがゆえに, メソッドが異なる部分 (`RTCPeerConnection#setRemoteDescription, `RTCPeerConnection#createAnswer`) や, `WebSocket#onmessage` のイベントハンドラで処理を開始する部分などがオファー側と異なってきます.
+対となるので, やっていることはほぼ同じなのですが, 対となるがゆえに, メソッドが異なる部分 (`RTCPeerConnection#setRemoteDescription`, `RTCPeerConnection#createAnswer`) や, `WebSocket#onmessage` のイベントハンドラで処理を開始する部分などがオファー側と異なってきます.
 
 また, `RTCPeerConnection#addIceCandidate` メソッドは, 経路候補を即時に取り込みます.
 
@@ -327,7 +329,14 @@ signalingChannel.message(offer, answer, candidate);
 ```JavaScript
 peerConnection.ontrack = (event) => {
   const remote = document.querySelector('video#remote');
-  remote.srcObject = event.streams[0] ? event.streams[0] : null;
+  const stream = event.streams[0] ? event.streams[0] : null;
+
+  if ('srcObject' in remote) {
+    remote.srcObject = stream;
+  } else {
+    // legacy
+    remote.src = window.URL.createObjectURL(stream);
+  }
 
   remote.play()
     .then(() => {})
