@@ -49,7 +49,7 @@
 
 <meta itemprop="datePublished" content="2019-05-29T20:00:59&#43;09:00" />
 <meta itemprop="dateModified" content="2019-05-29T20:00:59&#43;09:00" />
-<meta itemprop="wordCount" content="2617">
+<meta itemprop="wordCount" content="2691">
 
 
 
@@ -287,7 +287,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-05-29 20:00:59 &#43;0900 DST" itemprop="datePublished">2019-05-29</time>
             &middot;
-            2617
+            2691
             words
             &middot;
             6
@@ -484,8 +484,9 @@ const peerConnection = new RTCPeerConnection(options);
 
 <h4 id="シグナリング">シグナリング</h4>
 
-<p>P2P 通信を確立するための手順です. 一般的には, シグナリングサーバーを構築します.
-WebSocket を利用した簡易的なシグナリンサーバーの実装例です.</p>
+<p>シグナリングとは, P2P 通信を確立するための手順です.  一般的には, シグナリングサーバーを構築します. 通信開始時点では, 通信相手となるホストの情報がわからないので, シグナリングサーバーに探してもらう必要があります.</p>
+
+<p>以下のコードは, WebSocket を利用した簡易的なシグナリングサーバーの実装例です.</p>
 
 <pre><code class="language-JavaScript">const WebSocketServer = require('ws').Server;
 const port = (process.argv[2] &gt; 0) &amp;&amp; (process.argv[2] &lt;= 65535) ? process.argv[2] : 3000;
@@ -603,7 +604,7 @@ peerConnection.createOffer()
 <h4 id="アンサー側の処理">アンサー側の処理</h4>
 
 <p>シグナリングやトランスポート候補の監視は, 対となるピア (アンサー側と呼ぶことにします) でも実行する必要があります.
-対となるので, やっていることはほぼ同じなのですが, 対となるがゆえに, メソッドが異なる部分 (<code>RTCPeerConnection#setRemoteDescription,</code>RTCPeerConnection#createAnswer<code>) や,</code>WebSocket#onmessage` のイベントハンドラで処理を開始する部分などがオファー側と異なってきます.</p>
+対となるので, やっていることはほぼ同じなのですが, 対となるがゆえに, メソッドが異なる部分 (<code>RTCPeerConnection#setRemoteDescription</code>, <code>RTCPeerConnection#createAnswer</code>) や, <code>WebSocket#onmessage</code> のイベントハンドラで処理を開始する部分などがオファー側と異なってきます.</p>
 
 <p>また, <code>RTCPeerConnection#addIceCandidate</code> メソッドは, 経路候補を即時に取り込みます.</p>
 
@@ -657,7 +658,14 @@ signalingChannel.message(offer, answer, candidate);
 
 <pre><code class="language-JavaScript">peerConnection.ontrack = (event) =&gt; {
   const remote = document.querySelector('video#remote');
-  remote.srcObject = event.streams[0] ? event.streams[0] : null;
+  const stream = event.streams[0] ? event.streams[0] : null;
+
+  if ('srcObject' in remote) {
+    remote.srcObject = stream;
+  } else {
+    // legacy
+    remote.src = window.URL.createObjectURL(stream);
+  }
 
   remote.play()
     .then(() =&gt; {})
