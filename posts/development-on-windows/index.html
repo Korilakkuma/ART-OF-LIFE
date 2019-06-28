@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
 <head>
-    <title>ホワイトボードコーディングを支える技術 &middot; ART OF LIFE</title>
+    <title>Development on Windows &middot; ART OF LIFE</title>
     <meta name="generator" content="Hugo 0.40.1" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
     
-      <meta name="description" content="ホワイトボードコーディング試験で大事だと思ったこと">
+      <meta name="description" content="Windows Subsystem for Linux による Windows 開発環境構築">
     
     
-    <link rel="canonical" href="https://art-of-life.jp/posts/coding-exam/"/>
+    <link rel="canonical" href="https://art-of-life.jp/posts/development-on-windows/"/>
     <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
@@ -20,16 +20,16 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="ホワイトボードコーディングを支える技術" />
-<meta property="og:description" content="ホワイトボードコーディング試験で大事だと思ったこと" />
+    <meta property="og:title" content="Development on Windows" />
+<meta property="og:description" content="Windows Subsystem for Linux による Windows 開発環境構築" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://art-of-life.jp/posts/coding-exam/" />
+<meta property="og:url" content="https://art-of-life.jp/posts/development-on-windows/" />
 
 
 
-<meta property="article:published_time" content="2019-06-04T22:28:54&#43;09:00"/>
+<meta property="article:published_time" content="2019-06-28T17:27:34&#43;09:00"/>
 
-<meta property="article:modified_time" content="2019-06-04T22:28:54&#43;09:00"/>
+<meta property="article:modified_time" content="2019-06-28T17:27:34&#43;09:00"/>
 
 
 
@@ -43,21 +43,21 @@
 
     
     
-<meta itemprop="name" content="ホワイトボードコーディングを支える技術">
-<meta itemprop="description" content="ホワイトボードコーディング試験で大事だと思ったこと">
+<meta itemprop="name" content="Development on Windows">
+<meta itemprop="description" content="Windows Subsystem for Linux による Windows 開発環境構築">
 
 
-<meta itemprop="datePublished" content="2019-06-04T22:28:54&#43;09:00" />
-<meta itemprop="dateModified" content="2019-06-04T22:28:54&#43;09:00" />
-<meta itemprop="wordCount" content="2184">
+<meta itemprop="datePublished" content="2019-06-28T17:27:34&#43;09:00" />
+<meta itemprop="dateModified" content="2019-06-28T17:27:34&#43;09:00" />
+<meta itemprop="wordCount" content="1710">
 
 
 
-<meta itemprop="keywords" content="Algorithm,Data Structures," />
+<meta itemprop="keywords" content="Windows,Linux," />
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="ホワイトボードコーディングを支える技術"/>
-<meta name="twitter:description" content="ホワイトボードコーディング試験で大事だと思ったこと"/>
+<meta name="twitter:title" content="Development on Windows"/>
+<meta name="twitter:description" content="Windows Subsystem for Linux による Windows 開発環境構築"/>
 <meta name="twitter:site" content="@forever120527"/>
 
     
@@ -275,9 +275,9 @@
         
 
         <header class="article-header">
-    <a href="https://art-of-life.jp/posts/coding-exam/">
+    <a href="https://art-of-life.jp/posts/development-on-windows/">
     <h1 class="article-title" itemprop="name">
-        ホワイトボードコーディングを支える技術
+        Development on Windows
     </h1>
     </a>
     <div class="article-meta">
@@ -285,12 +285,12 @@
         
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2019-06-04 22:28:54 &#43;0900 DST" itemprop="datePublished">2019-06-04</time>
+            <time datetime="2019-06-28 17:27:34 &#43;0900 DST" itemprop="datePublished">2019-06-28</time>
             &middot;
-            2184
+            1710
             words
             &middot;
-            5
+            4
             minute read
         </div>
         
@@ -301,15 +301,11 @@
                 <i class="fa fa-folder"></i>
                 
                 
-                <a class="article-category-link" href="https://art-of-life.jp/categories/computer-sience">Computer Sience</a>
+                <a class="article-category-link" href="https://art-of-life.jp/categories/development">Development</a>
                 &middot;
                 
                 
-                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/jobs">Jobs</a>
+                <a class="article-category-link" href="https://art-of-life.jp/categories/operating-system">Operating System</a>
                 
                 
             </div>
@@ -323,11 +319,11 @@
                 <i class="fa fa-tags"></i>
                 
                 
-                <a class="article-category-link" href="https://art-of-life.jp/tags/algorithm">Algorithm</a>
+                <a class="article-category-link" href="https://art-of-life.jp/tags/windows">Windows</a>
                 &middot;
                 
                 
-                <a class="article-category-link" href="https://art-of-life.jp/tags/data-structures">Data Structures</a>
+                <a class="article-category-link" href="https://art-of-life.jp/tags/linux">Linux</a>
                 
                 
             </div>
@@ -339,137 +335,188 @@
         <div class="article-entry" itemprop="articleBody">
             
 
-<h1 id="ホワイトボードコーディングとは">ホワイトボードコーディングとは ?</h1>
+<h1 id="まえおき">まえおき</h1>
 
-<p>プログラマとして就職活動や転職活動をしていると頻繁に課される選考試験の 1 つです.
-その名前のとおり, ひととおり面接を終えたあと, ホワイトボードに得意なプログラミング言語でコード, あるいは, 擬似コードを記述する試験です.
-(個人的な見解として) GAFA レベルでもない限り, 課される問題自体はそれほど難しいものではありません.
-しかし, 意外と (特に, 初めての場合) できないものです &hellip; 原因は以下のどれかに該当するのではないでしょうか ?</p>
+<p>諸事情でしばらく Mac が使えなくなったので, しぶしぶ Windows でしばらく開発することにしました.
+ハードウェア・OS は以下のとおりです.</p>
 
-<ul>
-<li>選考試験という空気や緊張感</li>
-<li>ホワイトボードという普段慣れないツールでコーディング</li>
-<li>デバッグをしつつ進めることができない</li>
-</ul>
+<h2 id="ideapad-710s-plus-13lsk">ideapad 710S Plus - 13lSK</h2>
 
-<p>対照的に, 事前にコーディング試験をする場合もあります.
-こちらは, 普段使い慣れたツールで, 自宅など好きな場所で回答していいので, いつもどおりコーディングすれば実力は発揮できるはずです.</p>
+<dl>
+  <dt>プロセッサ</dt>
+  <dd>Intel(R) Core(TM) i3-6100U CPU @ 2.30 GHz</dd>
+  <dt>RAM</dt>
+  <dd>4.00 GB</dd>
+  <dt>OS</dt>
+  <dd>Windows 10 Home</dd>
+</dl>
 
-<p>普段慣れない環境, ツールだととたんにできなくなるのはプログラマだけではありません.
-ピアニストだってそうだと思います. 椅子がなければ, とたんに弾けなくなるものです (少なくともわたしは &hellip; w)</p>
+<p>もともとは, 2017 年の末に母親へのクリスマスプレゼントとして購入した PC でしたが, フラットデザインが気に入らなかったのか放置されていたので使うことにしました.</p>
 
-<h1 id="問題例">問題例</h1>
+<h1 id="windows-subsystem-for-linux-wsl-とは">Windows Subsystem for Linux (WSL) とは ?</h1>
 
-<ul>
-<li>Fizz Buzz
+<p>これまで, Windows で UNIX ライクな開発環境を導入するには, MinGW や Cygwin を導入するのが一般的でした. しかし, これらのツールは, <b>Linux 環境のプログラムの動作や互換性</b>に問題がありました. もう少し簡単に表現すると, Linux コマンドを似た役割の Windows コマンドに置き換えて実行する (例えば, <code>ls</code> であれば <code>dir</code>) ので, 利用可能なコマンドを簡単に増やせないという欠点がありました. また, VirtualBox などの仮想環境では, Windows と連携できない, さらに, リソース (CPU やメモリ) を余分に消費してしまいます.</p>
 
-<ul>
-<li>テストコードまで求められるケースもある</li>
-</ul></li>
-<li>アルゴリズムやデータ構造
+<p>Windows Subsystem for Linux (WSL) はこれらのデメリットを解決するツールで, Linux のバイナリ実行ファイルを Windows 10 でネイティブ実行するための互換レイヤー (エミュレータ) です. つまり, macOS のコンソールのようなものを, Windows 10 でも利用可能になるということです.</p>
 
-<ul>
-<li>二分探索法など典型的なアルゴリズムもあれば, 考えることを要するアルゴリズムもある</li>
-<li>単に実装するだけではなく, 時間計算量や空間計算量の少ないアルゴリズムの実装が求められる</li>
-</ul></li>
-<li>ループを使わずに, 繰り返し処理をする (再帰の実装)</li>
-<li>API からサンプルデータを取得して描画する &hellip; ような実践的なコーディング</li>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">MinGW</th>
+      <th scope="col">Cygwin</th>
+      <th scope="col">仮想化</th>
+      <th scope="col">WSL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">Windows 環境との親和性, Windows アプリとの連携</th><td>〇</td><td>〇</td><td>X</td><td>〇</td></tr>
+    <tr><th scope="row">実行速度・メモリ使用効率</th><td>〇</td><td>〇</td><td>X</td><td>〇</td></tr>
 
-<p>わたしがこれまでに見たり, 聞いたりしたなかでは上記の例があげられます.
-と言っても, これがすべてではないので, ピンポイントで事前に準備するのはほぼ不可能と言えます.</p>
+    <tr><th scope="row">Linux 環境プログラムの動作・互換性</th><td>X</td><td>X</td><td>〇</td><td>〇</td></tr>
 
-<h1 id="なにを評価するのか">なにを評価するのか ?</h1>
+  </tbody>
+</table>
 
-<p>はっきり言ってこれが大事ですよね. 個人的な見解ですが, 完璧にコーディングできるかどうかは評価していないと思います.
-評価していると感じたのは以下の 2 点です. 簡単に表現すれば, 実装とコミュニケーションです.</p>
+<h1 id="インストール">インストール</h1>
 
-<ul>
-<li>最低限のプログラミング力
+<h2 id="機能の有効化">機能の有効化</h2>
 
-<ul>
-<li>仕様の把握</li>
-<li>アルゴリズム・データ構造を考える</li>
-<li>上記 2 点を踏まえたうえで, ある程度実装できるか</li>
-</ul></li>
-<li>面接官 (= チームのメンバー) とのコミュニケーション
+<p>Windows で Linux Subsystem を有効化します.</p>
 
-<ul>
-<li>ヒントを与えられたら, コードを追加することができる</li>
-<li>質問されたら, 回答 or コードを修正できる</li>
-<li>コードをあまり書けなくても, 実装しようとしたことを伝えられるか</li>
-</ul></li>
-</ul>
+<p>スタートボタンを右クリックして, 「アプリと機能」を選択します.</p>
 
-<h2 id="実装">実装</h2>
+<p><img src="https://user-images.githubusercontent.com/4006693/60387358-a5673d80-9adc-11e9-8d28-51eb0d353a73.png" alt="アプリと機能" />
+そして, 「プログラムと機能」を選択します.</p>
 
-<p>まず, 課題に対する最低限の実装ができなくてはなりません.
-なぜなら, これができないと, 面接官もヒントを与えたり, 質問もできないからです.
-とは言え, いきなりのホワイトボードコーディングだと頭が真っ白になって, 普段なら簡単に実装できるアルゴリズムもできない &hellip; ことがあると思います. したがって, 大事なのは, 簡単なところからでもいいので, 実装できるところからホワイトボードに書きましょう. また, 実装できるところから書いているうちにしだいに落ち着いてもきます. 落ち着いたところで, 考えてみてもいいですし, 実装できるところを全部書いてからでもいいでしょう. あるいは, 複雑なアルゴリズムは, 関数 (メソッド) としてブラックボックス化して整理するのもいいかもしれません.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/60391031-7377ca80-9b20-11e9-8f5b-8a09dc5dab5f.png" alt="プログラムと機能" /></p>
 
-<p>おそらく, 受験のときに解ける問題から解きなさいと言われた経験がある人も多いと思いますが, それは, コーディング試験でも同じです.</p>
+<p>左側の一覧から, 「Windows の機能の有効化または無効化」を選択します.</p>
 
-<h2 id="コミュニケーション">コミュニケーション</h2>
+<p><img src="https://user-images.githubusercontent.com/4006693/60391037-8db1a880-9b20-11e9-9ec8-7c5cad50969e.png" alt="Windows の機能の有効化または無効化" /></p>
 
-<p>面接官は, チームのメンバーだと思ってください. 最低限のコードが書けたなら, メンバーはヒントを与えることが可能ですし, かなりの実装ができたなら, 質問をなげかけてよりよいコードになるように助けてくれるはずです. メンバーからのヒントや質問に対する回答をコードなり, 言葉なりで必ず返しましょう. また, ほとんどコーディングができなかった場合でも, ファイナルアタックと思って, 最低限, こういうアルゴリズムを考えて, こういう実装をしたかったと伝えましょう. ホワイトボードコーディングの評価をどの程度重視するかはわかりません. もしかしたら, あまり重視していない, あるいは, 重視はしているけど, コミュニケーションを重視している可能性もあります.</p>
+<p>Windows Subsystem for Linux にチェックをして, 「OK」を選択します.</p>
 
-<h1 id="準備">準備</h1>
+<p><img src="https://user-images.githubusercontent.com/4006693/60389409-8deb7d00-9afb-11e9-81fb-ede83eaf97fd.png" alt="Windows Subsystem for Linux" /></p>
 
-<p>準備というのは何事においても大事ですが, ホワイトボードコーディングに関しては特別準備する必要はないと思います.
-基本情報技術者レベルのアルゴリズムとデータ構造に関する理解, そして, それを実装できる得意なプログラミング言語があれば準備完了です.</p>
+<p>インストールが開始されるので完了するまで待ちます. 完了したら再起動します.</p>
 
-<p>参考までに, ざっと思いついたアルゴリズムとデータ構造を列挙してみました.</p>
+<p>再起動したら, スタートメニューを右クリックして, 「設定」&gt;「更新とセキュリティ」を選択し, 左側のメニューから「開発者向け」を選択して「開発者モード」にチェックをします (警告が表示されますが, そのまますすめて大丈夫です).</p>
 
-<h2 id="アルゴリズム">アルゴリズム</h2>
+<p><img src="https://user-images.githubusercontent.com/4006693/60387421-dc8a1e80-9add-11e9-94d1-7f93f50899f7.png" alt="開発者モード" /></p>
 
-<ul>
-<li>探索アルゴリズム
+<h2 id="bash-のインストール">bash のインストール</h2>
 
-<ul>
-<li>線形探索</li>
-<li>二分探索</li>
-</ul></li>
-<li>整列アルゴリズム
+<h3 id="古い-wsl-の削除">古い WSL の削除</h3>
 
-<ul>
-<li>バブルソート, 選択ソート, 挿入ソート</li>
-<li>シェルソート</li>
-<li>クイックソート</li>
-<li>マージソート</li>
-<li>ヒープソート</li>
-</ul></li>
-</ul>
+<p>もし, インストールしている場合, 安全のために古い WSL は削除しておきます.</p>
 
-<h2 id="データ構造">データ構造</h2>
+<p>コマンドプロンプト, または PowerShell で以下のコマンドを実行します (ただし, このときすべてのデータが消去されるので, 必要なデータはバックアップを取得しておきましょう).</p>
 
-<ul>
-<li>配列</li>
-<li>リスト</li>
-<li>スタック・キュー</li>
-<li>木
+<pre><code class="language-bash">&gt; lxrun /uninstall
+</code></pre>
 
-<ul>
-<li>二分探索木</li>
-<li>ヒープ</li>
-<li>B 木</li>
-</ul></li>
-</ul>
+<h3 id="ストアから-wsl-をインストール">ストアから WSL をインストール</h3>
 
-<h1 id="おわりに">おわりに</h1>
+<p>Microsoft Store を開いて, 検索窓で「Ubuntu」と検索します (お気に入りのディストリビューションがあれば, そちらで検索してください).</p>
 
-<p>ホワイトボードコーディングを豊富に経験している方からすると, わたしの見解はかなりずれている可能性が高いです.
-あくまで, 1 つの見解としてとらえて, なにより, コーディングですから, 緊張せず, その場を楽しむぐらいの余裕をもって臨むことが重要だと思います.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/60387535-a0f05400-9adf-11e9-87f3-434919eeb31c.png" alt="Microsoft Store" /></p>
 
-<p>まとめると, とてもあたりまえのことを評価しているだけなのですが, ホワイトボードの前になると思考停止になってしまう可能性が高いので, 完璧に実装する必要はないことだけでも知っておくと, 少しは落ち着けるかと思います.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/60387536-a51c7180-9adf-11e9-9f7f-07423fd0a858.png" alt="Ubuntu" /></p>
+
+<p>最後に, 「入手」ボタンをクリックします.</p>
+
+<p>インストール作業が完了したら, スタートに追加される「Ubuntu」を起動して, インストールの完了を待ちます. 完了すると, 内部で利用する, ユーザー名とパスワードの設定を要求されるので入力します.</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/60387629-f4af6d00-9ae0-11e9-859e-0da4aa7602d8.png" alt="Ubuntu Install" /></p>
+
+<h3 id="初期設定">初期設定</h3>
+
+<h4 id="リポジトリの変更">リポジトリの変更</h4>
+
+<p>デフォルトでは, 海外サーバーにリポジトリのデータを取得しにいくので, 日本のサーバーに切り替えます.</p>
+
+<pre><code class="language-bash">$ sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g' /etc/apt/sources.list
+</code></pre>
+
+<h4 id="github-ssh-公開鍵の登録">GitHub SSH 公開鍵の登録</h4>
+
+<p>デフォルトで git が利用可能ですが, そのままでは git から clone したり, push したりすることができないので, 公開鍵を登録します.</p>
+
+<pre><code class="language-bash">$ ssh-keygen
+$ cat ~/.ssh/id_rsa.pub
+</code></pre>
+
+<p><code>cat</code> コマンドで表示される公開鍵の内容をコピーして, GitHub の「Settings」&gt;「SSH and GPG keys」&gt;「New SSH key」を選択してペーストします (Title は, 任意で OK です).</p>
+
+<p>最後に, SSH 接続します.</p>
+
+<pre><code class="language-bash">$ ssh -T git@github.com
+</code></pre>
+
+<p><code>Hi Korilakkuma! You've successfully authenticated, but GitHub does not provide shell access.</code> のようなメッセージが表示されれば, 完了です.</p>
+
+<h4 id="git-config">git config</h4>
+
+<p><code>git config</code> でいくつかの設定を入力・変更します.</p>
+
+<pre><code class="language-bash">$ git config --global user.email rilakkuma.san.xjapan@gmail.com
+$ git config --global user.name &quot;Tomohiro IKEDA&quot;
+$ git config --global core.editor vim
+</code></pre>
+
+<h3 id="パッケージのアップデート">パッケージのアップデート</h3>
+
+<p>パッケージのアップデートは定期的におこなう必要があります.</p>
+
+<pre><code class="language-bash">$ sudo apt update
+$ sudo apt upgrade
+</code></pre>
+
+<h3 id="任意設定">任意設定</h3>
+
+<p>ここからは, 個人的な設定 (インストール) なので読み飛ばしていただいても大丈夫です.</p>
+
+<h4 id="gcc-g-make-のインストール">gcc, g++, make のインストール</h4>
+
+<p>C/C++ を書くプログラマにとってはおそらくあったほうがよいかと思います.</p>
+
+<pre><code class="language-bash">$ sudo apt install gcc g++ make
+</code></pre>
+
+<h4 id="nodebrew-のインストール">nodebrew のインストール</h4>
+
+<pre><code class="language-bash">$ curl -L git.io/nodebrew | perl - setup
+</code></pre>
+
+<p><code>export PATH=$HOME/.nodebrew/current/bin:$PATH</code> を <code>~/.bashrc</code> に追記して,</p>
+
+<pre><code class="language-bash">$ source ~/.bashrc
+</code></pre>
+
+<p>で読み込みます.</p>
+
+<pre><code class="language-bash">$ nodebrew ls-remote
+$ nodebrew install-binary v12.0.0  # インストールしたいバージョン
+$ nodebrew use v12.0.0
+</code></pre>
+
+<pre><code class="language-bash">$ node -v
+v12.0.0
+$ npm -v
+6.9.0
+</code></pre>
+
+<p>のように表示されれば完了です.</p>
 
         </div>
         <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/coding-exam/" data-id="ce1d170b8e5f5cb1b2cb9a9b95aea7f1" class="article-share-link">
+    <a data-url="https://art-of-life.jp/posts/development-on-windows/" data-id="26d3c43cb1a51c5db96ac1ac61a37e29" class="article-share-link">
         <i class="fa fa-share"></i>
         Share
     </a>
     
-    <a href="https://art-of-life.jp/posts/coding-exam/#disqus_thread" class="article-comment-link">
+    <a href="https://art-of-life.jp/posts/development-on-windows/#disqus_thread" class="article-comment-link">
         Comments
     </a>
     
@@ -545,21 +592,14 @@
     
 <nav id="article-nav">
     
-    <a href="https://art-of-life.jp/posts/webrtc-overview/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="https://art-of-life.jp/posts/hlsjs-contributor/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">WebRTC の概要</div>
+      <div class="article-nav-title">hls.js のコントリビューターになろう</div>
     </a>
     
 
-    
-    <a href="https://art-of-life.jp/posts/hlsjs-contributor/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">hls.js のコントリビューターになろう</div>
-    </a>
     
 </nav>
 

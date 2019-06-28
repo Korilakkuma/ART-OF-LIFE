@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Development on ART OF LIFE</title>
+    <link>https://art-of-life.jp/categories/development/</link>
+    <description>Recent content in Development on ART OF LIFE</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Fri, 28 Jun 2019 17:27:34 +0900</lastBuildDate>
+    
+	<atom:link href="https://art-of-life.jp/categories/development/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Development on Windows</title>
+      <link>https://art-of-life.jp/posts/development-on-windows/</link>
+      <pubDate>Fri, 28 Jun 2019 17:27:34 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/development-on-windows/</guid>
+      <description>まえおき 諸事情でしばらく Mac が使えなくなったので, しぶしぶ Windows でしばらく開発することにしました. ハードウェア・OS は以下のとおりです. ideapad 710S Plus - 13lSK</description>
+    </item>
+    
+  </channel>
+</rss>
