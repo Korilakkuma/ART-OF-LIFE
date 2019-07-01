@@ -6,10 +6,19 @@
     <description>Recent content in Posts on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Fri, 28 Jun 2019 17:27:34 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jul 2019 22:56:52 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>3 ヶ月フィードバック (2019 / 4 - 2019 / 6)</title>
+      <link>https://art-of-life.jp/posts/201904-201906/</link>
+      <pubDate>Mon, 01 Jul 2019 22:56:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/201904-201906/</guid>
+      <description>概要 まずは, おおまかにフィードバックです. 4 / 10 でサイバーエージェントを退職してニートになりました. 正直なところ, 納得いく退職ではなかったの</description>
+    </item>
     
     <item>
       <title>Development on Windows</title>

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://art-of-life.jp/posts/201904-201906/</loc>
+    <lastmod>2019-07-01T22:56:52+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://art-of-life.jp/posts/development-on-windows/</loc>
     <lastmod>2019-06-28T17:27:34+09:00</lastmod>
   </url>
@@ -39,7 +44,7 @@
   
   <url>
     <loc>https://art-of-life.jp/</loc>
-    <lastmod>2019-06-28T17:27:34+09:00</lastmod>
+    <lastmod>2019-07-01T22:56:52+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -140,8 +145,14 @@
   </url>
   
   <url>
+    <loc>https://art-of-life.jp/categories/others/</loc>
+    <lastmod>2019-07-01T22:56:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://art-of-life.jp/posts/</loc>
-    <lastmod>2019-06-28T17:27:34+09:00</lastmod>
+    <lastmod>2019-07-01T22:56:52+09:00</lastmod>
     <priority>0</priority>
   </url>
   
