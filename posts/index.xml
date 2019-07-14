@@ -6,10 +6,19 @@
     <description>Recent content in Posts on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Mon, 01 Jul 2019 22:56:52 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jul 2019 17:27:13 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Mathematics for Programmer</title>
+      <link>https://art-of-life.jp/posts/mathematics-for-programmer/</link>
+      <pubDate>Sun, 14 Jul 2019 17:27:13 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/mathematics-for-programmer/</guid>
+      <description>プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (動画, オーディオ, 画像など) をあつか</description>
+    </item>
     
     <item>
       <title>3 ヶ月フィードバック (2019 / 4 - 2019 / 6)</title>

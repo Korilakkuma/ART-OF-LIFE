@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://art-of-life.jp/posts/mathematics-for-programmer/</loc>
+    <lastmod>2019-07-14T17:27:13+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://art-of-life.jp/posts/201904-201906/</loc>
     <lastmod>2019-07-01T22:56:52+09:00</lastmod>
   </url>
@@ -44,7 +49,7 @@
   
   <url>
     <loc>https://art-of-life.jp/</loc>
-    <lastmod>2019-07-01T22:56:52+09:00</lastmod>
+    <lastmod>2019-07-14T17:27:13+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -85,6 +90,12 @@
   </url>
   
   <url>
+    <loc>https://art-of-life.jp/tags/discrete-mathematics/</loc>
+    <lastmod>2019-07-14T17:27:13+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://art-of-life.jp/tags/hls.js/</loc>
     <lastmod>2019-06-12T23:30:29+09:00</lastmod>
     <priority>0</priority>
@@ -110,13 +121,13 @@
   
   <url>
     <loc>https://art-of-life.jp/tags/mathematics/</loc>
-    <lastmod>2019-05-28T19:46:00+09:00</lastmod>
+    <lastmod>2019-07-14T17:27:13+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/mathematics/</loc>
-    <lastmod>2019-05-28T19:46:00+09:00</lastmod>
+    <lastmod>2019-07-14T17:27:13+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -152,13 +163,13 @@
   
   <url>
     <loc>https://art-of-life.jp/posts/</loc>
-    <lastmod>2019-07-01T22:56:52+09:00</lastmod>
+    <lastmod>2019-07-14T17:27:13+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/programming/</loc>
-    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
+    <lastmod>2019-07-14T17:27:13+09:00</lastmod>
     <priority>0</priority>
   </url>
   
