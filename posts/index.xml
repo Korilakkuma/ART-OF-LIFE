@@ -6,10 +6,19 @@
     <description>Recent content in Posts on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 14 Jul 2019 17:27:13 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jul 2019 05:27:00 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>.travis.yml の更新</title>
+      <link>https://art-of-life.jp/posts/update-travis-yml/</link>
+      <pubDate>Fri, 26 Jul 2019 05:27:00 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/update-travis-yml/</guid>
+      <description>Travis CI でエラー 昨日, Travis CI でビルドしたら, ソースコード・テストコードとも何も変更していないのに, 2 つのエラーが発生するようになりました &amp;hellip; Can&#39;t open /etc/init.d/xvfb テ</description>
+    </item>
     
     <item>
       <title>Mathematics for Programmer</title>
