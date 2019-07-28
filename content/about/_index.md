@@ -19,11 +19,13 @@ disable_comments = true
 ## 動画
 
 - WebRTC
-- Streaming (hls.js)
+- Streaming (hls.js / shaka-packager)
 
 WebRTC は業務で利用したことはありませんが, JavaScript API はひととおり理解して実装可能なレベルです.
 
-hls.js の [contributor](https://github.com/video-dev/hls.js/graphs/contributors) をやっていますが, まだまだ `src` 以下への contribute が少ないです ...
+hls.js の [contributor](https://github.com/video-dev/hls.js/graphs/contributors) ですが, まだまだ `src` 以下への contribute が少ないです ...
+
+HLS / DASH など Streaming 技術と C++ のレベルアップを目指して, shaka-packager の [contributor](https://github.com/google/shaka-packager/graphs/contributors) にもなりました.
 
 ## オーディオ
 
@@ -41,11 +43,7 @@ hls.js の [contributor](https://github.com/video-dev/hls.js/graphs/contributors
 - アルゴリズムとデータ構造
 - OS (システムコールなど)
 - ネットワーク (TCP/IP)
-- 基礎数学
-  - 微分積分
-  - 線形代数
-  - 確率統計
-  - 離散数学
+- 基礎数学 (微分積分, 離散数学など)
 
 ## プログラミング言語
 
@@ -66,11 +64,19 @@ hls.js の [contributor](https://github.com/video-dev/hls.js/graphs/contributors
 
 プロダクトを実装するために欠かせないツールです.
 
-- MacBook Pro (macOS)
+- MacBook Air (macOS)
 - Chrome
 - iTerm2
+- tmux
 - zsh
 - Vim
+
+かつては, デザインも趣味の範疇でこなしていたので,
+
+- Illustrator
+- Photoshop
+
+なども使えますが, メディア技術に投資するため, 現在は, たまに必要なアイコンなどを作成するぐらいです.
 
 ## あえてやらないこと
 
@@ -85,7 +91,9 @@ hls.js の [contributor](https://github.com/video-dev/hls.js/graphs/contributors
 - データベース
 - インフラ
 
-これらは, 仕事運用上必要なこと以外は, ふれない方針です.
+これらは, 仕事運用上必要なこと以外, ふれない方針です.
+
+ただし, Docker (今後は, + Kubernetes) に関しては, Web エンジニアのデファクトスタンダートな技術であるので, Docker の概要やコマンド, Dockerfile の読み書きなどは可能であり, ある程度は追求していく予定です.
 
 # Music
 
