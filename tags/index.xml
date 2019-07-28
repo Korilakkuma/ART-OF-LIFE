@@ -6,35 +6,35 @@
     <description>Recent content in Tags on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 04 Jun 2019 22:28:54 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jul 2019 17:27:12 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Algorithm</title>
-      <link>https://art-of-life.jp/tags/algorithm/</link>
-      <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
+      <title>Mac</title>
+      <link>https://art-of-life.jp/tags/mac/</link>
+      <pubDate>Sun, 28 Jul 2019 17:27:12 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/tags/algorithm/</guid>
+      <guid>https://art-of-life.jp/tags/mac/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Ci</title>
+      <title>dotfiles</title>
+      <link>https://art-of-life.jp/tags/dotfiles/</link>
+      <pubDate>Sun, 28 Jul 2019 17:27:12 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/dotfiles/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CI</title>
       <link>https://art-of-life.jp/tags/ci/</link>
       <pubDate>Fri, 26 Jul 2019 05:27:00 +0900</pubDate>
       
       <guid>https://art-of-life.jp/tags/ci/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data Structures</title>
-      <link>https://art-of-life.jp/tags/data-structures/</link>
-      <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/tags/data-structures/</guid>
       <description></description>
     </item>
     
@@ -48,20 +48,11 @@
     </item>
     
     <item>
-      <title>Hls.js</title>
-      <link>https://art-of-life.jp/tags/hls.js/</link>
-      <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
+      <title>Mathematics</title>
+      <link>https://art-of-life.jp/tags/mathematics/</link>
+      <pubDate>Sun, 14 Jul 2019 17:27:13 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/tags/hls.js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Javascript</title>
-      <link>https://art-of-life.jp/tags/javascript/</link>
-      <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/tags/javascript/</guid>
+      <guid>https://art-of-life.jp/tags/mathematics/</guid>
       <description></description>
     </item>
     
@@ -75,11 +66,20 @@
     </item>
     
     <item>
-      <title>Mathematics</title>
-      <link>https://art-of-life.jp/tags/mathematics/</link>
-      <pubDate>Sun, 14 Jul 2019 17:27:13 +0900</pubDate>
+      <title>Windows</title>
+      <link>https://art-of-life.jp/tags/windows/</link>
+      <pubDate>Fri, 28 Jun 2019 17:27:34 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/tags/mathematics/</guid>
+      <guid>https://art-of-life.jp/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JavaScript</title>
+      <link>https://art-of-life.jp/tags/javascript/</link>
+      <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/javascript/</guid>
       <description></description>
     </item>
     
@@ -93,20 +93,38 @@
     </item>
     
     <item>
-      <title>Webrtc</title>
-      <link>https://art-of-life.jp/tags/webrtc/</link>
-      <pubDate>Wed, 29 May 2019 20:00:59 +0900</pubDate>
+      <title>hls.js</title>
+      <link>https://art-of-life.jp/tags/hls.js/</link>
+      <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/tags/webrtc/</guid>
+      <guid>https://art-of-life.jp/tags/hls.js/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Windows</title>
-      <link>https://art-of-life.jp/tags/windows/</link>
-      <pubDate>Fri, 28 Jun 2019 17:27:34 +0900</pubDate>
+      <title>Algorithm</title>
+      <link>https://art-of-life.jp/tags/algorithm/</link>
+      <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/tags/windows/</guid>
+      <guid>https://art-of-life.jp/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Structures</title>
+      <link>https://art-of-life.jp/tags/data-structures/</link>
+      <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/data-structures/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WebRTC</title>
+      <link>https://art-of-life.jp/tags/webrtc/</link>
+      <pubDate>Wed, 29 May 2019 20:00:59 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/webrtc/</guid>
       <description></description>
     </item>
     
