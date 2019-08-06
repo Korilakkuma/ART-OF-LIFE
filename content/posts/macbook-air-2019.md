@@ -82,7 +82,13 @@ L511 をコメントアウトします.
 Include /private/etc/apache2/extra/httpd-userdir.conf
 ```
 
-最後に, 以下の設定を追加します.
+そして, 以下の設定を追加します.
+
+```bash
+sudo vim /etc/apache2/extra/httpd-userdir.conf↲
+```
+
+L16 をコメントアウトします.
 
 ```
 Include /private/etc/apache2/users/*.conf
@@ -166,3 +172,35 @@ $ make init  # ホームディレクトリにシンボリックリンクをは�
 `brew cask install` でインストールできない, GUI アプリケーションは手動でインストールしましょう.
 
 あとは, iTerm2 もターミナルと同様に外観をカスタマイズしておきます.
+
+### MySQL の設定
+
+もし, ローカル環境で MySQL も使うのであれば設定しておきます.
+
+まずは, MySQL が起動するか確認します.
+
+```bash
+$ mysql.server start
+```
+
+root ユーザーでログインしてみます.
+
+```bash
+$ mysql -u root
+```
+
+ログインが確認できたら, exit します.
+
+次に, セキュリティ設定をします.
+
+```bash
+$ mysql_secure_installation
+```
+
+質問が 4 つほどされますが, すべて yes で大丈夫です.
+
+設定が完了したら, パスワード入力して MySQL に接続できるか確認します.
+
+```
+$ mysql -u root -p
+```
