@@ -23,7 +23,7 @@ hasCJKLanguage = true
 [params]
     # Tell me who you are
     author = "Korilakkuma"
-    bio = "Multimedia (Video, Audio, Graphics) Engineer. In concrete, I am good at Web Audio API, WebRTC and hls.js. And, I can program by C/C++, JavaScript ... etc"
+    bio = "Multimedia (Video, Audio) Engineer. In concrete, I'm expert to Web Audio API, WebRTC and Streaming (hls.js / shaka-packager contributor). C/C++, JavaScript ... etc"
     location = "Osaka, JAPAN"
     site_description = "Art (Computer Science と Music) についての Blog"
     copyright  = "Copyright (c) <a href=\"/about/\">Korilakkuma</a>"
