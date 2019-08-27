@@ -6,10 +6,19 @@
     <description>Recent content in Computer Sience on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 04 Jun 2019 22:28:54 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 28 Aug 2019 05:27:13 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/categories/computer-sience/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MP3 の圧縮技術の概要</title>
+      <link>https://art-of-life.jp/posts/mp3/</link>
+      <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/mp3/</guid>
+      <description>MP3 とは ? MPEG メディアデータ (動画や音声) は, テキストデータと比較すると, 非常に大きなデータサイズです. したがって, データを小さくする (圧縮する</description>
+    </item>
     
     <item>
       <title>ホワイトボードコーディングを支える技術</title>

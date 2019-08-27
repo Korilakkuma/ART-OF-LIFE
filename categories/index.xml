@@ -6,10 +6,46 @@
     <description>Recent content in Categories on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 28 Jul 2019 17:27:12 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 28 Aug 2019 05:27:13 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Audio</title>
+      <link>https://art-of-life.jp/categories/audio/</link>
+      <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/audio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Computer Sience</title>
+      <link>https://art-of-life.jp/categories/computer-sience/</link>
+      <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/computer-sience/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mathematics</title>
+      <link>https://art-of-life.jp/categories/mathematics/</link>
+      <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/mathematics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Multimedia</title>
+      <link>https://art-of-life.jp/categories/multimedia/</link>
+      <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/multimedia/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Development</title>
@@ -26,15 +62,6 @@
       <pubDate>Fri, 26 Jul 2019 05:27:00 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mathematics</title>
-      <link>https://art-of-life.jp/categories/mathematics/</link>
-      <pubDate>Sun, 14 Jul 2019 17:27:13 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/mathematics/</guid>
       <description></description>
     </item>
     
@@ -57,15 +84,6 @@
     </item>
     
     <item>
-      <title>Multimedia</title>
-      <link>https://art-of-life.jp/categories/multimedia/</link>
-      <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/multimedia/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>OSS</title>
       <link>https://art-of-life.jp/categories/oss/</link>
       <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
@@ -84,29 +102,11 @@
     </item>
     
     <item>
-      <title>Computer Sience</title>
-      <link>https://art-of-life.jp/categories/computer-sience/</link>
-      <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/computer-sience/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Jobs</title>
       <link>https://art-of-life.jp/categories/jobs/</link>
       <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/jobs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Audio</title>
-      <link>https://art-of-life.jp/categories/audio/</link>
-      <pubDate>Wed, 29 May 2019 20:00:59 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/audio/</guid>
       <description></description>
     </item>
     
