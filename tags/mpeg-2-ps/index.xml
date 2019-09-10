@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MPEG-2 PS on ART OF LIFE</title>
+    <link>https://art-of-life.jp/tags/mpeg-2-ps/</link>
+    <description>Recent content in MPEG-2 PS on ART OF LIFE</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Tue, 10 Sep 2019 23:27:21 +0900</lastBuildDate>
+    
+	<atom:link href="https://art-of-life.jp/tags/mpeg-2-ps/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MPEG-2 Systems</title>
+      <link>https://art-of-life.jp/posts/mpeg2-systems/</link>
+      <pubDate>Tue, 10 Sep 2019 23:27:21 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/mpeg2-systems/</guid>
+      <description>MPEG-2 Systems とは ? MPEG-2 MPEG-2 は, MPEG-1 を改良し, 放送用として十分と言える程度の高画質を目指して規格化されました. MPEG-2 は, DVD やデジタル BS 放送などのデータ形式として</description>
+    </item>
+    
+  </channel>
+</rss>

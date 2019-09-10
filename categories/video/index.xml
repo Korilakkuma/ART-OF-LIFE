@@ -6,10 +6,19 @@
     <description>Recent content in Video on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Wed, 12 Jun 2019 23:30:29 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 10 Sep 2019 23:27:21 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/categories/video/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MPEG-2 Systems</title>
+      <link>https://art-of-life.jp/posts/mpeg2-systems/</link>
+      <pubDate>Tue, 10 Sep 2019 23:27:21 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/mpeg2-systems/</guid>
+      <description>MPEG-2 Systems とは ? MPEG-2 MPEG-2 は, MPEG-1 を改良し, 放送用として十分と言える程度の高画質を目指して規格化されました. MPEG-2 は, DVD やデジタル BS 放送などのデータ形式として</description>
+    </item>
     
     <item>
       <title>hls.js のコントリビューターになろう</title>
