@@ -34,7 +34,7 @@
 
 <meta itemprop="datePublished" content="2019-09-10T23:27:21&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-10T23:27:21&#43;09:00" />
-<meta itemprop="wordCount" content="951">
+<meta itemprop="wordCount" content="1310">
 
 
 
@@ -272,10 +272,10 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-10 23:27:21 &#43;0900 JST" itemprop="datePublished">2019-09-10</time>
             &middot;
-            951
+            1310
             words
             &middot;
-            2
+            3
             minute read
         </div>
         
@@ -338,33 +338,61 @@
 
 <p>MPEG-2 を多重化して, 伝送するための規格です. 用途別に, <b>MPEG-2 PS</b> (Program Stream) と <b>MPEG-2 TS</b> (Transport Stream) に分類されます.</p>
 
+<p><img src="https://user-images.githubusercontent.com/4006693/65369873-c8ddf680-dc8d-11e9-8d5e-196fb76819fc.png" alt="MPEG-2 PS と MPEG-2 TS のイメージ" /></p>
+
 <h2 id="es-elementary-stream">ES (Elementary Stream)</h2>
 
 <p>MPEG-2 システムでは, 符号化された画像や音声データを, <b>ES</b> (Elementary Stream) と呼びます.</p>
 
 <h2 id="pes-packetized-elementary-stream">PES (Packetized Elementary Stream)</h2>
 
-<p>ES を適切なサイズに分割してパケット化したものを <b>PES</b> (Packetized Elementary Stream) と呼びます. PES パケットのヘッダは再生時刻の情報を含むことができるので, これによって, 映像と音声を同期して再生することが可能になります.</p>
+<p>ES を適切なサイズに分割してパケット化したものを <b>PES</b> (Packetized Elementary Stream) と呼びます. PES パケットのヘッダは再生時刻の情報を含むことができるので, これによって, 映像と音声を同期して再生することが可能になります (詳細は, <a href="./#多重信号の同期">多重信号の同期のセクション</a>を参照).</p>
 
-<p><img src="https://user-images.githubusercontent.com/4006693/64762237-bf130f80-d578-11e9-83e8-7db118217097.png" alt="PES" /></p>
+<p><img src="https://user-images.githubusercontent.com/4006693/65368839-1011ba80-dc81-11e9-9667-fa83c7ce8d35.png" alt="PES" /></p>
 
 <h1 id="mpeg-2-ps">MPEG-2 PS</h1>
 
 <p>単一のプログラム (同期した映像や音声など）を<b>エラーの可能性が低い環境</b>  (光ディスクや HDD など) であつかうことを想定した形式です, 複数の PES パケットを連結して, 先頭にパックヘッダを付与したものを <b>pack</b> と呼び、さらに複数の pack を連結したものがプログラムストリームとなります.</p>
 
+<p><img src="https://user-images.githubusercontent.com/4006693/65369316-4e5da880-dc86-11e9-9477-1b787546f768.png" alt="pack" /></p>
+
 <h1 id="mpeg-2-ts">MPEG-2 TS</h1>
 
-<p>同時に 1 つ以上のプログラムを, <b>エラーが発生しうる環境</b> (放送や通信など) であつかうことを想定したデータ形式です. HLS や MPEG-DASH など, ストリーミングプロトコルで利用されています.</p>
+<p>同時に 1 つ以上のプログラムを, <b>エラーが発生しうる環境</b> (放送や通信など) であつかうことを想定したデータ形式です. デジタル放送や, HLS / MPEG-DASH など, ストリーミングプロトコルで利用されています.</p>
 
-<p>PES パケットを <b>Transport Packet</b> と呼ばれる <b>188 バイト</b>固定長のパケットへ分割します (188 バイトの場合に, パフォーマンスが最大になるからです). この Transport Packet の連続が, トランスポートストリームとなります. それぞれの Transport Packet には, <b>PID</b> (Packet Identifier) と呼ばれる <b>13 ビット</b> の情報が含まれます. これは, Transport Packet が何を伝送しているものか示すためのものです. 同一の画像・音声は, それぞれ同じ PID をもつので, Transport Stream を受信した側はそれを利用して, 元の PES（ES）に戻すことができます.</p>
+<p>PES パケットを <b>Transport Packet</b> (TS packet) と呼ばれる <b>188 バイト</b>固定長のパケットへ分割します. この Transport Packet の連続が, トランスポートストリームとなります.</p>
 
-<p>MPEG-2 TS は, エラーが発生しうる環境であつかうことを想定しているので, エラー検出が必要になります. Transport Packet ヘッダには同じ PID 内において値が 1 ずつ増加する <code>continuity_counter</code> という <b>4 ビット</b>のカウンタがあり, 受信側でこのカウンタの不連続を検出することで, Transport Packet のロスを検出可能しています. また, Transport Packet のヘッダの先頭バイトは, 必ず <b>0x47</b> ( <code>sync_byte</code>) 値になっています. これによって, 伝送路上のエラーで受信側が一時的にパケットの先頭を見失ったとしても 188 バイトごとの <code>sync_byte</code> を検出して同期しなおすことで比較的早期に同期を回復することができます.</p>
+<h2 id="同期ワード">同期ワード</h2>
+
+<p>Transport Packet のヘッダの先頭バイトは, 必ず <b>0x47</b> (<code>sync_byte</code>) 値になっています. 受信側, この値があるデータ位置を Transport Packet の先頭として処理します. また, 伝送路上のエラーで受信側が一時的にパケットの先頭を見失ったとしても 188 バイトごとの <code>sync_byte</code> を検出して同期しなおすことで比較的早期に同期を回復することができます.</p>
+
+<h2 id="pid">PID</h2>
+
+<p>それぞれの Transport Packet には, <b>PID</b> (Packet Identifier) と呼ばれる <b>13 ビット</b> の情報が含まれます. これは, Transport Packet が何を伝送しているものか示すためのものです. 同一の画像・音声は, それぞれ同じ PID をもつので, Transport Stream を受信した側はそれを利用して, 元の PES（ES）に戻すことができます.</p>
+
+<h2 id="巡回カウンター">巡回カウンター</h2>
+
+<p>MPEG-2 TS は, エラーが発生しうる環境であつかうことを想定しているので, エラー検出が必要になります. Transport Packet ヘッダには同じ PID 内において値が 1 ずつ増加する <code>continuity_counter</code> という <b>4 ビット</b>のカウンタがあり, 受信側でこのカウンタの不連続を検出することで, Transport Packet のロスを検出可能しています.</p>
+
+<h2 id="多重信号の同期">多重信号の同期</h2>
+
+<h3 id="pcr">PCR</h3>
+
+<p>MPEG-2 TS では, デジタル放送やストリーミングプロトコルで利用されるので, 送信側と受信側の同期をとる必要があります. 基準となるクロックは, <b>42 ビット</b>で, <b>STC</b>(System Time Clock) と呼ばれています. STC の同期は,約 27 h で, STC の校正データを伝送することによって同期をとることができます. そして, この校正データを <b>PCR</b> (Program Clock Reference) と呼びます.</p>
+
+<h3 id="pts">PTS</h3>
+
+<p>同期をとることができたら, 映像や音声といったコンポーネントどうしの同期をとる必要があります. STC を基準にして, 表示する時刻を付加します. この時刻を <b>PTS</b> (Presentation Time Stamp) と呼びます. また, デコードする時刻を付加することもあります. この時刻を <b>DTS</b> (Decoding Time Stamp) と呼びます.</p>
 
 <p><img src="https://user-images.githubusercontent.com/4006693/64762200-a7d42200-d578-11e9-92b3-71939a99afc0.png" alt="Transport Packet (TS packet)" /></p>
 
 <h1 id="リファレンス">リファレンス</h1>
 
 <ul>
+<li><a href="http://www.mpeg.co.jp/libraries/video_it/video_06.html">第6回　MPEG-2 PS概要 前編</a></li>
+<li><a href="http://www.mpeg.co.jp/libraries/video_it/video_07.html">第7回　MPEG-2 PS概要 後編</a></li>
+<li><a href="http://www.mpeg.co.jp/libraries/video_it/video_03.html">第3回　MPEG-2 TSの概要 前編</a></li>
+<li><a href="http://www.mpeg.co.jp/libraries/video_it/video_04.html">第4回　MPEG-2 TSの概要 後編</a></li>
 <li><a href="http://www.jushin-s.co.jp/michi/download/47_t16.pdf">テレビ放送電波はどんな形？(その５・多重化)</a></li>
 </ul>
 
