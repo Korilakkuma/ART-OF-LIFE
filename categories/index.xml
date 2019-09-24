@@ -6,10 +6,28 @@
     <description>Recent content in Categories on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 10 Sep 2019 23:27:21 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 12 Sep 2019 17:27:07 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Jobs</title>
+      <link>https://art-of-life.jp/categories/jobs/</link>
+      <pubDate>Thu, 12 Sep 2019 17:27:07 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/jobs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Music</title>
+      <link>https://art-of-life.jp/categories/music/</link>
+      <pubDate>Thu, 12 Sep 2019 17:27:07 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/music/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Audio</title>
@@ -75,15 +93,6 @@
     </item>
     
     <item>
-      <title>Others</title>
-      <link>https://art-of-life.jp/categories/others/</link>
-      <pubDate>Mon, 01 Jul 2019 22:56:52 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/others/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Operating System</title>
       <link>https://art-of-life.jp/categories/operating-system/</link>
       <pubDate>Fri, 28 Jun 2019 17:27:34 +0900</pubDate>
@@ -98,15 +107,6 @@
       <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/oss/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jobs</title>
-      <link>https://art-of-life.jp/categories/jobs/</link>
-      <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/jobs/</guid>
       <description></description>
     </item>
     

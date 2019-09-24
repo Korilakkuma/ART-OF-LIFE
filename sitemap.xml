@@ -4,18 +4,41 @@
   
   <url>
     <loc>https://art-of-life.jp/</loc>
-    <lastmod>2019-09-10T23:27:21+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/audio/</loc>
-    <lastmod>2019-09-10T23:27:21+09:00</lastmod>
+    <lastmod>2019-09-12T17:27:07+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/</loc>
+    <lastmod>2019-09-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/jobs/</loc>
+    <lastmod>2019-09-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/music/</loc>
+    <lastmod>2019-09-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/</loc>
+    <lastmod>2019-09-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/my-motivation/</loc>
+    <lastmod>2019-09-12T17:27:07+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/audio/</loc>
     <lastmod>2019-09-10T23:27:21+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -45,12 +68,6 @@
   
   <url>
     <loc>https://art-of-life.jp/categories/multimedia/</loc>
-    <lastmod>2019-09-10T23:27:21+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/posts/</loc>
     <lastmod>2019-09-10T23:27:21+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -166,17 +183,6 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/posts/201904-201906/</loc>
-    <lastmod>2019-07-01T22:56:52+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/others/</loc>
-    <lastmod>2019-07-01T22:56:52+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://art-of-life.jp/posts/development-on-windows/</loc>
     <lastmod>2019-06-28T17:27:34+09:00</lastmod>
   </url>
@@ -236,12 +242,6 @@
   
   <url>
     <loc>https://art-of-life.jp/tags/data-structures/</loc>
-    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/jobs/</loc>
     <lastmod>2019-06-04T22:28:54+09:00</lastmod>
     <priority>0</priority>
   </url>
