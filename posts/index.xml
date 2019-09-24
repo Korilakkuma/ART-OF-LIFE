@@ -6,18 +6,27 @@
     <description>Recent content in Posts on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Thu, 12 Sep 2019 17:27:07 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 25 Sep 2019 05:27:07 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>エムスリーデジタルコミュニケーションズに入社します - 原点回帰 -</title>
+      <title>攻撃再開 2019 〜破滅に向かって〜</title>
       <link>https://art-of-life.jp/posts/my-motivation/</link>
-      <pubDate>Thu, 12 Sep 2019 17:27:07 +0900</pubDate>
+      <pubDate>Wed, 25 Sep 2019 05:27:07 +0900</pubDate>
       
       <guid>https://art-of-life.jp/posts/my-motivation/</guid>
-      <description>入社までの経緯 退職 &amp;hellip; 退職を考えはじめたのは, 2018年の段階で私が知らないこと という記事を読んでからで, おそらく 2019 年の 2 月の前半だったと思い</description>
+      <description>転職決定までの経緯 マルチメディアエンジニアとして生き残る 2018年の段階で私が知らないこと この記事が, わたしのエンジニア人生において, 大きな</description>
+    </item>
+    
+    <item>
+      <title>FFT</title>
+      <link>https://art-of-life.jp/posts/fft/</link>
+      <pubDate>Sun, 22 Sep 2019 17:02:42 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/fft/</guid>
+      <description>高速フーリエ変換 (FFT : Fast Fourier Transform) とは, 離散フーリエ変換のサイズが 2 のべき乗の場合に, 高速に計算できるアルゴリズムのことです. アルゴリズムの導出 離散</description>
     </item>
     
     <item>
@@ -63,6 +72,15 @@
       
       <guid>https://art-of-life.jp/posts/mathematics-for-programmer/</guid>
       <description>プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (動画, オーディオ, 画像など) をあつか</description>
+    </item>
+    
+    <item>
+      <title>3 ヶ月フィードバック (2019 / 4 - 2019 / 6)</title>
+      <link>https://art-of-life.jp/posts/201904-201906/</link>
+      <pubDate>Mon, 01 Jul 2019 22:56:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/201904-201906/</guid>
+      <description>概要 まずは, おおまかにフィードバックです. 4 / 10 でサイバーエージェントを退職してニートになりました. 正直なところ, 納得いく退職ではなかったの</description>
     </item>
     
     <item>

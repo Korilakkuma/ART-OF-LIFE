@@ -6,7 +6,7 @@
     <description>Recent content in Categories on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Thu, 12 Sep 2019 17:27:07 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 25 Sep 2019 05:27:07 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Jobs</title>
       <link>https://art-of-life.jp/categories/jobs/</link>
-      <pubDate>Thu, 12 Sep 2019 17:27:07 +0900</pubDate>
+      <pubDate>Wed, 25 Sep 2019 05:27:07 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/jobs/</guid>
       <description></description>
@@ -23,9 +23,27 @@
     <item>
       <title>Music</title>
       <link>https://art-of-life.jp/categories/music/</link>
-      <pubDate>Thu, 12 Sep 2019 17:27:07 +0900</pubDate>
+      <pubDate>Wed, 25 Sep 2019 05:27:07 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/music/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mathematics</title>
+      <link>https://art-of-life.jp/categories/mathematics/</link>
+      <pubDate>Sun, 22 Sep 2019 17:02:42 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/mathematics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>https://art-of-life.jp/categories/programming/</link>
+      <pubDate>Sun, 22 Sep 2019 17:02:42 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/programming/</guid>
       <description></description>
     </item>
     
@@ -66,15 +84,6 @@
     </item>
     
     <item>
-      <title>Mathematics</title>
-      <link>https://art-of-life.jp/categories/mathematics/</link>
-      <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/mathematics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Development</title>
       <link>https://art-of-life.jp/categories/development/</link>
       <pubDate>Sun, 28 Jul 2019 17:27:12 +0900</pubDate>
@@ -84,11 +93,11 @@
     </item>
     
     <item>
-      <title>Programming</title>
-      <link>https://art-of-life.jp/categories/programming/</link>
-      <pubDate>Fri, 26 Jul 2019 05:27:00 +0900</pubDate>
+      <title>Others</title>
+      <link>https://art-of-life.jp/categories/others/</link>
+      <pubDate>Mon, 01 Jul 2019 22:56:52 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/categories/programming/</guid>
+      <guid>https://art-of-life.jp/categories/others/</guid>
       <description></description>
     </item>
     
