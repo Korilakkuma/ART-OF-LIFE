@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Music on ART OF LIFE</title>
-    <link>https://art-of-life.jp/categories/music/</link>
-    <description>Recent content in Music on ART OF LIFE</description>
+    <title>Music on </title>
+    <link>/categories/music/</link>
+    <description>Recent content in Music on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
     <lastBuildDate>Wed, 25 Sep 2019 05:27:07 +0900</lastBuildDate>
     
-	<atom:link href="https://art-of-life.jp/categories/music/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/music/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>攻撃再開 2019 〜破滅に向かって〜</title>
-      <link>https://art-of-life.jp/posts/my-motivation/</link>
+      <link>/posts/my-motivation/</link>
       <pubDate>Wed, 25 Sep 2019 05:27:07 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/my-motivation/</guid>
-      <description>転職決定までの経緯 マルチメディアエンジニアとして生き残る 2018年の段階で私が知らないこと この記事が, わたしのエンジニア人生において, 大きな</description>
+      <guid>/posts/my-motivation/</guid>
+      <description>転職決定までの経緯 マルチメディアエンジニアとして生き残る 2018年の段階で私が知らないこと
+この記事が, わたしのエンジニア人生において, 大きな影響を与えました.
+人生のリソースは有限です. 時間, お金, もって生まれた能力, バックグラウンド (なにを学んできたか) &amp;hellip; 一方で, Web などのコンピュータテクノロジーは, もはや人類が追いつけないようなスピードで発展しています. どんなに学んでも, 仕事に必要なスキルですら十分でないことのほうが多いかもしれません &amp;hellip;
+だからこそ, なにを捨てるか ? を決定することが重要で, それが, エンジニアとしての戦略となり, さらには, ブランディングになる &amp;hellip; と思いました.
+わたしは, Web フロントエンドエンジニアとしてキャリアを積んできましたが, そのドメインは捨てて, メディア技術に投資する戦略に大きく思考が変わりました.
+もともと, 音楽が好きで, 大学院では音信号処理, ニート時代は Web Music に熱中していました. しかしながら, オーディオ技術は需要が厳しい状況です &amp;hellip; 仮に, 需要があったとしても, あまりに 1 つの技術に投資しすぎるのは生存戦略において問題もあります (その問題点を, @kuina_ch さんは囲碁にたとえて, 以下のように発言されています.
+そこで, それなりに需要があり, オーディオ技術の基礎 (信号処理, コンピュータサイエンス) を活用でき, かつ, 興味をもっていた動画技術を磨いてコアスキルとして確立し, さらに, オーディオ技術で付加価値をつける &amp;hellip; という戦略, つまり, マルチメディアエンジニアとして生き残ることを決めました.
+退職 &amp;hellip; 動画技術をさらに磨くには, 動画プレイヤーだけでなく, 動画配信のバックエンドにも関わることが必要だと考えました.</description>
     </item>
     
   </channel>
