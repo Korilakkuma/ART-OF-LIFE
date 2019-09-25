@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Fourier Transform</title>
+      <link>https://art-of-life.jp/posts/fourier-transform/</link>
+      <pubDate>Sat, 21 Sep 2019 17:27:49 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/fourier-transform/</guid>
+      <description>フーリエ変換 周波数という視点 (ドメイン) から, 音や光の特徴を調べる方法がフーリエ変換です. 音の場合であれば, 基本周波数と倍音の比率などを分析</description>
+    </item>
+    
+    <item>
       <title>.travis.yml の更新</title>
       <link>https://art-of-life.jp/posts/update-travis-yml/</link>
       <pubDate>Fri, 26 Jul 2019 05:27:00 +0900</pubDate>
