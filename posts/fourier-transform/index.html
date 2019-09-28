@@ -34,7 +34,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T17:27:49&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-21T17:27:49&#43;09:00" />
-<meta itemprop="wordCount" content="1422">
+<meta itemprop="wordCount" content="1418">
 
 
 
@@ -174,7 +174,7 @@
       </div>
       <div class="article-info-block">
         
-          24
+          22
         
         <span>
             Tags
@@ -272,7 +272,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-21 17:27:49 &#43;0900 JST" itemprop="datePublished">2019-09-21</time>
             &middot;
-            1422
+            1418
             words
             &middot;
             3
@@ -421,9 +421,7 @@ $</p>
 #include &lt;cmath&gt;
 #include &lt;complex&gt;
 
-std::vector&lt;std::complex&lt;double&gt;&gt; DFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
-  std::vector&lt;std::complex&lt;double&gt;&gt; X(N);
-
+void DFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, std::vector&lt;std::complex&lt;double&gt;&gt; &amp;X, int N) {
   for (int n = 0; n &lt; N; n++) {
     for (int k = 0; k &lt; N; k++) {
       double real =  std::cos((2 * M_PI * k * n) / N);
@@ -432,8 +430,6 @@ std::vector&lt;std::complex&lt;double&gt;&gt; DFT(std::vector&lt;std::complex&lt
       X[k] = std::complex&lt;double&gt;(((real * x[n].real()) + (imag * x[n].imag())), ((real * x[n].imag()) + (imag * x[n].real())));
     }
   }
-
-  return X;
 }
 </code></pre>
 
@@ -442,9 +438,7 @@ std::vector&lt;std::complex&lt;double&gt;&gt; DFT(std::vector&lt;std::complex&lt
 <pre><code class="language-c++">#include &lt;vector&gt;
 #include &lt;cmath&gt;
 
-std::vector&lt;double&gt; hanning_window(int N) {
-  std::vector&lt;double&gt; w(N);
-
+void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
   if ((N % 2) == 0) {
     for (int n = 0; n &lt; N; n++) {
       w[n] = 0.5 - (0.5 * std::cos((2.0 * M_PI * n) / N));
@@ -454,8 +448,6 @@ std::vector&lt;double&gt; hanning_window(int N) {
       w[n] = 0.5 - (0.5 * std::cos((2.0 * M_PI * (n - 0.5)) / N));
     }
   }
-
-  return w;
 }
 </code></pre>
 
@@ -557,13 +549,6 @@ std::vector&lt;double&gt; hanning_window(int N) {
     
 
     
-    <a href="https://art-of-life.jp/posts/fft/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">FFT</div>
-    </a>
-    
 </nav>
 
 
@@ -647,7 +632,7 @@ std::vector&lt;double&gt; hanning_window(int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">5</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -676,10 +661,18 @@ std::vector&lt;double&gt; hanning_window(int N) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/categories/others">
+                    others
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -765,22 +758,6 @@ std::vector&lt;double&gt; hanning_window(int N) {
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/fast-fourier-transform">
-                    fast-fourier-transform
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/tags/fft">
-                    fft
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -824,7 +801,7 @@ std::vector&lt;double&gt; hanning_window(int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">5</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -935,12 +912,6 @@ std::vector&lt;double&gt; hanning_window(int N) {
         
         
         <a href="https://art-of-life.jp/tags/dotfiles" style="font-size: 12px;">dotfiles</a>
-        
-        
-        <a href="https://art-of-life.jp/tags/fast-fourier-transform" style="font-size: 12px;">fast-fourier-transform</a>
-        
-        
-        <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>

@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
 <head>
-    <title>ART OF LIFE</title>
+    <title>Fourier Transform &middot; ART OF LIFE</title>
     <meta name="generator" content="Hugo 0.56.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
     
-      <meta name="description" content="Art (Computer Science と Music) についての Blog">
+      <meta name="description" content="フーリエ変換・離散フーリエ変換">
     
     
-      <link href="https://art-of-life.jp/index.xml" rel="alternate" type="application/rss+xml" title="ART OF LIFE" />
-      <link href="https://art-of-life.jp/index.xml" rel="feed" type="application/rss+xml" title="ART OF LIFE" />
-    
-    <link rel="canonical" href="https://art-of-life.jp/"/>
+    <link rel="canonical" href="https://art-of-life.jp/posts/fourier-transform/"/>
     <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
@@ -23,21 +20,29 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="ART OF LIFE" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://art-of-life.jp/" />
-
-<meta property="og:updated_time" content="2019-09-22T17:02:42+09:00" />
+    <meta property="og:title" content="Fourier Transform" />
+<meta property="og:description" content="フーリエ変換・離散フーリエ変換" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://art-of-life.jp/posts/fourier-transform/" />
+<meta property="article:published_time" content="2019-09-21T17:27:49+09:00" />
+<meta property="article:modified_time" content="2019-09-21T17:27:49+09:00" />
 
     
-    <meta itemprop="name" content="ART OF LIFE">
-<meta itemprop="description" content="">
+    <meta itemprop="name" content="Fourier Transform">
+<meta itemprop="description" content="フーリエ変換・離散フーリエ変換">
 
+
+<meta itemprop="datePublished" content="2019-09-21T17:27:49&#43;09:00" />
+<meta itemprop="dateModified" content="2019-09-21T17:27:49&#43;09:00" />
+<meta itemprop="wordCount" content="1418">
+
+
+
+<meta itemprop="keywords" content="Mathematics,Fourier Transform,Discrete Fourier Transform,DFT," />
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="ART OF LIFE"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Fourier Transform"/>
+<meta name="twitter:description" content="フーリエ変換・離散フーリエ変換"/>
 <meta name="twitter:site" content="@forever120527"/>
 
     
@@ -169,7 +174,7 @@
       </div>
       <div class="article-info-block">
         
-          24
+          22
         
         <span>
             Tags
@@ -250,169 +255,9 @@
 
     <section id="main">
     
-    
-
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/fft/">
-    <h1 class="article-title" itemprop="name">
-        FFT
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-09-22 17:02:42 &#43;0900 JST" itemprop="datePublished">2019-09-22</time>
-            &middot;
-            2739
-            words
-            &middot;
-            6
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/mathematics">Mathematics</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/fast-fourier-transform">Fast Fourier Transform</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/fft">FFT</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                FFT の実装を理解する
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/fft/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/fft/" data-id="5a59857e4f9ca4a10422ca2a8b6f3d31" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
-    
-    <a href="https://art-of-life.jp/posts/fft/#disqus_thread" class="article-comment-link">
-        Comments
-    </a>
-    
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
 
         <header class="article-header">
     <a href="https://art-of-life.jp/posts/fourier-transform/">
@@ -427,7 +272,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-21 17:27:49 &#43;0900 JST" itemprop="datePublished">2019-09-21</time>
             &middot;
-            1422
+            1418
             words
             &middot;
             3
@@ -481,14 +326,137 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            <p>
-                フーリエ変換・離散フーリエ変換
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/fourier-transform/">
-                    Read more
-                </a>
-            </p>
+            
+
+<h1 id="フーリエ変換">フーリエ変換</h1>
+
+<p>周波数という視点 (ドメイン) から, 音や光の特徴を調べる方法が<b>フーリエ変換</b>です. 音の場合であれば, 基本周波数と倍音の比率などを分析することができます.</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/63822772-69d9da00-c98c-11e9-9870-ce3c5805cf24.gif" alt="フーリエ変換" /></p>
+
+<p>フーリエ変換は, $-\infty$ ~ $\infty$ の時刻まで観測したアナログ信号の周波数特性を調べるための数学的処理で, フーリエ変換と, その逆変換である, <b>逆フーリエ変換</b>は以下のように定義されています.</p>
+
+<p>$X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt\ \ (-\infty \leqq f \leqq \infty)$</p>
+
+<p>$x(t) = \int_{-\infty}^{\infty}X(t)\exp(j2{\pi}ft)df\ \ (-\infty \leqq t \leqq \infty)$</p>
+
+<p>$x(t)$ は, 時間 $t$ を変数とするアナログ信号, $X(f)$ は周波数 $f$ を変数とする $x(t)$ の周波数特性を表しています.</p>
+
+<h1 id="離散フーリエ変換">離散フーリエ変換</h1>
+
+<p>アナログ信号のフーリエ変換では, 無限の長さの連続信号となりますが, コンピュータでは<b>無限大</b>や<b>連続</b>した信号をあつかうことができません. したがって, コンピュータでフーリエ変換を実装する場合には, <b>離散フーリエ変換</b> (<b>DFT</b> : Discrete Fourier Transform) と, その逆変換である<b>逆離散フーリエ変換</b> (<b>IDFT</b> : Inverse Discrete Fourier Transform) を利用します.</p>
+
+<p>$t=nt_{s} \ (1 \leqq n \leqq N-1)$</p>
+
+<p>$f=\frac{kf_{s}}{N} \ (f \leqq k \leqq N - 1)$</p>
+
+<p>と定義できるので,</p>
+
+<p>$X(k) = \sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)$</p>
+
+<p>$x(n) = \frac{1}{N}\sum_{n=0}^{N-1}X(k)\exp\left(\frac{j2{\pi}kn}{N}\right)$</p>
+
+<p>音の場合, $x(n)$ は実数となります. 一方で, $X(k)$ は複素数となります. $X(k)$ を極座標形式で表すと, 以下のようになります.</p>
+
+<p>$X(k)=A(k)\exp(j{\theta}(k))$</p>
+
+<p>$
+\begin{cases}
+A(k)=\sqrt{real(X(k))^{2}+imag(X(k))^{2}} \\<br />
+\theta(k)=\tan^{-1}\left(\frac{imag(X(k))}{real(X(k))}\right)
+\end{cases}
+$</p>
+
+<p>ここで, $X(k)$ の逆離散フーリエ変換を考えます.</p>
+
+<p>$x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)exp\left(\frac{-j2{\pi}kn}{N}+j\theta(k)\right) \ (0 \leqq n \leqq N - 1)$</p>
+
+<p>オイラーの公式を適用すると,</p>
+
+<p>$x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)\left[\cos\left(\frac{2{\pi}kn}{N}+\theta(k)\right)+j\sin\left(\frac{2{\pi}kn}{N}+\theta(k)\right)\right] \ (0 \leqq n \leqq N - 1)$</p>
+
+<p>音の場合, $x(n)$ は, 虚数になるので, 虚数部を消去すると, 以下のようになります.</p>
+
+<p>$x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)\cos\left(\frac{2{\pi}kn}{N}+\theta(k)\right) \ (0 \leqq n \leqq N - 1)$</p>
+
+<p>この式は, $N$ 個の $\cos$ 波の重ねあわせによって $x(n)$ を合成できることを表しています. つまり, 離散フーリエ変換によって計算される周波数特性 (スペクトル) は, $\cos$ 波の振幅と位相の情報です ($A(k)$ は, <b>振幅スペクトル</b>, $\theta(k)$は, <b>位相スペクトル</b> です).</p>
+
+<p>周波数特性は, $k=\frac{N}{2}$ を中心に, 振幅スペクトルは線対称, 位相スペクトルは点対称になります. さらに, $k=\frac{N}{2}$ は, $\frac{f_{s}}{2}$, つまり, サンプリング周波数の $\frac{1}{2}$ に対応し, <b>サンプリング定理</b>にも関係しています.</p>
+
+<p>人間の聴覚は位相の違いに鈍感なので, 音の周波数特性といえば振幅スペクトルを意味していることがほとんどです (ただし, ホワイトノイズとインパルス音のように位相の違いを分析する必要がある場合もあります).</p>
+
+<h2 id="窓関数">窓関数</h2>
+
+<p>離散フーリエ変換では, $x(n)$, $x(k)$ が, 離散フーリエ変換のサイズ $N$ の周期信号という前提があります. つまり, $N$ が $sin$ 波の整数倍となっていれば, 離散フーリエ変換によって求められる周波数特性は, 基本周波数をのみを含んだものになります.</p>
+
+<p>ところが, そうでない場合, 実際の音にはない周波数成分が含まれてしまいます.</p>
+
+<p>この問題を緩和するのが, <b>窓関数</b>です. 窓関数を乗算することで, 端部の不連続点をあいまいにすることができ, 周波数成分の広がりをある程度おさえることができます.</p>
+
+<p>窓関数にはいくつか種類がありますが, 代表的な窓関数に, <b>ハニング窓</b>があり, 以下のように定義されています.</p>
+
+<p>($N$ が偶数の場合)</p>
+
+<p>$
+w(n)=\begin{cases}
+0.5-0.5\cos\left(\frac{2{\pi}n}{N}\right) \ (0 \leqq n \leqq N - 1) \\<br />
+0 \ (otherwise) \\<br />
+\end{cases}
+$</p>
+
+<p>($N$ が奇数の場合)</p>
+
+<p>$
+w(n)=\begin{cases}
+0.5-0.5\cos\left(\frac{2{\pi}(n+0.5)}{N}\right) \ (0 \leqq n \leqq N - 1) \\<br />
+0 \ (otherwise) \\<br />
+\end{cases}
+$</p>
+
+<h2 id="実装">実装</h2>
+
+<p>C++ で実装した, 離散フーリエ変換の関数です.</p>
+
+<pre><code class="language-c++">#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;complex&gt;
+
+void DFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, std::vector&lt;std::complex&lt;double&gt;&gt; &amp;X, int N) {
+  for (int n = 0; n &lt; N; n++) {
+    for (int k = 0; k &lt; N; k++) {
+      double real =  std::cos((2 * M_PI * k * n) / N);
+      double imag = -std::sin((2 * M_PI * k * n) / N);
+
+      X[k] = std::complex&lt;double&gt;(((real * x[n].real()) + (imag * x[n].imag())), ((real * x[n].imag()) + (imag * x[n].real())));
+    }
+  }
+}
+</code></pre>
+
+<p>ハニング窓</p>
+
+<pre><code class="language-c++">#include &lt;vector&gt;
+#include &lt;cmath&gt;
+
+void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
+  if ((N % 2) == 0) {
+    for (int n = 0; n &lt; N; n++) {
+      w[n] = 0.5 - (0.5 * std::cos((2.0 * M_PI * n) / N));
+    }
+  } else {
+    for (int n = 0; n &lt; N; n++) {
+      w[n] = 0.5 - (0.5 * std::cos((2.0 * M_PI * (n - 0.5)) / N));
+    }
+  }
+}
+</code></pre>
+
+<h1 id="リファレンス">リファレンス</h1>
+
+<ul>
+<li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%81%A7%E3%81%AF%E3%81%98%E3%82%81%E3%82%8B%E9%9F%B3%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E3%82%B5%E3%82%A6%E3%83%B3%E3%83%89%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86-%E9%9D%92%E6%9C%A8-%E7%9B%B4%E5%8F%B2/dp/4274206505">C言語ではじめる音のプログラミング―サウンドエフェクトの信号処理</a></li>
+</ul>
+
         </div>
         <footer class="article-footer">
     <a data-url="https://art-of-life.jp/posts/fourier-transform/" data-id="af8c437837e5a1fd9368b76edae85c77" class="article-share-link">
@@ -568,1275 +536,49 @@
 </footer>
 
     </div>
-</article>
 
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/mpeg2-systems/">
-    <h1 class="article-title" itemprop="name">
-        MPEG-2 Systems
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-09-10 23:27:21 &#43;0900 JST" itemprop="datePublished">2019-09-10</time>
-            &middot;
-            1310
-            words
-            &middot;
-            3
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/multimedia">Multimedia</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/video">Video</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/audio">Audio</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/mpeg-2-systems">MPEG-2 Systems</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/mpeg-2-ps">MPEG-2 PS</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/mpeg-2-ts">MPEG-2 TS</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                MPEG-2 Systems - MPEG-2 PS と MPEG-2 TS の概要
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/mpeg2-systems/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/mpeg2-systems/" data-id="77c17e7c1dbee779a3ba31d288715791" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
     
-    <a href="https://art-of-life.jp/posts/mpeg2-systems/#disqus_thread" class="article-comment-link">
-        Comments
+<nav id="article-nav">
+    
+    <a href="https://art-of-life.jp/posts/mpeg2-systems/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">MPEG-2 Systems</div>
     </a>
     
 
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/mp3/">
-    <h1 class="article-title" itemprop="name">
-        MP3 の圧縮技術の概要
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-08-28 05:27:13 &#43;0900 JST" itemprop="datePublished">2019-08-28</time>
-            &middot;
-            4929
-            words
-            &middot;
-            10
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/multimedia">Multimedia</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/audio">Audio</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/computer-sience">Computer Sience</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/mp3">MP3</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/pcm">PCM</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/mathematics">Mathematics</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/fourier-transform">Fourier Transform</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">Modified Discrete Cosine Transform</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                MP3 の圧縮技術の概要をとおして, 音声コーデックの基本技術を学ぶ
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/mp3/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/mp3/" data-id="0c14687ab3d658259ba914d37f30c345" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
     
-    <a href="https://art-of-life.jp/posts/mp3/#disqus_thread" class="article-comment-link">
-        Comments
-    </a>
-    
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/macbook-air-2019/">
-    <h1 class="article-title" itemprop="name">
-        Macbook Air 2019
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-07-28 17:27:12 &#43;0900 JST" itemprop="datePublished">2019-07-28</time>
-            &middot;
-            1807
-            words
-            &middot;
-            4
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/development">Development</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/mac">Mac</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/dotfiles">dotfiles</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                MacBook Air 2019 の使用感とセットアップメモ
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/macbook-air-2019/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/macbook-air-2019/" data-id="7ef1bb84fb84e195dcc79746ef9d22fd" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
-    
-    <a href="https://art-of-life.jp/posts/macbook-air-2019/#disqus_thread" class="article-comment-link">
-        Comments
-    </a>
-    
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/update-travis-yml/">
-    <h1 class="article-title" itemprop="name">
-        .travis.yml の更新
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-07-26 05:27:00 &#43;0900 JST" itemprop="datePublished">2019-07-26</time>
-            &middot;
-            481
-            words
-            &middot;
-            1
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/ci">CI</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                Travis CI でエラー 昨日, Travis CI でビルドしたら, ソースコード・テストコードとも何も変更していないのに, 2 つのエラーが発生するようになりました &hellip; Can't open /etc/init.d/xvfb テ
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/update-travis-yml/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/update-travis-yml/" data-id="a916161b8b8662f7bce1c266b4a08cde" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
-    
-    <a href="https://art-of-life.jp/posts/update-travis-yml/#disqus_thread" class="article-comment-link">
-        Comments
-    </a>
-    
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/mathematics-for-programmer/">
-    <h1 class="article-title" itemprop="name">
-        Mathematics for Programmer
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-07-14 17:27:13 &#43;0900 JST" itemprop="datePublished">2019-07-14</time>
-            &middot;
-            2969
-            words
-            &middot;
-            6
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/mathematics">Mathematics</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/discrete-mathematics">Discrete Mathematics</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (動画, オーディオ, 画像など) をあつか
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/mathematics-for-programmer/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/mathematics-for-programmer/" data-id="bfc25f7ec040e77da90cd709553542f3" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
-    
-    <a href="https://art-of-life.jp/posts/mathematics-for-programmer/#disqus_thread" class="article-comment-link">
-        Comments
-    </a>
-    
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/development-on-windows/">
-    <h1 class="article-title" itemprop="name">
-        Development on Windows
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-06-28 17:27:34 &#43;0900 JST" itemprop="datePublished">2019-06-28</time>
-            &middot;
-            1710
-            words
-            &middot;
-            4
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/development">Development</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/operating-system">Operating System</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/windows">Windows</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/linux">Linux</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                Windows Subsystem for Linux による Windows 開発環境構築
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/development-on-windows/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/development-on-windows/" data-id="26d3c43cb1a51c5db96ac1ac61a37e29" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
-    
-    <a href="https://art-of-life.jp/posts/development-on-windows/#disqus_thread" class="article-comment-link">
-        Comments
-    </a>
-    
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/hlsjs-contributor/">
-    <h1 class="article-title" itemprop="name">
-        hls.js のコントリビューターになろう
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-06-12 23:30:29 &#43;0900 JST" itemprop="datePublished">2019-06-12</time>
-            &middot;
-            2640
-            words
-            &middot;
-            6
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/multimedia">Multimedia</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/video">Video</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/oss">OSS</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/javascript">JavaScript</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/media-source-extensions">Media Source Extensions</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/hls.js">hls.js</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                hls.js のコントリビューターになるための道標
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/hlsjs-contributor/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/hlsjs-contributor/" data-id="ff792a00b01efc0ac5948d4049656ca3" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
-    
-    <a href="https://art-of-life.jp/posts/hlsjs-contributor/#disqus_thread" class="article-comment-link">
-        Comments
-    </a>
-    
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/coding-exam/">
-    <h1 class="article-title" itemprop="name">
-        ホワイトボードコーディングを支える技術
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-06-04 22:28:54 &#43;0900 JST" itemprop="datePublished">2019-06-04</time>
-            &middot;
-            2193
-            words
-            &middot;
-            5
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/computer-sience">Computer Sience</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/jobs">Jobs</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/algorithm">Algorithm</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/data-structures">Data Structures</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                ホワイトボードコーディング試験で大事だと思ったこと
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/coding-exam/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/coding-exam/" data-id="ce1d170b8e5f5cb1b2cb9a9b95aea7f1" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
-    
-    <a href="https://art-of-life.jp/posts/coding-exam/#disqus_thread" class="article-comment-link">
-        Comments
-    </a>
-    
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
-
-<nav id="page-nav">
-
-    
-    
-        <a class="extend next" rel="next" href="https://art-of-life.jp/page/2/">
-            Next »
-        </a>
-    
-
 </nav>
+
+
+</article>
+
+
+<section id="comments">
+    <div id="disqus_thread">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Korilakkuma" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+</section>
 
 
     </section>
@@ -1890,7 +632,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">5</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -1919,10 +661,18 @@
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/categories/others">
+                    others
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -2008,22 +758,6 @@
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/fast-fourier-transform">
-                    fast-fourier-transform
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/tags/fft">
-                    fft
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -2067,7 +801,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">5</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -2178,12 +912,6 @@
         
         
         <a href="https://art-of-life.jp/tags/dotfiles" style="font-size: 12px;">dotfiles</a>
-        
-        
-        <a href="https://art-of-life.jp/tags/fast-fourier-transform" style="font-size: 12px;">fast-fourier-transform</a>
-        
-        
-        <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
