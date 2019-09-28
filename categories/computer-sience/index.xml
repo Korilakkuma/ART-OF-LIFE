@@ -6,10 +6,19 @@
     <description>Recent content in Computer Sience on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Wed, 28 Aug 2019 05:27:13 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 28 Sep 2019 17:02:03 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/categories/computer-sience/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>FIR Filter</title>
+      <link>https://art-of-life.jp/posts/fir-filter/</link>
+      <pubDate>Sat, 28 Sep 2019 17:02:03 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/fir-filter/</guid>
+      <description>FIR フィルタとは ? デジタルフィルタは, 乗算器, 加算器, 遅延器で構成されています. これらの構成によって, FIR (Finite Impulse Response) フィルタと, IIR (Infinite Impulse Response) フィルタの 2</description>
+    </item>
     
     <item>
       <title>MP3 の圧縮技術の概要</title>

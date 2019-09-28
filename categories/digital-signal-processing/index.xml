@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Digital Signal Processing on ART OF LIFE</title>
+    <link>https://art-of-life.jp/categories/digital-signal-processing/</link>
+    <description>Recent content in Digital Signal Processing on ART OF LIFE</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Sat, 28 Sep 2019 17:02:03 +0900</lastBuildDate>
+    
+	<atom:link href="https://art-of-life.jp/categories/digital-signal-processing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>FIR Filter</title>
+      <link>https://art-of-life.jp/posts/fir-filter/</link>
+      <pubDate>Sat, 28 Sep 2019 17:02:03 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/fir-filter/</guid>
+      <description>FIR フィルタとは ? デジタルフィルタは, 乗算器, 加算器, 遅延器で構成されています. これらの構成によって, FIR (Finite Impulse Response) フィルタと, IIR (Infinite Impulse Response) フィルタの 2</description>
+    </item>
+    
+  </channel>
+</rss>

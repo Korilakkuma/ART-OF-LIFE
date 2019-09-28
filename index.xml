@@ -6,10 +6,19 @@
     <description>Recent content on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 22 Sep 2019 17:02:42 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 28 Sep 2019 17:02:03 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>FIR Filter</title>
+      <link>https://art-of-life.jp/posts/fir-filter/</link>
+      <pubDate>Sat, 28 Sep 2019 17:02:03 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/fir-filter/</guid>
+      <description>FIR フィルタとは ? デジタルフィルタは, 乗算器, 加算器, 遅延器で構成されています. これらの構成によって, FIR (Finite Impulse Response) フィルタと, IIR (Infinite Impulse Response) フィルタの 2</description>
+    </item>
     
     <item>
       <title>FFT</title>
