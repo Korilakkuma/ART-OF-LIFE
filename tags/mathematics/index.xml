@@ -6,19 +6,10 @@
     <description>Recent content in Mathematics on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 22 Sep 2019 17:02:42 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 21 Sep 2019 17:27:49 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/tags/mathematics/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>FFT</title>
-      <link>https://art-of-life.jp/posts/fft/</link>
-      <pubDate>Sun, 22 Sep 2019 17:02:42 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/fft/</guid>
-      <description>高速フーリエ変換 (FFT : Fast Fourier Transform) とは, 離散フーリエ変換のサイズが 2 のべき乗の場合に, 高速に計算できるアルゴリズムのことです. アルゴリズムの導出 離散</description>
-    </item>
     
     <item>
       <title>Fourier Transform</title>

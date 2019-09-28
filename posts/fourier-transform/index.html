@@ -34,7 +34,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T17:27:49&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-21T17:27:49&#43;09:00" />
-<meta itemprop="wordCount" content="1433">
+<meta itemprop="wordCount" content="1422">
 
 
 
@@ -174,7 +174,7 @@
       </div>
       <div class="article-info-block">
         
-          24
+          22
         
         <span>
             Tags
@@ -272,7 +272,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-21 17:27:49 &#43;0900 JST" itemprop="datePublished">2019-09-21</time>
             &middot;
-            1433
+            1422
             words
             &middot;
             3
@@ -340,11 +340,11 @@
 
 <p>$x(t) = \int_{-\infty}^{\infty}X(t)\exp(j2{\pi}ft)df\ \ (-\infty \leqq t \leqq \infty)$</p>
 
-<p>$x(t)$は, 時間 $t$ を変数とするアナログ信号, $X(f)$ は周波数 $f$ を変数とする $x(t)$ の周波数特性を表しています.</p>
+<p>$x(t)$ は, 時間 $t$ を変数とするアナログ信号, $X(f)$ は周波数 $f$ を変数とする $x(t)$ の周波数特性を表しています.</p>
 
 <h1 id="離散フーリエ変換">離散フーリエ変換</h1>
 
-<p>アナログ信号ののフーリエ変換では, 無限の長さの連続信号となりますが, コンピュータでは<b>無限大</b>や<b>連続</b>した信号をあつかうことができません. したがって, コンピュータでフーリエ変換を実装する場合には, <b>離散フーリエ変換</b> (<b>DFT</b> : Discrete Fourier Transform) と, その逆変換である<b>逆離散フーリエ変換</b> (<b>IDFT</b> : Inverse Discrete Fourier Transform) を利用します.</p>
+<p>アナログ信号のフーリエ変換では, 無限の長さの連続信号となりますが, コンピュータでは<b>無限大</b>や<b>連続</b>した信号をあつかうことができません. したがって, コンピュータでフーリエ変換を実装する場合には, <b>離散フーリエ変換</b> (<b>DFT</b> : Discrete Fourier Transform) と, その逆変換である<b>逆離散フーリエ変換</b> (<b>IDFT</b> : Inverse Discrete Fourier Transform) を利用します.</p>
 
 <p>$t=nt_{s} \ (1 \leqq n \leqq N-1)$</p>
 
@@ -379,17 +379,17 @@ $</p>
 
 <p>$x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)\cos\left(\frac{2{\pi}kn}{N}+\theta(k)\right) \ (0 \leqq n \leqq N - 1)$</p>
 
-<p>この式は, $N$ 個の $\cos$ 波の重ねあわせによって $x(n)$ を合成できることを表しています. つまり, 離散フーリエ変換によって計算される周波数特性 (スペクトル) は, $\cos$ 波の振幅と位相の情報です ($A(k)$ は, <b>振幅スペクトル</b>, $\theta(k)$は, <b>位相スペクトル</b> です.</p>
+<p>この式は, $N$ 個の $\cos$ 波の重ねあわせによって $x(n)$ を合成できることを表しています. つまり, 離散フーリエ変換によって計算される周波数特性 (スペクトル) は, $\cos$ 波の振幅と位相の情報です ($A(k)$ は, <b>振幅スペクトル</b>, $\theta(k)$は, <b>位相スペクトル</b> です).</p>
 
-<p>週8数特性は, $k=\frac{N}{2}$ を中心に, 振幅スペクトルは線対称, 位相スペクトルは点対称になります. さらに, $k=\frac{N}{2}$ は, $\frac{f_{s}}{2}$, つまり, サンプリング周波数の $\frac{1}{2}$ に対応し, これは, <b>サンプリング定理</b> にも関係しています.</p>
+<p>周波数特性は, $k=\frac{N}{2}$ を中心に, 振幅スペクトルは線対称, 位相スペクトルは点対称になります. さらに, $k=\frac{N}{2}$ は, $\frac{f_{s}}{2}$, つまり, サンプリング周波数の $\frac{1}{2}$ に対応し, <b>サンプリング定理</b>にも関係しています.</p>
 
-<p>音の場合, 人間の聴覚は位相の違いに鈍感なので, 音の周波数特性といえば振幅スペクトルを意味していることがほとんどです (ただし, ホワイトノイズとインパルス音のように位相の違いを分析する必要がある場合もあります).</p>
+<p>人間の聴覚は位相の違いに鈍感なので, 音の周波数特性といえば振幅スペクトルを意味していることがほとんどです (ただし, ホワイトノイズとインパルス音のように位相の違いを分析する必要がある場合もあります).</p>
 
 <h2 id="窓関数">窓関数</h2>
 
-<p>離散フーリエ変換では, $x(n)$, $x(k)$ が, 離散フーリエ変換のサイズ $N$ の周期信号という前提があります. つまり, $N$ が $sin# 波の整数倍となっていれば, 離散フーリエ変換によって求められる周波数特性は, 基本周波数をのみを含んだものになります.</p>
+<p>離散フーリエ変換では, $x(n)$, $x(k)$ が, 離散フーリエ変換のサイズ $N$ の周期信号という前提があります. つまり, $N$ が $sin$ 波の整数倍となっていれば, 離散フーリエ変換によって求められる周波数特性は, 基本周波数をのみを含んだものになります.</p>
 
-<p>ところが, そうでない場合, 音にはない周波数成分が含まれてしまいます.</p>
+<p>ところが, そうでない場合, 実際の音にはない周波数成分が含まれてしまいます.</p>
 
 <p>この問題を緩和するのが, <b>窓関数</b>です. 窓関数を乗算することで, 端部の不連続点をあいまいにすることができ, 周波数成分の広がりをある程度おさえることができます.</p>
 
@@ -457,7 +457,6 @@ std::vector&lt;double&gt; hanning_window(int N) {
 
   return w;
 }
-
 </code></pre>
 
 <h1 id="リファレンス">リファレンス</h1>
@@ -558,13 +557,6 @@ std::vector&lt;double&gt; hanning_window(int N) {
     
 
     
-    <a href="https://art-of-life.jp/posts/fft/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">FFT</div>
-    </a>
-    
 </nav>
 
 
@@ -640,7 +632,7 @@ std::vector&lt;double&gt; hanning_window(int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/jobs">
                     jobs
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -648,7 +640,7 @@ std::vector&lt;double&gt; hanning_window(int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">5</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -657,14 +649,6 @@ std::vector&lt;double&gt; hanning_window(int N) {
                     multimedia
                 </a>
                 <span class="category-list-count">4</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/music">
-                    music
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -696,7 +680,7 @@ std::vector&lt;double&gt; hanning_window(int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -782,22 +766,6 @@ std::vector&lt;double&gt; hanning_window(int N) {
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/fast-fourier-transform">
-                    fast-fourier-transform
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/tags/fft">
-                    fft
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -841,7 +809,7 @@ std::vector&lt;double&gt; hanning_window(int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">5</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
@@ -952,12 +920,6 @@ std::vector&lt;double&gt; hanning_window(int N) {
         
         
         <a href="https://art-of-life.jp/tags/dotfiles" style="font-size: 12px;">dotfiles</a>
-        
-        
-        <a href="https://art-of-life.jp/tags/fast-fourier-transform" style="font-size: 12px;">fast-fourier-transform</a>
-        
-        
-        <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
