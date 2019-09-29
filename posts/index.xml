@@ -6,10 +6,19 @@
     <description>Recent content in Posts on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sat, 28 Sep 2019 17:02:03 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 29 Sep 2019 17:51:06 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>IIR Filter</title>
+      <link>https://art-of-life.jp/posts/iir-filter/</link>
+      <pubDate>Sun, 29 Sep 2019 17:51:06 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/iir-filter/</guid>
+      <description>IIR フィルタとは ? IIR (Infinite Impulse Response) フィルタは, FIR フィルタと異なり, 現在の時刻の出力信号に, それよりも過去の出力信号がフィードバックされます. 出力信号が</description>
+    </item>
     
     <item>
       <title>FIR Filter</title>

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
 <head>
-    <title>FIR Filter &middot; ART OF LIFE</title>
+    <title>IIR Filter &middot; ART OF LIFE</title>
     <meta name="generator" content="Hugo 0.56.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
     
-      <meta name="description" content="FIR Filter の概要">
+      <meta name="description" content="IIR Filter の概要">
     
     
-    <link rel="canonical" href="https://art-of-life.jp/posts/fir-filter/"/>
+    <link rel="canonical" href="https://art-of-life.jp/posts/iir-filter/"/>
     <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
@@ -20,29 +20,29 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="FIR Filter" />
-<meta property="og:description" content="FIR Filter の概要" />
+    <meta property="og:title" content="IIR Filter" />
+<meta property="og:description" content="IIR Filter の概要" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://art-of-life.jp/posts/fir-filter/" />
-<meta property="article:published_time" content="2019-09-28T17:02:03+09:00" />
-<meta property="article:modified_time" content="2019-09-28T17:02:03+09:00" />
+<meta property="og:url" content="https://art-of-life.jp/posts/iir-filter/" />
+<meta property="article:published_time" content="2019-09-29T17:51:06+09:00" />
+<meta property="article:modified_time" content="2019-09-29T17:51:06+09:00" />
 
     
-    <meta itemprop="name" content="FIR Filter">
-<meta itemprop="description" content="FIR Filter の概要">
+    <meta itemprop="name" content="IIR Filter">
+<meta itemprop="description" content="IIR Filter の概要">
 
 
-<meta itemprop="datePublished" content="2019-09-28T17:02:03&#43;09:00" />
-<meta itemprop="dateModified" content="2019-09-28T17:02:03&#43;09:00" />
-<meta itemprop="wordCount" content="4288">
+<meta itemprop="datePublished" content="2019-09-29T17:51:06&#43;09:00" />
+<meta itemprop="dateModified" content="2019-09-29T17:51:06&#43;09:00" />
+<meta itemprop="wordCount" content="3939">
 
 
 
 <meta itemprop="keywords" content="Digital Signal Processing,Mathematics,Z-transform,Digital Filter," />
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="FIR Filter"/>
-<meta name="twitter:description" content="FIR Filter の概要"/>
+<meta name="twitter:title" content="IIR Filter"/>
+<meta name="twitter:description" content="IIR Filter の概要"/>
 <meta name="twitter:site" content="@forever120527"/>
 
     
@@ -174,7 +174,7 @@
       </div>
       <div class="article-info-block">
         
-          27
+          29
         
         <span>
             Tags
@@ -260,9 +260,9 @@
         
 
         <header class="article-header">
-    <a href="https://art-of-life.jp/posts/fir-filter/">
+    <a href="https://art-of-life.jp/posts/iir-filter/">
     <h1 class="article-title" itemprop="name">
-        FIR Filter
+        IIR Filter
     </h1>
     </a>
     <div class="article-meta">
@@ -270,12 +270,12 @@
         
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2019-09-28 17:02:03 &#43;0900 JST" itemprop="datePublished">2019-09-28</time>
+            <time datetime="2019-09-29 17:51:06 &#43;0900 JST" itemprop="datePublished">2019-09-29</time>
             &middot;
-            4288
+            3939
             words
             &middot;
-            9
+            8
             minute read
         </div>
         
@@ -336,307 +336,441 @@
         <div class="article-entry" itemprop="articleBody">
             
 
-<h1 id="fir-フィルタとは">FIR フィルタとは ?</h1>
+<h1 id="iir-フィルタとは">IIR フィルタとは ?</h1>
 
-<p>デジタルフィルタは, <b>乗算器</b>, <b>加算器</b>, <b>遅延器</b>で構成されています. これらの構成によって, <b>FIR</b> (Finite Impulse Response) フィルタと, <b>IIR</b> (Infinite Impulse Response) フィルタの 2 種類に分類できます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65827477-74113000-e2cc-11e9-9df2-920f834bd8e5.png" alt="デジタルフィルタの構成 (FIR フィルタの例)" /></p>
-
-<p>FIR フィルタの定義は以下のようになります. この式は, <b>コンボリューション</b> (<b>畳み込み</b>) と呼ばれる計算の定義です.</p>
+<p><b>IIR (Infinite Impulse Response) フィルタ</b>は, FIR フィルタと異なって, 現在の時刻の出力信号に対して, それよりも過去の出力信号がフィードバックされます. したがって, インパルス応答が無限に続きます.</p>
 
 <p>$
 \begin{eqnarray}
-y(n)=\sum_{m=0}^{J}b(m)x(n-m)
+y(n)=-\sum_{m=1}^{I}a(m)y(n-m)+\sum_{m=0}^{J}b(m)x(n-m)
 \end{eqnarray}
 $</p>
 
-<p>$x(n)$ は入力信号, $y(n)$ は出力信号, $b(m)$ は乗算器のフィルタ係数, $J$ は遅延器の数を表しています ($m=0$ から開始しているので, フィルタ係数の数は $J+1$ となります).</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/66048249-29114a00-e564-11e9-8f5d-839c8ebe9b37.png" alt="IIR フィルタ" /></p>
 
-<p>遅延器とは, デジタル信号を 1 サンプルだけ格納することができるメモリです. 音データを遅延器に入力すると, 遅延器に 1 時刻の間だけ蓄積されたあと, 次の時刻に出力されます. 過去の音データをどのくらい記憶できるかは, 遅延器の数によって決定されます. 例えば, サンプリング周波数 44.1 kHz の場合, 1 秒間の音データを記憶するのには, 44100 個の遅延器が必要になります.</p>
+<p>FIR フィルタと比較して, よりよい周波数特性をもつ (つまり, 理想特性に近い) フィルタを実装しやすいというメリットがあります. 逆に, 出力信号がフィードバックされるので, 設計・実装が複雑になるというデメリットがあります.</p>
 
 <h1 id="z-変換">Z 変換</h1>
 
-<p>フィルタの特性というのは, <b>Z 変換</b> によって分析することが可能です.</p>
-
-<p>$x(n)$ と $y(n)$ の Z 変換は, 以下のように定義されます.</p>
+<p>FIR フィルタと同様に, IIR フィルタの周波数特性も Z 変換で調べます.</p>
 
 <p>$
 \begin{eqnarray}
-X(z)=\sum_{n=-\infty}^{\infty}x(n)z^{-n}
+Y(z)&amp;=&amp;-\sum_{n=-\infty}^{\infty}\sum_{m=1}^{I}a(m)y(n-m)z^{-n}+\sum_{n=-\infty}^{\infty}\sum_{m=0}^{J}b(m)x(n-m) \\<br />
+    &amp;=&amp;-\sum_{m=1}^{I}a(m)\sum_{n=-\infty}^{\infty}y(n-m)z^{-n}+\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-n} \\<br />
+    &amp;=&amp;-\sum_{m=1}^{I}a(m)\sum_{n=-\infty}^{\infty}y(n-m)z^{-(n-m)}z^{-m}+\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-(n-m)}z^{-m} \\<br />
+    &amp;=&amp;-\sum_{m=1}^{I}a(m)Y(z)z^{-m}+\sum_{m=0}^{J}b(m)X(z)z^{-m} \\<br />
+\end{eqnarray}
+$</p>
+
+<p>ここで, $a(m)$ は, $1 \leqq m \leqq I$, $b(m)$ は, $0 \leqq m \leqq J$ で値をもつので,</p>
+
+<p>$
+\begin{eqnarray}
+Y(z)&amp;=&amp;-\sum_{m=-\infty}^{\infty}a(m)Y(z)z^{-m}+\sum_{m=-\infty}^{\infty}b(m)X(z)z^{-m}
+\end{eqnarray}
+$</p>
+
+<p>フィルタ係数, $a(m)$ と $b(m)$ の Z 変換は以下のように定義されます.</p>
+
+<p>$
+\begin{eqnarray}
+A(z)&amp;=&amp;\sum_{m=-\infty}^{\infty}a(m)z^{-m} \\<br />
+B(z)&amp;=&amp;\sum_{m=-\infty}^{\infty}b(m)z^{-m} \\<br />
+\end{eqnarray}
+$</p>
+
+<p>したがって, IIR フィルタの Z 変換は以下のように定義できます.</p>
+
+<p>$
+\begin{eqnarray}
+Y(z)&amp;=&amp;-A(z)Y(z)+B(z)X(z)
+\end{eqnarray}
+$</p>
+
+<p>よって, 伝達関数は,</p>
+
+<p>$
+\begin{eqnarray}
+H(z)&amp;=&amp;\frac{Y(z)}{X(z)}=\frac{B(z)}{1+A(z)}
+\end{eqnarray}
+$</p>
+
+<p>となります.</p>
+
+<h1 id="双-1-次変換法">双 1 次変換法</h1>
+
+<p>ある周波数特性をもつ IIR フィルタを設計する方法として, アナログフィルタの伝達関数を利用する方法があります.</p>
+
+<p>ここで, 伝達関数が以下のように定義されるアナログフィルタの LPF を例に, IIR フィルタを設計します.</p>
+
+<p>$
+\begin{eqnarray}
+H(s)&amp;=&amp;\frac{4{\pi}^{2}f_{c}^{2}}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>ここで, $f_{c}$ は, <b>遮断周波数</b> (または, <b>カットオフ周波数</b>) と呼ばれ, 通過域と阻止域の境界を表します. $Q$ は, <b>クオリティファクタ</b>と呼ばれ, 遮断周波数における増幅率を表します (一般的に, 遮断周波数は, 増幅率が $\frac{1}{\sqrt{2}}$ となる周波数として定義されるので, $Q$ は $\frac{1}{\sqrt{2}}$ となります.</p>
+
+<p>ところで, 上記の伝達関数は $s$ を変数として定義されています. $s$ を $z$ におきかえて, アナログフィルタの伝達関数を IIR フィルタの伝達関数に変換する方法として利用される 1 つの方法が, <b>双 1 次変換法</b>です. (<b>s - z 変換</b>とも呼ばれます. 数学的観点で簡単に解説すると, アナログ信号 $x(t)$ を<b>ラプラス変換</b>した信号を $X(s)$ とし, デジタル信号 $x(n)$ を Z 変換した信号を $X(z)$ とすると, $X(s)$ から $X(z)$ に変換するための処理です).</p>
+
+<p>$
+\begin{eqnarray}
+s=\frac{1-z^{-1}}{1+z^{-1}}
+\end{eqnarray}
+$</p>
+
+<p>このおきかえを適用すると,</p>
+
+<p>$
+\begin{eqnarray}
+H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
 \end{eqnarray}
 $</p>
 
 <p>$
 \begin{eqnarray}
-Y(z)=\sum_{n=-\infty}^{\infty}y(n)z^{-n}
-\end{eqnarray}
-$</p>
-
-<p>この定義をもとに, FIR フィルタの定義式の Z 変換を求めます.</p>
-
-<p>$
-\begin{eqnarray}
-Y(z)&amp;=&amp;\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-n} \\<br />
-    &amp;=&amp;\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-(n-m)}z^{-m} \\<br />
-    &amp;=&amp;\sum_{m=0}^{J}b(m)X(z)z^{-m} \\<br />
-\end{eqnarray}
-$</p>
-
-<p>ここで, フィルタ係数の定義というのは,</p>
-
-<p>$
-\begin{cases}
-\begin{eqnarray}
-&amp;b(m)\neq0&amp;\quad(0 \leqq m \leqq J) \\<br />
-&amp;b(m)=0&amp;\quad(otherwise) \\<br />
-\end{eqnarray}
-\end{cases}
-$</p>
-
-<p>となるので,</p>
-
-<p>$
-\begin{eqnarray}
-Y(z)&amp;=&amp;\sum_{m=-\infty}^{\infty}b(m)X(z)z^{-m} \\<br />
-    &amp;=&amp;\sum_{m=-\infty}^{\infty}b(m)z^{-m}X(z) \\<br />
-\end{eqnarray}
-$</p>
-
-<p>と書き換えることができます.</p>
-
-<p>また, $b(m)$ の Z 変換は,</p>
-
-<p>$
-\begin{eqnarray}
-B(z)=\sum_{m=\infty}^{\infty}b(m)z^{-n}
-\end{eqnarray}
-$</p>
-
-<p>となるので, FIR フィルタの Z 変換は以下のように定義できます.</p>
-
-<p>$Y(z)=B(z)X(z)$</p>
-
-<p>この式は, $z$ を変数として信号を表すと, FIR フィルタは, 入力信号とフィルタ係数の乗算によって出力信号が生成できることを意味します.</p>
-
-<p>また, 入力信号と出力信号の比を<b>伝達関数</b>と呼び, FIR フィルタの伝達関数は以下のように定義できます.</p>
-
-<p>$
-\begin{eqnarray}
-H(z)=\frac{Y(z)}{X(z)}=B(z)
-\end{eqnarray}
-$</p>
-
-<h2 id="z-変換とフーリエ変換">Z 変換とフーリエ変換</h2>
-
-<p>Z 変換は, デジタル信号に対するフーリエ変換と関係しています. $z$ を $\exp(j2{\pi}f)$ に置き換えると,</p>
-
-<p>$
-\begin{eqnarray}
-X(f)=\sum_{n=-\infty}^{\infty}x(n)\exp\left(-j2{\pi}fn\right)
+b(0)&amp;=&amp;\frac{4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
 
 <p>$
 \begin{eqnarray}
-Y(f)=\sum_{n=-\infty}^{\infty}y(n)\exp\left(-j2{\pi}fn\right)
+b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
 
 <p>$
 \begin{eqnarray}
-B(f)=\sum_{m=-\infty}^{\infty}b(m)\exp\left(-j2{\pi}fm\right)
-\end{eqnarray}
-$</p>
-
-<p>これらは, サンプリング周波数 $f_{s}$ を 1 に正規化したデジタル信号のフーリエ変換です.</p>
-
-<p>つまり, FIR フィルタは, <b>時間領域では畳み込み</b>, <b>周波数領域では乗算</b>として定義できるということです.</p>
-
-<p>$Y(f)=B(f)X(f)$</p>
-
-<h1 id="窓関数法">窓関数法</h1>
-
-<p>FIR フィルタをそのまま利用するのは, フィルタの性能としてあまりよくありません. 周波数成分をはっきりと文理するには, フィルタの設計に工夫が必要となります.</p>
-
-<p>そのための 1 つの方法に, <b>窓関数法</b>があります. 窓関数法を適用することで, <b>LPF</b> (Low-Pass Filter), <b>HPF</b> (High-Pass Filter), <b>BPF</b> (Band-Pass Filter), <b>BEF</b> (Band-Eliminate Filter) という基本的なフィルタを設計することが可能になります.</p>
-
-<p>フィルタが通過させる帯域は, <b>通過域</b>, 減衰させる帯域は, <b>阻止域</b>と呼びます. また, $f_{e}$ は, <b>エッジ周波数</b>と呼ばれ, 理想的なフィルタは, この周波数を境にして, 通過域と阻止域をはっきりと分離する事ができますが, コンピュータではこのような理想フィルタを実装することはできません.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65849989-c1060c80-e387-11e9-8e4a-d0ba5c987567.png" alt="FIR フィルタ (LPF, HPF, BPF, BEF)" /></p>
-
-<p>では, LPF を例にして, 窓関数法による FIR フィルタを設計してみます.</p>
-
-<p>理想的な LPF は, エッジ周波数より低域の周波数成分は 1, それより高域の周波数成分では 0 となるので, 理想特性は以下のように定義できます.</p>
-
-<p>$
-B(f)=
-\begin{cases}
-\begin{eqnarray}
-&amp;1&amp;\quad(0 \leqq \left|f\right| \leqq f_{e}) \\<br />
-&amp;0&amp;\quad(f_{e} \leqq \left|f\right| \leqq \frac{1}{2}) \\<br />
-\end{eqnarray}
-\end{cases}
-$</p>
-
-<p>$B(f)$ から, フィルタ係数を求めるには, デジタル信号に対する逆フーリエ変換を利用します.</p>
-
-<p>$
-\begin{eqnarray}
-b(m)&amp;=&amp;\int_{-f_{e}}^{f_{e}}\exp\left(j2{\pi}fm\right)df \quad (-\infty \leqq m \leqq \infty) \\<br />
-    &amp;=&amp;2f_{e}sinc\left(2{\pi}f_{e}m\right) \\<br />
+b(2)&amp;=&amp;\frac{4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
 
 <p>$
-sinc(x)=
-\begin{cases}
 \begin{eqnarray}
-&amp;1&amp; \quad (x=0) \\<br />
-&amp;\frac{\sin\left(x\right)}{x}&amp; \quad (otherwise) \\<br />
+a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
-\end{cases}
 $</p>
-
-<p>$sinc\left(x\right)$ は, <b>シンク関数</b>と呼ばれています. シンク関数は, $-\infty$ から $+\infty$ の区間で定義されるので, フィルタ係数が無限に存在します. コンピュータではこのようなフィルタをあつかえません. そこで, フィルタ係数を有限でうちきるために窓関数を利用します.</p>
-
-<p>窓関数法は, 0 を中心として対称となるようにフィルタをうちきりますが, このままだと, フィルタ係数のインデックスが負数からはじまるので, インデックスが 0 ~ $J$ になるように書き換えます.</p>
-
-<p>窓関数により, 有限にうちきった結果, 通過域と阻止域の境目が広がるという問題が発生します (理想特性をもつフィルタが, コンピュータでは実装できない理由です).</p>
-
-<p>通過域と阻止域の間に $\delta$ で定義される帯域を, <b>遷移帯域幅</b> と呼びます.</p>
-
-<p>$\delta$ は, フィルタ係数の数 $J+1$ に反比例します. つまり, 理想特性に近づけるほど, 乗算器の数が大きくなってしまいます.</p>
-
-<p>フィルタ係数をうちきる窓関数として, ハニング窓を適用する場合, $\delta$ からフィルタ係数の数を決定できます.</p>
 
 <p>$
-J+1=
 \begin{eqnarray}
-round\left(\frac{3.1}{\delta}\right)
+a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
 
-<p>ただし, 窓関数法では 0 を中心として対称になるようにフィルタをうちきる必要があるので, フィルタ係数の数は奇数にする必要があります.</p>
+<p>これらの式に, $f_{c}$ と $Q$ を指定すると, それに応じた周波数特性の IIR フィルタを設計することができます. ただし, これらの式の $f_{c}$ はアナログフィルタの周波数なので変換が必要です. そこで, 以下の関係を利用します.</p>
 
-<p>LPF と同様の設計で, HPF, BPF, BEF を実装することができます.</p>
+<p>$
+\begin{eqnarray}
+f_{a}=\frac{1}{2{\pi}}\tan\left(\frac{{\pi}f_{d}}{f_{s}}\right)
+\end{eqnarray}
+$</p>
+
+<p>この関係は,</p>
+
+<p>$
+\begin{eqnarray}
+s=\frac{1-z^{-1}}{1+z^{-1}}
+\end{eqnarray}
+$</p>
+
+<p>$s=j2{\pi}f_{a}$, $z=\exp\left(j2{\pi}f_{a}\right)$ とおきかえると導出できます.</p>
+
+<p>LPF フィルタと同様に, 双 1 次変換法を適用することで, HPF, BPF, BEF も設計することができます.</p>
 
 <h2 id="hpf">HPF</h2>
 
 <p>$
-B(f)=
-\begin{cases}
 \begin{eqnarray}
-&amp;0&amp;\quad(0 \leqq \left|f\right| \leqq f_{e}) \\<br />
-&amp;1&amp;\quad(f_{e} \leqq \left|f\right| \leqq \frac{1}{2}) \\<br />
+H(s)&amp;=&amp;\frac{s^{2}}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
-\end{cases}
 $</p>
 
 <p>$
 \begin{eqnarray}
-b\left(m\right)=sinc\left({\pi}m\right)-2f_{e}sinc\left(2{\pi}f_{e}m\right)
+H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(0)&amp;=&amp;\frac{1}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(1)&amp;=&amp;\frac{-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(2)&amp;=&amp;\frac{1}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
 
 <h2 id="bpf">BPF</h2>
 
 <p>$
-B(f)=
-\begin{cases}
 \begin{eqnarray}
-&amp;0&amp;\quad(0 \leqq \left|f\right| \leqq f_{e1}) \\<br />
-&amp;1&amp;\quad(f_{e1} \leqq \left|f\right| \leqq f_{e2}) \\<br />
-&amp;0&amp;\quad(f_{e2} \leqq \left|f\right| \leqq \frac{1}{2}) \\<br />
+H(s)&amp;=&amp;\frac{2{\pi}\left(f_{c2}-f_{c1}\right)s}{s^{2}+2{\pi}\left(f_{c2}-f_{c1}\right)s+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
-\end{cases}
 $</p>
 
 <p>$
 \begin{eqnarray}
-b\left(m\right)=2f_{e2}sinc\left(2{\pi}f_{e2}m\right)-2f_{e1}sinc\left(2{\pi}f_{e1}m\right)
+H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(0)&amp;=&amp;\frac{2{\pi}\left(f_{c2}-f_{c1}\right)}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(1)&amp;=&amp;0
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(2)&amp;=&amp;\frac{-2{\pi}\left(f_{c2}-f_{c1}\right)}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c1}f_{c2}-2}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(2)&amp;=&amp;\frac{1-2{\pi}\left(f_{c2}-f_{c1}\right)+4{\pi}^{2}f_{c1}f_{c2}}{1+2{\pi}\left(f_{c2}-f_{c1}\right)+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
 
 <h2 id="bef">BEF</h2>
 
 <p>$
-B(f)=
-\begin{cases}
 \begin{eqnarray}
-&amp;1&amp;\quad(0 \leqq \left|f\right| \leqq f_{e1}) \\<br />
-&amp;0&amp;\quad(f_{e1} \leqq \left|f\right| \leqq f_{e2}) \\<br />
-&amp;1&amp;\quad(f_{e2} \leqq \left|f\right| \leqq \frac{1}{2}) \\<br />
+H(s)&amp;=&amp;\frac{s^{2}+4{\pi}^{2}f_{c1}f_{c2}}{s^{2}+2{\pi}\left(f_{c2}-f_{c1}\right)s+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
-\end{cases}
 $</p>
 
 <p>$
 \begin{eqnarray}
-b\left(m\right)=sinc\left({\pi}m\right)-2f_{e2}sinc\left(2{\pi}f_{e2}m\right)+2f_{e1}sinc\left(2{\pi}f_{e1}m\right)
+H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
 \end{eqnarray}
 $</p>
 
+<p>$
+\begin{eqnarray}
+b(0)&amp;=&amp;\frac{4{\pi}^{2}f_{c1}f_{c2}+1}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c1}f_{c2}-2}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(2)&amp;=&amp;\frac{4{\pi}^{2}f_{c1}f_{c2}+1}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c1}f_{c2}-2}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(2)&amp;=&amp;\frac{1-2{\pi}\left(f_{c2}-f_{c1}\right)+4{\pi}^{2}f_{c1}f_{c2}}{1+2{\pi}\left(f_{c2}-f_{c1}\right)+4{\pi}^{2}f_{c1}f_{c2}}
+\end{eqnarray}
+$</p>
+
+<h2 id="共振フィルタとノッチフィルタ">共振フィルタとノッチフィルタ</h2>
+
+<p>BPF と BEF に関しては, それぞれ, <b>共振フィルタ</b>と<b>ノッチフィルタ</b>と呼ばれる定義があります. これらのフィルタでは, $f_{c}$ と $Q$ を以下のように定義します.</p>
+
+<p>$
+\begin{eqnarray}
+\frac{f_{c}}{Q}=f_{c2}-f_{c1}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+f_{c}^{2}=f_{c1}f_{c2}
+\end{eqnarray}
+$</p>
+
+<p>このように定義した場合, $f_{c}$ は<b>中心周波数</b>と呼ばれ, $Q$ によって帯域幅を調整することが可能になります ($Q$ が大きいほど帯域幅は小さくなり, $Q$ が小さいほど帯域幅は大きくなります).</p>
+
+<h3 id="共振フィルタ">共振フィルタ</h3>
+
+<p>$
+\begin{eqnarray}
+H(s)&amp;=&amp;\frac{\frac{2{\pi}f_{c}}{Q}s}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(0)&amp;=&amp;\frac{\frac{2{\pi}f_{c}}{Q}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(1)&amp;=&amp;0
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(2)&amp;=&amp;\frac{-\frac{2{\pi}f_{c}}{Q}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<h3 id="ノッチフィルタ">ノッチフィルタ</h3>
+
+<p>$
+\begin{eqnarray}
+H(s)&amp;=&amp;\frac{s^{2}+4{\pi}^{2}f_{c}^{2}}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(0)&amp;=&amp;\frac{4{\pi}^{2}f_{c}^{2}+1}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(2)&amp;=&amp;\frac{4{\pi}^{2}f_{c}^{2}+1}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/66048644-e00dc580-e564-11e9-9056-4dc98c761d47.png" alt="IIR フィルタ (LPF, HPF, BPF, BEF)" /></p>
+
 <h1 id="実装">実装</h1>
 
-<p>FIR フィルタによる LPF, HPF, BPF, BEF の実装 (C++) です.</p>
+<p>IIR フィルタによる LPF, HPF, BPF, BEF の実装 (C++) です.</p>
 
 <pre><code class="language-c++">#include &lt;vector&gt;
 #include &lt;cmath&gt;
 
-double sinc(double n) {
-  if (n == 0) {
-    return 1.0;
-  }
+void IIR_LPF(double fd, double Q, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
+  double fa = std::tan(M_PI * fd) / (2.0 * M_PI);
+  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
 
-  return std::sin(n) / n;
+  a[0] = 1.0;
+  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
+  a[2] = (1.0 - (2.0 * M_PI * fa) / Q + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
+  b[0] = (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+  b[1] = (8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+  b[2] = (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
 }
 
-void FIR_LPF(double fe, int J, std::vector&lt;double&gt; &amp;b, std::vector&lt;double&gt; &amp;w) {
-  int offset = J / 2;
+void IIR_HPF(double fd, double Q, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
+  double fa = tan(M_PI * fd) / (2.0 * M_PI);
+  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
 
-  for (int m = -(J / 2); m &lt;= (J / 2); m++) {
-    b[offset + m] = 2.0 * fe * sinc(2.0 * M_PI * fe * m);
-  }
-
-  for (int m = 0; m &lt; (J + 1); m++) {
-    b[m] *= w[m];
-  }
+  a[0] = 1.0;
+  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
+  a[2] = (1.0 - (2.0 * M_PI * fa) / Q + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
+  b[0] = 1 / numerator;
+  b[1] = -2 / numerator;
+  b[2] = 1 / numerator;
 }
 
-void FIR_HPF(double fe, int J, std::vector&lt;double&gt; &amp;b, std::vector&lt;double&gt; &amp;w) {
-  int offset = J / 2;
+void IIR_BPF(double fd, double Q, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
+  double fa = tan(M_PI * fd) / (2.0 * M_PI);
+  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
 
-  for (int m = -(J / 2); m &lt;= (J / 2); m++) {
-    b[offset + m] = sinc(M_PI * m) - (2.0 * fe * sinc(2.0 * M_PI * fe * m));
-  }
-
-  for (int m = 0; m &lt; (J + 1); m++) {
-    b[m] *= w[m];
-  }
+  a[0] = 1.0;
+  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
+  a[2] = (1.0 - (2.0 * M_PI * fa) / Q + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
+  b[0] = (2 * M_PI * fa / Q) / numerator;
+  b[1] = 0;
+  b[2] = -(2 * M_PI * fa / Q) / numerator;
 }
 
-void FIR_BPF(double fe1, double fe2, int J, std::vector&lt;double&gt; &amp;b, std::vector&lt;double&gt; &amp;w) {
-  int offset = J / 2;
+void IIR_BEF(double fd, double Q, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
+  double fa = tan(M_PI * fd) / (2.0 * M_PI);
+  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
 
-  for (int m = -(J / 2); m &lt;= (J / 2); m++) {
-    b[offset + m] = (2 * fe2 * sinc(2 * M_PI * fe2 * m)) - (2.0 * fe1 * sinc(2.0 * M_PI * fe1 * m));
-  }
-
-  for (int m = 0; m &lt; (J + 1); m++) {
-    b[m] *= w[m];
-  }
-}
-
-void FIR_BEF(double fe1, double fe2, int J, std::vector&lt;double&gt; &amp;b, std::vector&lt;double&gt; &amp;w) {
-  int offset = J / 2;
-
-  for (int m = -(J / 2); m &lt;= (J / 2); m++) {
-    b[offset + m] = sinc(M_PI * m) - (2 * fe2 * sinc(2 * M_PI * fe2 * m)) + (2.0 * fe1 * sinc(2.0 * M_PI * fe1 * m));
-  }
-
-  for (int m = 0; m &lt; (J + 1); m++) {
-    b[m] *= w[m];
-  }
+  a[0] = 1.0;
+  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
+  a[2] = (1.0 - (2.0 * M_PI * fa) / Q + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
+  b[0] = (4 * std::pow(M_PI, 2) * std::pow(fa, 2) + 1) / numerator;
+  b[1] = (8 * std::pow(M_PI, 2) * std::pow(fa, 2) - 2) / numerator;
+  b[2] = (4 * std::pow(M_PI, 2) * std::pow(fa, 2) + 1) / numerator;
 }
 </code></pre>
 
@@ -645,73 +779,48 @@ void FIR_BEF(double fe1, double fe2, int J, std::vector&lt;double&gt; &amp;b, st
 <pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;cstdlib&gt;
 #include &lt;string&gt;
-#include &lt;vector&gt;
+#include &lt;cmath&gt;
 #include &quot;wave.h&quot;
-#include &quot;window_functions.h&quot;
-#include &quot;fir_filters.h&quot;
+#include &quot;iir_filters.h&quot;
+
+enum {
+  I = 2,
+  J = 2
+};
 
 int main(int argc, char **argv) {
-  if ((argc != 4) &amp;&amp; (argc != 5)) {
-    std::cerr &lt;&lt; &quot;Require type, fe, delta&quot; &lt;&lt; std::endl;
+  if (argc != 3) {
+    std::cerr &lt;&lt; &quot;Require type, fd&quot; &lt;&lt; std::endl;
     std::exit(EXIT_FAILURE);
   }
 
   std::string type = argv[1];
 
   STEREO_PCM pcm0, pcm1;
-  std::vector&lt;double&gt; b;
-  std::vector&lt;double&gt; w;
+  std::vector&lt;double&gt; a(3);
+  std::vector&lt;double&gt; b(3);
 
-  // Read WAVE
   wave_read(&amp;pcm0, &quot;stereo.wav&quot;);
 
   pcm1.fs     = pcm0.fs;
   pcm1.bits   = pcm0.bits;
   pcm1.length = pcm0.length;
 
-  pcm1.sL.reserve(pcm0.length);
-  pcm1.sR.reserve(pcm0.length);
+  double fd = std::stod(argv[2]) / pcm0.fs;
+  double Q  = 1.0 / std::sqrt(2.0);
 
-  if (argc == 4) {
-    double fe    = std::stod(argv[2]) / pcm0.fs;
-    double delta = std::stod(argv[3]) / pcm0.fs;
-    int J        = std::round(3.1 / delta);
-
-    if ((J % 2) == 1) {
-      J++;
-    }
-
-    b.resize(J);
-    w.resize(J);
-
-    hanning_window(w, (J + 1));
-
-    if (type == &quot;lpf&quot;) {
-      FIR_LPF(fe, J, b, w);
-    } else if (type == &quot;hpf&quot;) {
-      FIR_HPF(fe, J, b, w);
-    }
-  } else if (argc == 5) {
-    double fe1   = std::stod(argv[2]) / pcm0.fs;
-    double fe2   = std::stod(argv[3]) / pcm0.fs;
-    double delta = std::stod(argv[4]) / pcm0.fs;
-    int J        = std::round(3.1 / delta);
-
-    if ((J % 2) == 1) {
-      J++;
-    }
-
-    b.resize(J);
-    w.resize(J);
-
-    hanning_window(w, (J + 1));
-
-    if (type == &quot;bpf&quot;) {
-      FIR_BPF(fe1, fe2, J, b, w);
-    } else if (type == &quot;bef&quot;) {
-      FIR_BEF(fe1, fe2, J, b, w);
-    }
+  if (type == &quot;lpf&quot;) {
+    IIR_LPF(fd, Q, a, b);
+  } else if (type == &quot;hpf&quot;) {
+    IIR_LPF(fd, Q, a, b);
+  } else if (type == &quot;bpf&quot;) {
+    IIR_BPF(fd, Q, a, b);
+  } else if (type == &quot;bef&quot;) {
+    IIR_BEF(fd, Q, a, b);
   }
+
+  pcm1.sL.resize(pcm1.length);
+  pcm1.sR.resize(pcm1.length);
 
   for (int n = 0; n &lt; pcm1.length; n++) {
     for (int m = 0; m &lt;= J; m++) {
@@ -720,187 +829,391 @@ int main(int argc, char **argv) {
         pcm1.sR[n] += b[m] * pcm0.sR[n - m];
       }
     }
-  }
 
-  // Write WAVE
-  wave_write(&amp;pcm1, &quot;fir_filter.wav&quot;);
-}
-</code></pre>
-
-<h1 id="ディレイ">ディレイ</h1>
-
-<p><b>ディレイ</b>とは, 現在の時刻の音データとそれよりも過去の音データを同時に再生することで, やまびこのような効果を生み出すサウンドエフェクトの 1 種です. デジタル信号処理のなかでも, 最も基本的な処理として位置づけられています (実際, <b>ディレイ系</b>と呼ばれるエフェクター群があります).</p>
-
-<p>$
-\begin{eqnarray}
-s_{1}(n)=\sum_{m=0}^{J}b(m)s_{0}(n-m)
-\end{eqnarray}
-$</p>
-
-<p>ディレイの処理は, FIR フィルタと同様です.</p>
-
-<p>現在の時刻の音データに, 過去の音データをどのようにミックスするかは, 乗算器の係数 $b(m)$ によって決まります.
-やまびこをつくりだすには, 一般的に以下のように定義します.</p>
-
-<p>$
-b(m)=
-\begin{cases}
-\begin{eqnarray}
-&amp;1&amp;\quad(m=0) \\<br />
-&amp;wet^{i}&amp;\quad(m=i*time, 1 \leqq i \leqq feedback) \\<br />
-&amp;0&amp;\quad(otherwise) \\<br />
-\end{eqnarray}
-\end{cases}
-$</p>
-
-<p>$wet$ はやまびこの減衰率を表しています. やまびこがしだいに小さくなるようにするには 1 より小さくする必要があります. $time$ は, やまびこの遅延時間です. $feedback$ は, やまびこの繰り返し回数です.</p>
-
-<p>実際のディレイエフェクターでも, ほぼ同様にパラメータを設定可能になっています.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65945784-aa3ae500-e46f-11e9-85f8-f7c28ca6e0c1.png" alt="ディレイとパラメータ" /></p>
-
-<p>ここで, ピストル音のような, ごく短時間に非常に大きな音が発生する音データ $s_{0}(n)$ を仮定します. このような音は, <b>インパルス</b>と呼ばれます (数学的には, <b>デルタ関数</b>で定義されます).</p>
-
-<p>$
-s_{0}(n)=
-\begin{cases}
-\begin{eqnarray}
-&amp;1&amp;\quad(n=0) \\<br />
-&amp;0&amp;\quad(otherwise) \\<br />
-\end{eqnarray}
-\end{cases}
-$</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65945730-8d061680-e46f-11e9-95c7-9f264cf55848.png" alt="デルタ関数 (アナログ信号なので, $\infty$ となっています)" /></p>
-
-<p>インパルスを入力として, FIR フィルタを計算すると, 出力信号は以下のように, $b(n)$ となります.</p>
-
-<p>$
-\begin{eqnarray}
-s_{1}(n)&amp;=&amp;\sum_{m=0}^{J}b(m)s_{0}(n-m) \\<br />
-         &amp;=&amp;\sum_{m=0}^{m=n-1}b(m)s_{0}(n-m)+b(n)s_{0}(0)+\sum_{m=n+1}^{m=J}b(m)s_{0}(n-m)  \\<br />
-         &amp;=&amp;b(n) \\<br />
-\end{eqnarray}
-$</p>
-
-<p>インパルスを入力信号としたとき, その応答として得られる出力信号を, <b>インパルス応答</b>と呼びます.
-<b>FIR フィルタのインパルス応答は, 乗算器の係数</b>です (FIR フィルタの特徴の 1 つ).</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65945811-bd4db500-e46f-11e9-9ce5-0bf595f4dc75.png" alt="インパルス応答" /></p>
-
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;cmath&gt;
-
-void Delay(
-  std::vector&lt;double&gt; &amp;dryL,
-  std::vector&lt;double&gt; &amp;mixL,
-  std::vector&lt;double&gt; &amp;dryR,
-  std::vector&lt;double&gt; &amp;mixR,
-  int length,
-  double wet,
-  double time,
-  int feedback) {
-  for (int n = 0; n &lt; length; n++) {
-    mixL[n] = dryL[n];
-    mixR[n] = dryR[n];
-
-    for (int i = 1; i &lt;= feedback; i++) {
-      int m = static_cast&lt;int&gt;(static_cast&lt;double&gt;(n) - static_cast&lt;double&gt;(i * time));
-
-      if (m &gt;= 0) {
-        mixL[n] = mixL[n] + std::pow(wet, (double)i) * dryL[m];
-        mixR[n] = mixR[n] + std::pow(wet, (double)i) * dryR[m];
+    for (int m = 1; m &lt;= I; m++) {
+      if ((n - m) &gt;= 0) {
+        pcm1.sL[n] += -a[m] * pcm1.sL[n - m];
+        pcm1.sR[n] += -a[m] * pcm1.sR[n - m];
       }
     }
   }
+
+  wave_write(&amp;pcm1, &quot;iir_filter.wav&quot;);
 }
+
 </code></pre>
 
 <h1 id="フレーム単位のフィルタリング">フレーム単位のフィルタリング</h1>
 
 <p>コンピュータのメモリは有限なので, 音データがあまりに長いと, 音データを一度にメモリに読み込んでフィルタリングすることが難しくなります. そこで, 音データを小さなフレームに分割して, フレーム単位でフィルタリングする必要があります. フレームに分割するので, フレームとフレームの接続を考慮する必要があります.</p>
 
-<p>FIR フィルタの場合は, 直前のフレームの音データを, 現在のフレームの最初に連結してフィルタリングします (ただし, 最初のフレームに関しては, 直前のフレームが存在しないので, 無音 (0) のフレームを連結します).</p>
+<p>IIR フィルタの場合には, 直前のフレームの音データだけでなく, 直前のフィルタリング結果も考慮して, フィルタリングする必要があります.</p>
 
-<p><img src="https://user-images.githubusercontent.com/4006693/65952621-2ee03000-e47d-11e9-8985-527417790d03.png" alt="フレーム単位のフィルタリング" /></p>
-
-<h2 id="巡回畳み込み">巡回畳み込み</h2>
-
-<p>FIR フィルタは, <b>時間領域では畳み込み</b>, <b>周波数領域では乗算</b>として定義できました. つまり, FIR フィルタの計算は, 時間領域で畳み込み演算する方法と, 周波数領域で乗算をしてその結果を時間領域に戻す方法の 2 つがあるということです.</p>
-
-<p>ところで, 離散フーリエ変換では, $x(n)$ が周期 $N$ の周期信号であることを仮定しているので, 畳み込みの結果も周期 $N$ の周期信号になります. これを, <b>巡回畳み込み</b>と呼びます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65955726-c21c6400-e483-11e9-8092-a0aa6d845011.png" alt="巡回畳み込み" /></p>
-
-<p>音のデータの長さを $L$, フィルタ係数の数を $J+1$ とすると, 通常の畳み込みの結果は $L+J$ サンプルになります. したがって, 巡回畳み込みの結果から, 通常の畳み込みの結果を取得するには, $N$ を $L+J$ 以上になるように設定する必要があります.</p>
-
-<p>$
-\begin{eqnarray}
-L+J \leqq N
-\end{eqnarray}
-$</p>
-
-<p>離散フーリエ変換による畳み込みの計算は, <b>0 埋め処理</b>をして, $N$ サンプルに拡張してから, 離散フーリエ変換を実行します (高速フーリエ変換の場合は, $N$ が 2 のべき乗になるようにします).</p>
-
-<h2 id="オーバーラップアド">オーバーラップアド</h2>
-
-<p>フレーム単位でフィルタリングをする場合, 隣接するフレームの畳み込みの結果を重ね合わせながら連結していく必要があります. この処理を<b>オーバーラップアド</b>と呼びます.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/66061100-b4e1a100-e579-11e9-9f68-e7622b17688e.png" alt="フレーム単位のフィルタリング" /></p>
 
 <h2 id="実装-1">実装</h2>
 
 <pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;complex&gt;
-#include &quot;../window/window_functions.h&quot;
-#include &quot;../fft/fft.h&quot;
 
-void fir_frame_filter(
+void iir_frame_filter(
   std::vector&lt;double&gt; &amp;s0,
   std::vector&lt;double&gt; &amp;s1,
-  std::vector&lt;double&gt; &amp;b0,
-  int length,
+  std::vector&lt;double&gt; &amp;a,
+  std::vector&lt;double&gt; &amp;b,
+  int length, 
   int J,
-  int L,
-  int N) {
+  int I,
+  int L) {
   int number_of_frames = length / L;
 
-  std::vector&lt;std::complex&lt;double&gt;&gt; b(N);
-  std::vector&lt;std::complex&lt;double&gt;&gt; x(N);
-  std::vector&lt;std::complex&lt;double&gt;&gt; y(N);
+  std::vector&lt;double&gt; x(L + J);
+  std::vector&lt;double&gt; y(L + I);
 
   for (int frame = 0; frame &lt; number_of_frames; frame++) {
     int offset = L * frame;
 
-    for (int n = 0; n &lt; N; n++) {
-      x[n] = std::complex&lt;double&gt;(0.0, 0.0);
+    for (int n = 0; n &lt; L + J; n++) {
+      if ((offset - J + n) &lt; 0) {
+        x[n] = 0.0;
+      } else {
+        x[n] = s0[offset - J + n];
+      }
+    }
+
+    for (int n = 0; n &lt; L + I; n++) {
+      if ((offset - I + n) &lt; 0) {
+        y[n] = 0.0;
+      } else {
+        y[n] = s1[offset - I + n];
+      }
     }
 
     for (int n = 0; n &lt; L; n++) {
-      x[n] = std::complex&lt;double&gt;(s0[offset + n], 0.0);
-    }
+      for (int m = 0; m &lt;= J; m++) {
+        y[I + n] += b[m] * x[J + (n - m)];
+      }
 
-    FFT(x, N);
-
-    for (int m = 0; m &lt; N; m++) {
-      b[m] = std::complex&lt;double&gt;(0.0, 0.0);
-    }
-
-    for (int m = 0; m &lt; J; m++) {
-      b[m] = std::complex&lt;double&gt;(b0[m], 0.0);
-    }
-
-    FFT(b, N);
-
-    for (int k = 0; k &lt; N; k++) {
-      y[k] = std::complex&lt;double&gt;(((b[k].real() * x[k].real()) - (b[k].imag() * x[k].imag())), ((b[k].real() * x[k].imag()) + (b[k].imag() * x[k].real())));
-    }
-
-    IFFT(y, N);
-
-    for (int n = 0; n &lt; (2 * L); n++) {
-      if ((offset + n) &lt; length) {
-        s1[offset + n] += y[n].real();
+      for (int m = 1; m &lt;= I; m++) {
+        y[I + n] += -a[m] * y[I + (n - m)];
       }
     }
+
+    for (int n = 0; n &lt; L; n++) {
+      s1[offset + n] = y[I + n];
+    }
+  }
+}
+</code></pre>
+
+<p>実行例</p>
+
+<pre><code class="language-c++">#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+#include &quot;wave.h&quot;
+#include &quot;iir_filters.h&quot;
+#include &quot;frame_filters.h&quot;
+
+enum {
+  L = 256,
+  J = 2,
+  I = 2
+};
+
+int main(int argc, char **argv) {
+  if (argc != 2) {
+    std::cerr &lt;&lt; &quot;Require fd&quot; &lt;&lt; std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+
+  STEREO_PCM pcm0, pcm1;
+  std::vector&lt;double&gt; a(3);
+  std::vector&lt;double&gt; b(3);
+
+  wave_read(&amp;pcm0, &quot;stereo.wav&quot;);
+
+  pcm1.fs     = pcm0.fs;
+  pcm1.bits   = pcm0.bits;
+  pcm1.length = pcm0.length;
+
+  double fd = std::stod(argv[1]) / pcm0.fs;
+  double Q  = 1.0 / std::sqrt(2.0);
+
+  IIR_LPF(fd, Q, a, b);
+
+  pcm1.sL.resize(pcm1.length);
+  pcm1.sR.resize(pcm1.length);
+
+  iir_frame_filter(pcm0.sL, pcm1.sL, a, b, pcm0.length, J, I, L);
+  iir_frame_filter(pcm0.sR, pcm1.sR, a, b, pcm0.length, J, I, L);
+
+  wave_write(&amp;pcm1, &quot;iir_frame_filter.wav&quot;);
+}
+</code></pre>
+
+<h1 id="イコライザ">イコライザ</h1>
+
+<p><b>イコライザ</b>は, 周波数特性を加工して, 好みの音色をつくりだすためのエフェクターです. イコライザは, 低域の周波数成分を強調する<b>ローシェルビングフィルタ</b>, 高域の周波数成分を強調する<b>ハイシェルビングフィルタ</b>, 特定の周波数帯域を強調する<b>ピーキングフィルタ</b>の 3 種類のフィルタによって構成されます.</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/66130390-a0121580-e62c-11e9-9ae6-ad5e3c6e7d53.png" alt="ローシェルビングフィルタ, ハイシェルビングフィルタ, ピーキングフィルタ" /></p>
+
+<h2 id="ローシェルビングフィルタ">ローシェルビングフィルタ</h2>
+
+<p>$
+\begin{eqnarray}
+H(s)&amp;=&amp;\frac{s^{2}+\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}\left(1+g\right)}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(0)&amp;=&amp;\frac{1+\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}\left(1+g\right)}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}\left(1+g\right)-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(2)&amp;=&amp;\frac{1-\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}\left(1+g\right)}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<h2 id="ハイシェルビングフィルタ">ハイシェルビングフィルタ</h2>
+
+<p>$
+\begin{eqnarray}
+H(s)&amp;=&amp;\frac{\left(1+g\right)s^{2}+\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(0)&amp;=&amp;\frac{\left(1+g\right)+\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2\left(1+g\right)}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(2)&amp;=&amp;\frac{\left(1+g\right)-\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<h2 id="ピーキングフィルタ">ピーキングフィルタ</h2>
+
+<p>$
+\begin{eqnarray}
+H(s)&amp;=&amp;\frac{s^{2}+\frac{2{\pi}f_{c}}{Q}\left(1+g\right)s+4{\pi}^{2}f_{c}^{2}}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(0)&amp;=&amp;\frac{1+\frac{2{\pi}f_{c}}{Q}\left(1+g\right)+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+b(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}\left(1+g\right)+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
+\end{eqnarray}
+$</p>
+
+<p>これらのフィルタには, $g$ という所定の帯域の増幅率を設定できるパラメータ (一般的に, <b>ゲイン</b>と呼ばれています) があります. ローシェルビングフィルタ, および, ハイシェルビングフィルタでは, $Q$ を $\frac{1}{\sqrt{2}}$ に設定することが一般的です. ピーキングフィルタでは, $Q$ によって帯域幅を調整することが可能です($Q$ が大きいほど帯域幅は小さくなり, $Q$ が小さいほど帯域幅は大きくなります).</p>
+
+<p>いずれのフィルタでも, 帯域を減衰させる (<b>カット</b>と呼びます) のは, $-1 \leqq g &lt; 0$ の範囲に設定します. 一方で, 帯域を増幅させる (<b>ブースト</b>と呼びます) には, $0 &lt; g$ に設定します.</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/66130511-c59f1f00-e62c-11e9-88e6-4c839ac7e0cc.png" alt="3 バンドイコライザ" /></p>
+
+<h2 id="実装-2">実装</h2>
+
+<pre><code class="language-c++">#include &lt;vector&gt;
+#include &lt;cmath&gt;
+
+void IIR_LOW_SHELVING(double fd, double Q, double g, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
+  double fa = std::tan(M_PI * fd) / (2.0 * M_PI);
+  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
+
+  a[0] = 1.0;
+  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
+  a[2] = (1.0 - ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
+  b[0] = (1 + std::sqrt(1 + g) * ((2 * M_PI * fa) / Q) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+  b[1] = (8.0 * std::pow(M_PI, 2) * std::pow(fa, 2) * (1 + g) - 2) / numerator;
+  b[2] = (1 - std::sqrt(1 + g) * ((2 * M_PI * fa) / Q) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+}
+
+void IIR_HIGH_SHELVING(double fd, double Q, double g, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
+  double fa = std::tan(M_PI * fd) / (2.0 * M_PI);
+  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
+
+  a[0] = 1.0;
+  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
+  a[2] = (1.0 - ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
+  b[0] = ((1 + g) + std::sqrt(1 + g) * ((2 * M_PI * fa) / Q) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+  b[1] = (8 * std::pow(M_PI, 2) * std::pow(fa, 2) - 2 * (1 + g)) / numerator;
+  b[2] = ((1 + g) - std::sqrt(1 + g) * ((2 * M_PI * fa) / Q) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+}
+
+void IIR_PEAKING(double fd, double Q, double g, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
+  double fa = std::tan(M_PI * fd) / (2.0 * M_PI);
+  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
+
+  a[0] = 1.0;
+  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
+  a[2] = (1.0 - ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
+  b[0] = (1 + ((2 * M_PI * fa) / Q) * (1 + g) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+  b[1] = (8.0 * std::pow(M_PI, 2) * std::pow(fa, 2) - 2) / numerator;
+  b[2] = (1 - ((2 * M_PI * fa) / Q) * (1 + g) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+}
+</code></pre>
+
+<p>イコライザ</p>
+
+<pre><code class="language-c++">#include &lt;vector&gt;
+#include &quot;iir_filters.h&quot;
+
+enum {
+  NUMBER_OF_BANDS = 3,
+  BASS   = 500,
+  MIDDLE = 1000,
+  TREBLE = 2000
+};
+
+void Equalizer(
+  std::vector&lt;double&gt; &amp;s0,
+  std::vector&lt;double&gt; &amp;s1,
+  double fs,
+  int length,
+  int I,
+  int J,
+  double bass,
+  double middle,
+  double treble,
+  double Q) {
+  std::vector&lt;std::vector&lt;double&gt;&gt; A(NUMBER_OF_BANDS, std::vector&lt;double&gt;(3));
+  std::vector&lt;std::vector&lt;double&gt;&gt; B(NUMBER_OF_BANDS, std::vector&lt;double&gt;(3));
+  std::vector&lt;double&gt; a(3);
+  std::vector&lt;double&gt; b(3);
+
+  IIR_LOW_SHELVING(static_cast&lt;double&gt;(BASS) / fs, Q, bass, a, b);
+
+  for (int m = 0; m &lt;= I; m++) {
+    A[0][m] = a[m];
+  }
+
+  for (int m = 0; m &lt;= J; m++) {
+    B[0][m] = b[m];
+  }
+
+  IIR_PEAKING(static_cast&lt;double&gt;(MIDDLE) / fs, Q, middle, a, b);
+
+  for (int m = 0; m &lt;= I; m++) {
+    A[1][m] = a[m];
+  }
+
+  for (int m = 0; m &lt;= J; m++) {
+    B[1][m] = b[m];
+  }
+
+  IIR_HIGH_SHELVING(static_cast&lt;double&gt;(TREBLE) / fs, Q, treble, a, b);
+
+  for (int m = 0; m &lt;= I; m++) {
+    A[2][m] = a[m];
+  }
+
+  for (int m = 0; m &lt;= J; m++) {
+    B[2][m] = b[m];
+  }
+
+  for (int i = 0; i &lt; NUMBER_OF_BANDS; i++) {
+    s1.assign(length, 0.0);
+
+    for (int n = 0; n &lt; length; n++) {
+      for (int m = 0; m &lt;= J; m++) {
+        if ((n - m) &gt;= 0) {
+          s1[n] = s1[n] + (B[i][m] * s0[n - m]);
+        }
+      }
+
+      for (int m = 1; m &lt;= I; m++) {
+        if ((n - m) &gt;= 0) {
+          s1[n] = s1[n] + (-A[i][m] * s1[n - m]);
+        }
+      }
+    }
+
+    s0 = s1;
   }
 }
 </code></pre>
@@ -910,28 +1223,26 @@ void fir_frame_filter(
 <pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;cstdlib&gt;
 #include &lt;cmath&gt;
-#include &lt;vector&gt;
 #include &quot;wave.h&quot;
-#include &quot;fir_filters.h&quot;
-#include &quot;frame_filters.h&quot;
+#include &quot;equalizer.h&quot;
 
 enum {
-  L = 256,
-  N = 512
+  I = 2,
+  J = 2
 };
 
 int main(int argc, char **argv) {
-  if (argc != 3) {
-    std::cerr &lt;&lt;&quot;Require fe, delta&quot; &lt;&lt; std::endl;
+  if (argc != 4) {
+    std::cerr &lt;&lt; &quot;Require bass, middle, treble&quot; &lt;&lt; std::endl;
     std::exit(EXIT_FAILURE);
   }
 
   STEREO_PCM pcm0, pcm1;
-  std::vector&lt;double&gt; b;
-  std::vector&lt;double&gt; w;
-  double fe;
-  double delta;
-  int J;
+
+  double bass   = std::stod(argv[1]);
+  double middle = std::stod(argv[2]);
+  double treble = std::stod(argv[3]);
+  double Q      = 1.0 / std::sqrt(2.0);
 
   wave_read(&amp;pcm0, &quot;stereo.wav&quot;);
 
@@ -939,30 +1250,14 @@ int main(int argc, char **argv) {
   pcm1.bits   = pcm0.bits;
   pcm1.length = pcm0.length;
 
-  fe    = std::stod(argv[1]) / pcm0.fs;
-  delta = std::stod(argv[2]) / pcm0.fs;
-  J     = std::round(3.1 / delta);
-
-  if ((J % 2) == 1) {
-    J++;
-  }
-
-  b.resize(J + 1);
-  w.resize(J + 1);
-
-  hanning_window(w, (J + 1));
-
-  FIR_LPF(fe, J, b, w);
-
   pcm1.sL.resize(pcm1.length);
   pcm1.sR.resize(pcm1.length);
 
-  fir_frame_filter(pcm0.sL, pcm1.sL, b, pcm0.length, J, L, N);
-  fir_frame_filter(pcm0.sR, pcm1.sR, b, pcm0.length, J, L, N);
+  Equalizer(pcm0.sL, pcm1.sL, pcm1.fs, pcm1.length, I, J, bass, middle, treble, Q);
+  Equalizer(pcm0.sR, pcm1.sR, pcm1.fs, pcm1.length, I, J, bass, middle, treble, Q);
 
-  wave_write(&amp;pcm1, &quot;fir_frame_filter.wav&quot;);
+  wave_write(&amp;pcm1, &quot;equalizer.wav&quot;);
 }
-
 </code></pre>
 
 <h1 id="リファレンス">リファレンス</h1>
@@ -973,12 +1268,12 @@ int main(int argc, char **argv) {
 
         </div>
         <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/fir-filter/" data-id="0bd5ab2f46f4b12fdf3976380da312d5" class="article-share-link">
+    <a data-url="https://art-of-life.jp/posts/iir-filter/" data-id="5989bbd7325402aa6c5ab42387b53cc5" class="article-share-link">
         <i class="fa fa-share"></i>
         Share
     </a>
     
-    <a href="https://art-of-life.jp/posts/fir-filter/#disqus_thread" class="article-comment-link">
+    <a href="https://art-of-life.jp/posts/iir-filter/#disqus_thread" class="article-comment-link">
         Comments
     </a>
     
@@ -1054,20 +1349,20 @@ int main(int argc, char **argv) {
     
 <nav id="article-nav">
     
-    <a href="https://art-of-life.jp/posts/fft/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="https://art-of-life.jp/posts/fir-filter/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">FFT</div>
+      <div class="article-nav-title">FIR Filter</div>
     </a>
     
 
     
-    <a href="https://art-of-life.jp/posts/iir-filter/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="https://art-of-life.jp/posts/laplace-transform/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Newer
       </strong>
-      <div class="article-nav-title">IIR Filter</div>
+      <div class="article-nav-title">Laplace Transform</div>
     </a>
     
 </nav>
@@ -1145,7 +1440,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
             <li class="category-list-item">
@@ -1161,7 +1456,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">7</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -1266,7 +1561,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
             <li class="category-list-item">
@@ -1335,6 +1630,14 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
+                    laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/linux">
                     linux
                 </a>
@@ -1354,7 +1657,15 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">7</span>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
+                    mdct
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -1434,7 +1745,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/z-transform">
                     z-transform
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
         </ul>
@@ -1496,6 +1807,9 @@ int main(int argc, char **argv) {
         <a href="https://art-of-life.jp/tags/javascript" style="font-size: 12px;">javascript</a>
         
         
+        <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
         
         
@@ -1503,6 +1817,9 @@ int main(int argc, char **argv) {
         
         
         <a href="https://art-of-life.jp/tags/mathematics" style="font-size: 12px;">mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mdct" style="font-size: 12px;">mdct</a>
         
         
         <a href="https://art-of-life.jp/tags/media-source-extensions" style="font-size: 12px;">media-source-extensions</a>
