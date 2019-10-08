@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
 <head>
-    <title>CI &middot; ART OF LIFE</title>
+    <title>WAVE ファイルの構成 &middot; ART OF LIFE</title>
     <meta name="generator" content="Hugo 0.56.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
     
-      <meta name="description" content="Art (Computer Science と Music) についての Blog">
+      <meta name="description" content="WAVE ファイルの構成を理解して, 読み書きするコードを実装する">
     
     
-      <link href="https://art-of-life.jp/tags/ci/index.xml" rel="alternate" type="application/rss+xml" title="ART OF LIFE" />
-      <link href="https://art-of-life.jp/tags/ci/index.xml" rel="feed" type="application/rss+xml" title="ART OF LIFE" />
-    
-    <link rel="canonical" href="https://art-of-life.jp/tags/ci/"/>
+    <link rel="canonical" href="https://art-of-life.jp/posts/wave/"/>
     <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
@@ -23,21 +20,29 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="CI" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://art-of-life.jp/tags/ci/" />
-
-<meta property="og:updated_time" content="2019-07-26T05:27:00+09:00" />
+    <meta property="og:title" content="WAVE ファイルの構成" />
+<meta property="og:description" content="WAVE ファイルの構成を理解して, 読み書きするコードを実装する" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://art-of-life.jp/posts/wave/" />
+<meta property="article:published_time" content="2019-09-11T17:25:18+09:00" />
+<meta property="article:modified_time" content="2019-09-11T17:25:18+09:00" />
 
     
-    <meta itemprop="name" content="CI">
-<meta itemprop="description" content="">
+    <meta itemprop="name" content="WAVE ファイルの構成">
+<meta itemprop="description" content="WAVE ファイルの構成を理解して, 読み書きするコードを実装する">
 
+
+<meta itemprop="datePublished" content="2019-09-11T17:25:18&#43;09:00" />
+<meta itemprop="dateModified" content="2019-09-11T17:25:18&#43;09:00" />
+<meta itemprop="wordCount" content="1837">
+
+
+
+<meta itemprop="keywords" content="WAVE,PCM," />
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="CI"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="WAVE ファイルの構成"/>
+<meta name="twitter:description" content="WAVE ファイルの構成を理解して, 読み書きするコードを実装する"/>
 <meta name="twitter:site" content="@forever120527"/>
 
     
@@ -250,45 +255,603 @@
 
     <section id="main">
     
-    
-    
-    
-    <section class="archives-wrap">
-        <div class="archive-category-wrap">
-            <span class="archive-category">CI</span>
-        </div>
-        <div class="archives">
-            
-            
-                <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
-            
-            <a href="https://art-of-life.jp/posts/update-travis-yml/" class="thumbnail">
-                <span style="background-image:url(https://art-of-life.jp/)" alt=".travis.yml の更新" class="thumbnail-image"></span>
-            </a>
-            
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="https://art-of-life.jp/posts/update-travis-yml/">.travis.yml の更新</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2019-07-26 05:27:00 &#43;0900 JST" itemprop="datePublished">2019-07-26</time>
-            </div>
-        </header>
-    </div>
-</article>
- 
-            
-        </div>
-    </section>
-    <nav id="page-nav">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
 
+        <header class="article-header">
+    <a href="https://art-of-life.jp/posts/wave/">
+    <h1 class="article-title" itemprop="name">
+        WAVE ファイルの構成
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2019-09-11 17:25:18 &#43;0900 JST" itemprop="datePublished">2019-09-11</time>
+            &middot;
+            1837
+            words
+            &middot;
+            4
+            minute read
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/multimedia">Multimedia</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/audio">Audio</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/wave">WAVE</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/pcm">PCM</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            
+
+<h1 id="wave-ファイルとは">WAVE ファイルとは ?</h1>
+
+<p><b>WAVE</b> とは, 音声コーデックの 1 つです. 圧縮をしないので, ファイルサイズは, MP3 や AAC などと比較するとかなり大きくなってしまいますが, 音質の劣化がありません.</p>
+
+<h1 id="wave-ファイルの構成">WAVE ファイルの構成</h1>
+
+<p>WAVE ファイルは, <b>chunk</b> と呼ばれるブロック構造によって音データを記録します. WAVE ファイルそのものは, <b>RIFF</b> (Resource Interchange File Format) チャンクと呼ばれるブロックになっています. そして, RIFF チャンクのなかに, <b>fmt</b> チャンクと <b>data</b> チャンクが格納されています.</p>
+
+<table>
+  <caption>WAVF ファイルの構成</caption>
+  <thead>
+    <tr><th scope="col">chunk</th><th scope="col">chunk</th><th scope="col">Parameter</th><th scope="col">byte</th><th scope="col">Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td rowspan="14">RIFF チャンク</td><td rowspan="3"></td><td>chunkID</td><td>4</td><td>&apos;RIFF&apos;</td></tr>
+    <tr><td>chunkSize</td><td>4</td><td>size + 36</td></tr>
+    <tr><td>formType</td><td>4</td><td>&apos;WAVE&apos;</td></tr>
+    <tr><td rowspan="8">fmt チャンク</td><td>chunkID</td><td>4</td><td>&apos;fmt &apos;</td></tr>
+    <tr><td>chunkSize</td><td>4</td><td>16</td></tr>
+    <tr><td>waveFormatType</td><td>2</td><td>プロパティ</td></tr>
+    <tr><td>channel</td><td>2</td><td>プロパティ</td></tr>
+    <tr><td>samplesPerSec</td><td>4</td><td>プロパティ</td></tr>
+    <tr><td>bytesPerSec</td><td>4</td><td>プロパティ</td></tr>
+    <tr><td>blockSize</td><td>2</td><td>プロパティ</td></tr>
+    <tr><td>bitsPerSample</td><td>2</td><td>プロパティ</td></tr>
+    <tr><td rowspan="3">data チャンク</td><td>chunkID</td><td>4</td><td>&apos;data&apos;</td></tr>
+    <tr><td>chunkSize</td><td>4</td><td>size</td></tr>
+    <tr><td>data</td><td>size</td><td>音データ</td></tr>
+  </tbody>
+</table>
+
+<ul>
+<li>waveFormatType
+
+<ul>
+<li>音データの形式で, PCM の場合 1</li>
+</ul></li>
+<li>channel
+
+<ul>
+<li>モノラルの場合 1, ステレオの場合 2</li>
+</ul></li>
+<li>samplesPerSec
+
+<ul>
+<li>サンプリング周波数 (単位は, Hz)</li>
+</ul></li>
+<li>blockSize
+
+<ul>
+<li>音データの最小単位を記録するのに必要なデータ量 (例:  16 bit ステレオであれば 4 byte)</li>
+</ul></li>
+<li>bytesPerSec
+
+<ul>
+<li>1 sec の音データを記録するのに必要なデータサイズ. <code>blockSize</code> と <code>samplesPerSec</code> の積</li>
+</ul></li>
+<li>bitsPerSample
+
+<ul>
+<li>量子化ビット (8 bit or 16 bit)</li>
+</ul></li>
+</ul>
+
+<p>data チャンクには, 音データそのものが記録されますが, その値は, 量子化ビットと関係しています.</p>
+
+<table>
+  <caption>data チャンク</caption>
+  <thead><tr><th scope="col"></th><th scope="col">Min</th><th scope="col">Max</th></tr></thead>
+  <tbody>
+     <tr><th scope="row">量子化ビット 8 bit</th><td>0</td><td>255</td></tr>
+     <tr><th scope="row">量子化ビット 16 bit</th><td>-32768</td><td>32767</td></tr>
+  </tbody>
+</table>
+
+<p>モノラル場合, 時間の経過にしたがって, 音データが順に記録されます. ステレオの場合, 左チャンネルと右チャンネルの音データが交互に記録されます.</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/66471174-d8e73a00-eac5-11e9-977a-fe4e11071ccb.png" alt="data チャンク (8 bit モノラル, 8 bit ステレオ, 16 bit モノラル, 16 bit ステレオ" /></p>
+
+<h1 id="クリッピング">クリッピング</h1>
+
+<p>ところで, 音データが, 最大値を上回ってしまうと<b>オーバーフロー</b>が発生 (量子化ビット 16 なら, -32768 になってしまう), また, 最小値を下回ってしまうと<b>アンダーフロー</b>が発生 (量子化ビットが 16 なら 32767 になってしまう) してしまい, 波形が大きく変形してしまいます.</p>
+
+<p>これを防止するために, それらの値 (量子化ビットが 16 なら, 32767, -32768) を上限, 下限として振幅をうちきります. この処理を<b>クリッピング</b>と呼びます.</p>
+
+<h1 id="実装">実装</h1>
+
+<p>C++ による, WAVE ファイルの読み書きの実装です.</p>
+
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+typedef struct {
+  int fs;
+  int bits;
+  int length;
+  std::vector&lt;double&gt; s;
+} MONO_PCM;
+
+typedef struct {
+  int fs;
+  int bits;
+  int length;
+  std::vector&lt;double&gt; sL;
+  std::vector&lt;double&gt; sR;
+} STEREO_PCM;
+
+void wave_read(MONO_PCM *pcm, std::string filename) {
+  int number_of_channels = 1;
+
+  char riff_chunk_id[4];
+  long riff_chunk_size;
+  char riff_form_type[4];
+  char fmt_chunk_id[4];
+  long fmt_chunk_size;
+  short fmt_wave_format_type;
+  short fmt_channel;
+  long fmt_samples_per_sec;
+  long fmt_bytes_per_sec;
+  short fmt_block_size;
+  short fmt_bits_per_sample;
+  char data_chunk_id[4];
+  int data_chunk_size;
+  short data;
+
+  std::fstream file(filename, std::ios::binary | std::ios::in);
+
+  file.read(reinterpret_cast&lt;char *&gt;(riff_chunk_id), 1 * 4);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;riff_chunk_size), 4 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(riff_form_type), 1 * 4);
+  file.read(reinterpret_cast&lt;char *&gt;(fmt_chunk_id), 1 * 4);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_chunk_size), 4 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_wave_format_type), 2 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_channel), 2 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_samples_per_sec), 4 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_bytes_per_sec), 4 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_block_size), 2 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_bits_per_sample), 2 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(data_chunk_id), 1 * 4);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;data_chunk_size), 4 * 1);
+
+  pcm-&gt;fs = fmt_samples_per_sec;
+  pcm-&gt;bits = fmt_bits_per_sample;
+  pcm-&gt;length = data_chunk_size / (number_of_channels * (pcm-&gt;bits / 8));
+
+  pcm-&gt;s.resize(pcm-&gt;length);
+
+  for (int n = 0; n &lt; pcm-&gt;length; n++) {
+    file.read(reinterpret_cast&lt;char *&gt;(&amp;data), 2 * 1);
+    pcm-&gt;s[n] = static_cast&lt;double&gt;(data) / 32768.0;
+  }
+
+  file.close();
+}
+
+void wave_write(MONO_PCM *pcm, std::string filename) {
+  int number_of_channels = 1;
+
+  char riff_chunk_id[4];
+  long riff_chunk_size;
+  char riff_form_type[4];
+  char fmt_chunk_id[4];
+  long fmt_chunk_size;
+  short fmt_wave_format_type;
+  short fmt_channel;
+  long fmt_samples_per_sec;
+  long fmt_bytes_per_sec;
+  short fmt_block_size;
+  short fmt_bits_per_sample;
+  char data_chunk_id[4];
+  int data_chunk_size;
+  short data;
+  double s;
+
+  riff_chunk_id[0] = 'R';
+  riff_chunk_id[1] = 'I';
+  riff_chunk_id[2] = 'F';
+  riff_chunk_id[3] = 'F';
+
+  riff_chunk_size = 36 + (number_of_channels * (16 / 8) * pcm-&gt;length);
+
+  riff_form_type[0] = 'W';
+  riff_form_type[1] = 'A';
+  riff_form_type[2] = 'V';
+  riff_form_type[3] = 'E';
+
+  fmt_chunk_id[0] = 'f';
+  fmt_chunk_id[1] = 'm';
+  fmt_chunk_id[2] = 't';
+  fmt_chunk_id[3] = ' ';
+
+  fmt_chunk_size = 16;
+  fmt_wave_format_type = 1;
+  fmt_channel = number_of_channels;
+  fmt_samples_per_sec = pcm-&gt;fs;
+  fmt_bytes_per_sec = pcm-&gt;fs * (number_of_channels * (pcm-&gt;bits / 8));
+  fmt_block_size = number_of_channels * (pcm-&gt;bits / 8);
+  fmt_bits_per_sample = pcm-&gt;bits;
+
+  data_chunk_id[0] = 'd';
+  data_chunk_id[1] = 'a';
+  data_chunk_id[2] = 't';
+  data_chunk_id[3] = 'a';
+
+  data_chunk_size = (number_of_channels * (16 / 8)) * pcm-&gt;length;
+
+  std::fstream file(filename, std::ios::binary | std::ios::out);
+
+  file.write(reinterpret_cast&lt;char *&gt;(riff_chunk_id), 1 * 4);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;riff_chunk_size), 4 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(riff_form_type), 1 * 4);
+  file.write(reinterpret_cast&lt;char *&gt;(fmt_chunk_id), 1 * 4);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_chunk_size), 4 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_wave_format_type), 2 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_channel), 2 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_samples_per_sec), 4 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_bytes_per_sec), 4 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_block_size), 2 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_bits_per_sample), 2 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(data_chunk_id), 1 * 4);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;data_chunk_size), 4 * 1);
+
+  for (int n = 0; n &lt; pcm-&gt;length; n++) {
+    s = ((pcm-&gt;s[n] + 1.0) / 2.0) * 65536.0;
+
+    if (s &gt; 65535.0) {
+        s = 65535.0;
+    }
+
+    if (s &lt; 0.0) {
+        s = 0.0;
+    }
+
+    data = static_cast&lt;short&gt;((s + 0.5) - 32768);
+
+    file.write(reinterpret_cast&lt;char *&gt;(&amp;data), 2 * 1);
+  }
+
+  file.close();
+}
+
+void wave_read(STEREO_PCM *pcm, std::string filename) {
+  int number_of_channels = 2;
+
+  char riff_chunk_id[4];
+  long riff_chunk_size;
+  char riff_form_type[4];
+  char fmt_chunk_id[4];
+  long fmt_chunk_size;
+  short fmt_wave_format_type;
+  short fmt_channel;
+  long fmt_samples_per_sec;
+  long fmt_bytes_per_sec;
+  short fmt_block_size;
+  short fmt_bits_per_sample;
+  char data_chunk_id[4];
+  int data_chunk_size;
+  short dataL;
+  short dataR;
+
+  std::fstream file(filename, std::ios::binary | std::ios::in);
+
+  file.read(reinterpret_cast&lt;char *&gt;(riff_chunk_id), 1 * 4);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;riff_chunk_size), 4 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(riff_form_type), 1 * 4);
+  file.read(reinterpret_cast&lt;char *&gt;(fmt_chunk_id), 1 * 4);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_chunk_size), 4 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_wave_format_type), 2 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_channel), 2 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_samples_per_sec), 4 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_bytes_per_sec), 4 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_block_size), 2 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;fmt_bits_per_sample), 2 * 1);
+  file.read(reinterpret_cast&lt;char *&gt;(data_chunk_id), 1 * 4);
+  file.read(reinterpret_cast&lt;char *&gt;(&amp;data_chunk_size), 4 * 1);
+
+  pcm-&gt;fs = fmt_samples_per_sec;
+  pcm-&gt;bits = fmt_bits_per_sample;
+  pcm-&gt;length = data_chunk_size / (number_of_channels * (pcm-&gt;bits / 8));
+
+  pcm-&gt;sL.resize(pcm-&gt;length);
+  pcm-&gt;sR.resize(pcm-&gt;length);
+
+  for (int n = 0; n &lt; pcm-&gt;length; n++) {
+    file.read(reinterpret_cast&lt;char *&gt;(&amp;dataL), 2 * 1);
+    file.read(reinterpret_cast&lt;char *&gt;(&amp;dataR), 2 * 1);
+
+    pcm-&gt;sL[n] = static_cast&lt;double&gt;(dataL) / 32768.0;
+    pcm-&gt;sR[n] = static_cast&lt;double&gt;(dataR) / 32768.0;
+  }
+
+  file.close();
+}
+
+void wave_write(STEREO_PCM *pcm, std::string filename) {
+  int number_of_channels = 2;
+
+  char riff_chunk_id[4];
+  long riff_chunk_size;
+  char riff_form_type[4];
+  char fmt_chunk_id[4];
+  long fmt_chunk_size;
+  short fmt_wave_format_type;
+  short fmt_channel;
+  long fmt_samples_per_sec;
+  long fmt_bytes_per_sec;
+  short fmt_block_size;
+  short fmt_bits_per_sample;
+  char data_chunk_id[4];
+  int data_chunk_size;
+  short dataL;
+  short dataR;
+  double sL;
+  double sR;
+
+  riff_chunk_id[0] = 'R';
+  riff_chunk_id[1] = 'I';
+  riff_chunk_id[2] = 'F';
+  riff_chunk_id[3] = 'F';
+
+  riff_chunk_size = 36 + (number_of_channels * (16 / 8) * pcm-&gt;length);
+
+  riff_form_type[0] = 'W';
+  riff_form_type[1] = 'A';
+  riff_form_type[2] = 'V';
+  riff_form_type[3] = 'E';
+
+  fmt_chunk_id[0] = 'f';
+  fmt_chunk_id[1] = 'm';
+  fmt_chunk_id[2] = 't';
+  fmt_chunk_id[3] = ' ';
+
+  fmt_chunk_size = 16;
+  fmt_wave_format_type = 1;
+  fmt_channel = number_of_channels;
+  fmt_samples_per_sec = pcm-&gt;fs;
+  fmt_bytes_per_sec = pcm-&gt;fs * (number_of_channels * (pcm-&gt;bits / 8));
+  fmt_block_size = number_of_channels * (pcm-&gt;bits / 8);
+  fmt_bits_per_sample = pcm-&gt;bits;
+
+  data_chunk_id[0] = 'd';
+  data_chunk_id[1] = 'a';
+  data_chunk_id[2] = 't';
+  data_chunk_id[3] = 'a';
+
+  data_chunk_size = (number_of_channels * (16 / 8)) * pcm-&gt;length;
+
+  std::fstream file(filename, std::ios::binary | std::ios::out);
+
+  file.write(reinterpret_cast&lt;char *&gt;(riff_chunk_id), 1 * 4);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;riff_chunk_size), 4 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(riff_form_type), 1 * 4);
+  file.write(reinterpret_cast&lt;char *&gt;(fmt_chunk_id), 1 * 4);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_chunk_size), 4 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_wave_format_type), 2 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_channel), 2 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_samples_per_sec), 4 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_bytes_per_sec), 4 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_block_size), 2 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;fmt_bits_per_sample), 2 * 1);
+  file.write(reinterpret_cast&lt;char *&gt;(data_chunk_id), 1 * 4);
+  file.write(reinterpret_cast&lt;char *&gt;(&amp;data_chunk_size), 4 * 1);
+
+  for (int n = 0; n &lt; pcm-&gt;length; n++) {
+    sL = ((pcm-&gt;sL[n] + 1.0) / 2.0) * 65536.0;
+    sR = ((pcm-&gt;sR[n] + 1.0) / 2.0) * 65536.0;
+
+    if (sL &gt; 65535.0) {
+        sL = 65535.0;
+    }
+
+    if (sL &lt; 0.0) {
+        sL = 0.0;
+    }
+
+    if (sR &gt; 65535.0) {
+        sR = 65535.0;
+    }
+
+    if (sR &lt; 0.0) {
+        sR = 0.0;
+    }
+
+    dataL = static_cast&lt;short&gt;((sL + 0.5) - 32768);
+    dataR = static_cast&lt;short&gt;((sR + 0.5) - 32768);
+
+    file.write(reinterpret_cast&lt;char *&gt;(&amp;dataL), 2 * 1);
+    file.write(reinterpret_cast&lt;char *&gt;(&amp;dataR), 2 * 1);
+  }
+
+  file.close();
+}
+</code></pre>
+
+<h1 id="リファレンス">リファレンス</h1>
+
+<ul>
+<li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%81%A7%E3%81%AF%E3%81%98%E3%82%81%E3%82%8B%E9%9F%B3%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E3%82%B5%E3%82%A6%E3%83%B3%E3%83%89%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86-%E9%9D%92%E6%9C%A8-%E7%9B%B4%E5%8F%B2/dp/4274206505">C言語ではじめる音のプログラミング―サウンドエフェクトの信号処理</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+    <a data-url="https://art-of-life.jp/posts/wave/" data-id="b86bceb6c051c9b38c8b0e9a9d62fd3d" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+    <a href="https://art-of-life.jp/posts/wave/#disqus_thread" class="article-comment-link">
+        Comments
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+
+    
+<nav id="article-nav">
+    
+    <a href="https://art-of-life.jp/posts/mpeg2-systems/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">MPEG-2 Systems</div>
+    </a>
+    
+
+    
+    <a href="https://art-of-life.jp/posts/fourier-transform/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Newer
+      </strong>
+      <div class="article-nav-title">Fourier Transform</div>
+    </a>
+    
 </nav>
 
+
+</article>
+
+
+<section id="comments">
+    <div id="disqus_thread">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
     
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Korilakkuma" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+</section>
+
 
     </section>
 

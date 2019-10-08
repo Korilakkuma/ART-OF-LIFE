@@ -137,8 +137,31 @@
   
   <url>
     <loc>https://art-of-life.jp/categories/audio/</loc>
-    <lastmod>2019-09-10T23:27:21+09:00</lastmod>
+    <lastmod>2019-09-11T17:25:18+09:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/multimedia/</loc>
+    <lastmod>2019-09-11T17:25:18+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/pcm/</loc>
+    <lastmod>2019-09-11T17:25:18+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/wave/</loc>
+    <lastmod>2019-09-11T17:25:18+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/wave/</loc>
+    <lastmod>2019-09-11T17:25:18+09:00</lastmod>
   </url>
   
   <url>
@@ -160,12 +183,6 @@
   
   <url>
     <loc>https://art-of-life.jp/tags/mpeg-2-ts/</loc>
-    <lastmod>2019-09-10T23:27:21+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/multimedia/</loc>
     <lastmod>2019-09-10T23:27:21+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -195,12 +212,6 @@
   
   <url>
     <loc>https://art-of-life.jp/tags/modified-discrete-cosine-transform/</loc>
-    <lastmod>2019-08-28T05:27:13+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/pcm/</loc>
     <lastmod>2019-08-28T05:27:13+09:00</lastmod>
     <priority>0</priority>
   </url>
