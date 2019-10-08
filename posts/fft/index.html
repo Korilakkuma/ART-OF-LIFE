@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
     
-      <meta name="description" content="FFT の実装を理解する">
+      <meta name="description" content="高速フーリエ変換 (FFT: Fast Fourier Transform) の実装を理解する">
     
     
     <link rel="canonical" href="https://art-of-life.jp/posts/fft/"/>
@@ -21,7 +21,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <meta property="og:title" content="FFT" />
-<meta property="og:description" content="FFT の実装を理解する" />
+<meta property="og:description" content="高速フーリエ変換 (FFT: Fast Fourier Transform) の実装を理解する" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://art-of-life.jp/posts/fft/" />
 <meta property="article:published_time" content="2019-09-22T17:02:42+09:00" />
@@ -29,12 +29,12 @@
 
     
     <meta itemprop="name" content="FFT">
-<meta itemprop="description" content="FFT の実装を理解する">
+<meta itemprop="description" content="高速フーリエ変換 (FFT: Fast Fourier Transform) の実装を理解する">
 
 
 <meta itemprop="datePublished" content="2019-09-22T17:02:42&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-22T17:02:42&#43;09:00" />
-<meta itemprop="wordCount" content="2739">
+<meta itemprop="wordCount" content="3090">
 
 
 
@@ -42,7 +42,7 @@
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FFT"/>
-<meta name="twitter:description" content="FFT の実装を理解する"/>
+<meta name="twitter:description" content="高速フーリエ変換 (FFT: Fast Fourier Transform) の実装を理解する"/>
 <meta name="twitter:site" content="@forever120527"/>
 
     
@@ -174,7 +174,7 @@
       </div>
       <div class="article-info-block">
         
-          27
+          29
         
         <span>
             Tags
@@ -272,10 +272,10 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-22 17:02:42 &#43;0900 JST" itemprop="datePublished">2019-09-22</time>
             &middot;
-            2739
+            3090
             words
             &middot;
-            6
+            7
             minute read
         </div>
         
@@ -330,11 +330,16 @@
 
 <p>離散フーリエ変換のサイズ ($N$) が 8 の場合を例に導出します.</p>
 
-<p>$X(k) = \sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2\pi kn}{N}\right)$</p>
+<p>$
+\begin{eqnarray}
+X(k)=\sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2\pi kn}{N}\right)
+\end{eqnarray}
+$</p>
 
 <p>離散フーリエ変換の公式は, 以下のように行列で表現することができます.</p>
 
 <p>$
+\begin{eqnarray}
 x(n)=\left[
 \begin{array}{c}
 x(0) \\<br />
@@ -347,9 +352,11 @@ x(6) \\<br />
 x(7) \\<br />
 \end{array}
 \right]
+\end{eqnarray}
 $</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{c}
 X(0) \\<br />
@@ -362,11 +369,17 @@ X(6) \\<br />
 X(7) \\<br />
 \end{array}
 \right]
+\end{eqnarray}
 $</p>
 
-<p>$W_{8}=\exp\left(\frac{-j2\pi}{8}\right)$</p>
+<p>$
+\begin{eqnarray}
+W_{8}=\exp\left(\frac{-j2\pi}{8}\right)
+\end{eqnarray}
+$</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{cccccccc}
 W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
@@ -379,15 +392,21 @@ W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp; W^{24}_{8} &am
 W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{28}_{8} &amp; W^{35}_{8} &amp; W^{42}_{8} &amp; W^{49}_{8} \\<br />
 \end{array}
 \right]x(n)
+\end{eqnarray}
 $</p>
 
 <p>ここで, 以下の関係 (オイラーの公式から導出できます) を考慮して, 行列を書き換えます.</p>
 
-<p>$W^{m}_{N}=W^{m(mod N)}_{N}$</p>
+<p>$
+\begin{eqnarray}
+W^{m}_{N}=W^{m(mod N)}_{N}
+\end{eqnarray}
+$</p>
 
 <p>例えば, $W^{8}_{8}=W^{0}_{8}$, $W^{9}_{8}=W^{1}_{8}$, $W^{10}_{8}=W^{2}_{8}$ &hellip;</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{cccccccc}
 W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
@@ -400,11 +419,13 @@ W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp; W^{0}_{8} &amp
 W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{4}_{8} &amp; W^{11}_{8} &amp; W^{18}_{8} &amp; W^{25}_{8} \\<br />
 \end{array}
 \right]x(n)
+\end{eqnarray}
 $</p>
 
 <p>そして, 行列の行を偶奇にわけて, 並び替えます.</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{c}
 X(0) \\<br />
@@ -417,9 +438,11 @@ X(3) \\<br />
 X(7) \\<br />
 \end{array}
 \right]
+\end{eqnarray}
 $</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{cccccccc}
 W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
@@ -432,18 +455,24 @@ W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; W^{4}_{8} &amp
 W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{4}_{8} &amp; W^{11}_{8} &amp; W^{18}_{8} &amp; W^{25}_{8} \\<br />
 \end{array}
 \right]x(n)
+\end{eqnarray}
 $</p>
 
 <p>すると, 行列の列の中央を境目に, <b>偶数のインデックスの行は左右の周期が対称に</b>, <b>奇数のインデックスの行は半周期</b> ($N=8$ なので 4 ずつずれている) ことがわかります.</p>
 
 <p>そこで, 以下の関係を考慮します.</p>
 
-<p>\begin{cases}
+<p>$
+\begin{eqnarray}
+\begin{cases}
 W^{0}_{8}=1 \\<br />
 W^{4}_{8}=-1 \\<br />
-\end{cases}</p>
+\end{cases}
+\end{eqnarray}
+$</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
 W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;   W^{0}_{8} &amp;   W^{0}_{8} \\<br />
@@ -456,15 +485,21 @@ W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; -W^{0}_{8} &am
 W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; -W^{0}_{8} &amp; -W^{7}_{8} &amp; -W^{14}_{8} &amp; -W^{21}_{8} \\<br />
 \end{array}
 \right]x(n)
+\end{eqnarray}
 $</p>
 
 <p>そして,</p>
 
-<p>$W^{a}W^{b}=W^{a+b}$</p>
+<p>$
+\begin{eqnarray}
+W^{a}W^{b}=W^{a+b}
+\end{eqnarray}
+$</p>
 
 <p>であるので,</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
 W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;            W^{0}_{8} &amp;            W^{0}_{8} &amp;             W^{0}_{8} &amp;             W^{0}_{8} \\<br />
@@ -477,11 +512,13 @@ W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; -W^{0}_{8}W^{0
 W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{6}_{8} &amp; -W^{2}_{8}W^{12}_{8} &amp; -W^{3}_{8}W^{18}_{8} \\<br />
 \end{array}
 \right]x(n)
+\end{eqnarray}
 $</p>
 
 <p>時間ドメインの関数を以下のように置き換えて, 行列をさらに書き換えます.</p>
 
 <p>$
+\begin{eqnarray}
 x_{1}(n)=\left[
 \begin{array}{l}
 x(0)+x(4) \\<br />
@@ -494,9 +531,11 @@ W^{2}_{8}(x(2)-x(6)) \\<br />
 W^{3}_{8}(x(3)-x(7)) \\<br />
 \end{array}
 \right]
+\end{eqnarray}
 $</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
 W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\<br />
@@ -509,13 +548,19 @@ W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp;          0 &am
          0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} \\<br />
 \end{array}
 \right]x_{1}(n)
+\end{eqnarray}
 $</p>
 
 <p>最後に, 以下の関係を考慮して, 行列を書き換えます.</p>
 
-<p>$W^{m}_{N}=W^{m/2}_{N/2}$</p>
+<p>$
+\begin{eqnarray}
+W^{m}_{N}=W^{m/2}_{N/2}
+\end{eqnarray}
+$</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
 W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
@@ -528,13 +573,15 @@ W^{0}_{4} &amp; W^{3}_{4} &amp; W^{6}_{4} &amp; W^{9}_{4} &amp;          0 &amp;
          0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{3}_{4} &amp; W^{6}_{4} &amp; W^{9}_{4} \\<br />
 \end{array}
 \right]x_{1}(n)
+\end{eqnarray}
 $</p>
 
 <p>この行列は, <b>離散フーリエ変換のサイズを $N=4$ に減らして高速化できることを意味します</b>.</p>
 
-<p>さらに, この行列をみると, 再帰的な構造があることがわかるので, 同様の手順で行列を書き換えます.</p>
+<p>さらに, この行列をみると, <b>再帰的な構造</b>があることがわかるので, 同様の手順で行列を書き換えます.</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
 W^{0}_{8} &amp; W^{0}_{8} &amp;            W^{0}_{8} &amp;            W^{0}_{8} &amp;           0 &amp;           0 &amp;                      0 &amp;                     0 \\<br />
@@ -547,9 +594,11 @@ W^{0}_{8} &amp; W^{6}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{2}_{8}W^{4}_{8} &a
          0 &amp;          0 &amp;                     0 &amp;                     0 &amp;  W^{0}_{8} &amp;  W^{6}_{8} &amp;  -W^{0}_{8}W^{0}_{8} &amp; -W^{2}_{8}W^{4}_{8} \\<br />
 \end{array}
 \right]x_{1}(n)
+\end{eqnarray}
 $</p>
 
 <p>$
+\begin{eqnarray}
 x_{2}(n)=\left[
 \begin{array}{l}
 x_{1}(0)+x_{1}(4) \\<br />
@@ -562,9 +611,11 @@ W^{0}_{8}(x_{1}(4)-x_{1}(6)) \\<br />
 W^{2}_{8}(x_{1}(5)-x_{1}(7)) \\<br />
 \end{array}
 \right]
+\end{eqnarray}
 $</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
 W^{0}_{8} &amp; W^{0}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
@@ -577,11 +628,13 @@ W^{0}_{8} &amp; W^{4}_{8} &amp;          0 &amp;          0 &amp;          0 &am
          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{4}_{8} \\<br />
 \end{array}
 \right]x_{2}(n)
+\end{eqnarray}
 $</p>
 
 <p>$W^{m}_{N}=W^{m/2}_{N/2}$ の関係があるので,</p>
 
 <p>$
+\begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
 W^{0}_{2} &amp; W^{0}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
@@ -594,9 +647,11 @@ W^{0}_{2} &amp; W^{1}_{2} &amp;          0 &amp;          0 &amp;          0 &am
          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{1}_{2} \\<br />
 \end{array}
 \right]x_{3}(n)
+\end{eqnarray}
 $</p>
 
 <p>$
+\begin{eqnarray}
 x_{3}(n)=\left[
 \begin{array}{l}
 x_{2}(0)+x_{2}(1) \\<br />
@@ -609,13 +664,14 @@ x_{2}(6)+x_{2}(7) \\<br />
 x_{2}(6)+x_{2}(7) \\<br />
 \end{array}
 \right]
+\end{eqnarray}
 $</p>
 
 <p>この行列は, <b>離散フーリエ変換のサイズを $N=2$ に減らして高速化できることを意味します</b>.</p>
 
 <h2 id="ビットリバース">ビットリバース</h2>
 
-<p>ところで, 高速フーリエ変換のアルゴリズム導出のさいに, 行列の列を並び替えているので, $X(k)$ のインデックスを昇順に並び替える必要があります.</p>
+<p>高速フーリエ変換のアルゴリズム導出のさいに, 行列の列を並び替えているので, $X(k)$ のインデックスを昇順に並び替える必要があります.</p>
 
 <p>並び替えるまえと並び替えたあとのインデックスには, 以下の関係があります.</p>
 
@@ -636,19 +692,21 @@ $</p>
   </tbody>
 </table>
 
-<p>つまり, 並び替えるまえのインデックスを 2 進数に変換し, そのビットをの並びを逆にして, 10 進数に変換したインデックスが並び替えたあとのインデックスということです. このアルゴリズムは, <b>ビットリバース</b>と呼ばれています.</p>
+<p>上記のテーブルより, 並び替えるまえのインデックスを 2 進数に変換し, そのビットをの並びを逆にして, 10 進数に変換したインデックスが並び替えたあとのインデックスということです. このアルゴリズムは, <b>ビットリバース</b>と呼ばれています.</p>
 
 <h2 id="計算量">計算量</h2>
 
 <p>行列の書き換え過程をダイアグラムにしたのが以下の図で, <b>バタフライ計算</b>と呼ばれています.</p>
 
-<p><img src="https://user-images.githubusercontent.com/4006693/65548973-80595e00-df57-11e9-8ed8-d621221f2e7b.png" alt="FFT (バタフライ計算)" /></p>
+<p><img src="https://user-images.githubusercontent.com/4006693/66152511-8f759580-e654-11e9-912e-0e8e61be7fd0.png" alt="FFT (バタフライ計算)" /></p>
 
-<p>離散フーリエ変換のサイズが $N$ の高速フーリエ変換は $\log_{2}N$ 段で計算できます. このとき, 最後の段以外は $N/2$ の乗算と $N$ 回の加算, 最後の段は $N$ 回の加算となるので, 高速フーリエ変換のオーダーは, $N\log_{2}N$ となります. 離散フーリエ変換のオーダーが $N^{2}$ であることを考えると, $N$ が大きいほど, 高速フーリエ変換はより有効であると言えます.</p>
+<p>離散フーリエ変換のサイズが $N$ の高速フーリエ変換は, $\log_{2}N$ 段で計算できます. このとき, 最後の段以外は $N/2$ 回の乗算と $N$ 回の加算, 最後の段は $N$ 回の加算となるので, 高速フーリエ変換のオーダーは, $N\log_{2}N$ となります. 離散フーリエ変換のオーダーが $N^{2}$ であることを考えると, $N$ が大きいほど, 高速フーリエ変換はより有効であると言えます.</p>
 
 <h2 id="実装">実装</h2>
 
-<p>C++ で実装した, 高速フーリエ変換の関数です.</p>
+<p>C++ で実装した, 高速フーリエ変換と逆高速フーリエ変換の関数です.</p>
+
+<p>FFT</p>
 
 <pre><code class="language-c++">#include &lt;vector&gt;
 #include &lt;cmath&gt;
@@ -685,7 +743,7 @@ void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
 
         if (stage &lt; number_of_stages) {
           x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
-          x[m] = std::complex&lt;double&gt;((c_real * (a_real - b_real)) - (c_imag * (a_imag - b_imag)), (c_real * (a_imag - b_imag)) - (c_imag * (a_real - b_real)));
+          x[m] = std::complex&lt;double&gt;((c_real * (a_real - b_real)) - (c_imag * (a_imag - b_imag)), (c_real * (a_imag - b_imag)) + (c_imag * (a_real - b_real)));
         } else {
           x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
           x[m] = std::complex&lt;double&gt;((a_real - b_real), (a_imag - b_imag));
@@ -707,11 +765,82 @@ void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
       continue;
     }
 
-    auto tmp    = x[k];
+    auto tmp    = x[index[k]];
     x[index[k]] = x[k];
     x[k]        = tmp;
   }
 }
+</code></pre>
+
+<p>IFFT</p>
+
+<pre><code class="language-c++">#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;complex&gt;
+
+int pow2(int n) {
+  if (n == 0) {
+    return 1;
+  }
+
+  return 2 &lt;&lt; (n - 1);
+}
+
+void IFFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
+  std::vector&lt;int&gt; index(N);
+
+  int number_of_stages = std::log2(N);
+
+  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
+    for (int i = 0; i &lt; pow2(stage - 1); i++) {
+      int rest = number_of_stages - stage;
+
+      for (int j = 0; j &lt; pow2(rest); j++) {
+        int n = i * pow2(rest + 1) + j;
+        int m = pow2(rest) + n;
+        int r = j * pow2(stage - 1);
+
+        double a_real = x[n].real();
+        double a_imag = x[n].imag();
+        double b_real = x[m].real();
+        double b_imag = x[m].imag();
+        double c_real = std::cos((2.0 * M_PI * r) / N);
+        double c_imag = std::sin((2.0 * M_PI * r) / N);
+
+        if (stage &lt; number_of_stages) {
+          x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
+          x[m] = std::complex&lt;double&gt;((c_real * (a_real - b_real)) - (c_imag * (a_imag - b_imag)), (c_real * (a_imag - b_imag)) + (c_imag * (a_real - b_real)));
+        } else {
+          x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
+          x[m] = std::complex&lt;double&gt;((a_real - b_real), (a_imag - b_imag));
+        }
+      }
+    }
+  }
+
+  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
+    int rest = number_of_stages - stage;
+
+    for (int i = 0; i &lt; pow2(stage - 1); i++) {
+      index[pow2(stage - 1) + i] = index[i] + pow2(rest);
+    }
+  }
+
+  for (int k = 0; k &lt; N; k++) {
+    if (index[k] &lt;= k) {
+      continue;
+    }
+
+    auto tmp    = x[index[k]];
+    x[index[k]] = x[k];
+    x[k]        = tmp;
+  }
+
+  for (int k = 0; k &lt; N; k++) {
+    x[k] = std::complex&lt;double&gt;((x[k].real() / N), (x[k].imag() / N));
+  }
+}
+
 </code></pre>
 
 <h1 id="リファレンス">リファレンス</h1>
@@ -894,7 +1023,7 @@ void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
             <li class="category-list-item">
@@ -910,7 +1039,7 @@ void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">7</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -1015,7 +1144,7 @@ void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
             <li class="category-list-item">
@@ -1084,6 +1213,14 @@ void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
+                    laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/linux">
                     linux
                 </a>
@@ -1103,7 +1240,15 @@ void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">7</span>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
+                    mdct
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -1183,7 +1328,7 @@ void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/z-transform">
                     z-transform
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
         </ul>
@@ -1245,6 +1390,9 @@ void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
         <a href="https://art-of-life.jp/tags/javascript" style="font-size: 12px;">javascript</a>
         
         
+        <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
         
         
@@ -1252,6 +1400,9 @@ void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
         
         
         <a href="https://art-of-life.jp/tags/mathematics" style="font-size: 12px;">mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mdct" style="font-size: 12px;">mdct</a>
         
         
         <a href="https://art-of-life.jp/tags/media-source-extensions" style="font-size: 12px;">media-source-extensions</a>

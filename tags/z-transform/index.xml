@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Z-transform on ART OF LIFE</title>
+    <title>Z-Transform on ART OF LIFE</title>
     <link>https://art-of-life.jp/tags/z-transform/</link>
-    <description>Recent content in Z-transform on ART OF LIFE</description>
+    <description>Recent content in Z-Transform on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 29 Sep 2019 17:51:06 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 05 Oct 2019 18:00:22 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/tags/z-transform/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Laplace Transform</title>
+      <link>https://art-of-life.jp/posts/laplace-transform/</link>
+      <pubDate>Sat, 05 Oct 2019 18:00:22 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/laplace-transform/</guid>
+      <description>ラプラス変換 ラプラス変換を数式を使わずに説明するのであれば, フーリエ変換の拡張です. 実用的には, フーリエ変換が音や光の周波数特性を分析するた</description>
+    </item>
     
     <item>
       <title>IIR Filter</title>
@@ -17,7 +26,7 @@
       <pubDate>Sun, 29 Sep 2019 17:51:06 +0900</pubDate>
       
       <guid>https://art-of-life.jp/posts/iir-filter/</guid>
-      <description>IIR フィルタとは ? IIR (Infinite Impulse Response) フィルタは, FIR フィルタと異なり, 現在の時刻の出力信号に, それよりも過去の出力信号がフィードバックされます. 出力信号が</description>
+      <description>IIR フィルタとは ? IIR (Infinite Impulse Response) フィルタは, FIR フィルタと異なって, 現在の時刻の出力信号に対して, それよりも過去の出力信号がフィードバックされます. し</description>
     </item>
     
     <item>

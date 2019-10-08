@@ -34,7 +34,7 @@
 
 <meta itemprop="datePublished" content="2019-09-28T17:02:03&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-28T17:02:03&#43;09:00" />
-<meta itemprop="wordCount" content="4288">
+<meta itemprop="wordCount" content="4272">
 
 
 
@@ -174,7 +174,7 @@
       </div>
       <div class="article-info-block">
         
-          27
+          29
         
         <span>
             Tags
@@ -272,7 +272,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-28 17:02:03 &#43;0900 JST" itemprop="datePublished">2019-09-28</time>
             &middot;
-            4288
+            4272
             words
             &middot;
             9
@@ -338,7 +338,7 @@
 
 <h1 id="fir-フィルタとは">FIR フィルタとは ?</h1>
 
-<p>デジタルフィルタは, <b>乗算器</b>, <b>加算器</b>, <b>遅延器</b>で構成されています. これらの構成によって, <b>FIR</b> (Finite Impulse Response) フィルタと, <b>IIR</b> (Infinite Impulse Response) フィルタの 2 種類に分類できます.</p>
+<p>デジタルフィルタは, <b>乗算器</b>, <b>加算器</b>, <b>遅延器</b>で構成されています. これらの構成によって, <b>FIR (Finite Impulse Response) フィルタ</b>と, <b>IIR (Infinite Impulse Response) フィルタ</b>の 2 種類に分類できます.</p>
 
 <p><img src="https://user-images.githubusercontent.com/4006693/65827477-74113000-e2cc-11e9-9df2-920f834bd8e5.png" alt="デジタルフィルタの構成 (FIR フィルタの例)" /></p>
 
@@ -352,7 +352,7 @@ $</p>
 
 <p>$x(n)$ は入力信号, $y(n)$ は出力信号, $b(m)$ は乗算器のフィルタ係数, $J$ は遅延器の数を表しています ($m=0$ から開始しているので, フィルタ係数の数は $J+1$ となります).</p>
 
-<p>遅延器とは, デジタル信号を 1 サンプルだけ格納することができるメモリです. 音データを遅延器に入力すると, 遅延器に 1 時刻の間だけ蓄積されたあと, 次の時刻に出力されます. 過去の音データをどのくらい記憶できるかは, 遅延器の数によって決定されます. 例えば, サンプリング周波数 44.1 kHz の場合, 1 秒間の音データを記憶するのには, 44100 個の遅延器が必要になります.</p>
+<p>遅延器とは, デジタル信号を 1 サンプルだけ格納することができるメモリです. 音データを遅延器に入力すると, 遅延器に 1 時刻の間だけ蓄積されたあと次の時刻に出力されます. 過去の音データをどのくらい記憶できるかは, 遅延器の数によって決定されます. 例えば, サンプリング周波数 44.1 kHz の場合, 1 秒間の音データを記憶するのには, 44100 個の遅延器が必要になります.</p>
 
 <h1 id="z-変換">Z 変換</h1>
 
@@ -416,7 +416,7 @@ $</p>
 
 <p>$Y(z)=B(z)X(z)$</p>
 
-<p>この式は, $z$ を変数として信号を表すと, FIR フィルタは, 入力信号とフィルタ係数の乗算によって出力信号が生成できることを意味します.</p>
+<p>この式は, $z$ を変数として信号を表すと, FIR フィルタは入力信号とフィルタ係数の乗算によって出力信号が生成できることを意味します.</p>
 
 <p>また, 入力信号と出力信号の比を<b>伝達関数</b>と呼び, FIR フィルタの伝達関数は以下のように定義できます.</p>
 
@@ -456,13 +456,13 @@ $</p>
 
 <h1 id="窓関数法">窓関数法</h1>
 
-<p>FIR フィルタをそのまま利用するのは, フィルタの性能としてあまりよくありません. 周波数成分をはっきりと文理するには, フィルタの設計に工夫が必要となります.</p>
+<p>FIR フィルタをそのまま利用するのは, フィルタの性能があまりよくありません. 周波数成分をはっきりと分離するには, フィルタの設計に工夫が必要となります.</p>
 
-<p>そのための 1 つの方法に, <b>窓関数法</b>があります. 窓関数法を適用することで, <b>LPF</b> (Low-Pass Filter), <b>HPF</b> (High-Pass Filter), <b>BPF</b> (Band-Pass Filter), <b>BEF</b> (Band-Eliminate Filter) という基本的なフィルタを設計することが可能になります.</p>
+<p>そのための 1 つの方法に, <b>窓関数法</b>があります. 窓関数法を適用することで, <b>LPF</b> (Low-Pass Filter), <b>HPF</b> (High-Pass Filter), <b>BPF</b> (Band-Pass Filter), <b>BEF</b> (Band-Eliminate Filter) という, 基本的なフィルタを設計することが可能になります.</p>
 
 <p>フィルタが通過させる帯域は, <b>通過域</b>, 減衰させる帯域は, <b>阻止域</b>と呼びます. また, $f_{e}$ は, <b>エッジ周波数</b>と呼ばれ, 理想的なフィルタは, この周波数を境にして, 通過域と阻止域をはっきりと分離する事ができますが, コンピュータではこのような理想フィルタを実装することはできません.</p>
 
-<p><img src="https://user-images.githubusercontent.com/4006693/65849989-c1060c80-e387-11e9-8e4a-d0ba5c987567.png" alt="FIR フィルタ (LPF, HPF, BPF, BEF)" /></p>
+<p><img src="https://user-images.githubusercontent.com/4006693/66262353-cf857580-e818-11e9-8ce5-653461d69fc8.png" alt="FIR フィルタ (LPF, HPF, BPF, BEF)" /></p>
 
 <p>では, LPF を例にして, 窓関数法による FIR フィルタを設計してみます.</p>
 
@@ -497,17 +497,15 @@ sinc(x)=
 \end{cases}
 $</p>
 
-<p>$sinc\left(x\right)$ は, <b>シンク関数</b>と呼ばれています. シンク関数は, $-\infty$ から $+\infty$ の区間で定義されるので, フィルタ係数が無限に存在します. コンピュータではこのようなフィルタをあつかえません. そこで, フィルタ係数を有限でうちきるために窓関数を利用します.</p>
+<p>$sinc\left(x\right)$ は, <b>シンク関数</b>と呼ばれています. シンク関数は, $-\infty$ から $+\infty$ の区間で定義されているので, フィルタ係数が無限に存在します. コンピュータではこのようなフィルタをあつかえません. したがって, フィルタ係数を有限でうちきるために窓関数を利用します.</p>
 
 <p>窓関数法は, 0 を中心として対称となるようにフィルタをうちきりますが, このままだと, フィルタ係数のインデックスが負数からはじまるので, インデックスが 0 ~ $J$ になるように書き換えます.</p>
 
-<p>窓関数により, 有限にうちきった結果, 通過域と阻止域の境目が広がるという問題が発生します (理想特性をもつフィルタが, コンピュータでは実装できない理由です).</p>
+<p>ただし, 窓関数で有限にうちきった結果, 通過域と阻止域の境界が広がるという問題が発生します (理想特性をもつフィルタが, コンピュータでは実装できない理由です).</p>
 
-<p>通過域と阻止域の間に $\delta$ で定義される帯域を, <b>遷移帯域幅</b> と呼びます.</p>
+<p>通過域と阻止域の間に $\delta$ で定義される帯域を, <b>遷移帯域幅</b> と呼びます. $\delta$ は, フィルタ係数の数 $J+1$ に反比例します. つまり, 理想特性に近づけるほど, 乗算器の数が大きくなってしまいます.</p>
 
-<p>$\delta$ は, フィルタ係数の数 $J+1$ に反比例します. つまり, 理想特性に近づけるほど, 乗算器の数が大きくなってしまいます.</p>
-
-<p>フィルタ係数をうちきる窓関数として, ハニング窓を適用する場合, $\delta$ からフィルタ係数の数を決定できます.</p>
+<p>実は, フィルタ係数をうちきる窓関数として, ハニング窓を適用する場合, $\delta$ からフィルタ係数の数を決定できます.</p>
 
 <p>$
 J+1=
@@ -516,7 +514,7 @@ round\left(\frac{3.1}{\delta}\right)
 \end{eqnarray}
 $</p>
 
-<p>ただし, 窓関数法では 0 を中心として対称になるようにフィルタをうちきる必要があるので, フィルタ係数の数は奇数にする必要があります.</p>
+<p>窓関数法では 0 を中心として対称になるようにフィルタをうちきる必要があるので, フィルタ係数の数は奇数にする必要があります.</p>
 
 <p>LPF と同様の設計で, HPF, BPF, BEF を実装することができます.</p>
 
@@ -669,8 +667,8 @@ int main(int argc, char **argv) {
   pcm1.bits   = pcm0.bits;
   pcm1.length = pcm0.length;
 
-  pcm1.sL.reserve(pcm0.length);
-  pcm1.sR.reserve(pcm0.length);
+  pcm1.sL.resize(pcm0.length);
+  pcm1.sR.resize(pcm0.length);
 
   if (argc == 4) {
     double fe    = std::stod(argv[2]) / pcm0.fs;
@@ -757,7 +755,7 @@ $</p>
 
 <p>実際のディレイエフェクターでも, ほぼ同様にパラメータを設定可能になっています.</p>
 
-<p><img src="https://user-images.githubusercontent.com/4006693/65945784-aa3ae500-e46f-11e9-85f8-f7c28ca6e0c1.png" alt="ディレイとパラメータ" /></p>
+<p><img src="https://user-images.githubusercontent.com/4006693/66262413-28a1d900-e81a-11e9-916d-98886dc00e1b.png" alt="ディレイとパラメータ" /></p>
 
 <p>ここで, ピストル音のような, ごく短時間に非常に大きな音が発生する音データ $s_{0}(n)$ を仮定します. このような音は, <b>インパルス</b>と呼ばれます (数学的には, <b>デルタ関数</b>で定義されます).</p>
 
@@ -792,24 +790,20 @@ $</p>
 #include &lt;cmath&gt;
 
 void Delay(
-  std::vector&lt;double&gt; &amp;dryL,
-  std::vector&lt;double&gt; &amp;mixL,
-  std::vector&lt;double&gt; &amp;dryR,
-  std::vector&lt;double&gt; &amp;mixR,
+  std::vector&lt;double&gt; &amp;dry,
+  std::vector&lt;double&gt; &amp;mix,
   int length,
   double wet,
   double time,
   int feedback) {
   for (int n = 0; n &lt; length; n++) {
-    mixL[n] = dryL[n];
-    mixR[n] = dryR[n];
+    mix[n] = dry[n];
 
     for (int i = 1; i &lt;= feedback; i++) {
       int m = static_cast&lt;int&gt;(static_cast&lt;double&gt;(n) - static_cast&lt;double&gt;(i * time));
 
       if (m &gt;= 0) {
-        mixL[n] = mixL[n] + std::pow(wet, (double)i) * dryL[m];
-        mixR[n] = mixR[n] + std::pow(wet, (double)i) * dryR[m];
+        mix[n] = mix[n] + std::pow(wet, static_cast&lt;double&gt;(i)) * dry[m];
       }
     }
   }
@@ -850,8 +844,8 @@ $</p>
 
 <pre><code class="language-c++">#include &lt;vector&gt;
 #include &lt;complex&gt;
-#include &quot;../window/window_functions.h&quot;
-#include &quot;../fft/fft.h&quot;
+#include &quot;window_functions.h&quot;
+#include &quot;fft.h&quot;
 
 void fir_frame_filter(
   std::vector&lt;double&gt; &amp;s0,
@@ -922,16 +916,13 @@ enum {
 
 int main(int argc, char **argv) {
   if (argc != 3) {
-    std::cerr &lt;&lt;&quot;Require fe, delta&quot; &lt;&lt; std::endl;
+    std::cerr &lt;&lt; &quot;Require fe, delta&quot; &lt;&lt; std::endl;
     std::exit(EXIT_FAILURE);
   }
 
   STEREO_PCM pcm0, pcm1;
   std::vector&lt;double&gt; b;
   std::vector&lt;double&gt; w;
-  double fe;
-  double delta;
-  int J;
 
   wave_read(&amp;pcm0, &quot;stereo.wav&quot;);
 
@@ -939,9 +930,9 @@ int main(int argc, char **argv) {
   pcm1.bits   = pcm0.bits;
   pcm1.length = pcm0.length;
 
-  fe    = std::stod(argv[1]) / pcm0.fs;
-  delta = std::stod(argv[2]) / pcm0.fs;
-  J     = std::round(3.1 / delta);
+  double fe    = std::stod(argv[1]) / pcm0.fs;
+  double delta = std::stod(argv[2]) / pcm0.fs;
+  int J        = std::round(3.1 / delta);
 
   if ((J % 2) == 1) {
     J++;
@@ -962,7 +953,6 @@ int main(int argc, char **argv) {
 
   wave_write(&amp;pcm1, &quot;fir_frame_filter.wav&quot;);
 }
-
 </code></pre>
 
 <h1 id="リファレンス">リファレンス</h1>
@@ -1145,7 +1135,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
             <li class="category-list-item">
@@ -1161,7 +1151,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">7</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -1266,7 +1256,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
             <li class="category-list-item">
@@ -1335,6 +1325,14 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
+                    laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/linux">
                     linux
                 </a>
@@ -1354,7 +1352,15 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">7</span>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
+                    mdct
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -1434,7 +1440,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/z-transform">
                     z-transform
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
         </ul>
@@ -1496,6 +1502,9 @@ int main(int argc, char **argv) {
         <a href="https://art-of-life.jp/tags/javascript" style="font-size: 12px;">javascript</a>
         
         
+        <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
         
         
@@ -1503,6 +1512,9 @@ int main(int argc, char **argv) {
         
         
         <a href="https://art-of-life.jp/tags/mathematics" style="font-size: 12px;">mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mdct" style="font-size: 12px;">mdct</a>
         
         
         <a href="https://art-of-life.jp/tags/media-source-extensions" style="font-size: 12px;">media-source-extensions</a>

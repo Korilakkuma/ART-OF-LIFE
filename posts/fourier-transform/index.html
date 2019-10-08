@@ -34,7 +34,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T17:27:49&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-21T17:27:49&#43;09:00" />
-<meta itemprop="wordCount" content="1418">
+<meta itemprop="wordCount" content="1484">
 
 
 
@@ -174,7 +174,7 @@
       </div>
       <div class="article-info-block">
         
-          27
+          29
         
         <span>
             Tags
@@ -272,7 +272,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-21 17:27:49 &#43;0900 JST" itemprop="datePublished">2019-09-21</time>
             &middot;
-            1418
+            1484
             words
             &middot;
             3
@@ -336,9 +336,17 @@
 
 <p>フーリエ変換は, $-\infty$ ~ $\infty$ の時刻まで観測したアナログ信号の周波数特性を調べるための数学的処理で, フーリエ変換と, その逆変換である, <b>逆フーリエ変換</b>は以下のように定義されています.</p>
 
-<p>$X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt\ \ (-\infty \leqq f \leqq \infty)$</p>
+<p>$
+\begin{eqnarray}
+X(f)=\int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt \quad (-\infty \leqq f \leqq \infty)
+\end{eqnarray}
+$</p>
 
-<p>$x(t) = \int_{-\infty}^{\infty}X(t)\exp(j2{\pi}ft)df\ \ (-\infty \leqq t \leqq \infty)$</p>
+<p>$
+\begin{eqnarray}
+x(t)=\int_{-\infty}^{\infty}X(t)\exp(j2{\pi}ft)df \quad (-\infty \leqq t \leqq \infty)
+\end{eqnarray}
+$</p>
 
 <p>$x(t)$ は, 時間 $t$ を変数とするアナログ信号, $X(f)$ は周波数 $f$ を変数とする $x(t)$ の周波数特性を表しています.</p>
 
@@ -346,44 +354,78 @@
 
 <p>アナログ信号のフーリエ変換では, 無限の長さの連続信号となりますが, コンピュータでは<b>無限大</b>や<b>連続</b>した信号をあつかうことができません. したがって, コンピュータでフーリエ変換を実装する場合には, <b>離散フーリエ変換</b> (<b>DFT</b> : Discrete Fourier Transform) と, その逆変換である<b>逆離散フーリエ変換</b> (<b>IDFT</b> : Inverse Discrete Fourier Transform) を利用します.</p>
 
-<p>$t=nt_{s} \ (1 \leqq n \leqq N-1)$</p>
+<p>$
+\begin{eqnarray}
+t=nt_{s} \quad (1 \leqq n \leqq N-1)
+\end{eqnarray}
+$</p>
 
-<p>$f=\frac{kf_{s}}{N} \ (f \leqq k \leqq N - 1)$</p>
+<p>$
+\begin{eqnarray}
+f=\frac{kf_{s}}{N} \quad (f \leqq k \leqq N - 1)
+\end{eqnarray}
+$</p>
 
 <p>と定義できるので,</p>
 
-<p>$X(k) = \sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)$</p>
+<p>$
+\begin{eqnarray}
+X(k)=\sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)
+\end{eqnarray}
+$</p>
 
-<p>$x(n) = \frac{1}{N}\sum_{n=0}^{N-1}X(k)\exp\left(\frac{j2{\pi}kn}{N}\right)$</p>
+<p>$
+\begin{eqnarray}
+x(n)=\frac{1}{N}\sum_{n=0}^{N-1}X(k)\exp\left(\frac{j2{\pi}kn}{N}\right)
+\end{eqnarray}
+$</p>
 
 <p>音の場合, $x(n)$ は実数となります. 一方で, $X(k)$ は複素数となります. $X(k)$ を極座標形式で表すと, 以下のようになります.</p>
 
-<p>$X(k)=A(k)\exp(j{\theta}(k))$</p>
+<p>$
+\begin{eqnarray}
+X(k)=A(k)\exp(j{\theta}(k))
+\end{eqnarray}
+$</p>
 
 <p>$
 \begin{cases}
-A(k)=\sqrt{real(X(k))^{2}+imag(X(k))^{2}} \\<br />
-\theta(k)=\tan^{-1}\left(\frac{imag(X(k))}{real(X(k))}\right)
+\begin{eqnarray}
+A(k)     &amp;=&amp;\sqrt{real(X(k))^{2}+imag(X(k))^{2}} \\<br />
+\theta(k)&amp;=&amp;\tan^{-1}\left(\frac{imag(X(k))}{real(X(k))}\right) \\<br />
+\end{eqnarray}
 \end{cases}
 $</p>
 
 <p>ここで, $X(k)$ の逆離散フーリエ変換を考えます.</p>
 
-<p>$x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)exp\left(\frac{-j2{\pi}kn}{N}+j\theta(k)\right) \ (0 \leqq n \leqq N - 1)$</p>
+<p>$
+\begin{eqnarray}
+x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)exp\left(\frac{-j2{\pi}kn}{N}+j\theta(k)\right) \quad (0 \leqq n \leqq N - 1)
+\end{eqnarray}
+$</p>
 
 <p>オイラーの公式を適用すると,</p>
 
-<p>$x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)\left[\cos\left(\frac{2{\pi}kn}{N}+\theta(k)\right)+j\sin\left(\frac{2{\pi}kn}{N}+\theta(k)\right)\right] \ (0 \leqq n \leqq N - 1)$</p>
+<p>$
+\begin{eqnarray}
+x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)\left[\cos\left(\frac{2{\pi}kn}{N}+\theta(k)\right)+j\sin\left(\frac{2{\pi}kn}{N}+\theta(k)\right)\right] \quad (0 \leqq n \leqq N - 1)
+\end{eqnarray}
+$</p>
 
 <p>音の場合, $x(n)$ は, 虚数になるので, 虚数部を消去すると, 以下のようになります.</p>
 
-<p>$x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)\cos\left(\frac{2{\pi}kn}{N}+\theta(k)\right) \ (0 \leqq n \leqq N - 1)$</p>
+<p>$
+\begin{eqnarray}
+x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)\cos\left(\frac{2{\pi}kn}{N}+\theta(k)\right) \quad (0 \leqq n \leqq N - 1)
+\end{eqnarray}
+$</p>
 
-<p>この式は, $N$ 個の $\cos$ 波の重ねあわせによって $x(n)$ を合成できることを表しています. つまり, 離散フーリエ変換によって計算される周波数特性 (スペクトル) は, $\cos$ 波の振幅と位相の情報です ($A(k)$ は, <b>振幅スペクトル</b>, $\theta(k)$は, <b>位相スペクトル</b> です).</p>
+<p>この式は, $N$ 個の $\cos$ 波の重ねあわせによって $x(n)$ を合成できることを表しています. したがって, 離散フーリエ変換によって計算される周波数特性 (スペクトル) は, $\cos$ 波の振幅と位相の情報です ($A(k)$ は, <b>振幅スペクトル</b>, $\theta(k)$は, <b>位相スペクトル</b> です).</p>
 
-<p>周波数特性は, $k=\frac{N}{2}$ を中心に, 振幅スペクトルは線対称, 位相スペクトルは点対称になります. さらに, $k=\frac{N}{2}$ は, $\frac{f_{s}}{2}$, つまり, サンプリング周波数の $\frac{1}{2}$ に対応し, <b>サンプリング定理</b>にも関係しています.</p>
+<p>周波数特性は, $k=\frac{N}{2}$ を中心に, <b>振幅スペクトルは線対称</b>, <b>位相スペクトルは点対称</b>になります. さらに, $k=\frac{N}{2}$ は, $\frac{f_{s}}{2}$, つまり, サンプリング周波数の $\frac{1}{2}$ に対応し, <b>サンプリング定理</b>にも関係しています.</p>
 
-<p>人間の聴覚は位相の違いに鈍感なので, 音の周波数特性といえば振幅スペクトルを意味していることがほとんどです (ただし, ホワイトノイズとインパルス音のように位相の違いを分析する必要がある場合もあります).</p>
+<p>人間の聴覚は, <b>位相の違いに鈍感</b> なので, 音の周波数特性といえば振幅スペクトルを意味していることがほとんどです (ただし, ホワイトノイズとインパルス音のように位相の違いを分析する必要がある場合もあります).</p>
 
 <h2 id="窓関数">窓関数</h2>
 
@@ -393,14 +435,16 @@ $</p>
 
 <p>この問題を緩和するのが, <b>窓関数</b>です. 窓関数を乗算することで, 端部の不連続点をあいまいにすることができ, 周波数成分の広がりをある程度おさえることができます.</p>
 
-<p>窓関数にはいくつか種類がありますが, 代表的な窓関数に, <b>ハニング窓</b>があり, 以下のように定義されています.</p>
+<p>窓関数にはいくつか種類がありますが, 代表的な窓関数として, <b>ハニング窓</b>があり, 以下のように定義されています(ほかには, ブラックマン窓などがあります).</p>
 
 <p>($N$ が偶数の場合)</p>
 
 <p>$
 w(n)=\begin{cases}
-0.5-0.5\cos\left(\frac{2{\pi}n}{N}\right) \ (0 \leqq n \leqq N - 1) \\<br />
-0 \ (otherwise) \\<br />
+\begin{eqnarray}
+&amp;0.5-0.5\cos\left(\frac{2{\pi}n}{N}\right)&amp; \quad (0 \leqq n \leqq N - 1) \\<br />
+&amp;0&amp; \quad (otherwise) \\<br />
+\end{eqnarray}
 \end{cases}
 $</p>
 
@@ -408,8 +452,10 @@ $</p>
 
 <p>$
 w(n)=\begin{cases}
-0.5-0.5\cos\left(\frac{2{\pi}(n+0.5)}{N}\right) \ (0 \leqq n \leqq N - 1) \\<br />
-0 \ (otherwise) \\<br />
+\begin{eqnarray}
+&amp;0.5-0.5\cos\left(\frac{2{\pi}(n+0.5)}{N}\right)&amp; \quad (0 \leqq n \leqq N - 1) \\<br />
+&amp;0&amp; \quad (otherwise) \\<br />
+\end{eqnarray}
 \end{cases}
 $</p>
 
@@ -631,7 +677,7 @@ void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
             <li class="category-list-item">
@@ -647,7 +693,7 @@ void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">7</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -752,7 +798,7 @@ void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
             <li class="category-list-item">
@@ -821,6 +867,14 @@ void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
+                    laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/linux">
                     linux
                 </a>
@@ -840,7 +894,15 @@ void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">7</span>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
+                    mdct
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -920,7 +982,7 @@ void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/z-transform">
                     z-transform
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
             </li>
             
         </ul>
@@ -982,6 +1044,9 @@ void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
         <a href="https://art-of-life.jp/tags/javascript" style="font-size: 12px;">javascript</a>
         
         
+        <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
         
         
@@ -989,6 +1054,9 @@ void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
         
         
         <a href="https://art-of-life.jp/tags/mathematics" style="font-size: 12px;">mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mdct" style="font-size: 12px;">mdct</a>
         
         
         <a href="https://art-of-life.jp/tags/media-source-extensions" style="font-size: 12px;">media-source-extensions</a>

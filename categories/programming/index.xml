@@ -17,7 +17,7 @@
       <pubDate>Sun, 29 Sep 2019 17:51:06 +0900</pubDate>
       
       <guid>https://art-of-life.jp/posts/iir-filter/</guid>
-      <description>IIR フィルタとは ? IIR (Infinite Impulse Response) フィルタは, FIR フィルタと異なり, 現在の時刻の出力信号に, それよりも過去の出力信号がフィードバックされます. 出力信号が</description>
+      <description>IIR フィルタとは ? IIR (Infinite Impulse Response) フィルタは, FIR フィルタと異なって, 現在の時刻の出力信号に対して, それよりも過去の出力信号がフィードバックされます. し</description>
     </item>
     
     <item>
