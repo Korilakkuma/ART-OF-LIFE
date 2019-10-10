@@ -34,7 +34,7 @@
 
 <meta itemprop="datePublished" content="2019-09-21T17:27:49&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-21T17:27:49&#43;09:00" />
-<meta itemprop="wordCount" content="1484">
+<meta itemprop="wordCount" content="1576">
 
 
 
@@ -272,10 +272,10 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-21 17:27:49 &#43;0900 JST" itemprop="datePublished">2019-09-21</time>
             &middot;
-            1484
+            1576
             words
             &middot;
-            3
+            4
             minute read
         </div>
         
@@ -491,8 +491,45 @@ void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
     }
   } else {
     for (int n = 0; n &lt; N; n++) {
-      w[n] = 0.5 - (0.5 * std::cos((2.0 * M_PI * (n - 0.5)) / N));
+      w[n] = 0.5 - (0.5 * std::cos((2.0 * M_PI * (n + 0.5)) / N));
     }
+  }
+}
+</code></pre>
+
+<p>実行例</p>
+
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;complex&gt;
+#include &quot;wave.h&quot;
+#include &quot;window_functions.h&quot;
+#include &quot;dft.h&quot;
+
+enum {
+  N = 64
+};
+
+int main(void) {
+  MONO_PCM pcm;
+
+  std::vector&lt;std::complex&lt;double&gt;&gt; x(N);
+  std::vector&lt;std::complex&lt;double&gt;&gt; X(N);
+  std::vector&lt;double&gt; w(N);
+
+  wave_read(&amp;pcm, &quot;monoral.wav&quot;);
+
+  hanning_window(w, N);
+
+  for (int n = 0; n &lt; N; n++) {
+    x[n] = std::complex&lt;double&gt;((w[n] * pcm.s[n]), 0.0);
+  }
+
+  DFT(x, X, N);
+
+  for (int k = 0; k &lt; N; k++) {
+    std::cout &lt;&lt; &quot;[&quot; &lt;&lt; k &lt;&lt; &quot;]&quot; &lt;&lt; &quot; &quot; &lt;&lt;  X[k].real() &lt;&lt; &quot; + j&quot; &lt;&lt; std::fixed &lt;&lt; X[k].imag() &lt;&lt; std::endl;
   }
 }
 </code></pre>
