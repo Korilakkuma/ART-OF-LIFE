@@ -4,14 +4,37 @@
   
   <url>
     <loc>https://art-of-life.jp/</loc>
-    <lastmod>2019-10-05T18:00:22+09:00</lastmod>
+    <lastmod>2019-10-10T20:52:07+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/</loc>
-    <lastmod>2019-10-05T18:00:22+09:00</lastmod>
+    <lastmod>2019-10-10T20:52:07+09:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/jobs/</loc>
+    <lastmod>2019-10-10T20:52:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/music/</loc>
+    <lastmod>2019-10-10T20:52:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/</loc>
+    <lastmod>2019-10-10T20:52:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/my-motivation/</loc>
+    <lastmod>2019-10-10T20:52:07+09:00</lastmod>
   </url>
   
   <url>
@@ -45,12 +68,6 @@
   
   <url>
     <loc>https://art-of-life.jp/tags/mathematics/</loc>
-    <lastmod>2019-10-05T18:00:22+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/posts/</loc>
     <lastmod>2019-10-05T18:00:22+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -321,12 +338,6 @@
   
   <url>
     <loc>https://art-of-life.jp/tags/data-structures/</loc>
-    <lastmod>2019-06-04T22:28:54+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/jobs/</loc>
     <lastmod>2019-06-04T22:28:54+09:00</lastmod>
     <priority>0</priority>
   </url>
