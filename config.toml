@@ -23,9 +23,9 @@ hasCJKLanguage = true
 [params]
     # Tell me who you are
     author = "Korilakkuma"
-    bio = "Multimedia (Video, Audio) Engineer. In concrete, I'm expert to Web Audio API, WebRTC and Streaming (hls.js / shaka-packager contributor). C/C++, JavaScript ... etc"
-    location = "Osaka, JAPAN"
-    site_description = "Art (Computer Science と Music) についての Blog"
+    bio = "Multimedia (Video, Audio) Engineer. I'm expert in Web Audio API, WebRTC and Streaming. C/C++, JavaScript ..."
+    location = "Tokyo, JAPAN"
+    site_description = "ART (Computer Science と Music) についての Blog"
     copyright  = "Copyright (c) <a href=\"/about/\">Korilakkuma</a>"
     avatar = "css/images/avatar.png"
     # Enter your email address to display your Gravatar icon in the profile. If not set the theme
@@ -101,7 +101,7 @@ hasCJKLanguage = true
     facebook        = ""
     facebook_admin  = ""
     twitter_domain  = ""
-    twitter         = "forever120527"
+    twitter         = "xmusicjp"
 
 # Enable and disable widgets for the right sidebar
 [params.widgets]
