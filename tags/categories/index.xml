@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on ART OF LIFE</title>
+    <link>https://art-of-life.jp/categories/</link>
+    <description>Recent content in Categories on ART OF LIFE</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Thu, 10 Oct 2019 20:52:07 +0900</lastBuildDate>
+    
+	<atom:link href="https://art-of-life.jp/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Jobs</title>
+      <link>https://art-of-life.jp/categories/jobs/</link>
+      <pubDate>Thu, 10 Oct 2019 20:52:07 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/jobs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Music</title>
+      <link>https://art-of-life.jp/categories/music/</link>
+      <pubDate>Thu, 10 Oct 2019 20:52:07 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/music/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Digital Signal Processing</title>
+      <link>https://art-of-life.jp/categories/digital-signal-processing/</link>
+      <pubDate>Sat, 05 Oct 2019 18:00:22 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/digital-signal-processing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mathematics</title>
+      <link>https://art-of-life.jp/categories/mathematics/</link>
+      <pubDate>Sat, 05 Oct 2019 18:00:22 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/mathematics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Computer Sience</title>
+      <link>https://art-of-life.jp/categories/computer-sience/</link>
+      <pubDate>Sun, 29 Sep 2019 17:51:06 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/computer-sience/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>https://art-of-life.jp/categories/programming/</link>
+      <pubDate>Sun, 29 Sep 2019 17:51:06 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Audio</title>
+      <link>https://art-of-life.jp/categories/audio/</link>
+      <pubDate>Wed, 11 Sep 2019 17:25:18 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/audio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Multimedia</title>
+      <link>https://art-of-life.jp/categories/multimedia/</link>
+      <pubDate>Wed, 11 Sep 2019 17:25:18 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/multimedia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Video</title>
+      <link>https://art-of-life.jp/categories/video/</link>
+      <pubDate>Tue, 10 Sep 2019 23:27:21 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/video/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Development</title>
+      <link>https://art-of-life.jp/categories/development/</link>
+      <pubDate>Sun, 28 Jul 2019 17:27:12 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Operating System</title>
+      <link>https://art-of-life.jp/categories/operating-system/</link>
+      <pubDate>Fri, 28 Jun 2019 17:27:34 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/operating-system/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OSS</title>
+      <link>https://art-of-life.jp/categories/oss/</link>
+      <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/oss/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,33 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ART OF LIFE</title>
-    <link>https://art-of-life.jp/</link>
-    <description>Recent content on ART OF LIFE</description>
+    <title>Programming on ART OF LIFE</title>
+    <link>https://art-of-life.jp/categories/programming/</link>
+    <description>Recent content in Programming on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Thu, 10 Oct 2019 20:52:07 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 29 Sep 2019 17:51:06 +0900</lastBuildDate>
     
-	<atom:link href="https://art-of-life.jp/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://art-of-life.jp/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>攻撃再開 2019 X ～破滅に向かって～</title>
-      <link>https://art-of-life.jp/posts/my-motivation/</link>
-      <pubDate>Thu, 10 Oct 2019 20:52:07 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/my-motivation/</guid>
-      <description>転職決定までの経緯 マルチメディアエンジニアとして生き残る 2018年の段階で私が知らないこと この記事が, わたしのエンジニア人生において, 大きな</description>
-    </item>
-    
-    <item>
-      <title>Laplace Transform</title>
-      <link>https://art-of-life.jp/posts/laplace-transform/</link>
-      <pubDate>Sat, 05 Oct 2019 18:00:22 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/laplace-transform/</guid>
-      <description>ラプラス変換 ラプラス変換を数式を使わずに説明するのであれば, フーリエ変換の拡張です. 実用的には, フーリエ変換が音や光の周波数特性を分析するた</description>
-    </item>
     
     <item>
       <title>IIR Filter</title>
@@ -66,42 +48,6 @@
     </item>
     
     <item>
-      <title>WAVE ファイルの構成</title>
-      <link>https://art-of-life.jp/posts/wave/</link>
-      <pubDate>Wed, 11 Sep 2019 17:25:18 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/wave/</guid>
-      <description>WAVE ファイルとは ? WAVE とは, 音声コーデックの 1 つです. 圧縮をしないので, ファイルサイズは, MP3 や AAC などと比較するとかなり大きくなってしまいますが,</description>
-    </item>
-    
-    <item>
-      <title>MPEG-2 Systems</title>
-      <link>https://art-of-life.jp/posts/mpeg2-systems/</link>
-      <pubDate>Tue, 10 Sep 2019 23:27:21 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/mpeg2-systems/</guid>
-      <description>MPEG-2 Systems とは ? MPEG-2 MPEG-2 は, MPEG-1 を改良し, 放送用として十分と言える程度の高画質を目指して規格化されました. MPEG-2 は, DVD やデジタル BS 放送などのデータ形式として</description>
-    </item>
-    
-    <item>
-      <title>MP3 の圧縮技術の概要</title>
-      <link>https://art-of-life.jp/posts/mp3/</link>
-      <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/mp3/</guid>
-      <description>MP3 とは ? MPEG メディアデータ (動画や音声, 画像など) は, テキストデータと比較すると非常に大きなデータサイズです. したがって, データを小さくする (</description>
-    </item>
-    
-    <item>
-      <title>Macbook Air 2019</title>
-      <link>https://art-of-life.jp/posts/macbook-air-2019/</link>
-      <pubDate>Sun, 28 Jul 2019 17:27:12 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/macbook-air-2019/</guid>
-      <description>MacBook Air 2019 を買いました 開封の儀 🎉 使用感 久々に, MacBook Air に復帰したこともあり, やはりボディの薄さとバッテリーのもちはよく, 神出鬼没にコーディングしたり</description>
-    </item>
-    
-    <item>
       <title>.travis.yml の更新</title>
       <link>https://art-of-life.jp/posts/update-travis-yml/</link>
       <pubDate>Fri, 26 Jul 2019 05:27:00 +0900</pubDate>
@@ -117,15 +63,6 @@
       
       <guid>https://art-of-life.jp/posts/mathematics-for-programmer/</guid>
       <description>プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (動画, オーディオ, 画像など) をあつか</description>
-    </item>
-    
-    <item>
-      <title>Development on Windows</title>
-      <link>https://art-of-life.jp/posts/development-on-windows/</link>
-      <pubDate>Fri, 28 Jun 2019 17:27:34 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/development-on-windows/</guid>
-      <description>まえおき 諸事情でしばらく Mac が使えなくなったので, しぶしぶ Windows でしばらく開発することにしました. ハードウェア・OS は以下のとおりです. ideapad 710S Plus - 13lSK</description>
     </item>
     
     <item>
@@ -162,15 +99,6 @@
       
       <guid>https://art-of-life.jp/posts/mathjax/</guid>
       <description>MathJax Overview Web ページ (HTML) で数式を表示するための JavaScript ライブラリです. 同様のものに, jsLatex がありますが, こちらは jQuery のプラグインであるので, jQuery を利用しないことが多</description>
-    </item>
-    
-    <item>
-      <title>2019 年度の ART OF LIFE</title>
-      <link>https://art-of-life.jp/posts/art-of-2019/</link>
-      <pubDate>Sun, 26 May 2019 23:58:23 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/art-of-2019/</guid>
-      <description>Technology (技術) 動画 WebRTC hls.js コンテナ・コーデックの知識 可能であれば業務で WebRTC を利用したいです. hls.js は, src 以下への contribute を増やすこと. WebRTC を利用するにも, hls.js へ contribute す</description>
     </item>
     
   </channel>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Audio on ART OF LIFE</title>
+    <link>https://art-of-life.jp/categories/audio/</link>
+    <description>Recent content in Audio on ART OF LIFE</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Wed, 11 Sep 2019 17:25:18 +0900</lastBuildDate>
+    
+	<atom:link href="https://art-of-life.jp/categories/audio/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>WAVE ファイルの構成</title>
+      <link>https://art-of-life.jp/posts/wave/</link>
+      <pubDate>Wed, 11 Sep 2019 17:25:18 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/wave/</guid>
+      <description>WAVE ファイルとは ? WAVE とは, 音声コーデックの 1 つです. 圧縮をしないので, ファイルサイズは, MP3 や AAC などと比較するとかなり大きくなってしまいますが,</description>
+    </item>
+    
+    <item>
+      <title>MPEG-2 Systems</title>
+      <link>https://art-of-life.jp/posts/mpeg2-systems/</link>
+      <pubDate>Tue, 10 Sep 2019 23:27:21 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/mpeg2-systems/</guid>
+      <description>MPEG-2 Systems とは ? MPEG-2 MPEG-2 は, MPEG-1 を改良し, 放送用として十分と言える程度の高画質を目指して規格化されました. MPEG-2 は, DVD やデジタル BS 放送などのデータ形式として</description>
+    </item>
+    
+    <item>
+      <title>MP3 の圧縮技術の概要</title>
+      <link>https://art-of-life.jp/posts/mp3/</link>
+      <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/mp3/</guid>
+      <description>MP3 とは ? MPEG メディアデータ (動画や音声, 画像など) は, テキストデータと比較すると非常に大きなデータサイズです. したがって, データを小さくする (</description>
+    </item>
+    
+    <item>
+      <title>WebRTC の概要</title>
+      <link>https://art-of-life.jp/posts/webrtc-overview/</link>
+      <pubDate>Wed, 29 May 2019 20:00:59 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/webrtc-overview/</guid>
+      <description>WebRTC Overview WebRTC (Web Real-Time Communication) は, ブラウザ (ピア) での音声・動画通信, データ共有を可能にする技術です. したがって, 様々な標準プロトコル (UDP など) や JavaScript API の集合体で</description>
+    </item>
+    
+  </channel>
+</rss>

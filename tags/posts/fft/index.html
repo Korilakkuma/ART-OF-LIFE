@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+    <title>FFT &middot; ART OF LIFE</title>
+    <meta name="generator" content="Hugo 0.56.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Korilakkuma">
+    
+      <meta name="description" content="高速フーリエ変換 (FFT: Fast Fourier Transform) の実装を理解する">
+    
+    
+    <link rel="canonical" href="https://art-of-life.jp/posts/fft/"/>
+    <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
+    <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
+    <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/css/monokai.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/fancybox/jquery.fancybox.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <meta property="og:title" content="FFT" />
+<meta property="og:description" content="高速フーリエ変換 (FFT: Fast Fourier Transform) の実装を理解する" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://art-of-life.jp/posts/fft/" />
+<meta property="article:published_time" content="2019-09-22T17:02:42+09:00" />
+<meta property="article:modified_time" content="2019-09-22T17:02:42+09:00" />
+
+    
+    <meta itemprop="name" content="FFT">
+<meta itemprop="description" content="高速フーリエ変換 (FFT: Fast Fourier Transform) の実装を理解する">
+
+
+<meta itemprop="datePublished" content="2019-09-22T17:02:42&#43;09:00" />
+<meta itemprop="dateModified" content="2019-09-22T17:02:42&#43;09:00" />
+<meta itemprop="wordCount" content="3090">
+
+
+
+<meta itemprop="keywords" content="Mathematics,Fast Fourier Transform,FFT," />
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="FFT"/>
+<meta name="twitter:description" content="高速フーリエ変換 (FFT: Fast Fourier Transform) の実装を理解する"/>
+<meta name="twitter:site" content="@xmusicjp"/>
+
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	<header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="https://art-of-life.jp/" id="logo">
+          
+          <i class="logo" style="background-image: url('https://art-of-life.jp/css/images/logo.png')"></i>
+          
+          <span class="site-title">ART OF LIFE</span>
+      </a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/about/">About</a>
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/tags/">Tags</a>
+          
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/categories/">Categories</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="sitesearch" value="https://art-of-life.jp/" />
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/about/">About</a></td>
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/tags/">Tags</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/categories/">Categories</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="sitesearch" value="https://art-of-life.jp/" />
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+   	
+    	<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      
+      <img id="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&d=identicon"/>
+      
+      <h2 id="name">Korilakkuma</h2>
+      <h3 id="title">Multimedia (Video, Audio) Engineer. I&#39;m expert in Web Audio API, WebRTC and Streaming. C/C&#43;&#43;, JavaScript ...</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      
+          <a id="follow" href="https://github.com/Korilakkuma">
+              Follow
+          </a>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        0
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          30
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="profile-block social-links">
+      <table>
+        <tr>
+          
+<td><a href="//github.com/Korilakkuma" target="_blank" title="GitHub"><i class="fa fa-github"></i></a></td>
+
+
+
+
+
+
+
+
+
+<td><a href="//codepen.io/Korilakkuma" target="_blank" title="CodePen"><i class="fa fa-codepen"></i></a></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//youtube.com/rilakkuma3xjapan" target="_blank" title="YouTube"><i class="fa fa-youtube"></i></a></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//twitter.com/xmusicjp" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="https://art-of-life.jp/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+    
+
+    <section id="main">
+    
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+
+        <header class="article-header">
+    <a href="https://art-of-life.jp/posts/fft/">
+    <h1 class="article-title" itemprop="name">
+        FFT
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2019-09-22 17:02:42 &#43;0900 JST" itemprop="datePublished">2019-09-22</time>
+            &middot;
+            3090
+            words
+            &middot;
+            7
+            minute read
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/mathematics">Mathematics</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/fast-fourier-transform">Fast Fourier Transform</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/fft">FFT</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            
+
+<p><b>高速フーリエ変換</b> (<b>FFT</b> : Fast Fourier Transform) とは, 離散フーリエ変換のサイズが <b>2 のべき乗</b>の場合に, 高速に計算できるアルゴリズムのことです.</p>
+
+<h2 id="アルゴリズムの導出">アルゴリズムの導出</h2>
+
+<p>離散フーリエ変換のサイズ ($N$) が 8 の場合を例に導出します.</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2\pi kn}{N}\right)
+\end{eqnarray}
+$</p>
+
+<p>離散フーリエ変換の公式は, 以下のように行列で表現することができます.</p>
+
+<p>$
+\begin{eqnarray}
+x(n)=\left[
+\begin{array}{c}
+x(0) \\<br />
+x(1) \\<br />
+x(2) \\<br />
+x(3) \\<br />
+x(4) \\<br />
+x(5) \\<br />
+x(6) \\<br />
+x(7) \\<br />
+\end{array}
+\right]
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{c}
+X(0) \\<br />
+X(1) \\<br />
+X(2) \\<br />
+X(3) \\<br />
+X(4) \\<br />
+X(5) \\<br />
+X(6) \\<br />
+X(7) \\<br />
+\end{array}
+\right]
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+W_{8}=\exp\left(\frac{-j2\pi}{8}\right)
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{cccccccc}
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
+W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp;  W^{4}_{8} &amp;  W^{5}_{8} &amp;  W^{6}_{8} &amp;  W^{7}_{8} \\<br />
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;  W^{8}_{8} &amp; W^{10}_{8} &amp; W^{12}_{8} &amp; W^{14}_{8} \\<br />
+W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; W^{12}_{8} &amp; W^{15}_{8} &amp; W^{18}_{8} &amp; W^{21}_{8} \\<br />
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp; W^{16}_{8} &amp; W^{20}_{8} &amp; W^{24}_{8} &amp; W^{28}_{8} \\<br />
+W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; W^{20}_{8} &amp; W^{25}_{8} &amp; W^{30}_{8} &amp; W^{35}_{8} \\<br />
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp; W^{24}_{8} &amp; W^{30}_{8} &amp; W^{36}_{8} &amp; W^{42}_{8} \\<br />
+W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{28}_{8} &amp; W^{35}_{8} &amp; W^{42}_{8} &amp; W^{49}_{8} \\<br />
+\end{array}
+\right]x(n)
+\end{eqnarray}
+$</p>
+
+<p>ここで, 以下の関係 (オイラーの公式から導出できます) を考慮して, 行列を書き換えます.</p>
+
+<p>$
+\begin{eqnarray}
+W^{m}_{N}=W^{m(mod N)}_{N}
+\end{eqnarray}
+$</p>
+
+<p>例えば, $W^{8}_{8}=W^{0}_{8}$, $W^{9}_{8}=W^{1}_{8}$, $W^{10}_{8}=W^{2}_{8}$ &hellip;</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{cccccccc}
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
+W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; W^{4}_{8} &amp;  W^{5}_{8} &amp;  W^{6}_{8} &amp;  W^{7}_{8} \\<br />
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp; W^{0}_{8} &amp;  W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} \\<br />
+W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; W^{4}_{8} &amp;  W^{7}_{8} &amp; W^{10}_{8} &amp; W^{13}_{8} \\<br />
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp; W^{0}_{8} &amp;  W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} \\<br />
+W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; W^{4}_{8} &amp;  W^{9}_{8} &amp; W^{14}_{8} &amp; W^{19}_{8} \\<br />
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp; W^{0}_{8} &amp;  W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} \\<br />
+W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{4}_{8} &amp; W^{11}_{8} &amp; W^{18}_{8} &amp; W^{25}_{8} \\<br />
+\end{array}
+\right]x(n)
+\end{eqnarray}
+$</p>
+
+<p>そして, 行列の行を偶奇にわけて, 並び替えます.</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{c}
+X(0) \\<br />
+X(4) \\<br />
+X(2) \\<br />
+X(6) \\<br />
+X(1) \\<br />
+X(5) \\<br />
+X(3) \\<br />
+X(7) \\<br />
+\end{array}
+\right]
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{cccccccc}
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp; W^{0}_{8} &amp;  W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} \\<br />
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp; W^{0}_{8} &amp;  W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} \\<br />
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp; W^{0}_{8} &amp;  W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} \\<br />
+W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; W^{4}_{8} &amp;  W^{5}_{8} &amp;  W^{6}_{8} &amp;  W^{7}_{8} \\<br />
+W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; W^{4}_{8} &amp;  W^{9}_{8} &amp; W^{14}_{8} &amp; W^{19}_{8} \\<br />
+W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; W^{4}_{8} &amp;  W^{7}_{8} &amp; W^{10}_{8} &amp; W^{13}_{8} \\<br />
+W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{4}_{8} &amp; W^{11}_{8} &amp; W^{18}_{8} &amp; W^{25}_{8} \\<br />
+\end{array}
+\right]x(n)
+\end{eqnarray}
+$</p>
+
+<p>すると, 行列の列の中央を境目に, <b>偶数のインデックスの行は左右の周期が対称に</b>, <b>奇数のインデックスの行は半周期</b> ($N=8$ なので 4 ずつずれている) ことがわかります.</p>
+
+<p>そこで, 以下の関係を考慮します.</p>
+
+<p>$
+\begin{eqnarray}
+\begin{cases}
+W^{0}_{8}=1 \\<br />
+W^{4}_{8}=-1 \\<br />
+\end{cases}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{rrrrrrrr}
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;   W^{0}_{8} &amp;   W^{0}_{8} \\<br />
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp;  W^{0}_{8} &amp;  W^{4}_{8} &amp;   W^{8}_{8} &amp;  W^{12}_{8} \\<br />
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;  W^{0}_{8} &amp;  W^{2}_{8} &amp;   W^{4}_{8} &amp;   W^{6}_{8} \\<br />
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp;  W^{0}_{8} &amp;  W^{6}_{8} &amp;  W^{12}_{8} &amp;  W^{18}_{8} \\<br />
+W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; -W^{0}_{8} &amp; -W^{1}_{8} &amp;  -W^{2}_{8} &amp;  -W^{3}_{8} \\<br />
+W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; -W^{0}_{8} &amp; -W^{5}_{8} &amp; -W^{10}_{8} &amp; -W^{15}_{8} \\<br />
+W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; -W^{0}_{8} &amp; -W^{3}_{8} &amp;  -W^{6}_{8} &amp;  -W^{9}_{8} \\<br />
+W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; -W^{0}_{8} &amp; -W^{7}_{8} &amp; -W^{14}_{8} &amp; -W^{21}_{8} \\<br />
+\end{array}
+\right]x(n)
+\end{eqnarray}
+$</p>
+
+<p>そして,</p>
+
+<p>$
+\begin{eqnarray}
+W^{a}W^{b}=W^{a+b}
+\end{eqnarray}
+$</p>
+
+<p>であるので,</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{rrrrrrrr}
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;            W^{0}_{8} &amp;            W^{0}_{8} &amp;             W^{0}_{8} &amp;             W^{0}_{8} \\<br />
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp;            W^{0}_{8} &amp;            W^{4}_{8} &amp;             W^{8}_{8} &amp;            W^{12}_{8} \\<br />
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;            W^{0}_{8} &amp;            W^{2}_{8} &amp;             W^{4}_{8} &amp;             W^{6}_{8} \\<br />
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp;            W^{0}_{8} &amp;            W^{6}_{8} &amp;            W^{12}_{8} &amp;            W^{18}_{8} \\<br />
+W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{0}_{8} &amp; -W^{2}_{8}W^{0}_{8}  &amp; -W^{3}_{8}W^{0}_{8}  \\<br />
+W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{4}_{8} &amp; -W^{2}_{8}W^{8}_{8}  &amp; -W^{3}_{8}W^{12}_{8} \\<br />
+W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{2}_{8} &amp; -W^{2}_{8}W^{4}_{8}  &amp; -W^{3}_{8}W^{6}_{8}  \\<br />
+W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{6}_{8} &amp; -W^{2}_{8}W^{12}_{8} &amp; -W^{3}_{8}W^{18}_{8} \\<br />
+\end{array}
+\right]x(n)
+\end{eqnarray}
+$</p>
+
+<p>時間ドメインの関数を以下のように置き換えて, 行列をさらに書き換えます.</p>
+
+<p>$
+\begin{eqnarray}
+x_{1}(n)=\left[
+\begin{array}{l}
+x(0)+x(4) \\<br />
+x(1)+x(5) \\<br />
+x(2)+x(6) \\<br />
+x(3)+x(7) \\<br />
+W^{0}_{8}(x(0)-x(4)) \\<br />
+W^{1}_{8}(x(1)-x(5)) \\<br />
+W^{2}_{8}(x(2)-x(6)) \\<br />
+W^{3}_{8}(x(3)-x(7)) \\<br />
+\end{array}
+\right]
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{rrrrrrrr}
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\<br />
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\<br />
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\<br />
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\<br />
+         0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
+         0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} \\<br />
+         0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} \\<br />
+         0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} \\<br />
+\end{array}
+\right]x_{1}(n)
+\end{eqnarray}
+$</p>
+
+<p>最後に, 以下の関係を考慮して, 行列を書き換えます.</p>
+
+<p>$
+\begin{eqnarray}
+W^{m}_{N}=W^{m/2}_{N/2}
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{rrrrrrrr}
+W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+W^{0}_{4} &amp; W^{2}_{4} &amp; W^{4}_{4} &amp; W^{6}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+W^{0}_{4} &amp; W^{1}_{4} &amp; W^{2}_{4} &amp; W^{3}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+W^{0}_{4} &amp; W^{3}_{4} &amp; W^{6}_{4} &amp; W^{9}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+         0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} \\<br />
+         0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{2}_{4} &amp; W^{4}_{4} &amp; W^{6}_{4} \\<br />
+         0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{1}_{4} &amp; W^{2}_{4} &amp; W^{3}_{4} \\<br />
+         0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{3}_{4} &amp; W^{6}_{4} &amp; W^{9}_{4} \\<br />
+\end{array}
+\right]x_{1}(n)
+\end{eqnarray}
+$</p>
+
+<p>この行列は, <b>離散フーリエ変換のサイズを $N=4$ に減らして高速化できることを意味します</b>.</p>
+
+<p>さらに, この行列をみると, <b>再帰的な構造</b>があることがわかるので, 同様の手順で行列を書き換えます.</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{rrrrrrrr}
+W^{0}_{8} &amp; W^{0}_{8} &amp;            W^{0}_{8} &amp;            W^{0}_{8} &amp;           0 &amp;           0 &amp;                      0 &amp;                     0 \\<br />
+W^{0}_{8} &amp; W^{4}_{8} &amp;           -W^{0}_{8} &amp;           -W^{4}_{8} &amp;           0 &amp;           0 &amp;                      0 &amp;                     0 \\<br />
+W^{0}_{8} &amp; W^{2}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{2}_{8}W^{6}_{8} &amp;           0 &amp;           0 &amp;                      0 &amp;                     0 \\<br />
+W^{0}_{8} &amp; W^{6}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{2}_{8}W^{4}_{8} &amp;           0 &amp;           0 &amp;                      0 &amp;                     0 \\<br />
+         0 &amp;          0 &amp;                     0 &amp;                     0 &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;             W^{0}_{8} &amp;            W^{0}_{8} \\<br />
+         0 &amp;          0 &amp;                     0 &amp;                     0 &amp;  W^{0}_{8} &amp; -W^{0}_{8} &amp;             W^{8}_{8} &amp;           W^{12}_{8} \\<br />
+         0 &amp;          0 &amp;                     0 &amp;                     0 &amp;  W^{0}_{8} &amp;  W^{2}_{8} &amp;  -W^{0}_{8}W^{0}_{8} &amp; -W^{2}_{8}W^{4}_{8} \\<br />
+         0 &amp;          0 &amp;                     0 &amp;                     0 &amp;  W^{0}_{8} &amp;  W^{6}_{8} &amp;  -W^{0}_{8}W^{0}_{8} &amp; -W^{2}_{8}W^{4}_{8} \\<br />
+\end{array}
+\right]x_{1}(n)
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+x_{2}(n)=\left[
+\begin{array}{l}
+x_{1}(0)+x_{1}(4) \\<br />
+x_{1}(1)+x_{1}(5) \\<br />
+W^{0}_{8}(x_{1}(2)+x_{1}(6)) \\<br />
+W^{2}_{8}(x_{1}(3)+x_{1}(7)) \\<br />
+x_{1}(4)+x_{1}(6) \\<br />
+x_{1}(5)+x_{1}(7) \\<br />
+W^{0}_{8}(x_{1}(4)-x_{1}(6)) \\<br />
+W^{2}_{8}(x_{1}(5)-x_{1}(7)) \\<br />
+\end{array}
+\right]
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{rrrrrrrr}
+W^{0}_{8} &amp; W^{0}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+W^{0}_{8} &amp; W^{4}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+         0 &amp;          0 &amp; W^{0}_{8} &amp; W^{0}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+         0 &amp;          0 &amp; W^{0}_{8} &amp; W^{4}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+         0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{0}_{8} &amp;          0 &amp;          0 \\<br />
+         0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{4}_{8} &amp;          0 &amp;          0 \\<br />
+         0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{0}_{8} \\<br />
+         0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{4}_{8} \\<br />
+\end{array}
+\right]x_{2}(n)
+\end{eqnarray}
+$</p>
+
+<p>$W^{m}_{N}=W^{m/2}_{N/2}$ の関係があるので,</p>
+
+<p>$
+\begin{eqnarray}
+X(k)=\left[
+\begin{array}{rrrrrrrr}
+W^{0}_{2} &amp; W^{0}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+W^{0}_{2} &amp; W^{1}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+         0 &amp;          0 &amp; W^{0}_{2} &amp; W^{0}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+         0 &amp;          0 &amp; W^{0}_{2} &amp; W^{1}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
+         0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{0}_{2} &amp;          0 &amp;          0 \\<br />
+         0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{1}_{2} &amp;          0 &amp;          0 \\<br />
+         0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{0}_{2} \\<br />
+         0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{1}_{2} \\<br />
+\end{array}
+\right]x_{3}(n)
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+x_{3}(n)=\left[
+\begin{array}{l}
+x_{2}(0)+x_{2}(1) \\<br />
+x_{2}(0)+x_{2}(1) \\<br />
+x_{2}(2)+x_{2}(3) \\<br />
+x_{2}(2)+x_{2}(3) \\<br />
+x_{2}(4)+x_{2}(5) \\<br />
+x_{2}(4)+x_{2}(5) \\<br />
+x_{2}(6)+x_{2}(7) \\<br />
+x_{2}(6)+x_{2}(7) \\<br />
+\end{array}
+\right]
+\end{eqnarray}
+$</p>
+
+<p>この行列は, <b>離散フーリエ変換のサイズを $N=2$ に減らして高速化できることを意味します</b>.</p>
+
+<h2 id="ビットリバース">ビットリバース</h2>
+
+<p>高速フーリエ変換のアルゴリズム導出のさいに, 行列の列を並び替えているので, $X(k)$ のインデックスを昇順に並び替える必要があります.</p>
+
+<p>並び替えるまえと並び替えたあとのインデックスには, 以下の関係があります.</p>
+
+<table>
+  <caption>ビットリバース</caption>
+  <thead>
+    <tr><th scope="col">$x(n)$</th><th scope="col">a</th><th scope="col">b</th><th scope="col">$X(k)$</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>000</td><td>000</td><td>0</td></tr>
+    <tr><td>1</td><td>001</td><td>100</td><td>4</td></tr>
+    <tr><td>2</td><td>010</td><td>010</td><td>2</td></tr>
+    <tr><td>3</td><td>011</td><td>110</td><td>6</td></tr>
+    <tr><td>4</td><td>100</td><td>001</td><td>1</td></tr>
+    <tr><td>5</td><td>101</td><td>101</td><td>5</td></tr>
+    <tr><td>6</td><td>110</td><td>011</td><td>3</td></tr>
+    <tr><td>7</td><td>111</td><td>111</td><td>7</td></tr>
+  </tbody>
+</table>
+
+<p>上記のテーブルより, 並び替えるまえのインデックスを 2 進数に変換し, そのビットをの並びを逆にして, 10 進数に変換したインデックスが並び替えたあとのインデックスということです. このアルゴリズムは, <b>ビットリバース</b>と呼ばれています.</p>
+
+<h2 id="計算量">計算量</h2>
+
+<p>行列の書き換え過程をダイアグラムにしたのが以下の図で, <b>バタフライ計算</b>と呼ばれています.</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/66152511-8f759580-e654-11e9-912e-0e8e61be7fd0.png" alt="FFT (バタフライ計算)" /></p>
+
+<p>離散フーリエ変換のサイズが $N$ の高速フーリエ変換は, $\log_{2}N$ 段で計算できます. このとき, 最後の段以外は $N/2$ 回の乗算と $N$ 回の加算, 最後の段は $N$ 回の加算となるので, 高速フーリエ変換のオーダーは, $N\log_{2}N$ となります. 離散フーリエ変換のオーダーが $N^{2}$ であることを考えると, $N$ が大きいほど, 高速フーリエ変換はより有効であると言えます.</p>
+
+<h2 id="実装">実装</h2>
+
+<p>C++ で実装した, 高速フーリエ変換と逆高速フーリエ変換の関数です.</p>
+
+<p>FFT</p>
+
+<pre><code class="language-c++">#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;complex&gt;
+
+int pow2(int n) {
+  if (n == 0) {
+    return 1;
+  }
+
+  return 2 &lt;&lt; (n - 1);
+}
+
+void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
+  std::vector&lt;int&gt; index(N);
+
+  int number_of_stages = std::log2(N);
+
+  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
+    for (int i = 0; i &lt; pow2(stage - 1); i++) {
+      int rest = number_of_stages - stage;
+
+      for (int j = 0; j &lt; pow2(rest); j++) {
+        int n = i * pow2(rest + 1) + j;
+        int m = pow2(rest) + n;
+        int r = j * pow2(stage - 1);
+
+        double a_real = x[n].real();
+        double a_imag = x[n].imag();
+        double b_real = x[m].real();
+        double b_imag = x[m].imag();
+        double c_real = std::cos((2.0 * M_PI * r) / N);
+        double c_imag = -std::sin((2.0 * M_PI * r) / N);
+
+        if (stage &lt; number_of_stages) {
+          x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
+          x[m] = std::complex&lt;double&gt;((c_real * (a_real - b_real)) - (c_imag * (a_imag - b_imag)), (c_real * (a_imag - b_imag)) + (c_imag * (a_real - b_real)));
+        } else {
+          x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
+          x[m] = std::complex&lt;double&gt;((a_real - b_real), (a_imag - b_imag));
+        }
+      }
+    }
+  }
+
+  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
+    int rest = number_of_stages - stage;
+
+    for (int i = 0; i &lt; pow2(stage - 1); i++) {
+      index[pow2(stage - 1) + i] = index[i] + pow2(rest);
+    }
+  }
+
+  for (int k = 0; k &lt; N; k++) {
+    if (index[k] &lt;= k) {
+      continue;
+    }
+
+    auto tmp    = x[index[k]];
+    x[index[k]] = x[k];
+    x[k]        = tmp;
+  }
+}
+</code></pre>
+
+<p>IFFT</p>
+
+<pre><code class="language-c++">#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;complex&gt;
+
+int pow2(int n) {
+  if (n == 0) {
+    return 1;
+  }
+
+  return 2 &lt;&lt; (n - 1);
+}
+
+void IFFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
+  std::vector&lt;int&gt; index(N);
+
+  int number_of_stages = std::log2(N);
+
+  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
+    for (int i = 0; i &lt; pow2(stage - 1); i++) {
+      int rest = number_of_stages - stage;
+
+      for (int j = 0; j &lt; pow2(rest); j++) {
+        int n = i * pow2(rest + 1) + j;
+        int m = pow2(rest) + n;
+        int r = j * pow2(stage - 1);
+
+        double a_real = x[n].real();
+        double a_imag = x[n].imag();
+        double b_real = x[m].real();
+        double b_imag = x[m].imag();
+        double c_real = std::cos((2.0 * M_PI * r) / N);
+        double c_imag = std::sin((2.0 * M_PI * r) / N);
+
+        if (stage &lt; number_of_stages) {
+          x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
+          x[m] = std::complex&lt;double&gt;((c_real * (a_real - b_real)) - (c_imag * (a_imag - b_imag)), (c_real * (a_imag - b_imag)) + (c_imag * (a_real - b_real)));
+        } else {
+          x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
+          x[m] = std::complex&lt;double&gt;((a_real - b_real), (a_imag - b_imag));
+        }
+      }
+    }
+  }
+
+  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
+    int rest = number_of_stages - stage;
+
+    for (int i = 0; i &lt; pow2(stage - 1); i++) {
+      index[pow2(stage - 1) + i] = index[i] + pow2(rest);
+    }
+  }
+
+  for (int k = 0; k &lt; N; k++) {
+    if (index[k] &lt;= k) {
+      continue;
+    }
+
+    auto tmp    = x[index[k]];
+    x[index[k]] = x[k];
+    x[k]        = tmp;
+  }
+
+  for (int k = 0; k &lt; N; k++) {
+    x[k] = std::complex&lt;double&gt;((x[k].real() / N), (x[k].imag() / N));
+  }
+}
+
+</code></pre>
+
+<h1 id="リファレンス">リファレンス</h1>
+
+<ul>
+<li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%81%A7%E3%81%AF%E3%81%98%E3%82%81%E3%82%8B%E9%9F%B3%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E3%82%B5%E3%82%A6%E3%83%B3%E3%83%89%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86-%E9%9D%92%E6%9C%A8-%E7%9B%B4%E5%8F%B2/dp/4274206505">C言語ではじめる音のプログラミング―サウンドエフェクトの信号処理</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+    <a data-url="https://art-of-life.jp/posts/fft/" data-id="5a59857e4f9ca4a10422ca2a8b6f3d31" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+    <a href="https://art-of-life.jp/posts/fft/#disqus_thread" class="article-comment-link">
+        Comments
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+
+    
+<nav id="article-nav">
+    
+    <a href="https://art-of-life.jp/posts/fourier-transform/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">Fourier Transform</div>
+    </a>
+    
+
+    
+    <a href="https://art-of-life.jp/posts/fir-filter/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Newer
+      </strong>
+      <div class="article-nav-title">FIR Filter</div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+
+<section id="comments">
+    <div id="disqus_thread">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Korilakkuma" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+</section>
+
+
+    </section>
+
+   	
+    	<aside id="sidebar">
+    
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
+                    audio
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
+                    computer-sience
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
+                    digital-signal-processing
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/jobs">
+                    jobs
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
+                    mathematics
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
+                    multimedia
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/music">
+                    music
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/operating-system">
+                    operating-system
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/oss">
+                    oss
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
+                    programming
+                </a>
+                <span class="category-list-count">10</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/video">
+                    video
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/algorithm">
+                    algorithm
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/data-structures">
+                    data-structures
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/dft">
+                    dft
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/digital-filter">
+                    digital-filter
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
+                    digital-signal-processing
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/discrete-fourier-transform">
+                    discrete-fourier-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/discrete-mathematics">
+                    discrete-mathematics
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/dotfiles">
+                    dotfiles
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fast-fourier-transform">
+                    fast-fourier-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fft">
+                    fft
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
+                    fourier-transform
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/hls.js">
+                    hls.js
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
+                    javascript
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
+                    laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linux">
+                    linux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mac">
+                    mac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
+                    mathematics
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
+                    mdct
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/media-source-extensions">
+                    media-source-extensions
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">
+                    modified-discrete-cosine-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mp3">
+                    mp3
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-ps">
+                    mpeg-2-ps
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-systems">
+                    mpeg-2-systems
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-ts">
+                    mpeg-2-ts
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
+                    pcm
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
+                    wave
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webrtc">
+                    webrtc
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
+                    windows
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/z-transform">
+                    z-transform
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        
+        <a href="https://art-of-life.jp/tags/algorithm" style="font-size: 12px;">algorithm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/data-structures" style="font-size: 12px;">data-structures</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/dft" style="font-size: 12px;">dft</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/digital-filter" style="font-size: 12px;">digital-filter</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/digital-signal-processing" style="font-size: 12px;">digital-signal-processing</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/discrete-fourier-transform" style="font-size: 12px;">discrete-fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/discrete-mathematics" style="font-size: 12px;">discrete-mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/dotfiles" style="font-size: 12px;">dotfiles</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fast-fourier-transform" style="font-size: 12px;">fast-fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/hls.js" style="font-size: 12px;">hls.js</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/javascript" style="font-size: 12px;">javascript</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mac" style="font-size: 12px;">mac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mathematics" style="font-size: 12px;">mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mdct" style="font-size: 12px;">mdct</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/media-source-extensions" style="font-size: 12px;">media-source-extensions</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/modified-discrete-cosine-transform" style="font-size: 12px;">modified-discrete-cosine-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-systems" style="font-size: 12px;">mpeg-2-systems</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/z-transform" style="font-size: 12px;">z-transform</a>
+        
+    </div>
+</div>
+
+
+
+
+
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+    
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019
+      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+    </div>
+  </div>
+</footer>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-41390233-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+<script src="https://art-of-life.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="https://art-of-life.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+<script>jQuery('.article-type-page a:not([target])').attr('target', '_blank');</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+</body>
+</html>

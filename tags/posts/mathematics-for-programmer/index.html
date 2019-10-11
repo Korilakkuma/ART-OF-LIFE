@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+    <title>Mathematics for Programmer &middot; ART OF LIFE</title>
+    <meta name="generator" content="Hugo 0.56.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Korilakkuma">
+    
+      <meta name="description" content="ART (Computer Science と Music) についての Blog">
+    
+    
+    <link rel="canonical" href="https://art-of-life.jp/posts/mathematics-for-programmer/"/>
+    <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
+    <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
+    <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/css/monokai.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/fancybox/jquery.fancybox.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <meta property="og:title" content="Mathematics for Programmer" />
+<meta property="og:description" content="プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (動画, オーディオ, 画像など) をあつか" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://art-of-life.jp/posts/mathematics-for-programmer/" />
+<meta property="article:published_time" content="2019-07-14T17:27:13+09:00" />
+<meta property="article:modified_time" content="2019-07-14T17:27:13+09:00" />
+
+    
+    <meta itemprop="name" content="Mathematics for Programmer">
+<meta itemprop="description" content="プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (動画, オーディオ, 画像など) をあつか">
+
+
+<meta itemprop="datePublished" content="2019-07-14T17:27:13&#43;09:00" />
+<meta itemprop="dateModified" content="2019-07-14T17:27:13&#43;09:00" />
+<meta itemprop="wordCount" content="2969">
+
+
+
+<meta itemprop="keywords" content="Mathematics,Discrete Mathematics," />
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mathematics for Programmer"/>
+<meta name="twitter:description" content="プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (動画, オーディオ, 画像など) をあつか"/>
+<meta name="twitter:site" content="@xmusicjp"/>
+
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	<header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="https://art-of-life.jp/" id="logo">
+          
+          <i class="logo" style="background-image: url('https://art-of-life.jp/css/images/logo.png')"></i>
+          
+          <span class="site-title">ART OF LIFE</span>
+      </a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/about/">About</a>
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/tags/">Tags</a>
+          
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/categories/">Categories</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="sitesearch" value="https://art-of-life.jp/" />
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/about/">About</a></td>
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/tags/">Tags</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/categories/">Categories</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="sitesearch" value="https://art-of-life.jp/" />
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+   	
+    	<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      
+      <img id="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&d=identicon"/>
+      
+      <h2 id="name">Korilakkuma</h2>
+      <h3 id="title">Multimedia (Video, Audio) Engineer. I&#39;m expert in Web Audio API, WebRTC and Streaming. C/C&#43;&#43;, JavaScript ...</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      
+          <a id="follow" href="https://github.com/Korilakkuma">
+              Follow
+          </a>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        0
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          30
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="profile-block social-links">
+      <table>
+        <tr>
+          
+<td><a href="//github.com/Korilakkuma" target="_blank" title="GitHub"><i class="fa fa-github"></i></a></td>
+
+
+
+
+
+
+
+
+
+<td><a href="//codepen.io/Korilakkuma" target="_blank" title="CodePen"><i class="fa fa-codepen"></i></a></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//youtube.com/rilakkuma3xjapan" target="_blank" title="YouTube"><i class="fa fa-youtube"></i></a></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//twitter.com/xmusicjp" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="https://art-of-life.jp/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+    
+
+    <section id="main">
+    
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+
+        <header class="article-header">
+    <a href="https://art-of-life.jp/posts/mathematics-for-programmer/">
+    <h1 class="article-title" itemprop="name">
+        Mathematics for Programmer
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2019-07-14 17:27:13 &#43;0900 JST" itemprop="datePublished">2019-07-14</time>
+            &middot;
+            2969
+            words
+            &middot;
+            6
+            minute read
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/mathematics">Mathematics</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/discrete-mathematics">Discrete Mathematics</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            
+
+<h1 id="プログラマに必要な数学">プログラマに必要な数学</h1>
+
+<p>一般的なプログラマに必要な数学は, <b>離散数学</b>と呼ばれる数学です.
+もちろん, メディア (動画, オーディオ, 画像など) をあつかうエンジニアになると, 微分積分や線形代数, 確率・統計といったこと (つまり, 情報理論や信号処理) も必要になりますが, そうでないプログラマが知っておきたいのは離散数学です.</p>
+
+<p>離散数学をまったく学んだことがなくても, プログラムを書いているのであれば, 無意識のうちに離散数学を使っています,
+なぜなら, プログラムという技術が, 離散数学によって支えられているからです.</p>
+
+<p>離散数学の定義となると, わたしもよくわかっていないのですが, あつかうトピックスとしては, 以下のようなことがあげられます.</p>
+
+<ul>
+<li>集合</li>
+<li>論理</li>
+<li>順列・組み合わせ</li>
+<li>数学的帰納法・漸化式</li>
+<li>背理法</li>
+<li>オートマトンと形式言語</li>
+<li>グラフ理論</li>
+</ul>
+
+<h2 id="集合">集合</h2>
+
+<p>数学の集合の概念をプログラムの世界にもちこんだのが <code>Set</code> という型.</p>
+
+<h2 id="論理">論理</h2>
+
+<p>ブール型, つまり, <code>true</code> / <code>false</code> という値や, 半加算器・全加算器のようなデジタル回路にも利用される.</p>
+
+<h2 id="順列-組み合わせ">順列・組み合わせ</h2>
+
+<p>数え上げを一般化する. 例えば, 配列のインデックスの算出など.</p>
+
+<h2 id="数学的帰納法-漸化式">数学的帰納法・漸化式</h2>
+
+<p>ループ処理 (再帰) が, <b>目的を果たすこと</b>, <b>終了すること</b>を保証する.</p>
+
+<h2 id="背理法">背理法</h2>
+
+<p>停止判定問題の証明などに利用される.</p>
+
+<h2 id="オートマトンと形式言語">オートマトンと形式言語</h2>
+
+<p>コンパイラ (プログラミング言語の開発) や, 正規表現などに利用される.</p>
+
+<h2 id="グラフ理論">グラフ理論</h2>
+
+<p>ダイクストラ法などのアルゴリズムや, コンピュータグラフィックス (CG) にも利用される.</p>
+
+<h1 id="分割統治">分割統治</h1>
+
+<p>上記にあげた離散数学のトピックスのほとんどで共通することがあります. それが, <b>分割統治</b>という考え方です. 分割統治とは, 「複雑な問題を, 単純な問題に分割する」, あるいは, 「大きな問題を, 小さな問題に分割する」という考え方です.</p>
+
+<p>例えば, 集合によって, 整数を偶数と奇数という集合に分割します, 論理によって, 真の場合と偽の場合を分割します. 組み合わせは, ある事象が発生する場合と発生しない場合に分割して問題を解決します. また, 数学的帰納法 (漸化式) は, 2 ステップ (あるいは, n - 1 のステップ) に分割することで大きな問題を解決します.</p>
+
+<h1 id="計算不可能な問題">計算不可能な問題</h1>
+
+<p>離散数学のなかで, 比較的プログラムに近いトピックスの 1 つが, <b>計算不可能な問題</b> (<b>計算可能性理論</b> : Computability Theory) ではないでしょうか.</p>
+
+<h2 id="計算不可能な問題とは">計算不可能な問題とは ?</h2>
+
+<p>計算不可能な問題とは, 「解を求めるのに莫大な時間を要する問題」でもなければ, 「解が存在しない問題」でもありませんし, 「未解決問題」のことでもありません.</p>
+
+<p><b>計算不可能な問題</b>とは, <b>プログラムで解くことが原理的に不可能な問題</b>のことです. 言い換えると, プログラムで解くことができる問題の集合に含まれない問題ということです.</p>
+
+<p>計算不可能な問題の代表例が, <b>停止判定問題</b> (Halting Problem) です.</p>
+
+<h2 id="停止判定問題">停止判定問題</h2>
+
+<p>まず, プログラムの定義を「データを入力すると結果を出力する」ものとします. しかし, なかには, 永遠に停止せずに, 結果を出力しないケースもあります. つまり, プログラムのふるまいは, 必ず以下のどちらかになります (有限時間内というのは, 現実的な時間内でなくてもかまいません).</p>
+
+<ul>
+<li>有限時間内に動作を停止する (エラーの場合も含む)</li>
+<li>有限時間内に動作を停止しない (永遠に動作を停止しない)</li>
+</ul>
+
+<p>後者は, いわゆる, <b>無限ループ</b> がその最たる例でしょう.</p>
+
+<pre><code class="language-C++">while (true) {
+    // ...
+}
+</code></pre>
+
+<h3 id="プログラムを調べるプログラム">プログラムを調べるプログラム</h3>
+
+<p>プログラムを調べるプログラムというものが存在します. 代表例は, 「コンパイラ」です. 高級言語を機械語に変換するプログラムです. 「ソースコードチェッカー」もそうです (フロントエンドエンジニアであれば, ESLint や TSLint がおなじみですね). さらには, 「デバッガ」も人がプログラムを調べるためのプログラムです.</p>
+
+<p>ここで, 「プログラムの停止判定を実行するプログラム」が実装できると仮定します (便宜上, <code>HaltChecker</code> という関数を実装できると仮定します). ここで, 停止判定とは, 「プログラムにデータを入力して実行したときに, 有限時間内に動作を停止するかどうか ?」を判定するということです.</p>
+
+<pre><code class="language-C++">/**
+ * @return p に d を入力したとき, p が有限時間内で停止する場合, true を返す. p に d を入力したとき, p が有限時間内で停止しない場合, false を返す
+ */
+bool HaltChecker(p, d);
+</code></pre>
+
+<p>1 つ注意点があります. <code>HaltChecker</code> は <b>対象となるプログラムを実際に動作させて判定する</b>という方法は使ってはいけません. なぜなら, 対象となるプログラムが永遠に停止しない場合, <code>HaltChecker</code> も永遠に停止しないからです.</p>
+
+<p>次に, <code>SelfLoop</code> という関数を実装します.</p>
+
+<pre><code class="language-C++">void SelfLoop(void (*p)()) {
+    bool halts = HaltChecker(p, p);  // 入力が 2 つとも p であることに注意
+
+    if (halts) {
+        while (true) {
+        }
+    }
+}
+</code></pre>
+
+<p><code>SelfLoop</code> は, 与えられたプログラム p を <code>HaltChecker</code> の入力に渡して, その結果, <code>true</code> であれば, 無限ループに入るという実装になっています.</p>
+
+<p>ここで,</p>
+
+<ul>
+<li>Program A 自身をデータとして, Program A に入力としてあたえると, 停止する</li>
+<li>Program B 自身をデータとして, Program B に入力としてあたえると, 永遠に停止しない</li>
+</ul>
+
+<p>という 2 つのプログラムの存在を定義します.</p>
+
+<p><code>SelfLoop</code> のふるまいとあわせて考えると, 以下のようになります.</p>
+
+<ul>
+<li>Program A を <code>SelfLoop</code> に入力としてあたえると, 停止しない (無限ループ)</li>
+<li>Program B を <code>SelfLoop</code> に入力としてあたえると, 終了して停止する</li>
+</ul>
+
+<p>そして, 最後のステップです. <code>SelfLoop</code> の入力として, <code>SelfLoop</code> そのものをあたえます.</p>
+
+<pre><code class="language-C++">SelfLoop(SelfLoop);
+</code></pre>
+
+<dl>
+  <dt>有限時間内に停止する場合</dt>
+  <dd>
+    この場合, <code>HaltChecker(SelfLoop, SelfLoop)</code> が <code>false</code> になります. これは, <code>SelfLoop</code> に <code>SelfLoop</code> を入力としてあたえると, <code>SelfLoop</code> は停止しないという意味になります. これは, 矛盾です.
+  </dd>
+  <dt>有限時間内に停止しない場合</dt>
+  <dd>
+    この場合, <code>HaltChecker(SelfLoop, SelfLoop)</code> が <code>true</code> になります. これは, <code>SelfLoop</code> に <code>SelfLoop</code> を入力としてあたえると, <code>SelfLoop</code> は停止するという意味になります. これも, 矛盾です.
+  </dd>
+</dl>
+
+<p>もれなく, ダブりなくのケースで矛盾が発生してしまいました.</p>
+
+<p>これは, <code>HaltChecker</code> が実装可能, すなわち, <b>「プログラムの停止判定を実行するプログラム」が実装できると仮定したことが問題</b>というわけです.</p>
+
+<p><b>背理法</b>により, <b>プログラムの停止判定を実行するプログラムは実装できない</b>ことが証明できました. ちなみに, <b>停止判定問題が計算不可能な問題</b>であることは, チューリングによって証明されました.</p>
+
+<h3 id="停止判定問題の例">停止判定問題の例</h3>
+
+<p>プログラムのふるまいを調べる問題の多くは, 計算不可能な問題です.</p>
+
+<ul>
+<li>入力としてあたえた 2 つのプログラムが, 「任意の入力に対しても同じ動作をするかどうか」を判定するプログラム</li>
+<li>入力としてあたえたプログラムが, 「入力した整数が素数であることを判定できるか」を判定するプログラム</li>
+<li>入力としてあたえたプログラムが, 「任意の入力に対しても 1 を出力するかどうか」を判定するプログラム</li>
+<li>入力としてあたえたプログラムが, 「ある一定時間 T 内に終了するかどうか」を T よりも短い時間で判定するプログラム</li>
+</ul>
+
+<h1 id="学び">学び</h1>
+
+<p>離散数学は, 大学の講義ですら必修でないことも多く, 特に, 高校数学ではあつかわれない, <b>オートマトンと形式言語</b>や, <b>グラフ理論</b>などは, よほど興味をもつか, 必要に迫られない限り学ぶ機会が少ないと思います.</p>
+
+<p>1 つ 1 つの詳細は, 今後こちらのブログでもまとめて投稿したいと思います. この投稿では, 離散数学とプログラムってこんな関係があったのか ! と思っていただければと思います.</p>
+
+<p>最後に, プログラマが (離散) 数学をザクっと学ぶのによさそうな参考書を記載しておきます (計算不可能な問題は, 下記を参考にしました).</p>
+
+<ul>
+<li><a href="https://www.amazon.co.jp/プログラマの数学第2版-結城-浩/dp/4797395451/ref=sr_1_1">プログラマの数学第2版</a></li>
+<li><a href="https://www.amazon.co.jp/プログラマーのための数学入門-I・-BOOKS-赤間-世紀/dp/4777514854/ref=sr_1_13">プログラマーのための数学入門</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+    <a data-url="https://art-of-life.jp/posts/mathematics-for-programmer/" data-id="bfc25f7ec040e77da90cd709553542f3" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+    <a href="https://art-of-life.jp/posts/mathematics-for-programmer/#disqus_thread" class="article-comment-link">
+        Comments
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+
+    
+<nav id="article-nav">
+    
+    <a href="https://art-of-life.jp/posts/development-on-windows/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">Development on Windows</div>
+    </a>
+    
+
+    
+    <a href="https://art-of-life.jp/posts/update-travis-yml/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Newer
+      </strong>
+      <div class="article-nav-title">.travis.yml の更新</div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+
+<section id="comments">
+    <div id="disqus_thread">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Korilakkuma" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+</section>
+
+
+    </section>
+
+   	
+    	<aside id="sidebar">
+    
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
+                    audio
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
+                    computer-sience
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
+                    digital-signal-processing
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/jobs">
+                    jobs
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
+                    mathematics
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
+                    multimedia
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/music">
+                    music
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/operating-system">
+                    operating-system
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/oss">
+                    oss
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
+                    programming
+                </a>
+                <span class="category-list-count">10</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/video">
+                    video
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/algorithm">
+                    algorithm
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/data-structures">
+                    data-structures
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/dft">
+                    dft
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/digital-filter">
+                    digital-filter
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
+                    digital-signal-processing
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/discrete-fourier-transform">
+                    discrete-fourier-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/discrete-mathematics">
+                    discrete-mathematics
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/dotfiles">
+                    dotfiles
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fast-fourier-transform">
+                    fast-fourier-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fft">
+                    fft
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
+                    fourier-transform
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/hls.js">
+                    hls.js
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
+                    javascript
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
+                    laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linux">
+                    linux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mac">
+                    mac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
+                    mathematics
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
+                    mdct
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/media-source-extensions">
+                    media-source-extensions
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">
+                    modified-discrete-cosine-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mp3">
+                    mp3
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-ps">
+                    mpeg-2-ps
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-systems">
+                    mpeg-2-systems
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-ts">
+                    mpeg-2-ts
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
+                    pcm
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
+                    wave
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webrtc">
+                    webrtc
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
+                    windows
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/z-transform">
+                    z-transform
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        
+        <a href="https://art-of-life.jp/tags/algorithm" style="font-size: 12px;">algorithm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/data-structures" style="font-size: 12px;">data-structures</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/dft" style="font-size: 12px;">dft</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/digital-filter" style="font-size: 12px;">digital-filter</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/digital-signal-processing" style="font-size: 12px;">digital-signal-processing</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/discrete-fourier-transform" style="font-size: 12px;">discrete-fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/discrete-mathematics" style="font-size: 12px;">discrete-mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/dotfiles" style="font-size: 12px;">dotfiles</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fast-fourier-transform" style="font-size: 12px;">fast-fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/hls.js" style="font-size: 12px;">hls.js</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/javascript" style="font-size: 12px;">javascript</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mac" style="font-size: 12px;">mac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mathematics" style="font-size: 12px;">mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mdct" style="font-size: 12px;">mdct</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/media-source-extensions" style="font-size: 12px;">media-source-extensions</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/modified-discrete-cosine-transform" style="font-size: 12px;">modified-discrete-cosine-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-systems" style="font-size: 12px;">mpeg-2-systems</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/z-transform" style="font-size: 12px;">z-transform</a>
+        
+    </div>
+</div>
+
+
+
+
+
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+    
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019
+      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+    </div>
+  </div>
+</footer>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-41390233-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+<script src="https://art-of-life.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="https://art-of-life.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+<script>jQuery('.article-type-page a:not([target])').attr('target', '_blank');</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+</body>
+</html>
