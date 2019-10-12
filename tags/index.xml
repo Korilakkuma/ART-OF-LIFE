@@ -1,176 +1,284 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ART OF LIFE</title>
-    <link>https://art-of-life.jp/</link>
-    <description>Recent content on ART OF LIFE</description>
+    <title>Tags on ART OF LIFE</title>
+    <link>https://art-of-life.jp/tags/</link>
+    <description>Recent content in Tags on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Thu, 10 Oct 2019 20:52:07 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 05 Oct 2019 18:00:22 +0900</lastBuildDate>
     
-	<atom:link href="https://art-of-life.jp/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://art-of-life.jp/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>攻撃再開 2019 X ～破滅に向かって～</title>
-      <link>https://art-of-life.jp/posts/my-motivation/</link>
-      <pubDate>Thu, 10 Oct 2019 20:52:07 +0900</pubDate>
+      <title>Digital Signal Processing</title>
+      <link>https://art-of-life.jp/tags/digital-signal-processing/</link>
+      <pubDate>Sat, 05 Oct 2019 18:00:22 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/my-motivation/</guid>
-      <description>転職決定までの経緯 マルチメディアエンジニアとして生き残る 2018年の段階で私が知らないこと この記事が, わたしのエンジニア人生において, 大きな</description>
+      <guid>https://art-of-life.jp/tags/digital-signal-processing/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>Laplace Transform</title>
-      <link>https://art-of-life.jp/posts/laplace-transform/</link>
+      <link>https://art-of-life.jp/tags/laplace-transform/</link>
       <pubDate>Sat, 05 Oct 2019 18:00:22 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/laplace-transform/</guid>
-      <description>ラプラス変換 ラプラス変換を数式を使わずに説明するのであれば, フーリエ変換の拡張です. 実用的には, フーリエ変換が音や光の周波数特性を分析するた</description>
+      <guid>https://art-of-life.jp/tags/laplace-transform/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>IIR Filter</title>
-      <link>https://art-of-life.jp/posts/iir-filter/</link>
+      <title>Mathematics</title>
+      <link>https://art-of-life.jp/tags/mathematics/</link>
+      <pubDate>Sat, 05 Oct 2019 18:00:22 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/mathematics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Z-Transform</title>
+      <link>https://art-of-life.jp/tags/z-transform/</link>
+      <pubDate>Sat, 05 Oct 2019 18:00:22 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/z-transform/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Digital Filter</title>
+      <link>https://art-of-life.jp/tags/digital-filter/</link>
       <pubDate>Sun, 29 Sep 2019 17:51:06 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/iir-filter/</guid>
-      <description>IIR フィルタとは ? IIR (Infinite Impulse Response) フィルタは, FIR フィルタと異なって, 現在の時刻の出力信号に対して, それよりも過去の出力信号がフィードバックされます. し</description>
-    </item>
-    
-    <item>
-      <title>FIR Filter</title>
-      <link>https://art-of-life.jp/posts/fir-filter/</link>
-      <pubDate>Sat, 28 Sep 2019 17:02:03 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/fir-filter/</guid>
-      <description>FIR フィルタとは ? デジタルフィルタは, 乗算器, 加算器, 遅延器で構成されています. これらの構成によって, FIR (Finite Impulse Response) フィルタと, IIR (Infinite Impulse Response) フィルタの 2</description>
+      <guid>https://art-of-life.jp/tags/digital-filter/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>FFT</title>
-      <link>https://art-of-life.jp/posts/fft/</link>
+      <link>https://art-of-life.jp/tags/fft/</link>
       <pubDate>Sun, 22 Sep 2019 17:02:42 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/fft/</guid>
-      <description>高速フーリエ変換 (FFT : Fast Fourier Transform) とは, 離散フーリエ変換のサイズが 2 のべき乗の場合に, 高速に計算できるアルゴリズムのことです. アルゴリズムの導出 離散</description>
+      <guid>https://art-of-life.jp/tags/fft/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fast Fourier Transform</title>
+      <link>https://art-of-life.jp/tags/fast-fourier-transform/</link>
+      <pubDate>Sun, 22 Sep 2019 17:02:42 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/fast-fourier-transform/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DFT</title>
+      <link>https://art-of-life.jp/tags/dft/</link>
+      <pubDate>Sat, 21 Sep 2019 17:27:49 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/dft/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Discrete Fourier Transform</title>
+      <link>https://art-of-life.jp/tags/discrete-fourier-transform/</link>
+      <pubDate>Sat, 21 Sep 2019 17:27:49 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/discrete-fourier-transform/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>Fourier Transform</title>
-      <link>https://art-of-life.jp/posts/fourier-transform/</link>
+      <link>https://art-of-life.jp/tags/fourier-transform/</link>
       <pubDate>Sat, 21 Sep 2019 17:27:49 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/fourier-transform/</guid>
-      <description>フーリエ変換 周波数という視点 (ドメイン) から, 音や光の特徴を調べる方法がフーリエ変換です. 音の場合であれば, 基本周波数と倍音の比率などを分析</description>
+      <guid>https://art-of-life.jp/tags/fourier-transform/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>WAVE ファイルの構成</title>
-      <link>https://art-of-life.jp/posts/wave/</link>
+      <title>PCM</title>
+      <link>https://art-of-life.jp/tags/pcm/</link>
       <pubDate>Wed, 11 Sep 2019 17:25:18 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/wave/</guid>
-      <description>WAVE ファイルとは ? WAVE とは, 音声コーデックの 1 つです. 圧縮をしないので, ファイルサイズは, MP3 や AAC などと比較するとかなり大きくなってしまいますが,</description>
+      <guid>https://art-of-life.jp/tags/pcm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WAVE</title>
+      <link>https://art-of-life.jp/tags/wave/</link>
+      <pubDate>Wed, 11 Sep 2019 17:25:18 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/wave/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MPEG-2 PS</title>
+      <link>https://art-of-life.jp/tags/mpeg-2-ps/</link>
+      <pubDate>Tue, 10 Sep 2019 23:27:21 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/mpeg-2-ps/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>MPEG-2 Systems</title>
-      <link>https://art-of-life.jp/posts/mpeg2-systems/</link>
+      <link>https://art-of-life.jp/tags/mpeg-2-systems/</link>
       <pubDate>Tue, 10 Sep 2019 23:27:21 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/mpeg2-systems/</guid>
-      <description>MPEG-2 Systems とは ? MPEG-2 MPEG-2 は, MPEG-1 を改良し, 放送用として十分と言える程度の高画質を目指して規格化されました. MPEG-2 は, DVD やデジタル BS 放送などのデータ形式として</description>
+      <guid>https://art-of-life.jp/tags/mpeg-2-systems/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>MP3 の圧縮技術の概要</title>
-      <link>https://art-of-life.jp/posts/mp3/</link>
+      <title>MPEG-2 TS</title>
+      <link>https://art-of-life.jp/tags/mpeg-2-ts/</link>
+      <pubDate>Tue, 10 Sep 2019 23:27:21 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/mpeg-2-ts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MDCT</title>
+      <link>https://art-of-life.jp/tags/mdct/</link>
       <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/mp3/</guid>
-      <description>MP3 とは ? MPEG メディアデータ (動画や音声, 画像など) は, テキストデータと比較すると非常に大きなデータサイズです. したがって, データを小さくする (</description>
+      <guid>https://art-of-life.jp/tags/mdct/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Macbook Air 2019</title>
-      <link>https://art-of-life.jp/posts/macbook-air-2019/</link>
+      <title>MP3</title>
+      <link>https://art-of-life.jp/tags/mp3/</link>
+      <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/mp3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Modified Discrete Cosine Transform</title>
+      <link>https://art-of-life.jp/tags/modified-discrete-cosine-transform/</link>
+      <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/modified-discrete-cosine-transform/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mac</title>
+      <link>https://art-of-life.jp/tags/mac/</link>
       <pubDate>Sun, 28 Jul 2019 17:27:12 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/macbook-air-2019/</guid>
-      <description>MacBook Air 2019 を買いました 開封の儀 🎉 使用感 久々に, MacBook Air に復帰したこともあり, やはりボディの薄さとバッテリーのもちはよく, 神出鬼没にコーディングしたり</description>
+      <guid>https://art-of-life.jp/tags/mac/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>.travis.yml の更新</title>
-      <link>https://art-of-life.jp/posts/update-travis-yml/</link>
+      <title>dotfiles</title>
+      <link>https://art-of-life.jp/tags/dotfiles/</link>
+      <pubDate>Sun, 28 Jul 2019 17:27:12 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/dotfiles/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CI</title>
+      <link>https://art-of-life.jp/tags/ci/</link>
       <pubDate>Fri, 26 Jul 2019 05:27:00 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/update-travis-yml/</guid>
-      <description>Travis CI でエラー 昨日, Travis CI でビルドしたら, ソースコード・テストコードとも何も変更していないのに, 2 つのエラーが発生するようになりました &amp;hellip; Can&#39;t open /etc/init.d/xvfb テ</description>
+      <guid>https://art-of-life.jp/tags/ci/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Mathematics for Programmer</title>
-      <link>https://art-of-life.jp/posts/mathematics-for-programmer/</link>
+      <title>Discrete Mathematics</title>
+      <link>https://art-of-life.jp/tags/discrete-mathematics/</link>
       <pubDate>Sun, 14 Jul 2019 17:27:13 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/mathematics-for-programmer/</guid>
-      <description>プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (動画, オーディオ, 画像など) をあつか</description>
+      <guid>https://art-of-life.jp/tags/discrete-mathematics/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Development on Windows</title>
-      <link>https://art-of-life.jp/posts/development-on-windows/</link>
+      <title>Linux</title>
+      <link>https://art-of-life.jp/tags/linux/</link>
       <pubDate>Fri, 28 Jun 2019 17:27:34 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/development-on-windows/</guid>
-      <description>まえおき 諸事情でしばらく Mac が使えなくなったので, しぶしぶ Windows でしばらく開発することにしました. ハードウェア・OS は以下のとおりです. ideapad 710S Plus - 13lSK</description>
+      <guid>https://art-of-life.jp/tags/linux/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>hls.js のコントリビューターになろう</title>
-      <link>https://art-of-life.jp/posts/hlsjs-contributor/</link>
+      <title>Windows</title>
+      <link>https://art-of-life.jp/tags/windows/</link>
+      <pubDate>Fri, 28 Jun 2019 17:27:34 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JavaScript</title>
+      <link>https://art-of-life.jp/tags/javascript/</link>
       <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/hlsjs-contributor/</guid>
-      <description>HLS 正式には, HTTP Live Streaming の略で, Apple が開発したストリーミングプロトコルです. ストリーミングとは, 動画のように容量の大きなデータをすべてダウンロードし</description>
+      <guid>https://art-of-life.jp/tags/javascript/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>ホワイトボードコーディングを支える技術</title>
-      <link>https://art-of-life.jp/posts/coding-exam/</link>
+      <title>Media Source Extensions</title>
+      <link>https://art-of-life.jp/tags/media-source-extensions/</link>
+      <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/media-source-extensions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hls.js</title>
+      <link>https://art-of-life.jp/tags/hls.js/</link>
+      <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/hls.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Algorithm</title>
+      <link>https://art-of-life.jp/tags/algorithm/</link>
       <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/coding-exam/</guid>
-      <description>ホワイトボードコーディングとは ? プログラマとして就職活動や転職活動をしていると頻繁に課される選考試験の 1 つです. その名前のとおり, ひととおり</description>
+      <guid>https://art-of-life.jp/tags/algorithm/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>WebRTC の概要</title>
-      <link>https://art-of-life.jp/posts/webrtc-overview/</link>
+      <title>Data Structures</title>
+      <link>https://art-of-life.jp/tags/data-structures/</link>
+      <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/data-structures/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WebRTC</title>
+      <link>https://art-of-life.jp/tags/webrtc/</link>
       <pubDate>Wed, 29 May 2019 20:00:59 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/webrtc-overview/</guid>
-      <description>WebRTC Overview WebRTC (Web Real-Time Communication) は, ブラウザ (ピア) での音声・動画通信, データ共有を可能にする技術です. したがって, 様々な標準プロトコル (UDP など) や JavaScript API の集合体で</description>
-    </item>
-    
-    <item>
-      <title>MathJax で数式を表示する</title>
-      <link>https://art-of-life.jp/posts/mathjax/</link>
-      <pubDate>Tue, 28 May 2019 19:46:00 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/mathjax/</guid>
-      <description>MathJax Overview Web ページ (HTML) で数式を表示するための JavaScript ライブラリです. 同様のものに, jsLatex がありますが, こちらは jQuery のプラグインであるので, jQuery を利用しないことが多</description>
-    </item>
-    
-    <item>
-      <title>2019 年度の ART OF LIFE</title>
-      <link>https://art-of-life.jp/posts/art-of-2019/</link>
-      <pubDate>Sun, 26 May 2019 23:58:23 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/art-of-2019/</guid>
-      <description>Technology (技術) 動画 WebRTC hls.js コンテナ・コーデックの知識 可能であれば業務で WebRTC を利用したいです. hls.js は, src 以下への contribute を増やすこと. WebRTC を利用するにも, hls.js へ contribute す</description>
+      <guid>https://art-of-life.jp/tags/webrtc/</guid>
+      <description></description>
     </item>
     
   </channel>
