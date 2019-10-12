@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
 <head>
-    <title>MP3 の圧縮技術の概要 &middot; ART OF LIFE</title>
+    <title>MP3 の圧縮符号化方式 &middot; ART OF LIFE</title>
     <meta name="generator" content="Hugo 0.56.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
     
-      <meta name="description" content="MP3 の圧縮技術の概要をとおして, 音声コーデックの基本技術を学ぶ">
+      <meta name="description" content="MP3 の圧縮符号化方式の概要をとおして, 音声コーデックの基本技術を学ぶ">
     
     
     <link rel="canonical" href="https://art-of-life.jp/posts/mp3/"/>
@@ -20,29 +20,29 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="MP3 の圧縮技術の概要" />
-<meta property="og:description" content="MP3 の圧縮技術の概要をとおして, 音声コーデックの基本技術を学ぶ" />
+    <meta property="og:title" content="MP3 の圧縮符号化方式" />
+<meta property="og:description" content="MP3 の圧縮符号化方式の概要をとおして, 音声コーデックの基本技術を学ぶ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://art-of-life.jp/posts/mp3/" />
 <meta property="article:published_time" content="2019-08-28T05:27:13+09:00" />
 <meta property="article:modified_time" content="2019-08-28T05:27:13+09:00" />
 
     
-    <meta itemprop="name" content="MP3 の圧縮技術の概要">
-<meta itemprop="description" content="MP3 の圧縮技術の概要をとおして, 音声コーデックの基本技術を学ぶ">
+    <meta itemprop="name" content="MP3 の圧縮符号化方式">
+<meta itemprop="description" content="MP3 の圧縮符号化方式の概要をとおして, 音声コーデックの基本技術を学ぶ">
 
 
 <meta itemprop="datePublished" content="2019-08-28T05:27:13&#43;09:00" />
 <meta itemprop="dateModified" content="2019-08-28T05:27:13&#43;09:00" />
-<meta itemprop="wordCount" content="5720">
+<meta itemprop="wordCount" content="5686">
 
 
 
-<meta itemprop="keywords" content="MP3,PCM,Mathematics,Fourier Transform,Modified Discrete Cosine Transform,MDCT," />
+<meta itemprop="keywords" content="MPEG-1 Audio,MP3,PCM,Mathematics,Fourier Transform,Modified Discrete Cosine Transform,MDCT," />
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="MP3 の圧縮技術の概要"/>
-<meta name="twitter:description" content="MP3 の圧縮技術の概要をとおして, 音声コーデックの基本技術を学ぶ"/>
+<meta name="twitter:title" content="MP3 の圧縮符号化方式"/>
+<meta name="twitter:description" content="MP3 の圧縮符号化方式の概要をとおして, 音声コーデックの基本技術を学ぶ"/>
 <meta name="twitter:site" content="@xmusicjp"/>
 
     
@@ -174,7 +174,7 @@
       </div>
       <div class="article-info-block">
         
-          30
+          31
         
         <span>
             Tags
@@ -262,7 +262,7 @@
         <header class="article-header">
     <a href="https://art-of-life.jp/posts/mp3/">
     <h1 class="article-title" itemprop="name">
-        MP3 の圧縮技術の概要
+        MP3 の圧縮符号化方式
     </h1>
     </a>
     <div class="article-meta">
@@ -272,7 +272,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-08-28 05:27:13 &#43;0900 JST" itemprop="datePublished">2019-08-28</time>
             &middot;
-            5720
+            5686
             words
             &middot;
             12
@@ -310,6 +310,10 @@
             
             <div class="article-category">
                 <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/mpeg-1-audio">MPEG-1 Audio</a>
+                &middot;
                 
                 
                 <a class="article-category-link" href="https://art-of-life.jp/tags/mp3">MP3</a>
@@ -434,7 +438,7 @@
 
 <h3 id="mpeg-2-オーディオ">MPEG-2 オーディオ</h3>
 
-<p>MPEG-2 オーディオには, <b>MPEG-2/BC</b> (Backward Compatible) と <b>MPEG-2/AAC</b> (Advanced Audio Codec) の 2 つの規格があります. MPEG-2/BC の基本的な仕組みは MPEG-1 オーディオと変わりません.</p>
+<p>MPEG-2 オーディオには, <b>MPEG-2/BC</b> (Backward Compatible) と <b>MPEG-2/AAC</b> (Advanced Audio Coding) の 2 つの規格があります. MPEG-2/BC の基本的な仕組みは MPEG-1 オーディオと変わりません.</p>
 
 <p>MPEG-2/AAC は, 高音質・高圧縮を求めるために, MPEG-2/BC のあとに制定された規格です. MPEG-2/AAC は. 大きな音の部分に雑音を集中させたり, 一定の時間内の次のデータを予測したりすることで, データサイズ大幅に削減します (MPEG-1 オーディオ Layer I と比較して, データサイズを約 70 % にできます).</p>
 
@@ -545,21 +549,42 @@
 
 <h1 id="mp3-の圧縮">MP3 の圧縮</h1>
 
-<p>MP3 では, 可能な限り音質を保ったままデータサイズを小さくするために, 以下のフローで, データの性質を調べながら, 人間の聴覚に影響がない部分だけを除去しています.</p>
+<p>MP3 では, 可能な限り音質を保ったままデータサイズを小さくするために, 以下のフローでデータの性質を調べながら, 人間の聴覚に影響がない部分だけを除去しています.</p>
 
-<p><img src="https://user-images.githubusercontent.com/4006693/66254051-de820e80-e7ab-11e9-8c6d-86c9d1656c7d.png" alt="MP3 生成のフロー" /></p>
+<p><img src="https://user-images.githubusercontent.com/4006693/66733648-2d5e3100-ee9b-11e9-8e91-84695749d808.png" alt="MP3 生成のフロー" /></p>
 
 <ul>
-<li>フーリエ変換・(変形) 離散コサイン変換 (MDCT)</li>
 <li>サブバンド分解</li>
+<li>フーリエ変換・(変形) 離散コサイン変換 (MDCT)</li>
 <li>心理聴覚評価</li>
 <li>量子化</li>
 <li>ハフマン符号</li>
 </ul>
 
+<h2 id="サブバンド分解">サブバンド分解</h2>
+
+<p>MP3 で圧縮するための最初の処理です. 選択したサンプリング周波数の <b>1 / 32</b> のサンプリング周波数でサンプリングしなおします.</p>
+
+<p>例えば, 44.1 kHz でサンプリングする場合には, サンプリング定理にしたがい, 22.05 kHz までのデータが含まれます. MP3 では, この周波数帯域を <b>32 分割</b>して (0 - 689.0625 Hz, 689.0625 Hz - 1378.125 Hz &hellip; 21360.9375 Hz - 22050 Hz), それぞれの周波数帯域において, 1 / 32 のサンプリング周波数 (1375 Hz) で, 再度サンプリングしなおします.</p>
+
+<p>サブバンド分解する理由は, 音には以下の特性があるからです.</p>
+
+<ul>
+<li>音楽では, 周波数帯域に偏りがある
+
+<ul>
+<li>振幅の小さな帯域を除去する</li>
+</ul></li>
+<li>周波数によって人間の知覚できる音が違う
+
+<ul>
+<li>高い周波数の場合, 音量変化には鈍感, 低い周波数の場合, 音量変化に敏感</li>
+</ul></li>
+</ul>
+
 <h2 id="フーリエ変換-変形-離散コサイン変換-mdct">フーリエ変換・(変形) 離散コサイン変換 (MDCT)</h2>
 
-<p>まず, サブバンド分解をするにも, 心理聴覚評価をするにも, 時間軸に対する振幅では, どの周波数成分をあつかえばよいのかわからないので, 時間軸に対する振幅を, <b>周波数軸に対する振幅</b> (振幅スペクトル) に変換する必要があります. そのための数学的処理が, <b>フーリエ変換</b>です.</p>
+<p>時間軸に対する振幅では, どの周波数成分をあつかえばよいのかわからないので, 時間軸に対する振幅を, <b>周波数軸に対する振幅</b> (振幅スペクトル) に変換する必要があります. そのための数学的処理が, <b>フーリエ変換</b>です.</p>
 
 <p><img src="https://user-images.githubusercontent.com/4006693/63822772-69d9da00-c98c-11e9-9870-ce3c5805cf24.gif" alt="フーリエ変換" /></p>
 
@@ -578,27 +603,6 @@ $</p>
 X(k)=\sum_{n=0}^{2N-1}x(n)\cos\left(\frac{{\pi}}{N}\left(n+\frac{1}{2}+\frac{N}{2}\right)\left(k+\frac{1}{2}\right)\right)
 \end{eqnarray}
 $</p>
-
-<h2 id="サブバンド分解">サブバンド分解</h2>
-
-<p>MP3 で圧縮するための (事実上) 最初の処理です. 選択したサンプリング周波数の <b>1 / 32</b> のサンプリング周波数でサンプリングしなおします.</p>
-
-<p>例えば, 44.1 kHz でサンプリングする場合には, サンプリング定理にしたがい, 22.05 kHz までのデータが含まれます. MP3 では, この周波数帯域を <b>32 分割</b>して (0 - 689.0625 Hz, 689.0625 Hz - 1378.125 Hz &hellip; 21360.9375 Hz - 22050 Hz), それぞれの周波数帯域において, 1 / 32 のサンプリング周波数 (1375 Hz) で, 再度サンプリングしなおします.</p>
-
-<p>サブバンド分解する理由は, 音には以下の特性があるからです.</p>
-
-<ul>
-<li>音楽では, 周波数帯域に偏りがある
-
-<ul>
-<li>振幅の小さな帯域を除去する</li>
-</ul></li>
-<li>周波数によって人間の知覚できる音が違う
-
-<ul>
-<li>高い周波数の場合, 音量変化には鈍感, 低い周波数の場合, 音量変化に敏感</li>
-</ul></li>
-</ul>
 
 <h2 id="心理聴覚評価">心理聴覚評価</h2>
 
@@ -1128,6 +1132,14 @@ $</p>
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-1-audio">
+                    mpeg-1-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-ps">
                     mpeg-2-ps
                 </a>
@@ -1271,6 +1283,9 @@ $</p>
         
         
         <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-1-audio" style="font-size: 12px;">mpeg-1-audio</a>
         
         
         <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
