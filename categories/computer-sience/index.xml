@@ -30,6 +30,15 @@
     </item>
     
     <item>
+      <title>AAC の圧縮符号化方式</title>
+      <link>https://art-of-life.jp/posts/aac/</link>
+      <pubDate>Mon, 09 Sep 2019 17:02:55 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/aac/</guid>
+      <description>MPEG-2 オーディオ MPEG-2 オーディオには, MPEG-2/BC (Backward Compatible) と MPEG-2/AAC (Advanced Audio Coding) の 2 つの規格があります. MPEG-2/BC の基本的な仕組みは MPEG-1 オーディオと変わりません. MPEG-2/BC には, サンプリング周</description>
+    </item>
+    
+    <item>
       <title>MP3 の圧縮符号化方式</title>
       <link>https://art-of-life.jp/posts/mp3/</link>
       <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>

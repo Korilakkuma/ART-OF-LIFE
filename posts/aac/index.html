@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+    <title>AAC の圧縮符号化方式 &middot; ART OF LIFE</title>
+    <meta name="generator" content="Hugo 0.56.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Korilakkuma">
+    
+      <meta name="description" content="AAC の圧縮符号化方式の概要をとおして, 音声コーデックの高度な技術を学ぶ">
+    
+    
+    <link rel="canonical" href="https://art-of-life.jp/posts/aac/"/>
+    <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
+    <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
+    <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/css/monokai.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/fancybox/jquery.fancybox.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <meta property="og:title" content="AAC の圧縮符号化方式" />
+<meta property="og:description" content="AAC の圧縮符号化方式の概要をとおして, 音声コーデックの高度な技術を学ぶ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://art-of-life.jp/posts/aac/" />
+<meta property="article:published_time" content="2019-09-09T17:02:55+09:00" />
+<meta property="article:modified_time" content="2019-09-09T17:02:55+09:00" />
+
+    
+    <meta itemprop="name" content="AAC の圧縮符号化方式">
+<meta itemprop="description" content="AAC の圧縮符号化方式の概要をとおして, 音声コーデックの高度な技術を学ぶ">
+
+
+<meta itemprop="datePublished" content="2019-09-09T17:02:55&#43;09:00" />
+<meta itemprop="dateModified" content="2019-09-09T17:02:55&#43;09:00" />
+<meta itemprop="wordCount" content="1131">
+
+
+
+<meta itemprop="keywords" content="MPEG-2 Audio,AAC,Advanced Audio Coding," />
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AAC の圧縮符号化方式"/>
+<meta name="twitter:description" content="AAC の圧縮符号化方式の概要をとおして, 音声コーデックの高度な技術を学ぶ"/>
+<meta name="twitter:site" content="@xmusicjp"/>
+
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	<header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="https://art-of-life.jp/" id="logo">
+          
+          <i class="logo" style="background-image: url('https://art-of-life.jp/css/images/logo.png')"></i>
+          
+          <span class="site-title">ART OF LIFE</span>
+      </a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/about/">About</a>
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/tags/">Tags</a>
+          
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/categories/">Categories</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="sitesearch" value="https://art-of-life.jp/" />
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/about/">About</a></td>
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/tags/">Tags</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/categories/">Categories</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="sitesearch" value="https://art-of-life.jp/" />
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+   	
+    	<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      
+      <img id="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&d=identicon"/>
+      
+      <h2 id="name">Korilakkuma</h2>
+      <h3 id="title">Multimedia (Video, Audio) Engineer. I&#39;m expert in Web Audio API, WebRTC and Streaming. C/C&#43;&#43;, JavaScript ...</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      
+          <a id="follow" href="https://github.com/Korilakkuma">
+              Follow
+          </a>
+      
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        0
+        <span>Posts</span>
+      </div>
+      <div class="article-info-block">
+        
+          34
+        
+        <span>
+            Tags
+        </span>
+      </div>
+    </div>
+    <div class="profile-block social-links">
+      <table>
+        <tr>
+          
+<td><a href="//github.com/Korilakkuma" target="_blank" title="GitHub"><i class="fa fa-github"></i></a></td>
+
+
+
+
+
+
+
+
+
+<td><a href="//codepen.io/Korilakkuma" target="_blank" title="CodePen"><i class="fa fa-codepen"></i></a></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//youtube.com/rilakkuma3xjapan" target="_blank" title="YouTube"><i class="fa fa-youtube"></i></a></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td><a href="//twitter.com/xmusicjp" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
+
+
+          <td><a href="https://art-of-life.jp/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</aside>
+
+    
+
+    <section id="main">
+    
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+
+        <header class="article-header">
+    <a href="https://art-of-life.jp/posts/aac/">
+    <h1 class="article-title" itemprop="name">
+        AAC の圧縮符号化方式
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2019-09-09 17:02:55 &#43;0900 JST" itemprop="datePublished">2019-09-09</time>
+            &middot;
+            1131
+            words
+            &middot;
+            3
+            minute read
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/multimedia">Multimedia</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/audio">Audio</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/computer-sience">Computer Sience</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/mpeg-2-audio">MPEG-2 Audio</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/aac">AAC</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/advanced-audio-coding">Advanced Audio Coding</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            
+
+<h1 id="mpeg-2-オーディオ">MPEG-2 オーディオ</h1>
+
+<p>MPEG-2 オーディオには, <b>MPEG-2/BC</b> (Backward Compatible) と <b>MPEG-2/AAC</b> (Advanced Audio Coding) の 2 つの規格があります. MPEG-2/BC の基本的な仕組みは MPEG-1 オーディオと変わりません.</p>
+
+<p>MPEG-2/BC には, サンプリング周波数を半分に落とした, <b>MPEG-2/LFS</b> (Low Sampling Frequency) と, 5.1 チャンネルを可能とした, <b>MPEG-2/MC</b> (Multi Channel) があります. 2 つの規格は, たまたま同じ仕様に含まれているだけで, LSF はインターネットでの利用を想定した低ビットレート, MC は 5.1 チャンネルというまったく異なる目的の規格であり, 同時に利用するためのものではありません. ただし, 共通点として, <b>MPEG-1 オーディオと互換性をもっています</b>.</p>
+
+<p>MPEG-2/AAC は, 高音質・高圧縮を求めるために, MPEG-2/BC のあとに制定された規格です. MPEG-2/AAC は. 大きな音の部分に雑音を集中させたり, 一定の時間内の次のデータを予測したりすることで, データサイズ大幅に削減します (MPEG-1 オーディオ Layer I と比較して, データサイズを約 70 % にできます). ただし, その代償として, <b>MPEG-1 オーディオと互換性はありません</b>.</p>
+
+<h1 id="aac-の圧縮">AAC の圧縮</h1>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/66747560-cf901000-eebf-11e9-908b-40783062f44f.png" alt="AAC の圧縮のフロー" /></p>
+
+<h2 id="1-入力データ">1. 入力データ</h2>
+
+<p>オーディオ信号で, AAC の場合, 2 チャンネルのステレオ信号や 5.1 チャンネルの信号などです.</p>
+
+<h2 id="2-ゲイン-コントロール">2. ゲイン・コントロール</h2>
+
+<p>ゲイン・コントロールは, アタック音の鋭い音に対する性能を少し向上させる処理ですが, オプションとなっています.</p>
+
+<h2 id="3-フィルタ-バンク">3. フィルタ・バンク</h2>
+
+<p>フィルタ・バンクは, MDCT を利用して, 信号を <b>128</b> 分割, または, <b>1024</b> 分割します.</p>
+
+<h2 id="4-tns">4. TNS</h2>
+
+<p>Temporal Noise Shaping は, 瞬間ノイズ整形とも呼ばれ, 圧縮率を向上させるための処理です.</p>
+
+<h2 id="5-インテンシティー-カップリング">5. インテンシティー/カップリング</h2>
+
+<p>ステレオ信号を効率的に符号化するための処理です.</p>
+
+<h2 id="6-予測器">6. 予測器</h2>
+
+<p>継続する音を, 前の信号を利用して効率よく圧縮するための処理です.</p>
+
+<h2 id="7-m-s">7. M/S</h2>
+
+<p>Main/Side 処理とは, ステレオ信号を左右の和と差にわけて処理する符号化処理です.</p>
+
+<h2 id="8-スケール-ファクタ">8. スケール・ファクタ</h2>
+
+<p>スケール・ファクタは, MP3 と同様, 信号の大きさを表す指数を算出する処理です.</p>
+
+<h2 id="9-量子化">9. 量子化</h2>
+
+<p>圧縮した信号を符号化 (数値化) します.</p>
+
+<h2 id="10-ノイズレス-コーディング">10. ノイズレス・コーディング</h2>
+
+<p>量子化した信号を, 統計的な性質を利用してさらに圧縮します.</p>
+
+<h1 id="aac-で採用された代表的な技術">AAC で採用された代表的な技術</h1>
+
+<p>以下のの技術により, MP3 と比較すると, 20 % - 50 % 圧縮率が向上します.</p>
+
+<h2 id="適応ブロック長-mdct">適応ブロック長 MDCT</h2>
+
+<p>1024 サンプルのブロックと 128 サンプルのブロックの組み合わせ.</p>
+
+<h2 id="tns">TNS</h2>
+
+<p>量子化ノイズの最適化.</p>
+
+<h2 id="ノイズレス-コーディング">ノイズレス・コーディング</h2>
+
+<p>効率のよいロスレス符号化.</p>
+
+<h2 id="4-次元ハフマン">4 次元ハフマン</h2>
+
+<p>MP3 より, さらに 10 % 程度効率のよいハフマン符号化.</p>
+
+<h2 id="ゲイン-コントロール">ゲイン・コントロール</h2>
+
+<p>プリエコー (オーディオ信号が急に大きくなる直前に発生するノイズ) を抑制.</p>
+
+<h2 id="予測器">予測器</h2>
+
+<p>周波数ごとの成分の予測.</p>
+
+<table>
+  <caption>AAC の圧縮技術とプロファイル</b>
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">メイン</th>
+      <th scope="col">LC<br />(AAC の簡易アルゴリズム)</th>
+      <th scope="col">SSR<br />(AAC の拡張)</th>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">適応ブロック長 MDCT</th>
+      <td>◯</td>
+      <td>◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th scope="row">TNS</th>
+      <td>◯</td>
+      <td>◯</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">ノイズレス・コーディング</th>
+      <td>◯</td>
+      <td>◯</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">4 次元ハフマン</th>
+      <td>◯</td>
+      <td>◯</td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th scope="row">ゲイン・コントロール</th>
+      <td></td>
+      <td></td>
+      <td>◯</td>
+    </tr>
+    <tr>
+      <th scope="row">予測器</th>
+      <td>◯</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="リファレンス">リファレンス</h1>
+
+<ul>
+<li><a href="https://www.amazon.co.jp/%E6%94%B9%E8%A8%82%E7%89%88-%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E6%94%BE%E9%80%81%E6%95%99%E7%A7%91%E6%9B%B8%EF%BC%88%E4%B8%8A%EF%BC%89-%E3%82%A4%E3%83%B3%E3%83%97%E3%83%AC%E3%82%B9%E6%A8%99%E6%BA%96%E6%95%99%E7%A7%91%E6%9B%B8%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E4%BA%80%E5%B1%B1-%E6%B8%89/dp/4844395033">改訂版 デジタル放送教科書（上）</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+    <a data-url="https://art-of-life.jp/posts/aac/" data-id="88aed46795baf6a4e5f6ef3f35760c54" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+    <a href="https://art-of-life.jp/posts/aac/#disqus_thread" class="article-comment-link">
+        Comments
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+
+    
+<nav id="article-nav">
+    
+    <a href="https://art-of-life.jp/posts/mp3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">MP3 の圧縮符号化方式</div>
+    </a>
+    
+
+    
+    <a href="https://art-of-life.jp/posts/mpeg2-systems/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Newer
+      </strong>
+      <div class="article-nav-title">MPEG-2 Systems</div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+
+<section id="comments">
+    <div id="disqus_thread">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Korilakkuma" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+</section>
+
+
+    </section>
+
+   	
+    	<aside id="sidebar">
+    
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
+                    audio
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
+                    computer-sience
+                </a>
+                <span class="category-list-count">5</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
+                    digital-signal-processing
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/jobs">
+                    jobs
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
+                    mathematics
+                </a>
+                <span class="category-list-count">9</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
+                    multimedia
+                </a>
+                <span class="category-list-count">6</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/music">
+                    music
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/operating-system">
+                    operating-system
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/oss">
+                    oss
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
+                    programming
+                </a>
+                <span class="category-list-count">10</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/video">
+                    video
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/aac">
+                    aac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/advanced-audio-coding">
+                    advanced-audio-coding
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/algorithm">
+                    algorithm
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
+                    ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/data-structures">
+                    data-structures
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/dft">
+                    dft
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/digital-filter">
+                    digital-filter
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
+                    digital-signal-processing
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/discrete-fourier-transform">
+                    discrete-fourier-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/discrete-mathematics">
+                    discrete-mathematics
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/dotfiles">
+                    dotfiles
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fast-fourier-transform">
+                    fast-fourier-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fft">
+                    fft
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
+                    fourier-transform
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/hls.js">
+                    hls.js
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
+                    javascript
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
+                    laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linux">
+                    linux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mac">
+                    mac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
+                    mathematics
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
+                    mdct
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/media-source-extensions">
+                    media-source-extensions
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">
+                    modified-discrete-cosine-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mp3">
+                    mp3
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-1-audio">
+                    mpeg-1-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-audio">
+                    mpeg-2-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-ps">
+                    mpeg-2-ps
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-systems">
+                    mpeg-2-systems
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-ts">
+                    mpeg-2-ts
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
+                    pcm
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
+                    wave
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webrtc">
+                    webrtc
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
+                    windows
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/z-transform">
+                    z-transform
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        
+        <a href="https://art-of-life.jp/tags/aac" style="font-size: 12px;">aac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/advanced-audio-coding" style="font-size: 12px;">advanced-audio-coding</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/algorithm" style="font-size: 12px;">algorithm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/data-structures" style="font-size: 12px;">data-structures</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/dft" style="font-size: 12px;">dft</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/digital-filter" style="font-size: 12px;">digital-filter</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/digital-signal-processing" style="font-size: 12px;">digital-signal-processing</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/discrete-fourier-transform" style="font-size: 12px;">discrete-fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/discrete-mathematics" style="font-size: 12px;">discrete-mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/dotfiles" style="font-size: 12px;">dotfiles</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fast-fourier-transform" style="font-size: 12px;">fast-fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/hls.js" style="font-size: 12px;">hls.js</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/javascript" style="font-size: 12px;">javascript</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mac" style="font-size: 12px;">mac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mathematics" style="font-size: 12px;">mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mdct" style="font-size: 12px;">mdct</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/media-source-extensions" style="font-size: 12px;">media-source-extensions</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/modified-discrete-cosine-transform" style="font-size: 12px;">modified-discrete-cosine-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-1-audio" style="font-size: 12px;">mpeg-1-audio</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-audio" style="font-size: 12px;">mpeg-2-audio</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-systems" style="font-size: 12px;">mpeg-2-systems</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/z-transform" style="font-size: 12px;">z-transform</a>
+        
+    </div>
+</div>
+
+
+
+
+
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+    
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019
+      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+    </div>
+  </div>
+</footer>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-41390233-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+<script src="https://art-of-life.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="https://art-of-life.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+<script>jQuery('.article-type-page a:not([target])').attr('target', '_blank');</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+</body>
+</html>
