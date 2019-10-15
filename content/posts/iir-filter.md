@@ -5,7 +5,7 @@ date = 2019-09-29T17:51:06+09:00
 description = "IIR Filter の概要"
 images = []
 menu = ""
-tags = ["Digital Signal Processing", "Mathematics", "Z-transform", "Digital Filter"]
+tags = ["Digital Signal Processing", "Mathematics", "Z-Transform", "Digital Filter"]
 title = "IIR Filter"
 +++
 

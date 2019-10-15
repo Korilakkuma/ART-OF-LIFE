@@ -5,7 +5,7 @@ date = 2019-09-28T17:02:03+09:00
 description = "FIR Filter の概要"
 images = []
 menu = ""
-tags = ["Digital Signal Processing", "Mathematics", "Z-transform", "Digital Filter"]
+tags = ["Digital Signal Processing", "Mathematics", "Z-Transform", "Digital Filter"]
 title = "FIR Filter"
 +++
 
