@@ -18,14 +18,10 @@ disable_comments = true
 
 ## 動画
 
-- WebRTC
 - Streaming (hls.js / shaka-packager)
+- WebRTC
 
-WebRTC は業務で利用したことはありませんが, JavaScript API はひととおり理解して実装可能なレベルです.
-
-hls.js の [contributor](https://github.com/video-dev/hls.js/graphs/contributors) ですが, まだまだ `src` 以下への contribute が少ないです ...
-
-HLS / DASH など Streaming 技術と C++ のレベルアップを目指して, shaka-packager の [contributor](https://github.com/google/shaka-packager/graphs/contributors) にもなりました.
+WebRTC は業務で利用したことはありませんが, JavaScript API はひととおり理解して実装可能なレベルです. hls.js の [contributor](https://github.com/video-dev/hls.js/graphs/contributors) ですが, まだまだ `src` 以下への contribute が少ないです. HLS / DASH など Streaming 技術と C++ のレベルアップを目指して, shaka-packager の [contributor](https://github.com/google/shaka-packager/graphs/contributors) にもなりました.
 
 ## オーディオ
 
@@ -33,7 +29,7 @@ HLS / DASH など Streaming 技術と C++ のレベルアップを目指して, 
 - Web MIDI API
 
 機能性の高いプロダクトを実装することが得意です.
-[ライブラリ](https://xsound.jp/), [Web アプリケーション](https://xsound.app/), [Web サイト](https://web-sounder.net/)を実装・運用しています. 作曲機能 (DAW) の実装よりは, 音信号処理をもとにした機能 (アナライザーやエフェクターなど) の実装を得意としています.
+[ライブラリ](https://xsound.jp/), [Web アプリケーション](https://xsound.app/), [Web サイト](https://web-sounder.net/)を実装・運用しています. 作曲機能 (DAW) の実装よりは, 音信号処理をもとにした機能 (エフェクターなど) の実装を得意としています.
 
 ## コンピュータサイエンス
 
@@ -76,7 +72,7 @@ HLS / DASH など Streaming 技術と C++ のレベルアップを目指して, 
 - Illustrator
 - Photoshop
 
-なども使えますが, メディア技術に投資するため, 現在は, たまに必要なアイコンなどを作成するぐらいです.
+なども使えますが, メディア技術に投資するため, 現在は, ブログのイラスト作成に利用するのみです.
 
 ## あえてやらないこと
 
@@ -104,6 +100,8 @@ X (X JAPAN) が好きです.
 - Silent Jealousy
 - WEEK END
 - Rusty Nail (これは POPS ですね ...)
+- Sadistic Desire
+- DAHLIA
 
 バラードだと, Piano Instruments バージョンでコピーします.
 
