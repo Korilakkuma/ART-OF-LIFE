@@ -6,10 +6,19 @@
     <description>Recent content on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Fri, 11 Oct 2019 20:52:07 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 20 Oct 2019 17:02:31 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>確率信号</title>
+      <link>https://art-of-life.jp/posts/stochastic-signal/</link>
+      <pubDate>Sun, 20 Oct 2019 17:02:31 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/stochastic-signal/</guid>
+      <description>音声信号などにおいて, ある時刻における振幅を知りたい場合, 実際に発音してからでないと知ることはできません. しかしながら, ある程度の時間をかけ</description>
+    </item>
     
     <item>
       <title>攻撃再開 2019 X ～破滅に向かって～</title>

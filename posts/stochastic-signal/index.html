@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
 <head>
-    <title>AAC &middot; ART OF LIFE</title>
+    <title>確率信号 &middot; ART OF LIFE</title>
     <meta name="generator" content="Hugo 0.56.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,10 +10,7 @@
       <meta name="description" content="ART (Computer Science と Music) についての Blog">
     
     
-      <link href="https://art-of-life.jp/tags/aac/index.xml" rel="alternate" type="application/rss+xml" title="ART OF LIFE" />
-      <link href="https://art-of-life.jp/tags/aac/index.xml" rel="feed" type="application/rss+xml" title="ART OF LIFE" />
-    
-    <link rel="canonical" href="https://art-of-life.jp/tags/aac/"/>
+    <link rel="canonical" href="https://art-of-life.jp/posts/stochastic-signal/"/>
     <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
@@ -23,21 +20,29 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="AAC" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://art-of-life.jp/tags/aac/" />
-
-<meta property="og:updated_time" content="2019-09-09T17:02:55+09:00" />
+    <meta property="og:title" content="確率信号" />
+<meta property="og:description" content="音声信号などにおいて, ある時刻における振幅を知りたい場合, 実際に発音してからでないと知ることはできません. しかしながら, ある程度の時間をかけ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://art-of-life.jp/posts/stochastic-signal/" />
+<meta property="article:published_time" content="2019-10-20T17:02:31+09:00" />
+<meta property="article:modified_time" content="2019-10-20T17:02:31+09:00" />
 
     
-    <meta itemprop="name" content="AAC">
-<meta itemprop="description" content="">
+    <meta itemprop="name" content="確率信号">
+<meta itemprop="description" content="音声信号などにおいて, ある時刻における振幅を知りたい場合, 実際に発音してからでないと知ることはできません. しかしながら, ある程度の時間をかけ">
 
+
+<meta itemprop="datePublished" content="2019-10-20T17:02:31&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-20T17:02:31&#43;09:00" />
+<meta itemprop="wordCount" content="1758">
+
+
+
+<meta itemprop="keywords" content="Digital Signal Processing,Mathematics,Stochastic Signal," />
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="AAC"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="確率信号"/>
+<meta name="twitter:description" content="音声信号などにおいて, ある時刻における振幅を知りたい場合, 実際に発音してからでないと知ることはできません. しかしながら, ある程度の時間をかけ"/>
 <meta name="twitter:site" content="@xmusicjp"/>
 
     
@@ -250,45 +255,403 @@
 
     <section id="main">
     
-    
-    
-    
-    <section class="archives-wrap">
-        <div class="archive-category-wrap">
-            <span class="archive-category">AAC</span>
-        </div>
-        <div class="archives">
-            
-            
-                <article class="archive-article archive-type-post">
-    <div class="archive-article-inner">
-        <div class="archive-article-thumbnail">
-            
-            <a href="https://art-of-life.jp/posts/aac/" class="thumbnail">
-                <span style="background-image:url(https://art-of-life.jp/)" alt="AAC の圧縮符号化方式" class="thumbnail-image"></span>
-            </a>
-            
-        </div>
-        <header class="archive-article-header">
-            <h1 itemprop="name">
-            <a class="archive-article-title" href="https://art-of-life.jp/posts/aac/">AAC の圧縮符号化方式</a>
-            </h1>
-            <div class="archive-article-date">
-                <i class="fa fa-calendar"></i>
-                <time datetime="2019-09-09 17:02:55 &#43;0900 JST" itemprop="datePublished">2019-09-09</time>
-            </div>
-        </header>
-    </div>
-</article>
- 
-            
-        </div>
-    </section>
-    <nav id="page-nav">
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
 
+        <header class="article-header">
+    <a href="https://art-of-life.jp/posts/stochastic-signal/">
+    <h1 class="article-title" itemprop="name">
+        確率信号
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2019-10-20 17:02:31 &#43;0900 JST" itemprop="datePublished">2019-10-20</time>
+            &middot;
+            1758
+            words
+            &middot;
+            4
+            minute read
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/digital-signal-processing">Digital Signal Processing</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/digital-signal-processing">Digital Signal Processing</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/mathematics">Mathematics</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/stochastic-signal">Stochastic Signal</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            
+
+<p>音声信号などにおいて, ある時刻における振幅を知りたい場合, 実際に発音してからでないと知ることはできません. しかしながら, ある程度の時間をかけて, 音声信号を観測すると, 統計的な性質がつかめます.</p>
+
+<h1 id="確定信号">確定信号</h1>
+
+<p><b>確定信号</b> (Deterministic Signal) とは, 時刻や位置の関数として表される信号で, 時刻や位置を指定すると, 特定の値が求められます. 典型的な例としては, 正弦波信号があります.</p>
+
+<h1 id="確率信号">確率信号</h1>
+
+<p><b>確率信号</b> (Stochastic Singnal) とは, <b>確率過程</b> (Stochastic Process) としてあつかうことによって, 過去や未来の信号の統計量を特定する信号のことです. したがって, 確定信号のように, 時間や位置の関数として表すことはできません. そして, 身の回りで発生している音のほとんどは, 確率信号です.</p>
+
+<h2 id="実現値">実現値</h2>
+
+<p>確率信号は, その定義上, 実際に発生した値のみが数値として表すことができます. この値を, <b>実現値</b> (Value) と呼びます.</p>
+
+<p>試行回数 $k$ 依存しない確率信号の場合, 実現値を多数観測することで, 値の傾向を知ることができます.</p>
+
+<h2 id="ヒストグラム">ヒストグラム</h2>
+
+<p>未来の確率信号の値を特定することはできませんが, どのような傾向で実現値が発生するかを知ることはできます. そのためには, 確率信号の実現値の傾向をすることが有効です. 一般的には, <b>ヒストグラム</b>を利用して, その傾向を視覚化します.</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/67201823-26f32a80-f442-11e9-8a33-c8bcd351dbcd.png" alt="ヒストグラムの例" /></p>
+
+<h2 id="確率密度関数">確率密度関数</h2>
+
+<p>確率信号の値の傾向がわかっている場合, 「<b>確率分布</b> があたえられている」と表現します. 微小区間の値の確率を表した関数を<b>確率密度関数</b> (PDF: Probability Density Function) と呼びます.</p>
+
+<p>確率信号 $x$ の PDF を $p(x)$ とすると, 以下の式が成立します.</p>
+
+<p>$
+\begin{eqnarray}
+\int_{-\infty}^{\infty}p(x)dx=1
+\end{eqnarray}
+$</p>
+
+<p>これは, 確率信号 $x$ のいずれかの実現値が必ず発生することを意味しています</p>
+
+<h3 id="ガウス分布">ガウス分布</h3>
+
+<p>代表的な PDF に, <b>ガウス分布</b> (Gaussian Distribution) (<b>正規分布</b> (Normal Distribution)) と呼ばれる関数があります. 確率信号を $x$ とすると, ガウス分布は以下の関数で表されます.</p>
+
+<p>$
+\begin{eqnarray}
+p(x)=\frac{1}{\sqrt{2{\pi}\delta^{2}}}\exp\left(-\frac{(x-{\mu})^{2}}{2\delta^{2}}\right)
+\end{eqnarray}
+$</p>
+
+<p>$\mu$ はガウス分布の中心を決定するパラメータで, <b>平均</b> (Mean) と呼びます. $\delta^2$ は分布の広がりを決定するパラメータで, <b>分散</b> (Variance) と呼びます. ガウス分布では, この 2 つのパラメータ (平均と分散) を指定すると, その分布が一様に定まるという特徴があります.</p>
+
+<p>ガウス分布の実装 (C++)</p>
+
+<pre><code class="language-c++">#include &lt;vector&gt;
+#include &lt;cmath&gt;
+
+void Gaussian(std::vector&lt;double&gt; &amp;dist, double mean, double variance, int N) {
+  for (int n = 0; n &lt; N; n++) {
+    dist[n] = (1 / std::sqrt(2 * M_PI * variance)) * std::exp(-1 * (std::pow((n - mean), 2) / (2 * variance)));
+  }
+}
+</code></pre>
+
+<p>実行例</p>
+
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;vector&gt;
+#include &quot;gaussian.h&quot;
+
+enum {
+  N = 10
+};
+
+int main(int argc, char **argv) {
+  if (argc != 3) {
+    std::cerr &lt;&lt; &quot;Require mean, variance&quot; &lt;&lt; std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+
+  std::vector&lt;double&gt; dist(N);
+
+  double mu     = std::stod(argv[1]);
+  double delta2 = std::stod(argv[2]);
+
+  Gaussian(dist, mu, delta2, N);
+
+  for (int n = 0; n &lt; N; n++) {
+    std::cout &lt;&lt; dist[n] &lt;&lt; std::endl;
+  }
+}
+</code></pre>
+
+<h2 id="確率分布関数">確率分布関数</h2>
+
+<p>確率分布があたえられている場合, 負の方向から積分した関数を<b>確率分布関数</b> (Probability Distribution Function) と呼びます.</p>
+
+<p>確率信号 $x$ がしたがう PDF を $p(x)$ とすると, 確率分布関数 $F(A)$ は,</p>
+
+<p>$
+\begin{eqnarray}
+f(A)=\int_{-\infty}^{A}p(x)dx=1
+\end{eqnarray}
+$</p>
+
+<p>さらに, 確率密度関数の性質より,</p>
+
+<p>$
+\begin{eqnarray}
+\int_{-\infty}^{\infty}p(x)dx=1
+\end{eqnarray}
+$</p>
+
+<p>であるので, $F(A)$ にも以下の性質があります.</p>
+
+<p>$
+\begin{eqnarray}
+F(\infty)=\int_{-\infty}^{\infty}p(x)dx=1
+\end{eqnarray}
+$</p>
+
+<p>また, 確率分布関数 $F(A)$ が既知であれば, 微分によって PDF を求めることが可能です.</p>
+
+<p>$
+\begin{eqnarray}
+p(x)=\frac{dF(x)}{dx}
+\end{eqnarray}
+$</p>
+
+<!--
+## 結合確率密度関数
+
+複数の確率信号が同時に発生する場合の PDF を考えます. 複数の確率信号 $x\_{1}, x\_{2}, \cdots, x\_{M}$ が同時に発生する場合の PDF を $p(x\_{1}, x\_{2}, \cdots, x\_{M})$ と表す場合, これを確率密度関数 (Join PDF) と呼びます.
+
+同時に $M$ 個の確率信号が発生すると, いずれかの実現値が, ほかの実現値に影響を与える可能性がoあるので, ここの PDF が既知でも, $p(x\_{1}, x\_{2}, \cdots, x\_{M})$ を求めることは困難です.-->
+
+<h2 id="期待値">期待値</h2>
+
+<p>実現値以外に, 確率信号を記述する方法としては, <b>期待値</b> (Expectation Value) が有効です.</p>
+
+<p>確率信号を $x$, その PDF を $p(x)$ とすると, その期待値 $E\left[x\right]$ は,</p>
+
+<p>$
+\begin{eqnarray}
+E\left[x\right]=\int_{-\infty}^{\infty}xp(x)dx
+\end{eqnarray}
+$</p>
+
+<p>また, $x_{k}$ を $k$ 回目の試行で得られた実現値であるとすると, 以下のように求めることもできます.</p>
+
+<p>$
+\begin{eqnarray}
+E\left[x\right]=\lim_{N \to \infty}\frac{1}{N}\sum_{k=1}^{N-1}x_{k}
+\end{eqnarray}
+$</p>
+
+<p>実は, 期待値 $E\left[x\right]$ は, 実現値の平均を表しています. , 分散は以下の式で定義できます.</p>
+
+<p>$
+\begin{eqnarray}
+E\left[(x-{\mu})^{2}\right]=\int_{-\infty}^{\infty}(x-{\mu})^{2}p(x)dx
+\end{eqnarray}
+$</p>
+
+<h2 id="時間平均とエルゴード過程">時間平均とエルゴード過程</h2>
+
+<p>1 回の試行で 1 つの値を観測するのではなく, 1 回の試行で複数個の値を順に取得する場合を考えます (配列を取得するイメージ).</p>
+
+<p>時刻を $n$, $k$ 回目の試行における, 時刻 $n$ の実現値を $x_{k}(n)$ とすると, <b>時間平均</b> (Time Average) は以下のように定義できます.</p>
+
+<p>$
+\begin{eqnarray}
+\bar{x_{k}}=\lim_{N \to \infty}\frac{1}{N}\sum_{n=0}^{N-1}x_{k}(n)
+\end{eqnarray}
+$</p>
+
+<p>期待値と似ていますが, 期待値と時間平均はほとんどの場合において異なります. 具体的には, 確率分布が時間とともに変化する確率信号の場合です (逆に, 確率分布が不変である確率信号に限って, 時間平均と期待値は一致します).</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/67203147-57889380-f445-11e9-8efd-51009b6ab70b.png" alt="期待値と時間平均のちがい" /></p>
+
+<p>音声信号をあつかう場合には, 試行回数が 1 回しかないことが多く, 期待値を求めることはできません. そこで, 観測信号の<b>期待値と時間平均が一致すると過程</b>して, 期待値を時間平均で代用します.</p>
+
+<p>$
+\begin{eqnarray}
+E\left[x(n)\right]=\lim_{N \to \infty}\frac{1}{N}\sum_{n=0}^{N-1}x(n)
+\end{eqnarray}
+$</p>
+
+<p>上記の式が成立するような場合で, このような性質をもつ信号系列を<b>エルゴード過程</b> (Ergodic Process) と呼びます.</p>
+
+<!--
+## 共分散と無相関
+
+## 独立
+
+## 独立と無相関のちがい
+
+## 定常と非定常
+
+## 中心極限定理
+-->
+
+<h1 id="リファレンス">リファレンス</h1>
+
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%87%E3%82%A3%E3%82%B8%E3%82%BF%E3%83%AB%E9%9F%B3%E5%A3%B0-%E7%94%BB%E5%83%8F%E3%81%AE%E5%9C%A7%E7%B8%AE-%E5%8A%A0%E5%B7%A5%E6%8A%80%E8%A1%93-%E5%A4%A7%E5%AE%B9%E9%87%8F%E5%8C%96%E3%81%99%E3%82%8B%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%83%BB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E8%BB%A2%E9%80%81%E3%83%BB%E4%BF%9D%E5%AD%98%E3%83%BB%E6%B4%BB%E7%94%A8%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-%E3%83%87%E3%82%A3%E3%82%B8%E3%82%BF%E3%83%AB%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/dp/4789831450">ディジタル音声&amp;画像の圧縮/伸長/加工技術: 大容量化するマルチメディア・データを転送・保存・活用するために (ディジタル信号処理シリーズ)</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+    <a data-url="https://art-of-life.jp/posts/stochastic-signal/" data-id="9a44ae38cc39c88bc45d53c36c1648f1" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+    <a href="https://art-of-life.jp/posts/stochastic-signal/#disqus_thread" class="article-comment-link">
+        Comments
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+
+    
+<nav id="article-nav">
+    
+    <a href="https://art-of-life.jp/posts/my-motivation/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">攻撃再開 2019 X ～破滅に向かって～</div>
+    </a>
+    
+
+    
 </nav>
 
+
+</article>
+
+
+<section id="comments">
+    <div id="disqus_thread">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
     
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Korilakkuma" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+</section>
+
 
     </section>
 
