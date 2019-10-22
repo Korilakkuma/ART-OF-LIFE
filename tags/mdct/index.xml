@@ -6,10 +6,19 @@
     <description>Recent content in MDCT on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Wed, 28 Aug 2019 05:27:13 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 21 Sep 2019 17:27:49 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/tags/mdct/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Fourier Transform</title>
+      <link>https://art-of-life.jp/posts/fourier-transform/</link>
+      <pubDate>Sat, 21 Sep 2019 17:27:49 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/fourier-transform/</guid>
+      <description>フーリエ変換 周波数という視点 (ドメイン) から, 音や光の特徴を調べる方法がフーリエ変換です. 音の場合であれば, 基本周波数と倍音の比率などを分析</description>
+    </item>
     
     <item>
       <title>MP3 の圧縮符号化方式</title>
