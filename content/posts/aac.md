@@ -19,7 +19,7 @@ MPEG-2/AAC は, 高音質・高圧縮を求めるために, MPEG-2/BC のあと�
 
 # AAC の圧縮
 
-![AAC の圧縮フロー](https://user-images.githubusercontent.com/4006693/66828405-e69c3400-ef8b-11e9-9dd8-e5e20a0e29e0.png)
+![AAC の圧縮フロー](https://user-images.githubusercontent.com/4006693/68105796-f96aae80-ff22-11e9-93dd-a62d3fb3d253.png)
 
 ## 1. 入力データ
 
