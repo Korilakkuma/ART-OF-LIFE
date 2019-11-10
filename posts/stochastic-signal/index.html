@@ -34,7 +34,7 @@
 
 <meta itemprop="datePublished" content="2019-10-20T17:02:31&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-20T17:02:31&#43;09:00" />
-<meta itemprop="wordCount" content="1758">
+<meta itemprop="wordCount" content="3195">
 
 
 
@@ -272,10 +272,10 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-10-20 17:02:31 &#43;0900 JST" itemprop="datePublished">2019-10-20</time>
             &middot;
-            1758
+            3195
             words
             &middot;
-            4
+            7
             minute read
         </div>
         
@@ -450,12 +450,11 @@ p(x)=\frac{dF(x)}{dx}
 \end{eqnarray}
 $</p>
 
-<!--
-## 結合確率密度関数
+<h2 id="結合確率密度関数">結合確率密度関数</h2>
 
-複数の確率信号が同時に発生する場合の PDF を考えます. 複数の確率信号 $x\_{1}, x\_{2}, \cdots, x\_{M}$ が同時に発生する場合の PDF を $p(x\_{1}, x\_{2}, \cdots, x\_{M})$ と表す場合, これを確率密度関数 (Join PDF) と呼びます.
+<p>複数の確率信号が同時に発生する場合の PDF を考えます. 複数の確率信号 $x_{1}, x_{2}, \cdots, x_{M}$ が同時に発生する場合の PDF を $p(x_{1}, x_{2}, \cdots, x_{M})$ と表す場合, これを<b>結合確率密度関数</b> (Join PDF) と呼びます.</p>
 
-同時に $M$ 個の確率信号が発生すると, いずれかの実現値が, ほかの実現値に影響を与える可能性がoあるので, ここの PDF が既知でも, $p(x\_{1}, x\_{2}, \cdots, x\_{M})$ を求めることは困難です.-->
+<p>同時に $M$ 個の確率信号が発生すると, いずれかの実現値が, ほかの実現値に影響を与える可能性があるので, ここの PDF が既知でも, $p(x_{1}, x_{2}, \cdots, x_{M})$ を求めることは困難です.</p>
 
 <h2 id="期待値">期待値</h2>
 
@@ -511,17 +510,135 @@ $</p>
 
 <p>上記の式が成立するような場合で, このような性質をもつ信号系列を<b>エルゴード過程</b> (Ergodic Process) と呼びます.</p>
 
-<!--
-## 共分散と無相関
+<h2 id="共分散と無相関">共分散と無相関</h2>
 
-## 独立
+<p>確率信号 $x_{1}$ の平均を $\mu_{1}$ として, 確率信号 $x_{2}$ の平均を $\mu_{2}$ とすると, $x_{1}$ と $x_{2}$ の平均からのずれの積の期待値, すなわち, 下記の式は,</p>
 
-## 独立と無相関のちがい
+<p>$
+\begin{eqnarray}
+E\left[\left(x_{1}-\mu_{1}\right)\left(x_{2}-\mu_{2}\right)\right]=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\left(x_{1}-\mu_{1}\right)\left(x_{2}-\mu_{2}\right)p\left(x_{1},x_{2}\right)dx_{1}dx_{2}
+\end{eqnarray}
+$</p>
 
-## 定常と非定常
+<p>分散との対比から, $x_{1}$ と $x_{2}$ の<b>共分散</b> (Covariance) と呼びます. 共分散は $x_{1}$ と $x_{2}$ が同じ値になるとき最も大きくなるので, <b>信号の関連性</b>を調べるときに有用になります.</p>
 
-## 中心極限定理
--->
+<p>共分散が 0 の場合,</p>
+
+<p>$
+\begin{eqnarray}
+E\left[\left(x_{1}-\mu_{1}\right)\left(x_{2}-\mu_{2}\right)\right]=0
+\end{eqnarray}
+$</p>
+
+<p>$x_{1}$ と $x_{2}$ は, <b>無相関</b> (Uncorrelated) であると呼びます. 無相関である場合, 以下の式が成立します.</p>
+
+<p>$
+\begin{eqnarray}
+E\left[x_{1}x_{2}\right]=E\left[x_{1}\right]E\left[x_{2}\right]
+\end{eqnarray}
+$</p>
+
+<p>上記の式は, 無相関である場合, 2 つの確率信号の期待値は, それぞれの期待値の積で求めることができるということを意味しています.</p>
+
+<p>確率信号をあつかう場合, あらかじめ期待値を差し引いて, 期待値を 0 とすることが多いです. この場合, 無相関の条件は, 以下のように定義できます.</p>
+
+<p>$
+\begin{eqnarray}
+E\left[x_{1}x_{2}\right]=0
+\end{eqnarray}
+$</p>
+
+<h2 id="独立">独立</h2>
+
+<p>複数の確率信号をあつかう場合, それらの和の期待値は, それぞれの期待値の和に等しくなります.</p>
+
+<p>$
+\begin{eqnarray}
+E\left[x_{1}+x_{2}+\cdots+x_{M}\right]=E\left[x_{1}\right]+E\left[x_{2}\right]+\cdots+E\left[x_{M}\right]
+\end{eqnarray}
+$</p>
+
+<p>しかしながら, 複数の確率信号の積の期待値は, それぞれにあつかうことができません.</p>
+
+<p>$
+\begin{eqnarray}
+E\left[x_{1}x_{2}{\cdots}x_{M}\right]=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty}x_{1}x_{2}{\cdots}x_{M}p\left(x_{1},x_{2},{\cdots},x_{M}\right)dx_{1}dx_{2}{\cdots}dx_{M}
+\end{eqnarray}
+$</p>
+
+<p>もし, それぞれの PDF の積として定義できる場合, 確率信号 $x_{1},x_{2},{\cdots},x_{M}$ は互いに<b>独立</b> (Independent) であると呼びます. 独立である場合, それぞれの期待値の積として定義できます.</p>
+
+<p>$
+\begin{eqnarray}
+E\left[x_{1}x_{2}{\cdots}x_{M}\right]=E\left[x_{1}\right]E\left[x_{2}\right]{\cdots}E\left[x_{M}\right]
+\end{eqnarray}
+$</p>
+
+<p>独立である場合, 下記の式も成立します.</p>
+
+<p>$
+\begin{eqnarray}
+E\left[x_{1}x_{2}\right]=E\left[x_{1}\right]E\left[x_{2}\right]
+\end{eqnarray}
+$</p>
+
+<p><b>独立であれば無相関でもあります</b>. その<b>逆</b>は, 必ずしも真ではありません. すなわち, 無相関であっても, その積の期待値が, それぞれの PDF の積として定義できるはかぎらないということです.</p>
+
+<h2 id="独立と無相関のちがい">独立と無相関のちがい</h2>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/68540983-29abc480-03dd-11ea-9ae7-cb3f8809ee54.png" alt="無相関" /></p>
+
+<p>無相関の場合, $x_{1}$ と $x_{2}$ のいずれかが正か負の大きな値をとる場合, 他方は小さな値しか撮りません. このように, 一方の実現値が他方の実現値に影響をあたえているので, 2 つの確率信号は独立ではありません.</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/68543656-7a331a00-03fd-11ea-900f-7cb55a109541.png" alt="独立" /></p>
+
+<p>独立の場合, $x_{1}$ と $x_{2}$ のいずれかが正か負の大きな値をとる場合, 他方は影響をうけていません. このように, 一方の実現値が他方の実現値に影響をあたえていないので, 2 つの確率信号は独立となります.</p>
+
+<h2 id="定常と非定常">定常と非定常</h2>
+
+<p>ある確率信号の統計的性質が, 時刻 $n$ とともに変化しない場合, その確率信号は, <b>定常</b> (Stationary) と呼びます. 定常はさらに, 2 つの状態, <b>弱定常</b> (Wide Sense Stationary) と<b>強定常</b> (Strictly Sense Stationary) に分類されます.</p>
+
+<p>$
+\begin{eqnarray}
+E\left[x(n)\right]=\mu
+\end{eqnarray}
+$</p>
+
+<p>$
+\begin{eqnarray}
+E\left[x(n)x(n-k)\right]=r(k)
+\end{eqnarray}
+$</p>
+
+<p>上記の 2 式で定義されるように, 期待値が時間に関わらず一定で, 時間差 $k$ のみの関数となるとき, 確率信号は弱定常と呼ばれます.</p>
+
+<p>高次の結合確率密度関数が,</p>
+
+<p>$
+\begin{eqnarray}
+p\left(x\left(n_{1}\right),x\left(n_{2}\right),{\cdots},x\left(n_{M}\right)\right)=p\left(x\left(n_{1}+t\right),x\left(n_{2}+t\right),{\cdots},x\left(n_{M}+t\right)\right)
+\end{eqnarray}
+$</p>
+
+<p>上記の式のように, 時間によって変化しない場合は, 強定常と呼ばれます.</p>
+
+<p>確率信号の統計的性質が時間的に変化する場合は, <b>非定常</b> (Non-stationary) と呼びます.</p>
+
+<h2 id="中心極限定理">中心極限定理</h2>
+
+<p>互いに独立で, 同一の確率分布にしたがう複数の確率信号を <b>i.i.d</b> (Independent Identically Distributed) な確率信号と呼びます.</p>
+
+<p>そのような確率信号の場合, <b>中心極限定理</b> (Central Limit Theorem) が成立します.</p>
+
+<p>平均 $\mu$, 分散 $\delta^{2}$ の i.i.d. な確率信号 $x_{1},x_{2},\cdots$に対して, それらの和としてあたえられる確率信号は,</p>
+
+<p>$
+\begin{eqnarray}
+s_{n}=\frac{1}{n}\sum_{k=1}^{n}x_{k}
+\end{eqnarray}
+$</p>
+
+<p>$n$ が十分に大きい場合, 近似的に, 平均 $\mu$, 分散 $\frac{\delta^{2}}{n}$ のガウス分布にしたがいます. つまり, 確率信号の和がしたがう PDF は, もとの PDF よりもガウス分布に近づくということになります.</p>
 
 <h1 id="リファレンス">リファレンス</h1>
 
