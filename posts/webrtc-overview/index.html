@@ -538,7 +538,7 @@ peerConnection.createOffer()
     this.websocket = new WebSocket(url);
 
     this.websocket.onopen  = Object.prototype.toString.call(onopen) === '[object Function]' ? onopen  : () =&gt; {};
-    this.websocket.onerror = Object.prototype.toString.call(onopen) === '[object Function]' ? onerror : () =&gt; {};
+    this.websocket.onerror = Object.prototype.toString.call(onerror) === '[object Function]' ? onerror : () =&gt; {};
   }
 
   send(sessionDescription) {
