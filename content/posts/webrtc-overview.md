@@ -221,7 +221,7 @@ class SignalingChannel {
     this.websocket = new WebSocket(url);
 
     this.websocket.onopen  = Object.prototype.toString.call(onopen) === '[object Function]' ? onopen  : () => {};
-    this.websocket.onerror = Object.prototype.toString.call(onopen) === '[object Function]' ? onerror : () => {};
+    this.websocket.onerror = Object.prototype.toString.call(onerror) === '[object Function]' ? onerror : () => {};
   }
 
   send(sessionDescription) {
