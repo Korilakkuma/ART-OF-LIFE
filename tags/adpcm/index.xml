@@ -17,7 +17,7 @@
       <pubDate>Thu, 21 Nov 2019 20:52:27 +0900</pubDate>
       
       <guid>https://art-of-life.jp/posts/adpcm/</guid>
-      <description>PCM アナログ信号である音 (媒体の振動) をコンピュータで処理するためには, 0 と 1 のみの情報, つまり, デジタル信号に変換する必要があります. その処</description>
+      <description>PCM アナログ信号である音 (媒体の振動) をコンピュータで処理するためには, 0 と 1 のみの情報, すなわち, デジタル信号に変換する必要があります. その</description>
     </item>
     
   </channel>
