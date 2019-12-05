@@ -232,11 +232,11 @@ SelfLoop(SelfLoop);
 <dl>
   <dt>有限時間内に停止する場合</dt>
   <dd>
-    この場合, <code>HaltChecker</code> が <code>false</code> を返します. すなわち, <code>SelfLoop</code> に <code>SelfLoop</code> を入力としてあたえると, <code>SelfLoop</code> は停止しないという意味になります. これは, 矛盾です.
+    この場合, <code>HaltChecker</code> が <code>true</code> を返します. すなわち, <code>SelfLoop</code> に <code>SelfLoop</code> を入力としてあたえると, <code>SelfLoop</code> は停止しないという意味になります. これは, 矛盾です.
   </dd>
   <dt>有限時間内に停止しない場合</dt>
   <dd>
-    この場合, <code>HaltChecker</code> が <code>true</code> を返します. すなわち, <code>SelfLoop</code> に <code>SelfLoop</code> を入力としてあたえると, <code>SelfLoop</code> は停止するという意味になります. これも, 矛盾です.
+    この場合, <code>HaltChecker</code> が <code>false</code> を返します. すなわち, <code>SelfLoop</code> に <code>SelfLoop</code> を入力としてあたえると, <code>SelfLoop</code> は停止するという意味になります. これも, 矛盾です.
   </dd>
 </dl>
 
