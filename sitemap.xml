@@ -3,6 +3,71 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://art-of-life.jp/</loc>
+    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/audio/</loc>
+    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/celp/</loc>
+    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/celp/</loc>
+    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/</loc>
+    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/computer-sience/</loc>
+    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/linear-prediction-analysis/</loc>
+    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/mathematics/</loc>
+    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/multimedia/</loc>
+    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/</loc>
+    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/</loc>
+    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://art-of-life.jp/tags/adpcm/</loc>
     <lastmod>2019-11-21T20:52:27+09:00</lastmod>
     <priority>0</priority>
@@ -14,55 +79,7 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/</loc>
-    <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/audio/</loc>
-    <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/</loc>
-    <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/computer-sience/</loc>
-    <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/mathematics/</loc>
-    <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/multimedia/</loc>
-    <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://art-of-life.jp/tags/pcm/</loc>
-    <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/posts/</loc>
-    <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/</loc>
     <lastmod>2019-11-21T20:52:27+09:00</lastmod>
     <priority>0</priority>
   </url>

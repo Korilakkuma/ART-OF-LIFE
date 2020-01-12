@@ -6,10 +6,19 @@
     <description>Recent content in Posts on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Thu, 21 Nov 2019 20:52:27 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 12 Jan 2020 17:27:07 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CELP</title>
+      <link>https://art-of-life.jp/posts/celp/</link>
+      <pubDate>Sun, 12 Jan 2020 17:27:07 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/celp/</guid>
+      <description>分析合成方式 PCM は, 音の波形そのものを符号化する, いわゆる, 波形符号化方式ですが, そうではなく, 観測信号から音の発生機構を推定し, そのパラメー</description>
+    </item>
     
     <item>
       <title>ADPCM</title>
