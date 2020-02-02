@@ -6,7 +6,7 @@
     <description>Recent content in Categories on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 12 Jan 2020 17:27:07 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 02 Feb 2020 17:27:52 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>Audio</title>
       <link>https://art-of-life.jp/categories/audio/</link>
-      <pubDate>Sun, 12 Jan 2020 17:27:07 +0900</pubDate>
+      <pubDate>Sun, 02 Feb 2020 17:27:52 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/audio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>https://art-of-life.jp/categories/programming/</link>
+      <pubDate>Sun, 02 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/programming/</guid>
       <description></description>
     </item>
     
@@ -71,15 +80,6 @@
       <pubDate>Fri, 11 Oct 2019 20:52:07 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/music/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Programming</title>
-      <link>https://art-of-life.jp/categories/programming/</link>
-      <pubDate>Sun, 29 Sep 2019 17:51:06 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/programming/</guid>
       <description></description>
     </item>
     

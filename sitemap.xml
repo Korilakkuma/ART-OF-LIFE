@@ -4,13 +4,66 @@
   
   <url>
     <loc>https://art-of-life.jp/</loc>
-    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/audio/</loc>
-    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/audio-processing-by-wasm/</loc>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/c/</loc>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/</loc>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/javascript/</loc>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/</loc>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/programming/</loc>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/</loc>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/web-audio-api/</loc>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/webassembly/</loc>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -23,12 +76,6 @@
   <url>
     <loc>https://art-of-life.jp/posts/celp/</loc>
     <lastmod>2020-01-12T17:27:07+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/</loc>
-    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -51,18 +98,6 @@
   
   <url>
     <loc>https://art-of-life.jp/categories/multimedia/</loc>
-    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/posts/</loc>
-    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/</loc>
     <lastmod>2020-01-12T17:27:07+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -156,12 +191,6 @@
   <url>
     <loc>https://art-of-life.jp/posts/iir-filter/</loc>
     <lastmod>2019-09-29T17:51:06+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/programming/</loc>
-    <lastmod>2019-09-29T17:51:06+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -366,12 +395,6 @@
   <url>
     <loc>https://art-of-life.jp/tags/windows/</loc>
     <lastmod>2019-06-28T17:27:34+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/javascript/</loc>
-    <lastmod>2019-06-12T23:30:29+09:00</lastmod>
     <priority>0</priority>
   </url>
   
