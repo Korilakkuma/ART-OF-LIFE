@@ -34,7 +34,7 @@
 
 <meta itemprop="datePublished" content="2020-02-02T17:27:52&#43;09:00" />
 <meta itemprop="dateModified" content="2020-02-02T17:27:52&#43;09:00" />
-<meta itemprop="wordCount" content="3670">
+<meta itemprop="wordCount" content="3689">
 
 
 
@@ -272,7 +272,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2020-02-02 17:27:52 &#43;0900 JST" itemprop="datePublished">2020-02-02</time>
             &middot;
-            3670
+            3689
             words
             &middot;
             8
@@ -469,7 +469,9 @@ double browniannoise(void) {
 }
 </code></pre>
 
-<p>オーディオ処理の具体的な意味は, 書籍や Web サイトを参考にしていただければと思います. 重要な点は, <code>emscripten.h</code> というヘッダファイルを読み込みと, JavaScript 側から呼び出したい処理 (関数) に <code>EMSCRIPTEN_KEEPALIVE</code> と宣言していることです.</p>
+<p>オーディオ処理の具体的な意味は, 書籍や Web サイトを参考にしていただければと思います.</p>
+
+<p>重要なポイントは, <code>emscripten.h</code> というヘッダファイルの読み込みと, JavaScript 側から呼び出したい処理 (関数) に <code>EMSCRIPTEN_KEEPALIVE</code> と宣言していることです.</p>
 
 <p>実装が完了したら, 以下のコマンドを実行して, WebAssembly のためのバイナリを生成します.</p>
 
@@ -543,7 +545,7 @@ processor.onaudioprocess = (event) =&gt; {
 
 <h2 id="ボーカルキャンセラ">ボーカルキャンセラ</h2>
 
-<p>ボーカルキャンセラも, ノイズと同様, 数値演算だけで実装できるオーディオ処理なので, フローとしては, ノイズと大差ありません.</p>
+<p>ボーカルキャンセラもノイズと同様, 数値演算だけで実装できるオーディオ処理なので, フローとしては, ノイズと大差ありません.</p>
 
 <p>ボーカルキャンセラの C 言語のソースです.</p>
 
@@ -580,7 +582,7 @@ processor.onaudioprocess = (event) =&gt; {
 
 <p>ノイズやボーカルキャンセラのように, JavaScript から C 言語の関数に渡す引数がない場合や, 数値型である場合は, 比較的単純に実装できます. しかしながら, JavaScript から<strong>参照</strong>として, 言い換えると, C 言語の関数が引数に<strong>配列</strong>や<strong>ポインタ</strong>をとる場合には, 少し実装が煩雑になります.</p>
 
-<p>ピッチシフターのの C 言語のソースです. JavaScript から参照する関数 (<code>pitchshifter</code> 関数) がポインタを引数として定義していることに着目してください.</p>
+<p>ピッチシフターの C 言語のソースです. JavaScript から参照する関数 (<code>pitchshifter</code> 関数) がポインタを引数として定義していることに着目してください.</p>
 
 <pre><code class="language-C">#include &lt;stdlib.h&gt;
 #include &lt;math.h&gt;
@@ -794,6 +796,7 @@ void IFFT(float *x_real, float *x_imag, int N) {
       const imagLs = new Float32Array(bufferSize);
       const imagRs = new Float32Array(bufferSize);
 
+      // `buffer`, `byteOffset`, `length` の 3 つの引数をとる Typed Array のコンストラクタ
       const arealLs = new Float32Array(m.HEAPF32.buffer, apointerRealL, bufferSize);
       const arealRs = new Float32Array(m.HEAPF32.buffer, apointerRealR, bufferSize);
       const aimagLs = new Float32Array(m.HEAPF32.buffer, apointerImagL, bufferSize);
@@ -829,13 +832,13 @@ void IFFT(float *x_real, float *x_imag, int N) {
 });
 </code></pre>
 
-<p>まず, <code>Module</code> という変数が定義されていることに着目してください. これは, コンパイル時に生成される JavaScript のファイルに定義されています (したがって, <code>pitchshifter.js</code> というファイルを読み込んでおく必要があります.</p>
+<p>まず, <code>Module</code> という変数が定義されていることに着目してください. これは, コンパイル時に生成される JavaScript のファイルに定義されています (したがって, <code>pitchshifter.js</code> というファイルを読み込んでおく必要があります).</p>
 
 <p>注意すべき点として, <code>onRuntimeInitialized</code> というコールバック関数で, 必要なオーディオ処理を実行します. このイベントが発火する前に, オーディオ処理を実行するとエラーが発生してしまいます.</p>
 
 <p>そして, <code>Module</code> インスタンスの <code>cwrap</code> メソッドで, JavaScript から呼び出す関数オブジェクトを生成します. 引数には, C 言語で定義した関数名や, その関数が必要とする引数の (JavaScript からみた) 型などを配列で指定します.</p>
 
-<p>最も重要なのは, JavaScript から参照 (C 言語にとっての配列やポインタ) を渡す場合には, <strong>JavaScript でもメモリ管理を実装する必要があります</strong>.</p>
+<p>最も重要なのは, JavaScript から参照 (C 言語の配列やポインタ) を渡す場合, <strong>JavaScript でもメモリ管理を実装する必要があります</strong>.</p>
 
 <p>実装手順としては,</p>
 
