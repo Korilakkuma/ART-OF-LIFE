@@ -137,7 +137,9 @@ double browniannoise(void) {
 }
 ```
 
-オーディオ処理の具体的な意味は, 書籍や Web サイトを参考にしていただければと思います. 重要な点は, `emscripten.h` というヘッダファイルを読み込みと, JavaScript 側から呼び出したい処理 (関数) に `EMSCRIPTEN_KEEPALIVE` と宣言していることです.
+オーディオ処理の具体的な意味は, 書籍や Web サイトを参考にしていただければと思います.
+
+重要なポイントは, `emscripten.h` というヘッダファイルの読み込みと, JavaScript 側から呼び出したい処理 (関数) に `EMSCRIPTEN_KEEPALIVE` と宣言していることです.
 
 実装が完了したら, 以下のコマンドを実行して, WebAssembly のためのバイナリを生成します.
 
@@ -214,7 +216,7 @@ WebAssembly (`WebAssembly.instantiate`) によって生成された, `instance` 
 
 ## ボーカルキャンセラ
 
-ボーカルキャンセラも, ノイズと同様, 数値演算だけで実装できるオーディオ処理なので, フローとしては, ノイズと大差ありません.
+ボーカルキャンセラもノイズと同様, 数値演算だけで実装できるオーディオ処理なので, フローとしては, ノイズと大差ありません.
 
 ボーカルキャンセラの C 言語のソースです.
 
@@ -254,7 +256,7 @@ processor.onaudioprocess = (event) => {
 
 ノイズやボーカルキャンセラのように, JavaScript から C 言語の関数に渡す引数がない場合や, 数値型である場合は, 比較的単純に実装できます. しかしながら, JavaScript から**参照**として, 言い換えると, C 言語の関数が引数に**配列**や**ポインタ**をとる場合には, 少し実装が煩雑になります.
 
-ピッチシフターのの C 言語のソースです. JavaScript から参照する関数 (`pitchshifter` 関数) がポインタを引数として定義していることに着目してください.
+ピッチシフターの C 言語のソースです. JavaScript から参照する関数 (`pitchshifter` 関数) がポインタを引数として定義していることに着目してください.
 
 ```C
 #include <stdlib.h>
@@ -472,6 +474,7 @@ const m = Module({
       const imagLs = new Float32Array(bufferSize);
       const imagRs = new Float32Array(bufferSize);
 
+      // `buffer`, `byteOffset`, `length` の 3 つの引数をとる Typed Array のコンストラクタ
       const arealLs = new Float32Array(m.HEAPF32.buffer, apointerRealL, bufferSize);
       const arealRs = new Float32Array(m.HEAPF32.buffer, apointerRealR, bufferSize);
       const aimagLs = new Float32Array(m.HEAPF32.buffer, apointerImagL, bufferSize);
@@ -507,13 +510,13 @@ const m = Module({
 });
 ```
 
-まず, `Module` という変数が定義されていることに着目してください. これは, コンパイル時に生成される JavaScript のファイルに定義されています (したがって, `pitchshifter.js` というファイルを読み込んでおく必要があります.
+まず, `Module` という変数が定義されていることに着目してください. これは, コンパイル時に生成される JavaScript のファイルに定義されています (したがって, `pitchshifter.js` というファイルを読み込んでおく必要があります).
 
 注意すべき点として, `onRuntimeInitialized` というコールバック関数で, 必要なオーディオ処理を実行します. このイベントが発火する前に, オーディオ処理を実行するとエラーが発生してしまいます.
 
 そして, `Module` インスタンスの `cwrap` メソッドで, JavaScript から呼び出す関数オブジェクトを生成します. 引数には, C 言語で定義した関数名や, その関数が必要とする引数の (JavaScript からみた) 型などを配列で指定します.
 
-最も重要なのは, JavaScript から参照 (C 言語にとっての配列やポインタ) を渡す場合には, **JavaScript でもメモリ管理を実装する必要があります**.
+最も重要なのは, JavaScript から参照 (C 言語の配列やポインタ) を渡す場合, **JavaScript でもメモリ管理を実装する必要があります**.
 
 実装手順としては,
 
