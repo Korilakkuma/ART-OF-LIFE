@@ -4,7 +4,72 @@
   
   <url>
     <loc>https://art-of-life.jp/</loc>
-    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/</loc>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/computer-sience/</loc>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/digital-signal-processing/</loc>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/digital-signal-processing/</loc>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/mathematics/</loc>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/noise-suppressor/</loc>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/</loc>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/programming/</loc>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/spectrum-subtraction/</loc>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/spectrum-subtraction/</loc>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/</loc>
+    <lastmod>2020-02-11T17:27:52+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -26,31 +91,7 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/categories/</loc>
-    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://art-of-life.jp/tags/javascript/</loc>
-    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/posts/</loc>
-    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/programming/</loc>
-    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/</loc>
     <lastmod>2020-02-02T17:27:52+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -79,19 +120,7 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/categories/computer-sience/</loc>
-    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://art-of-life.jp/tags/linear-prediction-analysis/</loc>
-    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/mathematics/</loc>
     <lastmod>2020-01-12T17:27:07+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -116,18 +145,6 @@
   <url>
     <loc>https://art-of-life.jp/tags/pcm/</loc>
     <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/digital-signal-processing/</loc>
-    <lastmod>2019-10-20T17:02:31+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/digital-signal-processing/</loc>
-    <lastmod>2019-10-20T17:02:31+09:00</lastmod>
     <priority>0</priority>
   </url>
   

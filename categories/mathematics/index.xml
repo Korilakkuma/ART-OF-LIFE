@@ -6,10 +6,19 @@
     <description>Recent content in Mathematics on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 12 Jan 2020 17:27:07 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 11 Feb 2020 17:27:52 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/categories/mathematics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spectrum Subtraction</title>
+      <link>https://art-of-life.jp/posts/spectrum-subtraction/</link>
+      <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/spectrum-subtraction/</guid>
+      <description>スペクトルサブトラクションとは スペクトルサブトラクションとは, その名のとおり, 周波数領域で減算処理をすることで, 背景雑音を除去するアルゴリズ</description>
+    </item>
     
     <item>
       <title>CELP</title>

@@ -6,10 +6,46 @@
     <description>Recent content in Categories on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 02 Feb 2020 17:27:52 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 11 Feb 2020 17:27:52 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Computer Sience</title>
+      <link>https://art-of-life.jp/categories/computer-sience/</link>
+      <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/computer-sience/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Digital Signal Processing</title>
+      <link>https://art-of-life.jp/categories/digital-signal-processing/</link>
+      <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/digital-signal-processing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mathematics</title>
+      <link>https://art-of-life.jp/categories/mathematics/</link>
+      <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/mathematics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>https://art-of-life.jp/categories/programming/</link>
+      <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/programming/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Audio</title>
@@ -21,47 +57,11 @@
     </item>
     
     <item>
-      <title>Programming</title>
-      <link>https://art-of-life.jp/categories/programming/</link>
-      <pubDate>Sun, 02 Feb 2020 17:27:52 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Computer Sience</title>
-      <link>https://art-of-life.jp/categories/computer-sience/</link>
-      <pubDate>Sun, 12 Jan 2020 17:27:07 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/computer-sience/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mathematics</title>
-      <link>https://art-of-life.jp/categories/mathematics/</link>
-      <pubDate>Sun, 12 Jan 2020 17:27:07 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/mathematics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Multimedia</title>
       <link>https://art-of-life.jp/categories/multimedia/</link>
       <pubDate>Sun, 12 Jan 2020 17:27:07 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/multimedia/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Digital Signal Processing</title>
-      <link>https://art-of-life.jp/categories/digital-signal-processing/</link>
-      <pubDate>Sun, 20 Oct 2019 17:02:31 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/digital-signal-processing/</guid>
       <description></description>
     </item>
     

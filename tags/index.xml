@@ -6,10 +6,37 @@
     <description>Recent content in Tags on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 02 Feb 2020 17:27:52 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 11 Feb 2020 17:27:52 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Digital Signal Processing</title>
+      <link>https://art-of-life.jp/tags/digital-signal-processing/</link>
+      <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/digital-signal-processing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Noise Suppressor</title>
+      <link>https://art-of-life.jp/tags/noise-suppressor/</link>
+      <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/noise-suppressor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spectrum Subtraction</title>
+      <link>https://art-of-life.jp/tags/spectrum-subtraction/</link>
+      <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/spectrum-subtraction/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>C</title>
@@ -80,15 +107,6 @@
       <pubDate>Thu, 21 Nov 2019 20:52:27 +0900</pubDate>
       
       <guid>https://art-of-life.jp/tags/pcm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Digital Signal Processing</title>
-      <link>https://art-of-life.jp/tags/digital-signal-processing/</link>
-      <pubDate>Sun, 20 Oct 2019 17:02:31 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/tags/digital-signal-processing/</guid>
       <description></description>
     </item>
     

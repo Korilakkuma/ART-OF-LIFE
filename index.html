@@ -28,7 +28,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://art-of-life.jp/" />
 
-<meta property="og:updated_time" content="2020-02-02T17:27:52+09:00" />
+<meta property="og:updated_time" content="2020-02-11T17:27:52+09:00" />
 
     
     <meta itemprop="name" content="ART OF LIFE">
@@ -169,7 +169,7 @@
       </div>
       <div class="article-info-block">
         
-          41
+          43
         
         <span>
             Tags
@@ -251,6 +251,171 @@
     <section id="main">
     
     
+
+<article class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        </a>
+
+        <header class="article-header">
+    <a href="https://art-of-life.jp/posts/spectrum-subtraction/">
+    <h1 class="article-title" itemprop="name">
+        Spectrum Subtraction
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2020-02-11 17:27:52 &#43;0900 JST" itemprop="datePublished">2020-02-11</time>
+            &middot;
+            1147
+            words
+            &middot;
+            3
+            minute read
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/computer-sience">Computer Sience</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/digital-signal-processing">Digital Signal Processing</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/digital-signal-processing">Digital Signal Processing</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/spectrum-subtraction">Spectrum Subtraction</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/noise-suppressor">Noise Suppressor</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>
+                ノイズサプレッサの実装から, スペクトルサブトラクションを理解する
+            </p>
+            <p class="article-more-link">
+                <a href="https://art-of-life.jp/posts/spectrum-subtraction/">
+                    Read more
+                </a>
+            </p>
+        </div>
+        <footer class="article-footer">
+    <a data-url="https://art-of-life.jp/posts/spectrum-subtraction/" data-id="e2a455097b326c2b1b774d3e5fa101aa" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+    <a href="https://art-of-life.jp/posts/spectrum-subtraction/#disqus_thread" class="article-comment-link">
+        Comments
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+</article>
 
 <article class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
@@ -1688,175 +1853,6 @@
     </div>
 </article>
 
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/fourier-transform/">
-    <h1 class="article-title" itemprop="name">
-        Fourier Transform
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-09-21 17:27:49 &#43;0900 JST" itemprop="datePublished">2019-09-21</time>
-            &middot;
-            2736
-            words
-            &middot;
-            6
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/mathematics">Mathematics</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/fourier-transform">Fourier Transform</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/discrete-fourier-transform">Discrete Fourier Transform</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/dft">DFT</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">Modified Discrete Cosine Transform</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/mdct">MDCT</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                フーリエ変換・離散フーリエ変換・変形離散コサイン変換
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/fourier-transform/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/fourier-transform/" data-id="af8c437837e5a1fd9368b76edae85c77" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
-    
-    <a href="https://art-of-life.jp/posts/fourier-transform/#disqus_thread" class="article-comment-link">
-        Comments
-    </a>
-    
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
 
 <nav id="page-nav">
 
@@ -1897,7 +1893,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
                     computer-sience
                 </a>
-                <span class="category-list-count">7</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -1913,7 +1909,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">5</span>
             </li>
             
             <li class="category-list-item">
@@ -1929,7 +1925,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">12</span>
+                <span class="category-list-count">13</span>
             </li>
             
             <li class="category-list-item">
@@ -1969,7 +1965,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">11</span>
+                <span class="category-list-count">12</span>
             </li>
             
             <li class="category-list-item">
@@ -2082,7 +2078,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">5</span>
             </li>
             
             <li class="category-list-item">
@@ -2263,10 +2259,26 @@
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/noise-suppressor">
+                    noise-suppressor
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
                     pcm
                 </a>
                 <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/spectrum-subtraction">
+                    spectrum-subtraction
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -2441,7 +2453,13 @@
         <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
         
         
+        <a href="https://art-of-life.jp/tags/noise-suppressor" style="font-size: 12px;">noise-suppressor</a>
+        
+        
         <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/spectrum-subtraction" style="font-size: 12px;">spectrum-subtraction</a>
         
         
         <a href="https://art-of-life.jp/tags/stochastic-signal" style="font-size: 12px;">stochastic-signal</a>
