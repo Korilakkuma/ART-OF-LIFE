@@ -58,7 +58,7 @@ $ git clone git@github.com:emscripten-core/emsdk.git
 $ cd emsdk
 $ ./emsdk install --build=Release sdk-incoming-64bit binaryen-master-64bit  # Cost much time ...
 $ ./emsdk activate --global --build=Release sdk-incoming-64bit binaryen-master-64bit
-$ source ./emsdk_env.sh
+$ source ./emsdk_env.sh  # スクリプトを実行すると `clang` / `clang++` のパスが変わるので注意
 ```
 
 以上で, WebAssembly の開発環境構築が完了です.
