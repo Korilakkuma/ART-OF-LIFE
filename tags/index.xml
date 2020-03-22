@@ -6,17 +6,35 @@
     <description>Recent content in Tags on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 11 Feb 2020 17:27:52 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 24 Feb 2020 15:22:57 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Correlation function</title>
+      <link>https://art-of-life.jp/tags/correlation-function/</link>
+      <pubDate>Mon, 24 Feb 2020 15:22:57 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/correlation-function/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Digital Signal Processing</title>
       <link>https://art-of-life.jp/tags/digital-signal-processing/</link>
-      <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
+      <pubDate>Mon, 24 Feb 2020 15:22:57 +0900</pubDate>
       
       <guid>https://art-of-life.jp/tags/digital-signal-processing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Time Stretch</title>
+      <link>https://art-of-life.jp/tags/time-stretch/</link>
+      <pubDate>Mon, 24 Feb 2020 15:22:57 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/time-stretch/</guid>
       <description></description>
     </item>
     

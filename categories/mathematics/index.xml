@@ -6,10 +6,19 @@
     <description>Recent content in Mathematics on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 11 Feb 2020 17:27:52 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 24 Feb 2020 15:22:57 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/categories/mathematics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Time Stretch</title>
+      <link>https://art-of-life.jp/posts/time-stretch/</link>
+      <pubDate>Mon, 24 Feb 2020 15:22:57 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/time-stretch/</guid>
+      <description>タイムストレッチとは リサンプリング 実装 #include &amp;lt;vector&amp;gt; void TimeStretch( double rate, std::vector&amp;lt;double&amp;gt; &amp;amp;in, std::vector&amp;lt;double&amp;gt; &amp;amp;out, int fs, int length ) { if ((rate == 1.0) || (rate &amp;lt;= 0.0)) { for (int n = 0; n &amp;lt; length; n++) { out[n] = in[n]; } return; } int template_size = static_cast&amp;lt;int&amp;gt;(fs * 0.01); int p_min = static_cast&amp;lt;int&amp;gt;(fs</description>
+    </item>
     
     <item>
       <title>Spectrum Subtraction</title>
