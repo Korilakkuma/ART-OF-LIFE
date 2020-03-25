@@ -7,6 +7,7 @@ images = []
 menu = ""
 tags = ["Digital Signal Processing", "Time Stretch", "Correlation function"]
 title = "Time Stretch"
+draft = true
 +++
 
 # タイムストレッチとは
