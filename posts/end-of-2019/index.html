@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
 <head>
-    <title>Audio Processing by WebAssembly &middot; ART OF LIFE</title>
+    <title>2019 年度の ART OF LIFE ふりかえり &middot; ART OF LIFE</title>
     <meta name="generator" content="Hugo 0.57.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
     
-      <meta name="description" content="WebAssembly でオーディオ処理を実装する">
+      <meta name="description" content="2019 年度の ART 目標ふりかえり">
     
     
-    <link rel="canonical" href="https://art-of-life.jp/posts/audio-processing-by-wasm/"/>
+    <link rel="canonical" href="https://art-of-life.jp/posts/end-of-2019/"/>
     <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
@@ -20,29 +20,29 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="Audio Processing by WebAssembly" />
-<meta property="og:description" content="WebAssembly でオーディオ処理を実装する" />
+    <meta property="og:title" content="2019 年度の ART OF LIFE ふりかえり" />
+<meta property="og:description" content="2019 年度の ART 目標ふりかえり" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://art-of-life.jp/posts/audio-processing-by-wasm/" />
-<meta property="article:published_time" content="2020-02-02T17:27:52+09:00" />
-<meta property="article:modified_time" content="2020-02-02T17:27:52+09:00" />
+<meta property="og:url" content="https://art-of-life.jp/posts/end-of-2019/" />
+<meta property="article:published_time" content="2020-03-31T22:53:57+09:00" />
+<meta property="article:modified_time" content="2020-03-31T22:53:57+09:00" />
 
     
-    <meta itemprop="name" content="Audio Processing by WebAssembly">
-<meta itemprop="description" content="WebAssembly でオーディオ処理を実装する">
+    <meta itemprop="name" content="2019 年度の ART OF LIFE ふりかえり">
+<meta itemprop="description" content="2019 年度の ART 目標ふりかえり">
 
 
-<meta itemprop="datePublished" content="2020-02-02T17:27:52&#43;09:00" />
-<meta itemprop="dateModified" content="2020-02-02T17:27:52&#43;09:00" />
-<meta itemprop="wordCount" content="3715">
+<meta itemprop="datePublished" content="2020-03-31T22:53:57&#43;09:00" />
+<meta itemprop="dateModified" content="2020-03-31T22:53:57&#43;09:00" />
+<meta itemprop="wordCount" content="558">
 
 
 
-<meta itemprop="keywords" content="JavaScript,WebAssembly,Web Audio API,C," />
+<meta itemprop="keywords" content="" />
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Audio Processing by WebAssembly"/>
-<meta name="twitter:description" content="WebAssembly でオーディオ処理を実装する"/>
+<meta name="twitter:title" content="2019 年度の ART OF LIFE ふりかえり"/>
+<meta name="twitter:description" content="2019 年度の ART 目標ふりかえり"/>
 <meta name="twitter:site" content="@xmusicjp"/>
 
     
@@ -260,9 +260,9 @@
         
 
         <header class="article-header">
-    <a href="https://art-of-life.jp/posts/audio-processing-by-wasm/">
+    <a href="https://art-of-life.jp/posts/end-of-2019/">
     <h1 class="article-title" itemprop="name">
-        Audio Processing by WebAssembly
+        2019 年度の ART OF LIFE ふりかえり
     </h1>
     </a>
     <div class="article-meta">
@@ -270,56 +270,22 @@
         
         <div class="article-date">
             <i class="fa fa-calendar"></i>
-            <time datetime="2020-02-02 17:27:52 &#43;0900 JST" itemprop="datePublished">2020-02-02</time>
+            <time datetime="2020-03-31 22:53:57 &#43;0900 JST" itemprop="datePublished">2020-03-31</time>
             &middot;
-            3715
+            558
             words
             &middot;
-            8
+            2
             minute read
         </div>
         
         
             
             
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/audio">Audio</a>
-                
-                
-            </div>
-            
         
 
         
             
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/javascript">JavaScript</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/webassembly">WebAssembly</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/web-audio-api">Web Audio API</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/c">C</a>
-                
-                
-            </div>
             
         
     </div>
@@ -328,547 +294,82 @@
         <div class="article-entry" itemprop="articleBody">
             
 
-<h1 id="webassembly-とは">WebAssembly とは</h1>
+<h1 id="overview">Overview</h1>
 
-<p><strong>WebAssembly</strong> とは, C / C++, Go や Rust などで実装され, (WebAssembly のために) コンパイルされたバイナリを実行するための JavaScript API です. WebAssembly を利用することによって, 以下のようなことが可能になります.</p>
+<p>2019 年度は, 社会人になってから (上京してから) もっとも激動の 1 年間だったように思います.</p>
+
+<ol>
+<li>サイバーエージェント退職 (April)</li>
+<li>東京大学 <a href="https://sdm.wide.ad.jp/index.ja.html">Software Design Media (SDM) 研究室</a> のお手伝いをはじめる (May)</li>
+<li>転職活動本格再開 (June)</li>
+<li>MacBook Air 2019 購入 (July)</li>
+<li>8 年ぶりに JAIST &hellip; (August)</li>
+<li><a href="https://www.youtube.com/watch?v=LLPx1OmDkeA&amp;feature=youtu.be&amp;t=7092">Immersive Web Meetup (WebXR &amp; Web Music)</a> 開催 (September)</li>
+<li>パロニム株式会社入社 (October)</li>
+<li>妹の結婚式出席 (November)</li>
+</ol>
+
+<h1 id="technology-技術">Technology (技術)</h1>
+
+<h2 id="github">GitHub</h2>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/78642857-57465c80-78ee-11ea-91e5-3b830610c3c0.png" alt="GitHub 2019" /></p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/78642923-704f0d80-78ee-11ea-9544-57eb2096a0e7.png" alt="GitHub 2019 contributions" /></p>
+
+<p>もっとも多い contributions になりました.</p>
+
+<h2 id="blog">Blog</h2>
+
+<p>26 記事. また, これまで Wordpress でブログを運用していましたが, Hugo にのりかえました</p>
+
+<h2 id="productions">Productions</h2>
+
+<h3 id="xsound">XSound</h3>
+
+<p><a href="https://github.com/Korilakkuma/XSound/releases/tag/v2.9.2">v2.9.2</a> から, <a href="https://github.com/Korilakkuma/XSound/releases/tag/v2.19.3">v2.19.3</a> まで多くのリリースをすることができました.</p>
 
 <ul>
-<li>パフォーマンスのネックになっている処理を WebAssembly を利用することで高速化する</li>
-<li>JavaScript の処理系では不可能な処理を実装する</li>
+<li>ノイズ生成</li>
+<li>オーディオフェードイン /　フェードアウト</li>
+<li>ビジュアルオーディオスプライト</li>
+<li>オーディオストリーミング</li>
+<li>ディトーションアルゴリズム改良</li>
+<li>オートワウ / ピッチシフター / ノイズサプレッサ / 擬似ステレオ</li>
 </ul>
 
-<p>とりわけ, オーディオなどメディアをあつかう処理は, 計算量の多い処理を実装することが多々あります. また, C / C++ にはオーディオなどメディアをあつかうためのライブラリなど, 資産もたくさんあるので, それらを活用できるという点でも, WebAssembly とメディア処理は非常に相性がよいと言えます.</p>
+<h3 id="xsound-app">XSound.app</h3>
 
-<h1 id="web-audio-api-と-webassembly">Web Audio API と WebAssembly</h1>
+<p>できれば, 2019 年度内に, モダン Web フロントエンド技術へ移行したかったですが, こちらはできずでした &hellip;</p>
 
-<p>Web Audio API の API 設計は, Web Audio API が定義する AudioNode を接続して高度なオーディオ処理を実装することです. しかし, その設計にしたがうだけでは, 実装できないオーディオ処理も存在します.</p>
+<h3 id="oss">OSS</h3>
 
-<ul>
-<li>ノイズ</li>
-<li>ボーカルキャンセラ</li>
-<li>ノイズゲート / ノイズサプレッサ</li>
-<li>チャンネルのごとの FFT / IFFT</li>
-<li>ピッチシフター</li>
-<li>タイムストレッチ</li>
-</ul>
+<p><a href="https://github.com/video-dev/hls.js">hls.js</a> だけでなく, <a href="https://github.com/google/shaka-packager">shaka-pacager</a> へのコントリビュートを開始しました.</p>
 
-<p>例として, 上記にあげたオーディオ処理は, 直接音データにアクセスして, 音響演算を実装する必要があります (そのための AudioNode が <strong>ScriptProcessorNode</strong> (非推奨), <strong>AudioWorklet</strong> です).</p>
+<h2 id="skills">Skills</h2>
 
-<p>その音響演算を JavaScript で実装してもよいのですが, より高速化をはかるのであれば, WebAssembly を利用することで解決できるかもしれません.</p>
+<p>2019 年度はとにかく, 音信号処理や動画コンテナ・コーデックの理解と, C++ の学びに投資しました. 2020 年度もさらなる投資をしていきます.</p>
 
-<h1 id="実装">実装</h1>
+<p>Web 技術だと, WebAssembly に着手できたのはよかったかなと思います.</p>
 
-<p>さっそく, ノイズ / ボーカルキャンセラ / ピッチシフターを WebAssembly で実装してみます.</p>
+<h1 id="music-芸術">Music (芸術)</h1>
 
-<h2 id="webassembly-の開発環境構築">WebAssembly の開発環境構築</h2>
-
-<p>まず, C / C++ などで実装されたソースコードを, WebAssembly のためにコンパイルする開発環境の構築が必要です. 以下は, Mac OS X の場合の手順です (詳細は, <a href="https://github.com/emscripten-core/emsdk">GitHub のリポジトリ</a>や <a href="https://developer.mozilla.org/ja/docs/WebAssembly/C_to_wasm">MDN のドキュメント</a>を参考にしてください).</p>
-
-<p>事前にインストールが必要なツールや環境です.</p>
+<p>8 年ぶりに JAIST へ訪れたことがおおきかったです. 5 年ぶりぐらいに新しい楽曲を練習して, それなりに弾けるようになりました.</p>
 
 <ul>
-<li>Xcode
-
-<ul>
-<li>git and clang</li>
-</ul></li>
-<li>CMake</li>
-<li>Python
-
-<ul>
-<li>Version 2.7.0 or above.</li>
-</ul></li>
-<li>Java
-
-<ul>
-<li>For running closure compiler (optional)</li>
-</ul></li>
-</ul>
-
-<p>必要なツールや環境をインストールしたら, 以下のコマンドを実行します. <code>./emsdk install --build=Release sdk-incoming-64bit binaryen-master-64bit</code> これは非常に時間がかかるので, 寝る前などに実行するとよいでしょう.</p>
-
-<pre><code class="language-bash">$ git clone git@github.com:emscripten-core/emsdk.git
-$ cd emsdk
-$ ./emsdk install --build=Release sdk-incoming-64bit binaryen-master-64bit  # Cost much time ...
-$ ./emsdk activate --global --build=Release sdk-incoming-64bit binaryen-master-64bit
-$ source ./emsdk_env.sh  # スクリプトを実行すると `clang` / `clang++` のパスが変わるので注意
-</code></pre>
-
-<p>以上で, WebAssembly の開発環境構築が完了です.</p>
-
-<h2 id="ノイズ">ノイズ</h2>
-
-<p>ホワイトノイズ / ピンクノイズ / ブラウニアンノイズの実装例を解説します.</p>
-
-<p>まずは, オーディオ処理をさせる C 言語 のソースを実装します.</p>
-
-<pre><code class="language-C">#include &lt;stdlib.h&gt;
-#include &lt;time.h&gt;
-#include &lt;emscripten/emscripten.h&gt;
-
-int is_init = 0;
-
-double b0 = 0.0;
-double b1 = 0.0;
-double b2 = 0.0;
-double b3 = 0.0;
-double b4 = 0.0;
-double b5 = 0.0;
-double b6 = 0.0;
-
-double last_out = 0.0;
-
-EMSCRIPTEN_KEEPALIVE
-double whitenoise(void) {
-  if (is_init == 0) {
-    srand((unsigned)time(NULL));
-    is_init = 1;
-  }
-
-  double o = 2 * (((double)rand() / ((double)RAND_MAX + 1.0)) - 0.5);
-
-  return o;
-}
-
-EMSCRIPTEN_KEEPALIVE
-double pinknoise(void) {
-  if (is_init == 0) {
-    srand((unsigned)time(NULL));
-    is_init = 1;
-  }
-
-  double n = 2 * (((double)rand() / ((double)RAND_MAX + 1.0)) - 0.5);
-
-  b0 = (0.99886 * b0) + (n * 0.0555179);
-  b1 = (0.99332 * b1) + (n * 0.0750759);
-  b2 = (0.96900 * b2) + (n * 0.1538520);
-  b3 = (0.86650 * b3) + (n * 0.3104856);
-  b4 = (0.55000 * b4) + (n * 0.5329522);
-  b5 = (-0.7616 * b5) - (n * 0.0168980);
-
-  double o = 0.11 * (b0 + b1 + b2 + b3 + b4 + b5 + b6 + (n * 0.5362));
-
-  b6 = n * 0.115926;
-
-  return o;
-}
-
-EMSCRIPTEN_KEEPALIVE
-double browniannoise(void) {
-  if (is_init == 0) {
-    srand((unsigned)time(NULL));
-    is_init = 1;
-  }
-
-  double n = 2 * (((double)rand() / ((double)RAND_MAX + 1.0)) - 0.5);
-  double o = 3.5 * ((last_out + (0.02 * n)) / 1.02);
-
-  last_out = (last_out + (0.02 * n)) / 1.02;
-
-  return o;
-}
-</code></pre>
-
-<p>オーディオ処理の具体的な意味は, 書籍や Web サイトを参考にしていただければと思います.</p>
-
-<p>重要なポイントは, <code>emscripten.h</code> というヘッダファイルの読み込みと, JavaScript 側から呼び出したい処理 (関数) に <code>EMSCRIPTEN_KEEPALIVE</code> と宣言していることです.</p>
-
-<p>実装が完了したら, 以下のコマンドを実行して, WebAssembly のためのバイナリを生成します.</p>
-
-<pre><code class="language-bash">$ emcc noise.c -s WASM=1 -o noise.js
-</code></pre>
-
-<p>次に, WebAssembly を利用して, 生成したバイナリを JavaScript から利用できるようにします.</p>
-
-<pre><code class="language-JavaScript">async function setupWASM(wasm) {
-  try {
-    const response = await fetch(`./${wasm}.wasm`)
-    const bytes    = await response.arrayBuffer();
-    const module   = await WebAssembly.compile(bytes);
-
-    const imports = {};
-
-    imports.env = {};
-    imports.env.memoryBase = 0;
-    imports.env.tableBase  = 0;
-
-    if (!imports.env.memory) {
-      imports.env.memory = new WebAssembly.Memory({ initial: 256, maximum: 256 });
-    }
-
-    if (!imports.env.table) {
-      imports.env.table = new WebAssembly.Table({ initial: 1, maximum : 1, element: 'anyfunc' });
-    }
-
-    const { instance } = await WebAssembly.instantiate(bytes, imports);
-
-    return { module, instance, bytes };
-  } catch (e) {
-    console.error(e);
-  }
-}
-</code></pre>
-
-<p>以上で, C 言語で実装した関数を呼び出す準備が実装できました.</p>
-
-<p>あとは, Web Audio API の ScriptProcessorNode を利用して, C 言語で定義した関数を呼び出し, ノイズのためのオーディオ処理を実装します.</p>
-
-<pre><code class="language-JavaScript">// `processor` は, `ScriptProcessorNode` のインスタンス
-processor.onaudioprocess = (event) =&gt; {
-  const outputLs = event.outputBuffer.getChannelData(0);
-  const outputRs = event.outputBuffer.getChannelData(1);
-
-  for (let i = 0; i &lt; bufferSize; i++) {
-    let output = 0;
-
-    switch (type) {
-      case 'whitenoise':
-        output = instance.exports.whitenoise();
-        break;
-      case 'pinknoise':
-        output = instance.exports.pinknoise();
-        break;
-      case 'browniannoise':
-        output = instance.exports.browniannoise();
-        break;
-      default:
-        break;
-    }
-
-    outputLs[i] = output;
-    outputRs[i] = output;
-  }
-};
-</code></pre>
-
-<p>WebAssembly (<code>WebAssembly.instantiate</code>) によって生成された, <code>instance</code> というオブジェクトを参照して, C 言語で定義した関数を呼び出すことができます.</p>
-
-<h2 id="ボーカルキャンセラ">ボーカルキャンセラ</h2>
-
-<p>ボーカルキャンセラもノイズと同様, 数値演算だけで実装できるオーディオ処理なので, フローとしては, ノイズと大差ありません.</p>
-
-<p>ボーカルキャンセラの C 言語のソースです.</p>
-
-<pre><code class="language-C">#include &lt;emscripten/emscripten.h&gt;
-
-EMSCRIPTEN_KEEPALIVE
-double vocalcanceler(double l, double r, double d) {
-  return l - (d * r);
-}
-</code></pre>
-
-<p>ソースをコンパイルします.</p>
-
-<pre><code class="language-bash">$ emcc vocalcanceler.c -s WASM=1 -o vocalcanceler.js
-</code></pre>
-
-<p>そして, Web Audio API の ScriptProcessorNode を利用して, その関数を呼び出し, ボーカルキャンセラのためのオーディオ処理を実装します.</p>
-
-<pre><code class="language-JavaScript">// `processor` は, `ScriptProcessorNode` のインスタンス
-processor.onaudioprocess = (event) =&gt; {
-  const inputLs  = event.inputBuffer.getChannelData(0);
-  const inputRs  = event.inputBuffer.getChannelData(1);
-  const outputLs = event.outputBuffer.getChannelData(0);
-  const outputRs = event.outputBuffer.getChannelData(1);
-
-  for (let i = 0; i &lt; bufferSize; i++) {
-    outputLs[i] = instance.exports.vocalcanceler(inputLs[i], inputRs[i], depth);
-    outputRs[i] = instance.exports.vocalcanceler(inputRs[i], inputLs[i], depth);
-  }
-};
-</code></pre>
-
-<h2 id="ピッチシフター">ピッチシフター</h2>
-
-<p>ノイズやボーカルキャンセラのように, JavaScript から C 言語の関数に渡す引数がない場合や, 数値型である場合は, 比較的単純に実装できます. しかしながら, JavaScript から<strong>参照</strong>として, 言い換えると, C 言語の関数が引数に<strong>配列</strong>や<strong>ポインタ</strong>をとる場合には, 少し実装が煩雑になります.</p>
-
-<p>ピッチシフターの C 言語のソースです. JavaScript から参照する関数 (<code>pitchshifter</code> 関数) がポインタを引数として定義していることに着目してください.</p>
-
-<pre><code class="language-C">#include &lt;stdlib.h&gt;
-#include &lt;math.h&gt;
-#include &lt;emscripten/emscripten.h&gt;
-
-int pow2(int n);
-void FFT(float *x_real, float *x_imag, int N);
-void IFFT(float *x_real, float *x_imag, int N);
-
-EMSCRIPTEN_KEEPALIVE
-void pitchshifter(
-  double pitch,
-  float *reals,
-  float *imags,
-  float *a_reals,
-  float *a_imags,
-  int N
-) {
-  FFT(reals, imags, N);
-
-  for (int k = 0; k &lt; N; k++) {
-    int offset = floor(pitch * k);
-
-    int eq = 1;
-
-    if (k &gt; (N / 2)) {
-      eq = 0;
-    }
-
-    if ((offset &gt;= 0) &amp;&amp; (offset &lt; N)) {
-      a_reals[offset] += eq * reals[k];
-      a_imags[offset] += eq * imags[k];
-    }
-  }
-
-  IFFT(a_reals, a_imags, N);
-}
-
-int pow2(int n) {
-  if (n == 0) {
-    return 1;
-  }
-
-  return 2 &lt;&lt; (n - 1);
-}
-
-void FFT(float *x_real, float *x_imag, int N) {
-  int number_of_stages = log2(N);
-
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      int rest = number_of_stages - stage;
-
-      for (int j = 0; j &lt; pow2(rest); j++) {
-        int n = i * pow2(rest + 1) + j;
-        int m = pow2(rest) + n;
-        int r = j * pow2(stage - 1);
-
-        float a_real = x_real[n];
-        float a_imag = x_imag[n];
-        float b_real = x_real[m];
-        float b_imag = x_imag[m];
-        float c_real = cos((2.0 * M_PI * r) / N);
-        float c_imag = -sin((2.0 * M_PI * r) / N);
-
-        if (stage &lt; number_of_stages) {
-          x_real[n] = a_real + b_real;
-          x_imag[n] = a_imag + b_imag;
-          x_real[m] = (c_real * (a_real - b_real)) - (c_imag * (a_imag - b_imag));
-          x_imag[m] = (c_real * (a_imag - b_imag)) + (c_imag * (a_real - b_real));
-        } else {
-          x_real[n] = a_real + b_real;
-          x_imag[n] = a_imag + b_imag;
-          x_real[m] = a_real - b_real;
-          x_imag[m] = a_imag - b_imag;
-        }
-      }
-    }
-  }
-
-  int *index = (int *)calloc(N, sizeof(int));
-
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    int rest = number_of_stages - stage;
-
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      index[pow2(stage - 1) + i] = index[i] + pow2(rest);
-    }
-  }
-
-  for (int k = 0; k &lt; N; k++) {
-    if (index[k] &lt;= k) {
-      continue;
-    }
-
-    float tmp_real = x_real[index[k]];
-    float tmp_imag = x_imag[index[k]];
-
-    x_real[index[k]] = x_real[k];
-    x_imag[index[k]] = x_imag[k];
-
-    x_real[k] = tmp_real;
-    x_imag[k] = tmp_imag;
-  }
-
-  free(index);
-}
-
-void IFFT(float *x_real, float *x_imag, int N) {
-  int number_of_stages = log2(N);
-
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      int rest = number_of_stages - stage;
-
-      for (int j = 0; j &lt; pow2(rest); j++) {
-        int n = i * pow2(rest + 1) + j;
-        int m = pow2(rest) + n;
-        int r = j * pow2(stage - 1);
-
-        float a_real = x_real[n];
-        float a_imag = x_imag[n];
-        float b_real = x_real[m];
-        float b_imag = x_imag[m];
-        float c_real = cos((2.0 * M_PI * r) / N);
-        float c_imag = sin((2.0 * M_PI * r) / N);
-
-        if (stage &lt; number_of_stages) {
-          x_real[n] = a_real + b_real;
-          x_imag[n] = a_imag + b_imag;
-          x_real[m] = (c_real * (a_real - b_real)) - (c_imag * (a_imag - b_imag));
-          x_imag[m] = (c_real * (a_imag - b_imag)) + (c_imag * (a_real - b_real));
-        } else {
-          x_real[n] = a_real + b_real;
-          x_imag[n] = a_imag + b_imag;
-          x_real[m] = a_real - b_real;
-          x_imag[m] = a_imag - b_imag;
-        }
-      }
-    }
-  }
-
-  int *index = (int *)calloc(N, sizeof(int));
-
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    int rest = number_of_stages - stage;
-
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      index[pow2(stage - 1) + i] = index[i] + pow2(rest);
-    }
-  }
-
-  for (int k = 0; k &lt; N; k++) {
-    if (index[k] &lt;= k) {
-      continue;
-    }
-
-    float tmp_real = x_real[index[k]];
-    float tmp_imag = x_imag[index[k]];
-
-    x_real[index[k]] = x_real[k];
-    x_imag[index[k]] = x_imag[k];
-
-    x_real[k] = tmp_real;
-    x_imag[k] = tmp_imag;
-  }
-
-  for (int k = 0; k &lt; N; k++) {
-    x_real[k] /= N;
-    x_imag[k] /= N;
-  }
-
-  free(index);
-}
-</code></pre>
-
-<p>コンパルのコマンドも少し複雑になります.</p>
-
-<pre><code class="language-bash">$ emcc pitchshifter.c -s WASM=1 -s MODULARIZE=1 -s &quot;EXPORTED_FUNCTIONS=['_pitchshifter']&quot; -s &quot;EXTRA_EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']&quot; -o pitchshifter.js
-</code></pre>
-
-<p><code>EXPORTED_FUNCTIONS</code> というオプションに, JavaScript から参照する関数に, プレフィックス (<code>_</code>) を付加した関数名を指定しています. また, <code>EXTRA_EXPORTED_RUNTIME_METHODS</code> というオプションには, <code>ccall</code> と <code>cwrap</code> を指定しています.</p>
-
-<p>C 言語で実装された関数を呼び出す JavaScript も実装がやや煩雑になります.</p>
-
-<pre><code class="language-JavaScript">const m = Module({
-  wasmBinary: new Uint8Array(bytes),
-  onRuntimeInitialized: () =&gt; {
-    console.log('onRuntimeInitialized');
-
-    const pitchshifter = m.cwrap('pitchshifter', null, ['number', 'Float32Array', 'Float32Array', 'Float32Array', 'Float32Array', 'number']);
-
-    // `processor` は, `ScriptProcessorNode` のインスタンス
-    processor.onaudioprocess = (event) =&gt; {
-      const inputLs  = event.inputBuffer.getChannelData(0);
-      const inputRs  = event.inputBuffer.getChannelData(1);
-      const outputLs = event.outputBuffer.getChannelData(0);
-      const outputRs = event.outputBuffer.getChannelData(1);
-
-      const pointerRealL  = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const pointerRealR  = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const pointerImagL  = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const pointerImagR  = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const apointerRealL = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const apointerRealR = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const apointerImagL = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const apointerImagR = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-
-      const realLs = new Float32Array(inputLs);
-      const realRs = new Float32Array(inputRs);
-      const imagLs = new Float32Array(bufferSize);
-      const imagRs = new Float32Array(bufferSize);
-
-      // `buffer`, `byteOffset`, `length` の 3 つの引数をとる Typed Array のコンストラクタ
-      const arealLs = new Float32Array(m.HEAPF32.buffer, apointerRealL, bufferSize);
-      const arealRs = new Float32Array(m.HEAPF32.buffer, apointerRealR, bufferSize);
-      const aimagLs = new Float32Array(m.HEAPF32.buffer, apointerImagL, bufferSize);
-      const aimagRs = new Float32Array(m.HEAPF32.buffer, apointerImagR, bufferSize);
-
-      m.HEAPF32.set(realLs, pointerRealL / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(realRs, pointerRealR / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(imagLs, pointerImagL / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(imagRs, pointerImagR / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(arealLs, apointerRealL / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(arealRs, apointerRealR / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(aimagLs, apointerImagL / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(aimagRs, apointerImagR / Float32Array.BYTES_PER_ELEMENT);
-
-      pitchshifter(pitch, pointerRealL, pointerImagL, apointerRealL, apointerImagL, bufferSize);
-      pitchshifter(pitch, pointerRealR, pointerImagR, apointerRealR, apointerImagR, bufferSize);
-
-      outputLs.set(arealLs);
-      outputRs.set(arealRs);
-
-      m._free(pointerRealL);
-      m._free(pointerImagL);
-      m._free(pointerRealR);
-      m._free(pointerImagR);
-      m._free(apointerRealL);
-      m._free(apointerImagL);
-      m._free(apointerRealR);
-      m._free(apointerImagR);
-    };
-
-    audio.play();
-  }
-});
-</code></pre>
-
-<p>まず, <code>Module</code> という変数が定義されていることに着目してください. これは, コンパイル時に生成される JavaScript のファイルに定義されています (したがって, <code>pitchshifter.js</code> というファイルを読み込んでおく必要があります).</p>
-
-<p>注意すべき点として, <code>onRuntimeInitialized</code> というコールバック関数で, 必要なオーディオ処理を実行します. このイベントが発火する前に, オーディオ処理を実行するとエラーが発生してしまいます.</p>
-
-<p>そして, <code>Module</code> インスタンスの <code>cwrap</code> メソッドで, JavaScript から呼び出す関数オブジェクトを生成します. 引数には, C 言語で定義した関数名や, その関数が必要とする引数の (JavaScript からみた) 型などを配列で指定します.</p>
-
-<p>最も重要なのは, JavaScript から参照 (C 言語の配列やポインタ) を渡す場合, <strong>JavaScript でもメモリ管理を実装する必要があります</strong>.</p>
-
-<p>実装手順としては,</p>
-
-<ul>
-<li><code>Module</code> インスタンスの <code>_malloc</code> を利用してメモリを確保 (そのポインタを取得)</li>
-<li><code>Module</code> インスタンスの <code>HEAPFXX#set</code> を利用して, ポインタと参照を関連づける</li>
-<li><code>Module</code> インスタンスの <code>_free</code> を利用して, メモリを解放する</li>
-</ul>
-
-<p>となります (<code>HEAPFXX</code> の <code>XX</code> は型に合わせた数値です. 例えば, <code>Float64Array</code> であれば, <code>HEAPF64</code> になります).</p>
-
-<p>細かい注意点としては, <code>Float32Array</code> など型が明確な場合, C 言語でも型をあわせる必要があります (<code>Float32Array</code> であれば <code>float</code>, <code>Float64Array</code> であれば <code>double</code> など).</p>
-
-<h1 id="リファレンス">リファレンス</h1>
-
-<p>かけあしになりましたが, WebAssembly でオーディオ処理を実装するための, 最低限必要な知見は紹介できたと思います. ソースコード全体やデモは, <a href="https://github.com/Korilakkuma/audio-processing-by-wasm">audio-processing-by-wasm</a> を参照してください.</p>
-
-<ul>
-<li><a href="https://developer.mozilla.org/ja/docs/WebAssembly/C_to_wasm">C/C++からWebAssemblyにコンパイルする</a></li>
-<li><a href="http://blog.shogonir.jp/entry/2017/05/23/232600a">JS側で作成したtyped arrayをwasm側に渡す</a></li>
+<li>Sadistic Desire (HIDE パート)</li>
+<li>DAHLIA (HIDE パート)</li>
+<li>SCARS (HIDE パート)</li>
 </ul>
 
         </div>
         <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/audio-processing-by-wasm/" data-id="09d932d520ae462c9b77f72f7671ccee" class="article-share-link">
+    <a data-url="https://art-of-life.jp/posts/end-of-2019/" data-id="ba81f597e31f08dc2bddd805fa950437" class="article-share-link">
         <i class="fa fa-share"></i>
         Share
     </a>
     
-    <a href="https://art-of-life.jp/posts/audio-processing-by-wasm/#disqus_thread" class="article-comment-link">
+    <a href="https://art-of-life.jp/posts/end-of-2019/#disqus_thread" class="article-comment-link">
         Comments
     </a>
     
@@ -944,21 +445,14 @@ void IFFT(float *x_real, float *x_imag, int N) {
     
 <nav id="article-nav">
     
-    <a href="https://art-of-life.jp/posts/celp/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="https://art-of-life.jp/posts/20150322-20200322/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Older
       </strong>
-      <div class="article-nav-title">CELP</div>
+      <div class="article-nav-title">3 月 22 日の誓い</div>
     </a>
     
 
-    
-    <a href="https://art-of-life.jp/posts/spectrum-subtraction/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">
-          Newer
-      </strong>
-      <div class="article-nav-title">Spectrum Subtraction</div>
-    </a>
     
 </nav>
 
