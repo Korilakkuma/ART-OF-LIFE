@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>Time Stretch &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.56.0" />
+    <meta name="generator" content="Hugo 0.57.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -21,7 +21,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <meta property="og:title" content="Time Stretch" />
-<meta property="og:description" content="タイムストレッチとは リサンプリング 実装 #include &lt;vector&gt; void TimeStretch( double rate, std::vector&lt;double&gt; &amp;in, std::vector&lt;double&gt; &amp;out, int fs, int length ) { if ((rate == 1.0) || (rate &lt;= 0.0)) { for (int n = 0; n &lt; length; n&#43;&#43;) { out[n] = in[n]; } return; } int template_size = static_cast&lt;int&gt;(fs * 0.01); int p_min = static_cast&lt;int&gt;(fs" />
+<meta property="og:description" content="タイムストレッチ 音波の速度 ($v$), 周波数 ($f$), 波長 ($\lambda$) には以下の関係式があります. $ \begin{eqnarray} v=f{\lambda} \end{eqnarray} $ 速度を速くすると, 周波数も高くなり, 速度を遅くすると, 周波数" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://art-of-life.jp/posts/time-stretch/" />
 <meta property="article:published_time" content="2020-02-24T15:22:57+09:00" />
@@ -29,12 +29,12 @@
 
     
     <meta itemprop="name" content="Time Stretch">
-<meta itemprop="description" content="タイムストレッチとは リサンプリング 実装 #include &lt;vector&gt; void TimeStretch( double rate, std::vector&lt;double&gt; &amp;in, std::vector&lt;double&gt; &amp;out, int fs, int length ) { if ((rate == 1.0) || (rate &lt;= 0.0)) { for (int n = 0; n &lt; length; n&#43;&#43;) { out[n] = in[n]; } return; } int template_size = static_cast&lt;int&gt;(fs * 0.01); int p_min = static_cast&lt;int&gt;(fs">
+<meta itemprop="description" content="タイムストレッチ 音波の速度 ($v$), 周波数 ($f$), 波長 ($\lambda$) には以下の関係式があります. $ \begin{eqnarray} v=f{\lambda} \end{eqnarray} $ 速度を速くすると, 周波数も高くなり, 速度を遅くすると, 周波数">
 
 
 <meta itemprop="datePublished" content="2020-02-24T15:22:57&#43;09:00" />
 <meta itemprop="dateModified" content="2020-02-24T15:22:57&#43;09:00" />
-<meta itemprop="wordCount" content="524">
+<meta itemprop="wordCount" content="1498">
 
 
 
@@ -42,7 +42,7 @@
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Time Stretch"/>
-<meta name="twitter:description" content="タイムストレッチとは リサンプリング 実装 #include &lt;vector&gt; void TimeStretch( double rate, std::vector&lt;double&gt; &amp;in, std::vector&lt;double&gt; &amp;out, int fs, int length ) { if ((rate == 1.0) || (rate &lt;= 0.0)) { for (int n = 0; n &lt; length; n&#43;&#43;) { out[n] = in[n]; } return; } int template_size = static_cast&lt;int&gt;(fs * 0.01); int p_min = static_cast&lt;int&gt;(fs"/>
+<meta name="twitter:description" content="タイムストレッチ 音波の速度 ($v$), 周波数 ($f$), 波長 ($\lambda$) には以下の関係式があります. $ \begin{eqnarray} v=f{\lambda} \end{eqnarray} $ 速度を速くすると, 周波数も高くなり, 速度を遅くすると, 周波数"/>
 <meta name="twitter:site" content="@xmusicjp"/>
 
     
@@ -174,7 +174,7 @@
       </div>
       <div class="article-info-block">
         
-          45
+          47
         
         <span>
             Tags
@@ -272,10 +272,10 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2020-02-24 15:22:57 &#43;0900 JST" itemprop="datePublished">2020-02-24</time>
             &middot;
-            524
+            1498
             words
             &middot;
-            2
+            3
             minute read
         </div>
         
@@ -332,9 +332,65 @@
         <div class="article-entry" itemprop="articleBody">
             
 
-<h1 id="タイムストレッチとは">タイムストレッチとは</h1>
+<h1 id="タイムストレッチ">タイムストレッチ</h1>
 
-<h2 id="リサンプリング">リサンプリング</h2>
+<p>音波の速度 ($v$), 周波数 ($f$), 波長 ($\lambda$) には以下の関係式があります.</p>
+
+<p>$
+\begin{eqnarray}
+v=f{\lambda}
+\end{eqnarray}
+$</p>
+
+<p>速度を速くすると, 周波数も高くなり, 速度を遅くすると, 周波数も低くなります. しかしながら, 波形の周期性に着目して, その繰り返し回数を増減させることによって, 周波数を変化させることなく, 音データを早送り再生したり, スロー再生したりすることが可能です. このアルゴリズムが <strong>タイムストレッチ</strong>です.</p>
+
+<h2 id="相関関数">相関関数</h2>
+
+<p>タイムストレッチでは, 波形の周期を求めるために<strong>相関関数</strong>を利用します. 相関関数は以下のように定義されます. $r(m)$ は相関関数, $s(n)$ は音データ, $N$ は相関関数のサイズです.</p>
+
+<p>$
+\begin{eqnarray}
+r(n)=\sum_{n=0}^{N-1}s(n)s(n+m)\quad(0 \leqq m \leqq N-1)
+\end{eqnarray}
+$</p>
+
+<p>つまり, 相関関数の計算は, 本来の音データとそれを $m$ サンプルずらした音データを $N$ 個の区間に限定して乗算して, その結果を加算する処理となっています.</p>
+
+<p>相関関数には, 基本周期とその整数倍で波形のピークを示すという特徴があるので, そのピークを調べることで波形の周期を求めることができます.</p>
+
+<!-- 具体例として, 基本周波数 440 Hz の音データの基本周期は, 2.27 ms (1 / 440) ms となります. -->
+
+<h2 id="早送り再生">早送り再生</h2>
+
+<p>例えば, 1.5 倍の速度で早送りする場合には, 最初の周期には単調減少の重みづけ, 次の周期には単調増加の重みづけをして, これらの波形をオーバラップアドによって重ね合わせると, 波形の接続部分における不連続的な変化を目立たせることなく, 3 周期の波形を 2 周期に縮めることができます.</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/79052665-18f4c880-7c73-11ea-8004-7732326c1b47.png" alt="早送り再生のアルゴリズム" /></p>
+
+<p>このアルゴリズムを, 基準時刻を更新しながら, 逐次実行することで, 音データの持続時間を短くしていきます. 基準時刻の更新に関わるパラメータ $q$ は, 再生速度を $rate$ とすると, 以下のように定義することができます ($p$ は周期).</p>
+
+<p>$
+\begin{eqnarray}
+q=round\left(\frac{p}{rate-1}\right)\quad(rate &gt; 1) \\<br />
+\end{eqnarray}
+$</p>
+
+<p>$rate$ が 1.5 の場合, $q$ は $p$ の 2 倍と算出できます.</p>
+
+<h2 id="スロー再生">スロー再生</h2>
+
+<p>例えば, 2 / 3 (0.66) 倍の速度でスロー再生する場合には, 最初の周期には単調増加の重みづけ, 次の周期には単調減少の重みづけをして, これらの波形をオーバラップアドによって重ね合わせると, 波形の接続部分における不連続的な変化を目立たせることなく, 2 周期の波形を 3 周期に伸ばすことができます.</p>
+
+<p><img src="https://user-images.githubusercontent.com/4006693/79052679-37f35a80-7c73-11ea-983e-93d50091ff02.png" alt="スロー再生のアルゴリズム" /></p>
+
+<p>このアルゴリズムを, 基準時刻を更新しながら, 逐次実行することで, 音データの持続時間を長くしていきます. 基準時刻の更新に関わるパラメータ $q$ は, 再生速度を $rate$ とすると, 以下のように定義することができます ($p$ は周期).</p>
+
+<p>$
+\begin{eqnarray}
+q=round\left(\frac{p{\cdot}rate}{1-rate}\right)\quad(0.5 \leqq rate &lt; 1) \\<br />
+\end{eqnarray}
+$</p>
+
+<p>$rate$ が 2 / 3 (0.66) の場合, $q$ は $p$ の 2 倍と算出できます.</p>
 
 <h2 id="実装">実装</h2>
 
@@ -381,10 +437,12 @@ void TimeStretch(
 
       r[m] = 0.0;
 
+      // Correlation function
       for (int n = 0; n &lt; template_size; n++) {
         r[m] += x[n] * y[n];
       }
 
+      // Peak of correlation function
       if (r[m] &gt; max_of_r) {
         max_of_r = r[m];
         p = m;
@@ -458,6 +516,11 @@ int main(int argc, char **argv) {
   STEREO_PCM pcm0, pcm1;
 
   double rate = std::stod(argv[1]);
+
+  if (rate &lt;= 0.0) {
+    std::cerr &lt;&lt; &quot;rate &gt; 0.0&quot; &lt;&lt; std::endl;
+    std::exit(EXIT_FAILURE);
+  }
 
   wave_read(&amp;pcm0, &quot;stereo.wav&quot;);
 
@@ -656,6 +719,14 @@ int main(int argc, char **argv) {
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
+                    event
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -877,6 +948,14 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
+                    forever-love
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1085,6 +1164,14 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
+                    wedding
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1167,6 +1254,9 @@ int main(int argc, char **argv) {
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
+        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
+        
+        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1243,6 +1333,9 @@ int main(int argc, char **argv) {
         
         
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
         
         
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
