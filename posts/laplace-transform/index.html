@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>Laplace Transform &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="Laplace Transform">
 <meta itemprop="description" content="ラプラス変換 / Z 変換の概要">
-
-
 <meta itemprop="datePublished" content="2019-10-05T18:00:22&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-05T18:00:22&#43;09:00" />
-<meta itemprop="wordCount" content="1061">
+<meta itemprop="wordCount" content="1066">
 
 
 
 <meta itemprop="keywords" content="Digital Signal Processing,Mathematics,Laplace Transform,Z-Transform," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Laplace Transform"/>
 <meta name="twitter:description" content="ラプラス変換 / Z 変換の概要"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-10-05 18:00:22 &#43;0900 JST" itemprop="datePublished">2019-10-05</time>
             &middot;
-            1061
+            1066
             words
             &middot;
             3
@@ -326,84 +323,54 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="ラプラス変換">ラプラス変換</h1>
-
-<p><b>ラプラス変換</b>を数式を使わずに説明するのであれば, <b>フーリエ変換の拡張</b>です.</p>
-
-<p>実用的には, フーリエ変換が音や光の周波数特性を分析するために利用されるのに対して, ラプラス変換は, 電気回路やシステム制御などの<b>過渡現象</b>を扱うドメインにおいて重要な道具です.</p>
-
-<p>過渡現象とは, 簡単に表現すると, <b>ある入力を切り替えた場合に, それに対する出力が少し遅延する現象</b>のことです. 実生活にたとえると, 自転車や自動車を運転している場合, ブレーキ (入力) をかけたときに, すぐにそれが停止 (出力) することが理想ではありますが, 実際には, 遅延が発生して停止します.</p>
-
+            <h1 id="ラプラス変換">ラプラス変換</h1>
+<p><!-- raw HTML omitted -->ラプラス変換<!-- raw HTML omitted -->を数式を使わずに説明するのであれば, <!-- raw HTML omitted -->フーリエ変換の拡張<!-- raw HTML omitted -->です.</p>
+<p>実用的には, フーリエ変換が音や光の周波数特性を分析するために利用されるのに対して, ラプラス変換は, 電気回路やシステム制御などの<!-- raw HTML omitted -->過渡現象<!-- raw HTML omitted -->を扱うドメインにおいて重要な道具です.</p>
+<p>過渡現象とは, 簡単に表現すると, <!-- raw HTML omitted -->ある入力を切り替えた場合に, それに対する出力が少し遅延する現象<!-- raw HTML omitted -->のことです. 実生活にたとえると, 自転車や自動車を運転している場合, ブレーキ (入力) をかけたときに, すぐにそれが停止 (出力) することが理想ではありますが, 実際には, 遅延が発生して停止します.</p>
 <h2 id="ラブラス変換の定義">ラブラス変換の定義</h2>
-
-<p>以下のような, マイナスの時間において 0 をとるような連続信号 (<b>因果信号</b>) において,</p>
-
+<p>以下のような, マイナスの時間において 0 をとるような連続信号 (<!-- raw HTML omitted -->因果信号<!-- raw HTML omitted -->) において,</p>
 <p>$
 \begin{eqnarray}
 x(t)=0 \quad (t &lt; 0)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 X(s)=\int_{0}^{\infty}x(t)\exp\left(-st\right)dt
 \end{eqnarray}
 $</p>
-
-<p>上記の式がラプラス変換の定義です (ただし, <b>$s$ は $\delta+j\omega$ で定義される複素数</b>です).</p>
-
-<p>$s$ によって定義される複素平面を, <b>$s$ 平面</b>と呼びます. ラプラス変換は, 時間領域の連続信号 $x(t)$ を <b>$s$ 領域</b> $X(s)$ に変換する処理ということです.</p>
-
+<p>上記の式がラプラス変換の定義です (ただし, <!-- raw HTML omitted -->$s$ は $\delta+j\omega$ で定義される複素数<!-- raw HTML omitted -->です).</p>
+<p>$s$ によって定義される複素平面を, <!-- raw HTML omitted -->$s$ 平面<!-- raw HTML omitted -->と呼びます. ラプラス変換は, 時間領域の連続信号 $x(t)$ を <!-- raw HTML omitted -->$s$ 領域<!-- raw HTML omitted --> $X(s)$ に変換する処理ということです.</p>
 <p>ところで, $x(t)$ のラブラス変換が存在するには, 右辺の積分が収束する必要があり, $x(t)$ に対して,</p>
-
 <p>$
 \begin{eqnarray}
 \left|x(t)\right| \leqq M\exp\left(\alpha t \right)
 \end{eqnarray}
 $</p>
-
-<p>を満たす $M$, $\alpha$ が存在する必要があります. この条件を翻訳すると, <b>$t$ が増加しても, ある指数関数 $\exp\left(\alpha t \right)$ よりも, $x(t)$ が急速に増大しない</b>ことを意味しています (具体的には, $\exp\left(t^{2}\right)$ のような信号の場合, ラプラス変換は存在しません).</p>
-
+<p>を満たす $M$, $\alpha$ が存在する必要があります. この条件を翻訳すると, <!-- raw HTML omitted -->$t$ が増加しても, ある指数関数 $\exp\left(\alpha t \right)$ よりも, $x(t)$ が急速に増大しない<!-- raw HTML omitted -->ことを意味しています (具体的には, $\exp\left(t^{2}\right)$ のような信号の場合, ラプラス変換は存在しません).</p>
 <h2 id="フーリエ変換との関係">フーリエ変換との関係</h2>
-
 <p>ラプラス変換は, フーリエ変換の拡張と説明しましたが, もう少し詳細を追います.</p>
-
 <p>実は, フーリエ変換にも存在条件があり,</p>
-
 <p>$
 \begin{eqnarray}
 \lim_{t \to \pm{\infty}}x(t)=0
 \end{eqnarray}
 $</p>
-
-<p>が成立する必要があります. そして, この条件は, ラプラス変換の存在条件よりもより制限のきびしい条件になります. この条件を, ラプラス変換において翻訳すると, フーリエ変換は, <b>$s$ 平面の虚軸 (周波数軸) におけるラプラス変換</b>という意味になります.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66258366-5fa6c900-e7df-11e9-838f-401717a5debd.png" alt="$s$ 平面とフーリエ変換" /></p>
-
+<p>が成立する必要があります. そして, この条件は, ラプラス変換の存在条件よりもより制限のきびしい条件になります. この条件を, ラプラス変換において翻訳すると, フーリエ変換は, <!-- raw HTML omitted -->$s$ 平面の虚軸 (周波数軸) におけるラプラス変換<!-- raw HTML omitted -->という意味になります.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/66258366-5fa6c900-e7df-11e9-838f-401717a5debd.png" alt="$s$ 平面とフーリエ変換"></p>
 <p>また, フーリエ変換においては, 変換領域が周波数という物理的に明確な意味がありますが, ラブラス変換の変換領域 ($s$ 平面) には物理的に明確な意味はありません.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66257803-77c71a00-e7d8-11e9-8ae4-605e940511ee.png" alt="ラプラス変換とフーリエ変換" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66257803-77c71a00-e7d8-11e9-8ae4-605e940511ee.png" alt="ラプラス変換とフーリエ変換"></p>
 <h1 id="z-変換">Z 変換</h1>
-
-<p><b>Z 変換</b>を数式を使わずに説明するのであれば, <b>離散フーリエ変換の拡張</b>です. 離散信号に対するラプラス変換を Z 変換と呼んでいるだけなので, 本質的にはラプラス変換と同じです.</p>
-
+<p><!-- raw HTML omitted -->Z 変換<!-- raw HTML omitted -->を数式を使わずに説明するのであれば, <!-- raw HTML omitted -->離散フーリエ変換の拡張<!-- raw HTML omitted -->です. 離散信号に対するラプラス変換を Z 変換と呼んでいるだけなので, 本質的にはラプラス変換と同じです.</p>
 <p>$
 \begin{eqnarray}
 X(z)=\sum_{n=-\infty}^{\infty}x(n)z^{-n}
 \end{eqnarray}
 $</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66258379-82d17880-e7df-11e9-9181-ef3d00bd0d50.png" alt="アナログ信号, ディジタル信号, s 平面, z 平面の関係" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66258379-82d17880-e7df-11e9-9181-ef3d00bd0d50.png" alt="アナログ信号, ディジタル信号, s 平面, z 平面の関係"></p>
 <p>より正確には, 離散フーリエ変換は, $z$ 変換の特殊な場合であり, $z$ 平面と呼ばれる, 複素平面内の $|z|=1$ という単位円上の $z$ 変換は, 離散フーリエ変換に一致します.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66827341-7ee4e980-ef89-11e9-8587-f7fd93d6c402.png" alt="$z$ 平面と離散フーリエ変換" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66827341-7ee4e980-ef89-11e9-8587-f7fd93d6c402.png" alt="$z$ 平面と離散フーリエ変換"></p>
 <h1 id="リファレンス">リファレンス</h1>
-
 <ul>
 <li><a href="https://www.amazon.co.jp/%E4%BF%A1%E5%8F%B7%E3%83%BB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%90%86%E8%AB%96%E3%81%AE%E5%9F%BA%E7%A4%8E%E2%80%95%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90%E3%80%81%E3%83%A9%E3%83%97%E3%83%A9%E3%82%B9%E5%A4%89%E6%8F%9B%E3%80%81z%E5%A4%89%E6%8F%9B%E3%82%92%E7%B3%BB%E7%B5%B1%E7%9A%84%E3%81%AB%E5%AD%A6%E3%81%B6-%E8%B6%B3%E7%AB%8B-%E4%BF%AE%E4%B8%80/dp/433903214X">信号・システム理論の基礎―フーリエ解析、ラプラス変換、z変換を系統的に学ぶ</a></li>
 </ul>
@@ -583,14 +550,6 @@ $</p>
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -812,14 +771,6 @@ $</p>
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1028,14 +979,6 @@ $</p>
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1118,9 +1061,6 @@ $</p>
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1199,9 +1139,6 @@ $</p>
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1225,7 +1162,7 @@ $</p>
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>AAC の圧縮符号化方式 &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="AAC の圧縮符号化方式">
 <meta itemprop="description" content="AAC の圧縮符号化方式の概要をとおして, 音声コーデックの高度な技術を学ぶ">
-
-
 <meta itemprop="datePublished" content="2019-09-09T17:02:55&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-09T17:02:55&#43;09:00" />
-<meta itemprop="wordCount" content="1131">
+<meta itemprop="wordCount" content="1045">
 
 
 
 <meta itemprop="keywords" content="MPEG-2 Audio,AAC,Advanced Audio Coding," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AAC の圧縮符号化方式"/>
 <meta name="twitter:description" content="AAC の圧縮符号化方式の概要をとおして, 音声コーデックの高度な技術を学ぶ"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-09 17:02:55 &#43;0900 JST" itemprop="datePublished">2019-09-09</time>
             &middot;
-            1131
+            1045
             words
             &middot;
             3
@@ -330,139 +327,48 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="mpeg-2-オーディオ">MPEG-2 オーディオ</h1>
-
-<p>MPEG-2 オーディオには, <b>MPEG-2/BC</b> (Backward Compatible) と <b>MPEG-2/AAC</b> (Advanced Audio Coding) の 2 つの規格があります. MPEG-2/BC の基本的な仕組みは MPEG-1 オーディオと変わりません.</p>
-
-<p>MPEG-2/BC には, サンプリング周波数を半分に落とした, <b>MPEG-2/LFS</b> (Low Sampling Frequency) と, 5.1 チャンネルを可能とした, <b>MPEG-2/MC</b> (Multi Channel) があります. 2 つの規格は, たまたま同じ仕様に含まれているだけで, LSF はインターネットでの利用を想定した低ビットレート, MC は 5.1 チャンネルというまったく異なる目的の規格であり, 同時に利用するためのものではありません. ただし, 共通点として, <b>MPEG-1 オーディオと互換性をもっています</b>.</p>
-
-<p>MPEG-2/AAC は, 高音質・高圧縮を求めるために, MPEG-2/BC のあとに制定された規格です. MPEG-2/AAC は. 大きな音の部分に雑音を集中させたり, 一定の時間内の次のデータを予測したりすることで, データサイズ大幅に削減します (MPEG-1 オーディオ Layer I と比較して, データサイズを約 70 % にできます). ただし, その代償として, <b>MPEG-1 オーディオと互換性はありません</b>.</p>
-
+            <h1 id="mpeg-2-オーディオ">MPEG-2 オーディオ</h1>
+<p>MPEG-2 オーディオには, <!-- raw HTML omitted -->MPEG-2/BC<!-- raw HTML omitted --> (Backward Compatible) と <!-- raw HTML omitted -->MPEG-2/AAC<!-- raw HTML omitted --> (Advanced Audio Coding) の 2 つの規格があります. MPEG-2/BC の基本的な仕組みは MPEG-1 オーディオと変わりません.</p>
+<p>MPEG-2/BC には, サンプリング周波数を半分に落とした, <!-- raw HTML omitted -->MPEG-2/LFS<!-- raw HTML omitted --> (Low Sampling Frequency) と, 5.1 チャンネルを可能とした, <!-- raw HTML omitted -->MPEG-2/MC<!-- raw HTML omitted --> (Multi Channel) があります. 2 つの規格は, たまたま同じ仕様に含まれているだけで, LSF はインターネットでの利用を想定した低ビットレート, MC は 5.1 チャンネルというまったく異なる目的の規格であり, 同時に利用するためのものではありません. ただし, 共通点として, <!-- raw HTML omitted -->MPEG-1 オーディオと互換性をもっています<!-- raw HTML omitted -->.</p>
+<p>MPEG-2/AAC は, 高音質・高圧縮を求めるために, MPEG-2/BC のあとに制定された規格です. MPEG-2/AAC は. 大きな音の部分に雑音を集中させたり, 一定の時間内の次のデータを予測したりすることで, データサイズ大幅に削減します (MPEG-1 オーディオ Layer I と比較して, データサイズを約 70 % にできます). ただし, その代償として, <!-- raw HTML omitted -->MPEG-1 オーディオと互換性はありません<!-- raw HTML omitted -->.</p>
 <h1 id="aac-の圧縮">AAC の圧縮</h1>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/68105796-f96aae80-ff22-11e9-93dd-a62d3fb3d253.png" alt="AAC の圧縮フロー" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/68105796-f96aae80-ff22-11e9-93dd-a62d3fb3d253.png" alt="AAC の圧縮フロー"></p>
 <h2 id="1-入力データ">1. 入力データ</h2>
-
 <p>オーディオ信号で, AAC の場合, 2 チャンネルのステレオ信号や 5.1 チャンネルの信号などです.</p>
-
-<h2 id="2-ゲイン-コントロール">2. ゲイン・コントロール</h2>
-
+<h2 id="2-ゲインコントロール">2. ゲイン・コントロール</h2>
 <p>ゲイン・コントロールは, アタック音の鋭い音に対する性能を少し向上させる処理ですが, オプションとなっています.</p>
-
-<h2 id="3-フィルタ-バンク">3. フィルタ・バンク</h2>
-
-<p>フィルタ・バンクは, MDCT を利用して, 信号を <b>128</b> 分割, または, <b>1024</b> 分割します.</p>
-
+<h2 id="3-フィルタバンク">3. フィルタ・バンク</h2>
+<p>フィルタ・バンクは, MDCT を利用して, 信号を <!-- raw HTML omitted -->128<!-- raw HTML omitted --> 分割, または, <!-- raw HTML omitted -->1024<!-- raw HTML omitted --> 分割します.</p>
 <h2 id="4-tns">4. TNS</h2>
-
 <p>Temporal Noise Shaping は, 瞬間ノイズ整形とも呼ばれ, 圧縮率を向上させるための処理です.</p>
-
-<h2 id="5-インテンシティー-カップリング">5. インテンシティー/カップリング</h2>
-
+<h2 id="5-インテンシティーカップリング">5. インテンシティー/カップリング</h2>
 <p>ステレオ信号を効率的に符号化するための処理です.</p>
-
 <h2 id="6-予測器">6. 予測器</h2>
-
 <p>継続する音を, 前の信号を利用して効率よく圧縮するための処理です.</p>
-
-<h2 id="7-m-s">7. M/S</h2>
-
+<h2 id="7-ms">7. M/S</h2>
 <p>Main/Side 処理とは, ステレオ信号を左右の和と差にわけて処理する符号化処理です.</p>
-
-<h2 id="8-スケール-ファクタ">8. スケール・ファクタ</h2>
-
+<h2 id="8-スケールファクタ">8. スケール・ファクタ</h2>
 <p>スケール・ファクタは, MP3 と同様, 信号の大きさを表す指数を算出する処理です.</p>
-
 <h2 id="9-量子化">9. 量子化</h2>
-
 <p>圧縮した信号を符号化 (数値化) します.</p>
-
-<h2 id="10-ノイズレス-コーディング">10. ノイズレス・コーディング</h2>
-
+<h2 id="10-ノイズレスコーディング">10. ノイズレス・コーディング</h2>
 <p>量子化した信号を, 統計的な性質を利用してさらに圧縮します.</p>
-
 <h1 id="aac-で採用された代表的な技術">AAC で採用された代表的な技術</h1>
-
 <p>以下のの技術により, MP3 と比較すると, 20 % - 50 % 圧縮率が向上します.</p>
-
 <h2 id="適応ブロック長-mdct">適応ブロック長 MDCT</h2>
-
 <p>1024 サンプルのブロックと 128 サンプルのブロックの組み合わせ.</p>
-
 <h2 id="tns">TNS</h2>
-
 <p>量子化ノイズの最適化.</p>
-
-<h2 id="ノイズレス-コーディング">ノイズレス・コーディング</h2>
-
+<h2 id="ノイズレスコーディング">ノイズレス・コーディング</h2>
 <p>効率のよいロスレス符号化.</p>
-
 <h2 id="4-次元ハフマン">4 次元ハフマン</h2>
-
 <p>MP3 より, さらに 10 % 程度効率のよいハフマン符号化.</p>
-
-<h2 id="ゲイン-コントロール">ゲイン・コントロール</h2>
-
+<h2 id="ゲインコントロール">ゲイン・コントロール</h2>
 <p>プリエコー (オーディオ信号が急に大きくなる直前に発生するノイズ) を抑制.</p>
-
 <h2 id="予測器">予測器</h2>
-
 <p>周波数ごとの成分の予測.</p>
-
-<table>
-  <caption>AAC の圧縮技術とプロファイル</b>
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">メイン</th>
-      <th scope="col">LC<br />(AAC の簡易アルゴリズム)</th>
-      <th scope="col">SSR<br />(AAC の拡張)</th>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">適応ブロック長 MDCT</th>
-      <td>◯</td>
-      <td>◯</td>
-      <td>◯</td>
-    </tr>
-    <tr>
-      <th scope="row">TNS</th>
-      <td>◯</td>
-      <td>◯</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">ノイズレス・コーディング</th>
-      <td>◯</td>
-      <td>◯</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">4 次元ハフマン</th>
-      <td>◯</td>
-      <td>◯</td>
-      <td>◯</td>
-    </tr>
-    <tr>
-      <th scope="row">ゲイン・コントロール</th>
-      <td></td>
-      <td></td>
-      <td>◯</td>
-    </tr>
-    <tr>
-      <th scope="row">予測器</th>
-      <td>◯</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-
+<!-- raw HTML omitted -->
 <h1 id="リファレンス">リファレンス</h1>
-
 <ul>
 <li><a href="https://www.amazon.co.jp/%E6%94%B9%E8%A8%82%E7%89%88-%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E6%94%BE%E9%80%81%E6%95%99%E7%A7%91%E6%9B%B8%EF%BC%88%E4%B8%8A%EF%BC%89-%E3%82%A4%E3%83%B3%E3%83%97%E3%83%AC%E3%82%B9%E6%A8%99%E6%BA%96%E6%95%99%E7%A7%91%E6%9B%B8%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E4%BA%80%E5%B1%B1-%E6%B8%89/dp/4844395033">改訂版 デジタル放送教科書（上）</a></li>
 </ul>
@@ -642,14 +548,6 @@
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -871,14 +769,6 @@
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1087,14 +977,6 @@
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1177,9 +1059,6 @@
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1258,9 +1137,6 @@
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1284,7 +1160,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

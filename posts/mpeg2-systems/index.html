@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>MPEG-2 Systems &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="MPEG-2 Systems">
 <meta itemprop="description" content="MPEG-2 Systems - MPEG-2 PS と MPEG-2 TS の概要">
-
-
 <meta itemprop="datePublished" content="2019-09-10T23:27:21&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-10T23:27:21&#43;09:00" />
-<meta itemprop="wordCount" content="1654">
+<meta itemprop="wordCount" content="1527">
 
 
 
 <meta itemprop="keywords" content="MPEG-2 Systems,MPEG-2 PS,MPEG-2 TS," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MPEG-2 Systems"/>
 <meta name="twitter:description" content="MPEG-2 Systems - MPEG-2 PS と MPEG-2 TS の概要"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-10 23:27:21 &#43;0900 JST" itemprop="datePublished">2019-09-10</time>
             &middot;
-            1654
+            1527
             words
             &middot;
             4
@@ -326,100 +323,37 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="mpeg-2-systems-とは">MPEG-2 Systems とは ?</h1>
-
+            <h1 id="mpeg-2-systems-とは-">MPEG-2 Systems とは ?</h1>
 <h2 id="mpeg-2">MPEG-2</h2>
-
 <p>MPEG-2 は, MPEG-1 を改良し, 放送用として十分と言える程度の高画質を目指して規格化されました. MPEG-2 は, DVD やデジタル BS 放送などのデータ形式として, 幅広く利用されています.</p>
-
 <h2 id="mpeg-2-systems">MPEG-2 Systems</h2>
-
-<p>MPEG-2 を多重化して, 伝送するための規格です. 用途別に, <b>MPEG-2 PS</b> (Program Stream) と <b>MPEG-2 TS</b> (Transport Stream) に分類されます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65369873-c8ddf680-dc8d-11e9-8d5e-196fb76819fc.png" alt="MPEG-2 PS と MPEG-2 TS のイメージ" /></p>
-
+<p>MPEG-2 を多重化して, 伝送するための規格です. 用途別に, <!-- raw HTML omitted -->MPEG-2 PS<!-- raw HTML omitted --> (Program Stream) と <!-- raw HTML omitted -->MPEG-2 TS<!-- raw HTML omitted --> (Transport Stream) に分類されます.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/65369873-c8ddf680-dc8d-11e9-8d5e-196fb76819fc.png" alt="MPEG-2 PS と MPEG-2 TS のイメージ"></p>
 <h2 id="es">ES</h2>
-
-<p>MPEG-2 Systems では, 符号化された画像や音声データを, <b>ES</b> (Elementary Stream) と呼びます. そして, MPEG-2 Systes における<b>プログラム</b>とは, たがいに同期関係のある映像や音声で, 1 つの時計で同期制御が可能な ES の集まりのことを指します.</p>
-
+<p>MPEG-2 Systems では, 符号化された画像や音声データを, <!-- raw HTML omitted -->ES<!-- raw HTML omitted --> (Elementary Stream) と呼びます. そして, MPEG-2 Systes における<!-- raw HTML omitted -->プログラム<!-- raw HTML omitted -->とは, たがいに同期関係のある映像や音声で, 1 つの時計で同期制御が可能な ES の集まりのことを指します.</p>
 <h2 id="pes">PES</h2>
-
-<p>ES を適切なサイズに分割してパケット化したものを <b>PES</b> (Packetized Elementary Stream) と呼びます. PES パケットのヘッダは再生時刻の情報を含むことができるので, これによって, 映像と音声を同期して再生することが可能になります (詳細は, <a href="./#多重信号の同期">多重信号の同期のセクション</a>を参照).</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65368839-1011ba80-dc81-11e9-9667-fa83c7ce8d35.png" alt="PES" /></p>
-
+<p>ES を適切なサイズに分割してパケット化したものを <!-- raw HTML omitted -->PES<!-- raw HTML omitted --> (Packetized Elementary Stream) と呼びます. PES パケットのヘッダは再生時刻の情報を含むことができるので, これによって, 映像と音声を同期して再生することが可能になります (詳細は, <a href="./#%E5%A4%9A%E9%87%8D%E4%BF%A1%E5%8F%B7%E3%81%AE%E5%90%8C%E6%9C%9F">多重信号の同期のセクション</a>を参照).</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/65368839-1011ba80-dc81-11e9-9667-fa83c7ce8d35.png" alt="PES"></p>
 <h1 id="mpeg-2-ps">MPEG-2 PS</h1>
-
-<p>単一のプログラム (同期した映像や音声など）を<b>エラーの可能性が低い環境</b>  (光ディスクや HDD など) であつかうことを想定した形式です, 複数の PES パケットを連結して, 先頭にパックヘッダを付与したものを <b>pack</b> と呼び、さらに複数の pack を連結したものがプログラムストリームとなります.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65369316-4e5da880-dc86-11e9-9477-1b787546f768.png" alt="pack" /></p>
-
+<p>単一のプログラム (同期した映像や音声など）を<!-- raw HTML omitted -->エラーの可能性が低い環境<!-- raw HTML omitted -->  (光ディスクや HDD など) であつかうことを想定した形式です, 複数の PES パケットを連結して, 先頭にパックヘッダを付与したものを <!-- raw HTML omitted -->pack<!-- raw HTML omitted --> と呼び、さらに複数の pack を連結したものがプログラムストリームとなります.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/65369316-4e5da880-dc86-11e9-9477-1b787546f768.png" alt="pack"></p>
 <h1 id="mpeg-2-ts">MPEG-2 TS</h1>
-
-<p>同時に 1 つ以上のプログラムを, <b>エラーが発生しうる環境</b> (放送や通信など) であつかうことを想定したデータ形式です. デジタル放送や HLS など, ストリーミングプロトコルで利用されています. MPEG-2 TS は, 伝送を前提としているので, 伝送しやすい固定長で, かつ, 小さいパケットサイズとなっています.</p>
-
-<p>MPEG-2 PS では, <b>PES 複数個をまとめてパケット化</b>するのに対して, MPEG-2 TS では, パケットサイズが小さいので, <b>PES を分解してパケット化</b>します. 具体的には, PES パケットを <b>Transport Packet</b> (TS packet) と呼ばれる <b>188 バイト</b>固定長のパケットへ分割します. そして, この Transport Packet の連続が, トランスポートストリームとなります. そして, この分割処理によって, 多重化しています.</p>
-
-<table>
-  <caption>MPEG-2 PS パック / MPEG-2 TS のパケットの比較</caption>
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">パケット長</th>
-      <th scope="col">ペイロード</th>
-      <th scope="col">クロック</th>
-      <th scope="col">プログラム数</th>
-      <th scope="col">多重化</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">MPEG-2 PS パック</th>
-      <td>可変長</td>
-      <td>PES</td>
-      <td>時刻の修正<br />ストリームに同期</td>
-      <td>単一プログラム</td>
-      <td>オーディオ 最大 33<br />ビデオ 最大 17</td>
-    </tr>
-    <tr>
-      <th scope="row">MPEG-2 TS パケット</th>
-      <td>固定長<br />(188 bytes)</td>
-      <td>PES<br />セクション</td>
-      <td>ストリームに同期</td>
-      <td>マルチプログラム</td>
-      <td>特になし</td>
-    </tr>
-  </tbody>
-</table>
-
+<p>同時に 1 つ以上のプログラムを, <!-- raw HTML omitted -->エラーが発生しうる環境<!-- raw HTML omitted --> (放送や通信など) であつかうことを想定したデータ形式です. デジタル放送や HLS など, ストリーミングプロトコルで利用されています. MPEG-2 TS は, 伝送を前提としているので, 伝送しやすい固定長で, かつ, 小さいパケットサイズとなっています.</p>
+<p>MPEG-2 PS では, <!-- raw HTML omitted -->PES 複数個をまとめてパケット化<!-- raw HTML omitted -->するのに対して, MPEG-2 TS では, パケットサイズが小さいので, <!-- raw HTML omitted -->PES を分解してパケット化<!-- raw HTML omitted -->します. 具体的には, PES パケットを <!-- raw HTML omitted -->Transport Packet<!-- raw HTML omitted --> (TS packet) と呼ばれる <!-- raw HTML omitted -->188 バイト<!-- raw HTML omitted -->固定長のパケットへ分割します. そして, この Transport Packet の連続が, トランスポートストリームとなります. そして, この分割処理によって, 多重化しています.</p>
+<!-- raw HTML omitted -->
 <h2 id="同期ワード">同期ワード</h2>
-
-<p>Transport Packet のヘッダの先頭バイトは, 必ず <b>0x47</b> (<code>sync_byte</code>) になっています. 受信側は, この値があるデータ位置を Transport Packet の先頭として処理します. これによって, 伝送路上でエラーが発生して, 受信側が一時的にパケットの先頭を見失ったとしても 188 バイトごとの <code>sync_byte</code> を検出して, 同期しなおすことで比較的早期に同期を回復することができます.</p>
-
+<p>Transport Packet のヘッダの先頭バイトは, 必ず <!-- raw HTML omitted -->0x47<!-- raw HTML omitted --> (<code>sync_byte</code>) になっています. 受信側は, この値があるデータ位置を Transport Packet の先頭として処理します. これによって, 伝送路上でエラーが発生して, 受信側が一時的にパケットの先頭を見失ったとしても 188 バイトごとの <code>sync_byte</code> を検出して, 同期しなおすことで比較的早期に同期を回復することができます.</p>
 <h2 id="pid">PID</h2>
-
-<p>それぞれの Transport Packet には, <b>PID</b> (Packet Identifier) と呼ばれる <b>13 ビット</b>の情報が含まれます. Transport Packet が何を伝送しているのかを表す識別子です. 同一の画像・音声は, それぞれ同じ PID をもつので, Transport Stream を受信した側はそれを利用して, 元の PES（ES）に戻すことができます.</p>
-
+<p>それぞれの Transport Packet には, <!-- raw HTML omitted -->PID<!-- raw HTML omitted --> (Packet Identifier) と呼ばれる <!-- raw HTML omitted -->13 ビット<!-- raw HTML omitted -->の情報が含まれます. Transport Packet が何を伝送しているのかを表す識別子です. 同一の画像・音声は, それぞれ同じ PID をもつので, Transport Stream を受信した側はそれを利用して, 元の PES（ES）に戻すことができます.</p>
 <h2 id="巡回カウンター">巡回カウンター</h2>
-
-<p>MPEG-2 TS はエラーが発生しうる環境であつかうことを想定しているのでエラー検出が必要になります. Transport Packet ヘッダには, 同じ PID の Transport Packet を受信するたびに値が 1 ずつ増加する <code>continuity_counter</code> という <b>4 ビット</b>のカウンタがあります. つまり, 受信側でこのカウンタの不連続を検出することで, Transport Packet のロスを検出可能しています.</p>
-
+<p>MPEG-2 TS はエラーが発生しうる環境であつかうことを想定しているのでエラー検出が必要になります. Transport Packet ヘッダには, 同じ PID の Transport Packet を受信するたびに値が 1 ずつ増加する <code>continuity_counter</code> という <!-- raw HTML omitted -->4 ビット<!-- raw HTML omitted -->のカウンタがあります. つまり, 受信側でこのカウンタの不連続を検出することで, Transport Packet のロスを検出可能しています.</p>
 <h2 id="多重信号の同期">多重信号の同期</h2>
-
 <h3 id="pcr">PCR</h3>
-
-<p>MPEG-2 TS では, デジタル放送やストリーミングプロトコルで利用されるので, 送信側と受信側の同期をとる必要があります. 基準となるクロックは, <b>42 ビット</b>で, <b>STC</b> (System Time Clock) と呼ばれています. STC の同期は,約 27 h で, STC の校正データを伝送することによって同期をとることができます. そして, この校正データを <b>PCR</b> (Program Clock Reference) と呼びます.</p>
-
+<p>MPEG-2 TS では, デジタル放送やストリーミングプロトコルで利用されるので, 送信側と受信側の同期をとる必要があります. 基準となるクロックは, <!-- raw HTML omitted -->42 ビット<!-- raw HTML omitted -->で, <!-- raw HTML omitted -->STC<!-- raw HTML omitted --> (System Time Clock) と呼ばれています. STC の同期は,約 27 h で, STC の校正データを伝送することによって同期をとることができます. そして, この校正データを <!-- raw HTML omitted -->PCR<!-- raw HTML omitted --> (Program Clock Reference) と呼びます.</p>
 <h3 id="pts">PTS</h3>
-
-<p>同期をとることができたら, 映像や音声といったコンポーネントどうしの同期をとる必要があります. STC を基準にして, 表示する時刻を付加します. この時刻を <b>PTS</b> (Presentation Time Stamp) と呼びます. デコードする時刻を付加することもあります. この時刻を <b>DTS</b> (Decoding Time Stamp) と呼びます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/64762200-a7d42200-d578-11e9-92b3-71939a99afc0.png" alt="Transport Packet (TS packet)" /></p>
-
+<p>同期をとることができたら, 映像や音声といったコンポーネントどうしの同期をとる必要があります. STC を基準にして, 表示する時刻を付加します. この時刻を <!-- raw HTML omitted -->PTS<!-- raw HTML omitted --> (Presentation Time Stamp) と呼びます. デコードする時刻を付加することもあります. この時刻を <!-- raw HTML omitted -->DTS<!-- raw HTML omitted --> (Decoding Time Stamp) と呼びます.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/64762200-a7d42200-d578-11e9-92b3-71939a99afc0.png" alt="Transport Packet (TS packet)"></p>
 <h1 id="リファレンス">リファレンス</h1>
-
 <ul>
 <li><a href="https://www.amazon.co.jp/%E6%94%B9%E8%A8%82%E7%89%88-%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E6%94%BE%E9%80%81%E6%95%99%E7%A7%91%E6%9B%B8%EF%BC%88%E4%B8%8A%EF%BC%89-%E3%82%A4%E3%83%B3%E3%83%97%E3%83%AC%E3%82%B9%E6%A8%99%E6%BA%96%E6%95%99%E7%A7%91%E6%9B%B8%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E4%BA%80%E5%B1%B1-%E6%B8%89/dp/4844395033">改訂版 デジタル放送教科書（上）</a></li>
 <li><a href="http://www.mpeg.co.jp/libraries/video_it/video_06.html">第6回　MPEG-2 PS概要 前編</a></li>
@@ -604,14 +538,6 @@
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -833,14 +759,6 @@
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1049,14 +967,6 @@
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1139,9 +1049,6 @@
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1220,9 +1127,6 @@
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1246,7 +1150,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

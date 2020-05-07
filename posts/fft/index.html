@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>FFT &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="FFT">
 <meta itemprop="description" content="高速フーリエ変換 (FFT: Fast Fourier Transform) の実装を理解する">
-
-
 <meta itemprop="datePublished" content="2019-09-22T17:02:42&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-22T17:02:42&#43;09:00" />
-<meta itemprop="wordCount" content="3090">
+<meta itemprop="wordCount" content="3078">
 
 
 
 <meta itemprop="keywords" content="Mathematics,Fast Fourier Transform,FFT," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FFT"/>
 <meta name="twitter:description" content="高速フーリエ変換 (FFT: Fast Fourier Transform) の実装を理解する"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-22 17:02:42 &#43;0900 JST" itemprop="datePublished">2019-09-22</time>
             &middot;
-            3090
+            3078
             words
             &middot;
             7
@@ -322,529 +319,455 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<p><b>高速フーリエ変換</b> (<b>FFT</b> : Fast Fourier Transform) とは, 離散フーリエ変換のサイズが <b>2 のべき乗</b>の場合に, 高速に計算できるアルゴリズムのことです.</p>
-
+            <p><!-- raw HTML omitted -->高速フーリエ変換<!-- raw HTML omitted --> (<!-- raw HTML omitted -->FFT<!-- raw HTML omitted --> : Fast Fourier Transform) とは, 離散フーリエ変換のサイズが <!-- raw HTML omitted -->2 のべき乗<!-- raw HTML omitted -->の場合に, 高速に計算できるアルゴリズムのことです.</p>
 <h2 id="アルゴリズムの導出">アルゴリズムの導出</h2>
-
 <p>離散フーリエ変換のサイズ ($N$) が 8 の場合を例に導出します.</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2\pi kn}{N}\right)
 \end{eqnarray}
 $</p>
-
 <p>離散フーリエ変換の公式は, 以下のように行列で表現することができます.</p>
-
 <p>$
 \begin{eqnarray}
 x(n)=\left[
 \begin{array}{c}
-x(0) \\<br />
-x(1) \\<br />
-x(2) \\<br />
-x(3) \\<br />
-x(4) \\<br />
-x(5) \\<br />
-x(6) \\<br />
-x(7) \\<br />
+x(0) \\\<br>
+x(1) \\\<br>
+x(2) \\\<br>
+x(3) \\\<br>
+x(4) \\\<br>
+x(5) \\\<br>
+x(6) \\\<br>
+x(7) \\\<br>
 \end{array}
 \right]
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{c}
-X(0) \\<br />
-X(1) \\<br />
-X(2) \\<br />
-X(3) \\<br />
-X(4) \\<br />
-X(5) \\<br />
-X(6) \\<br />
-X(7) \\<br />
+X(0) \\\<br>
+X(1) \\\<br>
+X(2) \\\<br>
+X(3) \\\<br>
+X(4) \\\<br>
+X(5) \\\<br>
+X(6) \\\<br>
+X(7) \\\<br>
 \end{array}
 \right]
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 W_{8}=\exp\left(\frac{-j2\pi}{8}\right)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{cccccccc}
-W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
-W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp;  W^{4}_{8} &amp;  W^{5}_{8} &amp;  W^{6}_{8} &amp;  W^{7}_{8} \\<br />
-W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;  W^{8}_{8} &amp; W^{10}_{8} &amp; W^{12}_{8} &amp; W^{14}_{8} \\<br />
-W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; W^{12}_{8} &amp; W^{15}_{8} &amp; W^{18}_{8} &amp; W^{21}_{8} \\<br />
-W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp; W^{16}_{8} &amp; W^{20}_{8} &amp; W^{24}_{8} &amp; W^{28}_{8} \\<br />
-W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; W^{20}_{8} &amp; W^{25}_{8} &amp; W^{30}_{8} &amp; W^{35}_{8} \\<br />
-W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp; W^{24}_{8} &amp; W^{30}_{8} &amp; W^{36}_{8} &amp; W^{42}_{8} \\<br />
-W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{28}_{8} &amp; W^{35}_{8} &amp; W^{42}_{8} &amp; W^{49}_{8} \\<br />
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\\<br>
+W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp;  W^{4}_{8} &amp;  W^{5}_{8} &amp;  W^{6}_{8} &amp;  W^{7}_{8} \\\<br>
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;  W^{8}_{8} &amp; W^{10}_{8} &amp; W^{12}_{8} &amp; W^{14}_{8} \\\<br>
+W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; W^{12}_{8} &amp; W^{15}_{8} &amp; W^{18}_{8} &amp; W^{21}_{8} \\\<br>
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp; W^{16}_{8} &amp; W^{20}_{8} &amp; W^{24}_{8} &amp; W^{28}_{8} \\\<br>
+W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; W^{20}_{8} &amp; W^{25}_{8} &amp; W^{30}_{8} &amp; W^{35}_{8} \\\<br>
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp; W^{24}_{8} &amp; W^{30}_{8} &amp; W^{36}_{8} &amp; W^{42}_{8} \\\<br>
+W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{28}_{8} &amp; W^{35}_{8} &amp; W^{42}_{8} &amp; W^{49}_{8} \\\<br>
 \end{array}
 \right]x(n)
 \end{eqnarray}
 $</p>
-
 <p>ここで, 以下の関係 (オイラーの公式から導出できます) を考慮して, 行列を書き換えます.</p>
-
 <p>$
 \begin{eqnarray}
 W^{m}_{N}=W^{m(mod N)}_{N}
 \end{eqnarray}
 $</p>
-
 <p>例えば, $W^{8}_{8}=W^{0}_{8}$, $W^{9}_{8}=W^{1}_{8}$, $W^{10}_{8}=W^{2}_{8}$ &hellip;</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{cccccccc}
-W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
-W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; W^{4}_{8} &amp;  W^{5}_{8} &amp;  W^{6}_{8} &amp;  W^{7}_{8} \\<br />
-W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp; W^{0}_{8} &amp;  W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} \\<br />
-W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; W^{4}_{8} &amp;  W^{7}_{8} &amp; W^{10}_{8} &amp; W^{13}_{8} \\<br />
-W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp; W^{0}_{8} &amp;  W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} \\<br />
-W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; W^{4}_{8} &amp;  W^{9}_{8} &amp; W^{14}_{8} &amp; W^{19}_{8} \\<br />
-W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp; W^{0}_{8} &amp;  W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} \\<br />
-W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{4}_{8} &amp; W^{11}_{8} &amp; W^{18}_{8} &amp; W^{25}_{8} \\<br />
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\\<br>
+W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; W^{4}_{8} &amp;  W^{5}_{8} &amp;  W^{6}_{8} &amp;  W^{7}_{8} \\\<br>
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp; W^{0}_{8} &amp;  W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} \\\<br>
+W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; W^{4}_{8} &amp;  W^{7}_{8} &amp; W^{10}_{8} &amp; W^{13}_{8} \\\<br>
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp; W^{0}_{8} &amp;  W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} \\\<br>
+W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; W^{4}_{8} &amp;  W^{9}_{8} &amp; W^{14}_{8} &amp; W^{19}_{8} \\\<br>
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp; W^{0}_{8} &amp;  W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} \\\<br>
+W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{4}_{8} &amp; W^{11}_{8} &amp; W^{18}_{8} &amp; W^{25}_{8} \\\<br>
 \end{array}
 \right]x(n)
 \end{eqnarray}
 $</p>
-
 <p>そして, 行列の行を偶奇にわけて, 並び替えます.</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{c}
-X(0) \\<br />
-X(4) \\<br />
-X(2) \\<br />
-X(6) \\<br />
-X(1) \\<br />
-X(5) \\<br />
-X(3) \\<br />
-X(7) \\<br />
+X(0) \\\<br>
+X(4) \\\<br>
+X(2) \\\<br>
+X(6) \\\<br>
+X(1) \\\<br>
+X(5) \\\<br>
+X(3) \\\<br>
+X(7) \\\<br>
 \end{array}
 \right]
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{cccccccc}
-W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
-W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp; W^{0}_{8} &amp;  W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} \\<br />
-W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp; W^{0}_{8} &amp;  W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} \\<br />
-W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp; W^{0}_{8} &amp;  W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} \\<br />
-W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; W^{4}_{8} &amp;  W^{5}_{8} &amp;  W^{6}_{8} &amp;  W^{7}_{8} \\<br />
-W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; W^{4}_{8} &amp;  W^{9}_{8} &amp; W^{14}_{8} &amp; W^{19}_{8} \\<br />
-W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; W^{4}_{8} &amp;  W^{7}_{8} &amp; W^{10}_{8} &amp; W^{13}_{8} \\<br />
-W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{4}_{8} &amp; W^{11}_{8} &amp; W^{18}_{8} &amp; W^{25}_{8} \\<br />
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\\<br>
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp; W^{0}_{8} &amp;  W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} \\\<br>
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp; W^{0}_{8} &amp;  W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} \\\<br>
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp; W^{0}_{8} &amp;  W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} \\\<br>
+W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; W^{4}_{8} &amp;  W^{5}_{8} &amp;  W^{6}_{8} &amp;  W^{7}_{8} \\\<br>
+W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; W^{4}_{8} &amp;  W^{9}_{8} &amp; W^{14}_{8} &amp; W^{19}_{8} \\\<br>
+W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; W^{4}_{8} &amp;  W^{7}_{8} &amp; W^{10}_{8} &amp; W^{13}_{8} \\\<br>
+W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{4}_{8} &amp; W^{11}_{8} &amp; W^{18}_{8} &amp; W^{25}_{8} \\\<br>
 \end{array}
 \right]x(n)
 \end{eqnarray}
 $</p>
-
-<p>すると, 行列の列の中央を境目に, <b>偶数のインデックスの行は左右の周期が対称に</b>, <b>奇数のインデックスの行は半周期</b> ($N=8$ なので 4 ずつずれている) ことがわかります.</p>
-
+<p>すると, 行列の列の中央を境目に, <!-- raw HTML omitted -->偶数のインデックスの行は左右の周期が対称に<!-- raw HTML omitted -->, <!-- raw HTML omitted -->奇数のインデックスの行は半周期<!-- raw HTML omitted --> ($N=8$ なので 4 ずつずれている) ことがわかります.</p>
 <p>そこで, 以下の関係を考慮します.</p>
-
 <p>$
 \begin{eqnarray}
 \begin{cases}
-W^{0}_{8}=1 \\<br />
-W^{4}_{8}=-1 \\<br />
+W^{0}_{8}=1 \\<br>
+W^{4}_{8}=-1 \\<br>
 \end{cases}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
-W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;   W^{0}_{8} &amp;   W^{0}_{8} \\<br />
-W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp;  W^{0}_{8} &amp;  W^{4}_{8} &amp;   W^{8}_{8} &amp;  W^{12}_{8} \\<br />
-W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;  W^{0}_{8} &amp;  W^{2}_{8} &amp;   W^{4}_{8} &amp;   W^{6}_{8} \\<br />
-W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp;  W^{0}_{8} &amp;  W^{6}_{8} &amp;  W^{12}_{8} &amp;  W^{18}_{8} \\<br />
-W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; -W^{0}_{8} &amp; -W^{1}_{8} &amp;  -W^{2}_{8} &amp;  -W^{3}_{8} \\<br />
-W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; -W^{0}_{8} &amp; -W^{5}_{8} &amp; -W^{10}_{8} &amp; -W^{15}_{8} \\<br />
-W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; -W^{0}_{8} &amp; -W^{3}_{8} &amp;  -W^{6}_{8} &amp;  -W^{9}_{8} \\<br />
-W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; -W^{0}_{8} &amp; -W^{7}_{8} &amp; -W^{14}_{8} &amp; -W^{21}_{8} \\<br />
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;   W^{0}_{8} &amp;   W^{0}_{8} \\\<br>
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp;  W^{0}_{8} &amp;  W^{4}_{8} &amp;   W^{8}_{8} &amp;  W^{12}_{8} \\\<br>
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;  W^{0}_{8} &amp;  W^{2}_{8} &amp;   W^{4}_{8} &amp;   W^{6}_{8} \\\<br>
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp;  W^{0}_{8} &amp;  W^{6}_{8} &amp;  W^{12}_{8} &amp;  W^{18}_{8} \\\<br>
+W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; -W^{0}_{8} &amp; -W^{1}_{8} &amp;  -W^{2}_{8} &amp;  -W^{3}_{8} \\\<br>
+W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; -W^{0}_{8} &amp; -W^{5}_{8} &amp; -W^{10}_{8} &amp; -W^{15}_{8} \\\<br>
+W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; -W^{0}_{8} &amp; -W^{3}_{8} &amp;  -W^{6}_{8} &amp;  -W^{9}_{8} \\\<br>
+W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; -W^{0}_{8} &amp; -W^{7}_{8} &amp; -W^{14}_{8} &amp; -W^{21}_{8} \\\<br>
 \end{array}
 \right]x(n)
 \end{eqnarray}
 $</p>
-
 <p>そして,</p>
-
 <p>$
 \begin{eqnarray}
 W^{a}W^{b}=W^{a+b}
 \end{eqnarray}
 $</p>
-
 <p>であるので,</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
-W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;            W^{0}_{8} &amp;            W^{0}_{8} &amp;             W^{0}_{8} &amp;             W^{0}_{8} \\<br />
-W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp;            W^{0}_{8} &amp;            W^{4}_{8} &amp;             W^{8}_{8} &amp;            W^{12}_{8} \\<br />
-W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;            W^{0}_{8} &amp;            W^{2}_{8} &amp;             W^{4}_{8} &amp;             W^{6}_{8} \\<br />
-W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp;            W^{0}_{8} &amp;            W^{6}_{8} &amp;            W^{12}_{8} &amp;            W^{18}_{8} \\<br />
-W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{0}_{8} &amp; -W^{2}_{8}W^{0}_{8}  &amp; -W^{3}_{8}W^{0}_{8}  \\<br />
-W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{4}_{8} &amp; -W^{2}_{8}W^{8}_{8}  &amp; -W^{3}_{8}W^{12}_{8} \\<br />
-W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{2}_{8} &amp; -W^{2}_{8}W^{4}_{8}  &amp; -W^{3}_{8}W^{6}_{8}  \\<br />
-W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{6}_{8} &amp; -W^{2}_{8}W^{12}_{8} &amp; -W^{3}_{8}W^{18}_{8} \\<br />
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;            W^{0}_{8} &amp;            W^{0}_{8} &amp;             W^{0}_{8} &amp;             W^{0}_{8} \\\<br>
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp;            W^{0}_{8} &amp;            W^{4}_{8} &amp;             W^{8}_{8} &amp;            W^{12}_{8} \\\<br>
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;            W^{0}_{8} &amp;            W^{2}_{8} &amp;             W^{4}_{8} &amp;             W^{6}_{8} \\\<br>
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp;            W^{0}_{8} &amp;            W^{6}_{8} &amp;            W^{12}_{8} &amp;            W^{18}_{8} \\\<br>
+W^{0}_{8} &amp; W^{1}_{8} &amp;  W^{2}_{8} &amp;  W^{3}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{0}_{8} &amp; -W^{2}_{8}W^{0}_{8}  &amp; -W^{3}_{8}W^{0}_{8}  \\\<br>
+W^{0}_{8} &amp; W^{5}_{8} &amp; W^{10}_{8} &amp; W^{15}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{4}_{8} &amp; -W^{2}_{8}W^{8}_{8}  &amp; -W^{3}_{8}W^{12}_{8} \\\<br>
+W^{0}_{8} &amp; W^{3}_{8} &amp;  W^{6}_{8} &amp;  W^{9}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{2}_{8} &amp; -W^{2}_{8}W^{4}_{8}  &amp; -W^{3}_{8}W^{6}_{8}  \\\<br>
+W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; -W^{0}_{8}W^{0}_{8} &amp; -W^{1}_{8}W^{6}_{8} &amp; -W^{2}_{8}W^{12}_{8} &amp; -W^{3}_{8}W^{18}_{8} \\\<br>
 \end{array}
 \right]x(n)
 \end{eqnarray}
 $</p>
-
 <p>時間ドメインの関数を以下のように置き換えて, 行列をさらに書き換えます.</p>
-
 <p>$
 \begin{eqnarray}
 x_{1}(n)=\left[
 \begin{array}{l}
-x(0)+x(4) \\<br />
-x(1)+x(5) \\<br />
-x(2)+x(6) \\<br />
-x(3)+x(7) \\<br />
-W^{0}_{8}(x(0)-x(4)) \\<br />
-W^{1}_{8}(x(1)-x(5)) \\<br />
-W^{2}_{8}(x(2)-x(6)) \\<br />
-W^{3}_{8}(x(3)-x(7)) \\<br />
+x(0)+x(4) \\\<br>
+x(1)+x(5) \\\<br>
+x(2)+x(6) \\\<br>
+x(3)+x(7) \\\<br>
+W^{0}_{8}(x(0)-x(4)) \\\<br>
+W^{1}_{8}(x(1)-x(5)) \\\<br>
+W^{2}_{8}(x(2)-x(6)) \\\<br>
+W^{3}_{8}(x(3)-x(7)) \\\<br>
 \end{array}
 \right]
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
-W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\<br />
-W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\<br />
-W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\<br />
-W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\<br />
-         0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
-         0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} \\<br />
-         0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} \\<br />
-         0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} \\<br />
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\\<br>
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\\<br>
+W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\\<br>
+W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} &amp;          0 &amp;          0 &amp;           0 &amp;           0 \\\<br>
+0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\\<br>
+0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{8}_{8} &amp; W^{12}_{8} \\\<br>
+0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{2}_{8} &amp;  W^{4}_{8} &amp;  W^{6}_{8} \\\<br>
+0 &amp;          0 &amp;           0 &amp;           0 &amp; W^{0}_{8} &amp; W^{6}_{8} &amp; W^{12}_{8} &amp; W^{18}_{8} \\\<br>
 \end{array}
 \right]x_{1}(n)
 \end{eqnarray}
 $</p>
-
 <p>最後に, 以下の関係を考慮して, 行列を書き換えます.</p>
-
 <p>$
 \begin{eqnarray}
 W^{m}_{N}=W^{m/2}_{N/2}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
-W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-W^{0}_{4} &amp; W^{2}_{4} &amp; W^{4}_{4} &amp; W^{6}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-W^{0}_{4} &amp; W^{1}_{4} &amp; W^{2}_{4} &amp; W^{3}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-W^{0}_{4} &amp; W^{3}_{4} &amp; W^{6}_{4} &amp; W^{9}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-         0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} \\<br />
-         0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{2}_{4} &amp; W^{4}_{4} &amp; W^{6}_{4} \\<br />
-         0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{1}_{4} &amp; W^{2}_{4} &amp; W^{3}_{4} \\<br />
-         0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{3}_{4} &amp; W^{6}_{4} &amp; W^{9}_{4} \\<br />
+W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+W^{0}_{4} &amp; W^{2}_{4} &amp; W^{4}_{4} &amp; W^{6}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+W^{0}_{4} &amp; W^{1}_{4} &amp; W^{2}_{4} &amp; W^{3}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+W^{0}_{4} &amp; W^{3}_{4} &amp; W^{6}_{4} &amp; W^{9}_{4} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} &amp; W^{0}_{4} \\\<br>
+0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{2}_{4} &amp; W^{4}_{4} &amp; W^{6}_{4} \\\<br>
+0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{1}_{4} &amp; W^{2}_{4} &amp; W^{3}_{4} \\\<br>
+0 &amp;          0 &amp;           0 &amp;         0 &amp; W^{0}_{4} &amp; W^{3}_{4} &amp; W^{6}_{4} &amp; W^{9}_{4} \\\<br>
 \end{array}
 \right]x_{1}(n)
 \end{eqnarray}
 $</p>
-
-<p>この行列は, <b>離散フーリエ変換のサイズを $N=4$ に減らして高速化できることを意味します</b>.</p>
-
-<p>さらに, この行列をみると, <b>再帰的な構造</b>があることがわかるので, 同様の手順で行列を書き換えます.</p>
-
+<p>この行列は, <!-- raw HTML omitted -->離散フーリエ変換のサイズを $N=4$ に減らして高速化できることを意味します<!-- raw HTML omitted -->.</p>
+<p>さらに, この行列をみると, <!-- raw HTML omitted -->再帰的な構造<!-- raw HTML omitted -->があることがわかるので, 同様の手順で行列を書き換えます.</p>
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
-W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;           0 &amp;          0 &amp;           0 &amp;           0 \\<br />
-W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{0}_{8} &amp;  W^{4}_{8} &amp;           0 &amp;          0 &amp;           0 &amp;           0 \\<br />
-W^{0}_{8} &amp; W^{2}_{8} &amp; -W^{0}_{8} &amp; -W^{2}_{8} &amp;           0 &amp;          0 &amp;           0 &amp;           0 \\<br />
-W^{0}_{8} &amp; W^{6}_{8} &amp; -W^{0}_{8} &amp; -W^{6}_{8} &amp;           0 &amp;          0 &amp;           0 &amp;           0 \\<br />
-         0 &amp;          0 &amp;           0 &amp;           0 &amp;  W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\<br />
-         0 &amp;          0 &amp;           0 &amp;           0 &amp;  W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{0}_{8} &amp;  W^{4}_{8} \\<br />
-         0 &amp;          0 &amp;           0 &amp;           0 &amp;  W^{0}_{8} &amp; W^{2}_{8} &amp; -W^{0}_{8} &amp; -W^{2}_{8} \\<br />
-         0 &amp;          0 &amp;           0 &amp;           0 &amp;  W^{0}_{8} &amp; W^{6}_{8} &amp; -W^{0}_{8} &amp; -W^{6}_{8} \\<br />
+W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} &amp;           0 &amp;          0 &amp;           0 &amp;           0 \\\<br>
+W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{0}_{8} &amp;  W^{4}_{8} &amp;           0 &amp;          0 &amp;           0 &amp;           0 \\\<br>
+W^{0}_{8} &amp; W^{2}_{8} &amp; -W^{0}_{8} &amp; -W^{2}_{8} &amp;           0 &amp;          0 &amp;           0 &amp;           0 \\\<br>
+W^{0}_{8} &amp; W^{6}_{8} &amp; -W^{0}_{8} &amp; -W^{6}_{8} &amp;           0 &amp;          0 &amp;           0 &amp;           0 \\\<br>
+0 &amp;          0 &amp;           0 &amp;           0 &amp;  W^{0}_{8} &amp; W^{0}_{8} &amp;  W^{0}_{8} &amp;  W^{0}_{8} \\\<br>
+0 &amp;          0 &amp;           0 &amp;           0 &amp;  W^{0}_{8} &amp; W^{4}_{8} &amp;  W^{0}_{8} &amp;  W^{4}_{8} \\\<br>
+0 &amp;          0 &amp;           0 &amp;           0 &amp;  W^{0}_{8} &amp; W^{2}_{8} &amp; -W^{0}_{8} &amp; -W^{2}_{8} \\\<br>
+0 &amp;          0 &amp;           0 &amp;           0 &amp;  W^{0}_{8} &amp; W^{6}_{8} &amp; -W^{0}_{8} &amp; -W^{6}_{8} \\\<br>
 \end{array}
 \right]x_{1}(n)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 x_{2}(n)=\left[
 \begin{array}{l}
-x_{1}(0)+x_{1}(2) \\<br />
-x_{1}(1)+x_{1}(3) \\<br />
-W^{0}_{8}(x_{1}(0)-x_{1}(2)) \\<br />
-W^{2}_{8}(x_{1}(1)-x_{1}(3)) \\<br />
-x_{1}(4)+x_{1}(6) \\<br />
-x_{1}(5)+x_{1}(7) \\<br />
-W^{0}_{8}(x_{1}(4)-x_{1}(6)) \\<br />
-W^{2}_{8}(x_{1}(5)-x_{1}(7)) \\<br />
+x_{1}(0)+x_{1}(2) \\\<br>
+x_{1}(1)+x_{1}(3) \\\<br>
+W^{0}_{8}(x_{1}(0)-x_{1}(2)) \\\<br>
+W^{2}_{8}(x_{1}(1)-x_{1}(3)) \\\<br>
+x_{1}(4)+x_{1}(6) \\\<br>
+x_{1}(5)+x_{1}(7) \\\<br>
+W^{0}_{8}(x_{1}(4)-x_{1}(6)) \\\<br>
+W^{2}_{8}(x_{1}(5)-x_{1}(7)) \\\<br>
 \end{array}
 \right]
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
-W^{0}_{8} &amp; W^{0}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-W^{0}_{8} &amp; W^{4}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-         0 &amp;          0 &amp; W^{0}_{8} &amp; W^{0}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-         0 &amp;          0 &amp; W^{0}_{8} &amp; W^{4}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-         0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{0}_{8} &amp;          0 &amp;          0 \\<br />
-         0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{4}_{8} &amp;          0 &amp;          0 \\<br />
-         0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{0}_{8} \\<br />
-         0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{4}_{8} \\<br />
+W^{0}_{8} &amp; W^{0}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+W^{0}_{8} &amp; W^{4}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+0 &amp;          0 &amp; W^{0}_{8} &amp; W^{0}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+0 &amp;          0 &amp; W^{0}_{8} &amp; W^{4}_{8} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{0}_{8} &amp;          0 &amp;          0 \\\<br>
+0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{4}_{8} &amp;          0 &amp;          0 \\\<br>
+0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{0}_{8} \\\<br>
+0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{8} &amp; W^{4}_{8} \\\<br>
 \end{array}
 \right]x_{2}(n)
 \end{eqnarray}
 $</p>
-
 <p>$W^{m}_{N}=W^{m/2}_{N/2}$ の関係があるので,</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\left[
 \begin{array}{rrrrrrrr}
-W^{0}_{2} &amp; W^{0}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-W^{0}_{2} &amp; W^{1}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-         0 &amp;          0 &amp; W^{0}_{2} &amp; W^{0}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-         0 &amp;          0 &amp; W^{0}_{2} &amp; W^{1}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\<br />
-         0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{0}_{2} &amp;          0 &amp;          0 \\<br />
-         0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{1}_{2} &amp;          0 &amp;          0 \\<br />
-         0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{0}_{2} \\<br />
-         0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{1}_{2} \\<br />
+W^{0}_{2} &amp; W^{0}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+W^{0}_{2} &amp; W^{1}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+0 &amp;          0 &amp; W^{0}_{2} &amp; W^{0}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+0 &amp;          0 &amp; W^{0}_{2} &amp; W^{1}_{2} &amp;          0 &amp;          0 &amp;          0 &amp;          0 \\\<br>
+0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{0}_{2} &amp;          0 &amp;          0 \\\<br>
+0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{1}_{2} &amp;          0 &amp;          0 \\\<br>
+0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{0}_{2} \\\<br>
+0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp;          0 &amp; W^{0}_{2} &amp; W^{1}_{2} \\\<br>
 \end{array}
 \right]x_{3}(n)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 x_{3}(n)=\left[
 \begin{array}{l}
-x_{2}(0)+x_{2}(1) \\<br />
-x_{2}(0)+x_{2}(1) \\<br />
-x_{2}(2)+x_{2}(3) \\<br />
-x_{2}(2)+x_{2}(3) \\<br />
-x_{2}(4)+x_{2}(5) \\<br />
-x_{2}(4)+x_{2}(5) \\<br />
-x_{2}(6)+x_{2}(7) \\<br />
-x_{2}(6)+x_{2}(7) \\<br />
+x_{2}(0)+x_{2}(1) \\\<br>
+x_{2}(0)+x_{2}(1) \\\<br>
+x_{2}(2)+x_{2}(3) \\\<br>
+x_{2}(2)+x_{2}(3) \\\<br>
+x_{2}(4)+x_{2}(5) \\\<br>
+x_{2}(4)+x_{2}(5) \\\<br>
+x_{2}(6)+x_{2}(7) \\\<br>
+x_{2}(6)+x_{2}(7) \\\<br>
 \end{array}
 \right]
 \end{eqnarray}
 $</p>
-
-<p>この行列は, <b>離散フーリエ変換のサイズを $N=2$ に減らして高速化できることを意味します</b>.</p>
-
+<p>この行列は, <!-- raw HTML omitted -->離散フーリエ変換のサイズを $N=2$ に減らして高速化できることを意味します<!-- raw HTML omitted -->.</p>
 <h2 id="ビットリバース">ビットリバース</h2>
-
 <p>高速フーリエ変換のアルゴリズム導出のさいに, 行列の列を並び替えているので, $X(k)$ のインデックスを昇順に並び替える必要があります.</p>
-
 <p>並び替えるまえと並び替えたあとのインデックスには, 以下の関係があります.</p>
-
-<table>
-  <caption>ビットリバース</caption>
-  <thead>
-    <tr><th scope="col">$x(n)$</th><th scope="col">a</th><th scope="col">b</th><th scope="col">$X(k)$</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>0</td><td>000</td><td>000</td><td>0</td></tr>
-    <tr><td>1</td><td>001</td><td>100</td><td>4</td></tr>
-    <tr><td>2</td><td>010</td><td>010</td><td>2</td></tr>
-    <tr><td>3</td><td>011</td><td>110</td><td>6</td></tr>
-    <tr><td>4</td><td>100</td><td>001</td><td>1</td></tr>
-    <tr><td>5</td><td>101</td><td>101</td><td>5</td></tr>
-    <tr><td>6</td><td>110</td><td>011</td><td>3</td></tr>
-    <tr><td>7</td><td>111</td><td>111</td><td>7</td></tr>
-  </tbody>
-</table>
-
-<p>上記のテーブルより, 並び替えるまえのインデックスを 2 進数に変換し, そのビットをの並びを逆にして, 10 進数に変換したインデックスが並び替えたあとのインデックスということです. このアルゴリズムは, <b>ビットリバース</b>と呼ばれています.</p>
-
+<!-- raw HTML omitted -->
+<p>上記のテーブルより, 並び替えるまえのインデックスを 2 進数に変換し, そのビットをの並びを逆にして, 10 進数に変換したインデックスが並び替えたあとのインデックスということです. このアルゴリズムは, <!-- raw HTML omitted -->ビットリバース<!-- raw HTML omitted -->と呼ばれています.</p>
 <h2 id="計算量">計算量</h2>
-
-<p>行列の書き換え過程をダイアグラムにしたのが以下の図で, <b>バタフライ計算</b>と呼ばれています.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66152511-8f759580-e654-11e9-912e-0e8e61be7fd0.png" alt="FFT (バタフライ計算)" /></p>
-
+<p>行列の書き換え過程をダイアグラムにしたのが以下の図で, <!-- raw HTML omitted -->バタフライ計算<!-- raw HTML omitted -->と呼ばれています.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/66152511-8f759580-e654-11e9-912e-0e8e61be7fd0.png" alt="FFT (バタフライ計算)"></p>
 <p>離散フーリエ変換のサイズが $N$ の高速フーリエ変換は, $\log_{2}N$ 段で計算できます. このとき, 最後の段以外は $N/2$ 回の乗算と $N$ 回の加算, 最後の段は $N$ 回の加算となるので, 高速フーリエ変換のオーダーは, $N\log_{2}N$ となります. 離散フーリエ変換のオーダーが $N^{2}$ であることを考えると, $N$ が大きいほど, 高速フーリエ変換はより有効であると言えます.</p>
-
 <h2 id="実装">実装</h2>
-
 <p>C++ で実装した, 高速フーリエ変換と逆高速フーリエ変換の関数です.</p>
-
 <p>FFT</p>
-
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;cmath&gt;
-#include &lt;complex&gt;
-
-int pow2(int n) {
-  if (n == 0) {
-    return 1;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;complex&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pow2</span>(<span style="color:#66d9ef">int</span> n) {
+  <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
   }
 
-  return 2 &lt;&lt; (n - 1);
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&lt;&lt;</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
 }
 
-void FFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
-  std::vector&lt;int&gt; index(N);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">FFT</span>(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">int</span> N) {
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> index(N);
 
-  int number_of_stages = std::log2(N);
+  <span style="color:#66d9ef">int</span> number_of_stages <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>log2(N);
 
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      int rest = number_of_stages - stage;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> stage <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; stage <span style="color:#f92672">&lt;=</span> number_of_stages; stage<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>); i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">int</span> rest <span style="color:#f92672">=</span> number_of_stages <span style="color:#f92672">-</span> stage;
 
-      for (int j = 0; j &lt; pow2(rest); j++) {
-        int n = i * pow2(rest + 1) + j;
-        int m = pow2(rest) + n;
-        int r = j * pow2(stage - 1);
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> pow2(rest); j<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> i <span style="color:#f92672">*</span> pow2(rest <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> j;
+        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> pow2(rest) <span style="color:#f92672">+</span> n;
+        <span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> j <span style="color:#f92672">*</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
 
-        double a_real = x[n].real();
-        double a_imag = x[n].imag();
-        double b_real = x[m].real();
-        double b_imag = x[m].imag();
-        double c_real = std::cos((2.0 * M_PI * r) / N);
-        double c_imag = -std::sin((2.0 * M_PI * r) / N);
+        <span style="color:#66d9ef">double</span> a_real <span style="color:#f92672">=</span> x[n].real();
+        <span style="color:#66d9ef">double</span> a_imag <span style="color:#f92672">=</span> x[n].imag();
+        <span style="color:#66d9ef">double</span> b_real <span style="color:#f92672">=</span> x[m].real();
+        <span style="color:#66d9ef">double</span> b_imag <span style="color:#f92672">=</span> x[m].imag();
+        <span style="color:#66d9ef">double</span> c_real <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>cos((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> r) <span style="color:#f92672">/</span> N);
+        <span style="color:#66d9ef">double</span> c_imag <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>std<span style="color:#f92672">::</span>sin((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> r) <span style="color:#f92672">/</span> N);
 
-        if (stage &lt; number_of_stages) {
-          x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
-          x[m] = std::complex&lt;double&gt;((c_real * (a_real - b_real)) - (c_imag * (a_imag - b_imag)), (c_real * (a_imag - b_imag)) + (c_imag * (a_real - b_real)));
-        } else {
-          x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
-          x[m] = std::complex&lt;double&gt;((a_real - b_real), (a_imag - b_imag));
+        <span style="color:#66d9ef">if</span> (stage <span style="color:#f92672">&lt;</span> number_of_stages) {
+          x[n] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>((a_real <span style="color:#f92672">+</span> b_real), (a_imag <span style="color:#f92672">+</span> b_imag));
+          x[m] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>((c_real <span style="color:#f92672">*</span> (a_real <span style="color:#f92672">-</span> b_real)) <span style="color:#f92672">-</span> (c_imag <span style="color:#f92672">*</span> (a_imag <span style="color:#f92672">-</span> b_imag)), (c_real <span style="color:#f92672">*</span> (a_imag <span style="color:#f92672">-</span> b_imag)) <span style="color:#f92672">+</span> (c_imag <span style="color:#f92672">*</span> (a_real <span style="color:#f92672">-</span> b_real)));
+        } <span style="color:#66d9ef">else</span> {
+          x[n] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>((a_real <span style="color:#f92672">+</span> b_real), (a_imag <span style="color:#f92672">+</span> b_imag));
+          x[m] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>((a_real <span style="color:#f92672">-</span> b_real), (a_imag <span style="color:#f92672">-</span> b_imag));
         }
       }
     }
   }
 
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    int rest = number_of_stages - stage;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> stage <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; stage <span style="color:#f92672">&lt;=</span> number_of_stages; stage<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> rest <span style="color:#f92672">=</span> number_of_stages <span style="color:#f92672">-</span> stage;
 
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      index[pow2(stage - 1) + i] = index[i] + pow2(rest);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>); i<span style="color:#f92672">++</span>) {
+      index[pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> i] <span style="color:#f92672">=</span> index[i] <span style="color:#f92672">+</span> pow2(rest);
     }
   }
 
-  for (int k = 0; k &lt; N; k++) {
-    if (index[k] &lt;= k) {
-      continue;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (index[k] <span style="color:#f92672">&lt;=</span> k) {
+      <span style="color:#66d9ef">continue</span>;
     }
 
-    auto tmp    = x[index[k]];
-    x[index[k]] = x[k];
-    x[k]        = tmp;
+    <span style="color:#66d9ef">auto</span> tmp    <span style="color:#f92672">=</span> x[index[k]];
+    x[index[k]] <span style="color:#f92672">=</span> x[k];
+    x[k]        <span style="color:#f92672">=</span> tmp;
   }
 }
-</code></pre>
-
-<p>IFFT</p>
-
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;cmath&gt;
-#include &lt;complex&gt;
-
-int pow2(int n) {
-  if (n == 0) {
-    return 1;
+</code></pre></div><p>IFFT</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;complex&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pow2</span>(<span style="color:#66d9ef">int</span> n) {
+  <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
   }
 
-  return 2 &lt;&lt; (n - 1);
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&lt;&lt;</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
 }
 
-void IFFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
-  std::vector&lt;int&gt; index(N);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IFFT</span>(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">int</span> N) {
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> index(N);
 
-  int number_of_stages = std::log2(N);
+  <span style="color:#66d9ef">int</span> number_of_stages <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>log2(N);
 
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      int rest = number_of_stages - stage;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> stage <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; stage <span style="color:#f92672">&lt;=</span> number_of_stages; stage<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>); i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">int</span> rest <span style="color:#f92672">=</span> number_of_stages <span style="color:#f92672">-</span> stage;
 
-      for (int j = 0; j &lt; pow2(rest); j++) {
-        int n = i * pow2(rest + 1) + j;
-        int m = pow2(rest) + n;
-        int r = j * pow2(stage - 1);
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> pow2(rest); j<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> i <span style="color:#f92672">*</span> pow2(rest <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> j;
+        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> pow2(rest) <span style="color:#f92672">+</span> n;
+        <span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> j <span style="color:#f92672">*</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
 
-        double a_real = x[n].real();
-        double a_imag = x[n].imag();
-        double b_real = x[m].real();
-        double b_imag = x[m].imag();
-        double c_real = std::cos((2.0 * M_PI * r) / N);
-        double c_imag = std::sin((2.0 * M_PI * r) / N);
+        <span style="color:#66d9ef">double</span> a_real <span style="color:#f92672">=</span> x[n].real();
+        <span style="color:#66d9ef">double</span> a_imag <span style="color:#f92672">=</span> x[n].imag();
+        <span style="color:#66d9ef">double</span> b_real <span style="color:#f92672">=</span> x[m].real();
+        <span style="color:#66d9ef">double</span> b_imag <span style="color:#f92672">=</span> x[m].imag();
+        <span style="color:#66d9ef">double</span> c_real <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>cos((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> r) <span style="color:#f92672">/</span> N);
+        <span style="color:#66d9ef">double</span> c_imag <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>sin((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> r) <span style="color:#f92672">/</span> N);
 
-        if (stage &lt; number_of_stages) {
-          x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
-          x[m] = std::complex&lt;double&gt;((c_real * (a_real - b_real)) - (c_imag * (a_imag - b_imag)), (c_real * (a_imag - b_imag)) + (c_imag * (a_real - b_real)));
-        } else {
-          x[n] = std::complex&lt;double&gt;((a_real + b_real), (a_imag + b_imag));
-          x[m] = std::complex&lt;double&gt;((a_real - b_real), (a_imag - b_imag));
+        <span style="color:#66d9ef">if</span> (stage <span style="color:#f92672">&lt;</span> number_of_stages) {
+          x[n] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>((a_real <span style="color:#f92672">+</span> b_real), (a_imag <span style="color:#f92672">+</span> b_imag));
+          x[m] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>((c_real <span style="color:#f92672">*</span> (a_real <span style="color:#f92672">-</span> b_real)) <span style="color:#f92672">-</span> (c_imag <span style="color:#f92672">*</span> (a_imag <span style="color:#f92672">-</span> b_imag)), (c_real <span style="color:#f92672">*</span> (a_imag <span style="color:#f92672">-</span> b_imag)) <span style="color:#f92672">+</span> (c_imag <span style="color:#f92672">*</span> (a_real <span style="color:#f92672">-</span> b_real)));
+        } <span style="color:#66d9ef">else</span> {
+          x[n] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>((a_real <span style="color:#f92672">+</span> b_real), (a_imag <span style="color:#f92672">+</span> b_imag));
+          x[m] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>((a_real <span style="color:#f92672">-</span> b_real), (a_imag <span style="color:#f92672">-</span> b_imag));
         }
       }
     }
   }
 
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    int rest = number_of_stages - stage;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> stage <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; stage <span style="color:#f92672">&lt;=</span> number_of_stages; stage<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> rest <span style="color:#f92672">=</span> number_of_stages <span style="color:#f92672">-</span> stage;
 
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      index[pow2(stage - 1) + i] = index[i] + pow2(rest);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>); i<span style="color:#f92672">++</span>) {
+      index[pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> i] <span style="color:#f92672">=</span> index[i] <span style="color:#f92672">+</span> pow2(rest);
     }
   }
 
-  for (int k = 0; k &lt; N; k++) {
-    if (index[k] &lt;= k) {
-      continue;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (index[k] <span style="color:#f92672">&lt;=</span> k) {
+      <span style="color:#66d9ef">continue</span>;
     }
 
-    auto tmp    = x[index[k]];
-    x[index[k]] = x[k];
-    x[k]        = tmp;
+    <span style="color:#66d9ef">auto</span> tmp    <span style="color:#f92672">=</span> x[index[k]];
+    x[index[k]] <span style="color:#f92672">=</span> x[k];
+    x[k]        <span style="color:#f92672">=</span> tmp;
   }
 
-  for (int k = 0; k &lt; N; k++) {
-    x[k] = std::complex&lt;double&gt;((x[k].real() / N), (x[k].imag() / N));
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+    x[k] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>((x[k].real() <span style="color:#f92672">/</span> N), (x[k].imag() <span style="color:#f92672">/</span> N));
   }
 }
 
-</code></pre>
-
-<h1 id="リファレンス">リファレンス</h1>
-
+</code></pre></div><h1 id="リファレンス">リファレンス</h1>
 <ul>
 <li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%81%A7%E3%81%AF%E3%81%98%E3%82%81%E3%82%8B%E9%9F%B3%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E3%82%B5%E3%82%A6%E3%83%B3%E3%83%89%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86-%E9%9D%92%E6%9C%A8-%E7%9B%B4%E5%8F%B2/dp/4274206505">C言語ではじめる音のプログラミング―サウンドエフェクトの信号処理</a></li>
 </ul>
@@ -1024,14 +947,6 @@ void IFFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -1253,14 +1168,6 @@ void IFFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1469,14 +1376,6 @@ void IFFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1559,9 +1458,6 @@ void IFFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1640,9 +1536,6 @@ void IFFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1666,7 +1559,7 @@ void IFFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, int N) {
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

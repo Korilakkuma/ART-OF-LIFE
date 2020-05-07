@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>CELP &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,8 +30,6 @@
     
     <meta itemprop="name" content="CELP">
 <meta itemprop="description" content="分析合成方式 PCM は, 音の波形そのものを符号化する, いわゆる, 波形符号化方式ですが, そうではなく, 観測信号から音の発生機構を推定し, そのパラメー">
-
-
 <meta itemprop="datePublished" content="2020-01-12T17:27:07&#43;09:00" />
 <meta itemprop="dateModified" content="2020-01-12T17:27:07&#43;09:00" />
 <meta itemprop="wordCount" content="1918">
@@ -39,7 +37,6 @@
 
 
 <meta itemprop="keywords" content="Linear Prediction Analysis,CELP," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CELP"/>
 <meta name="twitter:description" content="分析合成方式 PCM は, 音の波形そのものを符号化する, いわゆる, 波形符号化方式ですが, そうではなく, 観測信号から音の発生機構を推定し, そのパラメー"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -326,106 +323,69 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="分析合成方式">分析合成方式</h1>
-
+            <h1 id="分析合成方式">分析合成方式</h1>
 <p>PCM は, 音の波形そのものを符号化する, いわゆる, <strong>波形符号化方式</strong>ですが, そうではなく, 観測信号から音の発生機構を推定し, そのパラメータを符号化するのが<strong>分析合成方式</strong>です. 特に, 分析合成方式のなかでも, 携帯電話や VoIP で利用されるのが, <strong>CELP</strong> (Code-Excited-Linear Prediction) と呼ばれる方式です.</p>
-
 <h2 id="音声のメカニズム">音声のメカニズム</h2>
-
 <p>音声の発声は, 最初に声帯が振動することによって, ブザーのような単調な音が発生します. これが音声の音源となります. そして, この音源が声道を通過することで実際の音声信号として発声されます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/72224369-41f6b600-35bd-11ea-875c-08d53ec835c4.png" alt="音声のメカニズム" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/72224369-41f6b600-35bd-11ea-875c-08d53ec835c4.png" alt="音声のメカニズム"></p>
 <p>実際に発声される音声は複雑な波形となりますが, その音源は単純な波形としてモデル化できます. 複雑な特性は, 音声合成フィルタに含めると, 音源は周期的なパルス列としてモデル化することも可能です.</p>
-
 <p>この単純なモデルにおいては, 音源となるパルスの周期 (ピッチ周期), パルスの振幅, 音声合成フィルタのフィルタ係数だけで音声を表現できるので, これら 3 つのパラメータのみを符号化します. また, 音声は, 10 ms - 30 ms 程度の短時間であれば, その性質がほとんど変化しないことが知られているので, 3 つのパラメータを一定時間ごとに 1 度符号化すればよいので, 高い圧縮率を実現できます.</p>
-
 <h2 id="線形予測分析">線形予測分析</h2>
-
 <p>分析合成方式のエンコーダでは, 3 つのパラメータを実際の音声から抽出する必要があります. 一般的に, 音声を通過させると, その出力が音源波形となる<strong>線形予測器</strong> (Linear Predictor) と呼ばれる適応フィルタが利用されます. 線形予測器のフィルタ係数は, <strong>LPC</strong> (Linear Prediction Coding) 係数と呼ばれ, 音声合成フィルタを構成するために利用されます. LPC 係数を算出することを, <strong>線形予測分析</strong> (Linear Prediction Analysis) と呼びます.</p>
-
 <p>音源を出力する線形予測器と, 音声を出力する音声合成フィルタは互いに逆フィルタの関係にあります. したがって, LPC 係数が取得できれば, その逆フィルタである, 音声合成フィルタを構成できます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/72224228-66519300-35bb-11ea-8afe-c551f666f97d.png" alt="音声合成フィルタと線形予測器との関係" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/72224228-66519300-35bb-11ea-8afe-c551f666f97d.png" alt="音声合成フィルタと線形予測器との関係"></p>
 <p>LPC 係数を $h_{m} (m=1, \cdots, M)$ として, 線形予測器への入力音声を $s(n)$ とすると, その出力である $w(n)$ は, 以下の式で定義できます.</p>
-
 <p>$
 \begin{eqnarray}
 w(n)=s(n)+\sum_{m=1}^{M}h_{m}s(n-m)
 \end{eqnarray}
 $</p>
-
 <p>$w(n)$ は音声の音源に相当します.</p>
-
 <p>逆に, $w(n)$ を入力とする音声合成フィルタ出力 $s(n)$ は, 以下の式で定義できます.</p>
-
 <p>$
 \begin{eqnarray}
 s(n)=w(n)-\sum_{m=1}^{M}h_{m}s(n-m)
 \end{eqnarray}
 $</p>
-
 <p>線形予測器の出力は音源である $w(n)$ なので, ピッチ周期とパルスの大きさも線形予測器の出力から取得することができます.</p>
-
 <p>それらの伝達関数は, 以下のように定義できます.</p>
-
 <p>$
 \begin{eqnarray}
 H_{LP}(z)=1+\sum_{m=1}^{M}h_{m}z^{-m}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 H_{AR}(z)=\frac{1}{1+\sum_{m=1}^{M}h_{m}z^{-m}}
 \end{eqnarray}
 $</p>
-
 <p>分析合成方式の音声圧縮では, LPC 係数と音源の情報 (ピッチ周期, パルスの大きさ) を符号化することで, 波形符号化方式よりも高い圧縮率を実現しています. 線形予測分析を利用して, 音声の符号化を実現するものを, <strong>LPCボコーダ</strong> (Linear Predictive Coding Vocoder) と呼びます.</p>
-
 <p>LPC 係数は, 線形予測器の出力である $w(n)$ の 2 乗平均値,</p>
-
 <p>$
 \begin{eqnarray}
 J=E\left[w^{2}(n)\right]
 \end{eqnarray}
 $</p>
-
 <p>を最小化することで取得できます.</p>
-
 <p>ここで, $J$ は, $m$ 番目の係数 $h_{m}$ に対して, 下に凸な 2 次関数となっているので, $J$ を $h_{m}$ で微分した値が $0$ になるように $h_{m}$ を決定します. つまり, 以下の連立方程式を解くことで, LPC 係数を取得できます.</p>
-
 <p>$
 \begin{eqnarray}
 \frac{dJ}{dh_{m}}=2\sum_{k=1}^{M}h_{k}E\left[s(n-k)s(n-m)\right]+2E[s(n)s(n-m)]=0 \quad (1 \leqq m \leqq M)
 \end{eqnarray}
 $</p>
-
 <p>音声の自己相関関数,</p>
-
 <p>$
 \begin{eqnarray}
 r(m)=E\left[s(n)s(n-m)\right]
 \end{eqnarray}
 $</p>
-
 <p>を定義すると, レビソン・ダービンのアルゴリズムから LPC 係数を求めることもできます.</p>
-
 <h1 id="celp">CELP</h1>
-
 <p>標準符号化方式の 1 つとして ITU-T が勧告している G.729 の CS-ACELP 方式の概要について説明します.</p>
-
 <p>CS-ACELP 方式では, 個人差のある音声を可能な限り忠実に合成するため, 音源として単純なパルス列ではなく, データベースとして用意した複数の固定音源と, 過去に利用した音源を適応的に変化させる適応音源の 2 つを組み合わせて音源を生成します. さらに, 音声の分析合成を 10 ms の短時間フレームごとに実行することで, 忠実度を向上させています.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/72223701-399a7d00-35b5-11ea-94e4-ecf544afce47.png" alt="CS-ACELP の音声合成部 (デコーダ)" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/72223701-399a7d00-35b5-11ea-94e4-ecf544afce47.png" alt="CS-ACELP の音声合成部 (デコーダ)"></p>
 <p>固定音源と適応音源に, それぞれ個別にゲインを乗算して音源の振幅を調整しています. つまり, デコーダを動作させるためには, 音声合成フィルタの LPC 係数, ピッチ周期, 固定音源, ゲインの 4 つの情報が必要になります.</p>
-
 <p>エンコーダでは, この 4 つの情報を入力音声から抽出して符号化します.</p>
-
 <ol>
 <li>線形予測分析を実行して LPC 係数を取得します</li>
 <li>LPC 係数を, 粗い量子化に対して頑健な <strong>LSP</strong> (Line Spectral Pairs) と呼ばれる量に変換 (18 bits)</li>
@@ -436,11 +396,8 @@ $</p>
 <li>2 つのゲインを符号化 (14 bits)</li>
 <li>4 つのパラメータを送信</li>
 </ol>
-
 <p>CS-ACELP では, これを音声が定常とみなせる 10 ms ごとに送信するので, 全体のビットレートは 8 kbps と非常に小さくすることができます.</p>
-
 <h1 id="リファレンス">リファレンス</h1>
-
 <ul>
 <li><a href="https://www.amazon.co.jp/%E3%83%87%E3%82%A3%E3%82%B8%E3%82%BF%E3%83%AB%E9%9F%B3%E5%A3%B0-%E7%94%BB%E5%83%8F%E3%81%AE%E5%9C%A7%E7%B8%AE-%E5%8A%A0%E5%B7%A5%E6%8A%80%E8%A1%93-%E5%A4%A7%E5%AE%B9%E9%87%8F%E5%8C%96%E3%81%99%E3%82%8B%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%83%BB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E8%BB%A2%E9%80%81%E3%83%BB%E4%BF%9D%E5%AD%98%E3%83%BB%E6%B4%BB%E7%94%A8%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-%E3%83%87%E3%82%A3%E3%82%B8%E3%82%BF%E3%83%AB%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/dp/4789831450">ディジタル音声&amp;画像の圧縮/伸長/加工技術: 大容量化するマルチメディア・データを転送・保存・活用するために (ディジタル信号処理シリーズ)</a></li>
 </ul>
@@ -620,14 +577,6 @@ $</p>
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -849,14 +798,6 @@ $</p>
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1065,14 +1006,6 @@ $</p>
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1155,9 +1088,6 @@ $</p>
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1236,9 +1166,6 @@ $</p>
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1262,7 +1189,7 @@ $</p>
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

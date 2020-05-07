@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>Macbook Air 2019 &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,8 +30,6 @@
     
     <meta itemprop="name" content="Macbook Air 2019">
 <meta itemprop="description" content="MacBook Air 2019 の使用感とセットアップメモ">
-
-
 <meta itemprop="datePublished" content="2019-07-28T17:27:12&#43;09:00" />
 <meta itemprop="dateModified" content="2019-07-28T17:27:12&#43;09:00" />
 <meta itemprop="wordCount" content="1807">
@@ -39,7 +37,6 @@
 
 
 <meta itemprop="keywords" content="Mac,dotfiles," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Macbook Air 2019"/>
 <meta name="twitter:description" content="MacBook Air 2019 の使用感とセットアップメモ"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -314,188 +311,99 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="macbook-air-2019-を買いました">MacBook Air 2019 を買いました</h1>
-
+            <h1 id="macbook-air-2019-を買いました">MacBook Air 2019 を買いました</h1>
 <p>開封の儀 🎉</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/62010053-cc2e9780-b1a0-11e9-9056-e1ad5b550c59.JPG" alt="MacBook Air 2019" />
-<img src="https://user-images.githubusercontent.com/4006693/62010137-bc638300-b1a1-11e9-8e00-33feae71d71c.JPG" alt="MacBook Air 2019" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/62010053-cc2e9780-b1a0-11e9-9056-e1ad5b550c59.JPG" alt="MacBook Air 2019">
+<img src="https://user-images.githubusercontent.com/4006693/62010137-bc638300-b1a1-11e9-8e00-33feae71d71c.JPG" alt="MacBook Air 2019"></p>
 <h2 id="使用感">使用感</h2>
-
 <p>久々に, MacBook Air に復帰したこともあり, やはりボディの薄さとバッテリーのもちはよく, 神出鬼没にコーディングしたり, ドキュメント書いたりするわたしには, やはり, MacBook Pro よりも Air のほうがあっているのかもしれません !</p>
-
 <h3 id="スペック">スペック</h3>
-
 <p>店頭で購入可能な最大スペックの MacBook Air 2019 です.</p>
-
 <ul>
 <li>MacBook Air (Retina, 13-inch, 2019)</li>
 <li>Processor 1.6 GHz Intel Core i5</li>
 <li>Memory 8 GB 2133 MHz LPDDR3</li>
 <li>SSD 256 GB</li>
 </ul>
-
 <p>以前は, Illustrator や Photoshop, また, 動画編集などの頻度が多かったですが, 最近はほとんどしないので, スペックはこれぐらいで十分という感じです (<code>ffmpeg</code> を利用するときは, まあ &hellip; という感じもありますが, どのみち, スクリーンショット用の動画変換であることが多いので, そこまで気にならないです).</p>
-
 <p>カラーはやはり, スペースグレイですね !</p>
-
 <h3 id="キーボード">キーボード</h3>
-
 <p>最も懸念される使用感ですね &hellip; MacBook Pro 2017 の使用経験がありますが, そのキーボードよりさらに浅いタッチ感ですね. まあ &hellip; 悪くはないといったところです.</p>
-
 <h3 id="touch-id">Touch ID</h3>
-
 <p>Touch ID (指紋認証) が可能です. これは, 思っていた以上に便利だったので, 設定しておくことをおすすめします.</p>
-
 <h2 id="セットアップ">セットアップ</h2>
-
 <h3 id="xcode-のインストール">Xcode のインストール</h3>
-
 <p>Xcode をインストールしないと, なにかと不便なのは変わりません. 時間がかかるので, 最初にインストール作業をします.</p>
-
 <h3 id="source-code-pro-のインストール">Source Code Pro のインストール</h3>
-
 <p>Xcode のインストールをまっている間に可能な作業を進めます. ターミナル (iTerm2) などでは, わたしは Source Code Pro を利用するので, フォントをインストールします.</p>
-
-<pre><code class="language-bash">$ curl -LO https://github.com/adobe-fonts/source-code-pro/archive/release.zip
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -LO https://github.com/adobe-fonts/source-code-pro/archive/release.zip
 $ unzip release.zip
 $ cp -a source-code-pro-release/TTF/* ~/Library/Fonts
-</code></pre>
-
-<p>iTerm2 を使いますが, しばらくは, ターミナルでも作業をするので, ターミナルの見た目を使いやすくカスタマイズします.</p>
-
+</code></pre></div><p>iTerm2 を使いますが, しばらくは, ターミナルでも作業をするので, ターミナルの見た目を使いやすくカスタマイズします.</p>
 <h3 id="builtin-apache-の設定">Builtin Apache の設定</h3>
-
 <p>macOS のバージョンごとに微妙に異なってくるのが, この Builtin Apache の設定です. 業務用に利用している場合などは必要ないかもしれませんが, 趣味でも利用する場合, ちょっとした動作を確認するのに, Docker や webpack-dev-server を使うのはさすがに大げさなので設定しておきます.</p>
-
-<pre><code class="language-bash">$ sudo vim /etc/apache2/httpd.conf
-</code></pre>
-
-<p>L174 - L177 をコメントアウトします (まあ, PHP も使えるようにしておきます).</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo vim /etc/apache2/httpd.conf
+</code></pre></div><p>L174 - L177 をコメントアウトします (まあ, PHP も使えるようにしておきます).</p>
 <pre><code>LoadModule userdir_module libexec/apache2/mod_userdir.so
 LoadModule alias_module libexec/apache2/mod_alias.so
 LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 LoadModule php7_module libexec/apache2/libphp7.so
-</code></pre>
-
-<p>L511 をコメントアウトします.</p>
-
+</code></pre><p>L511 をコメントアウトします.</p>
 <pre><code>Include /private/etc/apache2/extra/httpd-userdir.conf
-</code></pre>
-
-<p>そして, 以下の設定を追加します.</p>
-
-<pre><code class="language-bash">sudo vim /etc/apache2/extra/httpd-userdir.conf↲
-</code></pre>
-
-<p>L16 をコメントアウトします.</p>
-
+</code></pre><p>そして, 以下の設定を追加します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo vim /etc/apache2/extra/httpd-userdir.conf↲
+</code></pre></div><p>L16 をコメントアウトします.</p>
 <pre><code>Include /private/etc/apache2/users/*.conf
-</code></pre>
-
-<p>次に (<code>${whoami}</code> は, ユーザー名です),</p>
-
-<pre><code class="language-bash">$ sudo vim /etc/apache2/users/${whoami}.conf
-</code></pre>
-
-<pre><code>&lt;Directory /Users/${whoami}/Sites&gt;
+</code></pre><p>次に (<code>${whoami}</code> は, ユーザー名です),</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo vim /etc/apache2/users/<span style="color:#e6db74">${</span>whoami<span style="color:#e6db74">}</span>.conf
+</code></pre></div><pre><code>&lt;Directory /Users/${whoami}/Sites&gt;
     Options Indexes MultiViews FollowSymLinks Includes
     AllowOverride All
     Require all granted
     Order allow,deny
     Allow from all
 &lt;/Directory&gt;
-</code></pre>
-
-<p>最後に,</p>
-
-<pre><code class="language-bash">$ sudo /usr/sbin/apachectl start
-</code></pre>
-
-<p><code>http://localhost/~${whoami}/</code> でアクセスできれば OK です.</p>
-
+</code></pre><p>最後に,</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo /usr/sbin/apachectl start
+</code></pre></div><p><code>http://localhost/~${whoami}/</code> でアクセスできれば OK です.</p>
 <h3 id="ssh-公開鍵の生成">SSH 公開鍵の生成</h3>
-
-<pre><code class="language-bash">$ ssh-keygen
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ssh-keygen
 $ cat ~/.ssh/id_rsa.pub | pbcopy
-</code></pre>
-
-<p>生成した公開鍵を, GitHub に登録して,</p>
-
-<pre><code class="language-bash">$ ssh -T git@github.com
-</code></pre>
-
-<p>で, 成功メッセージが表示されれば OK です.</p>
-
+</code></pre></div><p>生成した公開鍵を, GitHub に登録して,</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ssh -T git@github.com
+</code></pre></div><p>で, 成功メッセージが表示されれば OK です.</p>
 <p>もし, git clone などで毎回パスフレーズをきかれる場合は,</p>
-
-<pre><code class="language-bash">$ sudo vim ~/.ssh/config
-</code></pre>
-
-<pre><code>Host *
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo vim ~/.ssh/config
+</code></pre></div><pre><code>Host *
   UseKeychain yes
   AddKeysToAgent yes
-</code></pre>
-
-<p>という内容のファイルを作成しておきます.</p>
-
+</code></pre><p>という内容のファイルを作成しておきます.</p>
 <h3 id="dotfiles-でワンライナーインストール">dotfiles でワンライナーインストール</h3>
-
 <p>Xcode のインストールが完了したら, はじめます.</p>
-
 <p>利用する Shell の設定や Vim の設定, CLI / GUI アプリケーションのインストールなどはすべて, dotfiles でワンライナーインストールします.</p>
-
 <p>&hellip; と言いつつ, わたし自身, dotfiles の作成・運用をはじめて間もないので, 非常にしょぼい <a href="https://github.com/Korilakkuma/dotfiles">dotfiles</a> となっています. もっとよりよい開発環境をワンライナーでインストールしたい方は, 有名な dotfiles を git clone してください.</p>
-
 <p>しかしながら, 有名な dotfiles はシンプルとは言え, dotfiles を学びはじめたビギナーの方には, 理解しずらいというデメリットもあります. 一応, わたしの dotfiles は, dotfiles のワンライナーインストールの仕組みを最低限理解できるようにはなっていると思います (dotfiles の流儀はおさえていると思います).</p>
-
 <p>必要に応じて選択してください.</p>
-
 <p>わたしの, dotfiles だと &hellip;</p>
-
-<pre><code class="language-bash">$ git clone git@github.com:Korilakkuma/dotfiles.git
-$ make deploy  # アプリケーションのインストールなど
-$ make init  # ホームディレクトリにシンボリックリンクをはる
-</code></pre>
-
-<p>ちなみに, <code>brew cask install</code> で GUI (デスクトップ) アプリケーションをインストールできます. 古い記事では, <code>brew cask</code> は, 別途インストールが必要と記載されているものもありますが, 現在は, 最新の Homebrew をインストールすれば, <code>brew cask install</code> も可能なようです.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone git@github.com:Korilakkuma/dotfiles.git
+$ make deploy  <span style="color:#75715e"># アプリケーションのインストールなど</span>
+$ make init  <span style="color:#75715e"># ホームディレクトリにシンボリックリンクをはる</span>
+</code></pre></div><p>ちなみに, <code>brew cask install</code> で GUI (デスクトップ) アプリケーションをインストールできます. 古い記事では, <code>brew cask</code> は, 別途インストールが必要と記載されているものもありますが, 現在は, 最新の Homebrew をインストールすれば, <code>brew cask install</code> も可能なようです.</p>
 <p><code>brew cask install</code> でインストールできない, GUI アプリケーションは手動でインストールしましょう.</p>
-
 <p>あとは, iTerm2 もターミナルと同様に外観をカスタマイズしておきます.</p>
-
 <h3 id="mysql-の設定">MySQL の設定</h3>
-
 <p>もし, ローカル環境で MySQL も使うのであれば設定しておきます.</p>
-
 <p>まずは, MySQL が起動するか確認します.</p>
-
-<pre><code class="language-bash">$ mysql.server start
-</code></pre>
-
-<p>root ユーザーでログインしてみます.</p>
-
-<pre><code class="language-bash">$ mysql -u root
-</code></pre>
-
-<p>ログインが確認できたら, exit します.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mysql.server start
+</code></pre></div><p>root ユーザーでログインしてみます.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mysql -u root
+</code></pre></div><p>ログインが確認できたら, exit します.</p>
 <p>次に, セキュリティ設定をします.</p>
-
-<pre><code class="language-bash">$ mysql_secure_installation
-</code></pre>
-
-<p>質問が 4 つほどされますが, すべて yes で大丈夫です.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mysql_secure_installation
+</code></pre></div><p>質問が 4 つほどされますが, すべて yes で大丈夫です.</p>
 <p>設定が完了したら, パスワード入力して MySQL に接続できるか確認します.</p>
-
 <pre><code>$ mysql -u root -p
 </code></pre>
-
         </div>
         <footer class="article-footer">
     <a data-url="https://art-of-life.jp/posts/macbook-air-2019/" data-id="7ef1bb84fb84e195dcc79746ef9d22fd" class="article-share-link">
@@ -671,14 +579,6 @@ $ make init  # ホームディレクトリにシンボリックリンクをは�
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -900,14 +800,6 @@ $ make init  # ホームディレクトリにシンボリックリンクをは�
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1116,14 +1008,6 @@ $ make init  # ホームディレクトリにシンボリックリンクをは�
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1206,9 +1090,6 @@ $ make init  # ホームディレクトリにシンボリックリンクをは�
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1287,9 +1168,6 @@ $ make init  # ホームディレクトリにシンボリックリンクをは�
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1313,7 +1191,7 @@ $ make init  # ホームディレクトリにシンボリックリンクをは�
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

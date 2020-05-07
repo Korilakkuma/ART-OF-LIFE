@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>WebRTC の概要 &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="WebRTC の概要">
 <meta itemprop="description" content="WebRTC による P2P の概要を整理してみた">
-
-
 <meta itemprop="datePublished" content="2019-05-29T20:00:59&#43;09:00" />
 <meta itemprop="dateModified" content="2019-05-29T20:00:59&#43;09:00" />
-<meta itemprop="wordCount" content="2700">
+<meta itemprop="wordCount" content="2553">
 
 
 
 <meta itemprop="keywords" content="JavaScript,WebRTC," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="WebRTC の概要"/>
 <meta name="twitter:description" content="WebRTC による P2P の概要を整理してみた"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-05-29 20:00:59 &#43;0900 JST" itemprop="datePublished">2019-05-29</time>
             &middot;
-            2700
+            2553
             words
             &middot;
             6
@@ -326,346 +323,265 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="webrtc">WebRTC</h1>
-
+            <h1 id="webrtc">WebRTC</h1>
 <h2 id="overview">Overview</h2>
-
 <p>WebRTC (Web Real-Time Communication) は, ブラウザ (ピア) での音声・動画通信, データ共有を可能にする技術です.
 したがって, 様々な標準プロトコル (UDP など) や JavaScript API の集合体で定義されています.
 &hellip; とは言え, ブラウザ API (JavaScript API) の視点では, 大きく 2 つの API に集約されます.</p>
-
 <h3 id="mediastream">MediaStream</h3>
-
 <p>音声や動画のストリームを取得.</p>
-
 <h3 id="rtcpeerconnection">RTCPeerConnection</h3>
-
 <p>音声や動画の通信.</p>
-
-<!--
-### RTCDataChannel
-
-アプリケーションデータの通信.
-
--->
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <h2 id="ストリームの取得">ストリームの取得</h2>
-
 <p><code>navigator.mediaDecives.getUserMedia</code> メソッドを利用して, 音声や動画を取得します
 (<code>navigator.getUserMedia</code> メソッドは, 古い仕様なので利用しないでください).
 引数に渡すプレインオブジェクトには, 様々な<a href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API/Constraints#Result">オプション</a>を設定できます (ノイズ除去, 画像補正 &hellip; etc).
 戻り値は, <code>Promise</code> で, 成功した場合のコールバックの引数には, <code>MediaStream</code> インスタンスが渡されます.</p>
-
 <p>また, よくあるコード例がここから <code>HTMLVideoElement</code> で表示することですが, 最新の仕様と, 古い仕様で処理が大きく異なる点に注意してください.</p>
-
-<pre><code class="language-JavaScript">const constraints = {
-  audio: true,
-  video: true
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">constraints</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">audio</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+  <span style="color:#a6e22e">video</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>
 };
 
-navigator.mediaDecives.getUserMedia(constraints)
-  .then((stream) =&gt; {
-    const video = document.querySelector('video#local');
+<span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">mediaDecives</span>.<span style="color:#a6e22e">getUserMedia</span>(<span style="color:#a6e22e">constraints</span>)
+  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">stream</span>) =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">video</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">querySelector</span>(<span style="color:#e6db74">&#39;video#local&#39;</span>);
 
-    if ('srcObject' in video) {
-      video.srcObject = stream;
-    } else {
-      // legacy
-      video.src = window.URL.createObjectURL(stream);
+    <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#39;srcObject&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">video</span>) {
+      <span style="color:#a6e22e">video</span>.<span style="color:#a6e22e">srcObject</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream</span>;
+    } <span style="color:#66d9ef">else</span> {
+      <span style="color:#75715e">// legacy
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">video</span>.<span style="color:#a6e22e">src</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">createObjectURL</span>(<span style="color:#a6e22e">stream</span>);
     }
   })
-  .catch((error)) =&gt; {
-    console.error(error);
+  .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">error</span>)) =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>);
   });
-</code></pre>
-
-<p>WebRTC は, 音声や動画に対して, 音質や画質の最適化, 音声と映像の同期, 出力ビットレートの調整などの複雑な処理を隠蔽しているので, アプリケーション実装側で, それらを意識することなく, 最適化されたストリームを取得できます.</p>
-
+</code></pre></div><p>WebRTC は, 音声や動画に対して, 音質や画質の最適化, 音声と映像の同期, 出力ビットレートの調整などの複雑な処理を隠蔽しているので, アプリケーション実装側で, それらを意識することなく, 最適化されたストリームを取得できます.</p>
 <h3 id="mediastream-1">MediaStream</h3>
-
 <ul>
 <li><code>MediaStream</code> は 1 つ以上のトラック (<code>MediaStreamTrack</code>) によって構成される</li>
 <li><code>MediaStream</code> に格納されている複数のトラックは同期されている</li>
 <li>入力ソースは, マイクロフォンや Web カメラなどの物理デバイス, ディスクファイルなど</li>
 <li><code>MediaStream</code> は, ローカルの動画や音声要素, ポストプロセスを実行する JavaScript, リモートピアなど 1 つ以上の出力先に送信可能</li>
 </ul>
-
 <h4 id="gettracks">getTracks</h4>
-
 <p>MediaStream にはいくつかのトラックが含まれています (例えば, 動画と音声なら 2 つ). <code>MediaStream#getTracks</code> は, それらを <code>MediaStreamTrack</code> として個別に取得します. また, <code>MediaStream#getAudioTracks</code>, <code>MediaStream#getVideoTracks</code> メソッドでは, それぞれ, 音声のみ, 映像のみの <code>MediaStreamTrack</code> を取得することが可能です.</p>
-
 <p>また, 後述する <code>RTCPeerConnection</code> には <code>addTrack</code> というメソッドがあるので, これを利用してトラックを自身に設定します.</p>
-
-<pre><code class="language-JavaScript">const constraints = {
-  audio: true,
-  video: true
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">constraints</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">audio</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+  <span style="color:#a6e22e">video</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>
 };
 
-navigator.mediaDecives.getUserMedia(constraints)
-  .then((stream) =&gt; {
-    for (const track of stream.getTracks()) {
-      peerConnection.addTrack(track, stream);
+<span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">mediaDecives</span>.<span style="color:#a6e22e">getUserMedia</span>(<span style="color:#a6e22e">constraints</span>)
+  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">stream</span>) =&gt; {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">track</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">getTracks</span>()) {
+      <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">addTrack</span>(<span style="color:#a6e22e">track</span>, <span style="color:#a6e22e">stream</span>);
     }
 
-    const video = document.querySelector('video#local');
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">video</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">querySelector</span>(<span style="color:#e6db74">&#39;video#local&#39;</span>);
 
-    if ('srcObject' in video) {
-      video.srcObject = stream;
-    } else {
-      // legacy
-      video.src = window.URL.createObjectURL(stream);
+    <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#39;srcObject&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">video</span>) {
+      <span style="color:#a6e22e">video</span>.<span style="color:#a6e22e">srcObject</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream</span>;
+    } <span style="color:#66d9ef">else</span> {
+      <span style="color:#75715e">// legacy
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">video</span>.<span style="color:#a6e22e">src</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">createObjectURL</span>(<span style="color:#a6e22e">stream</span>);
     }
   })
-  .catch((error)) =&gt; {
-    console.error(error);
+  .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">error</span>)) =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>);
   });
-</code></pre>
-
-<h2 id="rtcpeerconnection-1">RTCPeerConnection</h2>
-
+</code></pre></div><h2 id="rtcpeerconnection-1">RTCPeerConnection</h2>
 <h3 id="udp">UDP</h3>
-
 <p>WebRTC は, データの転送に UDP (User Datagram Protocol) を利用します.
 その理由は, データの信頼性よりも適時性が要求されるからです.
 UDP は, TCP とは対照的です.</p>
-
-<dl>
-  <dt>メッセージの到着を保証しない</dt>
-  <dd>通知, 再送, タイムアウトは存在しない</dd>
-  <dt>到着順序を保証しない</dt>
-  <dd>パケットのシーケンス番号, 再構成, HoL ブロッキングは存在しない</dd>
-  <dt>接続状況の追跡をしない</dt>
-  <dd>接続確立や中継のステートマシンは存在しない</dd>
-  <dt>輻輳制御をしない</dt>
-  <dd>ビルトインのクライアントやネットワークフィードバックの仕組みをもたない</dd>
-</dl>
-
+<!-- raw HTML omitted -->
 <p>実際には, DTLS (Datagram Transport Layer Security), SRTP (Secure Real-Time Transport Protocol) や SCTP (Stream Control Transmission Protocol) が追加で利用されており, UDP でありながら, TCP ライクなデータ転送を実現します.</p>
-
 <h3 id="rtcpeerconnection-api">RTCPeerConnection API</h3>
-
 <p>しかしながら, 上記にあげたプロトコルのほとんどは, <code>RTCPeerConnection</code> という JavaScript API に隠蔽されており, アプリケーション開発者が意識することはほとんどありません.</p>
-
-<pre><code class="language-JavaScript">const options = {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">options</span> <span style="color:#f92672">=</span> {
 };
 
-const peerConnection = new RTCPeerConnection(options);
-</code></pre>
-
-<p>まずは, オプションを引数にインスタンスを生成する必要がありますが, このオプションしてには, ICE を理解しておく必要があります.</p>
-
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">peerConnection</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">RTCPeerConnection</span>(<span style="color:#a6e22e">options</span>);
+</code></pre></div><p>まずは, オプションを引数にインスタンスを生成する必要がありますが, このオプションしてには, ICE を理解しておく必要があります.</p>
 <h4 id="ice">ICE</h4>
-
 <p>ICE (Interactive Connective Establishment) とは, WebRTC の通信経路候補を収集します.
 デフォルトでは, プライベートネットワーク限定で経路を収集しますが, 多くの場合, インターネット間で通信をしたいはずです.</p>
-
 <p>そのためには, ホストの IP アドレスが, インターネット側からどうなっているのかを, サーバーに問い合わせます.
 このサーバーを STUN (Session Traversal Utilities for NAT) と呼びます.</p>
-
 <p>また, ファイアウォールなど, 制約の多いネットワークでは, 自由に通信経路を選択できないので, 中継サーバーを利用します.
 このサーバーを TURN (Traversal Using Relays around NAT) と呼びます.</p>
-
 <h4 id="シグナリング">シグナリング</h4>
-
 <p>シグナリングとは, P2P 通信を確立するための手順です.  一般的には, シグナリングサーバーを構築します. 通信開始時点では, 通信相手となるホストの情報がわからないので, シグナリングサーバーに探してもらう必要があります.</p>
-
 <p>以下のコードは, WebSocket を利用した簡易的なシグナリングサーバーの実装例です.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">WebSocketServer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;ws&#39;</span>).<span style="color:#a6e22e">Server</span>;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">argv</span>[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">argv</span>[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">65535</span>) <span style="color:#f92672">?</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">argv</span>[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">:</span> <span style="color:#ae81ff">3000</span>;
 
-<pre><code class="language-JavaScript">const WebSocketServer = require('ws').Server;
-const port = (process.argv[2] &gt; 0) &amp;&amp; (process.argv[2] &lt;= 65535) ? process.argv[2] : 3000;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ws</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">WebSocketServer</span>({ <span style="color:#a6e22e">port</span> });
 
-const ws = new WebSocketServer({ port });
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Wait port (</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">port</span><span style="color:#e6db74">}</span><span style="color:#e6db74">) ...`</span>);
 
-console.log(`Wait port (${port}) ...`);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sockets</span> <span style="color:#f92672">=</span> [];
 
-const sockets = [];
+<span style="color:#a6e22e">ws</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;connection&#39;</span>, (<span style="color:#a6e22e">socket</span>) =&gt; {
+  <span style="color:#a6e22e">sockets</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">socket</span>);
 
-ws.on('connection', (socket) =&gt; {
-  sockets.push(socket);
-
-  socket.on('message', (message) =&gt; {
-    ws.clients.forEach((client) =&gt; {
-      if (socket !== client) {
-        client.send(message);
-      } else {
-        console.log('--- Skip Sender ---');
+  <span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;message&#39;</span>, (<span style="color:#a6e22e">message</span>) =&gt; {
+    <span style="color:#a6e22e">ws</span>.<span style="color:#a6e22e">clients</span>.<span style="color:#a6e22e">forEach</span>((<span style="color:#a6e22e">client</span>) =&gt; {
+      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">socket</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">client</span>) {
+        <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">message</span>);
+      } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;--- Skip Sender ---&#39;</span>);
       }
     });
   });
 });
-</code></pre>
-
-<p>P2P 通信を確立するためには, 通信要件をネゴシエーションする必要があります.</p>
-
+</code></pre></div><p>P2P 通信を確立するためには, 通信要件をネゴシエーションする必要があります.</p>
 <ul>
 <li>送受信の対象 (動画 ? 音声 ? データ ?, コーデックは ? &hellip; etc)</li>
 <li>通信経路 (IP アドレスとポート番号)</li>
 </ul>
-
 <p>これらの通信要件は, SDP (Session Description Protocol) というフォーマットに記述され, P2P の確立のために送受信されます.</p>
-
 <p>まずは, オファーの SDP を生成してシグナリングします.
 そのためには, <code>RTCPeerConnection#createOffer</code> メソッドを利用します.
 戻り値は, <code>Promise</code> で成功時のコールバックに <code>RTCSessionDescription</code> が渡されます (古い仕様では <code>Promise</code> は返らないので注意してください).
 また, シグナリングと同時に, 自身の設定として <code>RTCPeerConnection</code> に反映するために, <code>RTCPeerConnection#setLocalDescription</code> メソッドを利用します.</p>
-
-<pre><code class="language-JavaScript">const ice = {
-  iceServers: [
-    { url: 'stun:stunserver.com:12345' },
-    { url: 'turn:user@turnserver.com'. creadentials: 'pass' }
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ice</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">iceServers</span><span style="color:#f92672">:</span> [
+    { <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;stun:stunserver.com:12345&#39;</span> },
+    { <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;turn:user@turnserver.com&#39;</span>. <span style="color:#a6e22e">creadentials</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;pass&#39;</span> }
   ]
 };
 
-const signalingChannel = new SignalingChannel('ws://localhost:3000/');
-const peerConnection = new RTCPeerConnection(ice);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">signalingChannel</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SignalingChannel</span>(<span style="color:#e6db74">&#39;ws://localhost:3000/&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">peerConnection</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">RTCPeerConnection</span>(<span style="color:#a6e22e">ice</span>);
 
-peerConnection.createOffer()
-  .then((offer) =&gt; {
-    peerConnection.setLocalDescription(offer);
-    signalingChannel.send(offer);
+<span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">createOffer</span>()
+  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">offer</span>) =&gt; {
+    <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">setLocalDescription</span>(<span style="color:#a6e22e">offer</span>);
+    <span style="color:#a6e22e">signalingChannel</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">offer</span>);
   });
-  .catch((error) =&gt; {
-    console.error(error);
+  .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">error</span>) =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>);
   });
-</code></pre>
+</code></pre></div><p><code>SignalingChannel</code> は, クライアントにおけるシグナリング処理をまとめたクラスです (以下は, 実装例です).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SignalingChannel</span> {
+  <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">onopen</span>, <span style="color:#a6e22e">onerror</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">websocket</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">WebSocket</span>(<span style="color:#a6e22e">url</span>);
 
-<p><code>SignalingChannel</code> は, クライアントにおけるシグナリング処理をまとめたクラスです (以下は, 実装例です).</p>
-
-<pre><code class="language-JavaScript">class SignalingChannel {
-  constructor(url, onopen, onerror) {
-    this.websocket = new WebSocket(url);
-
-    this.websocket.onopen  = Object.prototype.toString.call(onopen) === '[object Function]' ? onopen  : () =&gt; {};
-    this.websocket.onerror = Object.prototype.toString.call(onerror) === '[object Function]' ? onerror : () =&gt; {};
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">websocket</span>.<span style="color:#a6e22e">onopen</span>  <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">toString</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">onopen</span>) <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;[object Function]&#39;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">onopen</span>  <span style="color:#f92672">:</span> () =&gt; {};
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">websocket</span>.<span style="color:#a6e22e">onerror</span> <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">toString</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">onerror</span>) <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;[object Function]&#39;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">onerror</span> <span style="color:#f92672">:</span> () =&gt; {};
   }
 
-  send(sessionDescription) {
-    this.websocket.send(JSON.stringify(sessionDescription));
+  <span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">sessionDescription</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">websocket</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">sessionDescription</span>));
   }
 
-  message(offer, answer, candidate) {
-    this.websocket.onmessage = (event) =&gt; {
-      const message = JSON.parse(event.data);
+  <span style="color:#a6e22e">message</span>(<span style="color:#a6e22e">offer</span>, <span style="color:#a6e22e">answer</span>, <span style="color:#a6e22e">candidate</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">websocket</span>.<span style="color:#a6e22e">onmessage</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">event</span>) =&gt; {
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">data</span>);
 
-      switch (message.type) {
-        case 'offer':
-          if (Object.prototype.toString.call(offer) === '[object Function]') {
-            offer(message);
+      <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">message</span>.<span style="color:#a6e22e">type</span>) {
+        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;offer&#39;</span><span style="color:#f92672">:</span>
+          <span style="color:#66d9ef">if</span> (Object.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">toString</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">offer</span>) <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;[object Function]&#39;</span>) {
+            <span style="color:#a6e22e">offer</span>(<span style="color:#a6e22e">message</span>);
           }
 
-          break;
-        case 'answer':
-          if (Object.prototype.toString.call(answer) === '[object Function]') {
-            answer(message);
+          <span style="color:#66d9ef">break</span>;
+        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;answer&#39;</span><span style="color:#f92672">:</span>
+          <span style="color:#66d9ef">if</span> (Object.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">toString</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">answer</span>) <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;[object Function]&#39;</span>) {
+            <span style="color:#a6e22e">answer</span>(<span style="color:#a6e22e">message</span>);
           }
 
-          break;
-        default:
-          if (message.candidate &amp;&amp; (Object.prototype.toString.call(candidate) === '[object Function]')) {
-            candidate(message);
+          <span style="color:#66d9ef">break</span>;
+        <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+          <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">message</span>.<span style="color:#a6e22e">candidate</span> <span style="color:#f92672">&amp;&amp;</span> (Object.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">toString</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">candidate</span>) <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;[object Function]&#39;</span>)) {
+            <span style="color:#a6e22e">candidate</span>(<span style="color:#a6e22e">message</span>);
           }
 
-          break;
+          <span style="color:#66d9ef">break</span>;
       }
     };
   }
 }
-</code></pre>
-
-<h4 id="トランスポートの候補">トランスポートの候補</h4>
-
+</code></pre></div><h4 id="トランスポートの候補">トランスポートの候補</h4>
 <p>SDP を送信しても, トランスポート (IP アドレスとポート番号) の候補がないので通信できません.
 そこで, <code>RTCPeerConnection#onicecandidate</code> イベントを監視することで取得できます.</p>
-
-<pre><code class="language-JavaScript">peerConnection.onicecandidate = (event) =&gt; {
-  if (event.candidate) {
-    signalingChannel.send(event.candidate);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">onicecandidate</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">event</span>) =&gt; {
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">candidate</span>) {
+    <span style="color:#a6e22e">signalingChannel</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">candidate</span>);
   }
 };
-</code></pre>
-
-<h4 id="アンサー側の処理">アンサー側の処理</h4>
-
+</code></pre></div><h4 id="アンサー側の処理">アンサー側の処理</h4>
 <p>シグナリングやトランスポート候補の監視は, 対となるピア (アンサー側と呼ぶことにします) でも実行する必要があります.
 対となるので, やっていることはほぼ同じなのですが, 対となるがゆえに, メソッドが異なる部分 (<code>RTCPeerConnection#setRemoteDescription</code>, <code>RTCPeerConnection#createAnswer</code>) や, <code>WebSocket#onmessage</code> のイベントハンドラで処理を開始する部分などがオファー側と異なってきます.</p>
-
 <p>また, <code>RTCPeerConnection#addIceCandidate</code> メソッドは, 経路候補を即時に取り込みます.</p>
-
-<pre><code class="language-JavaScript">const ice = {
-  iceServers: [
-    { url: 'stun:stunserver.com:12345' },
-    { url: 'turn:user@turnserver.com'. creadentials: 'pass' }
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ice</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">iceServers</span><span style="color:#f92672">:</span> [
+    { <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;stun:stunserver.com:12345&#39;</span> },
+    { <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;turn:user@turnserver.com&#39;</span>. <span style="color:#a6e22e">creadentials</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;pass&#39;</span> }
   ]
 };
 
-const signalingChannel = new SignalingChannel('ws://localhost:3000/');
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">signalingChannel</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">SignalingChannel</span>(<span style="color:#e6db74">&#39;ws://localhost:3000/&#39;</span>);
 
-let peerConnection = null;
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">peerConnection</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
 
-const offer = (message) =&gt; {
-  peerConnection = new RTCPeerConnection(ice);
-  peerConnection.setRemoteDescription(message);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">offer</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">message</span>) =&gt; {
+  <span style="color:#a6e22e">peerConnection</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">RTCPeerConnection</span>(<span style="color:#a6e22e">ice</span>);
+  <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">setRemoteDescription</span>(<span style="color:#a6e22e">message</span>);
 
-  peerConnection.onicecandidate = (event) =&gt; {
-    if (event.candidate) {
-      signalingChannel.send(event.candidate);
+  <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">onicecandidate</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">event</span>) =&gt; {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">candidate</span>) {
+      <span style="color:#a6e22e">signalingChannel</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">candidate</span>);
     }
   };
 
-  navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-    .then((stream) =&gt; {
-      peerConnection.createAnswer()
-        .then((answer) =&gt; {
-          peerConnection.setLocalDescription(answer);
-          signalingChannel.send(answer);
+  <span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">mediaDevices</span>.<span style="color:#a6e22e">getUserMedia</span>({ <span style="color:#a6e22e">audio</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">video</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> })
+    .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">stream</span>) =&gt; {
+      <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">createAnswer</span>()
+        .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">answer</span>) =&gt; {
+          <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">setLocalDescription</span>(<span style="color:#a6e22e">answer</span>);
+          <span style="color:#a6e22e">signalingChannel</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">answer</span>);
         })
-        .catch((error) =&gt; {
-          console.error(error);
+        .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">error</span>) =&gt; {
+          <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>);
         });
     })
-    .catch((error) =&gt; {
-      console.error(error);
+    .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">error</span>) =&gt; {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>);
     });
 };
 
-const answer = (message) =&gt; peerConnection.setRemoteDescription(message);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">answer</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">setRemoteDescription</span>(<span style="color:#a6e22e">message</span>);
 
-const candidate = (message) =&gt; peerConnection.addIceCandidate(message);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">candidate</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">addIceCandidate</span>(<span style="color:#a6e22e">message</span>);
 
-signalingChannel.message(offer, answer, candidate);
-</code></pre>
-
-<h4 id="ontrack">ontrack</h4>
-
+<span style="color:#a6e22e">signalingChannel</span>.<span style="color:#a6e22e">message</span>(<span style="color:#a6e22e">offer</span>, <span style="color:#a6e22e">answer</span>, <span style="color:#a6e22e">candidate</span>);
+</code></pre></div><h4 id="ontrack">ontrack</h4>
 <p>最後に &hellip; メディアが送受信されたときのイベントの監視です. そのためには, <code>RTCPeerConnection#ontrack</code> イベントを監視します (古い仕様では, <code>RTCPeerConnection#onaddstream</code> となっているので注意してください).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">ontrack</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">event</span>) =&gt; {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">remote</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">querySelector</span>(<span style="color:#e6db74">&#39;video#remote&#39;</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">stream</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">streams</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">?</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">streams</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>;
 
-<pre><code class="language-JavaScript">peerConnection.ontrack = (event) =&gt; {
-  const remote = document.querySelector('video#remote');
-  const stream = event.streams[0] ? event.streams[0] : null;
-
-  if ('srcObject' in remote) {
-    remote.srcObject = stream;
-  } else {
-    // legacy
-    remote.src = window.URL.createObjectURL(stream);
+  <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#39;srcObject&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">remote</span>) {
+    <span style="color:#a6e22e">remote</span>.<span style="color:#a6e22e">srcObject</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream</span>;
+  } <span style="color:#66d9ef">else</span> {
+    <span style="color:#75715e">// legacy
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">remote</span>.<span style="color:#a6e22e">src</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">createObjectURL</span>(<span style="color:#a6e22e">stream</span>);
   }
 
-  remote.play()
-    .then(() =&gt; {})
-    .catch(() =&gt; {});
+  <span style="color:#a6e22e">remote</span>.<span style="color:#a6e22e">play</span>()
+    .<span style="color:#a6e22e">then</span>(() =&gt; {})
+    .<span style="color:#66d9ef">catch</span>(() =&gt; {});
 };
-</code></pre>
-
-<h2 id="コード例-全体像">コード例 (全体像)</h2>
-
+</code></pre></div><h2 id="コード例-全体像">コード例 (全体像)</h2>
 <p>記事にした WebRTC の概要を, ローカルでデモできるリポジトリを作成したので, よかったら参考にしてみてください !</p>
-
 <p><a href="https://github.com/Korilakkuma/Signaling">Signaling</a></p>
-
 <h2 id="参考記事">参考記事</h2>
-
 <ul>
 <li><a href="https://html5experts.jp/mganeko/20013/">シグナリングサーバーを動かそう ーWebRTC入門2016</a></li>
 <li><a href="https://lealog.hateblo.jp/entry/2019/04/22/095422">WebRTCやるのに最低限必要なJavaScriptのAPIについて</a></li>
@@ -846,14 +762,6 @@ signalingChannel.message(offer, answer, candidate);
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -1075,14 +983,6 @@ signalingChannel.message(offer, answer, candidate);
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1291,14 +1191,6 @@ signalingChannel.message(offer, answer, candidate);
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1381,9 +1273,6 @@ signalingChannel.message(offer, answer, candidate);
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1462,9 +1351,6 @@ signalingChannel.message(offer, answer, candidate);
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1488,7 +1374,7 @@ signalingChannel.message(offer, answer, candidate);
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

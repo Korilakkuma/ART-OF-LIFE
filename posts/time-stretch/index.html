@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>Time Stretch &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="Time Stretch">
 <meta itemprop="description" content="タイムストレッチ 音波の速度 ($v$), 周波数 ($f$), 波長 ($\lambda$) には以下の関係式があります. $ \begin{eqnarray} v=f{\lambda} \end{eqnarray} $ 速度を速くすると, 周波数も高くなり, 速度を遅くすると, 周波数">
-
-
 <meta itemprop="datePublished" content="2020-02-24T15:22:57&#43;09:00" />
 <meta itemprop="dateModified" content="2020-02-24T15:22:57&#43;09:00" />
-<meta itemprop="wordCount" content="1498">
+<meta itemprop="wordCount" content="1495">
 
 
 
 <meta itemprop="keywords" content="Digital Signal Processing,Time Stretch,Correlation function," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Time Stretch"/>
 <meta name="twitter:description" content="タイムストレッチ 音波の速度 ($v$), 周波数 ($f$), 波長 ($\lambda$) には以下の関係式があります. $ \begin{eqnarray} v=f{\lambda} \end{eqnarray} $ 速度を速くすると, 周波数も高くなり, 速度を遅くすると, 周波数"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2020-02-24 15:22:57 &#43;0900 JST" itemprop="datePublished">2020-02-24</time>
             &middot;
-            1498
+            1495
             words
             &middot;
             3
@@ -330,203 +327,175 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="タイムストレッチ">タイムストレッチ</h1>
-
+            <h1 id="タイムストレッチ">タイムストレッチ</h1>
 <p>音波の速度 ($v$), 周波数 ($f$), 波長 ($\lambda$) には以下の関係式があります.</p>
-
 <p>$
 \begin{eqnarray}
 v=f{\lambda}
 \end{eqnarray}
 $</p>
-
 <p>速度を速くすると, 周波数も高くなり, 速度を遅くすると, 周波数も低くなります. しかしながら, 波形の周期性に着目して, その繰り返し回数を増減させることによって, 周波数を変化させることなく, 音データを早送り再生したり, スロー再生したりすることが可能です. このアルゴリズムが <strong>タイムストレッチ</strong>です.</p>
-
 <h2 id="相関関数">相関関数</h2>
-
 <p>タイムストレッチでは, 波形の周期を求めるために<strong>相関関数</strong>を利用します. 相関関数は以下のように定義されます. $r(m)$ は相関関数, $s(n)$ は音データ, $N$ は相関関数のサイズです.</p>
-
 <p>$
 \begin{eqnarray}
 r(n)=\sum_{n=0}^{N-1}s(n)s(n+m)\quad(0 \leqq m \leqq N-1)
 \end{eqnarray}
 $</p>
-
 <p>つまり, 相関関数の計算は, 本来の音データとそれを $m$ サンプルずらした音データを $N$ 個の区間に限定して乗算して, その結果を加算する処理となっています.</p>
-
 <p>相関関数には, 基本周期とその整数倍で波形のピークを示すという特徴があるので, そのピークを調べることで波形の周期を求めることができます.</p>
-
-<!-- 具体例として, 基本周波数 440 Hz の音データの基本周期は, 2.27 ms (1 / 440) ms となります. -->
-
+<!-- raw HTML omitted -->
 <h2 id="早送り再生">早送り再生</h2>
-
 <p>例えば, 1.5 倍の速度で早送りする場合には, 最初の周期には単調減少の重みづけ, 次の周期には単調増加の重みづけをして, これらの波形をオーバラップアドによって重ね合わせると, 波形の接続部分における不連続的な変化を目立たせることなく, 3 周期の波形を 2 周期に縮めることができます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/79052665-18f4c880-7c73-11ea-8004-7732326c1b47.png" alt="早送り再生のアルゴリズム" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/79052665-18f4c880-7c73-11ea-8004-7732326c1b47.png" alt="早送り再生のアルゴリズム"></p>
 <p>このアルゴリズムを, 基準時刻を更新しながら, 逐次実行することで, 音データの持続時間を短くしていきます. 基準時刻の更新に関わるパラメータ $q$ は, 再生速度を $rate$ とすると, 以下のように定義することができます ($p$ は周期).</p>
-
 <p>$
 \begin{eqnarray}
-q=round\left(\frac{p}{rate-1}\right)\quad(rate &gt; 1) \\<br />
+q=round\left(\frac{p}{rate-1}\right)\quad(rate &gt; 1) \\<br>
 \end{eqnarray}
 $</p>
-
 <p>$rate$ が 1.5 の場合, $q$ は $p$ の 2 倍と算出できます.</p>
-
 <h2 id="スロー再生">スロー再生</h2>
-
 <p>例えば, 2 / 3 (0.66) 倍の速度でスロー再生する場合には, 最初の周期には単調増加の重みづけ, 次の周期には単調減少の重みづけをして, これらの波形をオーバラップアドによって重ね合わせると, 波形の接続部分における不連続的な変化を目立たせることなく, 2 周期の波形を 3 周期に伸ばすことができます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/79052679-37f35a80-7c73-11ea-983e-93d50091ff02.png" alt="スロー再生のアルゴリズム" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/79052679-37f35a80-7c73-11ea-983e-93d50091ff02.png" alt="スロー再生のアルゴリズム"></p>
 <p>このアルゴリズムを, 基準時刻を更新しながら, 逐次実行することで, 音データの持続時間を長くしていきます. 基準時刻の更新に関わるパラメータ $q$ は, 再生速度を $rate$ とすると, 以下のように定義することができます ($p$ は周期).</p>
-
 <p>$
 \begin{eqnarray}
-q=round\left(\frac{p{\cdot}rate}{1-rate}\right)\quad(0.5 \leqq rate &lt; 1) \\<br />
+q=round\left(\frac{p{\cdot}rate}{1-rate}\right)\quad(0.5 \leqq rate &lt; 1) \\<br>
 \end{eqnarray}
 $</p>
-
 <p>$rate$ が 2 / 3 (0.66) の場合, $q$ は $p$ の 2 倍と算出できます.</p>
-
 <h2 id="実装">実装</h2>
-
-<pre><code class="language-c++">#include &lt;vector&gt;
-
-void TimeStretch(
-  double rate,
-  std::vector&lt;double&gt; &amp;in,
-  std::vector&lt;double&gt; &amp;out,
-  int fs,
-  int length
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">TimeStretch</span>(
+  <span style="color:#66d9ef">double</span> rate,
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>in,
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>out,
+  <span style="color:#66d9ef">int</span> fs,
+  <span style="color:#66d9ef">int</span> length
 ) {
-  if ((rate == 1.0) || (rate &lt;= 0.0)) {
-    for (int n = 0; n &lt; length; n++) {
-      out[n] = in[n];
+  <span style="color:#66d9ef">if</span> ((rate <span style="color:#f92672">==</span> <span style="color:#ae81ff">1.0</span>) <span style="color:#f92672">||</span> (rate <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.0</span>)) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> length; n<span style="color:#f92672">++</span>) {
+      out[n] <span style="color:#f92672">=</span> in[n];
     }
 
-    return;
+    <span style="color:#66d9ef">return</span>;
   }
 
-  int template_size = static_cast&lt;int&gt;(fs * 0.01);
-  int p_min = static_cast&lt;int&gt;(fs * 0.005);
-  int p_max = static_cast&lt;int&gt;(fs * 0.02);
+  <span style="color:#66d9ef">int</span> template_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(fs <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.01</span>);
+  <span style="color:#66d9ef">int</span> p_min <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(fs <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.005</span>);
+  <span style="color:#66d9ef">int</span> p_max <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(fs <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.02</span>);
 
-  std::vector&lt;double&gt; x(template_size);
-  std::vector&lt;double&gt; y(template_size);
-  std::vector&lt;double&gt; r(p_max + 1);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> x(template_size);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> y(template_size);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> r(p_max <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
 
-  int offset0 = 0;
-  int offset1 = 0;
+  <span style="color:#66d9ef">int</span> offset0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">int</span> offset1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
-  while ((offset0 + (2 * p_max)) &lt; length) {
-    for (int n = 0; n &lt; template_size; n++) {
-      x[n] = in[offset0 + n];
+  <span style="color:#66d9ef">while</span> ((offset0 <span style="color:#f92672">+</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> p_max)) <span style="color:#f92672">&lt;</span> length) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> template_size; n<span style="color:#f92672">++</span>) {
+      x[n] <span style="color:#f92672">=</span> in[offset0 <span style="color:#f92672">+</span> n];
     }
 
-    double max_of_r = 0.0;
-    int p = p_min;
+    <span style="color:#66d9ef">double</span> max_of_r <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+    <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> p_min;
 
-    for (int m = p_min; m &lt;= p_max; m++) {
-      for (int n = 0; n &lt; template_size; n++) {
-        y[n] = in[offset0 + m + n];
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> p_min; m <span style="color:#f92672">&lt;=</span> p_max; m<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> template_size; n<span style="color:#f92672">++</span>) {
+        y[n] <span style="color:#f92672">=</span> in[offset0 <span style="color:#f92672">+</span> m <span style="color:#f92672">+</span> n];
       }
 
-      r[m] = 0.0;
+      r[m] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
 
-      // Correlation function
-      for (int n = 0; n &lt; template_size; n++) {
-        r[m] += x[n] * y[n];
+      <span style="color:#75715e">// Correlation function
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> template_size; n<span style="color:#f92672">++</span>) {
+        r[m] <span style="color:#f92672">+=</span> x[n] <span style="color:#f92672">*</span> y[n];
       }
 
-      // Peak of correlation function
-      if (r[m] &gt; max_of_r) {
-        max_of_r = r[m];
-        p = m;
-      }
-    }
-
-    if (rate &lt; 1.0) {
-      for (int n = 0; n &lt; p; n++) {
-        out[offset1 + n] = in[offset0 + n];
+      <span style="color:#75715e">// Peak of correlation function
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">if</span> (r[m] <span style="color:#f92672">&gt;</span> max_of_r) {
+        max_of_r <span style="color:#f92672">=</span> r[m];
+        p <span style="color:#f92672">=</span> m;
       }
     }
 
-    for (int n = 0; n &lt; p; n++) {
-      if (rate &gt; 1.0) {
-        out[offset1 + n] = (in[offset0 + n] * (p - n)) / p;
-        out[offset1 + n] += (in[offset0 + p + n] * n) / p;
-      } else if (rate &lt; 1.0) {
-        out[offset1 + p + n] = (in[offset0 + p + n] * (p - n)) / p;
-        out[offset1 + p + n] += (in[offset0 + n] * n) / p;
+    <span style="color:#66d9ef">if</span> (rate <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1.0</span>) {
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> p; n<span style="color:#f92672">++</span>) {
+        out[offset1 <span style="color:#f92672">+</span> n] <span style="color:#f92672">=</span> in[offset0 <span style="color:#f92672">+</span> n];
       }
     }
 
-    int q = 0;
-
-    if (rate &gt; 1.0) {
-      q = static_cast&lt;int&gt;((p / (rate - 1.0)) + 0.5);
-    } else if (rate &lt; 1.0) {
-      q = static_cast&lt;int&gt;(((p * rate) / (1.0 - rate)) + 0.5);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> p; n<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (rate <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1.0</span>) {
+        out[offset1 <span style="color:#f92672">+</span> n] <span style="color:#f92672">=</span> (in[offset0 <span style="color:#f92672">+</span> n] <span style="color:#f92672">*</span> (p <span style="color:#f92672">-</span> n)) <span style="color:#f92672">/</span> p;
+        out[offset1 <span style="color:#f92672">+</span> n] <span style="color:#f92672">+=</span> (in[offset0 <span style="color:#f92672">+</span> p <span style="color:#f92672">+</span> n] <span style="color:#f92672">*</span> n) <span style="color:#f92672">/</span> p;
+      } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (rate <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1.0</span>) {
+        out[offset1 <span style="color:#f92672">+</span> p <span style="color:#f92672">+</span> n] <span style="color:#f92672">=</span> (in[offset0 <span style="color:#f92672">+</span> p <span style="color:#f92672">+</span> n] <span style="color:#f92672">*</span> (p <span style="color:#f92672">-</span> n)) <span style="color:#f92672">/</span> p;
+        out[offset1 <span style="color:#f92672">+</span> p <span style="color:#f92672">+</span> n] <span style="color:#f92672">+=</span> (in[offset0 <span style="color:#f92672">+</span> n] <span style="color:#f92672">*</span> n) <span style="color:#f92672">/</span> p;
+      }
     }
 
-    if (rate &gt; 1.0) {
-      for (int n = p; n &lt; q; n++) {
-        if ((offset0 + p + n) &gt;= length) {
-          break;
+    <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+    <span style="color:#66d9ef">if</span> (rate <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1.0</span>) {
+      q <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>((p <span style="color:#f92672">/</span> (rate <span style="color:#f92672">-</span> <span style="color:#ae81ff">1.0</span>)) <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>);
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (rate <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1.0</span>) {
+      q <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(((p <span style="color:#f92672">*</span> rate) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> rate)) <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>);
+    }
+
+    <span style="color:#66d9ef">if</span> (rate <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1.0</span>) {
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> p; n <span style="color:#f92672">&lt;</span> q; n<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">if</span> ((offset0 <span style="color:#f92672">+</span> p <span style="color:#f92672">+</span> n) <span style="color:#f92672">&gt;=</span> length) {
+          <span style="color:#66d9ef">break</span>;
         }
 
-        out[offset1 + n] = in[offset0 + p + n];
+        out[offset1 <span style="color:#f92672">+</span> n] <span style="color:#f92672">=</span> in[offset0 <span style="color:#f92672">+</span> p <span style="color:#f92672">+</span> n];
       }
 
-      offset0 += p + q;
-      offset1 += q;
-    } else if (rate &lt; 1.0) {
-      for (int n = p; n &lt; q; n++) {
-        if ((offset0 + n) &gt;= length) {
-          break;
+      offset0 <span style="color:#f92672">+=</span> p <span style="color:#f92672">+</span> q;
+      offset1 <span style="color:#f92672">+=</span> q;
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (rate <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1.0</span>) {
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> p; n <span style="color:#f92672">&lt;</span> q; n<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">if</span> ((offset0 <span style="color:#f92672">+</span> n) <span style="color:#f92672">&gt;=</span> length) {
+          <span style="color:#66d9ef">break</span>;
         }
 
-        out[offset1 + p + n] = in[offset0 + n];
+        out[offset1 <span style="color:#f92672">+</span> p <span style="color:#f92672">+</span> n] <span style="color:#f92672">=</span> in[offset0 <span style="color:#f92672">+</span> n];
       }
 
-      offset0 += q;
-      offset1 += p + q;
+      offset0 <span style="color:#f92672">+=</span> q;
+      offset1 <span style="color:#f92672">+=</span> p <span style="color:#f92672">+</span> q;
     }
   }
 }
-</code></pre>
-
-<p>実行例</p>
-
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdlib&gt;
-#include &quot;wave.h&quot;
-#include &quot;time_stretch.h&quot;
-
-int main(int argc, char **argv) {
-  if (argc != 2) {
-    std::cerr &lt;&lt; &quot;Require rate&quot; &lt;&lt; std::endl;
-    std::exit(EXIT_FAILURE);
+</code></pre></div><p>実行例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;wave.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;time_stretch.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv) {
+  <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span>) {
+    std<span style="color:#f92672">::</span>cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Require rate&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+    std<span style="color:#f92672">::</span>exit(EXIT_FAILURE);
   }
 
   STEREO_PCM pcm0, pcm1;
 
-  double rate = std::stod(argv[1]);
+  <span style="color:#66d9ef">double</span> rate <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">1</span>]);
 
-  if (rate &lt;= 0.0) {
-    std::cerr &lt;&lt; &quot;rate &gt; 0.0&quot; &lt;&lt; std::endl;
-    std::exit(EXIT_FAILURE);
+  <span style="color:#66d9ef">if</span> (rate <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.0</span>) {
+    std<span style="color:#f92672">::</span>cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;rate &gt; 0.0&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+    std<span style="color:#f92672">::</span>exit(EXIT_FAILURE);
   }
 
-  wave_read(&amp;pcm0, &quot;stereo.wav&quot;);
+  wave_read(<span style="color:#f92672">&amp;</span>pcm0, <span style="color:#e6db74">&#34;stereo.wav&#34;</span>);
 
-  pcm1.fs     = pcm0.fs;
-  pcm1.bits   = pcm0.bits;
-  pcm1.length = static_cast&lt;int&gt;(pcm0.length / rate) + 1;
+  pcm1.fs     <span style="color:#f92672">=</span> pcm0.fs;
+  pcm1.bits   <span style="color:#f92672">=</span> pcm0.bits;
+  pcm1.length <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(pcm0.length <span style="color:#f92672">/</span> rate) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
 
   pcm1.sL.resize(pcm1.length);
   pcm1.sR.resize(pcm1.length);
@@ -534,12 +503,9 @@ int main(int argc, char **argv) {
   TimeStretch(rate, pcm0.sL, pcm1.sL, pcm1.fs, pcm0.length);
   TimeStretch(rate, pcm0.sR, pcm1.sR, pcm1.fs, pcm0.length);
 
-  wave_write(&amp;pcm1, &quot;time-stretch.wav&quot;);
+  wave_write(<span style="color:#f92672">&amp;</span>pcm1, <span style="color:#e6db74">&#34;time-stretch.wav&#34;</span>);
 }
-</code></pre>
-
-<h2 id="リファレンス">リファレンス</h2>
-
+</code></pre></div><h2 id="リファレンス">リファレンス</h2>
 <ul>
 <li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%81%A7%E3%81%AF%E3%81%98%E3%82%81%E3%82%8B%E9%9F%B3%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E3%82%B5%E3%82%A6%E3%83%B3%E3%83%89%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86-%E9%9D%92%E6%9C%A8-%E7%9B%B4%E5%8F%B2/dp/4274206505">C言語ではじめる音のプログラミング―サウンドエフェクトの信号処理</a></li>
 </ul>
@@ -719,14 +685,6 @@ int main(int argc, char **argv) {
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -948,14 +906,6 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1164,14 +1114,6 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1254,9 +1196,6 @@ int main(int argc, char **argv) {
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1335,9 +1274,6 @@ int main(int argc, char **argv) {
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1361,7 +1297,7 @@ int main(int argc, char **argv) {
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

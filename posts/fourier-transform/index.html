@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>Fourier Transform &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="Fourier Transform">
 <meta itemprop="description" content="フーリエ変換・離散フーリエ変換・変形離散コサイン変換">
-
-
 <meta itemprop="datePublished" content="2019-09-21T17:27:49&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-21T17:27:49&#43;09:00" />
-<meta itemprop="wordCount" content="2736">
+<meta itemprop="wordCount" content="2743">
 
 
 
 <meta itemprop="keywords" content="Mathematics,Fourier Transform,Discrete Fourier Transform,DFT,Modified Discrete Cosine Transform,MDCT," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Fourier Transform"/>
 <meta name="twitter:description" content="フーリエ変換・離散フーリエ変換・変形離散コサイン変換"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-21 17:27:49 &#43;0900 JST" itemprop="datePublished">2019-09-21</time>
             &middot;
-            2736
+            2743
             words
             &middot;
             6
@@ -334,422 +331,350 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="フーリエ変換">フーリエ変換</h1>
-
-<p>周波数という視点 (ドメイン) から, 音や光の特徴を調べる方法が<b>フーリエ変換</b>です. 音の場合であれば, 基本周波数と倍音の比率などを分析することができます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/63822772-69d9da00-c98c-11e9-9870-ce3c5805cf24.gif" alt="フーリエ変換" /></p>
-
-<p>フーリエ変換は, $-\infty$ ~ $\infty$ の時刻まで観測したアナログ信号の周波数特性を調べるための数学的処理で, フーリエ変換と, その逆変換である, <b>逆フーリエ変換</b>は以下のように定義されています.</p>
-
+            <h1 id="フーリエ変換">フーリエ変換</h1>
+<p>周波数という視点 (ドメイン) から, 音や光の特徴を調べる方法が<!-- raw HTML omitted -->フーリエ変換<!-- raw HTML omitted -->です. 音の場合であれば, 基本周波数と倍音の比率などを分析することができます.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/63822772-69d9da00-c98c-11e9-9870-ce3c5805cf24.gif" alt="フーリエ変換"></p>
+<p>フーリエ変換は, $-\infty$ ~ $\infty$ の時刻まで観測したアナログ信号の周波数特性を調べるための数学的処理で, フーリエ変換と, その逆変換である, <!-- raw HTML omitted -->逆フーリエ変換<!-- raw HTML omitted -->は以下のように定義されています.</p>
 <p>$
 \begin{eqnarray}
 X(f)=\int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt \quad (-\infty \leqq f \leqq \infty)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 x(t)=\int_{-\infty}^{\infty}X(t)\exp(j2{\pi}ft)df \quad (-\infty \leqq t \leqq \infty)
 \end{eqnarray}
 $</p>
-
 <p>$x(t)$ は, 時間 $t$ を変数とするアナログ信号, $X(f)$ は周波数 $f$ を変数とする $x(t)$ の周波数特性を表しています.</p>
-
 <h1 id="離散フーリエ変換">離散フーリエ変換</h1>
-
-<p>アナログ信号のフーリエ変換では, 無限の長さの連続信号となりますが, コンピュータでは<b>無限大</b>や<b>連続</b>した信号をあつかうことができません. したがって, コンピュータでフーリエ変換を実装する場合には, <b>離散フーリエ変換</b> (<b>DFT</b> : Discrete Fourier Transform) と, その逆変換である<b>逆離散フーリエ変換</b> (<b>IDFT</b> : Inverse Discrete Fourier Transform) を利用します.</p>
-
+<p>アナログ信号のフーリエ変換では, 無限の長さの連続信号となりますが, コンピュータでは<!-- raw HTML omitted -->無限大<!-- raw HTML omitted -->や<!-- raw HTML omitted -->連続<!-- raw HTML omitted -->した信号をあつかうことができません. したがって, コンピュータでフーリエ変換を実装する場合には, <!-- raw HTML omitted -->離散フーリエ変換<!-- raw HTML omitted --> (<!-- raw HTML omitted -->DFT<!-- raw HTML omitted --> : Discrete Fourier Transform) と, その逆変換である<!-- raw HTML omitted -->逆離散フーリエ変換<!-- raw HTML omitted --> (<!-- raw HTML omitted -->IDFT<!-- raw HTML omitted --> : Inverse Discrete Fourier Transform) を利用します.</p>
 <p>$
 \begin{eqnarray}
 t=nt_{s} \quad (1 \leqq n \leqq N-1)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 f=\frac{kf_{s}}{N} \quad (f \leqq k \leqq N - 1)
 \end{eqnarray}
 $</p>
-
 <p>と定義できるので,</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=\sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 x(n)=\frac{1}{N}\sum_{k=0}^{N-1}X(k)\exp\left(\frac{j2{\pi}kn}{N}\right)
 \end{eqnarray}
 $</p>
-
 <p>音の場合, $x(n)$ は実数となります. 一方で, $X(k)$ は複素数となります. $X(k)$ を極座標形式で表すと, 以下のようになります.</p>
-
 <p>$
 \begin{eqnarray}
 X(k)=A(k)\exp(j{\theta}(k))
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{cases}
 \begin{eqnarray}
-A(k)     &amp;=&amp;\sqrt{real(X(k))^{2}+imag(X(k))^{2}} \\<br />
-\theta(k)&amp;=&amp;\tan^{-1}\left(\frac{imag(X(k))}{real(X(k))}\right) \\<br />
+A(k)     &amp;=&amp;\sqrt{real(X(k))^{2}+imag(X(k))^{2}} \\<br>
+\theta(k)&amp;=&amp;\tan^{-1}\left(\frac{imag(X(k))}{real(X(k))}\right) \\<br>
 \end{eqnarray}
 \end{cases}
 $</p>
-
 <p>ここで, $X(k)$ の逆離散フーリエ変換を考えます.</p>
-
 <p>$
 \begin{eqnarray}
 x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)exp\left(\frac{-j2{\pi}kn}{N}+j\theta(k)\right) \quad (0 \leqq n \leqq N - 1)
 \end{eqnarray}
 $</p>
-
 <p>オイラーの公式を適用すると,</p>
-
 <p>$
 \begin{eqnarray}
 x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)\left[\cos\left(\frac{2{\pi}kn}{N}+\theta(k)\right)+j\sin\left(\frac{2{\pi}kn}{N}+\theta(k)\right)\right] \quad (0 \leqq n \leqq N - 1)
 \end{eqnarray}
 $</p>
-
 <p>音の場合, $x(n)$ は, 虚数になるので, 虚数部を消去すると, 以下のようになります.</p>
-
 <p>$
 \begin{eqnarray}
 x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)\cos\left(\frac{2{\pi}kn}{N}+\theta(k)\right) \quad (0 \leqq n \leqq N - 1)
 \end{eqnarray}
 $</p>
-
-<p>この式は, $N$ 個の $\cos$ 波の重ねあわせによって $x(n)$ を合成できることを表しています. したがって, 離散フーリエ変換によって計算される周波数特性 (スペクトル) は, $\cos$ 波の振幅と位相の情報です ($A(k)$ は, <b>振幅スペクトル</b>, $\theta(k)$は, <b>位相スペクトル</b> です).</p>
-
-<p>周波数特性は, $k=\frac{N}{2}$ を中心に, <b>振幅スペクトルは線対称</b>, <b>位相スペクトルは点対称</b>になります. さらに, $k=\frac{N}{2}$ は, $\frac{f_{s}}{2}$, つまり, サンプリング周波数の $\frac{1}{2}$ に対応し, <b>サンプリング定理</b>にも関係しています.</p>
-
-<p>人間の聴覚は, <b>位相の違いに鈍感</b> なので, 音の周波数特性といえば振幅スペクトルを意味していることがほとんどです (ただし, ホワイトノイズとインパルス音のように位相の違いを分析する必要がある場合もあります).</p>
-
+<p>この式は, $N$ 個の $\cos$ 波の重ねあわせによって $x(n)$ を合成できることを表しています. したがって, 離散フーリエ変換によって計算される周波数特性 (スペクトル) は, $\cos$ 波の振幅と位相の情報です ($A(k)$ は, <!-- raw HTML omitted -->振幅スペクトル<!-- raw HTML omitted -->, $\theta(k)$は, <!-- raw HTML omitted -->位相スペクトル<!-- raw HTML omitted --> です).</p>
+<p>周波数特性は, $k=\frac{N}{2}$ を中心に, <!-- raw HTML omitted -->振幅スペクトルは線対称<!-- raw HTML omitted -->, <!-- raw HTML omitted -->位相スペクトルは点対称<!-- raw HTML omitted -->になります. さらに, $k=\frac{N}{2}$ は, $\frac{f_{s}}{2}$, つまり, サンプリング周波数の $\frac{1}{2}$ に対応し, <!-- raw HTML omitted -->サンプリング定理<!-- raw HTML omitted -->にも関係しています.</p>
+<p>人間の聴覚は, <!-- raw HTML omitted -->位相の違いに鈍感<!-- raw HTML omitted --> なので, 音の周波数特性といえば振幅スペクトルを意味していることがほとんどです (ただし, ホワイトノイズとインパルス音のように位相の違いを分析する必要がある場合もあります).</p>
 <h2 id="窓関数">窓関数</h2>
-
 <p>離散フーリエ変換では, $x(n)$, $x(k)$ が, 離散フーリエ変換のサイズ $N$ の周期信号という前提があります. つまり, $N$ が $sin$ 波の整数倍となっていれば, 離散フーリエ変換によって求められる周波数特性は, 基本周波数をのみを含んだものになります.</p>
-
 <p>ところが, そうでない場合, 実際の音にはない周波数成分が含まれてしまいます.</p>
-
-<p>この問題を緩和するのが, <b>窓関数</b>です. 窓関数を乗算することで, 端部の不連続点をあいまいにすることができ, 周波数成分の広がりをある程度おさえることができます.</p>
-
-<p>窓関数にはいくつか種類がありますが, 代表的な窓関数として, <b>ハニング窓</b>があり, 以下のように定義されています(ほかには, ブラックマン窓などがあります).</p>
-
+<p>この問題を緩和するのが, <!-- raw HTML omitted -->窓関数<!-- raw HTML omitted -->です. 窓関数を乗算することで, 端部の不連続点をあいまいにすることができ, 周波数成分の広がりをある程度おさえることができます.</p>
+<p>窓関数にはいくつか種類がありますが, 代表的な窓関数として, <!-- raw HTML omitted -->ハニング窓<!-- raw HTML omitted -->があり, 以下のように定義されています(ほかには, ブラックマン窓などがあります).</p>
 <p>($N$ が偶数の場合)</p>
-
 <p>$
 w(n)=\begin{cases}
 \begin{eqnarray}
-&amp;0.5-0.5\cos\left(\frac{2{\pi}n}{N}\right)&amp; \quad (0 \leqq n \leqq N - 1) \\<br />
-&amp;0&amp; \quad (otherwise) \\<br />
+&amp;0.5-0.5\cos\left(\frac{2{\pi}n}{N}\right)&amp; \quad (0 \leqq n \leqq N - 1) \\<br>
+&amp;0&amp; \quad (otherwise) \\<br>
 \end{eqnarray}
 \end{cases}
 $</p>
-
 <p>($N$ が奇数の場合)</p>
-
 <p>$
 w(n)=\begin{cases}
 \begin{eqnarray}
-&amp;0.5-0.5\cos\left(\frac{2{\pi}(n+0.5)}{N}\right)&amp; \quad (0 \leqq n \leqq N - 1) \\<br />
-&amp;0&amp; \quad (otherwise) \\<br />
+&amp;0.5-0.5\cos\left(\frac{2{\pi}(n+0.5)}{N}\right)&amp; \quad (0 \leqq n \leqq N - 1) \\<br>
+&amp;0&amp; \quad (otherwise) \\<br>
 \end{eqnarray}
 \end{cases}
 $</p>
-
 <h2 id="実装">実装</h2>
-
 <p>C++ で実装した, 離散フーリエ変換の関数です.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;complex&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">DFT</span>(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>x, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>X, <span style="color:#66d9ef">int</span> N) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">double</span> real_sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+    <span style="color:#66d9ef">double</span> imag_sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
 
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;cmath&gt;
-#include &lt;complex&gt;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> N; n<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">double</span> real <span style="color:#f92672">=</span>  std<span style="color:#f92672">::</span>cos((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> k <span style="color:#f92672">*</span> n) <span style="color:#f92672">/</span> N);
+      <span style="color:#66d9ef">double</span> imag <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>std<span style="color:#f92672">::</span>sin((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> k <span style="color:#f92672">*</span> n) <span style="color:#f92672">/</span> N);
 
-void DFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, std::vector&lt;std::complex&lt;double&gt;&gt; &amp;X, int N) {
-  for (int k = 0; k &lt; N; k++) {
-    double real_sum = 0.0;
-    double imag_sum = 0.0;
-
-    for (int n = 0; n &lt; N; n++) {
-      double real =  std::cos((2 * M_PI * k * n) / N);
-      double imag = -std::sin((2 * M_PI * k * n) / N);
-
-      real_sum += (real * x[n].real()) - (imag * x[n].imag());
-      imag_sum += (real * x[n].imag()) + (imag * x[n].real());
+      real_sum <span style="color:#f92672">+=</span> (real <span style="color:#f92672">*</span> x[n].real()) <span style="color:#f92672">-</span> (imag <span style="color:#f92672">*</span> x[n].imag());
+      imag_sum <span style="color:#f92672">+=</span> (real <span style="color:#f92672">*</span> x[n].imag()) <span style="color:#f92672">+</span> (imag <span style="color:#f92672">*</span> x[n].real());
     }
 
-    X[k] = std::complex&lt;double&gt;(real_sum, imag_sum);
+    X[k] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(real_sum, imag_sum);
   }
 }
 
-void IDFT(std::vector&lt;std::complex&lt;double&gt;&gt; &amp;x, std::vector&lt;std::complex&lt;double&gt;&gt; &amp;X, int N) {
-  for (int n = 0; n &lt; N; n++) {
-    double real_sum = 0.0;
-    double imag_sum = 0.0;
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IDFT</span>(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>x, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>X, <span style="color:#66d9ef">int</span> N) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> N; n<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">double</span> real_sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+    <span style="color:#66d9ef">double</span> imag_sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
 
-    for (int k = 0; k &lt; N; k++) {
-      double real = std::cos((2 * M_PI * k * n) / N);
-      double imag = std::sin((2 * M_PI * k * n) / N);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">double</span> real <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>cos((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> k <span style="color:#f92672">*</span> n) <span style="color:#f92672">/</span> N);
+      <span style="color:#66d9ef">double</span> imag <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>sin((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> k <span style="color:#f92672">*</span> n) <span style="color:#f92672">/</span> N);
 
-      real_sum += ((real * X[k].real()) - (imag * X[k].imag()));
-      imag_sum += ((real * X[k].imag()) + (imag * X[k].real()));
+      real_sum <span style="color:#f92672">+=</span> ((real <span style="color:#f92672">*</span> X[k].real()) <span style="color:#f92672">-</span> (imag <span style="color:#f92672">*</span> X[k].imag()));
+      imag_sum <span style="color:#f92672">+=</span> ((real <span style="color:#f92672">*</span> X[k].imag()) <span style="color:#f92672">+</span> (imag <span style="color:#f92672">*</span> X[k].real()));
     }
 
-    x[n] = std::complex&lt;double&gt;((real_sum / N), (imag_sum / N));
+    x[n] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>((real_sum <span style="color:#f92672">/</span> N), (imag_sum <span style="color:#f92672">/</span> N));
   }
 }
-</code></pre>
-
-<p>ハニング窓</p>
-
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;cmath&gt;
-
-void hanning_window(std::vector&lt;double&gt; &amp;w, int N) {
-  if ((N % 2) == 0) {
-    for (int n = 0; n &lt; N; n++) {
-      w[n] = 0.5 - (0.5 * std::cos((2.0 * M_PI * n) / N));
+</code></pre></div><p>ハニング窓</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">hanning_window</span>(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>w, <span style="color:#66d9ef">int</span> N) {
+  <span style="color:#66d9ef">if</span> ((N <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> N; n<span style="color:#f92672">++</span>) {
+      w[n] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">-</span> (<span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>cos((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> n) <span style="color:#f92672">/</span> N));
     }
-  } else {
-    for (int n = 0; n &lt; N; n++) {
-      w[n] = 0.5 - (0.5 * std::cos((2.0 * M_PI * (n + 0.5)) / N));
+  } <span style="color:#66d9ef">else</span> {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> N; n<span style="color:#f92672">++</span>) {
+      w[n] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">-</span> (<span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>cos((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> (n <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>)) <span style="color:#f92672">/</span> N));
     }
   }
 }
-</code></pre>
-
-<p>実行例</p>
-
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;cmath&gt;
-#include &lt;complex&gt;
-#include &quot;wave.h&quot;
-#include &quot;window_functions.h&quot;
-#include &quot;dft.h&quot;
-
-enum {
-  N = 8
+</code></pre></div><p>実行例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;complex&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;wave.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;window_functions.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;dft.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">enum</span> {
+  N <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
 };
 
-int main() {
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
   MONO_PCM pcm;
 
-  std::vector&lt;std::complex&lt;double&gt;&gt; x(N);
-  std::vector&lt;std::complex&lt;double&gt;&gt; X(N, 0.0);
-  std::vector&lt;double&gt; w(N);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> x(N);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> X(N, <span style="color:#ae81ff">0.0</span>);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> w(N);
 
-  WAVE::wave_read(&amp;pcm, &quot;sample.wav&quot;);
+  WAVE<span style="color:#f92672">::</span>wave_read(<span style="color:#f92672">&amp;</span>pcm, <span style="color:#e6db74">&#34;sample.wav&#34;</span>);
 
   hanning_window(w, N);
 
-  for (int n = 0; n &lt; N; n++) {
-    double real = w[n] * pcm.s[n];
-    x[n] = std::complex&lt;double&gt;(real, 0.0);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> N; n<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">double</span> real <span style="color:#f92672">=</span> w[n] <span style="color:#f92672">*</span> pcm.s[n];
+    x[n] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(real, <span style="color:#ae81ff">0.0</span>);
   }
 
-  std::cout &lt;&lt; std::fixed;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>fixed;
 
-  std::cout &lt;&lt; &quot;x(n)&quot; &lt;&lt; std::endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x(n)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
 
-  for (int n = 0; n &lt; N; n++) {
-    std::cout &lt;&lt; &quot;[&quot; &lt;&lt; n &lt;&lt; &quot;]&quot; &lt;&lt; &quot; &quot; &lt;&lt; x[n].real() &lt;&lt; std::endl;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> N; n<span style="color:#f92672">++</span>) {
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[&#34;</span> <span style="color:#f92672">&lt;&lt;</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;]&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x[n].real() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
   }
 
   DFT(x, X, N);
 
-  std::cout &lt;&lt; &quot;X(k)&quot; &lt;&lt; std::endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;X(k)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
 
-  for (int k = 0; k &lt; N; k++) {
-    std::cout &lt;&lt; &quot;[&quot; &lt;&lt; k &lt;&lt; &quot;]&quot; &lt;&lt; &quot; &quot; &lt;&lt;  X[k].real() &lt;&lt; &quot; + j&quot; &lt;&lt; X[k].imag() &lt;&lt; std::endl;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[&#34;</span> <span style="color:#f92672">&lt;&lt;</span> k <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;]&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span>  X[k].real() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; + j&#34;</span> <span style="color:#f92672">&lt;&lt;</span> X[k].imag() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
   }
 
-  x.assign(N, 0.0);
+  x.assign(N, <span style="color:#ae81ff">0.0</span>);
 
   IDFT(x, X, N);
 
-  std::cout &lt;&lt; &quot;x(n)&quot; &lt;&lt; std::endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x(n)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
 
-  for (int n = 0; n &lt; N; n++) {
-    std::cout &lt;&lt; &quot;[&quot; &lt;&lt; n &lt;&lt; &quot;]&quot; &lt;&lt; &quot; &quot; &lt;&lt; x[n].real() &lt;&lt; std::endl;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> N; n<span style="color:#f92672">++</span>) {
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[&#34;</span> <span style="color:#f92672">&lt;&lt;</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;]&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x[n].real() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
   }
 }
-</code></pre>
-
-<h1 id="離散コサイン変換">離散コサイン変換</h1>
-
-<p>フーリエ変換を利用することで, 周波数解析が可能になります. しかし, フーリエ変換では, その演算結果が複素数になってしまうというデメリットがあります. 実数である時間領域の信号を実数の周波数信号に変換できれば, コンピュータで処理することが容易になります. このセクションでは, MPEG などで利用されている<b>離散コサイン変換</b> (Discrete Cosine Transform) について解説します.</p>
-
+</code></pre></div><h1 id="離散コサイン変換">離散コサイン変換</h1>
+<p>フーリエ変換を利用することで, 周波数解析が可能になります. しかし, フーリエ変換では, その演算結果が複素数になってしまうというデメリットがあります. 実数である時間領域の信号を実数の周波数信号に変換できれば, コンピュータで処理することが容易になります. このセクションでは, MPEG などで利用されている<!-- raw HTML omitted -->離散コサイン変換<!-- raw HTML omitted --> (Discrete Cosine Transform) について解説します.</p>
 <p>$
 \begin{eqnarray}
 X(k)=\sqrt{\frac{2}{N}}a_{K}\sum_{n=0}^{N-1}x(n)\cos\left(\frac{\left(2n+1\right)k{\pi}}{2N}\right)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a_{k}=
 \begin{cases}
-&amp;1&amp;\quad(k=1,2,\cdots,N-1) \\<br />
-&amp;\frac{1}{\sqrt{2}}&amp;\quad(k=0)\\<br />
+&amp;1&amp;\quad(k=1,2,\cdots,N-1) \\<br>
+&amp;\frac{1}{\sqrt{2}}&amp;\quad(k=0)\\<br>
 \end{cases}
 \end{eqnarray}
 $</p>
-
 <p>また, その逆変換である, 逆離散コサイン変換は以下のように定義されます.</p>
-
 <p>$
 \begin{eqnarray}
 x(n)=\sqrt{\frac{2}{N}}\sum_{k=0}^{N-1}a_{K}X(k)\cos\left(\frac{\left(2n+1\right)k{\pi}}{2N}\right)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a_{k}=
 \begin{cases}
-&amp;1&amp;\quad(k=1,2,\cdots,N-1) \\<br />
-&amp;\frac{1}{\sqrt{2}}&amp;\quad(k=0)\\<br />
+&amp;1&amp;\quad(k=1,2,\cdots,N-1) \\<br>
+&amp;\frac{1}{\sqrt{2}}&amp;\quad(k=0)\\<br>
 \end{cases}
 \end{eqnarray}
 $</p>
-
 <h1 id="変形離散コサイン変換">変形離散コサイン変換</h1>
-
 <p>離散コサイン変換では, $N$ 個ずつデータを取得して, 周波数変換, 信号処理, そして, 逆変換を実行します. しかしながら, それでは, データのまとまりに不連続な点が発生してしまいます.</p>
-
-<p>そこで, 信号を窓関数を利用してオーバラップ (隣接するデータのまとまりを重ねて連結していく処理) をしながら, 信号を取得して, 周波数解析をする処理として, <b>変形離散コサイン変換</b> (<b>修正離散コサイン変換</b> (Modified Discrete Cosine Transform)) が利用されます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/67263894-640ff900-f4e4-11e9-91a7-ce280737e1e0.png" alt="オーバーラップ (赤い矩形の重なった部分がオーバーラップしている部分" /></p>
-
+<p>そこで, 信号を窓関数を利用してオーバラップ (隣接するデータのまとまりを重ねて連結していく処理) をしながら, 信号を取得して, 周波数解析をする処理として, <!-- raw HTML omitted -->変形離散コサイン変換<!-- raw HTML omitted --> (<!-- raw HTML omitted -->修正離散コサイン変換<!-- raw HTML omitted --> (Modified Discrete Cosine Transform)) が利用されます.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/67263894-640ff900-f4e4-11e9-91a7-ce280737e1e0.png" alt="オーバーラップ (赤い矩形の重なった部分がオーバーラップしている部分"></p>
 <p>$
 \begin{eqnarray}
-X(k)&amp;=&amp;\sum_{n=0}^{2N-1}x(n)\cos\left(\frac{\left(2n+N+1\right)\left(2k+1\right){\pi}}{4N}\right) \\<br />
-    &amp;=&amp;\sum_{n=0}^{2N-1}x(n)\cos\left(\frac{4\left(n+\frac{N}{2}+\frac{1}{2}\right)\left(k+\frac{1}{2}\right){\pi}}{4N}\right) \\<br />
-    &amp;=&amp;\sum_{n=0}^{2N-1}x(n)\cos\left(\frac{{\pi}}{N}\left(n+\frac{N}{2}+\frac{1}{2}\right)\left(k+\frac{1}{2}\right)\right) \quad (k=0,1,\cdots,N-1) \\<br />
+X(k)&amp;=&amp;\sum_{n=0}^{2N-1}x(n)\cos\left(\frac{\left(2n+N+1\right)\left(2k+1\right){\pi}}{4N}\right) \\<br>
+&amp;=&amp;\sum_{n=0}^{2N-1}x(n)\cos\left(\frac{4\left(n+\frac{N}{2}+\frac{1}{2}\right)\left(k+\frac{1}{2}\right){\pi}}{4N}\right) \\<br>
+&amp;=&amp;\sum_{n=0}^{2N-1}x(n)\cos\left(\frac{{\pi}}{N}\left(n+\frac{N}{2}+\frac{1}{2}\right)\left(k+\frac{1}{2}\right)\right) \quad (k=0,1,\cdots,N-1) \\<br>
 \end{eqnarray}
 $</p>
-
 <p>また, 逆変形離散コサイン変換は, 以下のように定義されます.</p>
-
 <p>$
 \begin{eqnarray}
-x(n)&amp;=&amp;\frac{1}{N}\sum_{k=0}^{N-1}X(k)\cos\left(\frac{\left(2n+N+1\right)\left(2k+1\right){\pi}}{4N}\right) \\<br />
-    &amp;=&amp;\frac{1}{N}\sum_{k=0}^{N-1}X(k)\cos\left(\frac{4\left(n+\frac{N}{2}+\frac{1}{2}\right)\left(k+\frac{1}{2}\right){\pi}}{4N}\right) \\<br />
-    &amp;=&amp;\frac{1}{N}\sum_{k=0}^{N-1}X(k)\cos\left(\frac{{\pi}}{N}\left(n+\frac{N}{2}+\frac{1}{2}\right)\left(k+\frac{1}{2}\right)\right) \quad (n=0,1,\cdots,2N-1) \\<br />
+x(n)&amp;=&amp;\frac{1}{N}\sum_{k=0}^{N-1}X(k)\cos\left(\frac{\left(2n+N+1\right)\left(2k+1\right){\pi}}{4N}\right) \\<br>
+&amp;=&amp;\frac{1}{N}\sum_{k=0}^{N-1}X(k)\cos\left(\frac{4\left(n+\frac{N}{2}+\frac{1}{2}\right)\left(k+\frac{1}{2}\right){\pi}}{4N}\right) \\<br>
+&amp;=&amp;\frac{1}{N}\sum_{k=0}^{N-1}X(k)\cos\left(\frac{{\pi}}{N}\left(n+\frac{N}{2}+\frac{1}{2}\right)\left(k+\frac{1}{2}\right)\right) \quad (n=0,1,\cdots,2N-1) \\<br>
 \end{eqnarray}
 $</p>
-
 <h2 id="実装-1">実装</h2>
-
 <p>C++ による, 変形離散コサイン変換の実装例です.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">MDCT</span>(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>x, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>X, <span style="color:#66d9ef">int</span> N) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">double</span> s <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
 
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;cmath&gt;
-
-void MDCT(std::vector&lt;double&gt; &amp;x, std::vector&lt;double&gt; &amp;X, int N) {
-  for (int k = 0; k &lt; N; k++) {
-    double s = 0.0;
-
-    for (int n = 0; n &lt;= ((2 * N) - 1); n++) {
-      s += x[n] * std::cos((M_PI / N) * (n + (N / 2.0) + (1.0 / 2.0)) * (k + (1.0 / 2.0)));
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;=</span> ((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> N) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>); n<span style="color:#f92672">++</span>) {
+      s <span style="color:#f92672">+=</span> x[n] <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>cos((M_PI <span style="color:#f92672">/</span> N) <span style="color:#f92672">*</span> (n <span style="color:#f92672">+</span> (N <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span>) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span>)) <span style="color:#f92672">*</span> (k <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span>)));
     }
 
-    X[k] = s;
+    X[k] <span style="color:#f92672">=</span> s;
   }
 }
 
-void IMDCT(std::vector&lt;double&gt; &amp;x, std::vector&lt;double&gt; &amp;X, int N) {
-  for (int n = 0; n &lt;= ((2 * N) - 1); n++) {
-    double t = 0.0;
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IMDCT</span>(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>x, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>X, <span style="color:#66d9ef">int</span> N) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;=</span> ((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> N) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>); n<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">double</span> t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
 
-    for (int k = 0; k &lt; N; k++) {
-      t += X[k] * std::cos((M_PI / N) * (n + (N / 2.0) + (1.0 / 2.0)) * (k + (1.0 / 2.0)));
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+      t <span style="color:#f92672">+=</span> X[k] <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>cos((M_PI <span style="color:#f92672">/</span> N) <span style="color:#f92672">*</span> (n <span style="color:#f92672">+</span> (N <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span>) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span>)) <span style="color:#f92672">*</span> (k <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span>)));
     }
 
-    x[n] = t / N;
+    x[n] <span style="color:#f92672">=</span> t <span style="color:#f92672">/</span> N;
   }
 }
-</code></pre>
-
-<p>実行例</p>
-
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;cmath&gt;
-#include &quot;wave.h&quot;
-#include &quot;window_functions.h&quot;
-#include &quot;mdct.h&quot;
-
-enum {
-  N = 8
+</code></pre></div><p>実行例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;wave.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;window_functions.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;mdct.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">enum</span> {
+  N <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
 };
 
-int main() {
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
   MONO_PCM pcm;
 
-  std::vector&lt;double&gt; x(2 * N);
-  std::vector&lt;double&gt; X(N, 0.0);
-  std::vector&lt;double&gt; w(2 * N);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> x(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> N);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> X(N, <span style="color:#ae81ff">0.0</span>);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> w(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> N);
 
-  wave_read(&amp;pcm, &quot;sample.wav&quot;);
+  wave_read(<span style="color:#f92672">&amp;</span>pcm, <span style="color:#e6db74">&#34;sample.wav&#34;</span>);
 
-  std::cout &lt;&lt; std::fixed;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>fixed;
 
-  sine_window(w, (2 * N));
+  sine_window(w, (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> N));
 
-  std::cout &lt;&lt; &quot;x(n)&quot; &lt;&lt; std::endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x(n)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
 
-  for (int n = 0; n &lt; (2 * N); n++) {
-    x[n] = w[n] * pcm.s[n];
-    std::cout &lt;&lt; &quot;[&quot; &lt;&lt; n &lt;&lt; &quot;]&quot; &lt;&lt; &quot; &quot; &lt;&lt; x[n] &lt;&lt; std::endl;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> N); n<span style="color:#f92672">++</span>) {
+    x[n] <span style="color:#f92672">=</span> w[n] <span style="color:#f92672">*</span> pcm.s[n];
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[&#34;</span> <span style="color:#f92672">&lt;&lt;</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;]&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x[n] <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
   }
 
   MDCT(x, X, N);
 
-  std::cout &lt;&lt; &quot;X(k)&quot; &lt;&lt; std::endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;X(k)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
 
-  for (int k = 0; k &lt; N; k++) {
-    std::cout &lt;&lt; &quot;[&quot; &lt;&lt; k &lt;&lt; &quot;]&quot; &lt;&lt; &quot; &quot; &lt;&lt; X[k] &lt;&lt; std::endl;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[&#34;</span> <span style="color:#f92672">&lt;&lt;</span> k <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;]&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> X[k] <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
   }
 
-  x.assign((2 * N), 0.0);
+  x.assign((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> N), <span style="color:#ae81ff">0.0</span>);
 
   IMDCT(x, X, N);
 
-  std::cout &lt;&lt; &quot;x(n)&quot; &lt;&lt; std::endl;
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x(n)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
 
-  for (int n = 0; n &lt; (2 * N); n++) {
-    x[n] *= w[n];
-    std::cout &lt;&lt; &quot;[&quot; &lt;&lt; n &lt;&lt; &quot;]&quot; &lt;&lt; &quot; &quot; &lt;&lt; x[n] &lt;&lt; std::endl;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> N); n<span style="color:#f92672">++</span>) {
+    x[n] <span style="color:#f92672">*=</span> w[n];
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[&#34;</span> <span style="color:#f92672">&lt;&lt;</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;]&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x[n] <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
   }
 }
-</code></pre>
-
-<p>注意点としては, MDCT / IMDCT を実行するまえに, 窓関数をかける必要があります. 上記の例では, MP3 などで利用される, <b>サイン窓</b>を利用しています.</p>
-
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;cmath&gt;
-
-void sine_window(std::vector&lt;double&gt; &amp;w, int N) {
-  for (int n = 0; n &lt; N; n++) {
-    w[n] = std::sin(M_PI * (static_cast&lt;double&gt;(n) / N));
+</code></pre></div><p>注意点としては, MDCT / IMDCT を実行するまえに, 窓関数をかける必要があります. 上記の例では, MP3 などで利用される, <!-- raw HTML omitted -->サイン窓<!-- raw HTML omitted -->を利用しています.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sine_window</span>(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>w, <span style="color:#66d9ef">int</span> N) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> N; n<span style="color:#f92672">++</span>) {
+    w[n] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>sin(M_PI <span style="color:#f92672">*</span> (<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(n) <span style="color:#f92672">/</span> N));
   }
 }
-</code></pre>
-
-<h1 id="リファレンス">リファレンス</h1>
-
+</code></pre></div><h1 id="リファレンス">リファレンス</h1>
 <ul>
 <li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%81%A7%E3%81%AF%E3%81%98%E3%82%81%E3%82%8B%E9%9F%B3%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E3%82%B5%E3%82%A6%E3%83%B3%E3%83%89%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86-%E9%9D%92%E6%9C%A8-%E7%9B%B4%E5%8F%B2/dp/4274206505">C言語ではじめる音のプログラミング―サウンドエフェクトの信号処理</a></li>
 <li><a href="https://www.amazon.co.jp/%E3%83%87%E3%82%A3%E3%82%B8%E3%82%BF%E3%83%AB%E9%9F%B3%E5%A3%B0-%E7%94%BB%E5%83%8F%E3%81%AE%E5%9C%A7%E7%B8%AE-%E5%8A%A0%E5%B7%A5%E6%8A%80%E8%A1%93-%E5%A4%A7%E5%AE%B9%E9%87%8F%E5%8C%96%E3%81%99%E3%82%8B%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%83%BB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E8%BB%A2%E9%80%81%E3%83%BB%E4%BF%9D%E5%AD%98%E3%83%BB%E6%B4%BB%E7%94%A8%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-%E3%83%87%E3%82%A3%E3%82%B8%E3%82%BF%E3%83%AB%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/dp/4789831450">ディジタル音声&amp;画像の圧縮/伸長/加工技術: 大容量化するマルチメディア・データを転送・保存・活用するために (ディジタル信号処理シリーズ)</a></li>
@@ -930,14 +855,6 @@ void sine_window(std::vector&lt;double&gt; &amp;w, int N) {
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -1159,14 +1076,6 @@ void sine_window(std::vector&lt;double&gt; &amp;w, int N) {
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1375,14 +1284,6 @@ void sine_window(std::vector&lt;double&gt; &amp;w, int N) {
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1465,9 +1366,6 @@ void sine_window(std::vector&lt;double&gt; &amp;w, int N) {
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1546,9 +1444,6 @@ void sine_window(std::vector&lt;double&gt; &amp;w, int N) {
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1572,7 +1467,7 @@ void sine_window(std::vector&lt;double&gt; &amp;w, int N) {
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

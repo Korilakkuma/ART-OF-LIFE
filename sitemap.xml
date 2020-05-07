@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -30,6 +30,11 @@
   <url>
     <loc>https://art-of-life.jp/categories/jobs/</loc>
     <lastmod>2020-03-22T15:22:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/c/</loc>
+    <lastmod>2020-02-24T15:22:57+09:00</lastmod>
   </url>
   
   <url>
@@ -103,11 +108,6 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/tags/c/</loc>
-    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://art-of-life.jp/tags/javascript/</loc>
     <lastmod>2020-02-02T17:27:52+09:00</lastmod>
   </url>
@@ -140,21 +140,6 @@
   <url>
     <loc>https://art-of-life.jp/categories/multimedia/</loc>
     <lastmod>2020-01-12T17:27:07+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/event/</loc>
-    <lastmod>2019-11-30T14:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/forever-love/</loc>
-    <lastmod>2019-11-30T14:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/wedding/</loc>
-    <lastmod>2019-11-30T14:00:00+09:00</lastmod>
   </url>
   
   <url>

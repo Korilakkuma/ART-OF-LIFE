@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>.travis.yml の更新 &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,8 +30,6 @@
     
     <meta itemprop="name" content=".travis.yml の更新">
 <meta itemprop="description" content="Travis CI でエラー 昨日, Travis CI でビルドしたら, ソースコード・テストコードとも何も変更していないのに, 2 つのエラーが発生するようになりました &hellip; Can&#39;t open /etc/init.d/xvfb テ">
-
-
 <meta itemprop="datePublished" content="2019-07-26T05:27:00&#43;09:00" />
 <meta itemprop="dateModified" content="2019-07-26T05:27:00&#43;09:00" />
 <meta itemprop="wordCount" content="481">
@@ -39,7 +37,6 @@
 
 
 <meta itemprop="keywords" content="CI," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=".travis.yml の更新"/>
 <meta name="twitter:description" content="Travis CI でエラー 昨日, Travis CI でビルドしたら, ソースコード・テストコードとも何も変更していないのに, 2 つのエラーが発生するようになりました &hellip; Can&#39;t open /etc/init.d/xvfb テ"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -310,75 +307,55 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="travis-ci-でエラー">Travis CI でエラー</h1>
-
+            <h1 id="travis-ci-でエラー">Travis CI でエラー</h1>
 <p>昨日, Travis CI でビルドしたら, ソースコード・テストコードとも何も変更していないのに, 2 つのエラーが発生するようになりました &hellip;</p>
-
 <ul>
 <li><code>Can't open /etc/init.d/xvfb</code></li>
 <li>テストの実行でタイムアウトエラー</li>
 </ul>
-
 <p>ちなみに, それまでパスしていた .travis.yml は以下のような記述です.</p>
-
-<pre><code class="language-yml">sudo: true
-language: node_js
-node_js:
-  - 10.0
-before_install:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">sudo</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#66d9ef">language</span>: node_js
+<span style="color:#66d9ef">node_js</span>:
+  - <span style="color:#ae81ff">10.0</span>
+<span style="color:#66d9ef">before_install</span>:
   - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
+  - export DISPLAY=:<span style="color:#ae81ff">99.0</span>
   - sh -e /etc/init.d/xvfb start
-script:
+<span style="color:#66d9ef">script</span>:
   - karma start --single-run
-</code></pre>
-
-<p>簡単に説明すると, テストランナーに Karma を利用して, Chromium 環境でブラウザ JavaScript をテストするというものです.</p>
-
-<h2 id="can-t-open-etc-init-d-xvfb">Can&rsquo;t open /etc/init.d/xvfb`</h2>
-
+</code></pre></div><p>簡単に説明すると, テストランナーに Karma を利用して, Chromium 環境でブラウザ JavaScript をテストするというものです.</p>
+<h2 id="cant-open-etcinitdxvfb">Can&rsquo;t open /etc/init.d/xvfb`</h2>
 <p>このエラーを解決するには, .travis.yml の記述を以下のように修正します.</p>
-
-<pre><code class="language-yml">sudo: true
-language: node_js
-node_js:
-  - 10.0
-services:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">sudo</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#66d9ef">language</span>: node_js
+<span style="color:#66d9ef">node_js</span>:
+  - <span style="color:#ae81ff">10.0</span>
+<span style="color:#66d9ef">services</span>:
   - xvfb
-before_install:
+<span style="color:#66d9ef">before_install</span>:
   - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-script:
+  - export DISPLAY=:<span style="color:#ae81ff">99.0</span>
+<span style="color:#66d9ef">script</span>:
   - karma start --single-run
-</code></pre>
-
-<p><code>services:</code> に <code>xvdb</code> を指定することで解決できます. 原因は, あくまで推測ですが, Travis CI のアップデートによるものでしょうか &hellip; ?</p>
-
+</code></pre></div><p><code>services:</code> に <code>xvdb</code> を指定することで解決できます. 原因は, あくまで推測ですが, Travis CI のアップデートによるものでしょうか &hellip; ?</p>
 <h2 id="テストの実行でタイムアウトエラー">テストの実行でタイムアウトエラー</h2>
-
 <p>この原因は, 環境変数 <code>CHROME_BIN</code> に設定している, <code>chromium-browser</code> のパスが見つからなくなっていることにより発生していました (URL が削除されたのでしょうか &hellip; ?).</p>
-
 <p>このエラーを解決するには, .travis.yml の記述を以下のように修正します.</p>
-
-<pre><code class="language-yaml">sudo: true
-language: node_js
-node_js:
-  - 10.0
-services:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">sudo</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#66d9ef">language</span>: node_js
+<span style="color:#66d9ef">node_js</span>:
+  - <span style="color:#ae81ff">10.0</span>
+<span style="color:#66d9ef">services</span>:
   - xvfb
-addons:
-  chrome: stable
-before_install:
+<span style="color:#66d9ef">addons</span>:
+  <span style="color:#66d9ef">chrome</span>: stable
+<span style="color:#66d9ef">before_install</span>:
   - export CHROME_BIN=google-chrome-stable
-  - export DISPLAY=:99.0
-script:
+  - export DISPLAY=:<span style="color:#ae81ff">99.0</span>
+<span style="color:#66d9ef">script</span>:
   - karma start --single-run
-</code></pre>
-
-<p>取得可能な Chrome の <code>stable</code> 版 (または, <code>beta</code> 版) をインストールして, <code>CHROME_BIN</code> にそのパスを指定します.</p>
-
+</code></pre></div><p>取得可能な Chrome の <code>stable</code> 版 (または, <code>beta</code> 版) をインストールして, <code>CHROME_BIN</code> にそのパスを指定します.</p>
 <p>以上で, 無事 CI がパスしました.</p>
 
         </div>
@@ -556,14 +533,6 @@ script:
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -785,14 +754,6 @@ script:
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1001,14 +962,6 @@ script:
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1091,9 +1044,6 @@ script:
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1172,9 +1122,6 @@ script:
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1198,7 +1145,7 @@ script:
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

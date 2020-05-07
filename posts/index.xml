@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on ART OF LIFE</title>
@@ -125,7 +125,7 @@
       <pubDate>Sun, 22 Sep 2019 17:02:42 +0900</pubDate>
       
       <guid>https://art-of-life.jp/posts/fft/</guid>
-      <description>高速フーリエ変換 (FFT : Fast Fourier Transform) とは, 離散フーリエ変換のサイズが 2 のべき乗の場合に, 高速に計算できるアルゴリズムのことです. アルゴリズムの導出 離散</description>
+      <description>高速フーリエ変換(FFT: Fast Fourier Transform) とは, 離散フーリエ変換のサイズが 2 のべき乗の場合に, 高速に計算できるアルゴリズムのことです. アルゴリズムの導</description>
     </item>
     
     <item>
@@ -143,7 +143,7 @@
       <pubDate>Wed, 11 Sep 2019 17:25:18 +0900</pubDate>
       
       <guid>https://art-of-life.jp/posts/wave/</guid>
-      <description>WAVE ファイルとは ? WAVE とは, 音声コーデックの 1 つです. 圧縮をしないので, ファイルサイズは, MP3 や AAC などと比較するとかなり大きくなってしまいますが,</description>
+      <description>WAVE ファイルとは ? WAVEとは, 音声コーデックの 1 つです. 圧縮をしないので, ファイルサイズは, MP3 や AAC などと比較するとかなり大きくなってしまいま</description>
     </item>
     
     <item>
@@ -161,7 +161,7 @@
       <pubDate>Mon, 09 Sep 2019 17:02:55 +0900</pubDate>
       
       <guid>https://art-of-life.jp/posts/aac/</guid>
-      <description>MPEG-2 オーディオ MPEG-2 オーディオには, MPEG-2/BC (Backward Compatible) と MPEG-2/AAC (Advanced Audio Coding) の 2 つの規格があります. MPEG-2/BC の基本的な仕組みは MPEG-1 オーディオと変わりません. MPEG-2/BC には, サンプリング周</description>
+      <description>MPEG-2 オーディオ MPEG-2 オーディオには, MPEG-2/BC(Backward Compatible) と MPEG-2/AAC(Advanced Audio Coding) の 2 つの規格があります. MPEG-2/BC の基本的な仕組みは MPEG-1 オーディオと変わりません. MPEG-2/BC には, サンプリング周波数</description>
     </item>
     
     <item>

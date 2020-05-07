@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>MathJax で数式を表示する &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,8 +30,6 @@
     
     <meta itemprop="name" content="MathJax で数式を表示する">
 <meta itemprop="description" content="Web ページで数式を表示するために, MathJax を導入してみた">
-
-
 <meta itemprop="datePublished" content="2019-05-28T19:46:00&#43;09:00" />
 <meta itemprop="dateModified" content="2019-05-28T19:46:00&#43;09:00" />
 <meta itemprop="wordCount" content="392">
@@ -39,7 +37,6 @@
 
 
 <meta itemprop="keywords" content="JavaScript,Mathematics," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MathJax で数式を表示する"/>
 <meta name="twitter:description" content="Web ページで数式を表示するために, MathJax を導入してみた"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -318,55 +315,31 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="mathjax">MathJax</h1>
-
+            <h1 id="mathjax">MathJax</h1>
 <h2 id="overview">Overview</h2>
-
 <p>Web ページ (HTML) で数式を表示するための JavaScript ライブラリです. 同様のものに, <a href="https://plugins.jquery.com/jsLaTeX/">jsLatex</a> がありますが, こちらは jQuery のプラグインであるので, jQuery を利用しないことが多い, SPA (Single Page Application) では使えません. また, <a href="https://katex.org/">KaTex</a> は, 単体で利用可能ですが, 個人的な感想として使いにくかったです &hellip; (他のライブラリなら正しい LaTex の数式がエラーになったりとかで &hellip;).</p>
-
 <p>そこで, <a href="https://github.com/mathjax/MathJax">MathJax</a> を導入してみました &hellip; と言いますか, Hugo の  hugo-icarus-theme ではデフォルトで採用されていました.</p>
-
 <h2 id="usage">Usage</h2>
-
-<pre><code class="language-HTML">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']]}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/x-mathjax-config&#34;</span>&gt;
+<span style="color:#a6e22e">MathJax</span>.<span style="color:#a6e22e">Hub</span>.<span style="color:#a6e22e">Config</span>({
+  <span style="color:#a6e22e">tex2jax</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">inlineMath</span><span style="color:#f92672">:</span> [[<span style="color:#e6db74">&#39;$&#39;</span>,<span style="color:#e6db74">&#39;$&#39;</span>], [<span style="color:#e6db74">&#39;\\(&#39;</span>,<span style="color:#e6db74">&#39;\\)&#39;</span>]]}
   });
-&lt;/script&gt;
-&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
-</code></pre>
-
-<p>必要な JavaScript ファイルの読み込みと, デリミタの設定をするだけです (hugo-icarus-theme では既に記述されています).</p>
-
+&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</code></pre></div><p>必要な JavaScript ファイルの読み込みと, デリミタの設定をするだけです (hugo-icarus-theme では既に記述されています).</p>
 <p>あとは, 表示したい箇所で, LaTex の数式をデリミタで囲むだけです.</p>
-
 <h2 id="example">Example</h2>
-
 <h3 id="フーリエ変換">フーリエ変換</h3>
-
 <p>$X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt\ \ (-\infty \leqq f \leqq \infty)$</p>
-
-<pre><code class="language-HTML">&lt;div&gt;$X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt\ \ (-\infty \leqq f \leqq \infty)$&lt;/div&gt;
-</code></pre>
-
-<h3 id="離散フーリエ変換">離散フーリエ変換</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">div</span>&gt;$X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt\ \ (-\infty \leqq f \leqq \infty)$&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div><h3 id="離散フーリエ変換">離散フーリエ変換</h3>
 <p>$X(k) = \sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)\ \ (0 \leqq k \leqq N-1)$</p>
-
-<pre><code class="language-HTML">&lt;div&gt;$X(k) = \sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)\ \ (0 \leqq k \leqq N-1)$&lt;/div&gt;
-</code></pre>
-
-<h3 id="コンボリューション積分">コンボリューション積分</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">div</span>&gt;$X(k) = \sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)\ \ (0 \leqq k \leqq N-1)$&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div><h3 id="コンボリューション積分">コンボリューション積分</h3>
 <p>$s_1(n) = \sum_{m=0}^{J}b(m)s_0(n-m)$</p>
-
-<pre><code class="language-HTML">&lt;div&gt;$s_1(n) = \sum_{m=0}^{J}b(m)s_0(n-m)$&lt;/div&gt;
-</code></pre>
-
-<p>以上です. 初回は, 簡単に, そして, プログラミングと数学ということをテーマにしてみました.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">div</span>&gt;$s_1(n) = \sum_{m=0}^{J}b(m)s_0(n-m)$&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div><p>以上です. 初回は, 簡単に, そして, プログラミングと数学ということをテーマにしてみました.</p>
 
         </div>
         <footer class="article-footer">
@@ -543,14 +516,6 @@ MathJax.Hub.Config({
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -772,14 +737,6 @@ MathJax.Hub.Config({
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -988,14 +945,6 @@ MathJax.Hub.Config({
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1078,9 +1027,6 @@ MathJax.Hub.Config({
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1159,9 +1105,6 @@ MathJax.Hub.Config({
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1185,7 +1128,7 @@ MathJax.Hub.Config({
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

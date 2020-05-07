@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on ART OF LIFE</title>
@@ -10,6 +10,15 @@
     
 	<atom:link href="https://art-of-life.jp/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C</title>
+      <link>https://art-of-life.jp/tags/c/</link>
+      <pubDate>Mon, 24 Feb 2020 15:22:57 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/c/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Correlation function</title>
@@ -57,15 +66,6 @@
     </item>
     
     <item>
-      <title>C</title>
-      <link>https://art-of-life.jp/tags/c/</link>
-      <pubDate>Sun, 02 Feb 2020 17:27:52 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/tags/c/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>JavaScript</title>
       <link>https://art-of-life.jp/tags/javascript/</link>
       <pubDate>Sun, 02 Feb 2020 17:27:52 +0900</pubDate>
@@ -107,24 +107,6 @@
       <pubDate>Sun, 12 Jan 2020 17:27:07 +0900</pubDate>
       
       <guid>https://art-of-life.jp/tags/linear-prediction-analysis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Forever Love</title>
-      <link>https://art-of-life.jp/tags/forever-love/</link>
-      <pubDate>Sat, 30 Nov 2019 14:00:00 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/tags/forever-love/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Wedding</title>
-      <link>https://art-of-life.jp/tags/wedding/</link>
-      <pubDate>Sat, 30 Nov 2019 14:00:00 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/tags/wedding/</guid>
       <description></description>
     </item>
     

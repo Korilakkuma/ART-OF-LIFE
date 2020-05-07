@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>FFT on ART OF LIFE</title>
@@ -17,7 +17,7 @@
       <pubDate>Sun, 22 Sep 2019 17:02:42 +0900</pubDate>
       
       <guid>https://art-of-life.jp/posts/fft/</guid>
-      <description>高速フーリエ変換 (FFT : Fast Fourier Transform) とは, 離散フーリエ変換のサイズが 2 のべき乗の場合に, 高速に計算できるアルゴリズムのことです. アルゴリズムの導出 離散</description>
+      <description>高速フーリエ変換(FFT: Fast Fourier Transform) とは, 離散フーリエ変換のサイズが 2 のべき乗の場合に, 高速に計算できるアルゴリズムのことです. アルゴリズムの導</description>
     </item>
     
   </channel>

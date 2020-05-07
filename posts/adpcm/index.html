@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>ADPCM &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,8 +30,6 @@
     
     <meta itemprop="name" content="ADPCM">
 <meta itemprop="description" content="ADPCM (適応差分パルス変調) の概要">
-
-
 <meta itemprop="datePublished" content="2019-11-21T20:52:27&#43;09:00" />
 <meta itemprop="dateModified" content="2019-11-21T20:52:27&#43;09:00" />
 <meta itemprop="wordCount" content="3210">
@@ -39,7 +37,6 @@
 
 
 <meta itemprop="keywords" content="ADPCM,PCM," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ADPCM"/>
 <meta name="twitter:description" content="ADPCM (適応差分パルス変調) の概要"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -326,94 +323,51 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="pcm">PCM</h1>
-
+            <h1 id="pcm">PCM</h1>
 <p>アナログ信号である音 (媒体の振動) をコンピュータで処理するためには, 0 と 1 のみの情報, すなわち, デジタル信号に変換する必要があります. その処理は, 以下の 3 つのステップになります.</p>
-
 <ol>
 <li>サンプリング</li>
 <li>量子化</li>
 <li>符号化</li>
 </ol>
-
 <p>サンプリングや量子化に共通することは, 連続した信号を離散信号に変換することです. コンピューター (の内部) では連続した値や無限大となる値を扱うことが不可能だからです. さらに, 離散信号に変換することで, データサイズを圧縮することもできます. このような, 音データの圧縮方法を <strong>PCM</strong> (Pulse Code Modulation) と呼びます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/69397180-9782b500-0d28-11ea-96da-567c51fac38a.gif" alt="サンプリング・量子化・符号化" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/69397180-9782b500-0d28-11ea-96da-567c51fac38a.gif" alt="サンプリング・量子化・符号化"></p>
 <p>音信号は, 2 つの連続した物理量 (次元) をもっています. <strong>時間</strong>と<strong>振幅</strong>です. サンプリングと量子化は, 2 つの連続した物理量を離散信号に変換する処理となります.</p>
-
 <h2 id="サンプリング-標本化">サンプリング (標本化)</h2>
-
 <p><strong>サンプリング</strong> (<strong>標本化</strong>) は, 時間を離散した値に変換する処理です. 離散信号, つまり, とびとびの値をとるためには, その間隔を決定するパラメータが必要です. それが, <strong>サンプリング周期</strong> (<strong>標本化周期</strong>) です. また, サンプリング周期の逆数となるパラメータは, <strong>サンプリング周波数</strong> (<strong>標本化周波数</strong>) です.</p>
-
 <p>サンプリング周波数は, 1 sec のあいだに, いくつのサンプル (離散点) をとるかを表しています. 例えば, サンプリング周波数が 48000 の場合, 1 sec のあいだに 48000 サンプル (離散点) をとることになります.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/69397201-ab2e1b80-0d28-11ea-9d2f-a2da19e0ce56.png" alt="サンプリング周波数" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/69397201-ab2e1b80-0d28-11ea-9d2f-a2da19e0ce56.png" alt="サンプリング周波数"></p>
 <p>サンプリングでは重要な定理があります. それは, <strong>サンプリング周波数の 1 / 2 より大きい周波数は元のアナログ信号に復元できないという定理</strong>です. これは, <strong>サンプリング定理</strong> (標本化定理, , シャノンの定理) と呼ばれます. また, サンプリング周波数の 1 / 2 の周波数は<strong>ナイキスト周波数</strong>と呼ばれます.</p>
-
 <p>サンプリングの精度を高くするほど, すなわち, サンプリング周波数を高くするほど元のアナログ信号に対してより忠実度の高いデジタル信号に変換可能となります. 一方で, より多くのサンプルをとることになるので, データサイズはサンプリング周波数に比例して大きくなってしまいます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/69397217-b97c3780-0d28-11ea-83ad-45a9355adf0b.png" alt="サンプリング周波数と音質" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/69397217-b97c3780-0d28-11ea-83ad-45a9355adf0b.png" alt="サンプリング周波数と音質"></p>
 <p>サンプリング周波数の具体例として, 音楽 CD は 44.1 kHz に設定されています. この理由は, 人間の聴覚が知覚可能な周波数はおよそ 20 kHz であることを考慮して, サンプリング定理を適用しているからです. さらに音質の高いものだと 96 kHz に設定されている音楽データもあります. しかし, 電話では, 8 kHz に設定されています. 音声の場合, 多少音質が損なわれても相手の音声を聴きとることが可能なこと, 楽器音ほど高い周波数成分が含まれないこと, また, リアルタイム性が重視されるので, 可能な限りデータサイズを減らす必要があることなどが理由としてあげられます.</p>
-
 <h2 id="量子化">量子化</h2>
-
 <p><strong>量子化</strong>は, 振幅を離散した値に変換する処理です. サンプリングと同じく, とびとびの値をとるためには, その間隔を決定づけるパラメータが必要になります. それが, <strong>量子化ビット</strong> (<strong>量子化精度</strong>) です.</p>
-
 <p>サンプリングされたアナログ信号は時間軸方向は離散化されていますが, 振幅軸の方向は, 連続したままです. 量子化では, 量子化ビットで指定された精度にしたがって, 振幅を整数値に丸める処理をします.</p>
-
 <p>例えば, 量子化ビットが 2 bit の場合は, 4 つのステップの値 ($2^{2}=4$) のいずれかに, 3 bit の場合は, 8 つのステップの値 ($2^{3}=8$) のいずれかに振幅が丸められます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/69397240-d31d7f00-0d28-11ea-8292-013be30cb8aa.png" alt="量子化ビット" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/69397240-d31d7f00-0d28-11ea-8292-013be30cb8aa.png" alt="量子化ビット"></p>
 <p>サンプリングの精度と同様に, 量子化の精度を高くするほど, すなわち, 量子化ビットを大きくするほど元のアナログ信号に対してより忠実度の高いデジタル信号に変換可能となります. 一方で, データサイズは量子化ビットに比例して大きくなってしまいます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/69397261-e3cdf500-0d28-11ea-8732-9c7344fb6004.png" alt="量子化ビットと音質" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/69397261-e3cdf500-0d28-11ea-8732-9c7344fb6004.png" alt="量子化ビットと音質"></p>
 <h2 id="符号化">符号化</h2>
-
 <p>量子化した (整数値に丸めた) 振幅を 2 進数に変換すると, コンピューターの内部で処理することが可能なデジタル信号となります.</p>
-
 <h1 id="log-pcm">log-PCM</h1>
-
 <p>音信号は振幅の小さい部分と振幅の大きい部分がありますが, 振幅の小さい部分の方が発生する確率は圧倒的に高くなります. したがって, 振幅の小さい部分は細かく, 振幅の大きい部分はあらく量子化することによって, データサイズをおさえつつも, 音質の劣化を知覚的に防止することができます.</p>
-
 <p>このような PCM を <strong>log-PCM</strong> (Logarithmic PCM) と呼びます. 主に固定電話に適用される方式です. log-PCM では, 入力音の振幅を対数変換し, 変換後の音に対して一様な量子化を実行します.</p>
-
 <p>PCM では, 圧縮された音を元に戻すために, 圧縮の逆の手順となる復号の処理が必要です (圧縮に対して<strong>伸張</strong>と呼ぶこともあります). log-PCM の対数特性の決め方には自由度があるので, 伸張の方法も各方式によって異なります.</p>
-
 <p>代表的な対数特性としては, <strong>A 法則</strong> (A-law) と <strong>$\mu$ 法則</strong> ($\mu$-low) があります.</p>
-
 <h1 id="dpcm-デルタ-pcm">DPCM (デルタ PCM)</h1>
-
 <p>サンプリング周期が短い場合には, 音の隣接するサンプル間の変化は小さくなります. そこで, 隣接するサンプルの差分をとれば, 元の音よりも信号の散らばり (分散) の程度を小さくでき, 割り当てるビット数を少なくできます. このように, 差分信号を量子化する方式を <strong>DPCM</strong> (Differential PCM), または, <strong>デルタ PCM</strong> と呼びます.</p>
-
 <h1 id="適応量子化">適応量子化</h1>
-
 <p>音が急激に変化する部分と, 緩やかに変化する部分では, 差分信号であっても 2 つの差は大きくなるので, このような信号に対して, 固定の量子化幅を利用することは効果的ではありません.</p>
-
 <p>そこで, 信号の大きさに合わせて量子化幅を変更し, 圧縮効率を改善する方式が, <strong>適応量子化</strong> (Adaptive Quantization) です.</p>
-
 <h1 id="adpcm">ADPCM</h1>
-
 <p>音信号は多くの場合, 過去の信号と密接に関係しているので, 過去の値から現在の値をある程度予測することができます. 予測値と現在の音との差分を<strong>予測誤差</strong> (Prediction Error) と呼び, DPCM よりもさらに小さい分散をもちます. したがって, 予測誤差を量子化の対象として, さらに, 適応量子化を導入することで, 非常に高い圧縮効率を得ることができます. このような, 予測と量子化の 2 つの適応制御をそなえた方式を <strong>ADPCM</strong> (Adaptive Differential PCM), <strong>適応差分パルス変調</strong>と呼びます.</p>
-
 <p>ADPCM は WAVE ファイルにも利用されています. ADPCM はエンコーダ / デコーダの実装が複雑というデメリットはもちますが, 少ないビット数で高い音質を保持できるというメリットがあります.</p>
-
 <p>以下のセクションでは, 国際電気通信連合 (ITU) で定められている, G.726 方式の ADPCM について解説します.</p>
-
 <h2 id="adpcm-エンコーダ">ADPCM エンコーダ</h2>
-
 <p>適応量子化器は, 入力信号 $s_{1}(n)$ から, 予測信号 $s_{e}(n)$ を減算した, 予測誤差を量子化します. 予測信号 $s_{e}(n)$ は過去の入力信号 (実際は, 再合成信号) を参照して生成されます. 量子化された予測誤差が, ADPCM 信号 $I(n)$ として送信されます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/69674052-0b351100-10df-11ea-9ba7-b6e68b03d6a0.png" alt="ADPCM エンコーダ" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/69674052-0b351100-10df-11ea-9ba7-b6e68b03d6a0.png" alt="ADPCM エンコーダ"></p>
 <p>ADPCM 信号生成の後処理として, 逆量子化によって予測誤差を復元します. そして, 予測誤差と予測信号を加算することで入力信号を再合成 ($s_{r}(n)$) します. 再合成信号 $s_{r}(n)$ を利用して, 次の時刻の入力信号を予測します. 予測信号 $s_{e}(n)$ は, 前回の予測誤差が 0 に近づくように予測器の係数を更新したあとに計算されます. 逆量子化以降の処理は, $I(n)$ だけから実行できることが特徴です. また, ADPCM ではこの特徴を, そのままでデコーダに活用しています. まとめると,</p>
-
 <ol>
 <li>現在の観測信号に対する予測値を生成する</li>
 <li>観測信号から予測値を減算して予測誤差を得る</li>
@@ -421,22 +375,16 @@
 <li>予測誤差と予測値を加算して, 観測信号を再合成する</li>
 <li>予測誤差を参照して, 量子化器と予測器を更新する</li>
 </ol>
-
 <h2 id="adpcm-デコーダ">ADPCM デコーダ</h2>
-
 <p>ADPCM 信号の逆量子化以降の処理は, エンコーダと同じです. 予測器の更新結果も, 観測された予測誤差を 0 に近づけることを目的とするので, エンコーダと同じ更新結果が取得できます. 予測信号の初期値をどのように設定するかですが, G.726 では, ある定数を指定しています. デコーダの最終出力は, 予測誤差と予測信号を加算した再合成信号です.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/69674125-2a33a300-10df-11ea-8db1-84d6c1f261d7.png" alt="ADPCM デコーダ" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/69674125-2a33a300-10df-11ea-8db1-84d6c1f261d7.png" alt="ADPCM デコーダ"></p>
 <ol>
 <li>現在の観測信号に対する予測値を生成する</li>
 <li>予測誤差である ADPCM 信号を受信する</li>
 <li>予測誤差と予測値を加算して, 観測信号を再合成する</li>
 <li>予測誤差を参照して, 量子化器と予測器を更新する</li>
 </ol>
-
 <h1 id="リファレンス">リファレンス</h1>
-
 <ul>
 <li><a href="https://www.amazon.co.jp/%E3%83%87%E3%82%A3%E3%82%B8%E3%82%BF%E3%83%AB%E9%9F%B3%E5%A3%B0-%E7%94%BB%E5%83%8F%E3%81%AE%E5%9C%A7%E7%B8%AE-%E5%8A%A0%E5%B7%A5%E6%8A%80%E8%A1%93-%E5%A4%A7%E5%AE%B9%E9%87%8F%E5%8C%96%E3%81%99%E3%82%8B%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%E3%83%BB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E8%BB%A2%E9%80%81%E3%83%BB%E4%BF%9D%E5%AD%98%E3%83%BB%E6%B4%BB%E7%94%A8%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB-%E3%83%87%E3%82%A3%E3%82%B8%E3%82%BF%E3%83%AB%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA/dp/4789831450">ディジタル音声&amp;画像の圧縮/伸長/加工技術: 大容量化するマルチメディア・データを転送・保存・活用するために (ディジタル信号処理シリーズ)</a></li>
 </ul>
@@ -616,14 +564,6 @@
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -845,14 +785,6 @@
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1061,14 +993,6 @@
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1151,9 +1075,6 @@
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1232,9 +1153,6 @@
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1258,7 +1176,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

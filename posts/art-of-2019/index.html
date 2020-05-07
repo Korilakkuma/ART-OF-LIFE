@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>2019 年度の ART OF LIFE &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="2019 年度の ART OF LIFE">
 <meta itemprop="description" content="2019 年度の ART 目標">
-
-
 <meta itemprop="datePublished" content="2019-05-26T23:58:23&#43;09:00" />
 <meta itemprop="dateModified" content="2019-05-26T23:58:23&#43;09:00" />
-<meta itemprop="wordCount" content="801">
+<meta itemprop="wordCount" content="808">
 
 
 
 <meta itemprop="keywords" content="" />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="2019 年度の ART OF LIFE"/>
 <meta name="twitter:description" content="2019 年度の ART 目標"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-05-26 23:58:23 &#43;0900 JST" itemprop="datePublished">2019-05-26</time>
             &middot;
-            801
+            808
             words
             &middot;
             2
@@ -292,105 +289,77 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="technology-技術">Technology (技術)</h1>
-
+            <h1 id="technology-技術">Technology (技術)</h1>
 <h2 id="動画">動画</h2>
-
 <ul>
 <li>WebRTC</li>
 <li>hls.js</li>
 <li>コンテナ・コーデックの知識</li>
 </ul>
-
 <p>可能であれば業務で WebRTC を利用したいです.
 hls.js は, <code>src</code> 以下への contribute を増やすこと.
 WebRTC を利用するにも, hls.js へ contribute するにも, ベースとなる動画コンテナや映像・音声のコーデック知識が不足しているので, ここは特に注力していきます.</p>
-
 <h2 id="オーディオ">オーディオ</h2>
-
 <ul>
 <li>Web Audio API</li>
 <li>音信号処理</li>
 <li>Web Audio レンダリングエンジンへの contribute</li>
 </ul>
-
 <p>Web Audio API は, 引き続き, <a href="https://xsound.jp/">ライブラリ</a>, <a href="https://xsound.app/">Web アプリケーション</a>, <a href="https://web-sounder.net/">Web サイト</a> をよりよいプロダクトにしていくこと. 特に, <code>AudioWorklet</code> への移行はそろそろ着手したいです.</p>
-
 <h2 id="コンピュータサイエンス">コンピュータサイエンス</h2>
-
 <ul>
 <li>OS</li>
 <li>TCP/IP</li>
 </ul>
-
-<p>OS (システムコールなど) について知ることは, レンダリングエンジンの contributor になるために重要なことだと思っています(<a href="https://nhiroki.jp/2017/12/01/chromium-sourcecode">Chromium のソースコードの歩き方</a>, <q>base/ は chrome/ や content/ で使われる共通ライブラリで、OS の提供するシステムコールなどを抽象化した API を提供します。 &hellip;</q>, <q>Chromium ではマルチプロセスアーキテクチャが採用されています</q> &hellip; etc). 同様に, WebRTC を理解していくうえで, TCP/IP に関する知識も不可欠だと思っています.</p>
-
+<p>OS (システムコールなど) について知ることは, レンダリングエンジンの contributor になるために重要なことだと思っています(<a href="https://nhiroki.jp/2017/12/01/chromium-sourcecode">Chromium のソースコードの歩き方</a>, <!-- raw HTML omitted -->base/ は chrome/ や content/ で使われる共通ライブラリで、OS の提供するシステムコールなどを抽象化した API を提供します。 &hellip;<!-- raw HTML omitted -->, <!-- raw HTML omitted -->Chromium ではマルチプロセスアーキテクチャが採用されています<!-- raw HTML omitted --> &hellip; etc). 同様に, WebRTC を理解していくうえで, TCP/IP に関する知識も不可欠だと思っています.</p>
 <h2 id="プログラミング言語">プログラミング言語</h2>
-
 <ul>
 <li>JavaScript (TypeScript)</li>
 <li>C / C++</li>
 </ul>
-
 <p>JavaScript は最新の言語仕様を追っていくというよりは, メディア技術に活用できそうなブラウザ API を追っていきます．具体的には, WebAssembly ですね. したがって, Web Audio レンダリングエンジンへの contribute のためだけでなく, C / C++ で音信号処理を実装できるように学びます.</p>
-
 <h2 id="ツール">ツール</h2>
-
 <ul>
 <li>dotfiles の継続的コミット</li>
 </ul>
-
 <p>より効率よく作業できるように, zsh, Vim の設定ファイルのアップデートやプラグインの導入を進めていきます.</p>
-
 <h2 id="タスク">タスク</h2>
-
 <ul>
-<li><p><a href="https://weblike-curtaincall.ssl-lolipop.jp/portfolio-music-v/">Music V</a> の GitHub Pages への移行</p>
-
+<li>
+<p><a href="https://weblike-curtaincall.ssl-lolipop.jp/portfolio-music-v/">Music V</a> の GitHub Pages への移行</p>
 <ul>
 <li>ES2015 ~ or TypeScript で実装</li>
 <li>Vue.js でリファクタリング (脱 jQuery)</li>
 <li>HLS で再生</li>
-</ul></li>
-
-<li><p><a href="https://xsound.app/">X Sound</a> のリファクタリング</p>
-
+</ul>
+</li>
+<li>
+<p><a href="https://xsound.app/">X Sound</a> のリファクタリング</p>
 <ul>
 <li>ES2015 ~ or TypeScript で実装</li>
 <li>Vue.js でリファクタリング (脱 AngularJS)</li>
 <li>Sass をやめる</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h2 id="あえてやらないこと">あえてやらないこと</h2>
-
 <ul>
 <li>フロントエンドの最新技術</li>
 <li>UI / UX</li>
 <li>サーバーサイド, インフラ, デザイン</li>
 </ul>
-
 <p>もちろん, 仕事運用上, 必要最低限は学びます.</p>
-
 <h1 id="music-芸術">Music (芸術)</h1>
-
 <h2 id="guitar">Guitar</h2>
-
 <ul>
 <li>Sadistic Desire</li>
 <li>DAHLIA</li>
 </ul>
-
 <p>DAHLIA は, 昔弾けたのですがしばらくサボったら弾けなくなりました &hellip;</p>
-
 <h2 id="piano">Piano</h2>
-
 <ul>
 <li>Tears (Piano Instruments)</li>
 </ul>
-
 <p>そろそろ運指を覚えたい &hellip;</p>
 
         </div>
@@ -561,14 +530,6 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -790,14 +751,6 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1006,14 +959,6 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1096,9 +1041,6 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1177,9 +1119,6 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1203,7 +1142,7 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

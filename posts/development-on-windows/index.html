@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>Development on Windows &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="Development on Windows">
 <meta itemprop="description" content="Windows Subsystem for Linux による Windows 開発環境構築">
-
-
 <meta itemprop="datePublished" content="2019-06-28T17:27:34&#43;09:00" />
 <meta itemprop="dateModified" content="2019-06-28T17:27:34&#43;09:00" />
-<meta itemprop="wordCount" content="1710">
+<meta itemprop="wordCount" content="1755">
 
 
 
 <meta itemprop="keywords" content="Windows,Linux," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Development on Windows"/>
 <meta name="twitter:description" content="Windows Subsystem for Linux による Windows 開発環境構築"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-06-28 17:27:34 &#43;0900 JST" itemprop="datePublished">2019-06-28</time>
             &middot;
-            1710
+            1755
             words
             &middot;
             4
@@ -318,181 +315,84 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="まえおき">まえおき</h1>
-
+            <h1 id="まえおき">まえおき</h1>
 <p>諸事情でしばらく Mac が使えなくなったので, しぶしぶ Windows でしばらく開発することにしました.
 ハードウェア・OS は以下のとおりです.</p>
-
-<h2 id="ideapad-710s-plus-13lsk">ideapad 710S Plus - 13lSK</h2>
-
-<dl>
-  <dt>プロセッサ</dt>
-  <dd>Intel(R) Core(TM) i3-6100U CPU @ 2.30 GHz</dd>
-  <dt>RAM</dt>
-  <dd>4.00 GB</dd>
-  <dt>OS</dt>
-  <dd>Windows 10 Home</dd>
-</dl>
-
+<h2 id="ideapad-710s-plus---13lsk">ideapad 710S Plus - 13lSK</h2>
+<!-- raw HTML omitted -->
 <p>もともとは, 2017 年の末に母親へのクリスマスプレゼントとして購入した PC でしたが, フラットデザインが気に入らなかったのか放置されていたので使うことにしました.</p>
-
-<h1 id="windows-subsystem-for-linux-wsl-とは">Windows Subsystem for Linux (WSL) とは ?</h1>
-
-<p>これまで, Windows で UNIX ライクな開発環境を導入するには, MinGW や Cygwin を導入するのが一般的でした. しかし, これらのツールは, <b>Linux 環境のプログラムの動作や互換性</b>に問題がありました. もう少し簡単に表現すると, Linux コマンドを似た役割の Windows コマンドに置き換えて実行する (例えば, <code>ls</code> であれば <code>dir</code>) ので, 利用可能なコマンドを簡単に増やせないという欠点がありました. また, VirtualBox などの仮想環境では, Windows と連携できない, さらに, リソース (CPU やメモリ) を余分に消費してしまいます.</p>
-
+<h1 id="windows-subsystem-for-linux-wsl-とは-">Windows Subsystem for Linux (WSL) とは ?</h1>
+<p>これまで, Windows で UNIX ライクな開発環境を導入するには, MinGW や Cygwin を導入するのが一般的でした. しかし, これらのツールは, <!-- raw HTML omitted -->Linux 環境のプログラムの動作や互換性<!-- raw HTML omitted -->に問題がありました. もう少し簡単に表現すると, Linux コマンドを似た役割の Windows コマンドに置き換えて実行する (例えば, <code>ls</code> であれば <code>dir</code>) ので, 利用可能なコマンドを簡単に増やせないという欠点がありました. また, VirtualBox などの仮想環境では, Windows と連携できない, さらに, リソース (CPU やメモリ) を余分に消費してしまいます.</p>
 <p>Windows Subsystem for Linux (WSL) はこれらのデメリットを解決するツールで, Linux のバイナリ実行ファイルを Windows 10 でネイティブ実行するための互換レイヤー (エミュレータ) です. つまり, macOS のコンソールのようなものを, Windows 10 でも利用可能になるということです.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">MinGW</th>
-      <th scope="col">Cygwin</th>
-      <th scope="col">仮想化</th>
-      <th scope="col">WSL</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><th scope="row">Windows 環境との親和性, Windows アプリとの連携</th><td>〇</td><td>〇</td><td>X</td><td>〇</td></tr>
-    <tr><th scope="row">実行速度・メモリ使用効率</th><td>〇</td><td>〇</td><td>X</td><td>〇</td></tr>
-
-    <tr><th scope="row">Linux 環境プログラムの動作・互換性</th><td>X</td><td>X</td><td>〇</td><td>〇</td></tr>
-
-  </tbody>
-</table>
-
+<!-- raw HTML omitted -->
+<pre><code>&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Linux 環境プログラムの動作・互換性&lt;/th&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;〇&lt;/td&gt;&lt;td&gt;〇&lt;/td&gt;&lt;/tr&gt;
+</code></pre>
+<!-- raw HTML omitted -->
 <h1 id="インストール">インストール</h1>
-
 <h2 id="機能の有効化">機能の有効化</h2>
-
 <p>Windows で Linux Subsystem を有効化します.</p>
-
 <p>スタートボタンを右クリックして, 「アプリと機能」を選択します.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/60387358-a5673d80-9adc-11e9-8d28-51eb0d353a73.png" alt="アプリと機能" />
+<p><img src="https://user-images.githubusercontent.com/4006693/60387358-a5673d80-9adc-11e9-8d28-51eb0d353a73.png" alt="アプリと機能">
 そして, 「プログラムと機能」を選択します.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/60391031-7377ca80-9b20-11e9-8f5b-8a09dc5dab5f.png" alt="プログラムと機能" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/60391031-7377ca80-9b20-11e9-8f5b-8a09dc5dab5f.png" alt="プログラムと機能"></p>
 <p>左側の一覧から, 「Windows の機能の有効化または無効化」を選択します.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/60391037-8db1a880-9b20-11e9-9ec8-7c5cad50969e.png" alt="Windows の機能の有効化または無効化" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/60391037-8db1a880-9b20-11e9-9ec8-7c5cad50969e.png" alt="Windows の機能の有効化または無効化"></p>
 <p>Windows Subsystem for Linux にチェックをして, 「OK」を選択します.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/60389409-8deb7d00-9afb-11e9-81fb-ede83eaf97fd.png" alt="Windows Subsystem for Linux" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/60389409-8deb7d00-9afb-11e9-81fb-ede83eaf97fd.png" alt="Windows Subsystem for Linux"></p>
 <p>インストールが開始されるので完了するまで待ちます. 完了したら再起動します.</p>
-
 <p>再起動したら, スタートメニューを右クリックして, 「設定」&gt;「更新とセキュリティ」を選択し, 左側のメニューから「開発者向け」を選択して「開発者モード」にチェックをします (警告が表示されますが, そのまますすめて大丈夫です).</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/60387421-dc8a1e80-9add-11e9-94d1-7f93f50899f7.png" alt="開発者モード" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/60387421-dc8a1e80-9add-11e9-94d1-7f93f50899f7.png" alt="開発者モード"></p>
 <h2 id="bash-のインストール">bash のインストール</h2>
-
 <h3 id="古い-wsl-の削除">古い WSL の削除</h3>
-
 <p>もし, インストールしている場合, 安全のために古い WSL は削除しておきます.</p>
-
 <p>コマンドプロンプト, または PowerShell で以下のコマンドを実行します (ただし, このときすべてのデータが消去されるので, 必要なデータはバックアップを取得しておきましょう).</p>
-
-<pre><code class="language-bash">&gt; lxrun /uninstall
-</code></pre>
-
-<h3 id="ストアから-wsl-をインストール">ストアから WSL をインストール</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; lxrun /uninstall
+</code></pre></div><h3 id="ストアから-wsl-をインストール">ストアから WSL をインストール</h3>
 <p>Microsoft Store を開いて, 検索窓で「Ubuntu」と検索します (お気に入りのディストリビューションがあれば, そちらで検索してください).</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/60387535-a0f05400-9adf-11e9-87f3-434919eeb31c.png" alt="Microsoft Store" /></p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/60387536-a51c7180-9adf-11e9-9f7f-07423fd0a858.png" alt="Ubuntu" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/60387535-a0f05400-9adf-11e9-87f3-434919eeb31c.png" alt="Microsoft Store"></p>
+<p><img src="https://user-images.githubusercontent.com/4006693/60387536-a51c7180-9adf-11e9-9f7f-07423fd0a858.png" alt="Ubuntu"></p>
 <p>最後に, 「入手」ボタンをクリックします.</p>
-
 <p>インストール作業が完了したら, スタートに追加される「Ubuntu」を起動して, インストールの完了を待ちます. 完了すると, 内部で利用する, ユーザー名とパスワードの設定を要求されるので入力します.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/60387629-f4af6d00-9ae0-11e9-859e-0da4aa7602d8.png" alt="Ubuntu Install" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/60387629-f4af6d00-9ae0-11e9-859e-0da4aa7602d8.png" alt="Ubuntu Install"></p>
 <h3 id="初期設定">初期設定</h3>
-
 <h4 id="リポジトリの変更">リポジトリの変更</h4>
-
 <p>デフォルトでは, 海外サーバーにリポジトリのデータを取得しにいくので, 日本のサーバーに切り替えます.</p>
-
-<pre><code class="language-bash">$ sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g' /etc/apt/sources.list
-</code></pre>
-
-<h4 id="github-ssh-公開鍵の登録">GitHub SSH 公開鍵の登録</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo sed -i -e <span style="color:#e6db74">&#39;s%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g&#39;</span> /etc/apt/sources.list
+</code></pre></div><h4 id="github-ssh-公開鍵の登録">GitHub SSH 公開鍵の登録</h4>
 <p>デフォルトで git が利用可能ですが, そのままでは git から clone したり, push したりすることができないので, 公開鍵を登録します.</p>
-
-<pre><code class="language-bash">$ ssh-keygen
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ssh-keygen
 $ cat ~/.ssh/id_rsa.pub
-</code></pre>
-
-<p><code>cat</code> コマンドで表示される公開鍵の内容をコピーして, GitHub の「Settings」&gt;「SSH and GPG keys」&gt;「New SSH key」を選択してペーストします (Title は, 任意で OK です).</p>
-
+</code></pre></div><p><code>cat</code> コマンドで表示される公開鍵の内容をコピーして, GitHub の「Settings」&gt;「SSH and GPG keys」&gt;「New SSH key」を選択してペーストします (Title は, 任意で OK です).</p>
 <p>最後に, SSH 接続します.</p>
-
-<pre><code class="language-bash">$ ssh -T git@github.com
-</code></pre>
-
-<p><code>Hi Korilakkuma! You've successfully authenticated, but GitHub does not provide shell access.</code> のようなメッセージが表示されれば, 完了です.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ssh -T git@github.com
+</code></pre></div><p><code>Hi Korilakkuma! You've successfully authenticated, but GitHub does not provide shell access.</code> のようなメッセージが表示されれば, 完了です.</p>
 <h4 id="git-config">git config</h4>
-
 <p><code>git config</code> でいくつかの設定を入力・変更します.</p>
-
-<pre><code class="language-bash">$ git config --global user.email rilakkuma.san.xjapan@gmail.com
-$ git config --global user.name &quot;Tomohiro IKEDA&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git config --global user.email rilakkuma.san.xjapan@gmail.com
+$ git config --global user.name <span style="color:#e6db74">&#34;Tomohiro IKEDA&#34;</span>
 $ git config --global core.editor vim
-</code></pre>
-
-<h3 id="パッケージのアップデート">パッケージのアップデート</h3>
-
+</code></pre></div><h3 id="パッケージのアップデート">パッケージのアップデート</h3>
 <p>パッケージのアップデートは定期的におこなう必要があります.</p>
-
-<pre><code class="language-bash">$ sudo apt update
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt update
 $ sudo apt upgrade
-</code></pre>
-
-<h3 id="任意設定">任意設定</h3>
-
+</code></pre></div><h3 id="任意設定">任意設定</h3>
 <p>ここからは, 個人的な設定 (インストール) なので読み飛ばしていただいても大丈夫です.</p>
-
 <h4 id="gcc-g-make-のインストール">gcc, g++, make のインストール</h4>
-
 <p>C/C++ を書くプログラマにとってはおそらくあったほうがよいかと思います.</p>
-
-<pre><code class="language-bash">$ sudo apt install gcc g++ make
-</code></pre>
-
-<h4 id="nodebrew-のインストール">nodebrew のインストール</h4>
-
-<pre><code class="language-bash">$ curl -L git.io/nodebrew | perl - setup
-</code></pre>
-
-<p><code>export PATH=$HOME/.nodebrew/current/bin:$PATH</code> を <code>~/.bashrc</code> に追記して,</p>
-
-<pre><code class="language-bash">$ source ~/.bashrc
-</code></pre>
-
-<p>で読み込みます.</p>
-
-<pre><code class="language-bash">$ nodebrew ls-remote
-$ nodebrew install-binary v12.0.0  # インストールしたいバージョン
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt install gcc g++ make
+</code></pre></div><h4 id="nodebrew-のインストール">nodebrew のインストール</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl -L git.io/nodebrew | perl - setup
+</code></pre></div><p><code>export PATH=$HOME/.nodebrew/current/bin:$PATH</code> を <code>~/.bashrc</code> に追記して,</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ source ~/.bashrc
+</code></pre></div><p>で読み込みます.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nodebrew ls-remote
+$ nodebrew install-binary v12.0.0  <span style="color:#75715e"># インストールしたいバージョン</span>
 $ nodebrew use v12.0.0
-</code></pre>
-
-<pre><code class="language-bash">$ node -v
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ node -v
 v12.0.0
 $ npm -v
 6.9.0
-</code></pre>
-
-<p>のように表示されれば完了です.</p>
+</code></pre></div><p>のように表示されれば完了です.</p>
 
         </div>
         <footer class="article-footer">
@@ -669,14 +569,6 @@ $ npm -v
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -898,14 +790,6 @@ $ npm -v
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1114,14 +998,6 @@ $ npm -v
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1204,9 +1080,6 @@ $ npm -v
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1285,9 +1158,6 @@ $ npm -v
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1311,7 +1181,7 @@ $ npm -v
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>

@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>Audio Processing by WebAssembly &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.57.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="Audio Processing by WebAssembly">
 <meta itemprop="description" content="WebAssembly でオーディオ処理を実装する">
-
-
 <meta itemprop="datePublished" content="2020-02-02T17:27:52&#43;09:00" />
 <meta itemprop="dateModified" content="2020-02-02T17:27:52&#43;09:00" />
-<meta itemprop="wordCount" content="3715">
+<meta itemprop="wordCount" content="3711">
 
 
 
 <meta itemprop="keywords" content="JavaScript,WebAssembly,Web Audio API,C," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Audio Processing by WebAssembly"/>
 <meta name="twitter:description" content="WebAssembly でオーディオ処理を実装する"/>
@@ -160,7 +157,7 @@
       
       <h2 id="name">Korilakkuma</h2>
       <h3 id="title">Multimedia Engineer. Especially, I&#39;m expert in Audio Signal Processing and Streaming. C / C&#43;&#43;, JavaScript 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          47
+          45
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2020-02-02 17:27:52 &#43;0900 JST" itemprop="datePublished">2020-02-02</time>
             &middot;
-            3715
+            3711
             words
             &middot;
             8
@@ -326,23 +323,15 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="webassembly-とは">WebAssembly とは</h1>
-
+            <h1 id="webassembly-とは">WebAssembly とは</h1>
 <p><strong>WebAssembly</strong> とは, C / C++, Go や Rust などで実装され, (WebAssembly のために) コンパイルされたバイナリを実行するための JavaScript API です. WebAssembly を利用することによって, 以下のようなことが可能になります.</p>
-
 <ul>
 <li>パフォーマンスのネックになっている処理を WebAssembly を利用することで高速化する</li>
 <li>JavaScript の処理系では不可能な処理を実装する</li>
 </ul>
-
 <p>とりわけ, オーディオなどメディアをあつかう処理は, 計算量の多い処理を実装することが多々あります. また, C / C++ にはオーディオなどメディアをあつかうためのライブラリなど, 資産もたくさんあるので, それらを活用できるという点でも, WebAssembly とメディア処理は非常に相性がよいと言えます.</p>
-
 <h1 id="web-audio-api-と-webassembly">Web Audio API と WebAssembly</h1>
-
 <p>Web Audio API の API 設計は, Web Audio API が定義する AudioNode を接続して高度なオーディオ処理を実装することです. しかし, その設計にしたがうだけでは, 実装できないオーディオ処理も存在します.</p>
-
 <ul>
 <li>ノイズ</li>
 <li>ボーカルキャンセラ</li>
@@ -351,511 +340,447 @@
 <li>ピッチシフター</li>
 <li>タイムストレッチ</li>
 </ul>
-
 <p>例として, 上記にあげたオーディオ処理は, 直接音データにアクセスして, 音響演算を実装する必要があります (そのための AudioNode が <strong>ScriptProcessorNode</strong> (非推奨), <strong>AudioWorklet</strong> です).</p>
-
 <p>その音響演算を JavaScript で実装してもよいのですが, より高速化をはかるのであれば, WebAssembly を利用することで解決できるかもしれません.</p>
-
 <h1 id="実装">実装</h1>
-
 <p>さっそく, ノイズ / ボーカルキャンセラ / ピッチシフターを WebAssembly で実装してみます.</p>
-
 <h2 id="webassembly-の開発環境構築">WebAssembly の開発環境構築</h2>
-
 <p>まず, C / C++ などで実装されたソースコードを, WebAssembly のためにコンパイルする開発環境の構築が必要です. 以下は, Mac OS X の場合の手順です (詳細は, <a href="https://github.com/emscripten-core/emsdk">GitHub のリポジトリ</a>や <a href="https://developer.mozilla.org/ja/docs/WebAssembly/C_to_wasm">MDN のドキュメント</a>を参考にしてください).</p>
-
 <p>事前にインストールが必要なツールや環境です.</p>
-
 <ul>
 <li>Xcode
-
 <ul>
 <li>git and clang</li>
-</ul></li>
+</ul>
+</li>
 <li>CMake</li>
 <li>Python
-
 <ul>
 <li>Version 2.7.0 or above.</li>
-</ul></li>
+</ul>
+</li>
 <li>Java
-
 <ul>
 <li>For running closure compiler (optional)</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>必要なツールや環境をインストールしたら, 以下のコマンドを実行します. <code>./emsdk install --build=Release sdk-incoming-64bit binaryen-master-64bit</code> これは非常に時間がかかるので, 寝る前などに実行するとよいでしょう.</p>
-
-<pre><code class="language-bash">$ git clone git@github.com:emscripten-core/emsdk.git
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone git@github.com:emscripten-core/emsdk.git
 $ cd emsdk
-$ ./emsdk install --build=Release sdk-incoming-64bit binaryen-master-64bit  # Cost much time ...
-$ ./emsdk activate --global --build=Release sdk-incoming-64bit binaryen-master-64bit
-$ source ./emsdk_env.sh  # スクリプトを実行すると `clang` / `clang++` のパスが変わるので注意
-</code></pre>
-
-<p>以上で, WebAssembly の開発環境構築が完了です.</p>
-
+$ ./emsdk install --build<span style="color:#f92672">=</span>Release sdk-incoming-64bit binaryen-master-64bit  <span style="color:#75715e"># Cost much time ...</span>
+$ ./emsdk activate --global --build<span style="color:#f92672">=</span>Release sdk-incoming-64bit binaryen-master-64bit
+$ source ./emsdk_env.sh  <span style="color:#75715e"># スクリプトを実行すると `clang` / `clang++` のパスが変わるので注意</span>
+</code></pre></div><p>以上で, WebAssembly の開発環境構築が完了です.</p>
 <h2 id="ノイズ">ノイズ</h2>
-
 <p>ホワイトノイズ / ピンクノイズ / ブラウニアンノイズの実装例を解説します.</p>
-
 <p>まずは, オーディオ処理をさせる C 言語 のソースを実装します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;time.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;emscripten/emscripten.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> is_init <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
-<pre><code class="language-C">#include &lt;stdlib.h&gt;
-#include &lt;time.h&gt;
-#include &lt;emscripten/emscripten.h&gt;
+<span style="color:#66d9ef">double</span> b0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+<span style="color:#66d9ef">double</span> b1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+<span style="color:#66d9ef">double</span> b2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+<span style="color:#66d9ef">double</span> b3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+<span style="color:#66d9ef">double</span> b4 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+<span style="color:#66d9ef">double</span> b5 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+<span style="color:#66d9ef">double</span> b6 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
 
-int is_init = 0;
-
-double b0 = 0.0;
-double b1 = 0.0;
-double b2 = 0.0;
-double b3 = 0.0;
-double b4 = 0.0;
-double b5 = 0.0;
-double b6 = 0.0;
-
-double last_out = 0.0;
+<span style="color:#66d9ef">double</span> last_out <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
 
 EMSCRIPTEN_KEEPALIVE
-double whitenoise(void) {
-  if (is_init == 0) {
-    srand((unsigned)time(NULL));
-    is_init = 1;
+<span style="color:#66d9ef">double</span> <span style="color:#a6e22e">whitenoise</span>(<span style="color:#66d9ef">void</span>) {
+  <span style="color:#66d9ef">if</span> (is_init <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+    srand((<span style="color:#66d9ef">unsigned</span>)time(NULL));
+    is_init <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
   }
 
-  double o = 2 * (((double)rand() / ((double)RAND_MAX + 1.0)) - 0.5);
+  <span style="color:#66d9ef">double</span> o <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> (((<span style="color:#66d9ef">double</span>)rand() <span style="color:#f92672">/</span> ((<span style="color:#66d9ef">double</span>)RAND_MAX <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.0</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.5</span>);
 
-  return o;
+  <span style="color:#66d9ef">return</span> o;
 }
 
 EMSCRIPTEN_KEEPALIVE
-double pinknoise(void) {
-  if (is_init == 0) {
-    srand((unsigned)time(NULL));
-    is_init = 1;
+<span style="color:#66d9ef">double</span> <span style="color:#a6e22e">pinknoise</span>(<span style="color:#66d9ef">void</span>) {
+  <span style="color:#66d9ef">if</span> (is_init <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+    srand((<span style="color:#66d9ef">unsigned</span>)time(NULL));
+    is_init <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
   }
 
-  double n = 2 * (((double)rand() / ((double)RAND_MAX + 1.0)) - 0.5);
+  <span style="color:#66d9ef">double</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> (((<span style="color:#66d9ef">double</span>)rand() <span style="color:#f92672">/</span> ((<span style="color:#66d9ef">double</span>)RAND_MAX <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.0</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.5</span>);
 
-  b0 = (0.99886 * b0) + (n * 0.0555179);
-  b1 = (0.99332 * b1) + (n * 0.0750759);
-  b2 = (0.96900 * b2) + (n * 0.1538520);
-  b3 = (0.86650 * b3) + (n * 0.3104856);
-  b4 = (0.55000 * b4) + (n * 0.5329522);
-  b5 = (-0.7616 * b5) - (n * 0.0168980);
+  b0 <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.99886</span> <span style="color:#f92672">*</span> b0) <span style="color:#f92672">+</span> (n <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.0555179</span>);
+  b1 <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.99332</span> <span style="color:#f92672">*</span> b1) <span style="color:#f92672">+</span> (n <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.0750759</span>);
+  b2 <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.96900</span> <span style="color:#f92672">*</span> b2) <span style="color:#f92672">+</span> (n <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.1538520</span>);
+  b3 <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.86650</span> <span style="color:#f92672">*</span> b3) <span style="color:#f92672">+</span> (n <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.3104856</span>);
+  b4 <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.55000</span> <span style="color:#f92672">*</span> b4) <span style="color:#f92672">+</span> (n <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5329522</span>);
+  b5 <span style="color:#f92672">=</span> (<span style="color:#f92672">-</span><span style="color:#ae81ff">0.7616</span> <span style="color:#f92672">*</span> b5) <span style="color:#f92672">-</span> (n <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.0168980</span>);
 
-  double o = 0.11 * (b0 + b1 + b2 + b3 + b4 + b5 + b6 + (n * 0.5362));
+  <span style="color:#66d9ef">double</span> o <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.11</span> <span style="color:#f92672">*</span> (b0 <span style="color:#f92672">+</span> b1 <span style="color:#f92672">+</span> b2 <span style="color:#f92672">+</span> b3 <span style="color:#f92672">+</span> b4 <span style="color:#f92672">+</span> b5 <span style="color:#f92672">+</span> b6 <span style="color:#f92672">+</span> (n <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5362</span>));
 
-  b6 = n * 0.115926;
+  b6 <span style="color:#f92672">=</span> n <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.115926</span>;
 
-  return o;
+  <span style="color:#66d9ef">return</span> o;
 }
 
 EMSCRIPTEN_KEEPALIVE
-double browniannoise(void) {
-  if (is_init == 0) {
-    srand((unsigned)time(NULL));
-    is_init = 1;
+<span style="color:#66d9ef">double</span> <span style="color:#a6e22e">browniannoise</span>(<span style="color:#66d9ef">void</span>) {
+  <span style="color:#66d9ef">if</span> (is_init <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+    srand((<span style="color:#66d9ef">unsigned</span>)time(NULL));
+    is_init <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
   }
 
-  double n = 2 * (((double)rand() / ((double)RAND_MAX + 1.0)) - 0.5);
-  double o = 3.5 * ((last_out + (0.02 * n)) / 1.02);
+  <span style="color:#66d9ef">double</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> (((<span style="color:#66d9ef">double</span>)rand() <span style="color:#f92672">/</span> ((<span style="color:#66d9ef">double</span>)RAND_MAX <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.0</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.5</span>);
+  <span style="color:#66d9ef">double</span> o <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.5</span> <span style="color:#f92672">*</span> ((last_out <span style="color:#f92672">+</span> (<span style="color:#ae81ff">0.02</span> <span style="color:#f92672">*</span> n)) <span style="color:#f92672">/</span> <span style="color:#ae81ff">1.02</span>);
 
-  last_out = (last_out + (0.02 * n)) / 1.02;
+  last_out <span style="color:#f92672">=</span> (last_out <span style="color:#f92672">+</span> (<span style="color:#ae81ff">0.02</span> <span style="color:#f92672">*</span> n)) <span style="color:#f92672">/</span> <span style="color:#ae81ff">1.02</span>;
 
-  return o;
+  <span style="color:#66d9ef">return</span> o;
 }
-</code></pre>
-
-<p>オーディオ処理の具体的な意味は, 書籍や Web サイトを参考にしていただければと思います.</p>
-
+</code></pre></div><p>オーディオ処理の具体的な意味は, 書籍や Web サイトを参考にしていただければと思います.</p>
 <p>重要なポイントは, <code>emscripten.h</code> というヘッダファイルの読み込みと, JavaScript 側から呼び出したい処理 (関数) に <code>EMSCRIPTEN_KEEPALIVE</code> と宣言していることです.</p>
-
 <p>実装が完了したら, 以下のコマンドを実行して, WebAssembly のためのバイナリを生成します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ emcc noise.c -s WASM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> -o noise.js
+</code></pre></div><p>次に, WebAssembly を利用して, 生成したバイナリを JavaScript から利用できるようにします.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupWASM</span>(<span style="color:#a6e22e">wasm</span>) {
+  <span style="color:#66d9ef">try</span> {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`./</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">wasm</span><span style="color:#e6db74">}</span><span style="color:#e6db74">.wasm`</span>)
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bytes</span>    <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">arrayBuffer</span>();
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">module</span>   <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">compile</span>(<span style="color:#a6e22e">bytes</span>);
 
-<pre><code class="language-bash">$ emcc noise.c -s WASM=1 -o noise.js
-</code></pre>
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">imports</span> <span style="color:#f92672">=</span> {};
 
-<p>次に, WebAssembly を利用して, 生成したバイナリを JavaScript から利用できるようにします.</p>
+    <span style="color:#a6e22e">imports</span>.<span style="color:#a6e22e">env</span> <span style="color:#f92672">=</span> {};
+    <span style="color:#a6e22e">imports</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">memoryBase</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#a6e22e">imports</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">tableBase</span>  <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
-<pre><code class="language-JavaScript">async function setupWASM(wasm) {
-  try {
-    const response = await fetch(`./${wasm}.wasm`)
-    const bytes    = await response.arrayBuffer();
-    const module   = await WebAssembly.compile(bytes);
-
-    const imports = {};
-
-    imports.env = {};
-    imports.env.memoryBase = 0;
-    imports.env.tableBase  = 0;
-
-    if (!imports.env.memory) {
-      imports.env.memory = new WebAssembly.Memory({ initial: 256, maximum: 256 });
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">imports</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">memory</span>) {
+      <span style="color:#a6e22e">imports</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">memory</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">Memory</span>({ <span style="color:#a6e22e">initial</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">256</span>, <span style="color:#a6e22e">maximum</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">256</span> });
     }
 
-    if (!imports.env.table) {
-      imports.env.table = new WebAssembly.Table({ initial: 1, maximum : 1, element: 'anyfunc' });
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">imports</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">table</span>) {
+      <span style="color:#a6e22e">imports</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">table</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">Table</span>({ <span style="color:#a6e22e">initial</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">maximum</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">element</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;anyfunc&#39;</span> });
     }
 
-    const { instance } = await WebAssembly.instantiate(bytes, imports);
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">instance</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">instantiate</span>(<span style="color:#a6e22e">bytes</span>, <span style="color:#a6e22e">imports</span>);
 
-    return { module, instance, bytes };
-  } catch (e) {
-    console.error(e);
+    <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">module</span>, <span style="color:#a6e22e">instance</span>, <span style="color:#a6e22e">bytes</span> };
+  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">e</span>);
   }
 }
-</code></pre>
-
-<p>以上で, C 言語で実装した関数を呼び出す準備が実装できました.</p>
-
+</code></pre></div><p>以上で, C 言語で実装した関数を呼び出す準備が実装できました.</p>
 <p>あとは, Web Audio API の ScriptProcessorNode を利用して, C 言語で定義した関数を呼び出し, ノイズのためのオーディオ処理を実装します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#75715e">// `processor` は, `ScriptProcessorNode` のインスタンス
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">processor</span>.<span style="color:#a6e22e">onaudioprocess</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">event</span>) =&gt; {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">outputLs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">outputBuffer</span>.<span style="color:#a6e22e">getChannelData</span>(<span style="color:#ae81ff">0</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">outputRs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">outputBuffer</span>.<span style="color:#a6e22e">getChannelData</span>(<span style="color:#ae81ff">1</span>);
 
-<pre><code class="language-JavaScript">// `processor` は, `ScriptProcessorNode` のインスタンス
-processor.onaudioprocess = (event) =&gt; {
-  const outputLs = event.outputBuffer.getChannelData(0);
-  const outputRs = event.outputBuffer.getChannelData(1);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">bufferSize</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">output</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
-  for (let i = 0; i &lt; bufferSize; i++) {
-    let output = 0;
-
-    switch (type) {
-      case 'whitenoise':
-        output = instance.exports.whitenoise();
-        break;
-      case 'pinknoise':
-        output = instance.exports.pinknoise();
-        break;
-      case 'browniannoise':
-        output = instance.exports.browniannoise();
-        break;
-      default:
-        break;
+    <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">type</span>) {
+      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;whitenoise&#39;</span><span style="color:#f92672">:</span>
+        <span style="color:#a6e22e">output</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">instance</span>.<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">whitenoise</span>();
+        <span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;pinknoise&#39;</span><span style="color:#f92672">:</span>
+        <span style="color:#a6e22e">output</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">instance</span>.<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">pinknoise</span>();
+        <span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;browniannoise&#39;</span><span style="color:#f92672">:</span>
+        <span style="color:#a6e22e">output</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">instance</span>.<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">browniannoise</span>();
+        <span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+        <span style="color:#66d9ef">break</span>;
     }
 
-    outputLs[i] = output;
-    outputRs[i] = output;
+    <span style="color:#a6e22e">outputLs</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">output</span>;
+    <span style="color:#a6e22e">outputRs</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">output</span>;
   }
 };
-</code></pre>
-
-<p>WebAssembly (<code>WebAssembly.instantiate</code>) によって生成された, <code>instance</code> というオブジェクトを参照して, C 言語で定義した関数を呼び出すことができます.</p>
-
+</code></pre></div><p>WebAssembly (<code>WebAssembly.instantiate</code>) によって生成された, <code>instance</code> というオブジェクトを参照して, C 言語で定義した関数を呼び出すことができます.</p>
 <h2 id="ボーカルキャンセラ">ボーカルキャンセラ</h2>
-
 <p>ボーカルキャンセラもノイズと同様, 数値演算だけで実装できるオーディオ処理なので, フローとしては, ノイズと大差ありません.</p>
-
 <p>ボーカルキャンセラの C 言語のソースです.</p>
-
-<pre><code class="language-C">#include &lt;emscripten/emscripten.h&gt;
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;emscripten/emscripten.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
 EMSCRIPTEN_KEEPALIVE
-double vocalcanceler(double l, double r, double d) {
-  return l - (d * r);
+<span style="color:#66d9ef">double</span> <span style="color:#a6e22e">vocalcanceler</span>(<span style="color:#66d9ef">double</span> l, <span style="color:#66d9ef">double</span> r, <span style="color:#66d9ef">double</span> d) {
+  <span style="color:#66d9ef">return</span> l <span style="color:#f92672">-</span> (d <span style="color:#f92672">*</span> r);
 }
-</code></pre>
+</code></pre></div><p>ソースをコンパイルします.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ emcc vocalcanceler.c -s WASM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> -o vocalcanceler.js
+</code></pre></div><p>そして, Web Audio API の ScriptProcessorNode を利用して, その関数を呼び出し, ボーカルキャンセラのためのオーディオ処理を実装します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#75715e">// `processor` は, `ScriptProcessorNode` のインスタンス
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">processor</span>.<span style="color:#a6e22e">onaudioprocess</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">event</span>) =&gt; {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">inputLs</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">inputBuffer</span>.<span style="color:#a6e22e">getChannelData</span>(<span style="color:#ae81ff">0</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">inputRs</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">inputBuffer</span>.<span style="color:#a6e22e">getChannelData</span>(<span style="color:#ae81ff">1</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">outputLs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">outputBuffer</span>.<span style="color:#a6e22e">getChannelData</span>(<span style="color:#ae81ff">0</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">outputRs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">outputBuffer</span>.<span style="color:#a6e22e">getChannelData</span>(<span style="color:#ae81ff">1</span>);
 
-<p>ソースをコンパイルします.</p>
-
-<pre><code class="language-bash">$ emcc vocalcanceler.c -s WASM=1 -o vocalcanceler.js
-</code></pre>
-
-<p>そして, Web Audio API の ScriptProcessorNode を利用して, その関数を呼び出し, ボーカルキャンセラのためのオーディオ処理を実装します.</p>
-
-<pre><code class="language-JavaScript">// `processor` は, `ScriptProcessorNode` のインスタンス
-processor.onaudioprocess = (event) =&gt; {
-  const inputLs  = event.inputBuffer.getChannelData(0);
-  const inputRs  = event.inputBuffer.getChannelData(1);
-  const outputLs = event.outputBuffer.getChannelData(0);
-  const outputRs = event.outputBuffer.getChannelData(1);
-
-  for (let i = 0; i &lt; bufferSize; i++) {
-    outputLs[i] = instance.exports.vocalcanceler(inputLs[i], inputRs[i], depth);
-    outputRs[i] = instance.exports.vocalcanceler(inputRs[i], inputLs[i], depth);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">bufferSize</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+    <span style="color:#a6e22e">outputLs</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">instance</span>.<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">vocalcanceler</span>(<span style="color:#a6e22e">inputLs</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">inputRs</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">depth</span>);
+    <span style="color:#a6e22e">outputRs</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">instance</span>.<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">vocalcanceler</span>(<span style="color:#a6e22e">inputRs</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">inputLs</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">depth</span>);
   }
 };
-</code></pre>
-
-<h2 id="ピッチシフター">ピッチシフター</h2>
-
+</code></pre></div><h2 id="ピッチシフター">ピッチシフター</h2>
 <p>ノイズやボーカルキャンセラのように, JavaScript から C 言語の関数に渡す引数がない場合や, 数値型である場合は, 比較的単純に実装できます. しかしながら, JavaScript から<strong>参照</strong>として, 言い換えると, C 言語の関数が引数に<strong>配列</strong>や<strong>ポインタ</strong>をとる場合には, 少し実装が煩雑になります.</p>
-
 <p>ピッチシフターの C 言語のソースです. JavaScript から参照する関数 (<code>pitchshifter</code> 関数) がポインタを引数として定義していることに着目してください.</p>
-
-<pre><code class="language-C">#include &lt;stdlib.h&gt;
-#include &lt;math.h&gt;
-#include &lt;emscripten/emscripten.h&gt;
-
-int pow2(int n);
-void FFT(float *x_real, float *x_imag, int N);
-void IFFT(float *x_real, float *x_imag, int N);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;math.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;emscripten/emscripten.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pow2</span>(<span style="color:#66d9ef">int</span> n);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">FFT</span>(<span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>x_real, <span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>x_imag, <span style="color:#66d9ef">int</span> N);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IFFT</span>(<span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>x_real, <span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>x_imag, <span style="color:#66d9ef">int</span> N);
 
 EMSCRIPTEN_KEEPALIVE
-void pitchshifter(
-  double pitch,
-  float *reals,
-  float *imags,
-  float *a_reals,
-  float *a_imags,
-  int N
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pitchshifter</span>(
+  <span style="color:#66d9ef">double</span> pitch,
+  <span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>reals,
+  <span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>imags,
+  <span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>a_reals,
+  <span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>a_imags,
+  <span style="color:#66d9ef">int</span> N
 ) {
   FFT(reals, imags, N);
 
-  for (int k = 0; k &lt; N; k++) {
-    int offset = floor(pitch * k);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> offset <span style="color:#f92672">=</span> floor(pitch <span style="color:#f92672">*</span> k);
 
-    int eq = 1;
+    <span style="color:#66d9ef">int</span> eq <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
 
-    if (k &gt; (N / 2)) {
-      eq = 0;
+    <span style="color:#66d9ef">if</span> (k <span style="color:#f92672">&gt;</span> (N <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>)) {
+      eq <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
     }
 
-    if ((offset &gt;= 0) &amp;&amp; (offset &lt; N)) {
-      a_reals[offset] += eq * reals[k];
-      a_imags[offset] += eq * imags[k];
+    <span style="color:#66d9ef">if</span> ((offset <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">&amp;&amp;</span> (offset <span style="color:#f92672">&lt;</span> N)) {
+      a_reals[offset] <span style="color:#f92672">+=</span> eq <span style="color:#f92672">*</span> reals[k];
+      a_imags[offset] <span style="color:#f92672">+=</span> eq <span style="color:#f92672">*</span> imags[k];
     }
   }
 
   IFFT(a_reals, a_imags, N);
 }
 
-int pow2(int n) {
-  if (n == 0) {
-    return 1;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pow2</span>(<span style="color:#66d9ef">int</span> n) {
+  <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
   }
 
-  return 2 &lt;&lt; (n - 1);
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&lt;&lt;</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
 }
 
-void FFT(float *x_real, float *x_imag, int N) {
-  int number_of_stages = log2(N);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">FFT</span>(<span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>x_real, <span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>x_imag, <span style="color:#66d9ef">int</span> N) {
+  <span style="color:#66d9ef">int</span> number_of_stages <span style="color:#f92672">=</span> log2(N);
 
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      int rest = number_of_stages - stage;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> stage <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; stage <span style="color:#f92672">&lt;=</span> number_of_stages; stage<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>); i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">int</span> rest <span style="color:#f92672">=</span> number_of_stages <span style="color:#f92672">-</span> stage;
 
-      for (int j = 0; j &lt; pow2(rest); j++) {
-        int n = i * pow2(rest + 1) + j;
-        int m = pow2(rest) + n;
-        int r = j * pow2(stage - 1);
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> pow2(rest); j<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> i <span style="color:#f92672">*</span> pow2(rest <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> j;
+        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> pow2(rest) <span style="color:#f92672">+</span> n;
+        <span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> j <span style="color:#f92672">*</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
 
-        float a_real = x_real[n];
-        float a_imag = x_imag[n];
-        float b_real = x_real[m];
-        float b_imag = x_imag[m];
-        float c_real = cos((2.0 * M_PI * r) / N);
-        float c_imag = -sin((2.0 * M_PI * r) / N);
+        <span style="color:#66d9ef">float</span> a_real <span style="color:#f92672">=</span> x_real[n];
+        <span style="color:#66d9ef">float</span> a_imag <span style="color:#f92672">=</span> x_imag[n];
+        <span style="color:#66d9ef">float</span> b_real <span style="color:#f92672">=</span> x_real[m];
+        <span style="color:#66d9ef">float</span> b_imag <span style="color:#f92672">=</span> x_imag[m];
+        <span style="color:#66d9ef">float</span> c_real <span style="color:#f92672">=</span> cos((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> r) <span style="color:#f92672">/</span> N);
+        <span style="color:#66d9ef">float</span> c_imag <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>sin((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> r) <span style="color:#f92672">/</span> N);
 
-        if (stage &lt; number_of_stages) {
-          x_real[n] = a_real + b_real;
-          x_imag[n] = a_imag + b_imag;
-          x_real[m] = (c_real * (a_real - b_real)) - (c_imag * (a_imag - b_imag));
-          x_imag[m] = (c_real * (a_imag - b_imag)) + (c_imag * (a_real - b_real));
-        } else {
-          x_real[n] = a_real + b_real;
-          x_imag[n] = a_imag + b_imag;
-          x_real[m] = a_real - b_real;
-          x_imag[m] = a_imag - b_imag;
+        <span style="color:#66d9ef">if</span> (stage <span style="color:#f92672">&lt;</span> number_of_stages) {
+          x_real[n] <span style="color:#f92672">=</span> a_real <span style="color:#f92672">+</span> b_real;
+          x_imag[n] <span style="color:#f92672">=</span> a_imag <span style="color:#f92672">+</span> b_imag;
+          x_real[m] <span style="color:#f92672">=</span> (c_real <span style="color:#f92672">*</span> (a_real <span style="color:#f92672">-</span> b_real)) <span style="color:#f92672">-</span> (c_imag <span style="color:#f92672">*</span> (a_imag <span style="color:#f92672">-</span> b_imag));
+          x_imag[m] <span style="color:#f92672">=</span> (c_real <span style="color:#f92672">*</span> (a_imag <span style="color:#f92672">-</span> b_imag)) <span style="color:#f92672">+</span> (c_imag <span style="color:#f92672">*</span> (a_real <span style="color:#f92672">-</span> b_real));
+        } <span style="color:#66d9ef">else</span> {
+          x_real[n] <span style="color:#f92672">=</span> a_real <span style="color:#f92672">+</span> b_real;
+          x_imag[n] <span style="color:#f92672">=</span> a_imag <span style="color:#f92672">+</span> b_imag;
+          x_real[m] <span style="color:#f92672">=</span> a_real <span style="color:#f92672">-</span> b_real;
+          x_imag[m] <span style="color:#f92672">=</span> a_imag <span style="color:#f92672">-</span> b_imag;
         }
       }
     }
   }
 
-  int *index = (int *)calloc(N, sizeof(int));
+  <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>index <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>)calloc(N, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
 
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    int rest = number_of_stages - stage;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> stage <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; stage <span style="color:#f92672">&lt;=</span> number_of_stages; stage<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> rest <span style="color:#f92672">=</span> number_of_stages <span style="color:#f92672">-</span> stage;
 
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      index[pow2(stage - 1) + i] = index[i] + pow2(rest);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>); i<span style="color:#f92672">++</span>) {
+      index[pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> i] <span style="color:#f92672">=</span> index[i] <span style="color:#f92672">+</span> pow2(rest);
     }
   }
 
-  for (int k = 0; k &lt; N; k++) {
-    if (index[k] &lt;= k) {
-      continue;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (index[k] <span style="color:#f92672">&lt;=</span> k) {
+      <span style="color:#66d9ef">continue</span>;
     }
 
-    float tmp_real = x_real[index[k]];
-    float tmp_imag = x_imag[index[k]];
+    <span style="color:#66d9ef">float</span> tmp_real <span style="color:#f92672">=</span> x_real[index[k]];
+    <span style="color:#66d9ef">float</span> tmp_imag <span style="color:#f92672">=</span> x_imag[index[k]];
 
-    x_real[index[k]] = x_real[k];
-    x_imag[index[k]] = x_imag[k];
+    x_real[index[k]] <span style="color:#f92672">=</span> x_real[k];
+    x_imag[index[k]] <span style="color:#f92672">=</span> x_imag[k];
 
-    x_real[k] = tmp_real;
-    x_imag[k] = tmp_imag;
+    x_real[k] <span style="color:#f92672">=</span> tmp_real;
+    x_imag[k] <span style="color:#f92672">=</span> tmp_imag;
   }
 
   free(index);
 }
 
-void IFFT(float *x_real, float *x_imag, int N) {
-  int number_of_stages = log2(N);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IFFT</span>(<span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>x_real, <span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>x_imag, <span style="color:#66d9ef">int</span> N) {
+  <span style="color:#66d9ef">int</span> number_of_stages <span style="color:#f92672">=</span> log2(N);
 
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      int rest = number_of_stages - stage;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> stage <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; stage <span style="color:#f92672">&lt;=</span> number_of_stages; stage<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>); i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">int</span> rest <span style="color:#f92672">=</span> number_of_stages <span style="color:#f92672">-</span> stage;
 
-      for (int j = 0; j &lt; pow2(rest); j++) {
-        int n = i * pow2(rest + 1) + j;
-        int m = pow2(rest) + n;
-        int r = j * pow2(stage - 1);
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> pow2(rest); j<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> i <span style="color:#f92672">*</span> pow2(rest <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> j;
+        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> pow2(rest) <span style="color:#f92672">+</span> n;
+        <span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> j <span style="color:#f92672">*</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
 
-        float a_real = x_real[n];
-        float a_imag = x_imag[n];
-        float b_real = x_real[m];
-        float b_imag = x_imag[m];
-        float c_real = cos((2.0 * M_PI * r) / N);
-        float c_imag = sin((2.0 * M_PI * r) / N);
+        <span style="color:#66d9ef">float</span> a_real <span style="color:#f92672">=</span> x_real[n];
+        <span style="color:#66d9ef">float</span> a_imag <span style="color:#f92672">=</span> x_imag[n];
+        <span style="color:#66d9ef">float</span> b_real <span style="color:#f92672">=</span> x_real[m];
+        <span style="color:#66d9ef">float</span> b_imag <span style="color:#f92672">=</span> x_imag[m];
+        <span style="color:#66d9ef">float</span> c_real <span style="color:#f92672">=</span> cos((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> r) <span style="color:#f92672">/</span> N);
+        <span style="color:#66d9ef">float</span> c_imag <span style="color:#f92672">=</span> sin((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> r) <span style="color:#f92672">/</span> N);
 
-        if (stage &lt; number_of_stages) {
-          x_real[n] = a_real + b_real;
-          x_imag[n] = a_imag + b_imag;
-          x_real[m] = (c_real * (a_real - b_real)) - (c_imag * (a_imag - b_imag));
-          x_imag[m] = (c_real * (a_imag - b_imag)) + (c_imag * (a_real - b_real));
-        } else {
-          x_real[n] = a_real + b_real;
-          x_imag[n] = a_imag + b_imag;
-          x_real[m] = a_real - b_real;
-          x_imag[m] = a_imag - b_imag;
+        <span style="color:#66d9ef">if</span> (stage <span style="color:#f92672">&lt;</span> number_of_stages) {
+          x_real[n] <span style="color:#f92672">=</span> a_real <span style="color:#f92672">+</span> b_real;
+          x_imag[n] <span style="color:#f92672">=</span> a_imag <span style="color:#f92672">+</span> b_imag;
+          x_real[m] <span style="color:#f92672">=</span> (c_real <span style="color:#f92672">*</span> (a_real <span style="color:#f92672">-</span> b_real)) <span style="color:#f92672">-</span> (c_imag <span style="color:#f92672">*</span> (a_imag <span style="color:#f92672">-</span> b_imag));
+          x_imag[m] <span style="color:#f92672">=</span> (c_real <span style="color:#f92672">*</span> (a_imag <span style="color:#f92672">-</span> b_imag)) <span style="color:#f92672">+</span> (c_imag <span style="color:#f92672">*</span> (a_real <span style="color:#f92672">-</span> b_real));
+        } <span style="color:#66d9ef">else</span> {
+          x_real[n] <span style="color:#f92672">=</span> a_real <span style="color:#f92672">+</span> b_real;
+          x_imag[n] <span style="color:#f92672">=</span> a_imag <span style="color:#f92672">+</span> b_imag;
+          x_real[m] <span style="color:#f92672">=</span> a_real <span style="color:#f92672">-</span> b_real;
+          x_imag[m] <span style="color:#f92672">=</span> a_imag <span style="color:#f92672">-</span> b_imag;
         }
       }
     }
   }
 
-  int *index = (int *)calloc(N, sizeof(int));
+  <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>index <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>)calloc(N, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
 
-  for (int stage = 1; stage &lt;= number_of_stages; stage++) {
-    int rest = number_of_stages - stage;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> stage <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; stage <span style="color:#f92672">&lt;=</span> number_of_stages; stage<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> rest <span style="color:#f92672">=</span> number_of_stages <span style="color:#f92672">-</span> stage;
 
-    for (int i = 0; i &lt; pow2(stage - 1); i++) {
-      index[pow2(stage - 1) + i] = index[i] + pow2(rest);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>); i<span style="color:#f92672">++</span>) {
+      index[pow2(stage <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> i] <span style="color:#f92672">=</span> index[i] <span style="color:#f92672">+</span> pow2(rest);
     }
   }
 
-  for (int k = 0; k &lt; N; k++) {
-    if (index[k] &lt;= k) {
-      continue;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (index[k] <span style="color:#f92672">&lt;=</span> k) {
+      <span style="color:#66d9ef">continue</span>;
     }
 
-    float tmp_real = x_real[index[k]];
-    float tmp_imag = x_imag[index[k]];
+    <span style="color:#66d9ef">float</span> tmp_real <span style="color:#f92672">=</span> x_real[index[k]];
+    <span style="color:#66d9ef">float</span> tmp_imag <span style="color:#f92672">=</span> x_imag[index[k]];
 
-    x_real[index[k]] = x_real[k];
-    x_imag[index[k]] = x_imag[k];
+    x_real[index[k]] <span style="color:#f92672">=</span> x_real[k];
+    x_imag[index[k]] <span style="color:#f92672">=</span> x_imag[k];
 
-    x_real[k] = tmp_real;
-    x_imag[k] = tmp_imag;
+    x_real[k] <span style="color:#f92672">=</span> tmp_real;
+    x_imag[k] <span style="color:#f92672">=</span> tmp_imag;
   }
 
-  for (int k = 0; k &lt; N; k++) {
-    x_real[k] /= N;
-    x_imag[k] /= N;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+    x_real[k] <span style="color:#f92672">/=</span> N;
+    x_imag[k] <span style="color:#f92672">/=</span> N;
   }
 
   free(index);
 }
-</code></pre>
-
-<p>コンパルのコマンドも少し複雑になります.</p>
-
-<pre><code class="language-bash">$ emcc pitchshifter.c -s WASM=1 -s MODULARIZE=1 -s &quot;EXPORTED_FUNCTIONS=['_pitchshifter']&quot; -s &quot;EXTRA_EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']&quot; -o pitchshifter.js
-</code></pre>
-
-<p><code>EXPORTED_FUNCTIONS</code> というオプションに, JavaScript から参照する関数に, プレフィックス (<code>_</code>) を付加した関数名を指定しています. また, <code>EXTRA_EXPORTED_RUNTIME_METHODS</code> というオプションには, <code>ccall</code> と <code>cwrap</code> を指定しています.</p>
-
+</code></pre></div><p>コンパルのコマンドも少し複雑になります.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ emcc pitchshifter.c -s WASM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> -s MODULARIZE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> -s <span style="color:#e6db74">&#34;EXPORTED_FUNCTIONS=[&#39;_pitchshifter&#39;]&#34;</span> -s <span style="color:#e6db74">&#34;EXTRA_EXPORTED_RUNTIME_METHODS=[&#39;ccall&#39;, &#39;cwrap&#39;]&#34;</span> -o pitchshifter.js
+</code></pre></div><p><code>EXPORTED_FUNCTIONS</code> というオプションに, JavaScript から参照する関数に, プレフィックス (<code>_</code>) を付加した関数名を指定しています. また, <code>EXTRA_EXPORTED_RUNTIME_METHODS</code> というオプションには, <code>ccall</code> と <code>cwrap</code> を指定しています.</p>
 <p>C 言語で実装された関数を呼び出す JavaScript も実装がやや煩雑になります.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">m</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Module</span>({
+  <span style="color:#a6e22e">wasmBinary</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Uint8Array</span>(<span style="color:#a6e22e">bytes</span>),
+  <span style="color:#a6e22e">onRuntimeInitialized</span><span style="color:#f92672">:</span> () =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;onRuntimeInitialized&#39;</span>);
 
-<pre><code class="language-JavaScript">const m = Module({
-  wasmBinary: new Uint8Array(bytes),
-  onRuntimeInitialized: () =&gt; {
-    console.log('onRuntimeInitialized');
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pitchshifter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">cwrap</span>(<span style="color:#e6db74">&#39;pitchshifter&#39;</span>, <span style="color:#66d9ef">null</span>, [<span style="color:#e6db74">&#39;number&#39;</span>, <span style="color:#e6db74">&#39;Float32Array&#39;</span>, <span style="color:#e6db74">&#39;Float32Array&#39;</span>, <span style="color:#e6db74">&#39;Float32Array&#39;</span>, <span style="color:#e6db74">&#39;Float32Array&#39;</span>, <span style="color:#e6db74">&#39;number&#39;</span>]);
 
-    const pitchshifter = m.cwrap('pitchshifter', null, ['number', 'Float32Array', 'Float32Array', 'Float32Array', 'Float32Array', 'number']);
+    <span style="color:#75715e">// `processor` は, `ScriptProcessorNode` のインスタンス
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">processor</span>.<span style="color:#a6e22e">onaudioprocess</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">event</span>) =&gt; {
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">inputLs</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">inputBuffer</span>.<span style="color:#a6e22e">getChannelData</span>(<span style="color:#ae81ff">0</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">inputRs</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">inputBuffer</span>.<span style="color:#a6e22e">getChannelData</span>(<span style="color:#ae81ff">1</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">outputLs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">outputBuffer</span>.<span style="color:#a6e22e">getChannelData</span>(<span style="color:#ae81ff">0</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">outputRs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">outputBuffer</span>.<span style="color:#a6e22e">getChannelData</span>(<span style="color:#ae81ff">1</span>);
 
-    // `processor` は, `ScriptProcessorNode` のインスタンス
-    processor.onaudioprocess = (event) =&gt; {
-      const inputLs  = event.inputBuffer.getChannelData(0);
-      const inputRs  = event.inputBuffer.getChannelData(1);
-      const outputLs = event.outputBuffer.getChannelData(0);
-      const outputRs = event.outputBuffer.getChannelData(1);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pointerRealL</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_malloc</span>(<span style="color:#a6e22e">bufferSize</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pointerRealR</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_malloc</span>(<span style="color:#a6e22e">bufferSize</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pointerImagL</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_malloc</span>(<span style="color:#a6e22e">bufferSize</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pointerImagR</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_malloc</span>(<span style="color:#a6e22e">bufferSize</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">apointerRealL</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_malloc</span>(<span style="color:#a6e22e">bufferSize</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">apointerRealR</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_malloc</span>(<span style="color:#a6e22e">bufferSize</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">apointerImagL</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_malloc</span>(<span style="color:#a6e22e">bufferSize</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">apointerImagR</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_malloc</span>(<span style="color:#a6e22e">bufferSize</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
 
-      const pointerRealL  = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const pointerRealR  = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const pointerImagL  = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const pointerImagR  = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const apointerRealL = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const apointerRealR = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const apointerImagL = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
-      const apointerImagR = m._malloc(bufferSize * Float32Array.BYTES_PER_ELEMENT);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">realLs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Float32Array</span>(<span style="color:#a6e22e">inputLs</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">realRs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Float32Array</span>(<span style="color:#a6e22e">inputRs</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">imagLs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Float32Array</span>(<span style="color:#a6e22e">bufferSize</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">imagRs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Float32Array</span>(<span style="color:#a6e22e">bufferSize</span>);
 
-      const realLs = new Float32Array(inputLs);
-      const realRs = new Float32Array(inputRs);
-      const imagLs = new Float32Array(bufferSize);
-      const imagRs = new Float32Array(bufferSize);
+      <span style="color:#75715e">// `buffer`, `byteOffset`, `length` の 3 つの引数をとる Typed Array のコンストラクタ
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arealLs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Float32Array</span>(<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">buffer</span>, <span style="color:#a6e22e">apointerRealL</span>, <span style="color:#a6e22e">bufferSize</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arealRs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Float32Array</span>(<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">buffer</span>, <span style="color:#a6e22e">apointerRealR</span>, <span style="color:#a6e22e">bufferSize</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">aimagLs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Float32Array</span>(<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">buffer</span>, <span style="color:#a6e22e">apointerImagL</span>, <span style="color:#a6e22e">bufferSize</span>);
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">aimagRs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Float32Array</span>(<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">buffer</span>, <span style="color:#a6e22e">apointerImagR</span>, <span style="color:#a6e22e">bufferSize</span>);
 
-      // `buffer`, `byteOffset`, `length` の 3 つの引数をとる Typed Array のコンストラクタ
-      const arealLs = new Float32Array(m.HEAPF32.buffer, apointerRealL, bufferSize);
-      const arealRs = new Float32Array(m.HEAPF32.buffer, apointerRealR, bufferSize);
-      const aimagLs = new Float32Array(m.HEAPF32.buffer, apointerImagL, bufferSize);
-      const aimagRs = new Float32Array(m.HEAPF32.buffer, apointerImagR, bufferSize);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">realLs</span>, <span style="color:#a6e22e">pointerRealL</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">realRs</span>, <span style="color:#a6e22e">pointerRealR</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">imagLs</span>, <span style="color:#a6e22e">pointerImagL</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">imagRs</span>, <span style="color:#a6e22e">pointerImagR</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">arealLs</span>, <span style="color:#a6e22e">apointerRealL</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">arealRs</span>, <span style="color:#a6e22e">apointerRealR</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">aimagLs</span>, <span style="color:#a6e22e">apointerImagL</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">HEAPF32</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">aimagRs</span>, <span style="color:#a6e22e">apointerImagR</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Float32Array</span>.<span style="color:#a6e22e">BYTES_PER_ELEMENT</span>);
 
-      m.HEAPF32.set(realLs, pointerRealL / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(realRs, pointerRealR / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(imagLs, pointerImagL / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(imagRs, pointerImagR / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(arealLs, apointerRealL / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(arealRs, apointerRealR / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(aimagLs, apointerImagL / Float32Array.BYTES_PER_ELEMENT);
-      m.HEAPF32.set(aimagRs, apointerImagR / Float32Array.BYTES_PER_ELEMENT);
+      <span style="color:#a6e22e">pitchshifter</span>(<span style="color:#a6e22e">pitch</span>, <span style="color:#a6e22e">pointerRealL</span>, <span style="color:#a6e22e">pointerImagL</span>, <span style="color:#a6e22e">apointerRealL</span>, <span style="color:#a6e22e">apointerImagL</span>, <span style="color:#a6e22e">bufferSize</span>);
+      <span style="color:#a6e22e">pitchshifter</span>(<span style="color:#a6e22e">pitch</span>, <span style="color:#a6e22e">pointerRealR</span>, <span style="color:#a6e22e">pointerImagR</span>, <span style="color:#a6e22e">apointerRealR</span>, <span style="color:#a6e22e">apointerImagR</span>, <span style="color:#a6e22e">bufferSize</span>);
 
-      pitchshifter(pitch, pointerRealL, pointerImagL, apointerRealL, apointerImagL, bufferSize);
-      pitchshifter(pitch, pointerRealR, pointerImagR, apointerRealR, apointerImagR, bufferSize);
+      <span style="color:#a6e22e">outputLs</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">arealLs</span>);
+      <span style="color:#a6e22e">outputRs</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">arealRs</span>);
 
-      outputLs.set(arealLs);
-      outputRs.set(arealRs);
-
-      m._free(pointerRealL);
-      m._free(pointerImagL);
-      m._free(pointerRealR);
-      m._free(pointerImagR);
-      m._free(apointerRealL);
-      m._free(apointerImagL);
-      m._free(apointerRealR);
-      m._free(apointerImagR);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_free</span>(<span style="color:#a6e22e">pointerRealL</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_free</span>(<span style="color:#a6e22e">pointerImagL</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_free</span>(<span style="color:#a6e22e">pointerRealR</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_free</span>(<span style="color:#a6e22e">pointerImagR</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_free</span>(<span style="color:#a6e22e">apointerRealL</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_free</span>(<span style="color:#a6e22e">apointerImagL</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_free</span>(<span style="color:#a6e22e">apointerRealR</span>);
+      <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">_free</span>(<span style="color:#a6e22e">apointerImagR</span>);
     };
 
-    audio.play();
+    <span style="color:#a6e22e">audio</span>.<span style="color:#a6e22e">play</span>();
   }
 });
-</code></pre>
-
-<p>まず, <code>Module</code> という変数が定義されていることに着目してください. これは, コンパイル時に生成される JavaScript のファイルに定義されています (したがって, <code>pitchshifter.js</code> というファイルを読み込んでおく必要があります).</p>
-
+</code></pre></div><p>まず, <code>Module</code> という変数が定義されていることに着目してください. これは, コンパイル時に生成される JavaScript のファイルに定義されています (したがって, <code>pitchshifter.js</code> というファイルを読み込んでおく必要があります).</p>
 <p>注意すべき点として, <code>onRuntimeInitialized</code> というコールバック関数で, 必要なオーディオ処理を実行します. このイベントが発火する前に, オーディオ処理を実行するとエラーが発生してしまいます.</p>
-
 <p>そして, <code>Module</code> インスタンスの <code>cwrap</code> メソッドで, JavaScript から呼び出す関数オブジェクトを生成します. 引数には, C 言語で定義した関数名や, その関数が必要とする引数の (JavaScript からみた) 型などを配列で指定します.</p>
-
 <p>最も重要なのは, JavaScript から参照 (C 言語の配列やポインタ) を渡す場合, <strong>JavaScript でもメモリ管理を実装する必要があります</strong>.</p>
-
 <p>実装手順としては,</p>
-
 <ul>
 <li><code>Module</code> インスタンスの <code>_malloc</code> を利用してメモリを確保 (そのポインタを取得)</li>
 <li><code>Module</code> インスタンスの <code>HEAPFXX#set</code> を利用して, ポインタと参照を関連づける</li>
 <li><code>Module</code> インスタンスの <code>_free</code> を利用して, メモリを解放する</li>
 </ul>
-
-<p>となります (<code>HEAPFXX</code> の <code>XX</code> は型に合わせた数値です. 例えば, <code>Float64Array</code> であれば, <code>HEAPF64</code> になります).</p>
-
+<p>となります (<code>HEAPFXX</code> の <code>XX</code> は型に合わせた数値です. 例えば, <code>Float64Array </code> であれば, <code>HEAPF64</code> になります).</p>
 <p>細かい注意点としては, <code>Float32Array</code> など型が明確な場合, C 言語でも型をあわせる必要があります (<code>Float32Array</code> であれば <code>float</code>, <code>Float64Array</code> であれば <code>double</code> など).</p>
-
 <h1 id="リファレンス">リファレンス</h1>
-
 <p>かけあしになりましたが, WebAssembly でオーディオ処理を実装するための, 最低限必要な知見は紹介できたと思います. ソースコード全体やデモは, <a href="https://github.com/Korilakkuma/audio-processing-by-wasm">audio-processing-by-wasm</a> を参照してください.</p>
-
 <ul>
 <li><a href="https://developer.mozilla.org/ja/docs/WebAssembly/C_to_wasm">C/C++からWebAssemblyにコンパイルする</a></li>
 <li><a href="http://blog.shogonir.jp/entry/2017/05/23/232600a">JS側で作成したtyped arrayをwasm側に渡す</a></li>
@@ -1036,14 +961,6 @@ void IFFT(float *x_real, float *x_imag, int N) {
                     digital-signal-processing
                 </a>
                 <span class="category-list-count">6</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/event">
-                    event
-                </a>
-                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -1265,14 +1182,6 @@ void IFFT(float *x_real, float *x_imag, int N) {
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/forever-love">
-                    forever-love
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
                     fourier-transform
                 </a>
@@ -1481,14 +1390,6 @@ void IFFT(float *x_real, float *x_imag, int N) {
             
             <li class="category-list-item">
                 
-                <a class="category-list-link" href="https://art-of-life.jp/tags/wedding">
-                    wedding
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/windows">
                     windows
                 </a>
@@ -1571,9 +1472,6 @@ void IFFT(float *x_real, float *x_imag, int N) {
         <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
         
         
-        <a href="https://art-of-life.jp/tags/forever-love" style="font-size: 12px;">forever-love</a>
-        
-        
         <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
         
         
@@ -1652,9 +1550,6 @@ void IFFT(float *x_real, float *x_imag, int N) {
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
         
         
-        <a href="https://art-of-life.jp/tags/wedding" style="font-size: 12px;">wedding</a>
-        
-        
         <a href="https://art-of-life.jp/tags/windows" style="font-size: 12px;">windows</a>
         
         
@@ -1678,7 +1573,7 @@ void IFFT(float *x_real, float *x_imag, int N) {
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
     </div>
   </div>
 </footer>
