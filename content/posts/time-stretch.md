@@ -2,7 +2,7 @@
 banner = ""
 categories = ["Computer Sience", "Digital Signal Processing", "Mathematics", "Programming"]
 date = 2020-02-24T15:22:57+09:00
-description = ""
+description = "ピッチを変えずに, 再生速度を変更する"
 images = []
 menu = ""
 tags = ["Digital Signal Processing", "Time Stretch", "Correlation function"]
