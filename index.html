@@ -27,7 +27,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://art-of-life.jp/" />
-<meta property="og:updated_time" content="2020-03-31T22:53:57+09:00" />
+<meta property="og:updated_time" content="2020-06-07T02:57:12+09:00" />
 
     
     <meta itemprop="name" content="ART OF LIFE">
@@ -166,7 +166,7 @@
       </div>
       <div class="article-info-block">
         
-          45
+          48
         
         <span>
             Tags
@@ -248,6 +248,175 @@
     <section id="main">
     
     
+
+<article class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        </a>
+
+        <header class="article-header">
+    <a href="https://art-of-life.jp/posts/resampling/">
+    <h1 class="article-title" itemprop="name">
+        Resampling
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2020-06-07 02:57:12 &#43;0900 JST" itemprop="datePublished">2020-06-07</time>
+            &middot;
+            957
+            words
+            &middot;
+            2
+            minute read
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/computer-sience">Computer Sience</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/digital-signal-processing">Digital Signal Processing</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/digital-signal-processing">Digital Signal Processing</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/resampling">Resampling</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/linear-interpolation">Linear Interpolation</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/sampling-theorem">Sampling Theorem</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>
+                サンプリング周波数を変更する
+            </p>
+            <p class="article-more-link">
+                <a href="https://art-of-life.jp/posts/resampling/">
+                    Read more
+                </a>
+            </p>
+        </div>
+        <footer class="article-footer">
+    <a data-url="https://art-of-life.jp/posts/resampling/" data-id="3acb25fd225aec1d73baa103f4f47f14" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+    <a href="https://art-of-life.jp/posts/resampling/#disqus_thread" class="article-comment-link">
+        Comments
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+</article>
 
 <article class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
@@ -1622,167 +1791,6 @@
     </div>
 </article>
 
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/laplace-transform/">
-    <h1 class="article-title" itemprop="name">
-        Laplace Transform
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-10-05 18:00:22 &#43;0900 JST" itemprop="datePublished">2019-10-05</time>
-            &middot;
-            1066
-            words
-            &middot;
-            3
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/digital-signal-processing">Digital Signal Processing</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/digital-signal-processing">Digital Signal Processing</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/mathematics">Mathematics</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/laplace-transform">Laplace Transform</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/z-transform">Z-Transform</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                ラプラス変換 / Z 変換の概要
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/laplace-transform/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/laplace-transform/" data-id="ca88fb58cca6cf7a4ba09606ed16128a" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
-    
-    <a href="https://art-of-life.jp/posts/laplace-transform/#disqus_thread" class="article-comment-link">
-        Comments
-    </a>
-    
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
 
 <nav id="page-nav">
 
@@ -1823,7 +1831,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
                     computer-sience
                 </a>
-                <span class="category-list-count">9</span>
+                <span class="category-list-count">10</span>
             </li>
             
             <li class="category-list-item">
@@ -1839,7 +1847,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">6</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -1855,7 +1863,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">14</span>
+                <span class="category-list-count">15</span>
             </li>
             
             <li class="category-list-item">
@@ -1895,7 +1903,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">13</span>
+                <span class="category-list-count">14</span>
             </li>
             
             <li class="category-list-item">
@@ -2016,7 +2024,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">6</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -2087,6 +2095,14 @@
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
                     laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-interpolation">
+                    linear-interpolation
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -2209,6 +2225,22 @@
                     pcm
                 </a>
                 <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/resampling">
+                    resampling
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/sampling-theorem">
+                    sampling-theorem
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -2363,6 +2395,9 @@
         <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
         
         
+        <a href="https://art-of-life.jp/tags/linear-interpolation" style="font-size: 12px;">linear-interpolation</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linear-prediction-analysis" style="font-size: 12px;">linear-prediction-analysis</a>
         
         
@@ -2406,6 +2441,12 @@
         
         
         <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/resampling" style="font-size: 12px;">resampling</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/sampling-theorem" style="font-size: 12px;">sampling-theorem</a>
         
         
         <a href="https://art-of-life.jp/tags/spectrum-subtraction" style="font-size: 12px;">spectrum-subtraction</a>

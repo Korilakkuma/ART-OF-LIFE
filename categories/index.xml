@@ -6,24 +6,15 @@
     <description>Recent content in Categories on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 22 Mar 2020 15:22:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2020 02:57:12 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Jobs</title>
-      <link>https://art-of-life.jp/categories/jobs/</link>
-      <pubDate>Sun, 22 Mar 2020 15:22:00 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/jobs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Computer Sience</title>
       <link>https://art-of-life.jp/categories/computer-sience/</link>
-      <pubDate>Mon, 24 Feb 2020 15:22:57 +0900</pubDate>
+      <pubDate>Sun, 07 Jun 2020 02:57:12 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/computer-sience/</guid>
       <description></description>
@@ -32,7 +23,7 @@
     <item>
       <title>Digital Signal Processing</title>
       <link>https://art-of-life.jp/categories/digital-signal-processing/</link>
-      <pubDate>Mon, 24 Feb 2020 15:22:57 +0900</pubDate>
+      <pubDate>Sun, 07 Jun 2020 02:57:12 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/digital-signal-processing/</guid>
       <description></description>
@@ -41,7 +32,7 @@
     <item>
       <title>Mathematics</title>
       <link>https://art-of-life.jp/categories/mathematics/</link>
-      <pubDate>Mon, 24 Feb 2020 15:22:57 +0900</pubDate>
+      <pubDate>Sun, 07 Jun 2020 02:57:12 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/mathematics/</guid>
       <description></description>
@@ -50,9 +41,18 @@
     <item>
       <title>Programming</title>
       <link>https://art-of-life.jp/categories/programming/</link>
-      <pubDate>Mon, 24 Feb 2020 15:22:57 +0900</pubDate>
+      <pubDate>Sun, 07 Jun 2020 02:57:12 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jobs</title>
+      <link>https://art-of-life.jp/categories/jobs/</link>
+      <pubDate>Sun, 22 Mar 2020 15:22:00 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/jobs/</guid>
       <description></description>
     </item>
     

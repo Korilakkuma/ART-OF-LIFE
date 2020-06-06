@@ -6,10 +6,19 @@
     <description>Recent content in Digital Signal Processing on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Mon, 24 Feb 2020 15:22:57 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2020 02:57:12 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/tags/digital-signal-processing/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Resampling</title>
+      <link>https://art-of-life.jp/posts/resampling/</link>
+      <pubDate>Sun, 07 Jun 2020 02:57:12 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/resampling/</guid>
+      <description>リサンプリング リサンプリングとは, デジタル信号をアナログ信号に戻し, サンプリング周波数を (本来のサンプリング周波数から) 変更して, 再度, サン</description>
+    </item>
     
     <item>
       <title>Time Stretch</title>
