@@ -229,16 +229,10 @@ void SelfLoop(void (*p)()) {
 SelfLoop(SelfLoop);
 ```
 
-<dl>
-  <dt>有限時間内に停止する場合</dt>
-  <dd>
-    この場合, <code>HaltChecker</code> が <code>true</code> を返します. すなわち, <code>SelfLoop</code> に <code>SelfLoop</code> を入力としてあたえると, <code>SelfLoop</code> は停止しないという意味になります. これは, 矛盾です.
-  </dd>
-  <dt>有限時間内に停止しない場合</dt>
-  <dd>
-    この場合, <code>HaltChecker</code> が <code>false</code> を返します. すなわち, <code>SelfLoop</code> に <code>SelfLoop</code> を入力としてあたえると, <code>SelfLoop</code> は停止するという意味になります. これも, 矛盾です.
-  </dd>
-</dl>
+有限時間内に停止する場合
+: この場合, `HaltChecker` が `true` を返します. すなわち, `SelfLoop` に `SelfLoop` を入力としてあたえると, `SelfLoop` は停止しないという意味になります. これは, 矛盾です.
+有限時間内に停止しない場合
+: この場合, `HaltChecker` が `false` を返します. すなわち, `SelfLoop` に `SelfLoop` を入力としてあたえると, `SelfLoop` は停止するという意味になります. これも, 矛盾です.
 
 もれなく, ダブりなくのケースで矛盾が発生してしまいました.
 
