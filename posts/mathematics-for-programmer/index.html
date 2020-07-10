@@ -32,7 +32,7 @@
 <meta itemprop="description" content="プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (音・画像・動画) をあつかうエンジニア">
 <meta itemprop="datePublished" content="2019-07-14T17:27:13&#43;09:00" />
 <meta itemprop="dateModified" content="2019-07-14T17:27:13&#43;09:00" />
-<meta itemprop="wordCount" content="3971">
+<meta itemprop="wordCount" content="4117">
 
 
 
@@ -269,10 +269,10 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-07-14 17:27:13 &#43;0900 JST" itemprop="datePublished">2019-07-14</time>
             &middot;
-            3971
+            4117
             words
             &middot;
-            8
+            9
             minute read
         </div>
         
@@ -476,7 +476,12 @@ $</p>
 <!-- raw HTML omitted -->
 <p>ここで, <code>SelfLoop</code> の入力として, <code>SelfLoop</code> そのものをあたえます.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">SelfLoop(SelfLoop);
-</code></pre></div><!-- raw HTML omitted -->
+</code></pre></div><dl>
+<dt>有限時間内に停止する場合</dt>
+<dd>この場合, <code>HaltChecker</code> が <code>true</code> を返します. すなわち, <code>SelfLoop</code> に <code>SelfLoop</code> を入力としてあたえると, <code>SelfLoop</code> は停止しないという意味になります. これは, 矛盾です.
+有限時間内に停止しない場合</dd>
+<dd>この場合, <code>HaltChecker</code> が <code>false</code> を返します. すなわち, <code>SelfLoop</code> に <code>SelfLoop</code> を入力としてあたえると, <code>SelfLoop</code> は停止するという意味になります. これも, 矛盾です.</dd>
+</dl>
 <p>もれなく, ダブりなくのケースで矛盾が発生してしまいました.</p>
 <p>これは, <code>HaltChecker</code> が実装可能, つまり, <!-- raw HTML omitted -->「プログラムの停止判定を実行するプログラム」が実装可能と仮定したことが問題<!-- raw HTML omitted -->というわけです.</p>
 <p><!-- raw HTML omitted -->背理法<!-- raw HTML omitted -->により, <!-- raw HTML omitted -->プログラムの停止判定を実行するプログラムは実装できない<!-- raw HTML omitted -->ことが証明できました. 実は, <!-- raw HTML omitted -->停止判定問題が計算不可能な問題<!-- raw HTML omitted -->であることは,<!-- raw HTML omitted --> チューリング<!-- raw HTML omitted -->によって証明されています.</p>
