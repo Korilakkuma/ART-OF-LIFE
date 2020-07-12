@@ -32,7 +32,7 @@
 <meta itemprop="description" content="WebRTC による P2P の概要を整理してみた">
 <meta itemprop="datePublished" content="2019-05-29T20:00:59&#43;09:00" />
 <meta itemprop="dateModified" content="2019-05-29T20:00:59&#43;09:00" />
-<meta itemprop="wordCount" content="2553">
+<meta itemprop="wordCount" content="2700">
 
 
 
@@ -269,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-05-29 20:00:59 &#43;0900 JST" itemprop="datePublished">2019-05-29</time>
             &middot;
-            2553
+            2700
             words
             &middot;
             6
@@ -332,8 +332,12 @@
 <p>音声や動画のストリームを取得.</p>
 <h3 id="rtcpeerconnection">RTCPeerConnection</h3>
 <p>音声や動画の通信.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!--
+### RTCDataChannel
+
+アプリケーションデータの通信.
+
+-->
 <h2 id="ストリームの取得">ストリームの取得</h2>
 <p><code>navigator.mediaDecives.getUserMedia</code> メソッドを利用して, 音声や動画を取得します
 (<code>navigator.getUserMedia</code> メソッドは, 古い仕様なので利用しないでください).
@@ -398,7 +402,16 @@
 <p>WebRTC は, データの転送に UDP (User Datagram Protocol) を利用します.
 その理由は, データの信頼性よりも適時性が要求されるからです.
 UDP は, TCP とは対照的です.</p>
-<!-- raw HTML omitted -->
+<dl>
+  <dt>メッセージの到着を保証しない</dt>
+  <dd>通知, 再送, タイムアウトは存在しない</dd>
+  <dt>到着順序を保証しない</dt>
+  <dd>パケットのシーケンス番号, 再構成, HoL ブロッキングは存在しない</dd>
+  <dt>接続状況の追跡をしない</dt>
+  <dd>接続確立や中継のステートマシンは存在しない</dd>
+  <dt>輻輳制御をしない</dt>
+  <dd>ビルトインのクライアントやネットワークフィードバックの仕組みをもたない</dd>
+</dl>
 <p>実際には, DTLS (Datagram Transport Layer Security), SRTP (Secure Real-Time Transport Protocol) や SCTP (Stream Control Transmission Protocol) が追加で利用されており, UDP でありながら, TCP ライクなデータ転送を実現します.</p>
 <h3 id="rtcpeerconnection-api">RTCPeerConnection API</h3>
 <p>しかしながら, 上記にあげたプロトコルのほとんどは, <code>RTCPeerConnection</code> という JavaScript API に隠蔽されており, アプリケーション開発者が意識することはほとんどありません.</p>
@@ -1407,7 +1420,7 @@ UDP は, TCP とは対照的です.</p>
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>

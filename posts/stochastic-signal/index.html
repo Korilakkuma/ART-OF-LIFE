@@ -32,7 +32,7 @@
 <meta itemprop="description" content="音声信号などにおいて, ある時刻における振幅を知りたい場合, 実際に発音してからでないと知ることはできません. しかしながら, ある程度の時間をかけ">
 <meta itemprop="datePublished" content="2019-10-20T17:02:31&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-20T17:02:31&#43;09:00" />
-<meta itemprop="wordCount" content="3379">
+<meta itemprop="wordCount" content="3191">
 
 
 
@@ -269,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-10-20 17:02:31 &#43;0900 JST" itemprop="datePublished">2019-10-20</time>
             &middot;
-            3379
+            3191
             words
             &middot;
             7
@@ -321,17 +321,17 @@
         <div class="article-entry" itemprop="articleBody">
             <p>音声信号などにおいて, ある時刻における振幅を知りたい場合, 実際に発音してからでないと知ることはできません. しかしながら, ある程度の時間をかけて, 音声信号を観測すると, 統計的な性質がつかめます.</p>
 <h1 id="確定信号">確定信号</h1>
-<p><!-- raw HTML omitted -->確定信号<!-- raw HTML omitted --> (Deterministic Signal) とは, 時刻や位置の関数として表される信号で, 時刻や位置を指定すると, 特定の値が求められます. 典型的な例としては, 正弦波信号があります.</p>
+<p><b>確定信号</b> (Deterministic Signal) とは, 時刻や位置の関数として表される信号で, 時刻や位置を指定すると, 特定の値が求められます. 典型的な例としては, 正弦波信号があります.</p>
 <h1 id="確率信号">確率信号</h1>
-<p><!-- raw HTML omitted -->確率信号<!-- raw HTML omitted --> (Stochastic Singnal) とは, <!-- raw HTML omitted -->確率過程<!-- raw HTML omitted --> (Stochastic Process) としてあつかうことによって, 過去や未来の信号の統計量を特定する信号のことです. したがって, 確定信号のように, 時間や位置の関数として表すことはできません. そして, 身の回りで発生している音のほとんどは, 確率信号です.</p>
+<p><b>確率信号</b> (Stochastic Singnal) とは, <b>確率過程</b> (Stochastic Process) としてあつかうことによって, 過去や未来の信号の統計量を特定する信号のことです. したがって, 確定信号のように, 時間や位置の関数として表すことはできません. そして, 身の回りで発生している音のほとんどは, 確率信号です.</p>
 <h2 id="実現値">実現値</h2>
-<p>確率信号は, その定義上, 実際に発生した値のみが数値として表すことができます. この値を, <!-- raw HTML omitted -->実現値<!-- raw HTML omitted --> (Value) と呼びます.</p>
+<p>確率信号は, その定義上, 実際に発生した値のみが数値として表すことができます. この値を, <b>実現値</b> (Value) と呼びます.</p>
 <p>試行回数 $k$ 依存しない確率信号の場合, 実現値を多数観測することで, 値の傾向を知ることができます.</p>
 <h2 id="ヒストグラム">ヒストグラム</h2>
-<p>未来の確率信号の値を特定することはできませんが, どのような傾向で実現値が発生するかを知ることはできます. そのためには, 確率信号の実現値の傾向をすることが有効です. 一般的には, <!-- raw HTML omitted -->ヒストグラム<!-- raw HTML omitted -->を利用して, その傾向を視覚化します.</p>
+<p>未来の確率信号の値を特定することはできませんが, どのような傾向で実現値が発生するかを知ることはできます. そのためには, 確率信号の実現値の傾向をすることが有効です. 一般的には, <b>ヒストグラム</b>を利用して, その傾向を視覚化します.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/67201823-26f32a80-f442-11e9-8a33-c8bcd351dbcd.png" alt="ヒストグラムの例"></p>
 <h2 id="確率密度関数">確率密度関数</h2>
-<p>確率信号の値の傾向がわかっている場合, 「<!-- raw HTML omitted -->確率分布<!-- raw HTML omitted --> があたえられている」と表現します. 微小区間の値の確率を表した関数を<!-- raw HTML omitted -->確率密度関数<!-- raw HTML omitted --> (PDF: Probability Density Function) と呼びます.</p>
+<p>確率信号の値の傾向がわかっている場合, 「<b>確率分布</b> があたえられている」と表現します. 微小区間の値の確率を表した関数を<b>確率密度関数</b> (PDF: Probability Density Function) と呼びます.</p>
 <p>確率信号 $x$ の PDF を $p(x)$ とすると, 以下の式が成立します.</p>
 <p>$
 \begin{eqnarray}
@@ -340,13 +340,13 @@
 $</p>
 <p>これは, 確率信号 $x$ のいずれかの実現値が必ず発生することを意味しています</p>
 <h3 id="ガウス分布">ガウス分布</h3>
-<p>代表的な PDF に, <!-- raw HTML omitted -->ガウス分布<!-- raw HTML omitted --> (Gaussian Distribution) (<!-- raw HTML omitted -->正規分布<!-- raw HTML omitted --> (Normal Distribution)) と呼ばれる関数があります. 確率信号を $x$ とすると, ガウス分布は以下の関数で表されます.</p>
+<p>代表的な PDF に, <b>ガウス分布</b> (Gaussian Distribution) (<b>正規分布</b> (Normal Distribution)) と呼ばれる関数があります. 確率信号を $x$ とすると, ガウス分布は以下の関数で表されます.</p>
 <p>$
 \begin{eqnarray}
 p(x)=\frac{1}{\sqrt{2{\pi}\delta^{2}}}\exp\left(-\frac{(x-{\mu})^{2}}{2\delta^{2}}\right)
 \end{eqnarray}
 $</p>
-<p>$\mu$ はガウス分布の中心を決定するパラメータで, <!-- raw HTML omitted -->平均<!-- raw HTML omitted --> (Mean) と呼びます. $\delta^2$ は分布の広がりを決定するパラメータで, <!-- raw HTML omitted -->分散<!-- raw HTML omitted --> (Variance) と呼びます. ガウス分布では, この 2 つのパラメータ (平均と分散) を指定すると, その分布が一様に定まるという特徴があります.</p>
+<p>$\mu$ はガウス分布の中心を決定するパラメータで, <b>平均</b> (Mean) と呼びます. $\delta^2$ は分布の広がりを決定するパラメータで, <b>分散</b> (Variance) と呼びます. ガウス分布では, この 2 つのパラメータ (平均と分散) を指定すると, その分布が一様に定まるという特徴があります.</p>
 <p>ガウス分布の実装 (C++)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
@@ -384,7 +384,7 @@ $</p>
   }
 }
 </code></pre></div><h2 id="確率分布関数">確率分布関数</h2>
-<p>確率分布があたえられている場合, 負の方向から積分した関数を<!-- raw HTML omitted -->確率分布関数<!-- raw HTML omitted --> (Probability Distribution Function) と呼びます.</p>
+<p>確率分布があたえられている場合, 負の方向から積分した関数を<b>確率分布関数</b> (Probability Distribution Function) と呼びます.</p>
 <p>確率信号 $x$ がしたがう PDF を $p(x)$ とすると, 確率分布関数 $F(A)$ は,</p>
 <p>$
 \begin{eqnarray}
@@ -410,10 +410,10 @@ p(x)=\frac{dF(x)}{dx}
 \end{eqnarray}
 $</p>
 <h2 id="結合確率密度関数">結合確率密度関数</h2>
-<p>複数の確率信号が同時に発生する場合の PDF を考えます. 複数の確率信号 $x_{1}, x_{2}, \cdots, x_{M}$ が同時に発生する場合の PDF を $p(x_{1}, x_{2}, \cdots, x_{M})$ と表す場合, これを<!-- raw HTML omitted -->結合確率密度関数<!-- raw HTML omitted --> (Join PDF) と呼びます.</p>
+<p>複数の確率信号が同時に発生する場合の PDF を考えます. 複数の確率信号 $x_{1}, x_{2}, \cdots, x_{M}$ が同時に発生する場合の PDF を $p(x_{1}, x_{2}, \cdots, x_{M})$ と表す場合, これを<b>結合確率密度関数</b> (Join PDF) と呼びます.</p>
 <p>同時に $M$ 個の確率信号が発生すると, いずれかの実現値が, ほかの実現値に影響を与える可能性があるので, ここの PDF が既知でも, $p(x_{1}, x_{2}, \cdots, x_{M})$ を求めることは困難です.</p>
 <h2 id="期待値">期待値</h2>
-<p>実現値以外に, 確率信号を記述する方法としては, <!-- raw HTML omitted -->期待値<!-- raw HTML omitted --> (Expectation Value) が有効です.</p>
+<p>実現値以外に, 確率信号を記述する方法としては, <b>期待値</b> (Expectation Value) が有効です.</p>
 <p>確率信号を $x$, その PDF を $p(x)$ とすると, その期待値 $E\left[x\right]$ は,</p>
 <p>$
 \begin{eqnarray}
@@ -434,7 +434,7 @@ E\left[(x-{\mu})^{2}\right]=\int_{-\infty}^{\infty}(x-{\mu})^{2}p(x)dx
 $</p>
 <h2 id="時間平均とエルゴード過程">時間平均とエルゴード過程</h2>
 <p>1 回の試行で 1 つの値を観測するのではなく, 1 回の試行で複数個の値を順に取得する場合を考えます (配列を取得するイメージ).</p>
-<p>時刻を $n$, $k$ 回目の試行における, 時刻 $n$ の実現値を $x_{k}(n)$ とすると, <!-- raw HTML omitted -->時間平均<!-- raw HTML omitted --> (Time Average) は以下のように定義できます.</p>
+<p>時刻を $n$, $k$ 回目の試行における, 時刻 $n$ の実現値を $x_{k}(n)$ とすると, <b>時間平均</b> (Time Average) は以下のように定義できます.</p>
 <p>$
 \begin{eqnarray}
 \bar{x_{k}}=\lim_{N \to \infty}\frac{1}{N}\sum_{n=0}^{N-1}x_{k}(n)
@@ -442,13 +442,13 @@ $</p>
 $</p>
 <p>期待値と似ていますが, 期待値と時間平均はほとんどの場合において異なります. 具体的には, 確率分布が時間とともに変化する確率信号の場合です (逆に, 確率分布が不変である確率信号に限って, 時間平均と期待値は一致します).</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/67203147-57889380-f445-11e9-8efd-51009b6ab70b.png" alt="期待値と時間平均のちがい"></p>
-<p>音声信号をあつかう場合には, 試行回数が 1 回しかないことが多く, 期待値を求めることはできません. そこで, 観測信号の<!-- raw HTML omitted -->期待値と時間平均が一致すると過程<!-- raw HTML omitted -->して, 期待値を時間平均で代用します.</p>
+<p>音声信号をあつかう場合には, 試行回数が 1 回しかないことが多く, 期待値を求めることはできません. そこで, 観測信号の<b>期待値と時間平均が一致すると過程</b>して, 期待値を時間平均で代用します.</p>
 <p>$
 \begin{eqnarray}
 E\left[x(n)\right]=\lim_{N \to \infty}\frac{1}{N}\sum_{n=0}^{N-1}x(n)
 \end{eqnarray}
 $</p>
-<p>上記の式が成立するような場合で, このような性質をもつ信号系列を<!-- raw HTML omitted -->エルゴード過程<!-- raw HTML omitted --> (Ergodic Process) と呼びます.</p>
+<p>上記の式が成立するような場合で, このような性質をもつ信号系列を<b>エルゴード過程</b> (Ergodic Process) と呼びます.</p>
 <h2 id="共分散と無相関">共分散と無相関</h2>
 <p>確率信号 $x_{1}$ の平均を $\mu_{1}$ として, 確率信号 $x_{2}$ の平均を $\mu_{2}$ とすると, $x_{1}$ と $x_{2}$ の平均からのずれの積の期待値, すなわち, 下記の式は,</p>
 <p>$
@@ -456,14 +456,14 @@ $</p>
 E\left[\left(x_{1}-\mu_{1}\right)\left(x_{2}-\mu_{2}\right)\right]=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\left(x_{1}-\mu_{1}\right)\left(x_{2}-\mu_{2}\right)p\left(x_{1},x_{2}\right)dx_{1}dx_{2}
 \end{eqnarray}
 $</p>
-<p>分散との対比から, $x_{1}$ と $x_{2}$ の<!-- raw HTML omitted -->共分散<!-- raw HTML omitted --> (Covariance) と呼びます. 共分散は $x_{1}$ と $x_{2}$ が同じ値になるとき最も大きくなるので, <!-- raw HTML omitted -->信号の関連性<!-- raw HTML omitted -->を調べるときに有用になります.</p>
+<p>分散との対比から, $x_{1}$ と $x_{2}$ の<b>共分散</b> (Covariance) と呼びます. 共分散は $x_{1}$ と $x_{2}$ が同じ値になるとき最も大きくなるので, <b>信号の関連性</b>を調べるときに有用になります.</p>
 <p>共分散が 0 の場合,</p>
 <p>$
 \begin{eqnarray}
 E\left[\left(x_{1}-\mu_{1}\right)\left(x_{2}-\mu_{2}\right)\right]=0
 \end{eqnarray}
 $</p>
-<p>$x_{1}$ と $x_{2}$ は, <!-- raw HTML omitted -->無相関<!-- raw HTML omitted --> (Uncorrelated) であると呼びます. 無相関である場合, 以下の式が成立します.</p>
+<p>$x_{1}$ と $x_{2}$ は, <b>無相関</b> (Uncorrelated) であると呼びます. 無相関である場合, 以下の式が成立します.</p>
 <p>$
 \begin{eqnarray}
 E\left[x_{1}x_{2}\right]=E\left[x_{1}\right]E\left[x_{2}\right]
@@ -489,7 +489,7 @@ $</p>
 E\left[x_{1}x_{2}{\cdots}x_{M}\right]=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty}x_{1}x_{2}{\cdots}x_{M}p\left(x_{1},x_{2},{\cdots},x_{M}\right)dx_{1}dx_{2}{\cdots}dx_{M}
 \end{eqnarray}
 $</p>
-<p>もし, それぞれの PDF の積として定義できる場合, 確率信号 $x_{1},x_{2},{\cdots},x_{M}$ は互いに<!-- raw HTML omitted -->独立<!-- raw HTML omitted --> (Independent) であると呼びます. 独立である場合, それぞれの期待値の積として定義できます.</p>
+<p>もし, それぞれの PDF の積として定義できる場合, 確率信号 $x_{1},x_{2},{\cdots},x_{M}$ は互いに<b>独立</b> (Independent) であると呼びます. 独立である場合, それぞれの期待値の積として定義できます.</p>
 <p>$
 \begin{eqnarray}
 E\left[x_{1}x_{2}{\cdots}x_{M}\right]=E\left[x_{1}\right]E\left[x_{2}\right]{\cdots}E\left[x_{M}\right]
@@ -501,14 +501,14 @@ $</p>
 E\left[x_{1}x_{2}\right]=E\left[x_{1}\right]E\left[x_{2}\right]
 \end{eqnarray}
 $</p>
-<p><!-- raw HTML omitted -->独立であれば無相関でもあります<!-- raw HTML omitted -->. その<!-- raw HTML omitted -->逆<!-- raw HTML omitted -->は, 必ずしも真ではありません. すなわち, 無相関であっても, その積の期待値が, それぞれの PDF の積として定義できるはかぎらないということです.</p>
+<p><b>独立であれば無相関でもあります</b>. その<b>逆</b>は, 必ずしも真ではありません. すなわち, 無相関であっても, その積の期待値が, それぞれの PDF の積として定義できるはかぎらないということです.</p>
 <h2 id="独立と無相関のちがい">独立と無相関のちがい</h2>
 <p><img src="https://user-images.githubusercontent.com/4006693/68540983-29abc480-03dd-11ea-9ae7-cb3f8809ee54.png" alt="無相関"></p>
 <p>無相関の場合, $x_{1}$ と $x_{2}$ のいずれかが正か負の大きな値をとる場合, 他方は小さな値しか撮りません. このように, 一方の実現値が他方の実現値に影響をあたえているので, 2 つの確率信号は独立ではありません.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/68543656-7a331a00-03fd-11ea-900f-7cb55a109541.png" alt="独立"></p>
 <p>独立の場合, $x_{1}$ と $x_{2}$ のいずれかが正か負の大きな値をとる場合, 他方は影響をうけていません. このように, 一方の実現値が他方の実現値に影響をあたえていないので, 2 つの確率信号は独立となります.</p>
 <h2 id="定常と非定常">定常と非定常</h2>
-<p>ある確率信号の統計的性質が, 時刻 $n$ とともに変化しない場合, その確率信号は, <!-- raw HTML omitted -->定常<!-- raw HTML omitted --> (Stationary) と呼びます. 定常はさらに, 2 つの状態, <!-- raw HTML omitted -->弱定常<!-- raw HTML omitted --> (Wide Sense Stationary) と<!-- raw HTML omitted -->強定常<!-- raw HTML omitted --> (Strictly Sense Stationary) に分類されます.</p>
+<p>ある確率信号の統計的性質が, 時刻 $n$ とともに変化しない場合, その確率信号は, <b>定常</b> (Stationary) と呼びます. 定常はさらに, 2 つの状態, <b>弱定常</b> (Wide Sense Stationary) と<b>強定常</b> (Strictly Sense Stationary) に分類されます.</p>
 <p>$
 \begin{eqnarray}
 E\left[x(n)\right]=\mu
@@ -527,10 +527,10 @@ p\left(x\left(n_{1}\right),x\left(n_{2}\right),{\cdots},x\left(n_{M}\right)\righ
 \end{eqnarray}
 $</p>
 <p>上記の式のように, 時間によって変化しない場合は, 強定常と呼ばれます.</p>
-<p>確率信号の統計的性質が時間的に変化する場合は, <!-- raw HTML omitted -->非定常<!-- raw HTML omitted --> (Non-stationary) と呼びます.</p>
+<p>確率信号の統計的性質が時間的に変化する場合は, <b>非定常</b> (Non-stationary) と呼びます.</p>
 <h2 id="中心極限定理">中心極限定理</h2>
-<p>互いに独立で, 同一の確率分布にしたがう複数の確率信号を <!-- raw HTML omitted -->i.i.d<!-- raw HTML omitted --> (Independent Identically Distributed) な確率信号と呼びます.</p>
-<p>そのような確率信号の場合, <!-- raw HTML omitted -->中心極限定理<!-- raw HTML omitted --> (Central Limit Theorem) が成立します.</p>
+<p>互いに独立で, 同一の確率分布にしたがう複数の確率信号を <b>i.i.d</b> (Independent Identically Distributed) な確率信号と呼びます.</p>
+<p>そのような確率信号の場合, <b>中心極限定理</b> (Central Limit Theorem) が成立します.</p>
 <p>平均 $\mu$, 分散 $\delta^{2}$ の i.i.d. な確率信号 $x_{1},x_{2},\cdots$に対して, それらの和としてあたえられる確率信号は,</p>
 <p>$
 \begin{eqnarray}
@@ -1363,7 +1363,7 @@ $</p>
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>

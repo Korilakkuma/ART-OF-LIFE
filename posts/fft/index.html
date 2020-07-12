@@ -32,7 +32,7 @@
 <meta itemprop="description" content="高速フーリエ変換 (FFT: Fast Fourier Transform) の実装を理解する">
 <meta itemprop="datePublished" content="2019-09-22T17:02:42&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-22T17:02:42&#43;09:00" />
-<meta itemprop="wordCount" content="3078">
+<meta itemprop="wordCount" content="3086">
 
 
 
@@ -269,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-22 17:02:42 &#43;0900 JST" itemprop="datePublished">2019-09-22</time>
             &middot;
-            3078
+            3086
             words
             &middot;
             7
@@ -319,7 +319,7 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            <p><!-- raw HTML omitted -->高速フーリエ変換<!-- raw HTML omitted --> (<!-- raw HTML omitted -->FFT<!-- raw HTML omitted --> : Fast Fourier Transform) とは, 離散フーリエ変換のサイズが <!-- raw HTML omitted -->2 のべき乗<!-- raw HTML omitted -->の場合に, 高速に計算できるアルゴリズムのことです.</p>
+            <p><b>高速フーリエ変換</b> (<b>FFT</b> : Fast Fourier Transform) とは, 離散フーリエ変換のサイズが <b>2 のべき乗</b>の場合に, 高速に計算できるアルゴリズムのことです.</p>
 <h2 id="アルゴリズムの導出">アルゴリズムの導出</h2>
 <p>離散フーリエ変換のサイズ ($N$) が 8 の場合を例に導出します.</p>
 <p>$
@@ -437,7 +437,7 @@ W^{0}_{8} &amp; W^{7}_{8} &amp; W^{14}_{8} &amp; W^{21}_{8} &amp; W^{4}_{8} &amp
 \right]x(n)
 \end{eqnarray}
 $</p>
-<p>すると, 行列の列の中央を境目に, <!-- raw HTML omitted -->偶数のインデックスの行は左右の周期が対称に<!-- raw HTML omitted -->, <!-- raw HTML omitted -->奇数のインデックスの行は半周期<!-- raw HTML omitted --> ($N=8$ なので 4 ずつずれている) ことがわかります.</p>
+<p>すると, 行列の列の中央を境目に, <b>偶数のインデックスの行は左右の周期が対称に</b>, <b>奇数のインデックスの行は半周期</b> ($N=8$ なので 4 ずつずれている) ことがわかります.</p>
 <p>そこで, 以下の関係を考慮します.</p>
 <p>$
 \begin{eqnarray}
@@ -541,8 +541,8 @@ W^{0}_{4} &amp; W^{3}_{4} &amp; W^{6}_{4} &amp; W^{9}_{4} &amp;          0 &amp;
 \right]x_{1}(n)
 \end{eqnarray}
 $</p>
-<p>この行列は, <!-- raw HTML omitted -->離散フーリエ変換のサイズを $N=4$ に減らして高速化できることを意味します<!-- raw HTML omitted -->.</p>
-<p>さらに, この行列をみると, <!-- raw HTML omitted -->再帰的な構造<!-- raw HTML omitted -->があることがわかるので, 同様の手順で行列を書き換えます.</p>
+<p>この行列は, <b>離散フーリエ変換のサイズを $N=4$ に減らして高速化できることを意味します</b>.</p>
+<p>さらに, この行列をみると, <b>再帰的な構造</b>があることがわかるので, 同様の手順で行列を書き換えます.</p>
 <p>$
 \begin{eqnarray}
 X(k)=\left[
@@ -624,14 +624,29 @@ x_{2}(6)+x_{2}(7) \\\<br>
 \right]
 \end{eqnarray}
 $</p>
-<p>この行列は, <!-- raw HTML omitted -->離散フーリエ変換のサイズを $N=2$ に減らして高速化できることを意味します<!-- raw HTML omitted -->.</p>
+<p>この行列は, <b>離散フーリエ変換のサイズを $N=2$ に減らして高速化できることを意味します</b>.</p>
 <h2 id="ビットリバース">ビットリバース</h2>
 <p>高速フーリエ変換のアルゴリズム導出のさいに, 行列の列を並び替えているので, $X(k)$ のインデックスを昇順に並び替える必要があります.</p>
 <p>並び替えるまえと並び替えたあとのインデックスには, 以下の関係があります.</p>
-<!-- raw HTML omitted -->
-<p>上記のテーブルより, 並び替えるまえのインデックスを 2 進数に変換し, そのビットをの並びを逆にして, 10 進数に変換したインデックスが並び替えたあとのインデックスということです. このアルゴリズムは, <!-- raw HTML omitted -->ビットリバース<!-- raw HTML omitted -->と呼ばれています.</p>
+<table>
+  <caption>ビットリバース</caption>
+  <thead>
+    <tr><th scope="col">$x(n)$</th><th scope="col">a</th><th scope="col">b</th><th scope="col">$X(k)$</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>000</td><td>000</td><td>0</td></tr>
+    <tr><td>1</td><td>001</td><td>100</td><td>4</td></tr>
+    <tr><td>2</td><td>010</td><td>010</td><td>2</td></tr>
+    <tr><td>3</td><td>011</td><td>110</td><td>6</td></tr>
+    <tr><td>4</td><td>100</td><td>001</td><td>1</td></tr>
+    <tr><td>5</td><td>101</td><td>101</td><td>5</td></tr>
+    <tr><td>6</td><td>110</td><td>011</td><td>3</td></tr>
+    <tr><td>7</td><td>111</td><td>111</td><td>7</td></tr>
+  </tbody>
+</table>
+<p>上記のテーブルより, 並び替えるまえのインデックスを 2 進数に変換し, そのビットをの並びを逆にして, 10 進数に変換したインデックスが並び替えたあとのインデックスということです. このアルゴリズムは, <b>ビットリバース</b>と呼ばれています.</p>
 <h2 id="計算量">計算量</h2>
-<p>行列の書き換え過程をダイアグラムにしたのが以下の図で, <!-- raw HTML omitted -->バタフライ計算<!-- raw HTML omitted -->と呼ばれています.</p>
+<p>行列の書き換え過程をダイアグラムにしたのが以下の図で, <b>バタフライ計算</b>と呼ばれています.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/66152511-8f759580-e654-11e9-912e-0e8e61be7fd0.png" alt="FFT (バタフライ計算)"></p>
 <p>離散フーリエ変換のサイズが $N$ の高速フーリエ変換は, $\log_{2}N$ 段で計算できます. このとき, 最後の段以外は $N/2$ 回の乗算と $N$ 回の加算, 最後の段は $N$ 回の加算となるので, 高速フーリエ変換のオーダーは, $N\log_{2}N$ となります. 離散フーリエ変換のオーダーが $N^{2}$ であることを考えると, $N$ が大きいほど, 高速フーリエ変換はより有効であると言えます.</p>
 <h2 id="実装">実装</h2>
@@ -1592,7 +1607,7 @@ $</p>
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>

@@ -32,7 +32,7 @@
 <meta itemprop="description" content="Windows Subsystem for Linux による Windows 開発環境構築">
 <meta itemprop="datePublished" content="2019-06-28T17:27:34&#43;09:00" />
 <meta itemprop="dateModified" content="2019-06-28T17:27:34&#43;09:00" />
-<meta itemprop="wordCount" content="1755">
+<meta itemprop="wordCount" content="1817">
 
 
 
@@ -269,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-06-28 17:27:34 &#43;0900 JST" itemprop="datePublished">2019-06-28</time>
             &middot;
-            1755
+            1817
             words
             &middot;
             4
@@ -319,15 +319,35 @@
 <p>諸事情でしばらく Mac が使えなくなったので, しぶしぶ Windows でしばらく開発することにしました.
 ハードウェア・OS は以下のとおりです.</p>
 <h2 id="ideapad-710s-plus---13lsk">ideapad 710S Plus - 13lSK</h2>
-<!-- raw HTML omitted -->
+<dl>
+  <dt>プロセッサ</dt>
+  <dd>Intel(R) Core(TM) i3-6100U CPU @ 2.30 GHz</dd>
+  <dt>RAM</dt>
+  <dd>4.00 GB</dd>
+  <dt>OS</dt>
+  <dd>Windows 10 Home</dd>
+</dl>
 <p>もともとは, 2017 年の末に母親へのクリスマスプレゼントとして購入した PC でしたが, フラットデザインが気に入らなかったのか放置されていたので使うことにしました.</p>
 <h1 id="windows-subsystem-for-linux-wsl-とは-">Windows Subsystem for Linux (WSL) とは ?</h1>
-<p>これまで, Windows で UNIX ライクな開発環境を導入するには, MinGW や Cygwin を導入するのが一般的でした. しかし, これらのツールは, <!-- raw HTML omitted -->Linux 環境のプログラムの動作や互換性<!-- raw HTML omitted -->に問題がありました. もう少し簡単に表現すると, Linux コマンドを似た役割の Windows コマンドに置き換えて実行する (例えば, <code>ls</code> であれば <code>dir</code>) ので, 利用可能なコマンドを簡単に増やせないという欠点がありました. また, VirtualBox などの仮想環境では, Windows と連携できない, さらに, リソース (CPU やメモリ) を余分に消費してしまいます.</p>
+<p>これまで, Windows で UNIX ライクな開発環境を導入するには, MinGW や Cygwin を導入するのが一般的でした. しかし, これらのツールは, <b>Linux 環境のプログラムの動作や互換性</b>に問題がありました. もう少し簡単に表現すると, Linux コマンドを似た役割の Windows コマンドに置き換えて実行する (例えば, <code>ls</code> であれば <code>dir</code>) ので, 利用可能なコマンドを簡単に増やせないという欠点がありました. また, VirtualBox などの仮想環境では, Windows と連携できない, さらに, リソース (CPU やメモリ) を余分に消費してしまいます.</p>
 <p>Windows Subsystem for Linux (WSL) はこれらのデメリットを解決するツールで, Linux のバイナリ実行ファイルを Windows 10 でネイティブ実行するための互換レイヤー (エミュレータ) です. つまり, macOS のコンソールのようなものを, Windows 10 でも利用可能になるということです.</p>
-<!-- raw HTML omitted -->
+<table>
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">MinGW</th>
+      <th scope="col">Cygwin</th>
+      <th scope="col">仮想化</th>
+      <th scope="col">WSL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">Windows 環境との親和性, Windows アプリとの連携</th><td>〇</td><td>〇</td><td>X</td><td>〇</td></tr>
+    <tr><th scope="row">実行速度・メモリ使用効率</th><td>〇</td><td>〇</td><td>X</td><td>〇</td></tr>
 <pre><code>&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;Linux 環境プログラムの動作・互換性&lt;/th&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;X&lt;/td&gt;&lt;td&gt;〇&lt;/td&gt;&lt;td&gt;〇&lt;/td&gt;&lt;/tr&gt;
 </code></pre>
-<!-- raw HTML omitted -->
+  </tbody>
+</table>
 <h1 id="インストール">インストール</h1>
 <h2 id="機能の有効化">機能の有効化</h2>
 <p>Windows で Linux Subsystem を有効化します.</p>
@@ -1214,7 +1234,7 @@ $ npm -v
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>

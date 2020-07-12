@@ -332,7 +332,7 @@
 
         <div class="article-entry" itemprop="articleBody">
             <h1 id="iir-フィルタとは-">IIR フィルタとは ?</h1>
-<p><!-- raw HTML omitted -->IIR (Infinite Impulse Response) フィルタ<!-- raw HTML omitted -->は, FIR フィルタと異なって, 現在の時刻の出力信号に対して, それよりも過去の出力信号がフィードバックされます. したがって, インパルス応答が無限に続きます.</p>
+<p><b>IIR (Infinite Impulse Response) フィルタ</b>は, FIR フィルタと異なって, 現在の時刻の出力信号に対して, それよりも過去の出力信号がフィードバックされます. したがって, インパルス応答が無限に続きます.</p>
 <p>$
 \begin{eqnarray}
 y(n)=-\sum_{m=1}^{I}a(m)y(n-m)+\sum_{m=0}^{J}b(m)x(n-m)
@@ -384,8 +384,8 @@ $</p>
 H(s)&amp;=&amp;\frac{4{\pi}^{2}f_{c}^{2}}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-<p>ここで, $f_{c}$ は, <!-- raw HTML omitted -->遮断周波数<!-- raw HTML omitted --> (または, <!-- raw HTML omitted -->カットオフ周波数<!-- raw HTML omitted -->) と呼ばれ, 通過域と阻止域の境界を表します. $Q$ は, <!-- raw HTML omitted -->クオリティファクタ<!-- raw HTML omitted -->と呼ばれ, 遮断周波数における増幅率を表します (一般的に, 遮断周波数は, 増幅率が $\frac{1}{\sqrt{2}}$ となる周波数として定義されるので, $Q$ は $\frac{1}{\sqrt{2}}$ となります.</p>
-<p>ところで, 上記の伝達関数は $s$ を変数として定義されています. $s$ を $z$ におきかえて, アナログフィルタの伝達関数を IIR フィルタの伝達関数に変換する方法として利用される 1 つの方法が, <!-- raw HTML omitted -->双 1 次変換法<!-- raw HTML omitted -->です. (<!-- raw HTML omitted -->s - z 変換<!-- raw HTML omitted -->とも呼ばれます. 数学的観点で簡単に解説すると, アナログ信号 $x(t)$ を<!-- raw HTML omitted -->ラプラス変換<!-- raw HTML omitted -->した信号を $X(s)$ とし, デジタル信号 $x(n)$ を Z 変換した信号を $X(z)$ とすると, $X(s)$ から $X(z)$ に変換するための処理です).</p>
+<p>ここで, $f_{c}$ は, <b>遮断周波数</b> (または, <b>カットオフ周波数</b>) と呼ばれ, 通過域と阻止域の境界を表します. $Q$ は, <b>クオリティファクタ</b>と呼ばれ, 遮断周波数における増幅率を表します (一般的に, 遮断周波数は, 増幅率が $\frac{1}{\sqrt{2}}$ となる周波数として定義されるので, $Q$ は $\frac{1}{\sqrt{2}}$ となります.</p>
+<p>ところで, 上記の伝達関数は $s$ を変数として定義されています. $s$ を $z$ におきかえて, アナログフィルタの伝達関数を IIR フィルタの伝達関数に変換する方法として利用される 1 つの方法が, <b>双 1 次変換法</b>です. (<b>s - z 変換</b>とも呼ばれます. 数学的観点で簡単に解説すると, アナログ信号 $x(t)$ を<b>ラプラス変換</b>した信号を $X(s)$ とし, デジタル信号 $x(n)$ を Z 変換した信号を $X(z)$ とすると, $X(s)$ から $X(z)$ に変換するための処理です).</p>
 <p>$
 \begin{eqnarray}
 s=\frac{1-z^{-1}}{1+z^{-1}}
@@ -545,7 +545,7 @@ a(2)&amp;=&amp;\frac{1-2{\pi}\left(f_{c2}-f_{c1}\right)+4{\pi}^{2}f_{c1}f_{c2}}{
 \end{eqnarray}
 $</p>
 <h2 id="共振フィルタとノッチフィルタ">共振フィルタとノッチフィルタ</h2>
-<p>BPF と BEF に関しては, それぞれ, <!-- raw HTML omitted -->共振フィルタ<!-- raw HTML omitted -->と<!-- raw HTML omitted -->ノッチフィルタ<!-- raw HTML omitted -->と呼ばれる定義があります. これらのフィルタでは, $f_{c}$ と $Q$ を以下のように定義します.</p>
+<p>BPF と BEF に関しては, それぞれ, <b>共振フィルタ</b>と<b>ノッチフィルタ</b>と呼ばれる定義があります. これらのフィルタでは, $f_{c}$ と $Q$ を以下のように定義します.</p>
 <p>$
 \begin{eqnarray}
 \frac{f_{c}}{Q}=f_{c2}-f_{c1}
@@ -556,7 +556,7 @@ $</p>
 f_{c}^{2}=f_{c1}f_{c2}
 \end{eqnarray}
 $</p>
-<p>このように定義した場合, $f_{c}$ は<!-- raw HTML omitted -->中心周波数<!-- raw HTML omitted -->と呼ばれ, $Q$ によって帯域幅を調整することが可能になります ($Q$ が大きいほど帯域幅は小さくなり, $Q$ が小さいほど帯域幅は大きくなります).</p>
+<p>このように定義した場合, $f_{c}$ は<b>中心周波数</b>と呼ばれ, $Q$ によって帯域幅を調整することが可能になります ($Q$ が大きいほど帯域幅は小さくなり, $Q$ が小さいほど帯域幅は大きくなります).</p>
 <h3 id="共振フィルタ">共振フィルタ</h3>
 <p>$
 \begin{eqnarray}
@@ -848,7 +848,7 @@ $</p>
   wave_write(<span style="color:#f92672">&amp;</span>pcm1, <span style="color:#e6db74">&#34;iir_frame_filter.wav&#34;</span>);
 }
 </code></pre></div><h1 id="イコライザ">イコライザ</h1>
-<p><!-- raw HTML omitted -->イコライザ<!-- raw HTML omitted -->は, 周波数特性を加工して, 好みの音色をつくりだすためのエフェクターです. イコライザは, 低域の周波数成分を強調する<!-- raw HTML omitted -->ローシェルビングフィルタ<!-- raw HTML omitted -->, 高域の周波数成分を強調する<!-- raw HTML omitted -->ハイシェルビングフィルタ<!-- raw HTML omitted -->, 特定の周波数帯域を強調する<!-- raw HTML omitted -->ピーキングフィルタ<!-- raw HTML omitted -->の 3 種類のフィルタによって構成されます.</p>
+<p><b>イコライザ</b>は, 周波数特性を加工して, 好みの音色をつくりだすためのエフェクターです. イコライザは, 低域の周波数成分を強調する<b>ローシェルビングフィルタ</b>, 高域の周波数成分を強調する<b>ハイシェルビングフィルタ</b>, 特定の周波数帯域を強調する<b>ピーキングフィルタ</b>の 3 種類のフィルタによって構成されます.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/66130390-a0121580-e62c-11e9-9ae6-ad5e3c6e7d53.png" alt="ローシェルビングフィルタ, ハイシェルビングフィルタ, ピーキングフィルタ"></p>
 <h2 id="ローシェルビングフィルタ">ローシェルビングフィルタ</h2>
 <p>$
@@ -958,8 +958,8 @@ $</p>
 a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-<p>これらのフィルタには, $g$ という所定の帯域の増幅率を設定できるパラメータ (一般的に, <!-- raw HTML omitted -->ゲイン<!-- raw HTML omitted -->と呼ばれています) があります. ローシェルビングフィルタ, および, ハイシェルビングフィルタでは, $Q$ を $\frac{1}{\sqrt{2}}$ に設定することが一般的です. ピーキングフィルタでは, $Q$ によって帯域幅を調整することが可能です($Q$ が大きいほど帯域幅は小さくなり, $Q$ が小さいほど帯域幅は大きくなります).</p>
-<p>いずれのフィルタでも, 帯域を減衰させる (<!-- raw HTML omitted -->カット<!-- raw HTML omitted -->と呼びます) のは, $-1 \leqq g &lt; 0$ の範囲に設定します. 一方で, 帯域を増幅させる (<!-- raw HTML omitted -->ブースト<!-- raw HTML omitted -->と呼びます) には, $0 &lt; g$ に設定します.</p>
+<p>これらのフィルタには, $g$ という所定の帯域の増幅率を設定できるパラメータ (一般的に, <b>ゲイン</b>と呼ばれています) があります. ローシェルビングフィルタ, および, ハイシェルビングフィルタでは, $Q$ を $\frac{1}{\sqrt{2}}$ に設定することが一般的です. ピーキングフィルタでは, $Q$ によって帯域幅を調整することが可能です($Q$ が大きいほど帯域幅は小さくなり, $Q$ が小さいほど帯域幅は大きくなります).</p>
+<p>いずれのフィルタでも, 帯域を減衰させる (<b>カット</b>と呼びます) のは, $-1 \leqq g &lt; 0$ の範囲に設定します. 一方で, 帯域を増幅させる (<b>ブースト</b>と呼びます) には, $0 &lt; g$ に設定します.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/66130511-c59f1f00-e62c-11e9-88e6-4c839ac7e0cc.png" alt="3 バンドイコライザ"></p>
 <h2 id="実装-2">実装</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
@@ -1941,7 +1941,7 @@ $</p>
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>

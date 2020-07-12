@@ -32,7 +32,7 @@
 <meta itemprop="description" content="フーリエ変換・離散フーリエ変換・変形離散コサイン変換">
 <meta itemprop="datePublished" content="2019-09-21T17:27:49&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-21T17:27:49&#43;09:00" />
-<meta itemprop="wordCount" content="2743">
+<meta itemprop="wordCount" content="2720">
 
 
 
@@ -269,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-21 17:27:49 &#43;0900 JST" itemprop="datePublished">2019-09-21</time>
             &middot;
-            2743
+            2720
             words
             &middot;
             6
@@ -332,9 +332,9 @@
 
         <div class="article-entry" itemprop="articleBody">
             <h1 id="フーリエ変換">フーリエ変換</h1>
-<p>周波数という視点 (ドメイン) から, 音や光の特徴を調べる方法が<!-- raw HTML omitted -->フーリエ変換<!-- raw HTML omitted -->です. 音の場合であれば, 基本周波数と倍音の比率などを分析することができます.</p>
+<p>周波数という視点 (ドメイン) から, 音や光の特徴を調べる方法が<b>フーリエ変換</b>です. 音の場合であれば, 基本周波数と倍音の比率などを分析することができます.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/63822772-69d9da00-c98c-11e9-9870-ce3c5805cf24.gif" alt="フーリエ変換"></p>
-<p>フーリエ変換は, $-\infty$ ~ $\infty$ の時刻まで観測したアナログ信号の周波数特性を調べるための数学的処理で, フーリエ変換と, その逆変換である, <!-- raw HTML omitted -->逆フーリエ変換<!-- raw HTML omitted -->は以下のように定義されています.</p>
+<p>フーリエ変換は, $-\infty$ ~ $\infty$ の時刻まで観測したアナログ信号の周波数特性を調べるための数学的処理で, フーリエ変換と, その逆変換である, <b>逆フーリエ変換</b>は以下のように定義されています.</p>
 <p>$
 \begin{eqnarray}
 X(f)=\int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt \quad (-\infty \leqq f \leqq \infty)
@@ -347,7 +347,7 @@ x(t)=\int_{-\infty}^{\infty}X(t)\exp(j2{\pi}ft)df \quad (-\infty \leqq t \leqq \
 $</p>
 <p>$x(t)$ は, 時間 $t$ を変数とするアナログ信号, $X(f)$ は周波数 $f$ を変数とする $x(t)$ の周波数特性を表しています.</p>
 <h1 id="離散フーリエ変換">離散フーリエ変換</h1>
-<p>アナログ信号のフーリエ変換では, 無限の長さの連続信号となりますが, コンピュータでは<!-- raw HTML omitted -->無限大<!-- raw HTML omitted -->や<!-- raw HTML omitted -->連続<!-- raw HTML omitted -->した信号をあつかうことができません. したがって, コンピュータでフーリエ変換を実装する場合には, <!-- raw HTML omitted -->離散フーリエ変換<!-- raw HTML omitted --> (<!-- raw HTML omitted -->DFT<!-- raw HTML omitted --> : Discrete Fourier Transform) と, その逆変換である<!-- raw HTML omitted -->逆離散フーリエ変換<!-- raw HTML omitted --> (<!-- raw HTML omitted -->IDFT<!-- raw HTML omitted --> : Inverse Discrete Fourier Transform) を利用します.</p>
+<p>アナログ信号のフーリエ変換では, 無限の長さの連続信号となりますが, コンピュータでは<b>無限大</b>や<b>連続</b>した信号をあつかうことができません. したがって, コンピュータでフーリエ変換を実装する場合には, <b>離散フーリエ変換</b> (<b>DFT</b> : Discrete Fourier Transform) と, その逆変換である<b>逆離散フーリエ変換</b> (<b>IDFT</b> : Inverse Discrete Fourier Transform) を利用します.</p>
 <p>$
 \begin{eqnarray}
 t=nt_{s} \quad (1 \leqq n \leqq N-1)
@@ -401,14 +401,14 @@ $</p>
 x(n)=\frac{1}{N}\sum_{n=0}^{N-1}A(k)\cos\left(\frac{2{\pi}kn}{N}+\theta(k)\right) \quad (0 \leqq n \leqq N - 1)
 \end{eqnarray}
 $</p>
-<p>この式は, $N$ 個の $\cos$ 波の重ねあわせによって $x(n)$ を合成できることを表しています. したがって, 離散フーリエ変換によって計算される周波数特性 (スペクトル) は, $\cos$ 波の振幅と位相の情報です ($A(k)$ は, <!-- raw HTML omitted -->振幅スペクトル<!-- raw HTML omitted -->, $\theta(k)$は, <!-- raw HTML omitted -->位相スペクトル<!-- raw HTML omitted --> です).</p>
-<p>周波数特性は, $k=\frac{N}{2}$ を中心に, <!-- raw HTML omitted -->振幅スペクトルは線対称<!-- raw HTML omitted -->, <!-- raw HTML omitted -->位相スペクトルは点対称<!-- raw HTML omitted -->になります. さらに, $k=\frac{N}{2}$ は, $\frac{f_{s}}{2}$, つまり, サンプリング周波数の $\frac{1}{2}$ に対応し, <!-- raw HTML omitted -->サンプリング定理<!-- raw HTML omitted -->にも関係しています.</p>
-<p>人間の聴覚は, <!-- raw HTML omitted -->位相の違いに鈍感<!-- raw HTML omitted --> なので, 音の周波数特性といえば振幅スペクトルを意味していることがほとんどです (ただし, ホワイトノイズとインパルス音のように位相の違いを分析する必要がある場合もあります).</p>
+<p>この式は, $N$ 個の $\cos$ 波の重ねあわせによって $x(n)$ を合成できることを表しています. したがって, 離散フーリエ変換によって計算される周波数特性 (スペクトル) は, $\cos$ 波の振幅と位相の情報です ($A(k)$ は, <b>振幅スペクトル</b>, $\theta(k)$は, <b>位相スペクトル</b> です).</p>
+<p>周波数特性は, $k=\frac{N}{2}$ を中心に, <b>振幅スペクトルは線対称</b>, <b>位相スペクトルは点対称</b>になります. さらに, $k=\frac{N}{2}$ は, $\frac{f_{s}}{2}$, つまり, サンプリング周波数の $\frac{1}{2}$ に対応し, <b>サンプリング定理</b>にも関係しています.</p>
+<p>人間の聴覚は, <b>位相の違いに鈍感</b> なので, 音の周波数特性といえば振幅スペクトルを意味していることがほとんどです (ただし, ホワイトノイズとインパルス音のように位相の違いを分析する必要がある場合もあります).</p>
 <h2 id="窓関数">窓関数</h2>
 <p>離散フーリエ変換では, $x(n)$, $x(k)$ が, 離散フーリエ変換のサイズ $N$ の周期信号という前提があります. つまり, $N$ が $sin$ 波の整数倍となっていれば, 離散フーリエ変換によって求められる周波数特性は, 基本周波数をのみを含んだものになります.</p>
 <p>ところが, そうでない場合, 実際の音にはない周波数成分が含まれてしまいます.</p>
-<p>この問題を緩和するのが, <!-- raw HTML omitted -->窓関数<!-- raw HTML omitted -->です. 窓関数を乗算することで, 端部の不連続点をあいまいにすることができ, 周波数成分の広がりをある程度おさえることができます.</p>
-<p>窓関数にはいくつか種類がありますが, 代表的な窓関数として, <!-- raw HTML omitted -->ハニング窓<!-- raw HTML omitted -->があり, 以下のように定義されています(ほかには, ブラックマン窓などがあります).</p>
+<p>この問題を緩和するのが, <b>窓関数</b>です. 窓関数を乗算することで, 端部の不連続点をあいまいにすることができ, 周波数成分の広がりをある程度おさえることができます.</p>
+<p>窓関数にはいくつか種類がありますが, 代表的な窓関数として, <b>ハニング窓</b>があり, 以下のように定義されています(ほかには, ブラックマン窓などがあります).</p>
 <p>($N$ が偶数の場合)</p>
 <p>$
 w(n)=\begin{cases}
@@ -537,7 +537,7 @@ $</p>
   }
 }
 </code></pre></div><h1 id="離散コサイン変換">離散コサイン変換</h1>
-<p>フーリエ変換を利用することで, 周波数解析が可能になります. しかし, フーリエ変換では, その演算結果が複素数になってしまうというデメリットがあります. 実数である時間領域の信号を実数の周波数信号に変換できれば, コンピュータで処理することが容易になります. このセクションでは, MPEG などで利用されている<!-- raw HTML omitted -->離散コサイン変換<!-- raw HTML omitted --> (Discrete Cosine Transform) について解説します.</p>
+<p>フーリエ変換を利用することで, 周波数解析が可能になります. しかし, フーリエ変換では, その演算結果が複素数になってしまうというデメリットがあります. 実数である時間領域の信号を実数の周波数信号に変換できれば, コンピュータで処理することが容易になります. このセクションでは, MPEG などで利用されている<b>離散コサイン変換</b> (Discrete Cosine Transform) について解説します.</p>
 <p>$
 \begin{eqnarray}
 X(k)=\sqrt{\frac{2}{N}}a_{K}\sum_{n=0}^{N-1}x(n)\cos\left(\frac{\left(2n+1\right)k{\pi}}{2N}\right)
@@ -569,7 +569,7 @@ a_{k}=
 $</p>
 <h1 id="変形離散コサイン変換">変形離散コサイン変換</h1>
 <p>離散コサイン変換では, $N$ 個ずつデータを取得して, 周波数変換, 信号処理, そして, 逆変換を実行します. しかしながら, それでは, データのまとまりに不連続な点が発生してしまいます.</p>
-<p>そこで, 信号を窓関数を利用してオーバラップ (隣接するデータのまとまりを重ねて連結していく処理) をしながら, 信号を取得して, 周波数解析をする処理として, <!-- raw HTML omitted -->変形離散コサイン変換<!-- raw HTML omitted --> (<!-- raw HTML omitted -->修正離散コサイン変換<!-- raw HTML omitted --> (Modified Discrete Cosine Transform)) が利用されます.</p>
+<p>そこで, 信号を窓関数を利用してオーバラップ (隣接するデータのまとまりを重ねて連結していく処理) をしながら, 信号を取得して, 周波数解析をする処理として, <b>変形離散コサイン変換</b> (<b>修正離散コサイン変換</b> (Modified Discrete Cosine Transform)) が利用されます.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/67263894-640ff900-f4e4-11e9-91a7-ce280737e1e0.png" alt="オーバーラップ (赤い矩形の重なった部分がオーバーラップしている部分"></p>
 <p>$
 \begin{eqnarray}
@@ -665,7 +665,7 @@ $</p>
     std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[&#34;</span> <span style="color:#f92672">&lt;&lt;</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;]&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x[n] <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
   }
 }
-</code></pre></div><p>注意点としては, MDCT / IMDCT を実行するまえに, 窓関数をかける必要があります. 上記の例では, MP3 などで利用される, <!-- raw HTML omitted -->サイン窓<!-- raw HTML omitted -->を利用しています.</p>
+</code></pre></div><p>注意点としては, MDCT / IMDCT を実行するまえに, 窓関数をかける必要があります. 上記の例では, MP3 などで利用される, <b>サイン窓</b>を利用しています.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
@@ -1500,7 +1500,7 @@ $</p>
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>

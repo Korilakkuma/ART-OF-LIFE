@@ -32,7 +32,7 @@
 <meta itemprop="description" content="ラプラス変換 / Z 変換の概要">
 <meta itemprop="datePublished" content="2019-10-05T18:00:22&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-05T18:00:22&#43;09:00" />
-<meta itemprop="wordCount" content="1066">
+<meta itemprop="wordCount" content="1061">
 
 
 
@@ -269,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-10-05 18:00:22 &#43;0900 JST" itemprop="datePublished">2019-10-05</time>
             &middot;
-            1066
+            1061
             words
             &middot;
             3
@@ -324,11 +324,11 @@
 
         <div class="article-entry" itemprop="articleBody">
             <h1 id="ラプラス変換">ラプラス変換</h1>
-<p><!-- raw HTML omitted -->ラプラス変換<!-- raw HTML omitted -->を数式を使わずに説明するのであれば, <!-- raw HTML omitted -->フーリエ変換の拡張<!-- raw HTML omitted -->です.</p>
-<p>実用的には, フーリエ変換が音や光の周波数特性を分析するために利用されるのに対して, ラプラス変換は, 電気回路やシステム制御などの<!-- raw HTML omitted -->過渡現象<!-- raw HTML omitted -->を扱うドメインにおいて重要な道具です.</p>
-<p>過渡現象とは, 簡単に表現すると, <!-- raw HTML omitted -->ある入力を切り替えた場合に, それに対する出力が少し遅延する現象<!-- raw HTML omitted -->のことです. 実生活にたとえると, 自転車や自動車を運転している場合, ブレーキ (入力) をかけたときに, すぐにそれが停止 (出力) することが理想ではありますが, 実際には, 遅延が発生して停止します.</p>
+<p><b>ラプラス変換</b>を数式を使わずに説明するのであれば, <b>フーリエ変換の拡張</b>です.</p>
+<p>実用的には, フーリエ変換が音や光の周波数特性を分析するために利用されるのに対して, ラプラス変換は, 電気回路やシステム制御などの<b>過渡現象</b>を扱うドメインにおいて重要な道具です.</p>
+<p>過渡現象とは, 簡単に表現すると, <b>ある入力を切り替えた場合に, それに対する出力が少し遅延する現象</b>のことです. 実生活にたとえると, 自転車や自動車を運転している場合, ブレーキ (入力) をかけたときに, すぐにそれが停止 (出力) することが理想ではありますが, 実際には, 遅延が発生して停止します.</p>
 <h2 id="ラブラス変換の定義">ラブラス変換の定義</h2>
-<p>以下のような, マイナスの時間において 0 をとるような連続信号 (<!-- raw HTML omitted -->因果信号<!-- raw HTML omitted -->) において,</p>
+<p>以下のような, マイナスの時間において 0 をとるような連続信号 (<b>因果信号</b>) において,</p>
 <p>$
 \begin{eqnarray}
 x(t)=0 \quad (t &lt; 0)
@@ -339,15 +339,15 @@ $</p>
 X(s)=\int_{0}^{\infty}x(t)\exp\left(-st\right)dt
 \end{eqnarray}
 $</p>
-<p>上記の式がラプラス変換の定義です (ただし, <!-- raw HTML omitted -->$s$ は $\delta+j\omega$ で定義される複素数<!-- raw HTML omitted -->です).</p>
-<p>$s$ によって定義される複素平面を, <!-- raw HTML omitted -->$s$ 平面<!-- raw HTML omitted -->と呼びます. ラプラス変換は, 時間領域の連続信号 $x(t)$ を <!-- raw HTML omitted -->$s$ 領域<!-- raw HTML omitted --> $X(s)$ に変換する処理ということです.</p>
+<p>上記の式がラプラス変換の定義です (ただし, <b>$s$ は $\delta+j\omega$ で定義される複素数</b>です).</p>
+<p>$s$ によって定義される複素平面を, <b>$s$ 平面</b>と呼びます. ラプラス変換は, 時間領域の連続信号 $x(t)$ を <b>$s$ 領域</b> $X(s)$ に変換する処理ということです.</p>
 <p>ところで, $x(t)$ のラブラス変換が存在するには, 右辺の積分が収束する必要があり, $x(t)$ に対して,</p>
 <p>$
 \begin{eqnarray}
 \left|x(t)\right| \leqq M\exp\left(\alpha t \right)
 \end{eqnarray}
 $</p>
-<p>を満たす $M$, $\alpha$ が存在する必要があります. この条件を翻訳すると, <!-- raw HTML omitted -->$t$ が増加しても, ある指数関数 $\exp\left(\alpha t \right)$ よりも, $x(t)$ が急速に増大しない<!-- raw HTML omitted -->ことを意味しています (具体的には, $\exp\left(t^{2}\right)$ のような信号の場合, ラプラス変換は存在しません).</p>
+<p>を満たす $M$, $\alpha$ が存在する必要があります. この条件を翻訳すると, <b>$t$ が増加しても, ある指数関数 $\exp\left(\alpha t \right)$ よりも, $x(t)$ が急速に増大しない</b>ことを意味しています (具体的には, $\exp\left(t^{2}\right)$ のような信号の場合, ラプラス変換は存在しません).</p>
 <h2 id="フーリエ変換との関係">フーリエ変換との関係</h2>
 <p>ラプラス変換は, フーリエ変換の拡張と説明しましたが, もう少し詳細を追います.</p>
 <p>実は, フーリエ変換にも存在条件があり,</p>
@@ -356,12 +356,12 @@ $</p>
 \lim_{t \to \pm{\infty}}x(t)=0
 \end{eqnarray}
 $</p>
-<p>が成立する必要があります. そして, この条件は, ラプラス変換の存在条件よりもより制限のきびしい条件になります. この条件を, ラプラス変換において翻訳すると, フーリエ変換は, <!-- raw HTML omitted -->$s$ 平面の虚軸 (周波数軸) におけるラプラス変換<!-- raw HTML omitted -->という意味になります.</p>
+<p>が成立する必要があります. そして, この条件は, ラプラス変換の存在条件よりもより制限のきびしい条件になります. この条件を, ラプラス変換において翻訳すると, フーリエ変換は, <b>$s$ 平面の虚軸 (周波数軸) におけるラプラス変換</b>という意味になります.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/66258366-5fa6c900-e7df-11e9-838f-401717a5debd.png" alt="$s$ 平面とフーリエ変換"></p>
 <p>また, フーリエ変換においては, 変換領域が周波数という物理的に明確な意味がありますが, ラブラス変換の変換領域 ($s$ 平面) には物理的に明確な意味はありません.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/66257803-77c71a00-e7d8-11e9-8ae4-605e940511ee.png" alt="ラプラス変換とフーリエ変換"></p>
 <h1 id="z-変換">Z 変換</h1>
-<p><!-- raw HTML omitted -->Z 変換<!-- raw HTML omitted -->を数式を使わずに説明するのであれば, <!-- raw HTML omitted -->離散フーリエ変換の拡張<!-- raw HTML omitted -->です. 離散信号に対するラプラス変換を Z 変換と呼んでいるだけなので, 本質的にはラプラス変換と同じです.</p>
+<p><b>Z 変換</b>を数式を使わずに説明するのであれば, <b>離散フーリエ変換の拡張</b>です. 離散信号に対するラプラス変換を Z 変換と呼んでいるだけなので, 本質的にはラプラス変換と同じです.</p>
 <p>$
 \begin{eqnarray}
 X(z)=\sum_{n=-\infty}^{\infty}x(n)z^{-n}
@@ -1195,7 +1195,7 @@ $</p>
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>

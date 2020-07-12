@@ -32,7 +32,7 @@
 <meta itemprop="description" content="FIR Filter の概要">
 <meta itemprop="datePublished" content="2019-09-28T17:02:03&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-28T17:02:03&#43;09:00" />
-<meta itemprop="wordCount" content="4251">
+<meta itemprop="wordCount" content="4255">
 
 
 
@@ -269,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-28 17:02:03 &#43;0900 JST" itemprop="datePublished">2019-09-28</time>
             &middot;
-            4251
+            4255
             words
             &middot;
             9
@@ -332,9 +332,9 @@
 
         <div class="article-entry" itemprop="articleBody">
             <h1 id="fir-フィルタとは-">FIR フィルタとは ?</h1>
-<p>デジタルフィルタは, <!-- raw HTML omitted -->乗算器<!-- raw HTML omitted -->, <!-- raw HTML omitted -->加算器<!-- raw HTML omitted -->, <!-- raw HTML omitted -->遅延器<!-- raw HTML omitted -->で構成されています. これらの構成によって, <!-- raw HTML omitted -->FIR (Finite Impulse Response) フィルタ<!-- raw HTML omitted -->と, <!-- raw HTML omitted -->IIR (Infinite Impulse Response) フィルタ<!-- raw HTML omitted -->の 2 種類に分類できます.</p>
+<p>デジタルフィルタは, <b>乗算器</b>, <b>加算器</b>, <b>遅延器</b>で構成されています. これらの構成によって, <b>FIR (Finite Impulse Response) フィルタ</b>と, <b>IIR (Infinite Impulse Response) フィルタ</b>の 2 種類に分類できます.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/65827477-74113000-e2cc-11e9-9df2-920f834bd8e5.png" alt="デジタルフィルタの構成 (FIR フィルタの例)"></p>
-<p>FIR フィルタの定義は以下のようになります. この式は, <!-- raw HTML omitted -->コンボリューション<!-- raw HTML omitted --> (<!-- raw HTML omitted -->畳み込み<!-- raw HTML omitted -->) と呼ばれる計算の定義です.</p>
+<p>FIR フィルタの定義は以下のようになります. この式は, <b>コンボリューション</b> (<b>畳み込み</b>) と呼ばれる計算の定義です.</p>
 <p>$
 \begin{eqnarray}
 y(n)=\sum_{m=0}^{J}b(m)x(n-m)
@@ -343,7 +343,7 @@ $</p>
 <p>$x(n)$ は入力信号, $y(n)$ は出力信号, $b(m)$ は乗算器のフィルタ係数, $J$ は遅延器の数を表しています ($m=0$ から開始しているので, フィルタ係数の数は $J+1$ となります).</p>
 <p>遅延器とは, デジタル信号を 1 サンプルだけ格納することができるメモリです. 音データを遅延器に入力すると, 遅延器に 1 時刻の間だけ蓄積されたあと次の時刻に出力されます. 過去の音データをどのくらい記憶できるかは, 遅延器の数によって決定されます. 例えば, サンプリング周波数 44.1 kHz の場合, 1 秒間の音データを記憶するのには, 44100 個の遅延器が必要になります.</p>
 <h1 id="z-変換">Z 変換</h1>
-<p>フィルタの特性というのは, <!-- raw HTML omitted -->Z 変換<!-- raw HTML omitted --> によって分析することが可能です.</p>
+<p>フィルタの特性というのは, <b>Z 変換</b> によって分析することが可能です.</p>
 <p>$x(n)$ と $y(n)$ の Z 変換は, 以下のように定義されます.</p>
 <p>$
 \begin{eqnarray}
@@ -389,7 +389,7 @@ $</p>
 <p>となるので, FIR フィルタの Z 変換は以下のように定義できます.</p>
 <p>$Y(z)=B(z)X(z)$</p>
 <p>この式は, $z$ を変数として信号を表すと, FIR フィルタは入力信号とフィルタ係数の乗算によって出力信号が生成できることを意味します.</p>
-<p>また, 入力信号と出力信号の比を<!-- raw HTML omitted -->伝達関数<!-- raw HTML omitted -->と呼び, FIR フィルタの伝達関数は以下のように定義できます.</p>
+<p>また, 入力信号と出力信号の比を<b>伝達関数</b>と呼び, FIR フィルタの伝達関数は以下のように定義できます.</p>
 <p>$
 \begin{eqnarray}
 H(z)=\frac{Y(z)}{X(z)}=B(z)
@@ -413,12 +413,12 @@ B(f)=\sum_{m=-\infty}^{\infty}b(m)\exp\left(-j2{\pi}fm\right)
 \end{eqnarray}
 $</p>
 <p>これらは, サンプリング周波数 $f_{s}$ を 1 に正規化したデジタル信号のフーリエ変換です.</p>
-<p>つまり, FIR フィルタは, <!-- raw HTML omitted -->時間領域では畳み込み<!-- raw HTML omitted -->, <!-- raw HTML omitted -->周波数領域では乗算<!-- raw HTML omitted -->として定義できるということです.</p>
+<p>つまり, FIR フィルタは, <b>時間領域では畳み込み</b>, <b>周波数領域では乗算</b>として定義できるということです.</p>
 <p>$Y(f)=B(f)X(f)$</p>
 <h1 id="窓関数法">窓関数法</h1>
 <p>FIR フィルタをそのまま利用するのは, フィルタの性能があまりよくありません. 周波数成分をはっきりと分離するには, フィルタの設計に工夫が必要となります.</p>
-<p>そのための 1 つの方法に, <!-- raw HTML omitted -->窓関数法<!-- raw HTML omitted -->があります. 窓関数法を適用することで, <!-- raw HTML omitted -->LPF<!-- raw HTML omitted --> (Low-Pass Filter), <!-- raw HTML omitted -->HPF<!-- raw HTML omitted --> (High-Pass Filter), <!-- raw HTML omitted -->BPF<!-- raw HTML omitted --> (Band-Pass Filter), <!-- raw HTML omitted -->BEF<!-- raw HTML omitted --> (Band-Eliminate Filter) という, 基本的なフィルタを設計することが可能になります.</p>
-<p>フィルタが通過させる帯域は, <!-- raw HTML omitted -->通過域<!-- raw HTML omitted -->, 減衰させる帯域は, <!-- raw HTML omitted -->阻止域<!-- raw HTML omitted -->と呼びます. また, $f_{e}$ は, <!-- raw HTML omitted -->エッジ周波数<!-- raw HTML omitted -->と呼ばれ, 理想的なフィルタは, この周波数を境にして, 通過域と阻止域をはっきりと分離する事ができますが, コンピュータではこのような理想フィルタを実装することはできません.</p>
+<p>そのための 1 つの方法に, <b>窓関数法</b>があります. 窓関数法を適用することで, <b>LPF</b> (Low-Pass Filter), <b>HPF</b> (High-Pass Filter), <b>BPF</b> (Band-Pass Filter), <b>BEF</b> (Band-Eliminate Filter) という, 基本的なフィルタを設計することが可能になります.</p>
+<p>フィルタが通過させる帯域は, <b>通過域</b>, 減衰させる帯域は, <b>阻止域</b>と呼びます. また, $f_{e}$ は, <b>エッジ周波数</b>と呼ばれ, 理想的なフィルタは, この周波数を境にして, 通過域と阻止域をはっきりと分離する事ができますが, コンピュータではこのような理想フィルタを実装することはできません.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/66262353-cf857580-e818-11e9-8ce5-653461d69fc8.png" alt="FIR フィルタ (LPF, HPF, BPF, BEF)"></p>
 <p>では, LPF を例にして, 窓関数法による FIR フィルタを設計してみます.</p>
 <p>理想的な LPF は, エッジ周波数より低域の周波数成分は 1, それより高域の周波数成分では 0 となるので, 理想特性は以下のように定義できます.</p>
@@ -447,10 +447,10 @@ sinc(x)=
 \end{eqnarray}
 \end{cases}
 $</p>
-<p>$sinc\left(x\right)$ は, <!-- raw HTML omitted -->シンク関数<!-- raw HTML omitted -->と呼ばれています. シンク関数は, $-\infty$ から $+\infty$ の区間で定義されているので, フィルタ係数が無限に存在します. コンピュータではこのようなフィルタをあつかえません. したがって, フィルタ係数を有限でうちきるために窓関数を利用します.</p>
+<p>$sinc\left(x\right)$ は, <b>シンク関数</b>と呼ばれています. シンク関数は, $-\infty$ から $+\infty$ の区間で定義されているので, フィルタ係数が無限に存在します. コンピュータではこのようなフィルタをあつかえません. したがって, フィルタ係数を有限でうちきるために窓関数を利用します.</p>
 <p>窓関数法は, 0 を中心として対称となるようにフィルタをうちきりますが, このままだと, フィルタ係数のインデックスが負数からはじまるので, インデックスが 0 ~ $J$ になるように書き換えます.</p>
 <p>ただし, 窓関数で有限にうちきった結果, 通過域と阻止域の境界が広がるという問題が発生します (理想特性をもつフィルタが, コンピュータでは実装できない理由です).</p>
-<p>通過域と阻止域の間に $\delta$ で定義される帯域を, <!-- raw HTML omitted -->遷移帯域幅<!-- raw HTML omitted --> と呼びます. $\delta$ は, フィルタ係数の数 $J+1$ に反比例します. つまり, 理想特性に近づけるほど, 乗算器の数が大きくなってしまいます.</p>
+<p>通過域と阻止域の間に $\delta$ で定義される帯域を, <b>遷移帯域幅</b> と呼びます. $\delta$ は, フィルタ係数の数 $J+1$ に反比例します. つまり, 理想特性に近づけるほど, 乗算器の数が大きくなってしまいます.</p>
 <p>実は, フィルタ係数をうちきる窓関数として, ハニング窓を適用する場合, $\delta$ からフィルタ係数の数を決定できます.</p>
 <p>$
 J+1=
@@ -652,7 +652,7 @@ $</p>
 </span><span style="color:#75715e"></span>  wave_write(<span style="color:#f92672">&amp;</span>pcm1, <span style="color:#e6db74">&#34;fir_filter.wav&#34;</span>);
 }
 </code></pre></div><h1 id="ディレイ">ディレイ</h1>
-<p><!-- raw HTML omitted -->ディレイ<!-- raw HTML omitted -->とは, 現在の時刻の音データとそれよりも過去の音データを同時に再生することで, やまびこのような効果を生み出すサウンドエフェクトの 1 種です. デジタル信号処理のなかでも, 最も基本的な処理として位置づけられています (実際, <!-- raw HTML omitted -->ディレイ系<!-- raw HTML omitted -->と呼ばれるエフェクター群があります).</p>
+<p><b>ディレイ</b>とは, 現在の時刻の音データとそれよりも過去の音データを同時に再生することで, やまびこのような効果を生み出すサウンドエフェクトの 1 種です. デジタル信号処理のなかでも, 最も基本的な処理として位置づけられています (実際, <b>ディレイ系</b>と呼ばれるエフェクター群があります).</p>
 <p>$
 \begin{eqnarray}
 s_{1}(n)=\sum_{m=0}^{J}b(m)s_{0}(n-m)
@@ -674,7 +674,7 @@ $</p>
 <p>$wet$ はやまびこの減衰率を表しています. やまびこがしだいに小さくなるようにするには 1 より小さくする必要があります. $time$ は, やまびこの遅延時間です. $feedback$ は, やまびこの繰り返し回数です.</p>
 <p>実際のディレイエフェクターでも, ほぼ同様にパラメータを設定可能になっています.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/66262413-28a1d900-e81a-11e9-916d-98886dc00e1b.png" alt="ディレイとパラメータ"></p>
-<p>ここで, ピストル音のような, ごく短時間に非常に大きな音が発生する音データ $s_{0}(n)$ を仮定します. このような音は, <!-- raw HTML omitted -->インパルス<!-- raw HTML omitted -->と呼ばれます (数学的には, <!-- raw HTML omitted -->デルタ関数<!-- raw HTML omitted -->で定義されます).</p>
+<p>ここで, ピストル音のような, ごく短時間に非常に大きな音が発生する音データ $s_{0}(n)$ を仮定します. このような音は, <b>インパルス</b>と呼ばれます (数学的には, <b>デルタ関数</b>で定義されます).</p>
 <p>$
 s_{0}(n)=
 \begin{cases}
@@ -693,8 +693,8 @@ s_{1}(n)&amp;=&amp;\sum_{m=0}^{J}b(m)s_{0}(n-m) \\<br>
 &amp;=&amp;b(n) \\<br>
 \end{eqnarray}
 $</p>
-<p>インパルスを入力信号としたとき, その応答として得られる出力信号を, <!-- raw HTML omitted -->インパルス応答<!-- raw HTML omitted -->と呼びます.
-<!-- raw HTML omitted -->FIR フィルタのインパルス応答は, 乗算器の係数<!-- raw HTML omitted -->です (FIR フィルタの特徴の 1 つ).</p>
+<p>インパルスを入力信号としたとき, その応答として得られる出力信号を, <b>インパルス応答</b>と呼びます.
+<b>FIR フィルタのインパルス応答は, 乗算器の係数</b>です (FIR フィルタの特徴の 1 つ).</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/65945811-bd4db500-e46f-11e9-9ce5-0bf595f4dc75.png" alt="インパルス応答"></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
@@ -723,8 +723,8 @@ $</p>
 <p>FIR フィルタの場合は, 直前のフレームの音データを, 現在のフレームの最初に連結してフィルタリングします (ただし, 最初のフレームに関しては, 直前のフレームが存在しないので, 無音 (0) のフレームを連結します).</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/65952621-2ee03000-e47d-11e9-8985-527417790d03.png" alt="フレーム単位のフィルタリング"></p>
 <h2 id="巡回畳み込み">巡回畳み込み</h2>
-<p>FIR フィルタは, <!-- raw HTML omitted -->時間領域では畳み込み<!-- raw HTML omitted -->, <!-- raw HTML omitted -->周波数領域では乗算<!-- raw HTML omitted -->として定義できました. つまり, FIR フィルタの計算は, 時間領域で畳み込み演算する方法と, 周波数領域で乗算をしてその結果を時間領域に戻す方法の 2 つがあるということです.</p>
-<p>ところで, 離散フーリエ変換では, $x(n)$ が周期 $N$ の周期信号であることを仮定しているので, 畳み込みの結果も周期 $N$ の周期信号になります. これを, <!-- raw HTML omitted -->巡回畳み込み<!-- raw HTML omitted -->と呼びます.</p>
+<p>FIR フィルタは, <b>時間領域では畳み込み</b>, <b>周波数領域では乗算</b>として定義できました. つまり, FIR フィルタの計算は, 時間領域で畳み込み演算する方法と, 周波数領域で乗算をしてその結果を時間領域に戻す方法の 2 つがあるということです.</p>
+<p>ところで, 離散フーリエ変換では, $x(n)$ が周期 $N$ の周期信号であることを仮定しているので, 畳み込みの結果も周期 $N$ の周期信号になります. これを, <b>巡回畳み込み</b>と呼びます.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/65955726-c21c6400-e483-11e9-8092-a0aa6d845011.png" alt="巡回畳み込み"></p>
 <p>音のデータの長さを $L$, フィルタ係数の数を $J+1$ とすると, 通常の畳み込みの結果は $L+J$ サンプルになります. したがって, 巡回畳み込みの結果から, 通常の畳み込みの結果を取得するには, $N$ を $L+J$ 以上になるように設定する必要があります.</p>
 <p>$
@@ -732,9 +732,9 @@ $</p>
 L+J \leqq N
 \end{eqnarray}
 $</p>
-<p>離散フーリエ変換による畳み込みの計算は, <!-- raw HTML omitted -->0 埋め処理<!-- raw HTML omitted -->をして, $N$ サンプルに拡張してから, 離散フーリエ変換を実行します (高速フーリエ変換の場合は, $N$ が 2 のべき乗になるようにします).</p>
+<p>離散フーリエ変換による畳み込みの計算は, <b>0 埋め処理</b>をして, $N$ サンプルに拡張してから, 離散フーリエ変換を実行します (高速フーリエ変換の場合は, $N$ が 2 のべき乗になるようにします).</p>
 <h2 id="オーバーラップアド">オーバーラップアド</h2>
-<p>フレーム単位でフィルタリングをする場合, 隣接するフレームの畳み込みの結果を重ね合わせながら連結していく必要があります. この処理を<!-- raw HTML omitted -->オーバーラップアド<!-- raw HTML omitted -->と呼びます.</p>
+<p>フレーム単位でフィルタリングをする場合, 隣接するフレームの畳み込みの結果を重ね合わせながら連結していく必要があります. この処理を<b>オーバーラップアド</b>と呼びます.</p>
 <h2 id="実装-1">実装</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;complex&gt;</span><span style="color:#75715e">
@@ -1669,7 +1669,7 @@ $</p>
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>

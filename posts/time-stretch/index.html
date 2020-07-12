@@ -344,7 +344,7 @@ r(n)=\sum_{n=0}^{N-1}s(n)s(n+m)\quad(0 \leqq m \leqq N-1)
 $</p>
 <p>つまり, 相関関数の計算は, 本来の音データとそれを $m$ サンプルずらした音データを $N$ 個の区間に限定して乗算して, その結果を加算する処理となっています.</p>
 <p>相関関数には, 基本周期とその整数倍で波形のピークを示すという特徴があるので, そのピークを調べることで波形の周期を求めることができます.</p>
-<!-- raw HTML omitted -->
+<!-- 具体例として, 基本周波数 440 Hz の音データの基本周期は, 2.27 ms (1 / 440) ms となります. -->
 <h2 id="早送り再生">早送り再生</h2>
 <p>例えば, 1.5 倍の速度で早送りする場合には, 最初の周期には単調減少の重みづけ, 次の周期には単調増加の重みづけをして, これらの波形をオーバラップアドによって重ね合わせると, 波形の接続部分における不連続的な変化を目立たせることなく, 3 周期の波形を 2 周期に縮めることができます.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/79052665-18f4c880-7c73-11ea-8004-7732326c1b47.png" alt="早送り再生のアルゴリズム"></p>
@@ -1330,7 +1330,7 @@ $</p>
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>

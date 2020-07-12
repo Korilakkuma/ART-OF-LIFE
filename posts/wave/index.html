@@ -32,7 +32,7 @@
 <meta itemprop="description" content="WAVE ファイルの構成を理解して, 読み書きするコードを実装する">
 <meta itemprop="datePublished" content="2019-09-11T17:25:18&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-11T17:25:18&#43;09:00" />
-<meta itemprop="wordCount" content="1612">
+<meta itemprop="wordCount" content="1834">
 
 
 
@@ -269,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-11 17:25:18 &#43;0900 JST" itemprop="datePublished">2019-09-11</time>
             &middot;
-            1612
+            1834
             words
             &middot;
             4
@@ -316,10 +316,31 @@
 
         <div class="article-entry" itemprop="articleBody">
             <h1 id="wave-ファイルとは-">WAVE ファイルとは ?</h1>
-<p><!-- raw HTML omitted -->WAVE<!-- raw HTML omitted --> とは, 音声コーデックの 1 つです. 圧縮をしないので, ファイルサイズは, MP3 や AAC などと比較するとかなり大きくなってしまいますが, 音質の劣化がありません.</p>
+<p><b>WAVE</b> とは, 音声コーデックの 1 つです. 圧縮をしないので, ファイルサイズは, MP3 や AAC などと比較するとかなり大きくなってしまいますが, 音質の劣化がありません.</p>
 <h1 id="wave-ファイルの構成">WAVE ファイルの構成</h1>
-<p>WAVE ファイルは, <!-- raw HTML omitted -->chunk<!-- raw HTML omitted --> と呼ばれるブロック構造によって音データを記録します. WAVE ファイルそのものは, <!-- raw HTML omitted -->RIFF<!-- raw HTML omitted --> (Resource Interchange File Format) チャンクと呼ばれるブロックになっています. そして, RIFF チャンクのなかに, <!-- raw HTML omitted -->fmt<!-- raw HTML omitted --> チャンクと <!-- raw HTML omitted -->data<!-- raw HTML omitted --> チャンクが格納されています.</p>
-<!-- raw HTML omitted -->
+<p>WAVE ファイルは, <b>chunk</b> と呼ばれるブロック構造によって音データを記録します. WAVE ファイルそのものは, <b>RIFF</b> (Resource Interchange File Format) チャンクと呼ばれるブロックになっています. そして, RIFF チャンクのなかに, <b>fmt</b> チャンクと <b>data</b> チャンクが格納されています.</p>
+<table>
+  <caption>WAVF ファイルの構成</caption>
+  <thead>
+    <tr><th scope="col">chunk</th><th scope="col">chunk</th><th scope="col">Parameter</th><th scope="col">byte</th><th scope="col">Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td rowspan="14">RIFF チャンク</td><td rowspan="3"></td><td>chunkID</td><td>4</td><td>&apos;RIFF&apos;</td></tr>
+    <tr><td>chunkSize</td><td>4</td><td>size + 36</td></tr>
+    <tr><td>formType</td><td>4</td><td>&apos;WAVE&apos;</td></tr>
+    <tr><td rowspan="8">fmt チャンク</td><td>chunkID</td><td>4</td><td>&apos;fmt &apos;</td></tr>
+    <tr><td>chunkSize</td><td>4</td><td>16</td></tr>
+    <tr><td>waveFormatType</td><td>2</td><td>プロパティ</td></tr>
+    <tr><td>channel</td><td>2</td><td>プロパティ</td></tr>
+    <tr><td>samplesPerSec</td><td>4</td><td>プロパティ</td></tr>
+    <tr><td>bytesPerSec</td><td>4</td><td>プロパティ</td></tr>
+    <tr><td>blockSize</td><td>2</td><td>プロパティ</td></tr>
+    <tr><td>bitsPerSample</td><td>2</td><td>プロパティ</td></tr>
+    <tr><td rowspan="3">data チャンク</td><td>chunkID</td><td>4</td><td>&apos;data&apos;</td></tr>
+    <tr><td>chunkSize</td><td>4</td><td>size</td></tr>
+    <tr><td>data</td><td>size</td><td>音データ</td></tr>
+  </tbody>
+</table>
 <ul>
 <li>waveFormatType
 <ul>
@@ -353,12 +374,19 @@
 </li>
 </ul>
 <p>data チャンクには, 音データそのものが記録されますが, その値は, 量子化ビットと関係しています.</p>
-<!-- raw HTML omitted -->
+<table>
+  <caption>data チャンク</caption>
+  <thead><tr><th scope="col"></th><th scope="col">Min</th><th scope="col">Max</th></tr></thead>
+  <tbody>
+     <tr><th scope="row">量子化ビット 8 bit</th><td>0</td><td>255</td></tr>
+     <tr><th scope="row">量子化ビット 16 bit</th><td>-32768</td><td>32767</td></tr>
+  </tbody>
+</table>
 <p>モノラル場合, 時間の経過にしたがって, 音データが順に記録されます. ステレオの場合, 左チャンネルと右チャンネルの音データが交互に記録されます.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/66471174-d8e73a00-eac5-11e9-977a-fe4e11071ccb.png" alt="data チャンク (8 bit モノラル, 8 bit ステレオ, 16 bit モノラル, 16 bit ステレオ"></p>
 <h1 id="クリッピング">クリッピング</h1>
-<p>ところで, 音データが, 最大値を上回ってしまうと<!-- raw HTML omitted -->オーバーフロー<!-- raw HTML omitted -->が発生 (量子化ビット 16 なら, -32768 になってしまう), また, 最小値を下回ってしまうと<!-- raw HTML omitted -->アンダーフロー<!-- raw HTML omitted -->が発生 (量子化ビットが 16 なら 32767 になってしまう) してしまい, 波形が大きく変形してしまいます.</p>
-<p>これを防止するために, それらの値 (量子化ビットが 16 なら, 32767, -32768) を上限, 下限として振幅をうちきります. この処理を<!-- raw HTML omitted -->クリッピング<!-- raw HTML omitted -->と呼びます.</p>
+<p>ところで, 音データが, 最大値を上回ってしまうと<b>オーバーフロー</b>が発生 (量子化ビット 16 なら, -32768 になってしまう), また, 最小値を下回ってしまうと<b>アンダーフロー</b>が発生 (量子化ビットが 16 なら 32767 になってしまう) してしまい, 波形が大きく変形してしまいます.</p>
+<p>これを防止するために, それらの値 (量子化ビットが 16 なら, 32767, -32768) を上限, 下限として振幅をうちきります. この処理を<b>クリッピング</b>と呼びます.</p>
 <h1 id="実装">実装</h1>
 <p>C++ による, WAVE ファイルの読み書きの実装です.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
@@ -1491,7 +1519,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>

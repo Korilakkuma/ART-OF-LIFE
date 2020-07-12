@@ -330,9 +330,9 @@
             <h1 id="hls">HLS</h1>
 <p>正式には, HTTP Live Streaming の略で, Apple が開発したストリーミングプロトコルです.
 ストリーミングとは, 動画のように容量の大きなデータをすべてダウンロードしてから再生開始するのではなく, ダウンロードしたデータから再生を開始し, 再生している間も残りのデータをダウンロードし続ける仕組みです.</p>
-<p>また, ストリーミングでは, バッファリングによって, ふくそうなどによりネットワークの回線が混雑した場合でも, (ある程度の間) 映像や音声をみだすことなく再生できます<!-- raw HTML omitted -->.</p>
+<p>また, ストリーミングでは, バッファリングによって, ふくそうなどによりネットワークの回線が混雑した場合でも, (ある程度の間) 映像や音声をみだすことなく再生できます<!-- (TCP による, ふくそう制御と再送制御を活用することができます)-->.</p>
 <p>HLS は, HTTP という名前が付いているように, HTTP を利用したストリーミングプロトコルなので, Web サーバーで配信することも可能です.</p>
-<p>HLS を構成するファイルは, 分割されたデータ (<!-- raw HTML omitted -->セグメントファイル<!-- raw HTML omitted -->) と, これらのセグメントファイルをどの順番で再生するかを記したファイル (<!-- raw HTML omitted -->プレイリストファイル<!-- raw HTML omitted -->). セグメントファイルは, MPEG2-TS (Transport Stream) 形式のバイナリデータ, プレイリストファイルは拡張子が m3u8 というテキストデータとなっています.</p>
+<p>HLS を構成するファイルは, 分割されたデータ (<b>セグメントファイル</b>) と, これらのセグメントファイルをどの順番で再生するかを記したファイル (<b>プレイリストファイル</b>). セグメントファイルは, MPEG2-TS (Transport Stream) 形式のバイナリデータ, プレイリストファイルは拡張子が m3u8 というテキストデータとなっています.</p>
 <h1 id="hlsjs-と-media-source-extensions">hls.js と Media Source Extensions</h1>
 <p>HLS は Apple が開発したプロトコルであるので, Safari (と Edge) ではプレイリストファイルを, <code>HTMLVideoElement#src</code> に設定するだけで再生することが可能です. しかしながら, Chrome や Firefox, IE11 では直接プレイリストファイルを解釈したり, 分割されたデータを再生可能な単位に再構築することができないので, <a href="https://www.w3.org/TR/media-source/">Media Source Extensions</a> を利用します. Media Source Extensions は, HTTP ダウンロードを利用してストリーミングするための JavaScript API です.</p>
 <p>hls.js は, この Media Source Extensions を利用してセグメントファイルを再生する以外にも, プレイリストファイルやセグメントファイルの取得, プレイリストファイルのパース, WebWorker を利用して MP4 を demux (映像と音声の分離), ビットレートの調整 (Adaptive Bitrate Streaming) など数多くのタスクを裏側で実行してくれます. hls.js を利用する開発者からすると, <code>video</code> タグと, hls.js が提供するいくつかの API を知っているだけで, HLS によるストリーミング再生がブラウザで可能になります.</p>
@@ -1203,7 +1203,7 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020
-      Copyright (c) <!-- raw HTML omitted -->Korilakkuma<!-- raw HTML omitted -->
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>
