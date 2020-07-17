@@ -231,6 +231,7 @@ SelfLoop(SelfLoop);
 
 有限時間内に停止する場合
 : この場合, `HaltChecker` が `true` を返します. すなわち, `SelfLoop` に `SelfLoop` を入力としてあたえると, `SelfLoop` は停止しないという意味になります. これは, 矛盾です.
+
 有限時間内に停止しない場合
 : この場合, `HaltChecker` が `false` を返します. すなわち, `SelfLoop` に `SelfLoop` を入力としてあたえると, `SelfLoop` は停止するという意味になります. これも, 矛盾です.
 
