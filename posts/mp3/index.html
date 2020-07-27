@@ -32,7 +32,7 @@
 <meta itemprop="description" content="MP3 の圧縮符号化方式の概要をとおして, 音声コーデックの基本技術を学ぶ">
 <meta itemprop="datePublished" content="2019-08-28T05:27:13&#43;09:00" />
 <meta itemprop="dateModified" content="2019-08-28T05:27:13&#43;09:00" />
-<meta itemprop="wordCount" content="5686">
+<meta itemprop="wordCount" content="5681">
 
 
 
@@ -269,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-08-28 05:27:13 &#43;0900 JST" itemprop="datePublished">2019-08-28</time>
             &middot;
-            5686
+            5681
             words
             &middot;
             12
@@ -480,7 +480,7 @@
 <p><img src="https://user-images.githubusercontent.com/4006693/67000836-7e785a00-f113-11e9-9213-c17c35b347c0.png" alt="MP3 の圧縮フロー"></p>
 <ul>
 <li>サブバンド分解</li>
-<li>フーリエ変換・(変形) 離散コサイン変換 (MDCT)</li>
+<li>フーリエ変換・修正離散コサイン変換 (MDCT)</li>
 <li>心理聴覚評価</li>
 <li>量子化</li>
 <li>ハフマン符号</li>
@@ -501,7 +501,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="フーリエ変換変形-離散コサイン変換-mdct">フーリエ変換・(変形) 離散コサイン変換 (MDCT)</h2>
+<h2 id="フーリエ変換修正離散コサイン変換-mdct">フーリエ変換・修正離散コサイン変換 (MDCT)</h2>
 <p>時間軸に対する振幅では, どの周波数成分をあつかえばよいのかわからないので, 時間軸に対する振幅を, <b>周波数軸に対する振幅</b> (振幅スペクトル) に変換する必要があります. そのための数学的処理が, <b>フーリエ変換</b>です.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/63822772-69d9da00-c98c-11e9-9870-ce3c5805cf24.gif" alt="フーリエ変換"></p>
 <p>しかしながら, フーリエ変換は, 数式上は $-\infty$ から $\infty$ の積分として処理するので, コンピュータで実現するためには, どこかで計算をうちきる必要があります. このうちきりにより, 元の波形に合成したときに (逆フーリエ変換), 誤差が発生し, 完全に元の波形には戻らなくなります.</p>
@@ -510,7 +510,7 @@
 X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt \quad (-\infty \leqq f \leqq \infty)
 \end{eqnarray}
 $</p>
-<p>この問題を解決するために, 区間の継ぎ目を調整する様々な手法が考案されました. そのうちの 1 つが, MP3 で利用されている <b>(変形) 離散コサイン変換</b> (Modified Discrete Cosine Transform) であり, 区間を重ね合わせて誤差を小さくする手法となっています.</p>
+<p>この問題を解決するために, 区間の継ぎ目を調整する様々な手法が考案されました. そのうちの 1 つが, MP3 で利用されている, <b>修正離散コサイン変換</b> (<b>Modified Discrete Cosine Transform</b>) であり, 区間を重ね合わせて誤差を小さくする手法となっています.</p>
 <p>$
 \begin{eqnarray}
 X(k)=\sum_{n=0}^{2N-1}x(n)\cos\left(\frac{{\pi}}{N}\left(n+\frac{1}{2}+\frac{N}{2}\right)\left(k+\frac{1}{2}\right)\right)
