@@ -2,7 +2,7 @@
 banner = ""
 categories = ["Mathematics", "Programming"]
 date = 2019-09-21T17:27:49+09:00
-description = "フーリエ変換・離散フーリエ変換・変形離散コサイン変換"
+description = "フーリエ変換・離散フーリエ変換・修正離散コサイン変換"
 images = []
 menu = ""
 tags = ["Mathematics", "Fourier Transform", "Discrete Fourier Transform", "DFT", "Modified Discrete Cosine Transform", "MDCT"]
@@ -300,11 +300,11 @@ a\_{k}=
 \end{eqnarray}
 $
 
-# 変形離散コサイン変換
+# 修正離散コサイン変換
 
 離散コサイン変換では, $N$ 個ずつデータを取得して, 周波数変換, 信号処理, そして, 逆変換を実行します. しかしながら, それでは, データのまとまりに不連続な点が発生してしまいます.
 
-そこで, 信号を窓関数を利用してオーバラップ (隣接するデータのまとまりを重ねて連結していく処理) をしながら, 信号を取得して, 周波数解析をする処理として, <b>変形離散コサイン変換</b> (<b>修正離散コサイン変換</b> (Modified Discrete Cosine Transform)) が利用されます.
+そこで, 信号を窓関数を利用してオーバラップ (隣接するデータのまとまりを重ねて連結していく処理) をしながら, 信号を取得して, 周波数解析をする処理として, <b>修正離散コサイン変換</b> (<b>変形離散コサイン変換</b> (Modified Discrete Cosine Transform)) が利用されます.
 
 ![オーバーラップ (赤い矩形の重なった部分がオーバーラップしている部分](https://user-images.githubusercontent.com/4006693/67263894-640ff900-f4e4-11e9-91a7-ce280737e1e0.png)
 
@@ -316,7 +316,7 @@ X(k)&=&\sum\_{n=0}^{2N-1}x(n)\cos\left(\frac{\left(2n+N+1\right)\left(2k+1\right
 \end{eqnarray}
 $
 
-また, 逆変形離散コサイン変換は, 以下のように定義されます.
+また, 逆修正離散コサイン変換は, 以下のように定義されます.
 
 $
 \begin{eqnarray}
@@ -328,7 +328,7 @@ $
 
 ## 実装
 
-C++ による, 変形離散コサイン変換の実装例です.
+C++ による, 修正離散コサイン変換の実装例です.
 
 ```c++
 #include <vector>
