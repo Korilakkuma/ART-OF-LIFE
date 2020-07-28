@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>IIR Filter &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.56.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -11,7 +11,7 @@
     
     
     <link rel="canonical" href="https://art-of-life.jp/posts/iir-filter/"/>
-    <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
+    <link rel="icon" href="https://art-of-life.jp/favicon.ico">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
     <link rel="stylesheet" href="https://art-of-life.jp/css/font-awesome.min.css">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="IIR Filter">
 <meta itemprop="description" content="IIR Filter の概要">
-
-
 <meta itemprop="datePublished" content="2019-09-29T17:51:06&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-29T17:51:06&#43;09:00" />
-<meta itemprop="wordCount" content="3939">
+<meta itemprop="wordCount" content="3921">
 
 
 
-<meta itemprop="keywords" content="Digital Signal Processing,Mathematics,Z-transform,Digital Filter," />
-
+<meta itemprop="keywords" content="Digital Signal Processing,Mathematics,Z-Transform,Digital Filter," />
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="IIR Filter"/>
 <meta name="twitter:description" content="IIR Filter の概要"/>
@@ -95,7 +92,7 @@
       </nav>
         <nav id="sub-nav">
           <div class="profile" id="profile-nav">
-            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.jpeg"><i class="fa fa-caret-down"></i></a>
           </div>
         </nav>
         <div id="search-form-wrap">
@@ -159,8 +156,8 @@
       <img id="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&d=identicon"/>
       
       <h2 id="name">Korilakkuma</h2>
-      <h3 id="title">Multimedia (Video, Audio) Engineer. I&#39;m expert in Web Audio API, WebRTC and Streaming. C/C&#43;&#43;, JavaScript ...</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <h3 id="title">Audio Programmer. As a graduate student, I plan to study Audio Signal Processing for Music from 2022. C/C&#43;&#43;, UNIX system call 💖🎸🎹</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          30
+          48
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-29 17:51:06 &#43;0900 JST" itemprop="datePublished">2019-09-29</time>
             &middot;
-            3939
+            3921
             words
             &middot;
             8
@@ -320,7 +317,7 @@
                 &middot;
                 
                 
-                <a class="article-category-link" href="https://art-of-life.jp/tags/z-transform">Z-transform</a>
+                <a class="article-category-link" href="https://art-of-life.jp/tags/z-transform">Z-Transform</a>
                 &middot;
                 
                 
@@ -334,611 +331,511 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="iir-フィルタとは">IIR フィルタとは ?</h1>
-
+            <h1 id="iir-フィルタとは-">IIR フィルタとは ?</h1>
 <p><b>IIR (Infinite Impulse Response) フィルタ</b>は, FIR フィルタと異なって, 現在の時刻の出力信号に対して, それよりも過去の出力信号がフィードバックされます. したがって, インパルス応答が無限に続きます.</p>
-
 <p>$
 \begin{eqnarray}
 y(n)=-\sum_{m=1}^{I}a(m)y(n-m)+\sum_{m=0}^{J}b(m)x(n-m)
 \end{eqnarray}
 $</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66048249-29114a00-e564-11e9-8f5d-839c8ebe9b37.png" alt="IIR フィルタ" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66048249-29114a00-e564-11e9-8f5d-839c8ebe9b37.png" alt="IIR フィルタ"></p>
 <p>FIR フィルタと比較して, よりよい周波数特性をもつ (つまり, 理想特性に近い) フィルタを実装しやすいというメリットがあります. 逆に, 出力信号がフィードバックされるので, 設計・実装が複雑になるというデメリットがあります.</p>
-
 <h1 id="z-変換">Z 変換</h1>
-
 <p>FIR フィルタと同様に, IIR フィルタの周波数特性も Z 変換で調べます.</p>
-
 <p>$
 \begin{eqnarray}
-Y(z)&amp;=&amp;-\sum_{n=-\infty}^{\infty}\sum_{m=1}^{I}a(m)y(n-m)z^{-n}+\sum_{n=-\infty}^{\infty}\sum_{m=0}^{J}b(m)x(n-m) \\<br />
-    &amp;=&amp;-\sum_{m=1}^{I}a(m)\sum_{n=-\infty}^{\infty}y(n-m)z^{-n}+\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-n} \\<br />
-    &amp;=&amp;-\sum_{m=1}^{I}a(m)\sum_{n=-\infty}^{\infty}y(n-m)z^{-(n-m)}z^{-m}+\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-(n-m)}z^{-m} \\<br />
-    &amp;=&amp;-\sum_{m=1}^{I}a(m)Y(z)z^{-m}+\sum_{m=0}^{J}b(m)X(z)z^{-m} \\<br />
+Y(z)&amp;=&amp;-\sum_{n=-\infty}^{\infty}\sum_{m=1}^{I}a(m)y(n-m)z^{-n}+\sum_{n=-\infty}^{\infty}\sum_{m=0}^{J}b(m)x(n-m) \\<br>
+&amp;=&amp;-\sum_{m=1}^{I}a(m)\sum_{n=-\infty}^{\infty}y(n-m)z^{-n}+\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-n} \\<br>
+&amp;=&amp;-\sum_{m=1}^{I}a(m)\sum_{n=-\infty}^{\infty}y(n-m)z^{-(n-m)}z^{-m}+\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-(n-m)}z^{-m} \\<br>
+&amp;=&amp;-\sum_{m=1}^{I}a(m)Y(z)z^{-m}+\sum_{m=0}^{J}b(m)X(z)z^{-m} \\<br>
 \end{eqnarray}
 $</p>
-
 <p>ここで, $a(m)$ は, $1 \leqq m \leqq I$, $b(m)$ は, $0 \leqq m \leqq J$ で値をもつので,</p>
-
 <p>$
 \begin{eqnarray}
 Y(z)&amp;=&amp;-\sum_{m=-\infty}^{\infty}a(m)Y(z)z^{-m}+\sum_{m=-\infty}^{\infty}b(m)X(z)z^{-m}
 \end{eqnarray}
 $</p>
-
 <p>フィルタ係数, $a(m)$ と $b(m)$ の Z 変換は以下のように定義されます.</p>
-
 <p>$
 \begin{eqnarray}
-A(z)&amp;=&amp;\sum_{m=-\infty}^{\infty}a(m)z^{-m} \\<br />
-B(z)&amp;=&amp;\sum_{m=-\infty}^{\infty}b(m)z^{-m} \\<br />
+A(z)&amp;=&amp;\sum_{m=-\infty}^{\infty}a(m)z^{-m} \\<br>
+B(z)&amp;=&amp;\sum_{m=-\infty}^{\infty}b(m)z^{-m} \\<br>
 \end{eqnarray}
 $</p>
-
 <p>したがって, IIR フィルタの Z 変換は以下のように定義できます.</p>
-
 <p>$
 \begin{eqnarray}
 Y(z)&amp;=&amp;-A(z)Y(z)+B(z)X(z)
 \end{eqnarray}
 $</p>
-
 <p>よって, 伝達関数は,</p>
-
 <p>$
 \begin{eqnarray}
 H(z)&amp;=&amp;\frac{Y(z)}{X(z)}=\frac{B(z)}{1+A(z)}
 \end{eqnarray}
 $</p>
-
 <p>となります.</p>
-
 <h1 id="双-1-次変換法">双 1 次変換法</h1>
-
 <p>ある周波数特性をもつ IIR フィルタを設計する方法として, アナログフィルタの伝達関数を利用する方法があります.</p>
-
 <p>ここで, 伝達関数が以下のように定義されるアナログフィルタの LPF を例に, IIR フィルタを設計します.</p>
-
 <p>$
 \begin{eqnarray}
 H(s)&amp;=&amp;\frac{4{\pi}^{2}f_{c}^{2}}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>ここで, $f_{c}$ は, <b>遮断周波数</b> (または, <b>カットオフ周波数</b>) と呼ばれ, 通過域と阻止域の境界を表します. $Q$ は, <b>クオリティファクタ</b>と呼ばれ, 遮断周波数における増幅率を表します (一般的に, 遮断周波数は, 増幅率が $\frac{1}{\sqrt{2}}$ となる周波数として定義されるので, $Q$ は $\frac{1}{\sqrt{2}}$ となります.</p>
-
 <p>ところで, 上記の伝達関数は $s$ を変数として定義されています. $s$ を $z$ におきかえて, アナログフィルタの伝達関数を IIR フィルタの伝達関数に変換する方法として利用される 1 つの方法が, <b>双 1 次変換法</b>です. (<b>s - z 変換</b>とも呼ばれます. 数学的観点で簡単に解説すると, アナログ信号 $x(t)$ を<b>ラプラス変換</b>した信号を $X(s)$ とし, デジタル信号 $x(n)$ を Z 変換した信号を $X(z)$ とすると, $X(s)$ から $X(z)$ に変換するための処理です).</p>
-
 <p>$
 \begin{eqnarray}
 s=\frac{1-z^{-1}}{1+z^{-1}}
 \end{eqnarray}
 $</p>
-
 <p>このおきかえを適用すると,</p>
-
 <p>$
 \begin{eqnarray}
 H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(0)&amp;=&amp;\frac{4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(2)&amp;=&amp;\frac{4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>これらの式に, $f_{c}$ と $Q$ を指定すると, それに応じた周波数特性の IIR フィルタを設計することができます. ただし, これらの式の $f_{c}$ はアナログフィルタの周波数なので変換が必要です. そこで, 以下の関係を利用します.</p>
-
 <p>$
 \begin{eqnarray}
 f_{a}=\frac{1}{2{\pi}}\tan\left(\frac{{\pi}f_{d}}{f_{s}}\right)
 \end{eqnarray}
 $</p>
-
 <p>この関係は,</p>
-
 <p>$
 \begin{eqnarray}
 s=\frac{1-z^{-1}}{1+z^{-1}}
 \end{eqnarray}
 $</p>
-
 <p>$s=j2{\pi}f_{a}$, $z=\exp\left(j2{\pi}f_{a}\right)$ とおきかえると導出できます.</p>
-
 <p>LPF フィルタと同様に, 双 1 次変換法を適用することで, HPF, BPF, BEF も設計することができます.</p>
-
 <h2 id="hpf">HPF</h2>
-
 <p>$
 \begin{eqnarray}
 H(s)&amp;=&amp;\frac{s^{2}}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(0)&amp;=&amp;\frac{1}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(1)&amp;=&amp;\frac{-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(2)&amp;=&amp;\frac{1}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <h2 id="bpf">BPF</h2>
-
 <p>$
 \begin{eqnarray}
 H(s)&amp;=&amp;\frac{2{\pi}\left(f_{c2}-f_{c1}\right)s}{s^{2}+2{\pi}\left(f_{c2}-f_{c1}\right)s+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(0)&amp;=&amp;\frac{2{\pi}\left(f_{c2}-f_{c1}\right)}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(1)&amp;=&amp;0
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(2)&amp;=&amp;\frac{-2{\pi}\left(f_{c2}-f_{c1}\right)}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c1}f_{c2}-2}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(2)&amp;=&amp;\frac{1-2{\pi}\left(f_{c2}-f_{c1}\right)+4{\pi}^{2}f_{c1}f_{c2}}{1+2{\pi}\left(f_{c2}-f_{c1}\right)+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
-
 <h2 id="bef">BEF</h2>
-
 <p>$
 \begin{eqnarray}
 H(s)&amp;=&amp;\frac{s^{2}+4{\pi}^{2}f_{c1}f_{c2}}{s^{2}+2{\pi}\left(f_{c2}-f_{c1}\right)s+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(0)&amp;=&amp;\frac{4{\pi}^{2}f_{c1}f_{c2}+1}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c1}f_{c2}-2}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(2)&amp;=&amp;\frac{4{\pi}^{2}f_{c1}f_{c2}+1}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c1}f_{c2}-2}{1+{2{\pi}\left(f_{c2}-f_{c1}\right)}+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(2)&amp;=&amp;\frac{1-2{\pi}\left(f_{c2}-f_{c1}\right)+4{\pi}^{2}f_{c1}f_{c2}}{1+2{\pi}\left(f_{c2}-f_{c1}\right)+4{\pi}^{2}f_{c1}f_{c2}}
 \end{eqnarray}
 $</p>
-
 <h2 id="共振フィルタとノッチフィルタ">共振フィルタとノッチフィルタ</h2>
-
 <p>BPF と BEF に関しては, それぞれ, <b>共振フィルタ</b>と<b>ノッチフィルタ</b>と呼ばれる定義があります. これらのフィルタでは, $f_{c}$ と $Q$ を以下のように定義します.</p>
-
 <p>$
 \begin{eqnarray}
 \frac{f_{c}}{Q}=f_{c2}-f_{c1}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 f_{c}^{2}=f_{c1}f_{c2}
 \end{eqnarray}
 $</p>
-
 <p>このように定義した場合, $f_{c}$ は<b>中心周波数</b>と呼ばれ, $Q$ によって帯域幅を調整することが可能になります ($Q$ が大きいほど帯域幅は小さくなり, $Q$ が小さいほど帯域幅は大きくなります).</p>
-
 <h3 id="共振フィルタ">共振フィルタ</h3>
-
 <p>$
 \begin{eqnarray}
 H(s)&amp;=&amp;\frac{\frac{2{\pi}f_{c}}{Q}s}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(0)&amp;=&amp;\frac{\frac{2{\pi}f_{c}}{Q}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(1)&amp;=&amp;0
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(2)&amp;=&amp;\frac{-\frac{2{\pi}f_{c}}{Q}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <h3 id="ノッチフィルタ">ノッチフィルタ</h3>
-
 <p>$
 \begin{eqnarray}
 H(s)&amp;=&amp;\frac{s^{2}+4{\pi}^{2}f_{c}^{2}}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(0)&amp;=&amp;\frac{4{\pi}^{2}f_{c}^{2}+1}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(2)&amp;=&amp;\frac{4{\pi}^{2}f_{c}^{2}+1}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66048644-e00dc580-e564-11e9-9056-4dc98c761d47.png" alt="IIR フィルタ (LPF, HPF, BPF, BEF)" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66048644-e00dc580-e564-11e9-9056-4dc98c761d47.png" alt="IIR フィルタ (LPF, HPF, BPF, BEF)"></p>
 <h1 id="実装">実装</h1>
-
 <p>IIR フィルタによる LPF, HPF, BPF, BEF の実装 (C++) です.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IIR_LPF</span>(<span style="color:#66d9ef">double</span> fd, <span style="color:#66d9ef">double</span> Q, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+  <span style="color:#66d9ef">double</span> fa <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>tan(M_PI <span style="color:#f92672">*</span> fd) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI);
+  <span style="color:#66d9ef">double</span> numerator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> ((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>));
 
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;cmath&gt;
-
-void IIR_LPF(double fd, double Q, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
-  double fa = std::tan(M_PI * fd) / (2.0 * M_PI);
-  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
-
-  a[0] = 1.0;
-  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
-  a[2] = (1.0 - (2.0 * M_PI * fa) / Q + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
-  b[0] = (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
-  b[1] = (8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
-  b[2] = (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+  a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>;
+  a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">8.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2.0</span>) <span style="color:#f92672">/</span> numerator;
+  a[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>))) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">8.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">/</span> numerator;
 }
 
-void IIR_HPF(double fd, double Q, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
-  double fa = tan(M_PI * fd) / (2.0 * M_PI);
-  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IIR_HPF</span>(<span style="color:#66d9ef">double</span> fd, <span style="color:#66d9ef">double</span> Q, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+  <span style="color:#66d9ef">double</span> fa <span style="color:#f92672">=</span> tan(M_PI <span style="color:#f92672">*</span> fd) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI);
+  <span style="color:#66d9ef">double</span> numerator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> ((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>));
 
-  a[0] = 1.0;
-  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
-  a[2] = (1.0 - (2.0 * M_PI * fa) / Q + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
-  b[0] = 1 / numerator;
-  b[1] = -2 / numerator;
-  b[2] = 1 / numerator;
+  a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>;
+  a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">8.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2.0</span>) <span style="color:#f92672">/</span> numerator;
+  a[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>))) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> numerator;
 }
 
-void IIR_BPF(double fd, double Q, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
-  double fa = tan(M_PI * fd) / (2.0 * M_PI);
-  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IIR_BPF</span>(<span style="color:#66d9ef">double</span> fd, <span style="color:#66d9ef">double</span> Q, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+  <span style="color:#66d9ef">double</span> fa <span style="color:#f92672">=</span> tan(M_PI <span style="color:#f92672">*</span> fd) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI);
+  <span style="color:#66d9ef">double</span> numerator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> ((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>));
 
-  a[0] = 1.0;
-  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
-  a[2] = (1.0 - (2.0 * M_PI * fa) / Q + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
-  b[0] = (2 * M_PI * fa / Q) / numerator;
-  b[1] = 0;
-  b[2] = -(2 * M_PI * fa / Q) / numerator;
+  a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>;
+  a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">8.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2.0</span>) <span style="color:#f92672">/</span> numerator;
+  a[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>))) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa <span style="color:#f92672">/</span> Q) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  b[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa <span style="color:#f92672">/</span> Q) <span style="color:#f92672">/</span> numerator;
 }
 
-void IIR_BEF(double fd, double Q, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
-  double fa = tan(M_PI * fd) / (2.0 * M_PI);
-  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IIR_BEF</span>(<span style="color:#66d9ef">double</span> fd, <span style="color:#66d9ef">double</span> Q, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+  <span style="color:#66d9ef">double</span> fa <span style="color:#f92672">=</span> tan(M_PI <span style="color:#f92672">*</span> fd) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI);
+  <span style="color:#66d9ef">double</span> numerator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> ((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>));
 
-  a[0] = 1.0;
-  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
-  a[2] = (1.0 - (2.0 * M_PI * fa) / Q + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
-  b[0] = (4 * std::pow(M_PI, 2) * std::pow(fa, 2) + 1) / numerator;
-  b[1] = (8 * std::pow(M_PI, 2) * std::pow(fa, 2) - 2) / numerator;
-  b[2] = (4 * std::pow(M_PI, 2) * std::pow(fa, 2) + 1) / numerator;
+  a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>;
+  a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">8.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2.0</span>) <span style="color:#f92672">/</span> numerator;
+  a[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>))) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">8</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> numerator;
 }
-</code></pre>
-
-<p>実行例</p>
-
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdlib&gt;
-#include &lt;string&gt;
-#include &lt;cmath&gt;
-#include &quot;wave.h&quot;
-#include &quot;iir_filters.h&quot;
-
-enum {
-  I = 2,
-  J = 2
+</code></pre></div><p>実行例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;wave.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;iir_filters.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">enum</span> {
+  I <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+  J <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
 };
 
-int main(int argc, char **argv) {
-  if (argc != 3) {
-    std::cerr &lt;&lt; &quot;Require type, fd&quot; &lt;&lt; std::endl;
-    std::exit(EXIT_FAILURE);
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv) {
+  <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span>) {
+    std<span style="color:#f92672">::</span>cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Require type, fd&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+    std<span style="color:#f92672">::</span>exit(EXIT_FAILURE);
   }
 
-  std::string type = argv[1];
+  std<span style="color:#f92672">::</span>string type <span style="color:#f92672">=</span> argv[<span style="color:#ae81ff">1</span>];
 
   STEREO_PCM pcm0, pcm1;
-  std::vector&lt;double&gt; a(3);
-  std::vector&lt;double&gt; b(3);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> a(<span style="color:#ae81ff">3</span>);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> b(<span style="color:#ae81ff">3</span>);
 
-  wave_read(&amp;pcm0, &quot;stereo.wav&quot;);
+  wave_read(<span style="color:#f92672">&amp;</span>pcm0, <span style="color:#e6db74">&#34;stereo.wav&#34;</span>);
 
-  pcm1.fs     = pcm0.fs;
-  pcm1.bits   = pcm0.bits;
-  pcm1.length = pcm0.length;
+  pcm1.fs     <span style="color:#f92672">=</span> pcm0.fs;
+  pcm1.bits   <span style="color:#f92672">=</span> pcm0.bits;
+  pcm1.length <span style="color:#f92672">=</span> pcm0.length;
 
-  double fd = std::stod(argv[2]) / pcm0.fs;
-  double Q  = 1.0 / std::sqrt(2.0);
+  <span style="color:#66d9ef">double</span> fd <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">/</span> pcm0.fs;
+  <span style="color:#66d9ef">double</span> Q  <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> std<span style="color:#f92672">::</span>sqrt(<span style="color:#ae81ff">2.0</span>);
 
-  if (type == &quot;lpf&quot;) {
+  <span style="color:#66d9ef">if</span> (type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;lpf&#34;</span>) {
     IIR_LPF(fd, Q, a, b);
-  } else if (type == &quot;hpf&quot;) {
+  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hpf&#34;</span>) {
     IIR_LPF(fd, Q, a, b);
-  } else if (type == &quot;bpf&quot;) {
+  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bpf&#34;</span>) {
     IIR_BPF(fd, Q, a, b);
-  } else if (type == &quot;bef&quot;) {
+  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bef&#34;</span>) {
     IIR_BEF(fd, Q, a, b);
   }
 
   pcm1.sL.resize(pcm1.length);
   pcm1.sR.resize(pcm1.length);
 
-  for (int n = 0; n &lt; pcm1.length; n++) {
-    for (int m = 0; m &lt;= J; m++) {
-      if ((n - m) &gt;= 0) {
-        pcm1.sL[n] += b[m] * pcm0.sL[n - m];
-        pcm1.sR[n] += b[m] * pcm0.sR[n - m];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> pcm1.length; n<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> J; m<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> ((n <span style="color:#f92672">-</span> m) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+        pcm1.sL[n] <span style="color:#f92672">+=</span> b[m] <span style="color:#f92672">*</span> pcm0.sL[n <span style="color:#f92672">-</span> m];
+        pcm1.sR[n] <span style="color:#f92672">+=</span> b[m] <span style="color:#f92672">*</span> pcm0.sR[n <span style="color:#f92672">-</span> m];
       }
     }
 
-    for (int m = 1; m &lt;= I; m++) {
-      if ((n - m) &gt;= 0) {
-        pcm1.sL[n] += -a[m] * pcm1.sL[n - m];
-        pcm1.sR[n] += -a[m] * pcm1.sR[n - m];
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; m <span style="color:#f92672">&lt;=</span> I; m<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> ((n <span style="color:#f92672">-</span> m) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+        pcm1.sL[n] <span style="color:#f92672">+=</span> <span style="color:#f92672">-</span>a[m] <span style="color:#f92672">*</span> pcm1.sL[n <span style="color:#f92672">-</span> m];
+        pcm1.sR[n] <span style="color:#f92672">+=</span> <span style="color:#f92672">-</span>a[m] <span style="color:#f92672">*</span> pcm1.sR[n <span style="color:#f92672">-</span> m];
       }
     }
   }
 
-  wave_write(&amp;pcm1, &quot;iir_filter.wav&quot;);
+  wave_write(<span style="color:#f92672">&amp;</span>pcm1, <span style="color:#e6db74">&#34;iir_filter.wav&#34;</span>);
 }
 
-</code></pre>
-
-<h1 id="フレーム単位のフィルタリング">フレーム単位のフィルタリング</h1>
-
+</code></pre></div><h1 id="フレーム単位のフィルタリング">フレーム単位のフィルタリング</h1>
 <p>コンピュータのメモリは有限なので, 音データがあまりに長いと, 音データを一度にメモリに読み込んでフィルタリングすることが難しくなります. そこで, 音データを小さなフレームに分割して, フレーム単位でフィルタリングする必要があります. フレームに分割するので, フレームとフレームの接続を考慮する必要があります.</p>
-
 <p>IIR フィルタの場合には, 直前のフレームの音データだけでなく, 直前のフィルタリング結果も考慮して, フィルタリングする必要があります.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66061100-b4e1a100-e579-11e9-9f68-e7622b17688e.png" alt="フレーム単位のフィルタリング" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66061100-b4e1a100-e579-11e9-9f68-e7622b17688e.png" alt="フレーム単位のフィルタリング"></p>
 <h2 id="実装-1">実装</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">iir_frame_filter</span>(
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>s0,
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>s1,
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a,
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b,
+  <span style="color:#66d9ef">int</span> length, 
+  <span style="color:#66d9ef">int</span> J,
+  <span style="color:#66d9ef">int</span> I,
+  <span style="color:#66d9ef">int</span> L) {
+  <span style="color:#66d9ef">int</span> number_of_frames <span style="color:#f92672">=</span> length <span style="color:#f92672">/</span> L;
 
-<pre><code class="language-c++">#include &lt;vector&gt;
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> x(L <span style="color:#f92672">+</span> J);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> y(L <span style="color:#f92672">+</span> I);
 
-void iir_frame_filter(
-  std::vector&lt;double&gt; &amp;s0,
-  std::vector&lt;double&gt; &amp;s1,
-  std::vector&lt;double&gt; &amp;a,
-  std::vector&lt;double&gt; &amp;b,
-  int length, 
-  int J,
-  int I,
-  int L) {
-  int number_of_frames = length / L;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> frame <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; frame <span style="color:#f92672">&lt;</span> number_of_frames; frame<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> offset <span style="color:#f92672">=</span> L <span style="color:#f92672">*</span> frame;
 
-  std::vector&lt;double&gt; x(L + J);
-  std::vector&lt;double&gt; y(L + I);
-
-  for (int frame = 0; frame &lt; number_of_frames; frame++) {
-    int offset = L * frame;
-
-    for (int n = 0; n &lt; L + J; n++) {
-      if ((offset - J + n) &lt; 0) {
-        x[n] = 0.0;
-      } else {
-        x[n] = s0[offset - J + n];
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> L <span style="color:#f92672">+</span> J; n<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> ((offset <span style="color:#f92672">-</span> J <span style="color:#f92672">+</span> n) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
+        x[n] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+      } <span style="color:#66d9ef">else</span> {
+        x[n] <span style="color:#f92672">=</span> s0[offset <span style="color:#f92672">-</span> J <span style="color:#f92672">+</span> n];
       }
     }
 
-    for (int n = 0; n &lt; L + I; n++) {
-      if ((offset - I + n) &lt; 0) {
-        y[n] = 0.0;
-      } else {
-        y[n] = s1[offset - I + n];
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> L <span style="color:#f92672">+</span> I; n<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> ((offset <span style="color:#f92672">-</span> I <span style="color:#f92672">+</span> n) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
+        y[n] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+      } <span style="color:#66d9ef">else</span> {
+        y[n] <span style="color:#f92672">=</span> s1[offset <span style="color:#f92672">-</span> I <span style="color:#f92672">+</span> n];
       }
     }
 
-    for (int n = 0; n &lt; L; n++) {
-      for (int m = 0; m &lt;= J; m++) {
-        y[I + n] += b[m] * x[J + (n - m)];
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> L; n<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> J; m<span style="color:#f92672">++</span>) {
+        y[I <span style="color:#f92672">+</span> n] <span style="color:#f92672">+=</span> b[m] <span style="color:#f92672">*</span> x[J <span style="color:#f92672">+</span> (n <span style="color:#f92672">-</span> m)];
       }
 
-      for (int m = 1; m &lt;= I; m++) {
-        y[I + n] += -a[m] * y[I + (n - m)];
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; m <span style="color:#f92672">&lt;=</span> I; m<span style="color:#f92672">++</span>) {
+        y[I <span style="color:#f92672">+</span> n] <span style="color:#f92672">+=</span> <span style="color:#f92672">-</span>a[m] <span style="color:#f92672">*</span> y[I <span style="color:#f92672">+</span> (n <span style="color:#f92672">-</span> m)];
       }
     }
 
-    for (int n = 0; n &lt; L; n++) {
-      s1[offset + n] = y[I + n];
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> L; n<span style="color:#f92672">++</span>) {
+      s1[offset <span style="color:#f92672">+</span> n] <span style="color:#f92672">=</span> y[I <span style="color:#f92672">+</span> n];
     }
   }
 }
-</code></pre>
-
-<p>実行例</p>
-
-<pre><code class="language-c++">#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cmath&gt;
-#include &lt;vector&gt;
-#include &quot;wave.h&quot;
-#include &quot;iir_filters.h&quot;
-#include &quot;frame_filters.h&quot;
-
-enum {
-  L = 256,
-  J = 2,
-  I = 2
+</code></pre></div><p>実行例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdio&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;wave.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;iir_filters.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;frame_filters.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">enum</span> {
+  L <span style="color:#f92672">=</span> <span style="color:#ae81ff">256</span>,
+  J <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+  I <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
 };
 
-int main(int argc, char **argv) {
-  if (argc != 2) {
-    std::cerr &lt;&lt; &quot;Require fd&quot; &lt;&lt; std::endl;
-    std::exit(EXIT_FAILURE);
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv) {
+  <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span>) {
+    std<span style="color:#f92672">::</span>cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Require fd&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+    std<span style="color:#f92672">::</span>exit(EXIT_FAILURE);
   }
 
   STEREO_PCM pcm0, pcm1;
-  std::vector&lt;double&gt; a(3);
-  std::vector&lt;double&gt; b(3);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> a(<span style="color:#ae81ff">3</span>);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> b(<span style="color:#ae81ff">3</span>);
 
-  wave_read(&amp;pcm0, &quot;stereo.wav&quot;);
+  wave_read(<span style="color:#f92672">&amp;</span>pcm0, <span style="color:#e6db74">&#34;stereo.wav&#34;</span>);
 
-  pcm1.fs     = pcm0.fs;
-  pcm1.bits   = pcm0.bits;
-  pcm1.length = pcm0.length;
+  pcm1.fs     <span style="color:#f92672">=</span> pcm0.fs;
+  pcm1.bits   <span style="color:#f92672">=</span> pcm0.bits;
+  pcm1.length <span style="color:#f92672">=</span> pcm0.length;
 
-  double fd = std::stod(argv[1]) / pcm0.fs;
-  double Q  = 1.0 / std::sqrt(2.0);
+  <span style="color:#66d9ef">double</span> fd <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">/</span> pcm0.fs;
+  <span style="color:#66d9ef">double</span> Q  <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> std<span style="color:#f92672">::</span>sqrt(<span style="color:#ae81ff">2.0</span>);
 
   IIR_LPF(fd, Q, a, b);
 
@@ -948,307 +845,268 @@ int main(int argc, char **argv) {
   iir_frame_filter(pcm0.sL, pcm1.sL, a, b, pcm0.length, J, I, L);
   iir_frame_filter(pcm0.sR, pcm1.sR, a, b, pcm0.length, J, I, L);
 
-  wave_write(&amp;pcm1, &quot;iir_frame_filter.wav&quot;);
+  wave_write(<span style="color:#f92672">&amp;</span>pcm1, <span style="color:#e6db74">&#34;iir_frame_filter.wav&#34;</span>);
 }
-</code></pre>
-
-<h1 id="イコライザ">イコライザ</h1>
-
+</code></pre></div><h1 id="イコライザ">イコライザ</h1>
 <p><b>イコライザ</b>は, 周波数特性を加工して, 好みの音色をつくりだすためのエフェクターです. イコライザは, 低域の周波数成分を強調する<b>ローシェルビングフィルタ</b>, 高域の周波数成分を強調する<b>ハイシェルビングフィルタ</b>, 特定の周波数帯域を強調する<b>ピーキングフィルタ</b>の 3 種類のフィルタによって構成されます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66130390-a0121580-e62c-11e9-9ae6-ad5e3c6e7d53.png" alt="ローシェルビングフィルタ, ハイシェルビングフィルタ, ピーキングフィルタ" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66130390-a0121580-e62c-11e9-9ae6-ad5e3c6e7d53.png" alt="ローシェルビングフィルタ, ハイシェルビングフィルタ, ピーキングフィルタ"></p>
 <h2 id="ローシェルビングフィルタ">ローシェルビングフィルタ</h2>
-
 <p>$
 \begin{eqnarray}
 H(s)&amp;=&amp;\frac{s^{2}+\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}\left(1+g\right)}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(0)&amp;=&amp;\frac{1+\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}\left(1+g\right)}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}\left(1+g\right)-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(2)&amp;=&amp;\frac{1-\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}\left(1+g\right)}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <h2 id="ハイシェルビングフィルタ">ハイシェルビングフィルタ</h2>
-
 <p>$
 \begin{eqnarray}
 H(s)&amp;=&amp;\frac{\left(1+g\right)s^{2}+\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(0)&amp;=&amp;\frac{\left(1+g\right)+\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2\left(1+g\right)}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(2)&amp;=&amp;\frac{\left(1+g\right)-\sqrt{1+g}\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <h2 id="ピーキングフィルタ">ピーキングフィルタ</h2>
-
 <p>$
 \begin{eqnarray}
 H(s)&amp;=&amp;\frac{s^{2}+\frac{2{\pi}f_{c}}{Q}\left(1+g\right)s+4{\pi}^{2}f_{c}^{2}}{s^{2}+\frac{2{\pi}f_{c}}{Q}s+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 H(z)&amp;=&amp;\frac{b(0)+b(1)z^{-1}+b(2)z^{-2}}{1+a(1)z^{-1}+a(2)z^{-2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(0)&amp;=&amp;\frac{1+\frac{2{\pi}f_{c}}{Q}\left(1+g\right)+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}\left(1+g\right)+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(1)&amp;=&amp;\frac{8{\pi}^{2}f_{c}^{2}-2}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 a(2)&amp;=&amp;\frac{1-\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}{1+\frac{2{\pi}f_{c}}{Q}+4{\pi}^{2}f_{c}^{2}}
 \end{eqnarray}
 $</p>
-
 <p>これらのフィルタには, $g$ という所定の帯域の増幅率を設定できるパラメータ (一般的に, <b>ゲイン</b>と呼ばれています) があります. ローシェルビングフィルタ, および, ハイシェルビングフィルタでは, $Q$ を $\frac{1}{\sqrt{2}}$ に設定することが一般的です. ピーキングフィルタでは, $Q$ によって帯域幅を調整することが可能です($Q$ が大きいほど帯域幅は小さくなり, $Q$ が小さいほど帯域幅は大きくなります).</p>
-
 <p>いずれのフィルタでも, 帯域を減衰させる (<b>カット</b>と呼びます) のは, $-1 \leqq g &lt; 0$ の範囲に設定します. 一方で, 帯域を増幅させる (<b>ブースト</b>と呼びます) には, $0 &lt; g$ に設定します.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66130511-c59f1f00-e62c-11e9-88e6-4c839ac7e0cc.png" alt="3 バンドイコライザ" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66130511-c59f1f00-e62c-11e9-88e6-4c839ac7e0cc.png" alt="3 バンドイコライザ"></p>
 <h2 id="実装-2">実装</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IIR_LOW_SHELVING</span>(<span style="color:#66d9ef">double</span> fd, <span style="color:#66d9ef">double</span> Q, <span style="color:#66d9ef">double</span> g, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+  <span style="color:#66d9ef">double</span> fa <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>tan(M_PI <span style="color:#f92672">*</span> fd) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI);
+  <span style="color:#66d9ef">double</span> numerator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> ((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>));
 
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;cmath&gt;
-
-void IIR_LOW_SHELVING(double fd, double Q, double g, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
-  double fa = std::tan(M_PI * fd) / (2.0 * M_PI);
-  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
-
-  a[0] = 1.0;
-  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
-  a[2] = (1.0 - ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
-  b[0] = (1 + std::sqrt(1 + g) * ((2 * M_PI * fa) / Q) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
-  b[1] = (8.0 * std::pow(M_PI, 2) * std::pow(fa, 2) * (1 + g) - 2) / numerator;
-  b[2] = (1 - std::sqrt(1 + g) * ((2 * M_PI * fa) / Q) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+  a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>;
+  a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">8.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2.0</span>) <span style="color:#f92672">/</span> numerator;
+  a[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> ((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>))) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> std<span style="color:#f92672">::</span>sqrt(<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> g) <span style="color:#f92672">*</span> ((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> <span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">8.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> g) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> std<span style="color:#f92672">::</span>sqrt(<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> g) <span style="color:#f92672">*</span> ((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> <span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">/</span> numerator;
 }
 
-void IIR_HIGH_SHELVING(double fd, double Q, double g, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
-  double fa = std::tan(M_PI * fd) / (2.0 * M_PI);
-  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IIR_HIGH_SHELVING</span>(<span style="color:#66d9ef">double</span> fd, <span style="color:#66d9ef">double</span> Q, <span style="color:#66d9ef">double</span> g, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+  <span style="color:#66d9ef">double</span> fa <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>tan(M_PI <span style="color:#f92672">*</span> fd) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI);
+  <span style="color:#66d9ef">double</span> numerator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> ((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>));
 
-  a[0] = 1.0;
-  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
-  a[2] = (1.0 - ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
-  b[0] = ((1 + g) + std::sqrt(1 + g) * ((2 * M_PI * fa) / Q) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
-  b[1] = (8 * std::pow(M_PI, 2) * std::pow(fa, 2) - 2 * (1 + g)) / numerator;
-  b[2] = ((1 + g) - std::sqrt(1 + g) * ((2 * M_PI * fa) / Q) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+  a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>;
+  a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">8.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2.0</span>) <span style="color:#f92672">/</span> numerator;
+  a[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> ((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>))) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> g) <span style="color:#f92672">+</span> std<span style="color:#f92672">::</span>sqrt(<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> g) <span style="color:#f92672">*</span> ((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> <span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">8</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> g)) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> g) <span style="color:#f92672">-</span> std<span style="color:#f92672">::</span>sqrt(<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> g) <span style="color:#f92672">*</span> ((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> <span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">/</span> numerator;
 }
 
-void IIR_PEAKING(double fd, double Q, double g, std::vector&lt;double&gt; &amp;a, std::vector&lt;double&gt; &amp;b) {
-  double fa = std::tan(M_PI * fd) / (2.0 * M_PI);
-  double numerator = 1.0 + ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2));
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">IIR_PEAKING</span>(<span style="color:#66d9ef">double</span> fd, <span style="color:#66d9ef">double</span> Q, <span style="color:#66d9ef">double</span> g, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+  <span style="color:#66d9ef">double</span> fa <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>tan(M_PI <span style="color:#f92672">*</span> fd) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI);
+  <span style="color:#66d9ef">double</span> numerator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> ((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>));
 
-  a[0] = 1.0;
-  a[1] = ((8.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) - 2.0) / numerator;
-  a[2] = (1.0 - ((2.0 * M_PI * fa) / Q) + (4.0 * std::pow(M_PI, 2) * std::pow(fa, 2))) / numerator;
-  b[0] = (1 + ((2 * M_PI * fa) / Q) * (1 + g) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
-  b[1] = (8.0 * std::pow(M_PI, 2) * std::pow(fa, 2) - 2) / numerator;
-  b[2] = (1 - ((2 * M_PI * fa) / Q) * (1 + g) + 4.0 * std::pow(M_PI, 2) * std::pow(fa, 2)) / numerator;
+  a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>;
+  a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">8.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2.0</span>) <span style="color:#f92672">/</span> numerator;
+  a[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> ((<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>))) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> ((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> g) <span style="color:#f92672">+</span> <span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">8.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">/</span> numerator;
+  b[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> ((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fa) <span style="color:#f92672">/</span> Q) <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> g) <span style="color:#f92672">+</span> <span style="color:#ae81ff">4.0</span> <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(M_PI, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> std<span style="color:#f92672">::</span>pow(fa, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">/</span> numerator;
 }
-</code></pre>
-
-<p>イコライザ</p>
-
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &quot;iir_filters.h&quot;
-
-enum {
-  NUMBER_OF_BANDS = 3,
-  BASS   = 500,
-  MIDDLE = 1000,
-  TREBLE = 2000
+</code></pre></div><p>イコライザ</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;iir_filters.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">enum</span> {
+  NUMBER_OF_BANDS <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>,
+  BASS   <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>,
+  MIDDLE <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>,
+  TREBLE <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>
 };
 
-void Equalizer(
-  std::vector&lt;double&gt; &amp;s0,
-  std::vector&lt;double&gt; &amp;s1,
-  double fs,
-  int length,
-  int I,
-  int J,
-  double bass,
-  double middle,
-  double treble,
-  double Q) {
-  std::vector&lt;std::vector&lt;double&gt;&gt; A(NUMBER_OF_BANDS, std::vector&lt;double&gt;(3));
-  std::vector&lt;std::vector&lt;double&gt;&gt; B(NUMBER_OF_BANDS, std::vector&lt;double&gt;(3));
-  std::vector&lt;double&gt; a(3);
-  std::vector&lt;double&gt; b(3);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Equalizer</span>(
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>s0,
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>s1,
+  <span style="color:#66d9ef">double</span> fs,
+  <span style="color:#66d9ef">int</span> length,
+  <span style="color:#66d9ef">int</span> I,
+  <span style="color:#66d9ef">int</span> J,
+  <span style="color:#66d9ef">double</span> bass,
+  <span style="color:#66d9ef">double</span> middle,
+  <span style="color:#66d9ef">double</span> treble,
+  <span style="color:#66d9ef">double</span> Q) {
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> A(NUMBER_OF_BANDS, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">3</span>));
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> B(NUMBER_OF_BANDS, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">3</span>));
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> a(<span style="color:#ae81ff">3</span>);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> b(<span style="color:#ae81ff">3</span>);
 
-  IIR_LOW_SHELVING(static_cast&lt;double&gt;(BASS) / fs, Q, bass, a, b);
+  IIR_LOW_SHELVING(<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(BASS) <span style="color:#f92672">/</span> fs, Q, bass, a, b);
 
-  for (int m = 0; m &lt;= I; m++) {
-    A[0][m] = a[m];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> I; m<span style="color:#f92672">++</span>) {
+    A[<span style="color:#ae81ff">0</span>][m] <span style="color:#f92672">=</span> a[m];
   }
 
-  for (int m = 0; m &lt;= J; m++) {
-    B[0][m] = b[m];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> J; m<span style="color:#f92672">++</span>) {
+    B[<span style="color:#ae81ff">0</span>][m] <span style="color:#f92672">=</span> b[m];
   }
 
-  IIR_PEAKING(static_cast&lt;double&gt;(MIDDLE) / fs, Q, middle, a, b);
+  IIR_PEAKING(<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(MIDDLE) <span style="color:#f92672">/</span> fs, Q, middle, a, b);
 
-  for (int m = 0; m &lt;= I; m++) {
-    A[1][m] = a[m];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> I; m<span style="color:#f92672">++</span>) {
+    A[<span style="color:#ae81ff">1</span>][m] <span style="color:#f92672">=</span> a[m];
   }
 
-  for (int m = 0; m &lt;= J; m++) {
-    B[1][m] = b[m];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> J; m<span style="color:#f92672">++</span>) {
+    B[<span style="color:#ae81ff">1</span>][m] <span style="color:#f92672">=</span> b[m];
   }
 
-  IIR_HIGH_SHELVING(static_cast&lt;double&gt;(TREBLE) / fs, Q, treble, a, b);
+  IIR_HIGH_SHELVING(<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(TREBLE) <span style="color:#f92672">/</span> fs, Q, treble, a, b);
 
-  for (int m = 0; m &lt;= I; m++) {
-    A[2][m] = a[m];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> I; m<span style="color:#f92672">++</span>) {
+    A[<span style="color:#ae81ff">2</span>][m] <span style="color:#f92672">=</span> a[m];
   }
 
-  for (int m = 0; m &lt;= J; m++) {
-    B[2][m] = b[m];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> J; m<span style="color:#f92672">++</span>) {
+    B[<span style="color:#ae81ff">2</span>][m] <span style="color:#f92672">=</span> b[m];
   }
 
-  for (int i = 0; i &lt; NUMBER_OF_BANDS; i++) {
-    s1.assign(length, 0.0);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> NUMBER_OF_BANDS; i<span style="color:#f92672">++</span>) {
+    s1.assign(length, <span style="color:#ae81ff">0.0</span>);
 
-    for (int n = 0; n &lt; length; n++) {
-      for (int m = 0; m &lt;= J; m++) {
-        if ((n - m) &gt;= 0) {
-          s1[n] = s1[n] + (B[i][m] * s0[n - m]);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> length; n<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> J; m<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">if</span> ((n <span style="color:#f92672">-</span> m) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+          s1[n] <span style="color:#f92672">=</span> s1[n] <span style="color:#f92672">+</span> (B[i][m] <span style="color:#f92672">*</span> s0[n <span style="color:#f92672">-</span> m]);
         }
       }
 
-      for (int m = 1; m &lt;= I; m++) {
-        if ((n - m) &gt;= 0) {
-          s1[n] = s1[n] + (-A[i][m] * s1[n - m]);
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; m <span style="color:#f92672">&lt;=</span> I; m<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">if</span> ((n <span style="color:#f92672">-</span> m) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+          s1[n] <span style="color:#f92672">=</span> s1[n] <span style="color:#f92672">+</span> (<span style="color:#f92672">-</span>A[i][m] <span style="color:#f92672">*</span> s1[n <span style="color:#f92672">-</span> m]);
         }
       }
     }
 
-    s0 = s1;
+    s0 <span style="color:#f92672">=</span> s1;
   }
 }
-</code></pre>
-
-<p>実行例</p>
-
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cmath&gt;
-#include &quot;wave.h&quot;
-#include &quot;equalizer.h&quot;
-
-enum {
-  I = 2,
-  J = 2
+</code></pre></div><p>実行例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;wave.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;equalizer.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">enum</span> {
+  I <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,
+  J <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
 };
 
-int main(int argc, char **argv) {
-  if (argc != 4) {
-    std::cerr &lt;&lt; &quot;Require bass, middle, treble&quot; &lt;&lt; std::endl;
-    std::exit(EXIT_FAILURE);
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv) {
+  <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">4</span>) {
+    std<span style="color:#f92672">::</span>cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Require bass, middle, treble&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+    std<span style="color:#f92672">::</span>exit(EXIT_FAILURE);
   }
 
   STEREO_PCM pcm0, pcm1;
 
-  double bass   = std::stod(argv[1]);
-  double middle = std::stod(argv[2]);
-  double treble = std::stod(argv[3]);
-  double Q      = 1.0 / std::sqrt(2.0);
+  <span style="color:#66d9ef">double</span> bass   <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">1</span>]);
+  <span style="color:#66d9ef">double</span> middle <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">2</span>]);
+  <span style="color:#66d9ef">double</span> treble <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">3</span>]);
+  <span style="color:#66d9ef">double</span> Q      <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> std<span style="color:#f92672">::</span>sqrt(<span style="color:#ae81ff">2.0</span>);
 
-  wave_read(&amp;pcm0, &quot;stereo.wav&quot;);
+  wave_read(<span style="color:#f92672">&amp;</span>pcm0, <span style="color:#e6db74">&#34;stereo.wav&#34;</span>);
 
-  pcm1.fs     = pcm0.fs;
-  pcm1.bits   = pcm0.bits;
-  pcm1.length = pcm0.length;
+  pcm1.fs     <span style="color:#f92672">=</span> pcm0.fs;
+  pcm1.bits   <span style="color:#f92672">=</span> pcm0.bits;
+  pcm1.length <span style="color:#f92672">=</span> pcm0.length;
 
   pcm1.sL.resize(pcm1.length);
   pcm1.sR.resize(pcm1.length);
@@ -1256,12 +1114,9 @@ int main(int argc, char **argv) {
   Equalizer(pcm0.sL, pcm1.sL, pcm1.fs, pcm1.length, I, J, bass, middle, treble, Q);
   Equalizer(pcm0.sR, pcm1.sR, pcm1.fs, pcm1.length, I, J, bass, middle, treble, Q);
 
-  wave_write(&amp;pcm1, &quot;equalizer.wav&quot;);
+  wave_write(<span style="color:#f92672">&amp;</span>pcm1, <span style="color:#e6db74">&#34;equalizer.wav&#34;</span>);
 }
-</code></pre>
-
-<h1 id="リファレンス">リファレンス</h1>
-
+</code></pre></div><h1 id="リファレンス">リファレンス</h1>
 <ul>
 <li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%81%A7%E3%81%AF%E3%81%98%E3%82%81%E3%82%8B%E9%9F%B3%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E3%82%B5%E3%82%A6%E3%83%B3%E3%83%89%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86-%E9%9D%92%E6%9C%A8-%E7%9B%B4%E5%8F%B2/dp/4274206505">C言語ではじめる音のプログラミング―サウンドエフェクトの信号処理</a></li>
 </ul>
@@ -1416,7 +1271,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
                     audio
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -1424,7 +1279,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
                     computer-sience
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">10</span>
             </li>
             
             <li class="category-list-item">
@@ -1440,7 +1295,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -1456,7 +1311,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">15</span>
             </li>
             
             <li class="category-list-item">
@@ -1464,15 +1319,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
                     multimedia
                 </a>
-                <span class="category-list-count">5</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/music">
-                    music
-                </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -1496,7 +1343,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">10</span>
+                <span class="category-list-count">14</span>
             </li>
             
             <li class="category-list-item">
@@ -1526,6 +1373,30 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/aac">
+                    aac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/adpcm">
+                    adpcm
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/advanced-audio-coding">
+                    advanced-audio-coding
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/algorithm">
                     algorithm
                 </a>
@@ -1534,8 +1405,32 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/c">
+                    c
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/celp">
+                    celp
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
                     ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/correlation-function">
+                    correlation-function
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1569,7 +1464,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -1633,13 +1528,29 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
                     javascript
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
                     laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-interpolation">
+                    linear-interpolation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-prediction-analysis">
+                    linear-prediction-analysis
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1665,7 +1576,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">9</span>
             </li>
             
             <li class="category-list-item">
@@ -1673,7 +1584,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
                     mdct
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -1689,13 +1600,29 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">
                     modified-discrete-cosine-transform
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mp3">
                     mp3
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-1-audio">
+                    mpeg-1-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-audio">
+                    mpeg-2-audio
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1726,16 +1653,80 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/noise-suppressor">
+                    noise-suppressor
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
                     pcm
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/resampling">
+                    resampling
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/sampling-theorem">
+                    sampling-theorem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/spectrum-subtraction">
+                    spectrum-subtraction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/stochastic-signal">
+                    stochastic-signal
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/time-stretch">
+                    time-stretch
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
                     wave
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/web-audio-api">
+                    web-audio-api
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webassembly">
+                    webassembly
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1781,10 +1772,28 @@ int main(int argc, char **argv) {
     <div class="widget tagcloud">
         
         
+        <a href="https://art-of-life.jp/tags/aac" style="font-size: 12px;">aac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/adpcm" style="font-size: 12px;">adpcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/advanced-audio-coding" style="font-size: 12px;">advanced-audio-coding</a>
+        
+        
         <a href="https://art-of-life.jp/tags/algorithm" style="font-size: 12px;">algorithm</a>
         
         
+        <a href="https://art-of-life.jp/tags/c" style="font-size: 12px;">c</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/celp" style="font-size: 12px;">celp</a>
+        
+        
         <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/correlation-function" style="font-size: 12px;">correlation-function</a>
         
         
         <a href="https://art-of-life.jp/tags/data-structures" style="font-size: 12px;">data-structures</a>
@@ -1826,6 +1835,12 @@ int main(int argc, char **argv) {
         <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
         
         
+        <a href="https://art-of-life.jp/tags/linear-interpolation" style="font-size: 12px;">linear-interpolation</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linear-prediction-analysis" style="font-size: 12px;">linear-prediction-analysis</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
         
         
@@ -1847,6 +1862,12 @@ int main(int argc, char **argv) {
         <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
         
         
+        <a href="https://art-of-life.jp/tags/mpeg-1-audio" style="font-size: 12px;">mpeg-1-audio</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-audio" style="font-size: 12px;">mpeg-2-audio</a>
+        
+        
         <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
         
         
@@ -1856,10 +1877,34 @@ int main(int argc, char **argv) {
         <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
         
         
+        <a href="https://art-of-life.jp/tags/noise-suppressor" style="font-size: 12px;">noise-suppressor</a>
+        
+        
         <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
         
         
+        <a href="https://art-of-life.jp/tags/resampling" style="font-size: 12px;">resampling</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/sampling-theorem" style="font-size: 12px;">sampling-theorem</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/spectrum-subtraction" style="font-size: 12px;">spectrum-subtraction</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/stochastic-signal" style="font-size: 12px;">stochastic-signal</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/time-stretch" style="font-size: 12px;">time-stretch</a>
+        
+        
         <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/web-audio-api" style="font-size: 12px;">web-audio-api</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webassembly" style="font-size: 12px;">webassembly</a>
         
         
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
@@ -1887,8 +1932,8 @@ int main(int argc, char **argv) {
 <footer id="footer">
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      &copy; 2020
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>
@@ -1913,7 +1958,7 @@ if (!doNotTrack) {
 
 
 <script>hljs.initHighlightingOnLoad();</script>
-<script>jQuery('.article-type-page a:not([target])').attr('target', '_blank');</script>
+<script>jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank');</script>
 
 
 <script type="text/x-mathjax-config">

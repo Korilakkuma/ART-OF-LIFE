@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on ART OF LIFE</title>
@@ -6,18 +6,90 @@
     <description>Recent content in Posts on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Thu, 10 Oct 2019 20:52:07 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2020 02:57:12 +0900</lastBuildDate>
     
 	<atom:link href="https://art-of-life.jp/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>攻撃再開 2019 X ～破滅に向かって～</title>
-      <link>https://art-of-life.jp/posts/my-motivation/</link>
-      <pubDate>Thu, 10 Oct 2019 20:52:07 +0900</pubDate>
+      <title>Resampling</title>
+      <link>https://art-of-life.jp/posts/resampling/</link>
+      <pubDate>Sun, 07 Jun 2020 02:57:12 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/my-motivation/</guid>
-      <description>転職決定までの経緯 マルチメディアエンジニアとして生き残る 2018年の段階で私が知らないこと この記事が, わたしのエンジニア人生において, 大きな</description>
+      <guid>https://art-of-life.jp/posts/resampling/</guid>
+      <description>リサンプリング リサンプリングとは, デジタル信号をアナログ信号に戻し, サンプリング周波数を (本来のサンプリング周波数から) 変更して, 再度, サン</description>
+    </item>
+    
+    <item>
+      <title>2019 年度の ART OF LIFE ふりかえり</title>
+      <link>https://art-of-life.jp/posts/end-of-2019/</link>
+      <pubDate>Tue, 31 Mar 2020 22:53:57 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/end-of-2019/</guid>
+      <description>Overview 2019 年度は, 社会人になってから (上京してから) もっとも激動の 1 年間だったように思います. サイバーエージェント退職 (April) 東京大学 Software Design Media (SDM) 研究室 のお</description>
+    </item>
+    
+    <item>
+      <title>3 月 22 日の誓い</title>
+      <link>https://art-of-life.jp/posts/20150322-20200322/</link>
+      <pubDate>Sun, 22 Mar 2020 15:22:00 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/20150322-20200322/</guid>
+      <description>旅立ちの日 2015 年 3 月 22 日から 5 年 (1827 日) が経過しました &amp;hellip; 2015 年 3 月 22 日は, わたしが 4 年間過ごした, 大阪の部屋とお別れした日です &amp;hellip; この部屋には, たく</description>
+    </item>
+    
+    <item>
+      <title>Time Stretch</title>
+      <link>https://art-of-life.jp/posts/time-stretch/</link>
+      <pubDate>Mon, 24 Feb 2020 15:22:57 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/time-stretch/</guid>
+      <description>タイムストレッチ 音波の速度 ($v$), 周波数 ($f$), 波長 ($\lambda$) には以下の関係式があります. $ \begin{eqnarray} v=f{\lambda} \end{eqnarray} $ 速度を速くすると, 周波数も高くなり, 速度を遅くすると, 周波数</description>
+    </item>
+    
+    <item>
+      <title>Spectrum Subtraction</title>
+      <link>https://art-of-life.jp/posts/spectrum-subtraction/</link>
+      <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/spectrum-subtraction/</guid>
+      <description>スペクトルサブトラクションとは スペクトルサブトラクションとは, その名のとおり, 周波数領域で減算処理をすることで, 背景雑音を除去するアルゴリズ</description>
+    </item>
+    
+    <item>
+      <title>Audio Processing by WebAssembly</title>
+      <link>https://art-of-life.jp/posts/audio-processing-by-wasm/</link>
+      <pubDate>Sun, 02 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/audio-processing-by-wasm/</guid>
+      <description>WebAssembly とは WebAssembly とは, C / C++, Go や Rust などで実装され, (WebAssembly のために) コンパイルされたバイナリを実行するための JavaScript API です. WebAssembly を利用することによって, 以下のよう</description>
+    </item>
+    
+    <item>
+      <title>CELP</title>
+      <link>https://art-of-life.jp/posts/celp/</link>
+      <pubDate>Sun, 12 Jan 2020 17:27:07 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/celp/</guid>
+      <description>分析合成方式 PCM は, 音の波形そのものを符号化する, いわゆる, 波形符号化方式ですが, そうではなく, 観測信号から音の発生機構を推定し, そのパラメー</description>
+    </item>
+    
+    <item>
+      <title>ADPCM</title>
+      <link>https://art-of-life.jp/posts/adpcm/</link>
+      <pubDate>Thu, 21 Nov 2019 20:52:27 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/adpcm/</guid>
+      <description>PCM アナログ信号である音 (媒体の振動) をコンピュータで処理するためには, 0 と 1 のみの情報, すなわち, デジタル信号に変換する必要があります. その</description>
+    </item>
+    
+    <item>
+      <title>確率信号</title>
+      <link>https://art-of-life.jp/posts/stochastic-signal/</link>
+      <pubDate>Sun, 20 Oct 2019 17:02:31 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/stochastic-signal/</guid>
+      <description>音声信号などにおいて, ある時刻における振幅を知りたい場合, 実際に発音してからでないと知ることはできません. しかしながら, ある程度の時間をかけ</description>
     </item>
     
     <item>
@@ -84,7 +156,16 @@
     </item>
     
     <item>
-      <title>MP3 の圧縮技術の概要</title>
+      <title>AAC の圧縮符号化方式</title>
+      <link>https://art-of-life.jp/posts/aac/</link>
+      <pubDate>Mon, 09 Sep 2019 17:02:55 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/aac/</guid>
+      <description>MPEG-2 オーディオ MPEG-2 オーディオには, MPEG-2/BC (Backward Compatible) と MPEG-2/AAC (Advanced Audio Coding) の 2 つの規格があります. MPEG-2/BC の基本的な仕組みは MPEG-1 オーディオと変わりません. MPEG-2/BC には, サンプリング周</description>
+    </item>
+    
+    <item>
+      <title>MP3 の圧縮符号化方式</title>
       <link>https://art-of-life.jp/posts/mp3/</link>
       <pubDate>Wed, 28 Aug 2019 05:27:13 +0900</pubDate>
       
@@ -116,7 +197,7 @@
       <pubDate>Sun, 14 Jul 2019 17:27:13 +0900</pubDate>
       
       <guid>https://art-of-life.jp/posts/mathematics-for-programmer/</guid>
-      <description>プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (動画, オーディオ, 画像など) をあつか</description>
+      <description>プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (音・画像・動画) をあつかうエンジニア</description>
     </item>
     
     <item>

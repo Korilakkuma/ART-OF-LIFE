@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
 <head>
-    <title>MP3 の圧縮技術の概要 &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.56.0" />
+    <title>MP3 の圧縮符号化方式 &middot; ART OF LIFE</title>
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
     
-      <meta name="description" content="MP3 の圧縮技術の概要をとおして, 音声コーデックの基本技術を学ぶ">
+      <meta name="description" content="MP3 の圧縮符号化方式の概要をとおして, 音声コーデックの基本技術を学ぶ">
     
     
     <link rel="canonical" href="https://art-of-life.jp/posts/mp3/"/>
-    <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
+    <link rel="icon" href="https://art-of-life.jp/favicon.ico">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
     <link rel="stylesheet" href="https://art-of-life.jp/css/font-awesome.min.css">
@@ -20,29 +20,26 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="MP3 の圧縮技術の概要" />
-<meta property="og:description" content="MP3 の圧縮技術の概要をとおして, 音声コーデックの基本技術を学ぶ" />
+    <meta property="og:title" content="MP3 の圧縮符号化方式" />
+<meta property="og:description" content="MP3 の圧縮符号化方式の概要をとおして, 音声コーデックの基本技術を学ぶ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://art-of-life.jp/posts/mp3/" />
 <meta property="article:published_time" content="2019-08-28T05:27:13+09:00" />
 <meta property="article:modified_time" content="2019-08-28T05:27:13+09:00" />
 
     
-    <meta itemprop="name" content="MP3 の圧縮技術の概要">
-<meta itemprop="description" content="MP3 の圧縮技術の概要をとおして, 音声コーデックの基本技術を学ぶ">
-
-
+    <meta itemprop="name" content="MP3 の圧縮符号化方式">
+<meta itemprop="description" content="MP3 の圧縮符号化方式の概要をとおして, 音声コーデックの基本技術を学ぶ">
 <meta itemprop="datePublished" content="2019-08-28T05:27:13&#43;09:00" />
 <meta itemprop="dateModified" content="2019-08-28T05:27:13&#43;09:00" />
-<meta itemprop="wordCount" content="5720">
+<meta itemprop="wordCount" content="5681">
 
 
 
-<meta itemprop="keywords" content="MP3,PCM,Mathematics,Fourier Transform,Modified Discrete Cosine Transform,MDCT," />
-
+<meta itemprop="keywords" content="MPEG-1 Audio,MP3,PCM,Mathematics,Fourier Transform,Modified Discrete Cosine Transform,MDCT," />
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="MP3 の圧縮技術の概要"/>
-<meta name="twitter:description" content="MP3 の圧縮技術の概要をとおして, 音声コーデックの基本技術を学ぶ"/>
+<meta name="twitter:title" content="MP3 の圧縮符号化方式"/>
+<meta name="twitter:description" content="MP3 の圧縮符号化方式の概要をとおして, 音声コーデックの基本技術を学ぶ"/>
 <meta name="twitter:site" content="@xmusicjp"/>
 
     
@@ -95,7 +92,7 @@
       </nav>
         <nav id="sub-nav">
           <div class="profile" id="profile-nav">
-            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.jpeg"><i class="fa fa-caret-down"></i></a>
           </div>
         </nav>
         <div id="search-form-wrap">
@@ -159,8 +156,8 @@
       <img id="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&d=identicon"/>
       
       <h2 id="name">Korilakkuma</h2>
-      <h3 id="title">Multimedia (Video, Audio) Engineer. I&#39;m expert in Web Audio API, WebRTC and Streaming. C/C&#43;&#43;, JavaScript ...</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <h3 id="title">Audio Programmer. As a graduate student, I plan to study Audio Signal Processing for Music from 2022. C/C&#43;&#43;, UNIX system call 💖🎸🎹</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          30
+          48
         
         <span>
             Tags
@@ -262,7 +259,7 @@
         <header class="article-header">
     <a href="https://art-of-life.jp/posts/mp3/">
     <h1 class="article-title" itemprop="name">
-        MP3 の圧縮技術の概要
+        MP3 の圧縮符号化方式
     </h1>
     </a>
     <div class="article-meta">
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-08-28 05:27:13 &#43;0900 JST" itemprop="datePublished">2019-08-28</time>
             &middot;
-            5720
+            5681
             words
             &middot;
             12
@@ -312,6 +309,10 @@
                 <i class="fa fa-tags"></i>
                 
                 
+                <a class="article-category-link" href="https://art-of-life.jp/tags/mpeg-1-audio">MPEG-1 Audio</a>
+                &middot;
+                
+                
                 <a class="article-category-link" href="https://art-of-life.jp/tags/mp3">MP3</a>
                 &middot;
                 
@@ -342,58 +343,31 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="mp3-とは">MP3 とは ?</h1>
-
+            <h1 id="mp3-とは-">MP3 とは ?</h1>
 <h2 id="mpeg">MPEG</h2>
-
 <p>メディアデータ (動画や音声, 画像など) は, テキストデータと比較すると非常に大きなデータサイズです. したがって, データを小さくする (圧縮する) ことは不可欠です.</p>
-
 <p>そして, データを圧縮するには, 複雑な算術計算が必要になります. どのように算術計算するかによって, データの形式 (<b>コーデック</b>) が異なってきます.</p>
-
 <p><b>MPEG</b> (Moving Picture coding Experts Group) は, その計算を仕様として標準化した規格の 1 つです. MPEG では, 用途に合わせて, <b>MPEG-1</b>, <b>MPEG-2</b>, <b>MPEG-4</b> の 3 種類が標準化されています.</p>
-
 <h3 id="mpeg-1">MPEG-1</h3>
-
 <p>MPEG-1 は, テレビ電話などで利用されていた, H.261 という規格をもとにして規格化されたデータ形式です. MPEG-1 の画質は, 一般的なテレビやビデオと同程度とされています.</p>
-
 <h3 id="mpeg-2">MPEG-2</h3>
-
 <p>MPEG-2 は, MPEG-1 を改良し, 放送用として十分と言える程度の高画質を目指して規格化されました. MPEG-2 は, DVD やデジタル BS 放送などのデータ形式として, 幅広く利用されています.</p>
-
 <h3 id="mpeg-4">MPEG-4</h3>
-
 <p>MPEG-4 は, MPEG-2 よりもさらに圧縮率を向上させて, テレビ電話やインターネットなどでも利用できるように改良した規格です. MPEG-4 では, 用途によって品質を選択できるのが大きな特徴です.</p>
-
 <h2 id="mpeg-オーディオ">MPEG オーディオ</h2>
-
 <p>MPEG は映像のための <b>MPEG ビデオ</b>と, 音声のための <b>MPEG オーディオ</b>の 2 つの規格に大きく分類されます.</p>
-
 <h3 id="mpeg-1-オーディオ">MPEG-1 オーディオ</h3>
-
 <p>MPEG-1 オーディオでは, Layer I, Layer II, Layer III の 3 つが定義されています.</p>
-
 <h4 id="layer-i">Layer I</h4>
-
 <p>Layer I は, MPEG オーディオの基礎となる技術です. 音のピッチ (周波数) を 32 分割して, 人間の聴覚には聴こえない高すぎる音や, 低すぎる音を取り除くことで, データを圧縮します.</p>
-
 <h4 id="layer-ii">Layer II</h4>
-
 <p>Layer II では, データのまとめかたを改良することで, Layer I よりもさらに圧縮率を高めています.</p>
-
 <h4 id="layer-iii">Layer III</h4>
-
 <p>Layer III では, 人間の聴覚にはノイズとして知覚されてしまう部分を修復するなどの処理を追加することで, クリアな音質を実現します. Layer III を使うと, もとのデータサイズの 1 / 10 程度までデータを圧縮できます. <b>MP3 は, この MPEG-1 オーディオ Layer III が使われています</b>.</p>
-
-<h4 id="layer-i-layer-iii-の共通点">Layer I - Layer III の共通点</h4>
-
+<h4 id="layer-i---layer-iii-の共通点">Layer I - Layer III の共通点</h4>
 <p>共通点としては, 32 バンドのポリフェーズ・サブバンド・フィルタによって, 周波数を 32 分割する処理は共通しています. そして, 周波数帯域ごとに, スケール・ファクタ (信号の強さを表す指数) とビット割り当て情報 (それぞれの周波数帯域ごとに, どの程度の精度で信号を表す) によって, 可変精度でサンプルを符号化します.</p>
-
-<h4 id="layer-i-layer-iii-の相違点">Layer I - Layer III の相違点</h4>
-
+<h4 id="layer-i---layer-iii-の相違点">Layer I - Layer III の相違点</h4>
 <p>サンプルするブロックのサイズ (サンプル数) が異なります. また, Layer III では, 後述する MDCT が利用されます. MDCT を利用して各バンドを 12 サンプルずつ変換 (このまとまりを<b>グラニュール</b>と呼びます) して, さらにそれを 2 つ 1 組 (このまとまりを<b>ブロック</b>と呼びます) にして処理します.</p>
-
 <table>
   <caption>Layer I, Layer II, Layer III の比較</caption>
   <thead>
@@ -431,77 +405,41 @@
     </tr>
   </tbody>
 </table>
-
 <h3 id="mpeg-2-オーディオ">MPEG-2 オーディオ</h3>
-
-<p>MPEG-2 オーディオには, <b>MPEG-2/BC</b> (Backward Compatible) と <b>MPEG-2/AAC</b> (Advanced Audio Codec) の 2 つの規格があります. MPEG-2/BC の基本的な仕組みは MPEG-1 オーディオと変わりません.</p>
-
+<p>MPEG-2 オーディオには, <b>MPEG-2/BC</b> (Backward Compatible) と <b>MPEG-2/AAC</b> (Advanced Audio Coding) の 2 つの規格があります. MPEG-2/BC の基本的な仕組みは MPEG-1 オーディオと変わりません.</p>
 <p>MPEG-2/AAC は, 高音質・高圧縮を求めるために, MPEG-2/BC のあとに制定された規格です. MPEG-2/AAC は. 大きな音の部分に雑音を集中させたり, 一定の時間内の次のデータを予測したりすることで, データサイズ大幅に削減します (MPEG-1 オーディオ Layer I と比較して, データサイズを約 70 % にできます).</p>
-
 <h3 id="mpeg-4-オーディオ">MPEG-4 オーディオ</h3>
-
 <p>MPEG-4 オーディオでは, 音声の規格を用途によって, いくつか定められたものから 1 つ選択することができます. 音楽の再生に利用されるのは, <b>MPEG-2/AAC</b> と <b>TwinVQ</b> の 2 つです.</p>
-
-<h4 id="mpeg-2-aac">MPEG-2/AAC</h4>
-
+<h4 id="mpeg-2aac">MPEG-2/AAC</h4>
 <p>MPEG-2 オーディオとまったく同じ方式でデータを圧縮します.</p>
-
 <h4 id="twinvq">TwinVQ</h4>
-
 <p>複数のデータをまとめて, その類似性を発見するという方法でデータを圧縮します.</p>
-
 <p>より一般的に利用されているのは, MPEG-2/AAC で, <b>MP4</b> と呼ばれることもあります.</p>
-
 <h1 id="圧縮の基本">圧縮の基本</h1>
-
 <p>データサイズを小さくするには, もとのデータサイズそのものを少なくして実現することがもっとも単純です. <b>サンプリング周波数と量子化ビットを小さな値にすることです</b>. しかしながら, この方法では, 音質が低下してしまいます. そこで, 音質を低下させずに, データを圧縮する技術が必要です.</p>
-
 <h2 id="ランレングス圧縮">ランレングス圧縮</h2>
-
 <p>ランレングス圧縮とは, あるビット列において, 同じデータが続く部分の個数を数えるという方法で圧縮します. 例えば, <code>0000110000001</code> のビット列で並ぶ, 13 個のデータがあるとします. このようなデータは, 表現を変えて, 0 が 4 つ, 1 が 2 つ, 0 が 6 つ, 1 が 1 つと表現することもできます.</p>
-
 <p>この方法であれば, <code>0000 ...</code> のような, 0 が 50 個並んだデータを表現するには, すべてのデータを記述しなくても, 0 が 50 個と記述することで表現可能で, データサイズを小さくすることができます.</p>
-
 <p>しかしながら, 同じ値が連続しない場合は, むしろ大きくなってしまう可能性もあります. 音をデジタル化したデータの場合, 同じ値が続くことは稀なので, ランレングス圧縮はあまり効果的ではありません.</p>
-
 <h2 id="デルタ-pcm">デルタ PCM</h2>
-
 <p>音の場合, 急激に値が変化することは少なく, 緩やかに値が変化するという性質があります. この性質を利用して, 値そのものを保存するのではなく, 前の値との差分だけを保存するという圧縮技術が, <b>デルタ PCM</b> です.</p>
-
 <p>例えば, 100, 103, 108, 114, 109, 98 という 6 個のデータがあれば, その差分を取得して, +100, +3, +5, +6, -5, -11 のように表現します.</p>
-
 <p>数値が小さくなるということは, 必要なビット数が少なくなるのでデータを圧縮することができます.</p>
-
 <h2 id="log-pcm">log-PCM</h2>
-
 <p>人間の聴覚は, 音を対数的に知覚します (<b>フェヒナーの法則</b>). 対数的に知覚するとは, 音の大きさが大きい場合には, 小さな音量変化に気づかず, 音の大きさが小さい場合には, より小さな音量変化に気づきます.</p>
-
 <p>そこで, 音が小さい部分では細かく, 音が大きい部分では粗く量子化することで圧縮することができます.</p>
-
 <h2 id="可逆圧縮と不可逆圧縮">可逆圧縮と不可逆圧縮</h2>
-
 <p>データの圧縮には, <b>可逆圧縮</b>と<b>不可逆圧縮</b>の 2 つに分類可能です.</p>
-
 <p>可逆圧縮とは, もとのデータの変化はさせず, 展開したときに, もとのデータに合致する方式です.</p>
-
 <p>不可逆圧縮とは, もとのデータを変化させ, 展開したときに, もとのデーターに完全合致しない方式です. <b>MP3 は, 不可逆圧縮が利用されています</b>.</p>
-
 <h2 id="mp3-の仕組み">MP3 の仕組み</h2>
-
 <p>MP3 では, データを圧縮するときに, 圧縮方法をいくつか設定することができます. したがって, MP3 といっても, いくつか種類があり, どのようにしてデータを生成するかによって, 音質が異なってきます.</p>
-
 <h3 id="サンプリング周波数">サンプリング周波数</h3>
-
 <p>MP3 では, サンプリング周波数として, 32 kHz, 44.1 kHz, 48 kHz のいずれかを選択できます.</p>
-
 <h3 id="ビットレート">ビットレート</h3>
-
 <p>MP3 では, 32 kbps ~ 320 kbps の範囲で設定できます.</p>
-
 <h3 id="モード">モード</h3>
-
 <p>MP3 では, モノラルとステレオのどちらでも選択可能です. モードには, 以下の 5 種類があります.</p>
-
 <table>
   <caption>MP3 のモード</caption>
   <thead><tr><th scope="col">モード</th><th scope="col">概要</th></tr></thead>
@@ -528,136 +466,87 @@
     </tr>
   </tbody>
 </table>
-
 <p>一般的に, MP3 を音楽であつかう場合,</p>
-
 <ul>
 <li>サンプリング周波数 44.1 kHz</li>
 <li>ビットレート 128 kbps or 192 kbps</li>
 <li>モード MS ステレオ</li>
 </ul>
-
 <p>で利用されることがほとんどです.</p>
-
 <h2 id="mp3-のデータサイズ">MP3 のデータサイズ</h2>
-
 <p>MP3 の大きな特徴として, ビットレート固定があります. したがって, <b>128 kbps の場合, 1 分のデータは, およそ 1 MB になります</b>.</p>
-
 <h1 id="mp3-の圧縮">MP3 の圧縮</h1>
-
-<p>MP3 では, 可能な限り音質を保ったままデータサイズを小さくするために, 以下のフローで, データの性質を調べながら, 人間の聴覚に影響がない部分だけを除去しています.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66254051-de820e80-e7ab-11e9-8c6d-86c9d1656c7d.png" alt="MP3 生成のフロー" /></p>
-
+<p>MP3 では, 可能な限り音質を保ったままデータサイズを小さくするために, 以下のフローでデータの性質を調べながら, 人間の聴覚に影響がない部分だけを除去しています.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/67000836-7e785a00-f113-11e9-9213-c17c35b347c0.png" alt="MP3 の圧縮フロー"></p>
 <ul>
-<li>フーリエ変換・(変形) 離散コサイン変換 (MDCT)</li>
 <li>サブバンド分解</li>
+<li>フーリエ変換・修正離散コサイン変換 (MDCT)</li>
 <li>心理聴覚評価</li>
 <li>量子化</li>
 <li>ハフマン符号</li>
 </ul>
-
-<h2 id="フーリエ変換-変形-離散コサイン変換-mdct">フーリエ変換・(変形) 離散コサイン変換 (MDCT)</h2>
-
-<p>まず, サブバンド分解をするにも, 心理聴覚評価をするにも, 時間軸に対する振幅では, どの周波数成分をあつかえばよいのかわからないので, 時間軸に対する振幅を, <b>周波数軸に対する振幅</b> (振幅スペクトル) に変換する必要があります. そのための数学的処理が, <b>フーリエ変換</b>です.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/63822772-69d9da00-c98c-11e9-9870-ce3c5805cf24.gif" alt="フーリエ変換" /></p>
-
+<h2 id="サブバンド分解">サブバンド分解</h2>
+<p>MP3 で圧縮するための最初の処理です. 選択したサンプリング周波数の <b>1 / 32</b> のサンプリング周波数でサンプリングしなおします.</p>
+<p>例えば, 44.1 kHz でサンプリングする場合には, サンプリング定理にしたがい, 22.05 kHz までのデータが含まれます. MP3 では, この周波数帯域を <b>32 分割</b>して (0 - 689.0625 Hz, 689.0625 Hz - 1378.125 Hz &hellip; 21360.9375 Hz - 22050 Hz), それぞれの周波数帯域において, 1 / 32 のサンプリング周波数 (1375 Hz) で, 再度サンプリングしなおします.</p>
+<p>サブバンド分解する理由は, 音には以下の特性があるからです.</p>
+<ul>
+<li>音楽では, 周波数帯域に偏りがある
+<ul>
+<li>振幅の小さな帯域を除去する</li>
+</ul>
+</li>
+<li>周波数によって人間の知覚できる音が違う
+<ul>
+<li>高い周波数の場合, 音量変化には鈍感, 低い周波数の場合, 音量変化に敏感</li>
+</ul>
+</li>
+</ul>
+<h2 id="フーリエ変換修正離散コサイン変換-mdct">フーリエ変換・修正離散コサイン変換 (MDCT)</h2>
+<p>時間軸に対する振幅では, どの周波数成分をあつかえばよいのかわからないので, 時間軸に対する振幅を, <b>周波数軸に対する振幅</b> (振幅スペクトル) に変換する必要があります. そのための数学的処理が, <b>フーリエ変換</b>です.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/63822772-69d9da00-c98c-11e9-9870-ce3c5805cf24.gif" alt="フーリエ変換"></p>
 <p>しかしながら, フーリエ変換は, 数式上は $-\infty$ から $\infty$ の積分として処理するので, コンピュータで実現するためには, どこかで計算をうちきる必要があります. このうちきりにより, 元の波形に合成したときに (逆フーリエ変換), 誤差が発生し, 完全に元の波形には戻らなくなります.</p>
-
 <p>$
 \begin{eqnarray}
 X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt \quad (-\infty \leqq f \leqq \infty)
 \end{eqnarray}
 $</p>
-
-<p>この問題を解決するために, 区間の継ぎ目を調整する様々な手法が考案されました. そのうちの 1 つが, MP3 で利用されている <b>(変形) 離散コサイン変換</b> (Modified Discrete Cosine Transform) であり, 区間を重ね合わせて誤差を小さくする手法となっています.</p>
-
+<p>この問題を解決するために, 区間の継ぎ目を調整する様々な手法が考案されました. そのうちの 1 つが, MP3 で利用されている, <b>修正離散コサイン変換</b> (<b>Modified Discrete Cosine Transform</b>) であり, 区間を重ね合わせて誤差を小さくする手法となっています.</p>
 <p>$
 \begin{eqnarray}
 X(k)=\sum_{n=0}^{2N-1}x(n)\cos\left(\frac{{\pi}}{N}\left(n+\frac{1}{2}+\frac{N}{2}\right)\left(k+\frac{1}{2}\right)\right)
 \end{eqnarray}
 $</p>
-
-<h2 id="サブバンド分解">サブバンド分解</h2>
-
-<p>MP3 で圧縮するための (事実上) 最初の処理です. 選択したサンプリング周波数の <b>1 / 32</b> のサンプリング周波数でサンプリングしなおします.</p>
-
-<p>例えば, 44.1 kHz でサンプリングする場合には, サンプリング定理にしたがい, 22.05 kHz までのデータが含まれます. MP3 では, この周波数帯域を <b>32 分割</b>して (0 - 689.0625 Hz, 689.0625 Hz - 1378.125 Hz &hellip; 21360.9375 Hz - 22050 Hz), それぞれの周波数帯域において, 1 / 32 のサンプリング周波数 (1375 Hz) で, 再度サンプリングしなおします.</p>
-
-<p>サブバンド分解する理由は, 音には以下の特性があるからです.</p>
-
-<ul>
-<li>音楽では, 周波数帯域に偏りがある
-
-<ul>
-<li>振幅の小さな帯域を除去する</li>
-</ul></li>
-<li>周波数によって人間の知覚できる音が違う
-
-<ul>
-<li>高い周波数の場合, 音量変化には鈍感, 低い周波数の場合, 音量変化に敏感</li>
-</ul></li>
-</ul>
-
 <h2 id="心理聴覚評価">心理聴覚評価</h2>
-
 <p>心理聴覚評価は, 人間の聴覚の性質をもとに, どの周波数帯域を削ってもよいかを決定する <b>MP3 の中核</b>となるものです.</p>
-
 <p>ちなみに, どの周波数成分を削除するかという判断は心理聴覚評価によって決まりますが, MP3 の仕様で定義されているものは一例であって, 規約ではないので, <b>MP3 のエンコーダによって異なります</b>. これが, エンコーダによって音質が異なる理由でもあります.</p>
-
 <p>心理聴覚評価では, <b>最小可聴限界</b>と<b>マスキング効果</b>を利用して, どの音が聴こえない (聴こえにくい) のかを判断します.</p>
-
 <h3 id="最小可聴限界">最小可聴限界</h3>
-
 <p>最小可聴限界とは, 静粛時に聴くことができる音圧 (dB) の範囲のことです.</p>
-
 <p>聴くことができる範囲は, 音の大きさだけではなく, 周波数によっても異なります. 人間の聴覚がもっともよく反応する周波数帯域は, 2 kHz ~ 5kHz の範囲です.</p>
-
 <p>最小可聴限界を下回る音圧は聴くことができないので, データを削除することができます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66157534-eda77600-e65e-11e9-997c-24cddcec9e82.png" alt="最小可聴限界" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66157534-eda77600-e65e-11e9-997c-24cddcec9e82.png" alt="最小可聴限界"></p>
 <h3 id="マスキング効果">マスキング効果</h3>
-
 <p>大きな音が発生しているときに, 小さな音がかき消されることはおそらくほとんどの方が経験的に知っています. これは, マスキング効果と呼ばれます. 大きな音を<b>マスカー</b>, 小さな音を<b>マスキー</b>と呼びます.</p>
-
 <p>マスキング効果の影響範囲もまた, 音の大きさだけでなく, 周波数にも関係します. マスカーとマスキーは, 周波数が近いほど大きな効果を発揮します.</p>
-
 <p>マスカーがおよぼす周波数範囲は, 1 kHz 以下では, 約 100 Hz の範囲内です. 1 kHz 以上になると, 周波数に比例して範囲が大きくなります.</p>
-
 <p>また, マスキング効果は, 同時に音が発生したときだけとは限らず, 時間的にも持続します (持続時間は, 1 / 100 程度です). 例えば, 大きな音が発生した直後の小さな音がかき消されるのはもちろん, 小さな音が発生したあとに大きな音が発生すると, 先に発生した小さな音もかき消されます.</p>
-
 <p>マスキングでかき消される小さな音は聴きとれない音なので, データを削除することができます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66158478-ee410c00-e660-11e9-882e-51f0599bfe92.png" alt="マスキング効果" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66158478-ee410c00-e660-11e9-882e-51f0599bfe92.png" alt="マスキング効果"></p>
 <h2 id="量子化">量子化</h2>
-
 <p>量子化では, それぞれの周波数成分の振幅に対して, 数値データを割り当てます. このとき, そのまま数値を割り当てるのではなく, 適当な値で除算して値を小さくします. どれだけ除算するかは, 心理聴覚評価によって決定されます.</p>
-
 <p>心理聴覚評価では, 人間の聴覚にとって重要な周波数帯域は小さな値で除算して, そうでない周波数帯域は大きな値で除算します. そうすることで. 重要でない周波数帯域の振幅は, その値を表現するのに必要なビット数が減ります.</p>
-
 <h2 id="ハフマン符号">ハフマン符号</h2>
-
 <p>ハフマン符号は, 音の圧縮だけでなく, さまざまなデータに利用される汎用的な圧縮方法です. ハフマン符号は可逆圧縮であるので, 展開したときに, もとのデータと完全に合致します (可逆圧縮). したがって, メディアデータだけではなく, テキストデータにも有効な圧縮です.</p>
-
 <p>ハフマン符号を簡単に説明すると,</p>
-
 <ul>
 <li>発生確率の高いものほど, 短いビット数で表現できる数値を割り当てる</li>
 <li>発生確率の低いものほど, 長いビット数で表現できる数値を割り当てる</li>
 </ul>
-
 <p>とすることで, 全体のデータを小さくすることができます.</p>
-
 <p>したがって, 発生確率が偏っているケースほど, 圧縮率が高くなります. 逆のケースの場合, あまり効果はありません.
 実際に, どのように値を割り当てるかは, <b>ハフマン木</b>によって決定できます.</p>
-
 <p>また, MP3 では, <b>ハフマン木が仕様によって決められています</b>. したがって, 事前に発生確率を求める必要やハフマン木を生成する必要はありません.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66167106-2d2c8d00-e674-11e9-904a-890610984b16.png" alt="ハフマン木の例" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66167106-2d2c8d00-e674-11e9-904a-890610984b16.png" alt="ハフマン木の例"></p>
 <table>
   <caption>ハフマン木から求めたハフマン符号 (根から葉にむかって数値を並べたビット列)</caption>
   <thead><tr><th scope="col">値</th><th scope="col">ハフマン符号</th></tr></thead>
@@ -680,11 +569,8 @@ $</p>
     </tr>
   </tbody>
 </table>
-
 <p>可逆圧縮は, どんなデータでも小さくすることができるわけではありません. データには, <b>エントロピー</b>という単位があり, それをこえて圧縮するともとに戻せないという限界の大きさがあります. それが, 理論的に不可能なことが, <b>シャノン</b>によって証明されています.</p>
-
 <h1 id="リファレンス">リファレンス</h1>
-
 <ul>
 <li><a href="https://www.amazon.co.jp/%E3%82%8F%E3%81%8B%E3%82%8BMP3%E2%80%95%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E3%83%BB%E3%82%B5%E3%82%A6%E3%83%B3%E3%83%89%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A8%E6%B4%BB%E7%94%A8%E6%B3%95-I%E3%83%BB-BOOKS-%E5%A4%A7%E6%BE%A4-%E6%96%87%E5%AD%9D/dp/4777511871/ref=sr_1_5">わかるMP3―デジタル・サウンドの仕組みと活用法</a></li>
 <li><a href="https://www.amazon.co.jp/%E6%94%B9%E8%A8%82%E7%89%88-%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E6%94%BE%E9%80%81%E6%95%99%E7%A7%91%E6%9B%B8%EF%BC%88%E4%B8%8A%EF%BC%89-%E3%82%A4%E3%83%B3%E3%83%97%E3%83%AC%E3%82%B9%E6%A8%99%E6%BA%96%E6%95%99%E7%A7%91%E6%9B%B8%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E4%BA%80%E5%B1%B1-%E6%B8%89/dp/4844395033">改訂版 デジタル放送教科書（上）</a></li>
@@ -784,11 +670,11 @@ $</p>
     
 
     
-    <a href="https://art-of-life.jp/posts/mpeg2-systems/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="https://art-of-life.jp/posts/aac/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Newer
       </strong>
-      <div class="article-nav-title">MPEG-2 Systems</div>
+      <div class="article-nav-title">AAC の圧縮符号化方式</div>
     </a>
     
 </nav>
@@ -842,7 +728,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
                     audio
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -850,7 +736,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
                     computer-sience
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">10</span>
             </li>
             
             <li class="category-list-item">
@@ -866,7 +752,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -882,7 +768,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">15</span>
             </li>
             
             <li class="category-list-item">
@@ -890,15 +776,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
                     multimedia
                 </a>
-                <span class="category-list-count">5</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/music">
-                    music
-                </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -922,7 +800,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">10</span>
+                <span class="category-list-count">14</span>
             </li>
             
             <li class="category-list-item">
@@ -952,6 +830,30 @@ $</p>
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/aac">
+                    aac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/adpcm">
+                    adpcm
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/advanced-audio-coding">
+                    advanced-audio-coding
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/algorithm">
                     algorithm
                 </a>
@@ -960,8 +862,32 @@ $</p>
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/c">
+                    c
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/celp">
+                    celp
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
                     ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/correlation-function">
+                    correlation-function
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -995,7 +921,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -1059,13 +985,29 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
                     javascript
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
                     laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-interpolation">
+                    linear-interpolation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-prediction-analysis">
+                    linear-prediction-analysis
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1091,7 +1033,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">9</span>
             </li>
             
             <li class="category-list-item">
@@ -1099,7 +1041,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
                     mdct
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -1115,13 +1057,29 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">
                     modified-discrete-cosine-transform
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mp3">
                     mp3
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-1-audio">
+                    mpeg-1-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-audio">
+                    mpeg-2-audio
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1152,16 +1110,80 @@ $</p>
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/noise-suppressor">
+                    noise-suppressor
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
                     pcm
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/resampling">
+                    resampling
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/sampling-theorem">
+                    sampling-theorem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/spectrum-subtraction">
+                    spectrum-subtraction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/stochastic-signal">
+                    stochastic-signal
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/time-stretch">
+                    time-stretch
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
                     wave
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/web-audio-api">
+                    web-audio-api
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webassembly">
+                    webassembly
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1207,10 +1229,28 @@ $</p>
     <div class="widget tagcloud">
         
         
+        <a href="https://art-of-life.jp/tags/aac" style="font-size: 12px;">aac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/adpcm" style="font-size: 12px;">adpcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/advanced-audio-coding" style="font-size: 12px;">advanced-audio-coding</a>
+        
+        
         <a href="https://art-of-life.jp/tags/algorithm" style="font-size: 12px;">algorithm</a>
         
         
+        <a href="https://art-of-life.jp/tags/c" style="font-size: 12px;">c</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/celp" style="font-size: 12px;">celp</a>
+        
+        
         <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/correlation-function" style="font-size: 12px;">correlation-function</a>
         
         
         <a href="https://art-of-life.jp/tags/data-structures" style="font-size: 12px;">data-structures</a>
@@ -1252,6 +1292,12 @@ $</p>
         <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
         
         
+        <a href="https://art-of-life.jp/tags/linear-interpolation" style="font-size: 12px;">linear-interpolation</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linear-prediction-analysis" style="font-size: 12px;">linear-prediction-analysis</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
         
         
@@ -1273,6 +1319,12 @@ $</p>
         <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
         
         
+        <a href="https://art-of-life.jp/tags/mpeg-1-audio" style="font-size: 12px;">mpeg-1-audio</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-audio" style="font-size: 12px;">mpeg-2-audio</a>
+        
+        
         <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
         
         
@@ -1282,10 +1334,34 @@ $</p>
         <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
         
         
+        <a href="https://art-of-life.jp/tags/noise-suppressor" style="font-size: 12px;">noise-suppressor</a>
+        
+        
         <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
         
         
+        <a href="https://art-of-life.jp/tags/resampling" style="font-size: 12px;">resampling</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/sampling-theorem" style="font-size: 12px;">sampling-theorem</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/spectrum-subtraction" style="font-size: 12px;">spectrum-subtraction</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/stochastic-signal" style="font-size: 12px;">stochastic-signal</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/time-stretch" style="font-size: 12px;">time-stretch</a>
+        
+        
         <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/web-audio-api" style="font-size: 12px;">web-audio-api</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webassembly" style="font-size: 12px;">webassembly</a>
         
         
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
@@ -1313,8 +1389,8 @@ $</p>
 <footer id="footer">
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      &copy; 2020
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>
@@ -1339,7 +1415,7 @@ if (!doNotTrack) {
 
 
 <script>hljs.initHighlightingOnLoad();</script>
-<script>jQuery('.article-type-page a:not([target])').attr('target', '_blank');</script>
+<script>jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank');</script>
 
 
 <script type="text/x-mathjax-config">

@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>MathJax で数式を表示する &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.56.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -11,7 +11,7 @@
     
     
     <link rel="canonical" href="https://art-of-life.jp/posts/mathjax/"/>
-    <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
+    <link rel="icon" href="https://art-of-life.jp/favicon.ico">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
     <link rel="stylesheet" href="https://art-of-life.jp/css/font-awesome.min.css">
@@ -30,8 +30,6 @@
     
     <meta itemprop="name" content="MathJax で数式を表示する">
 <meta itemprop="description" content="Web ページで数式を表示するために, MathJax を導入してみた">
-
-
 <meta itemprop="datePublished" content="2019-05-28T19:46:00&#43;09:00" />
 <meta itemprop="dateModified" content="2019-05-28T19:46:00&#43;09:00" />
 <meta itemprop="wordCount" content="392">
@@ -39,7 +37,6 @@
 
 
 <meta itemprop="keywords" content="JavaScript,Mathematics," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MathJax で数式を表示する"/>
 <meta name="twitter:description" content="Web ページで数式を表示するために, MathJax を導入してみた"/>
@@ -95,7 +92,7 @@
       </nav>
         <nav id="sub-nav">
           <div class="profile" id="profile-nav">
-            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.jpeg"><i class="fa fa-caret-down"></i></a>
           </div>
         </nav>
         <div id="search-form-wrap">
@@ -159,8 +156,8 @@
       <img id="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&d=identicon"/>
       
       <h2 id="name">Korilakkuma</h2>
-      <h3 id="title">Multimedia (Video, Audio) Engineer. I&#39;m expert in Web Audio API, WebRTC and Streaming. C/C&#43;&#43;, JavaScript ...</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <h3 id="title">Audio Programmer. As a graduate student, I plan to study Audio Signal Processing for Music from 2022. C/C&#43;&#43;, UNIX system call 💖🎸🎹</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          30
+          48
         
         <span>
             Tags
@@ -318,55 +315,31 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="mathjax">MathJax</h1>
-
+            <h1 id="mathjax">MathJax</h1>
 <h2 id="overview">Overview</h2>
-
 <p>Web ページ (HTML) で数式を表示するための JavaScript ライブラリです. 同様のものに, <a href="https://plugins.jquery.com/jsLaTeX/">jsLatex</a> がありますが, こちらは jQuery のプラグインであるので, jQuery を利用しないことが多い, SPA (Single Page Application) では使えません. また, <a href="https://katex.org/">KaTex</a> は, 単体で利用可能ですが, 個人的な感想として使いにくかったです &hellip; (他のライブラリなら正しい LaTex の数式がエラーになったりとかで &hellip;).</p>
-
 <p>そこで, <a href="https://github.com/mathjax/MathJax">MathJax</a> を導入してみました &hellip; と言いますか, Hugo の  hugo-icarus-theme ではデフォルトで採用されていました.</p>
-
 <h2 id="usage">Usage</h2>
-
-<pre><code class="language-HTML">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']]}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/x-mathjax-config&#34;</span>&gt;
+<span style="color:#a6e22e">MathJax</span>.<span style="color:#a6e22e">Hub</span>.<span style="color:#a6e22e">Config</span>({
+  <span style="color:#a6e22e">tex2jax</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">inlineMath</span><span style="color:#f92672">:</span> [[<span style="color:#e6db74">&#39;$&#39;</span>,<span style="color:#e6db74">&#39;$&#39;</span>], [<span style="color:#e6db74">&#39;\\(&#39;</span>,<span style="color:#e6db74">&#39;\\)&#39;</span>]]}
   });
-&lt;/script&gt;
-&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
-</code></pre>
-
-<p>必要な JavaScript ファイルの読み込みと, デリミタの設定をするだけです (hugo-icarus-theme では既に記述されています).</p>
-
+&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</code></pre></div><p>必要な JavaScript ファイルの読み込みと, デリミタの設定をするだけです (hugo-icarus-theme では既に記述されています).</p>
 <p>あとは, 表示したい箇所で, LaTex の数式をデリミタで囲むだけです.</p>
-
 <h2 id="example">Example</h2>
-
 <h3 id="フーリエ変換">フーリエ変換</h3>
-
 <p>$X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt\ \ (-\infty \leqq f \leqq \infty)$</p>
-
-<pre><code class="language-HTML">&lt;div&gt;$X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt\ \ (-\infty \leqq f \leqq \infty)$&lt;/div&gt;
-</code></pre>
-
-<h3 id="離散フーリエ変換">離散フーリエ変換</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">div</span>&gt;$X(f) = \int_{-\infty}^{\infty}x(t)\exp(-j2{\pi}ft)dt\ \ (-\infty \leqq f \leqq \infty)$&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div><h3 id="離散フーリエ変換">離散フーリエ変換</h3>
 <p>$X(k) = \sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)\ \ (0 \leqq k \leqq N-1)$</p>
-
-<pre><code class="language-HTML">&lt;div&gt;$X(k) = \sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)\ \ (0 \leqq k \leqq N-1)$&lt;/div&gt;
-</code></pre>
-
-<h3 id="コンボリューション積分">コンボリューション積分</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">div</span>&gt;$X(k) = \sum_{n=0}^{N-1}x(n)\exp\left(\frac{-j2{\pi}kn}{N}\right)\ \ (0 \leqq k \leqq N-1)$&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div><h3 id="コンボリューション積分">コンボリューション積分</h3>
 <p>$s_1(n) = \sum_{m=0}^{J}b(m)s_0(n-m)$</p>
-
-<pre><code class="language-HTML">&lt;div&gt;$s_1(n) = \sum_{m=0}^{J}b(m)s_0(n-m)$&lt;/div&gt;
-</code></pre>
-
-<p>以上です. 初回は, 簡単に, そして, プログラミングと数学ということをテーマにしてみました.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">div</span>&gt;$s_1(n) = \sum_{m=0}^{J}b(m)s_0(n-m)$&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div><p>以上です. 初回は, 簡単に, そして, プログラミングと数学ということをテーマにしてみました.</p>
 
         </div>
         <footer class="article-footer">
@@ -518,7 +491,7 @@ MathJax.Hub.Config({
                 <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
                     audio
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -526,7 +499,7 @@ MathJax.Hub.Config({
                 <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
                     computer-sience
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">10</span>
             </li>
             
             <li class="category-list-item">
@@ -542,7 +515,7 @@ MathJax.Hub.Config({
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -558,7 +531,7 @@ MathJax.Hub.Config({
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">15</span>
             </li>
             
             <li class="category-list-item">
@@ -566,15 +539,7 @@ MathJax.Hub.Config({
                 <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
                     multimedia
                 </a>
-                <span class="category-list-count">5</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/music">
-                    music
-                </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -598,7 +563,7 @@ MathJax.Hub.Config({
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">10</span>
+                <span class="category-list-count">14</span>
             </li>
             
             <li class="category-list-item">
@@ -628,6 +593,30 @@ MathJax.Hub.Config({
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/aac">
+                    aac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/adpcm">
+                    adpcm
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/advanced-audio-coding">
+                    advanced-audio-coding
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/algorithm">
                     algorithm
                 </a>
@@ -636,8 +625,32 @@ MathJax.Hub.Config({
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/c">
+                    c
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/celp">
+                    celp
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
                     ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/correlation-function">
+                    correlation-function
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -671,7 +684,7 @@ MathJax.Hub.Config({
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -735,13 +748,29 @@ MathJax.Hub.Config({
                 <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
                     javascript
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
                     laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-interpolation">
+                    linear-interpolation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-prediction-analysis">
+                    linear-prediction-analysis
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -767,7 +796,7 @@ MathJax.Hub.Config({
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">9</span>
             </li>
             
             <li class="category-list-item">
@@ -775,7 +804,7 @@ MathJax.Hub.Config({
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
                     mdct
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -791,13 +820,29 @@ MathJax.Hub.Config({
                 <a class="category-list-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">
                     modified-discrete-cosine-transform
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mp3">
                     mp3
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-1-audio">
+                    mpeg-1-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-audio">
+                    mpeg-2-audio
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -828,16 +873,80 @@ MathJax.Hub.Config({
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/noise-suppressor">
+                    noise-suppressor
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
                     pcm
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/resampling">
+                    resampling
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/sampling-theorem">
+                    sampling-theorem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/spectrum-subtraction">
+                    spectrum-subtraction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/stochastic-signal">
+                    stochastic-signal
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/time-stretch">
+                    time-stretch
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
                     wave
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/web-audio-api">
+                    web-audio-api
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webassembly">
+                    webassembly
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -883,10 +992,28 @@ MathJax.Hub.Config({
     <div class="widget tagcloud">
         
         
+        <a href="https://art-of-life.jp/tags/aac" style="font-size: 12px;">aac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/adpcm" style="font-size: 12px;">adpcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/advanced-audio-coding" style="font-size: 12px;">advanced-audio-coding</a>
+        
+        
         <a href="https://art-of-life.jp/tags/algorithm" style="font-size: 12px;">algorithm</a>
         
         
+        <a href="https://art-of-life.jp/tags/c" style="font-size: 12px;">c</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/celp" style="font-size: 12px;">celp</a>
+        
+        
         <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/correlation-function" style="font-size: 12px;">correlation-function</a>
         
         
         <a href="https://art-of-life.jp/tags/data-structures" style="font-size: 12px;">data-structures</a>
@@ -928,6 +1055,12 @@ MathJax.Hub.Config({
         <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
         
         
+        <a href="https://art-of-life.jp/tags/linear-interpolation" style="font-size: 12px;">linear-interpolation</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linear-prediction-analysis" style="font-size: 12px;">linear-prediction-analysis</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
         
         
@@ -949,6 +1082,12 @@ MathJax.Hub.Config({
         <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
         
         
+        <a href="https://art-of-life.jp/tags/mpeg-1-audio" style="font-size: 12px;">mpeg-1-audio</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-audio" style="font-size: 12px;">mpeg-2-audio</a>
+        
+        
         <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
         
         
@@ -958,10 +1097,34 @@ MathJax.Hub.Config({
         <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
         
         
+        <a href="https://art-of-life.jp/tags/noise-suppressor" style="font-size: 12px;">noise-suppressor</a>
+        
+        
         <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
         
         
+        <a href="https://art-of-life.jp/tags/resampling" style="font-size: 12px;">resampling</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/sampling-theorem" style="font-size: 12px;">sampling-theorem</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/spectrum-subtraction" style="font-size: 12px;">spectrum-subtraction</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/stochastic-signal" style="font-size: 12px;">stochastic-signal</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/time-stretch" style="font-size: 12px;">time-stretch</a>
+        
+        
         <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/web-audio-api" style="font-size: 12px;">web-audio-api</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webassembly" style="font-size: 12px;">webassembly</a>
         
         
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
@@ -989,8 +1152,8 @@ MathJax.Hub.Config({
 <footer id="footer">
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      &copy; 2020
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>
@@ -1015,7 +1178,7 @@ if (!doNotTrack) {
 
 
 <script>hljs.initHighlightingOnLoad();</script>
-<script>jQuery('.article-type-page a:not([target])').attr('target', '_blank');</script>
+<script>jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank');</script>
 
 
 <script type="text/x-mathjax-config">

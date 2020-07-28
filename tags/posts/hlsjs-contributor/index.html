@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>hls.js のコントリビューターになろう &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.56.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -11,7 +11,7 @@
     
     
     <link rel="canonical" href="https://art-of-life.jp/posts/hlsjs-contributor/"/>
-    <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
+    <link rel="icon" href="https://art-of-life.jp/favicon.ico">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
     <link rel="stylesheet" href="https://art-of-life.jp/css/font-awesome.min.css">
@@ -30,8 +30,6 @@
     
     <meta itemprop="name" content="hls.js のコントリビューターになろう">
 <meta itemprop="description" content="hls.js のコントリビューターになるための道標">
-
-
 <meta itemprop="datePublished" content="2019-06-12T23:30:29&#43;09:00" />
 <meta itemprop="dateModified" content="2019-06-12T23:30:29&#43;09:00" />
 <meta itemprop="wordCount" content="2640">
@@ -39,7 +37,6 @@
 
 
 <meta itemprop="keywords" content="JavaScript,Media Source Extensions,hls.js," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="hls.js のコントリビューターになろう"/>
 <meta name="twitter:description" content="hls.js のコントリビューターになるための道標"/>
@@ -95,7 +92,7 @@
       </nav>
         <nav id="sub-nav">
           <div class="profile" id="profile-nav">
-            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.jpeg"><i class="fa fa-caret-down"></i></a>
           </div>
         </nav>
         <div id="search-form-wrap">
@@ -159,8 +156,8 @@
       <img id="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&d=identicon"/>
       
       <h2 id="name">Korilakkuma</h2>
-      <h3 id="title">Multimedia (Video, Audio) Engineer. I&#39;m expert in Web Audio API, WebRTC and Streaming. C/C&#43;&#43;, JavaScript ...</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <h3 id="title">Audio Programmer. As a graduate student, I plan to study Audio Signal Processing for Music from 2022. C/C&#43;&#43;, UNIX system call 💖🎸🎹</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          30
+          48
         
         <span>
             Tags
@@ -330,99 +327,57 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="hls">HLS</h1>
-
+            <h1 id="hls">HLS</h1>
 <p>正式には, HTTP Live Streaming の略で, Apple が開発したストリーミングプロトコルです.
 ストリーミングとは, 動画のように容量の大きなデータをすべてダウンロードしてから再生開始するのではなく, ダウンロードしたデータから再生を開始し, 再生している間も残りのデータをダウンロードし続ける仕組みです.</p>
-
 <p>また, ストリーミングでは, バッファリングによって, ふくそうなどによりネットワークの回線が混雑した場合でも, (ある程度の間) 映像や音声をみだすことなく再生できます<!-- (TCP による, ふくそう制御と再送制御を活用することができます)-->.</p>
-
 <p>HLS は, HTTP という名前が付いているように, HTTP を利用したストリーミングプロトコルなので, Web サーバーで配信することも可能です.</p>
-
 <p>HLS を構成するファイルは, 分割されたデータ (<b>セグメントファイル</b>) と, これらのセグメントファイルをどの順番で再生するかを記したファイル (<b>プレイリストファイル</b>). セグメントファイルは, MPEG2-TS (Transport Stream) 形式のバイナリデータ, プレイリストファイルは拡張子が m3u8 というテキストデータとなっています.</p>
-
-<h1 id="hls-js-と-media-source-extensions">hls.js と Media Source Extensions</h1>
-
+<h1 id="hlsjs-と-media-source-extensions">hls.js と Media Source Extensions</h1>
 <p>HLS は Apple が開発したプロトコルであるので, Safari (と Edge) ではプレイリストファイルを, <code>HTMLVideoElement#src</code> に設定するだけで再生することが可能です. しかしながら, Chrome や Firefox, IE11 では直接プレイリストファイルを解釈したり, 分割されたデータを再生可能な単位に再構築することができないので, <a href="https://www.w3.org/TR/media-source/">Media Source Extensions</a> を利用します. Media Source Extensions は, HTTP ダウンロードを利用してストリーミングするための JavaScript API です.</p>
-
 <p>hls.js は, この Media Source Extensions を利用してセグメントファイルを再生する以外にも, プレイリストファイルやセグメントファイルの取得, プレイリストファイルのパース, WebWorker を利用して MP4 を demux (映像と音声の分離), ビットレートの調整 (Adaptive Bitrate Streaming) など数多くのタスクを裏側で実行してくれます. hls.js を利用する開発者からすると, <code>video</code> タグと, hls.js が提供するいくつかの API を知っているだけで, HLS によるストリーミング再生がブラウザで可能になります.</p>
-
-<h1 id="hls-js-のコントリビューターになろう">hls.js のコントリビューターになろう</h1>
-
+<h1 id="hlsjs-のコントリビューターになろう">hls.js のコントリビューターになろう</h1>
 <p>ここからが本題ですね. hls.js のコントリビューターになるためにはどうすればいいのでしょうか &hellip; ?</p>
-
 <h2 id="小さなことから始めよう">小さなことから始めよう</h2>
-
 <p>例えば, README の間違いを修正して, PR を送って, マージされるだけでもコントリビュートすることになります.
 hls.js に限らず, ある程度規模のある OSS にコントリビュートするには, まずはそういった小さなことから, その OSS における雰囲気みたいなのを知ることが, 今後コントリビュートしていくうえでの敷居を下げると思います (例えば, ブランチの命名や, issue や PR のフォーマットしたがった記述, また, 英語が苦手な方であれば少しずつ英語に慣れる &hellip; etc). そして, さいわい, hls.js のコラボレーターの方はみんな優しいです w.</p>
-
 <p>狙い目は以下のようなところでしょうか &hellip;</p>
-
 <ul>
 <li>README などドキュメント系の更新や修正</li>
 <li>環境構築系 (ビルド環境や CI など)</li>
 <li>Lint 対応</li>
 </ul>
-
 <p>勉強会などでもよく言われていることですね.</p>
-
 <p>ちなみに, わたしの例だと, 初めてのコントリビュートは, <a href="https://github.com/video-dev/hls.js/pull/1693">CI の修正</a>です.
 そして, 意外にも, 最も大きなコントリビュートが, <a href="https://github.com/video-dev/hls.js/pull/1762">webpack のバージョンアップと TypeScript コンパイラに移行</a> したことです.</p>
-
 <h2 id="コア部分へのコントリビュート">コア部分へのコントリビュート</h2>
-
 <p>コントリビュートが増えていくと, コア部分 (<code>/src</code> 以下) へコントリビュートしたくなります. しかし, 規模のある OSS ではやみくもにソースコードをリーディングしても (たまたま, 見つかるかもしれないですが) ヒット率は極めて低いでしょう.</p>
-
 <p>やはり, やみくもによりは,</p>
-
 <ul>
 <li>コントリビュートするためのスキル</li>
 <li><code>/src</code> 以下の構成の把握</li>
 <li>issue 対応</li>
 </ul>
-
 <p>これらを順に, あるいは, 同時的に進めていくのが, 結果としてはヒット率が高くなると思います.</p>
-
 <h3 id="コントリビュートするためのスキル">コントリビュートするためのスキル</h3>
-
 <h4 id="javascript">JavaScript</h4>
-
 <p>ES5 のコードがところどころ混ざっていますが, おおよそ ES2015 ~ で記述されています. また, 現在, <a href="https://github.com/video-dev/hls.js/issues/2070">TypeScript への移行</a> が進められているので, 今後, TypeScript が必須となってきます.</p>
-
 <h4 id="javascript-api">JavaScript API</h4>
-
 <p>Media Source Extensions を利用していることは述べましたが, そのほかにも, XMLHttpRequest や fetch, WebWorker, そして, HTMLVideoElement が利用されているので, これらの JavaScript API についての理解も必要になってきます.</p>
-
-<h4 id="コンテナ-コーデック">コンテナ・コーデック</h4>
-
+<h4 id="コンテナコーデック">コンテナ・コーデック</h4>
 <p>有名な JavaScript の OSS (例えば, React) と決定的に異なるのは, 動画コンテナやコーデックの理解が必要になることと, そのために数学を要することです. 動画コンテナとは, 映像と音声のファイルのまとめ方や映像と音声の同期情報のことで, 例えば, MP4, MOV, MPEG などが該当します. また, コーデックとは, 映像や音声を圧縮するアルゴリズムのことで, 例えば, 映像であれば, H.265, VP9, MPEG-4, 音声であれば, AAC, MP3, WAV などが該当します.</p>
-
 <p>HLS で利用されるセグメントファイルは, MPEG2-TS 形式と述べました. したがって, 最低でも MPEG2-TS のコンテナフォーマットについては理解しておく必要があるでしょう.</p>
-
 <p>また, コーデック, つまり, 圧縮アルゴリズムを理解するためには, 情報理論 (ハフマン符号, DPCM 符号, エントロピー符号) と数学 (離散コサイン変換) の基礎が必要になってきます.</p>
-
 <p>コントリビュートするソースにもよりますが, demuxer などにコントリビュートする場合には, バイナリプログラミングに対する慣れ (?) みたいなのも必要になってくるかなと思います.</p>
-
 <h3 id="src-以下の構成の把握"><code>/src</code> 以下の構成の把握</h3>
-
 <p>現状, <code>/src</code> 以下の構成は,</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/59401049-6646a600-8dd4-11e9-8e63-336af5873e27.png" alt="hls.js /src" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/59401049-6646a600-8dd4-11e9-8e63-336af5873e27.png" alt="hls.js /src"></p>
 <p>上記のようになっています. 実際に見ていただくと理解できるかもしれませんが, <code>src/loader</code> と <code>/src/controller</code> は比較的理解がしやすく, issue も比較的多いのでコントリビュートチャンスの多いソースになるのではないでしょうか.</p>
-
 <h3 id="issue-対応">issue 対応</h3>
-
 <p>必要なスキルを習得し, <code>/src</code> 以下の構成を把握しても, やはり, やみくもに進めてはヒット率は低いままです. 上記 2 つのことがある程度できていれば, issue の理解もある程度可能になっていると思われますので, あとは, issue どおりにデモを動作させてみて, チャンス ! と思えば, 修正するコードを書いて, PR を送ってみましょう. とは言え, 最初は結構な確率でクローズをくらいます w でも, 多くの人はそれが普通なので, めげずに継続あるのみです.</p>
-
 <h2 id="最大のチャンス">最大のチャンス</h2>
-
 <p>先ほど, 少し述べましたが, hls.js では現在, <a href="https://github.com/video-dev/hls.js/issues/2070">TypeScript に移行</a> する issue があります. 何が言いたいかと言いますと, 既存のコードを TypeScript に書き換えるだけで, PR を送ることができるのです ! つまり, TypeScript が書ければ誰でも可能と言っていいでしょう. 型情報が必要になるので, 単純に書き換え &hellip; というわけにはいきませんが, 既存のコードを移行する作業のなかで, コードリーディングもできるので, まさに一石二鳥です. これから, 動画エンジニアとして一歩踏み出したいけど &hellip; まだできていない方は, ぜひ PR を送ってみてください.</p>
-
 <h1 id="リファレンス">リファレンス</h1>
-
 <ul>
 <li><a href="https://developer.apple.com/streaming/">HLS 仕様</a></li>
 <li><a href="https://ygoto3.com/posts/streaming-technology-basics-for-frontend-engineers/">フロントエンドエンジニアのための動画ストリーミング技術基礎</a></li>
@@ -578,7 +533,7 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
                 <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
                     audio
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -586,7 +541,7 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
                 <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
                     computer-sience
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">10</span>
             </li>
             
             <li class="category-list-item">
@@ -602,7 +557,7 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -618,7 +573,7 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">15</span>
             </li>
             
             <li class="category-list-item">
@@ -626,15 +581,7 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
                 <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
                     multimedia
                 </a>
-                <span class="category-list-count">5</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/music">
-                    music
-                </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -658,7 +605,7 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">10</span>
+                <span class="category-list-count">14</span>
             </li>
             
             <li class="category-list-item">
@@ -688,6 +635,30 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/aac">
+                    aac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/adpcm">
+                    adpcm
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/advanced-audio-coding">
+                    advanced-audio-coding
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/algorithm">
                     algorithm
                 </a>
@@ -696,8 +667,32 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/c">
+                    c
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/celp">
+                    celp
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
                     ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/correlation-function">
+                    correlation-function
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -731,7 +726,7 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -795,13 +790,29 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
                 <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
                     javascript
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
                     laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-interpolation">
+                    linear-interpolation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-prediction-analysis">
+                    linear-prediction-analysis
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -827,7 +838,7 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">9</span>
             </li>
             
             <li class="category-list-item">
@@ -835,7 +846,7 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
                     mdct
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -851,13 +862,29 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
                 <a class="category-list-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">
                     modified-discrete-cosine-transform
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mp3">
                     mp3
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-1-audio">
+                    mpeg-1-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-audio">
+                    mpeg-2-audio
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -888,16 +915,80 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/noise-suppressor">
+                    noise-suppressor
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
                     pcm
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/resampling">
+                    resampling
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/sampling-theorem">
+                    sampling-theorem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/spectrum-subtraction">
+                    spectrum-subtraction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/stochastic-signal">
+                    stochastic-signal
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/time-stretch">
+                    time-stretch
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
                     wave
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/web-audio-api">
+                    web-audio-api
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webassembly">
+                    webassembly
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -943,10 +1034,28 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
     <div class="widget tagcloud">
         
         
+        <a href="https://art-of-life.jp/tags/aac" style="font-size: 12px;">aac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/adpcm" style="font-size: 12px;">adpcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/advanced-audio-coding" style="font-size: 12px;">advanced-audio-coding</a>
+        
+        
         <a href="https://art-of-life.jp/tags/algorithm" style="font-size: 12px;">algorithm</a>
         
         
+        <a href="https://art-of-life.jp/tags/c" style="font-size: 12px;">c</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/celp" style="font-size: 12px;">celp</a>
+        
+        
         <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/correlation-function" style="font-size: 12px;">correlation-function</a>
         
         
         <a href="https://art-of-life.jp/tags/data-structures" style="font-size: 12px;">data-structures</a>
@@ -988,6 +1097,12 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
         <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
         
         
+        <a href="https://art-of-life.jp/tags/linear-interpolation" style="font-size: 12px;">linear-interpolation</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linear-prediction-analysis" style="font-size: 12px;">linear-prediction-analysis</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
         
         
@@ -1009,6 +1124,12 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
         <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
         
         
+        <a href="https://art-of-life.jp/tags/mpeg-1-audio" style="font-size: 12px;">mpeg-1-audio</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-audio" style="font-size: 12px;">mpeg-2-audio</a>
+        
+        
         <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
         
         
@@ -1018,10 +1139,34 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
         <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
         
         
+        <a href="https://art-of-life.jp/tags/noise-suppressor" style="font-size: 12px;">noise-suppressor</a>
+        
+        
         <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
         
         
+        <a href="https://art-of-life.jp/tags/resampling" style="font-size: 12px;">resampling</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/sampling-theorem" style="font-size: 12px;">sampling-theorem</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/spectrum-subtraction" style="font-size: 12px;">spectrum-subtraction</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/stochastic-signal" style="font-size: 12px;">stochastic-signal</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/time-stretch" style="font-size: 12px;">time-stretch</a>
+        
+        
         <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/web-audio-api" style="font-size: 12px;">web-audio-api</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webassembly" style="font-size: 12px;">webassembly</a>
         
         
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
@@ -1049,8 +1194,8 @@ hls.js に限らず, ある程度規模のある OSS にコントリビュート
 <footer id="footer">
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      &copy; 2020
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>
@@ -1075,7 +1220,7 @@ if (!doNotTrack) {
 
 
 <script>hljs.initHighlightingOnLoad();</script>
-<script>jQuery('.article-type-page a:not([target])').attr('target', '_blank');</script>
+<script>jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank');</script>
 
 
 <script type="text/x-mathjax-config">

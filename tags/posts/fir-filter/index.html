@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>FIR Filter &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.56.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -11,7 +11,7 @@
     
     
     <link rel="canonical" href="https://art-of-life.jp/posts/fir-filter/"/>
-    <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
+    <link rel="icon" href="https://art-of-life.jp/favicon.ico">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
     <link rel="stylesheet" href="https://art-of-life.jp/css/font-awesome.min.css">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="FIR Filter">
 <meta itemprop="description" content="FIR Filter の概要">
-
-
 <meta itemprop="datePublished" content="2019-09-28T17:02:03&#43;09:00" />
 <meta itemprop="dateModified" content="2019-09-28T17:02:03&#43;09:00" />
-<meta itemprop="wordCount" content="4272">
+<meta itemprop="wordCount" content="4255">
 
 
 
-<meta itemprop="keywords" content="Digital Signal Processing,Mathematics,Z-transform,Digital Filter," />
-
+<meta itemprop="keywords" content="Digital Signal Processing,Mathematics,Z-Transform,Digital Filter," />
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FIR Filter"/>
 <meta name="twitter:description" content="FIR Filter の概要"/>
@@ -95,7 +92,7 @@
       </nav>
         <nav id="sub-nav">
           <div class="profile" id="profile-nav">
-            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.jpeg"><i class="fa fa-caret-down"></i></a>
           </div>
         </nav>
         <div id="search-form-wrap">
@@ -159,8 +156,8 @@
       <img id="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&d=identicon"/>
       
       <h2 id="name">Korilakkuma</h2>
-      <h3 id="title">Multimedia (Video, Audio) Engineer. I&#39;m expert in Web Audio API, WebRTC and Streaming. C/C&#43;&#43;, JavaScript ...</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <h3 id="title">Audio Programmer. As a graduate student, I plan to study Audio Signal Processing for Music from 2022. C/C&#43;&#43;, UNIX system call 💖🎸🎹</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          30
+          48
         
         <span>
             Tags
@@ -272,7 +269,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-09-28 17:02:03 &#43;0900 JST" itemprop="datePublished">2019-09-28</time>
             &middot;
-            4272
+            4255
             words
             &middot;
             9
@@ -320,7 +317,7 @@
                 &middot;
                 
                 
-                <a class="article-category-link" href="https://art-of-life.jp/tags/z-transform">Z-transform</a>
+                <a class="article-category-link" href="https://art-of-life.jp/tags/z-transform">Z-Transform</a>
                 &middot;
                 
                 
@@ -334,614 +331,508 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="fir-フィルタとは">FIR フィルタとは ?</h1>
-
+            <h1 id="fir-フィルタとは-">FIR フィルタとは ?</h1>
 <p>デジタルフィルタは, <b>乗算器</b>, <b>加算器</b>, <b>遅延器</b>で構成されています. これらの構成によって, <b>FIR (Finite Impulse Response) フィルタ</b>と, <b>IIR (Infinite Impulse Response) フィルタ</b>の 2 種類に分類できます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65827477-74113000-e2cc-11e9-9df2-920f834bd8e5.png" alt="デジタルフィルタの構成 (FIR フィルタの例)" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/65827477-74113000-e2cc-11e9-9df2-920f834bd8e5.png" alt="デジタルフィルタの構成 (FIR フィルタの例)"></p>
 <p>FIR フィルタの定義は以下のようになります. この式は, <b>コンボリューション</b> (<b>畳み込み</b>) と呼ばれる計算の定義です.</p>
-
 <p>$
 \begin{eqnarray}
 y(n)=\sum_{m=0}^{J}b(m)x(n-m)
 \end{eqnarray}
 $</p>
-
 <p>$x(n)$ は入力信号, $y(n)$ は出力信号, $b(m)$ は乗算器のフィルタ係数, $J$ は遅延器の数を表しています ($m=0$ から開始しているので, フィルタ係数の数は $J+1$ となります).</p>
-
 <p>遅延器とは, デジタル信号を 1 サンプルだけ格納することができるメモリです. 音データを遅延器に入力すると, 遅延器に 1 時刻の間だけ蓄積されたあと次の時刻に出力されます. 過去の音データをどのくらい記憶できるかは, 遅延器の数によって決定されます. 例えば, サンプリング周波数 44.1 kHz の場合, 1 秒間の音データを記憶するのには, 44100 個の遅延器が必要になります.</p>
-
 <h1 id="z-変換">Z 変換</h1>
-
 <p>フィルタの特性というのは, <b>Z 変換</b> によって分析することが可能です.</p>
-
 <p>$x(n)$ と $y(n)$ の Z 変換は, 以下のように定義されます.</p>
-
 <p>$
 \begin{eqnarray}
 X(z)=\sum_{n=-\infty}^{\infty}x(n)z^{-n}
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 Y(z)=\sum_{n=-\infty}^{\infty}y(n)z^{-n}
 \end{eqnarray}
 $</p>
-
 <p>この定義をもとに, FIR フィルタの定義式の Z 変換を求めます.</p>
-
 <p>$
 \begin{eqnarray}
-Y(z)&amp;=&amp;\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-n} \\<br />
-    &amp;=&amp;\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-(n-m)}z^{-m} \\<br />
-    &amp;=&amp;\sum_{m=0}^{J}b(m)X(z)z^{-m} \\<br />
+Y(z)&amp;=&amp;\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-n} \\<br>
+&amp;=&amp;\sum_{m=0}^{J}b(m)\sum_{n=-\infty}^{\infty}x(n-m)z^{-(n-m)}z^{-m} \\<br>
+&amp;=&amp;\sum_{m=0}^{J}b(m)X(z)z^{-m} \\<br>
 \end{eqnarray}
 $</p>
-
 <p>ここで, フィルタ係数の定義というのは,</p>
-
 <p>$
 \begin{cases}
 \begin{eqnarray}
-&amp;b(m)\neq0&amp;\quad(0 \leqq m \leqq J) \\<br />
-&amp;b(m)=0&amp;\quad(otherwise) \\<br />
+&amp;b(m)\neq0&amp;\quad(0 \leqq m \leqq J) \\<br>
+&amp;b(m)=0&amp;\quad(otherwise) \\<br>
 \end{eqnarray}
 \end{cases}
 $</p>
-
 <p>となるので,</p>
-
 <p>$
 \begin{eqnarray}
-Y(z)&amp;=&amp;\sum_{m=-\infty}^{\infty}b(m)X(z)z^{-m} \\<br />
-    &amp;=&amp;\sum_{m=-\infty}^{\infty}b(m)z^{-m}X(z) \\<br />
+Y(z)&amp;=&amp;\sum_{m=-\infty}^{\infty}b(m)X(z)z^{-m} \\<br>
+&amp;=&amp;\sum_{m=-\infty}^{\infty}b(m)z^{-m}X(z) \\<br>
 \end{eqnarray}
 $</p>
-
 <p>と書き換えることができます.</p>
-
 <p>また, $b(m)$ の Z 変換は,</p>
-
 <p>$
 \begin{eqnarray}
 B(z)=\sum_{m=\infty}^{\infty}b(m)z^{-n}
 \end{eqnarray}
 $</p>
-
 <p>となるので, FIR フィルタの Z 変換は以下のように定義できます.</p>
-
 <p>$Y(z)=B(z)X(z)$</p>
-
 <p>この式は, $z$ を変数として信号を表すと, FIR フィルタは入力信号とフィルタ係数の乗算によって出力信号が生成できることを意味します.</p>
-
 <p>また, 入力信号と出力信号の比を<b>伝達関数</b>と呼び, FIR フィルタの伝達関数は以下のように定義できます.</p>
-
 <p>$
 \begin{eqnarray}
 H(z)=\frac{Y(z)}{X(z)}=B(z)
 \end{eqnarray}
 $</p>
-
 <h2 id="z-変換とフーリエ変換">Z 変換とフーリエ変換</h2>
-
 <p>Z 変換は, デジタル信号に対するフーリエ変換と関係しています. $z$ を $\exp(j2{\pi}f)$ に置き換えると,</p>
-
 <p>$
 \begin{eqnarray}
 X(f)=\sum_{n=-\infty}^{\infty}x(n)\exp\left(-j2{\pi}fn\right)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 Y(f)=\sum_{n=-\infty}^{\infty}y(n)\exp\left(-j2{\pi}fn\right)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 B(f)=\sum_{m=-\infty}^{\infty}b(m)\exp\left(-j2{\pi}fm\right)
 \end{eqnarray}
 $</p>
-
 <p>これらは, サンプリング周波数 $f_{s}$ を 1 に正規化したデジタル信号のフーリエ変換です.</p>
-
 <p>つまり, FIR フィルタは, <b>時間領域では畳み込み</b>, <b>周波数領域では乗算</b>として定義できるということです.</p>
-
 <p>$Y(f)=B(f)X(f)$</p>
-
 <h1 id="窓関数法">窓関数法</h1>
-
 <p>FIR フィルタをそのまま利用するのは, フィルタの性能があまりよくありません. 周波数成分をはっきりと分離するには, フィルタの設計に工夫が必要となります.</p>
-
 <p>そのための 1 つの方法に, <b>窓関数法</b>があります. 窓関数法を適用することで, <b>LPF</b> (Low-Pass Filter), <b>HPF</b> (High-Pass Filter), <b>BPF</b> (Band-Pass Filter), <b>BEF</b> (Band-Eliminate Filter) という, 基本的なフィルタを設計することが可能になります.</p>
-
 <p>フィルタが通過させる帯域は, <b>通過域</b>, 減衰させる帯域は, <b>阻止域</b>と呼びます. また, $f_{e}$ は, <b>エッジ周波数</b>と呼ばれ, 理想的なフィルタは, この周波数を境にして, 通過域と阻止域をはっきりと分離する事ができますが, コンピュータではこのような理想フィルタを実装することはできません.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66262353-cf857580-e818-11e9-8ce5-653461d69fc8.png" alt="FIR フィルタ (LPF, HPF, BPF, BEF)" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66262353-cf857580-e818-11e9-8ce5-653461d69fc8.png" alt="FIR フィルタ (LPF, HPF, BPF, BEF)"></p>
 <p>では, LPF を例にして, 窓関数法による FIR フィルタを設計してみます.</p>
-
 <p>理想的な LPF は, エッジ周波数より低域の周波数成分は 1, それより高域の周波数成分では 0 となるので, 理想特性は以下のように定義できます.</p>
-
 <p>$
 B(f)=
 \begin{cases}
 \begin{eqnarray}
-&amp;1&amp;\quad(0 \leqq \left|f\right| \leqq f_{e}) \\<br />
-&amp;0&amp;\quad(f_{e} &lt; \left|f\right| \leqq \frac{1}{2}) \\<br />
+&amp;1&amp;\quad(0 \leqq \left|f\right| \leqq f_{e}) \\<br>
+&amp;0&amp;\quad(f_{e} &lt; \left|f\right| \leqq \frac{1}{2}) \\<br>
 \end{eqnarray}
 \end{cases}
 $</p>
-
 <p>$B(f)$ から, フィルタ係数を求めるには, デジタル信号に対する逆フーリエ変換を利用します.</p>
-
 <p>$
 \begin{eqnarray}
-b(m)&amp;=&amp;\int_{-f_{e}}^{f_{e}}\exp\left(j2{\pi}fm\right)df \quad (-\infty \leqq m \leqq \infty) \\<br />
-    &amp;=&amp;2f_{e}sinc\left(2{\pi}f_{e}m\right) \\<br />
+b(m)&amp;=&amp;\int_{-f_{e}}^{f_{e}}\exp\left(j2{\pi}fm\right)df \quad (-\infty \leqq m \leqq \infty) \\<br>
+&amp;=&amp;2f_{e}sinc\left(2{\pi}f_{e}m\right) \\<br>
 \end{eqnarray}
 $</p>
-
 <p>$
 sinc(x)=
 \begin{cases}
 \begin{eqnarray}
-&amp;1&amp; \quad (x=0) \\<br />
-&amp;\frac{\sin\left(x\right)}{x}&amp; \quad (otherwise) \\<br />
+&amp;1&amp; \quad (x=0) \\<br>
+&amp;\frac{\sin\left(x\right)}{x}&amp; \quad (otherwise) \\<br>
 \end{eqnarray}
 \end{cases}
 $</p>
-
 <p>$sinc\left(x\right)$ は, <b>シンク関数</b>と呼ばれています. シンク関数は, $-\infty$ から $+\infty$ の区間で定義されているので, フィルタ係数が無限に存在します. コンピュータではこのようなフィルタをあつかえません. したがって, フィルタ係数を有限でうちきるために窓関数を利用します.</p>
-
 <p>窓関数法は, 0 を中心として対称となるようにフィルタをうちきりますが, このままだと, フィルタ係数のインデックスが負数からはじまるので, インデックスが 0 ~ $J$ になるように書き換えます.</p>
-
 <p>ただし, 窓関数で有限にうちきった結果, 通過域と阻止域の境界が広がるという問題が発生します (理想特性をもつフィルタが, コンピュータでは実装できない理由です).</p>
-
 <p>通過域と阻止域の間に $\delta$ で定義される帯域を, <b>遷移帯域幅</b> と呼びます. $\delta$ は, フィルタ係数の数 $J+1$ に反比例します. つまり, 理想特性に近づけるほど, 乗算器の数が大きくなってしまいます.</p>
-
 <p>実は, フィルタ係数をうちきる窓関数として, ハニング窓を適用する場合, $\delta$ からフィルタ係数の数を決定できます.</p>
-
 <p>$
 J+1=
 \begin{eqnarray}
 round\left(\frac{3.1}{\delta}\right)
 \end{eqnarray}
 $</p>
-
 <p>窓関数法では 0 を中心として対称になるようにフィルタをうちきる必要があるので, フィルタ係数の数は奇数にする必要があります.</p>
-
 <p>LPF と同様の設計で, HPF, BPF, BEF を実装することができます.</p>
-
 <h2 id="hpf">HPF</h2>
-
 <p>$
 B(f)=
 \begin{cases}
 \begin{eqnarray}
-&amp;0&amp;\quad(0 \leqq \left|f\right| \leqq f_{e}) \\<br />
-&amp;1&amp;\quad(f_{e} &lt; \left|f\right| \leqq \frac{1}{2}) \\<br />
+&amp;0&amp;\quad(0 \leqq \left|f\right| \leqq f_{e}) \\<br>
+&amp;1&amp;\quad(f_{e} &lt; \left|f\right| \leqq \frac{1}{2}) \\<br>
 \end{eqnarray}
 \end{cases}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b\left(m\right)=sinc\left({\pi}m\right)-2f_{e}sinc\left(2{\pi}f_{e}m\right)
 \end{eqnarray}
 $</p>
-
 <h2 id="bpf">BPF</h2>
-
 <p>$
 B(f)=
 \begin{cases}
 \begin{eqnarray}
-&amp;0&amp;\quad(0 \leqq \left|f\right| \leqq f_{e1}) \\<br />
-&amp;1&amp;\quad(f_{e1} &lt; \left|f\right| \leqq f_{e2}) \\<br />
-&amp;0&amp;\quad(f_{e2} &lt; \left|f\right| \leqq \frac{1}{2}) \\<br />
+&amp;0&amp;\quad(0 \leqq \left|f\right| \leqq f_{e1}) \\<br>
+&amp;1&amp;\quad(f_{e1} &lt; \left|f\right| \leqq f_{e2}) \\<br>
+&amp;0&amp;\quad(f_{e2} &lt; \left|f\right| \leqq \frac{1}{2}) \\<br>
 \end{eqnarray}
 \end{cases}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b\left(m\right)=2f_{e2}sinc\left(2{\pi}f_{e2}m\right)-2f_{e1}sinc\left(2{\pi}f_{e1}m\right)
 \end{eqnarray}
 $</p>
-
 <h2 id="bef">BEF</h2>
-
 <p>$
 B(f)=
 \begin{cases}
 \begin{eqnarray}
-&amp;1&amp;\quad(0 \leqq \left|f\right| \leqq f_{e1}) \\<br />
-&amp;0&amp;\quad(f_{e1} &lt; \left|f\right| \leqq f_{e2}) \\<br />
-&amp;1&amp;\quad(f_{e2} &lt; \left|f\right| \leqq \frac{1}{2}) \\<br />
+&amp;1&amp;\quad(0 \leqq \left|f\right| \leqq f_{e1}) \\<br>
+&amp;0&amp;\quad(f_{e1} &lt; \left|f\right| \leqq f_{e2}) \\<br>
+&amp;1&amp;\quad(f_{e2} &lt; \left|f\right| \leqq \frac{1}{2}) \\<br>
 \end{eqnarray}
 \end{cases}
 $</p>
-
 <p>$
 \begin{eqnarray}
 b\left(m\right)=sinc\left({\pi}m\right)-2f_{e2}sinc\left(2{\pi}f_{e2}m\right)+2f_{e1}sinc\left(2{\pi}f_{e1}m\right)
 \end{eqnarray}
 $</p>
-
 <h1 id="実装">実装</h1>
-
 <p>FIR フィルタによる LPF, HPF, BPF, BEF の実装 (C++) です.</p>
-
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;cmath&gt;
-
-double sinc(double n) {
-  if (n == 0) {
-    return 1.0;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">double</span> <span style="color:#a6e22e">sinc</span>(<span style="color:#66d9ef">double</span> n) {
+  <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1.0</span>;
   }
 
-  return std::sin(n) / n;
+  <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>sin(n) <span style="color:#f92672">/</span> n;
 }
 
-void FIR_LPF(double fe, int J, std::vector&lt;double&gt; &amp;b, std::vector&lt;double&gt; &amp;w) {
-  int offset = J / 2;
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">FIR_LPF</span>(<span style="color:#66d9ef">double</span> fe, <span style="color:#66d9ef">int</span> J, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>w) {
+  <span style="color:#66d9ef">int</span> offset <span style="color:#f92672">=</span> J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
 
-  for (int m = -(J / 2); m &lt;= (J / 2); m++) {
-    b[offset + m] = 2.0 * fe * sinc(2.0 * M_PI * fe * m);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>); m <span style="color:#f92672">&lt;=</span> (J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>); m<span style="color:#f92672">++</span>) {
+    b[offset <span style="color:#f92672">+</span> m] <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> fe <span style="color:#f92672">*</span> sinc(<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fe <span style="color:#f92672">*</span> m);
   }
 
-  for (int m = 0; m &lt; (J + 1); m++) {
-    b[m] *= w[m];
-  }
-}
-
-void FIR_HPF(double fe, int J, std::vector&lt;double&gt; &amp;b, std::vector&lt;double&gt; &amp;w) {
-  int offset = J / 2;
-
-  for (int m = -(J / 2); m &lt;= (J / 2); m++) {
-    b[offset + m] = sinc(M_PI * m) - (2.0 * fe * sinc(2.0 * M_PI * fe * m));
-  }
-
-  for (int m = 0; m &lt; (J + 1); m++) {
-    b[m] *= w[m];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;</span> (J <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>); m<span style="color:#f92672">++</span>) {
+    b[m] <span style="color:#f92672">*=</span> w[m];
   }
 }
 
-void FIR_BPF(double fe1, double fe2, int J, std::vector&lt;double&gt; &amp;b, std::vector&lt;double&gt; &amp;w) {
-  int offset = J / 2;
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">FIR_HPF</span>(<span style="color:#66d9ef">double</span> fe, <span style="color:#66d9ef">int</span> J, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>w) {
+  <span style="color:#66d9ef">int</span> offset <span style="color:#f92672">=</span> J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
 
-  for (int m = -(J / 2); m &lt;= (J / 2); m++) {
-    b[offset + m] = (2 * fe2 * sinc(2 * M_PI * fe2 * m)) - (2.0 * fe1 * sinc(2.0 * M_PI * fe1 * m));
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>); m <span style="color:#f92672">&lt;=</span> (J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>); m<span style="color:#f92672">++</span>) {
+    b[offset <span style="color:#f92672">+</span> m] <span style="color:#f92672">=</span> sinc(M_PI <span style="color:#f92672">*</span> m) <span style="color:#f92672">-</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> fe <span style="color:#f92672">*</span> sinc(<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fe <span style="color:#f92672">*</span> m));
   }
 
-  for (int m = 0; m &lt; (J + 1); m++) {
-    b[m] *= w[m];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;</span> (J <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>); m<span style="color:#f92672">++</span>) {
+    b[m] <span style="color:#f92672">*=</span> w[m];
+  }
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">FIR_BPF</span>(<span style="color:#66d9ef">double</span> fe1, <span style="color:#66d9ef">double</span> fe2, <span style="color:#66d9ef">int</span> J, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>w) {
+  <span style="color:#66d9ef">int</span> offset <span style="color:#f92672">=</span> J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>); m <span style="color:#f92672">&lt;=</span> (J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>); m<span style="color:#f92672">++</span>) {
+    b[offset <span style="color:#f92672">+</span> m] <span style="color:#f92672">=</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> fe2 <span style="color:#f92672">*</span> sinc(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fe2 <span style="color:#f92672">*</span> m)) <span style="color:#f92672">-</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> fe1 <span style="color:#f92672">*</span> sinc(<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fe1 <span style="color:#f92672">*</span> m));
+  }
+
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;</span> (J <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>); m<span style="color:#f92672">++</span>) {
+    b[m] <span style="color:#f92672">*=</span> w[m];
   }
 }
 
-void FIR_BEF(double fe1, double fe2, int J, std::vector&lt;double&gt; &amp;b, std::vector&lt;double&gt; &amp;w) {
-  int offset = J / 2;
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">FIR_BEF</span>(<span style="color:#66d9ef">double</span> fe1, <span style="color:#66d9ef">double</span> fe2, <span style="color:#66d9ef">int</span> J, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>w) {
+  <span style="color:#66d9ef">int</span> offset <span style="color:#f92672">=</span> J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
 
-  for (int m = -(J / 2); m &lt;= (J / 2); m++) {
-    b[offset + m] = sinc(M_PI * m) - (2 * fe2 * sinc(2 * M_PI * fe2 * m)) + (2.0 * fe1 * sinc(2.0 * M_PI * fe1 * m));
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>); m <span style="color:#f92672">&lt;=</span> (J <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>); m<span style="color:#f92672">++</span>) {
+    b[offset <span style="color:#f92672">+</span> m] <span style="color:#f92672">=</span> sinc(M_PI <span style="color:#f92672">*</span> m) <span style="color:#f92672">-</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> fe2 <span style="color:#f92672">*</span> sinc(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fe2 <span style="color:#f92672">*</span> m)) <span style="color:#f92672">+</span> (<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> fe1 <span style="color:#f92672">*</span> sinc(<span style="color:#ae81ff">2.0</span> <span style="color:#f92672">*</span> M_PI <span style="color:#f92672">*</span> fe1 <span style="color:#f92672">*</span> m));
   }
 
-  for (int m = 0; m &lt; (J + 1); m++) {
-    b[m] *= w[m];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;</span> (J <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>); m<span style="color:#f92672">++</span>) {
+    b[m] <span style="color:#f92672">*=</span> w[m];
   }
 }
-</code></pre>
-
-<p>実行例</p>
-
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdlib&gt;
-#include &lt;string&gt;
-#include &lt;vector&gt;
-#include &quot;wave.h&quot;
-#include &quot;window_functions.h&quot;
-#include &quot;fir_filters.h&quot;
-
-int main(int argc, char **argv) {
-  if ((argc != 4) &amp;&amp; (argc != 5)) {
-    std::cerr &lt;&lt; &quot;Require type, fe, delta&quot; &lt;&lt; std::endl;
-    std::exit(EXIT_FAILURE);
+</code></pre></div><p>実行例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;wave.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;window_functions.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;fir_filters.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv) {
+  <span style="color:#66d9ef">if</span> ((argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">4</span>) <span style="color:#f92672">&amp;&amp;</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">5</span>)) {
+    std<span style="color:#f92672">::</span>cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Require type, fe, delta&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+    std<span style="color:#f92672">::</span>exit(EXIT_FAILURE);
   }
 
-  std::string type = argv[1];
+  std<span style="color:#f92672">::</span>string type <span style="color:#f92672">=</span> argv[<span style="color:#ae81ff">1</span>];
 
   STEREO_PCM pcm0, pcm1;
-  std::vector&lt;double&gt; b;
-  std::vector&lt;double&gt; w;
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> b;
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> w;
 
-  // Read WAVE
-  wave_read(&amp;pcm0, &quot;stereo.wav&quot;);
+  <span style="color:#75715e">// Read WAVE
+</span><span style="color:#75715e"></span>  wave_read(<span style="color:#f92672">&amp;</span>pcm0, <span style="color:#e6db74">&#34;stereo.wav&#34;</span>);
 
-  pcm1.fs     = pcm0.fs;
-  pcm1.bits   = pcm0.bits;
-  pcm1.length = pcm0.length;
+  pcm1.fs     <span style="color:#f92672">=</span> pcm0.fs;
+  pcm1.bits   <span style="color:#f92672">=</span> pcm0.bits;
+  pcm1.length <span style="color:#f92672">=</span> pcm0.length;
 
   pcm1.sL.resize(pcm0.length);
   pcm1.sR.resize(pcm0.length);
 
-  if (argc == 4) {
-    double fe    = std::stod(argv[2]) / pcm0.fs;
-    double delta = std::stod(argv[3]) / pcm0.fs;
-    int J        = std::round(3.1 / delta);
+  <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span>) {
+    <span style="color:#66d9ef">double</span> fe    <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">/</span> pcm0.fs;
+    <span style="color:#66d9ef">double</span> delta <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">3</span>]) <span style="color:#f92672">/</span> pcm0.fs;
+    <span style="color:#66d9ef">int</span> J        <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>round(<span style="color:#ae81ff">3.1</span> <span style="color:#f92672">/</span> delta);
 
-    if ((J % 2) == 1) {
-      J++;
+    <span style="color:#66d9ef">if</span> ((J <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+      J<span style="color:#f92672">++</span>;
     }
 
     b.resize(J);
     w.resize(J);
 
-    hanning_window(w, (J + 1));
+    hanning_window(w, (J <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
 
-    if (type == &quot;lpf&quot;) {
+    <span style="color:#66d9ef">if</span> (type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;lpf&#34;</span>) {
       FIR_LPF(fe, J, b, w);
-    } else if (type == &quot;hpf&quot;) {
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hpf&#34;</span>) {
       FIR_HPF(fe, J, b, w);
     }
-  } else if (argc == 5) {
-    double fe1   = std::stod(argv[2]) / pcm0.fs;
-    double fe2   = std::stod(argv[3]) / pcm0.fs;
-    double delta = std::stod(argv[4]) / pcm0.fs;
-    int J        = std::round(3.1 / delta);
+  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span>) {
+    <span style="color:#66d9ef">double</span> fe1   <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">/</span> pcm0.fs;
+    <span style="color:#66d9ef">double</span> fe2   <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">3</span>]) <span style="color:#f92672">/</span> pcm0.fs;
+    <span style="color:#66d9ef">double</span> delta <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">4</span>]) <span style="color:#f92672">/</span> pcm0.fs;
+    <span style="color:#66d9ef">int</span> J        <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>round(<span style="color:#ae81ff">3.1</span> <span style="color:#f92672">/</span> delta);
 
-    if ((J % 2) == 1) {
-      J++;
+    <span style="color:#66d9ef">if</span> ((J <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+      J<span style="color:#f92672">++</span>;
     }
 
     b.resize(J);
     w.resize(J);
 
-    hanning_window(w, (J + 1));
+    hanning_window(w, (J <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
 
-    if (type == &quot;bpf&quot;) {
+    <span style="color:#66d9ef">if</span> (type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bpf&#34;</span>) {
       FIR_BPF(fe1, fe2, J, b, w);
-    } else if (type == &quot;bef&quot;) {
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bef&#34;</span>) {
       FIR_BEF(fe1, fe2, J, b, w);
     }
   }
 
-  for (int n = 0; n &lt; pcm1.length; n++) {
-    for (int m = 0; m &lt;= J; m++) {
-      if ((n - m) &gt;= 0) {
-        pcm1.sL[n] += b[m] * pcm0.sL[n - m];
-        pcm1.sR[n] += b[m] * pcm0.sR[n - m];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> pcm1.length; n<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;=</span> J; m<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> ((n <span style="color:#f92672">-</span> m) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+        pcm1.sL[n] <span style="color:#f92672">+=</span> b[m] <span style="color:#f92672">*</span> pcm0.sL[n <span style="color:#f92672">-</span> m];
+        pcm1.sR[n] <span style="color:#f92672">+=</span> b[m] <span style="color:#f92672">*</span> pcm0.sR[n <span style="color:#f92672">-</span> m];
       }
     }
   }
 
-  // Write WAVE
-  wave_write(&amp;pcm1, &quot;fir_filter.wav&quot;);
+  <span style="color:#75715e">// Write WAVE
+</span><span style="color:#75715e"></span>  wave_write(<span style="color:#f92672">&amp;</span>pcm1, <span style="color:#e6db74">&#34;fir_filter.wav&#34;</span>);
 }
-</code></pre>
-
-<h1 id="ディレイ">ディレイ</h1>
-
+</code></pre></div><h1 id="ディレイ">ディレイ</h1>
 <p><b>ディレイ</b>とは, 現在の時刻の音データとそれよりも過去の音データを同時に再生することで, やまびこのような効果を生み出すサウンドエフェクトの 1 種です. デジタル信号処理のなかでも, 最も基本的な処理として位置づけられています (実際, <b>ディレイ系</b>と呼ばれるエフェクター群があります).</p>
-
 <p>$
 \begin{eqnarray}
 s_{1}(n)=\sum_{m=0}^{J}b(m)s_{0}(n-m)
 \end{eqnarray}
 $</p>
-
 <p>ディレイの処理は, FIR フィルタと同様です.</p>
-
 <p>現在の時刻の音データに, 過去の音データをどのようにミックスするかは, 乗算器の係数 $b(m)$ によって決まります.
 やまびこをつくりだすには, 一般的に以下のように定義します.</p>
-
 <p>$
 b(m)=
 \begin{cases}
 \begin{eqnarray}
-&amp;1&amp;\quad(m=0) \\<br />
-&amp;wet^{i}&amp;\quad(m=i*time, 1 \leqq i \leqq feedback) \\<br />
-&amp;0&amp;\quad(otherwise) \\<br />
+&amp;1&amp;\quad(m=0) \\<br>
+&amp;wet^{i}&amp;\quad(m=i*time, 1 \leqq i \leqq feedback) \\<br>
+&amp;0&amp;\quad(otherwise) \\<br>
 \end{eqnarray}
 \end{cases}
 $</p>
-
 <p>$wet$ はやまびこの減衰率を表しています. やまびこがしだいに小さくなるようにするには 1 より小さくする必要があります. $time$ は, やまびこの遅延時間です. $feedback$ は, やまびこの繰り返し回数です.</p>
-
 <p>実際のディレイエフェクターでも, ほぼ同様にパラメータを設定可能になっています.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66262413-28a1d900-e81a-11e9-916d-98886dc00e1b.png" alt="ディレイとパラメータ" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66262413-28a1d900-e81a-11e9-916d-98886dc00e1b.png" alt="ディレイとパラメータ"></p>
 <p>ここで, ピストル音のような, ごく短時間に非常に大きな音が発生する音データ $s_{0}(n)$ を仮定します. このような音は, <b>インパルス</b>と呼ばれます (数学的には, <b>デルタ関数</b>で定義されます).</p>
-
 <p>$
 s_{0}(n)=
 \begin{cases}
 \begin{eqnarray}
-&amp;1&amp;\quad(n=0) \\<br />
-&amp;0&amp;\quad(otherwise) \\<br />
+&amp;1&amp;\quad(n=0) \\<br>
+&amp;0&amp;\quad(otherwise) \\<br>
 \end{eqnarray}
 \end{cases}
 $</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65945730-8d061680-e46f-11e9-95c7-9f264cf55848.png" alt="デルタ関数 (アナログ信号なので, $\infty$ となっています)" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/65945730-8d061680-e46f-11e9-95c7-9f264cf55848.png" alt="デルタ関数 (アナログ信号なので, $\infty$ となっています)"></p>
 <p>インパルスを入力として, FIR フィルタを計算すると, 出力信号は以下のように, $b(n)$ となります.</p>
-
 <p>$
 \begin{eqnarray}
-s_{1}(n)&amp;=&amp;\sum_{m=0}^{J}b(m)s_{0}(n-m) \\<br />
-         &amp;=&amp;\sum_{m=0}^{m=n-1}b(m)s_{0}(n-m)+b(n)s_{0}(0)+\sum_{m=n+1}^{m=J}b(m)s_{0}(n-m)  \\<br />
-         &amp;=&amp;b(n) \\<br />
+s_{1}(n)&amp;=&amp;\sum_{m=0}^{J}b(m)s_{0}(n-m) \\<br>
+&amp;=&amp;\sum_{m=0}^{m=n-1}b(m)s_{0}(n-m)+b(n)s_{0}(0)+\sum_{m=n+1}^{m=J}b(m)s_{0}(n-m)  \\<br>
+&amp;=&amp;b(n) \\<br>
 \end{eqnarray}
 $</p>
-
 <p>インパルスを入力信号としたとき, その応答として得られる出力信号を, <b>インパルス応答</b>と呼びます.
 <b>FIR フィルタのインパルス応答は, 乗算器の係数</b>です (FIR フィルタの特徴の 1 つ).</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/65945811-bd4db500-e46f-11e9-9ce5-0bf595f4dc75.png" alt="インパルス応答"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Delay</span>(
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>dry,
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>mix,
+  <span style="color:#66d9ef">int</span> length,
+  <span style="color:#66d9ef">double</span> wet,
+  <span style="color:#66d9ef">double</span> time,
+  <span style="color:#66d9ef">int</span> feedback) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> length; n<span style="color:#f92672">++</span>) {
+    mix[n] <span style="color:#f92672">=</span> dry[n];
 
-<p><img src="https://user-images.githubusercontent.com/4006693/65945811-bd4db500-e46f-11e9-9ce5-0bf595f4dc75.png" alt="インパルス応答" /></p>
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> feedback; i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(n) <span style="color:#f92672">-</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(i <span style="color:#f92672">*</span> time));
 
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;cmath&gt;
-
-void Delay(
-  std::vector&lt;double&gt; &amp;dry,
-  std::vector&lt;double&gt; &amp;mix,
-  int length,
-  double wet,
-  double time,
-  int feedback) {
-  for (int n = 0; n &lt; length; n++) {
-    mix[n] = dry[n];
-
-    for (int i = 1; i &lt;= feedback; i++) {
-      int m = static_cast&lt;int&gt;(static_cast&lt;double&gt;(n) - static_cast&lt;double&gt;(i * time));
-
-      if (m &gt;= 0) {
-        mix[n] = mix[n] + std::pow(wet, static_cast&lt;double&gt;(i)) * dry[m];
+      <span style="color:#66d9ef">if</span> (m <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+        mix[n] <span style="color:#f92672">=</span> mix[n] <span style="color:#f92672">+</span> std<span style="color:#f92672">::</span>pow(wet, <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(i)) <span style="color:#f92672">*</span> dry[m];
       }
     }
   }
 }
-</code></pre>
-
-<h1 id="フレーム単位のフィルタリング">フレーム単位のフィルタリング</h1>
-
+</code></pre></div><h1 id="フレーム単位のフィルタリング">フレーム単位のフィルタリング</h1>
 <p>コンピュータのメモリは有限なので, 音データがあまりに長いと, 音データを一度にメモリに読み込んでフィルタリングすることが難しくなります. そこで, 音データを小さなフレームに分割して, フレーム単位でフィルタリングする必要があります. フレームに分割するので, フレームとフレームの接続を考慮する必要があります.</p>
-
 <p>FIR フィルタの場合は, 直前のフレームの音データを, 現在のフレームの最初に連結してフィルタリングします (ただし, 最初のフレームに関しては, 直前のフレームが存在しないので, 無音 (0) のフレームを連結します).</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65952621-2ee03000-e47d-11e9-8985-527417790d03.png" alt="フレーム単位のフィルタリング" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/65952621-2ee03000-e47d-11e9-8985-527417790d03.png" alt="フレーム単位のフィルタリング"></p>
 <h2 id="巡回畳み込み">巡回畳み込み</h2>
-
 <p>FIR フィルタは, <b>時間領域では畳み込み</b>, <b>周波数領域では乗算</b>として定義できました. つまり, FIR フィルタの計算は, 時間領域で畳み込み演算する方法と, 周波数領域で乗算をしてその結果を時間領域に戻す方法の 2 つがあるということです.</p>
-
 <p>ところで, 離散フーリエ変換では, $x(n)$ が周期 $N$ の周期信号であることを仮定しているので, 畳み込みの結果も周期 $N$ の周期信号になります. これを, <b>巡回畳み込み</b>と呼びます.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/65955726-c21c6400-e483-11e9-8092-a0aa6d845011.png" alt="巡回畳み込み" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/65955726-c21c6400-e483-11e9-8092-a0aa6d845011.png" alt="巡回畳み込み"></p>
 <p>音のデータの長さを $L$, フィルタ係数の数を $J+1$ とすると, 通常の畳み込みの結果は $L+J$ サンプルになります. したがって, 巡回畳み込みの結果から, 通常の畳み込みの結果を取得するには, $N$ を $L+J$ 以上になるように設定する必要があります.</p>
-
 <p>$
 \begin{eqnarray}
 L+J \leqq N
 \end{eqnarray}
 $</p>
-
 <p>離散フーリエ変換による畳み込みの計算は, <b>0 埋め処理</b>をして, $N$ サンプルに拡張してから, 離散フーリエ変換を実行します (高速フーリエ変換の場合は, $N$ が 2 のべき乗になるようにします).</p>
-
 <h2 id="オーバーラップアド">オーバーラップアド</h2>
-
 <p>フレーム単位でフィルタリングをする場合, 隣接するフレームの畳み込みの結果を重ね合わせながら連結していく必要があります. この処理を<b>オーバーラップアド</b>と呼びます.</p>
-
 <h2 id="実装-1">実装</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;complex&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;window_functions.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;fft.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fir_frame_filter</span>(
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>s0,
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>s1,
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b0,
+  <span style="color:#66d9ef">int</span> length,
+  <span style="color:#66d9ef">int</span> J,
+  <span style="color:#66d9ef">int</span> L,
+  <span style="color:#66d9ef">int</span> N) {
+  <span style="color:#66d9ef">int</span> number_of_frames <span style="color:#f92672">=</span> length <span style="color:#f92672">/</span> L;
 
-<pre><code class="language-c++">#include &lt;vector&gt;
-#include &lt;complex&gt;
-#include &quot;window_functions.h&quot;
-#include &quot;fft.h&quot;
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> b(N);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> x(N);
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> y(N);
 
-void fir_frame_filter(
-  std::vector&lt;double&gt; &amp;s0,
-  std::vector&lt;double&gt; &amp;s1,
-  std::vector&lt;double&gt; &amp;b0,
-  int length,
-  int J,
-  int L,
-  int N) {
-  int number_of_frames = length / L;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> frame <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; frame <span style="color:#f92672">&lt;</span> number_of_frames; frame<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> offset <span style="color:#f92672">=</span> L <span style="color:#f92672">*</span> frame;
 
-  std::vector&lt;std::complex&lt;double&gt;&gt; b(N);
-  std::vector&lt;std::complex&lt;double&gt;&gt; x(N);
-  std::vector&lt;std::complex&lt;double&gt;&gt; y(N);
-
-  for (int frame = 0; frame &lt; number_of_frames; frame++) {
-    int offset = L * frame;
-
-    for (int n = 0; n &lt; N; n++) {
-      x[n] = std::complex&lt;double&gt;(0.0, 0.0);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> N; n<span style="color:#f92672">++</span>) {
+      x[n] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>);
     }
 
-    for (int n = 0; n &lt; L; n++) {
-      x[n] = std::complex&lt;double&gt;(s0[offset + n], 0.0);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> L; n<span style="color:#f92672">++</span>) {
+      x[n] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(s0[offset <span style="color:#f92672">+</span> n], <span style="color:#ae81ff">0.0</span>);
     }
 
     FFT(x, N);
 
-    for (int m = 0; m &lt; N; m++) {
-      b[m] = std::complex&lt;double&gt;(0.0, 0.0);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;</span> N; m<span style="color:#f92672">++</span>) {
+      b[m] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>);
     }
 
-    for (int m = 0; m &lt; J; m++) {
-      b[m] = std::complex&lt;double&gt;(b0[m], 0.0);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; m <span style="color:#f92672">&lt;</span> J; m<span style="color:#f92672">++</span>) {
+      b[m] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(b0[m], <span style="color:#ae81ff">0.0</span>);
     }
 
     FFT(b, N);
 
-    for (int k = 0; k &lt; N; k++) {
-      y[k] = std::complex&lt;double&gt;(((b[k].real() * x[k].real()) - (b[k].imag() * x[k].imag())), ((b[k].real() * x[k].imag()) + (b[k].imag() * x[k].real())));
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> N; k<span style="color:#f92672">++</span>) {
+      y[k] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>complex<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(((b[k].real() <span style="color:#f92672">*</span> x[k].real()) <span style="color:#f92672">-</span> (b[k].imag() <span style="color:#f92672">*</span> x[k].imag())), ((b[k].real() <span style="color:#f92672">*</span> x[k].imag()) <span style="color:#f92672">+</span> (b[k].imag() <span style="color:#f92672">*</span> x[k].real())));
     }
 
     IFFT(y, N);
 
-    for (int n = 0; n &lt; (2 * L); n++) {
-      if ((offset + n) &lt; length) {
-        s1[offset + n] += y[n].real();
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> L); n<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> ((offset <span style="color:#f92672">+</span> n) <span style="color:#f92672">&lt;</span> length) {
+        s1[offset <span style="color:#f92672">+</span> n] <span style="color:#f92672">+=</span> y[n].real();
       }
     }
   }
 }
-</code></pre>
-
-<p>実行例</p>
-
-<pre><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cmath&gt;
-#include &lt;vector&gt;
-#include &quot;wave.h&quot;
-#include &quot;fir_filters.h&quot;
-#include &quot;frame_filters.h&quot;
-
-enum {
-  L = 256,
-  N = 512
+</code></pre></div><p>実行例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cmath&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;wave.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;fir_filters.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;frame_filters.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">enum</span> {
+  L <span style="color:#f92672">=</span> <span style="color:#ae81ff">256</span>,
+  N <span style="color:#f92672">=</span> <span style="color:#ae81ff">512</span>
 };
 
-int main(int argc, char **argv) {
-  if (argc != 3) {
-    std::cerr &lt;&lt; &quot;Require fe, delta&quot; &lt;&lt; std::endl;
-    std::exit(EXIT_FAILURE);
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv) {
+  <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span>) {
+    std<span style="color:#f92672">::</span>cerr <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Require fe, delta&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+    std<span style="color:#f92672">::</span>exit(EXIT_FAILURE);
   }
 
   STEREO_PCM pcm0, pcm1;
-  std::vector&lt;double&gt; b;
-  std::vector&lt;double&gt; w;
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> b;
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> w;
 
-  wave_read(&amp;pcm0, &quot;stereo.wav&quot;);
+  wave_read(<span style="color:#f92672">&amp;</span>pcm0, <span style="color:#e6db74">&#34;stereo.wav&#34;</span>);
 
-  pcm1.fs     = pcm0.fs;
-  pcm1.bits   = pcm0.bits;
-  pcm1.length = pcm0.length;
+  pcm1.fs     <span style="color:#f92672">=</span> pcm0.fs;
+  pcm1.bits   <span style="color:#f92672">=</span> pcm0.bits;
+  pcm1.length <span style="color:#f92672">=</span> pcm0.length;
 
-  double fe    = std::stod(argv[1]) / pcm0.fs;
-  double delta = std::stod(argv[2]) / pcm0.fs;
-  int J        = std::round(3.1 / delta);
+  <span style="color:#66d9ef">double</span> fe    <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">/</span> pcm0.fs;
+  <span style="color:#66d9ef">double</span> delta <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>stod(argv[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">/</span> pcm0.fs;
+  <span style="color:#66d9ef">int</span> J        <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>round(<span style="color:#ae81ff">3.1</span> <span style="color:#f92672">/</span> delta);
 
-  if ((J % 2) == 1) {
-    J++;
+  <span style="color:#66d9ef">if</span> ((J <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+    J<span style="color:#f92672">++</span>;
   }
 
-  b.resize(J + 1);
-  w.resize(J + 1);
+  b.resize(J <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+  w.resize(J <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
 
-  hanning_window(w, (J + 1));
+  hanning_window(w, (J <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
 
   FIR_LPF(fe, J, b, w);
 
@@ -951,12 +842,9 @@ int main(int argc, char **argv) {
   fir_frame_filter(pcm0.sL, pcm1.sL, b, pcm0.length, J, L, N);
   fir_frame_filter(pcm0.sR, pcm1.sR, b, pcm0.length, J, L, N);
 
-  wave_write(&amp;pcm1, &quot;fir_frame_filter.wav&quot;);
+  wave_write(<span style="color:#f92672">&amp;</span>pcm1, <span style="color:#e6db74">&#34;fir_frame_filter.wav&#34;</span>);
 }
-</code></pre>
-
-<h1 id="リファレンス">リファレンス</h1>
-
+</code></pre></div><h1 id="リファレンス">リファレンス</h1>
 <ul>
 <li><a href="https://www.amazon.co.jp/C%E8%A8%80%E8%AA%9E%E3%81%A7%E3%81%AF%E3%81%98%E3%82%81%E3%82%8B%E9%9F%B3%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E2%80%95%E3%82%B5%E3%82%A6%E3%83%B3%E3%83%89%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86-%E9%9D%92%E6%9C%A8-%E7%9B%B4%E5%8F%B2/dp/4274206505">C言語ではじめる音のプログラミング―サウンドエフェクトの信号処理</a></li>
 </ul>
@@ -1111,7 +999,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
                     audio
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -1119,7 +1007,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
                     computer-sience
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">10</span>
             </li>
             
             <li class="category-list-item">
@@ -1135,7 +1023,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -1151,7 +1039,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">15</span>
             </li>
             
             <li class="category-list-item">
@@ -1159,15 +1047,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
                     multimedia
                 </a>
-                <span class="category-list-count">5</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/music">
-                    music
-                </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -1191,7 +1071,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">10</span>
+                <span class="category-list-count">14</span>
             </li>
             
             <li class="category-list-item">
@@ -1221,6 +1101,30 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/aac">
+                    aac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/adpcm">
+                    adpcm
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/advanced-audio-coding">
+                    advanced-audio-coding
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/algorithm">
                     algorithm
                 </a>
@@ -1229,8 +1133,32 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/c">
+                    c
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/celp">
+                    celp
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
                     ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/correlation-function">
+                    correlation-function
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1264,7 +1192,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -1328,13 +1256,29 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
                     javascript
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
                     laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-interpolation">
+                    linear-interpolation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-prediction-analysis">
+                    linear-prediction-analysis
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1360,7 +1304,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">9</span>
             </li>
             
             <li class="category-list-item">
@@ -1368,7 +1312,7 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
                     mdct
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -1384,13 +1328,29 @@ int main(int argc, char **argv) {
                 <a class="category-list-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">
                     modified-discrete-cosine-transform
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mp3">
                     mp3
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-1-audio">
+                    mpeg-1-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-audio">
+                    mpeg-2-audio
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1421,16 +1381,80 @@ int main(int argc, char **argv) {
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/noise-suppressor">
+                    noise-suppressor
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
                     pcm
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/resampling">
+                    resampling
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/sampling-theorem">
+                    sampling-theorem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/spectrum-subtraction">
+                    spectrum-subtraction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/stochastic-signal">
+                    stochastic-signal
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/time-stretch">
+                    time-stretch
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
                     wave
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/web-audio-api">
+                    web-audio-api
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webassembly">
+                    webassembly
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1476,10 +1500,28 @@ int main(int argc, char **argv) {
     <div class="widget tagcloud">
         
         
+        <a href="https://art-of-life.jp/tags/aac" style="font-size: 12px;">aac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/adpcm" style="font-size: 12px;">adpcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/advanced-audio-coding" style="font-size: 12px;">advanced-audio-coding</a>
+        
+        
         <a href="https://art-of-life.jp/tags/algorithm" style="font-size: 12px;">algorithm</a>
         
         
+        <a href="https://art-of-life.jp/tags/c" style="font-size: 12px;">c</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/celp" style="font-size: 12px;">celp</a>
+        
+        
         <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/correlation-function" style="font-size: 12px;">correlation-function</a>
         
         
         <a href="https://art-of-life.jp/tags/data-structures" style="font-size: 12px;">data-structures</a>
@@ -1521,6 +1563,12 @@ int main(int argc, char **argv) {
         <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
         
         
+        <a href="https://art-of-life.jp/tags/linear-interpolation" style="font-size: 12px;">linear-interpolation</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linear-prediction-analysis" style="font-size: 12px;">linear-prediction-analysis</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
         
         
@@ -1542,6 +1590,12 @@ int main(int argc, char **argv) {
         <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
         
         
+        <a href="https://art-of-life.jp/tags/mpeg-1-audio" style="font-size: 12px;">mpeg-1-audio</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-audio" style="font-size: 12px;">mpeg-2-audio</a>
+        
+        
         <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
         
         
@@ -1551,10 +1605,34 @@ int main(int argc, char **argv) {
         <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
         
         
+        <a href="https://art-of-life.jp/tags/noise-suppressor" style="font-size: 12px;">noise-suppressor</a>
+        
+        
         <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
         
         
+        <a href="https://art-of-life.jp/tags/resampling" style="font-size: 12px;">resampling</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/sampling-theorem" style="font-size: 12px;">sampling-theorem</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/spectrum-subtraction" style="font-size: 12px;">spectrum-subtraction</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/stochastic-signal" style="font-size: 12px;">stochastic-signal</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/time-stretch" style="font-size: 12px;">time-stretch</a>
+        
+        
         <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/web-audio-api" style="font-size: 12px;">web-audio-api</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webassembly" style="font-size: 12px;">webassembly</a>
         
         
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
@@ -1582,8 +1660,8 @@ int main(int argc, char **argv) {
 <footer id="footer">
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      &copy; 2020
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>
@@ -1608,7 +1686,7 @@ if (!doNotTrack) {
 
 
 <script>hljs.initHighlightingOnLoad();</script>
-<script>jQuery('.article-type-page a:not([target])').attr('target', '_blank');</script>
+<script>jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank');</script>
 
 
 <script type="text/x-mathjax-config">

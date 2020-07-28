@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>2019 年度の ART OF LIFE &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.56.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -11,7 +11,7 @@
     
     
     <link rel="canonical" href="https://art-of-life.jp/posts/art-of-2019/"/>
-    <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
+    <link rel="icon" href="https://art-of-life.jp/favicon.ico">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
     <link rel="stylesheet" href="https://art-of-life.jp/css/font-awesome.min.css">
@@ -30,8 +30,6 @@
     
     <meta itemprop="name" content="2019 年度の ART OF LIFE">
 <meta itemprop="description" content="2019 年度の ART 目標">
-
-
 <meta itemprop="datePublished" content="2019-05-26T23:58:23&#43;09:00" />
 <meta itemprop="dateModified" content="2019-05-26T23:58:23&#43;09:00" />
 <meta itemprop="wordCount" content="801">
@@ -39,7 +37,6 @@
 
 
 <meta itemprop="keywords" content="" />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="2019 年度の ART OF LIFE"/>
 <meta name="twitter:description" content="2019 年度の ART 目標"/>
@@ -95,7 +92,7 @@
       </nav>
         <nav id="sub-nav">
           <div class="profile" id="profile-nav">
-            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.jpeg"><i class="fa fa-caret-down"></i></a>
           </div>
         </nav>
         <div id="search-form-wrap">
@@ -159,8 +156,8 @@
       <img id="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&d=identicon"/>
       
       <h2 id="name">Korilakkuma</h2>
-      <h3 id="title">Multimedia (Video, Audio) Engineer. I&#39;m expert in Web Audio API, WebRTC and Streaming. C/C&#43;&#43;, JavaScript ...</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <h3 id="title">Audio Programmer. As a graduate student, I plan to study Audio Signal Processing for Music from 2022. C/C&#43;&#43;, UNIX system call 💖🎸🎹</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          30
+          48
         
         <span>
             Tags
@@ -292,105 +289,77 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="technology-技術">Technology (技術)</h1>
-
+            <h1 id="technology-技術">Technology (技術)</h1>
 <h2 id="動画">動画</h2>
-
 <ul>
 <li>WebRTC</li>
 <li>hls.js</li>
 <li>コンテナ・コーデックの知識</li>
 </ul>
-
 <p>可能であれば業務で WebRTC を利用したいです.
 hls.js は, <code>src</code> 以下への contribute を増やすこと.
 WebRTC を利用するにも, hls.js へ contribute するにも, ベースとなる動画コンテナや映像・音声のコーデック知識が不足しているので, ここは特に注力していきます.</p>
-
 <h2 id="オーディオ">オーディオ</h2>
-
 <ul>
 <li>Web Audio API</li>
 <li>音信号処理</li>
 <li>Web Audio レンダリングエンジンへの contribute</li>
 </ul>
-
 <p>Web Audio API は, 引き続き, <a href="https://xsound.jp/">ライブラリ</a>, <a href="https://xsound.app/">Web アプリケーション</a>, <a href="https://web-sounder.net/">Web サイト</a> をよりよいプロダクトにしていくこと. 特に, <code>AudioWorklet</code> への移行はそろそろ着手したいです.</p>
-
 <h2 id="コンピュータサイエンス">コンピュータサイエンス</h2>
-
 <ul>
 <li>OS</li>
 <li>TCP/IP</li>
 </ul>
-
 <p>OS (システムコールなど) について知ることは, レンダリングエンジンの contributor になるために重要なことだと思っています(<a href="https://nhiroki.jp/2017/12/01/chromium-sourcecode">Chromium のソースコードの歩き方</a>, <q>base/ は chrome/ や content/ で使われる共通ライブラリで、OS の提供するシステムコールなどを抽象化した API を提供します。 &hellip;</q>, <q>Chromium ではマルチプロセスアーキテクチャが採用されています</q> &hellip; etc). 同様に, WebRTC を理解していくうえで, TCP/IP に関する知識も不可欠だと思っています.</p>
-
 <h2 id="プログラミング言語">プログラミング言語</h2>
-
 <ul>
 <li>JavaScript (TypeScript)</li>
 <li>C / C++</li>
 </ul>
-
 <p>JavaScript は最新の言語仕様を追っていくというよりは, メディア技術に活用できそうなブラウザ API を追っていきます．具体的には, WebAssembly ですね. したがって, Web Audio レンダリングエンジンへの contribute のためだけでなく, C / C++ で音信号処理を実装できるように学びます.</p>
-
 <h2 id="ツール">ツール</h2>
-
 <ul>
 <li>dotfiles の継続的コミット</li>
 </ul>
-
 <p>より効率よく作業できるように, zsh, Vim の設定ファイルのアップデートやプラグインの導入を進めていきます.</p>
-
 <h2 id="タスク">タスク</h2>
-
 <ul>
-<li><p><a href="https://weblike-curtaincall.ssl-lolipop.jp/portfolio-music-v/">Music V</a> の GitHub Pages への移行</p>
-
+<li>
+<p><a href="https://weblike-curtaincall.ssl-lolipop.jp/portfolio-music-v/">Music V</a> の GitHub Pages への移行</p>
 <ul>
 <li>ES2015 ~ or TypeScript で実装</li>
 <li>Vue.js でリファクタリング (脱 jQuery)</li>
 <li>HLS で再生</li>
-</ul></li>
-
-<li><p><a href="https://xsound.app/">X Sound</a> のリファクタリング</p>
-
+</ul>
+</li>
+<li>
+<p><a href="https://xsound.app/">X Sound</a> のリファクタリング</p>
 <ul>
 <li>ES2015 ~ or TypeScript で実装</li>
 <li>Vue.js でリファクタリング (脱 AngularJS)</li>
 <li>Sass をやめる</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h2 id="あえてやらないこと">あえてやらないこと</h2>
-
 <ul>
 <li>フロントエンドの最新技術</li>
 <li>UI / UX</li>
 <li>サーバーサイド, インフラ, デザイン</li>
 </ul>
-
 <p>もちろん, 仕事運用上, 必要最低限は学びます.</p>
-
 <h1 id="music-芸術">Music (芸術)</h1>
-
 <h2 id="guitar">Guitar</h2>
-
 <ul>
 <li>Sadistic Desire</li>
 <li>DAHLIA</li>
 </ul>
-
 <p>DAHLIA は, 昔弾けたのですがしばらくサボったら弾けなくなりました &hellip;</p>
-
 <h2 id="piano">Piano</h2>
-
 <ul>
 <li>Tears (Piano Instruments)</li>
 </ul>
-
 <p>そろそろ運指を覚えたい &hellip;</p>
 
         </div>
@@ -536,7 +505,7 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                 <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
                     audio
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -544,7 +513,7 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                 <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
                     computer-sience
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">10</span>
             </li>
             
             <li class="category-list-item">
@@ -560,7 +529,7 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -576,7 +545,7 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">15</span>
             </li>
             
             <li class="category-list-item">
@@ -584,15 +553,7 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                 <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
                     multimedia
                 </a>
-                <span class="category-list-count">5</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/music">
-                    music
-                </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -616,7 +577,7 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">10</span>
+                <span class="category-list-count">14</span>
             </li>
             
             <li class="category-list-item">
@@ -646,6 +607,30 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/aac">
+                    aac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/adpcm">
+                    adpcm
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/advanced-audio-coding">
+                    advanced-audio-coding
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/algorithm">
                     algorithm
                 </a>
@@ -654,8 +639,32 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/c">
+                    c
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/celp">
+                    celp
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
                     ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/correlation-function">
+                    correlation-function
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -689,7 +698,7 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -753,13 +762,29 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                 <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
                     javascript
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
                     laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-interpolation">
+                    linear-interpolation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-prediction-analysis">
+                    linear-prediction-analysis
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -785,7 +810,7 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">9</span>
             </li>
             
             <li class="category-list-item">
@@ -793,7 +818,7 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
                     mdct
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -809,13 +834,29 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
                 <a class="category-list-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">
                     modified-discrete-cosine-transform
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mp3">
                     mp3
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-1-audio">
+                    mpeg-1-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-audio">
+                    mpeg-2-audio
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -846,16 +887,80 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/noise-suppressor">
+                    noise-suppressor
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
                     pcm
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/resampling">
+                    resampling
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/sampling-theorem">
+                    sampling-theorem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/spectrum-subtraction">
+                    spectrum-subtraction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/stochastic-signal">
+                    stochastic-signal
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/time-stretch">
+                    time-stretch
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
                     wave
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/web-audio-api">
+                    web-audio-api
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webassembly">
+                    webassembly
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -901,10 +1006,28 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
     <div class="widget tagcloud">
         
         
+        <a href="https://art-of-life.jp/tags/aac" style="font-size: 12px;">aac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/adpcm" style="font-size: 12px;">adpcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/advanced-audio-coding" style="font-size: 12px;">advanced-audio-coding</a>
+        
+        
         <a href="https://art-of-life.jp/tags/algorithm" style="font-size: 12px;">algorithm</a>
         
         
+        <a href="https://art-of-life.jp/tags/c" style="font-size: 12px;">c</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/celp" style="font-size: 12px;">celp</a>
+        
+        
         <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/correlation-function" style="font-size: 12px;">correlation-function</a>
         
         
         <a href="https://art-of-life.jp/tags/data-structures" style="font-size: 12px;">data-structures</a>
@@ -946,6 +1069,12 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
         <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
         
         
+        <a href="https://art-of-life.jp/tags/linear-interpolation" style="font-size: 12px;">linear-interpolation</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linear-prediction-analysis" style="font-size: 12px;">linear-prediction-analysis</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
         
         
@@ -967,6 +1096,12 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
         <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
         
         
+        <a href="https://art-of-life.jp/tags/mpeg-1-audio" style="font-size: 12px;">mpeg-1-audio</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-audio" style="font-size: 12px;">mpeg-2-audio</a>
+        
+        
         <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
         
         
@@ -976,10 +1111,34 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
         <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
         
         
+        <a href="https://art-of-life.jp/tags/noise-suppressor" style="font-size: 12px;">noise-suppressor</a>
+        
+        
         <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
         
         
+        <a href="https://art-of-life.jp/tags/resampling" style="font-size: 12px;">resampling</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/sampling-theorem" style="font-size: 12px;">sampling-theorem</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/spectrum-subtraction" style="font-size: 12px;">spectrum-subtraction</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/stochastic-signal" style="font-size: 12px;">stochastic-signal</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/time-stretch" style="font-size: 12px;">time-stretch</a>
+        
+        
         <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/web-audio-api" style="font-size: 12px;">web-audio-api</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webassembly" style="font-size: 12px;">webassembly</a>
         
         
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
@@ -1007,8 +1166,8 @@ WebRTC を利用するにも, hls.js へ contribute するにも, ベースと�
 <footer id="footer">
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      &copy; 2020
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>
@@ -1033,7 +1192,7 @@ if (!doNotTrack) {
 
 
 <script>hljs.initHighlightingOnLoad();</script>
-<script>jQuery('.article-type-page a:not([target])').attr('target', '_blank');</script>
+<script>jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank');</script>
 
 
 <script type="text/x-mathjax-config">

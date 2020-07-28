@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>Laplace Transform &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.56.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -11,7 +11,7 @@
     
     
     <link rel="canonical" href="https://art-of-life.jp/posts/laplace-transform/"/>
-    <link rel="icon" type="image/png" href="https://art-of-life.jp/favicon.png">
+    <link rel="icon" href="https://art-of-life.jp/favicon.ico">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
     <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
     <link rel="stylesheet" href="https://art-of-life.jp/css/font-awesome.min.css">
@@ -30,16 +30,13 @@
     
     <meta itemprop="name" content="Laplace Transform">
 <meta itemprop="description" content="ラプラス変換 / Z 変換の概要">
-
-
 <meta itemprop="datePublished" content="2019-10-05T18:00:22&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-05T18:00:22&#43;09:00" />
-<meta itemprop="wordCount" content="987">
+<meta itemprop="wordCount" content="1061">
 
 
 
 <meta itemprop="keywords" content="Digital Signal Processing,Mathematics,Laplace Transform,Z-Transform," />
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Laplace Transform"/>
 <meta name="twitter:description" content="ラプラス変換 / Z 変換の概要"/>
@@ -95,7 +92,7 @@
       </nav>
         <nav id="sub-nav">
           <div class="profile" id="profile-nav">
-            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.jpeg"><i class="fa fa-caret-down"></i></a>
           </div>
         </nav>
         <div id="search-form-wrap">
@@ -159,8 +156,8 @@
       <img id="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&d=identicon"/>
       
       <h2 id="name">Korilakkuma</h2>
-      <h3 id="title">Multimedia (Video, Audio) Engineer. I&#39;m expert in Web Audio API, WebRTC and Streaming. C/C&#43;&#43;, JavaScript ...</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo, JAPAN</span>
+      <h3 id="title">Audio Programmer. As a graduate student, I plan to study Audio Signal Processing for Music from 2022. C/C&#43;&#43;, UNIX system call 💖🎸🎹</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
       
           <a id="follow" href="https://github.com/Korilakkuma">
               Follow
@@ -174,7 +171,7 @@
       </div>
       <div class="article-info-block">
         
-          30
+          48
         
         <span>
             Tags
@@ -272,10 +269,10 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-10-05 18:00:22 &#43;0900 JST" itemprop="datePublished">2019-10-05</time>
             &middot;
-            987
+            1061
             words
             &middot;
-            2
+            3
             minute read
         </div>
         
@@ -326,80 +323,54 @@
 </header>
 
         <div class="article-entry" itemprop="articleBody">
-            
-
-<h1 id="ラプラス変換">ラプラス変換</h1>
-
+            <h1 id="ラプラス変換">ラプラス変換</h1>
 <p><b>ラプラス変換</b>を数式を使わずに説明するのであれば, <b>フーリエ変換の拡張</b>です.</p>
-
 <p>実用的には, フーリエ変換が音や光の周波数特性を分析するために利用されるのに対して, ラプラス変換は, 電気回路やシステム制御などの<b>過渡現象</b>を扱うドメインにおいて重要な道具です.</p>
-
 <p>過渡現象とは, 簡単に表現すると, <b>ある入力を切り替えた場合に, それに対する出力が少し遅延する現象</b>のことです. 実生活にたとえると, 自転車や自動車を運転している場合, ブレーキ (入力) をかけたときに, すぐにそれが停止 (出力) することが理想ではありますが, 実際には, 遅延が発生して停止します.</p>
-
 <h2 id="ラブラス変換の定義">ラブラス変換の定義</h2>
-
 <p>以下のような, マイナスの時間において 0 をとるような連続信号 (<b>因果信号</b>) において,</p>
-
 <p>$
 \begin{eqnarray}
 x(t)=0 \quad (t &lt; 0)
 \end{eqnarray}
 $</p>
-
 <p>$
 \begin{eqnarray}
 X(s)=\int_{0}^{\infty}x(t)\exp\left(-st\right)dt
 \end{eqnarray}
 $</p>
-
 <p>上記の式がラプラス変換の定義です (ただし, <b>$s$ は $\delta+j\omega$ で定義される複素数</b>です).</p>
-
 <p>$s$ によって定義される複素平面を, <b>$s$ 平面</b>と呼びます. ラプラス変換は, 時間領域の連続信号 $x(t)$ を <b>$s$ 領域</b> $X(s)$ に変換する処理ということです.</p>
-
 <p>ところで, $x(t)$ のラブラス変換が存在するには, 右辺の積分が収束する必要があり, $x(t)$ に対して,</p>
-
 <p>$
 \begin{eqnarray}
 \left|x(t)\right| \leqq M\exp\left(\alpha t \right)
 \end{eqnarray}
 $</p>
-
 <p>を満たす $M$, $\alpha$ が存在する必要があります. この条件を翻訳すると, <b>$t$ が増加しても, ある指数関数 $\exp\left(\alpha t \right)$ よりも, $x(t)$ が急速に増大しない</b>ことを意味しています (具体的には, $\exp\left(t^{2}\right)$ のような信号の場合, ラプラス変換は存在しません).</p>
-
 <h2 id="フーリエ変換との関係">フーリエ変換との関係</h2>
-
 <p>ラプラス変換は, フーリエ変換の拡張と説明しましたが, もう少し詳細を追います.</p>
-
 <p>実は, フーリエ変換にも存在条件があり,</p>
-
 <p>$
 \begin{eqnarray}
 \lim_{t \to \pm{\infty}}x(t)=0
 \end{eqnarray}
 $</p>
-
 <p>が成立する必要があります. そして, この条件は, ラプラス変換の存在条件よりもより制限のきびしい条件になります. この条件を, ラプラス変換において翻訳すると, フーリエ変換は, <b>$s$ 平面の虚軸 (周波数軸) におけるラプラス変換</b>という意味になります.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66258366-5fa6c900-e7df-11e9-838f-401717a5debd.png" alt="$s$ 平面とフーリエ変換" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66258366-5fa6c900-e7df-11e9-838f-401717a5debd.png" alt="$s$ 平面とフーリエ変換"></p>
 <p>また, フーリエ変換においては, 変換領域が周波数という物理的に明確な意味がありますが, ラブラス変換の変換領域 ($s$ 平面) には物理的に明確な意味はありません.</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66257803-77c71a00-e7d8-11e9-8ae4-605e940511ee.png" alt="ラプラス変換とフーリエ変換" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66257803-77c71a00-e7d8-11e9-8ae4-605e940511ee.png" alt="ラプラス変換とフーリエ変換"></p>
 <h1 id="z-変換">Z 変換</h1>
-
 <p><b>Z 変換</b>を数式を使わずに説明するのであれば, <b>離散フーリエ変換の拡張</b>です. 離散信号に対するラプラス変換を Z 変換と呼んでいるだけなので, 本質的にはラプラス変換と同じです.</p>
-
 <p>$
 \begin{eqnarray}
 X(z)=\sum_{n=-\infty}^{\infty}x(n)z^{-n}
 \end{eqnarray}
 $</p>
-
-<p><img src="https://user-images.githubusercontent.com/4006693/66258379-82d17880-e7df-11e9-9181-ef3d00bd0d50.png" alt="アナログ信号, ディジタル信号, s 平面, z 平面の関係" /></p>
-
+<p><img src="https://user-images.githubusercontent.com/4006693/66258379-82d17880-e7df-11e9-9181-ef3d00bd0d50.png" alt="アナログ信号, ディジタル信号, s 平面, z 平面の関係"></p>
+<p>より正確には, 離散フーリエ変換は, $z$ 変換の特殊な場合であり, $z$ 平面と呼ばれる, 複素平面内の $|z|=1$ という単位円上の $z$ 変換は, 離散フーリエ変換に一致します.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/66827341-7ee4e980-ef89-11e9-8587-f7fd93d6c402.png" alt="$z$ 平面と離散フーリエ変換"></p>
 <h1 id="リファレンス">リファレンス</h1>
-
 <ul>
 <li><a href="https://www.amazon.co.jp/%E4%BF%A1%E5%8F%B7%E3%83%BB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%90%86%E8%AB%96%E3%81%AE%E5%9F%BA%E7%A4%8E%E2%80%95%E3%83%95%E3%83%BC%E3%83%AA%E3%82%A8%E8%A7%A3%E6%9E%90%E3%80%81%E3%83%A9%E3%83%97%E3%83%A9%E3%82%B9%E5%A4%89%E6%8F%9B%E3%80%81z%E5%A4%89%E6%8F%9B%E3%82%92%E7%B3%BB%E7%B5%B1%E7%9A%84%E3%81%AB%E5%AD%A6%E3%81%B6-%E8%B6%B3%E7%AB%8B-%E4%BF%AE%E4%B8%80/dp/433903214X">信号・システム理論の基礎―フーリエ解析、ラプラス変換、z変換を系統的に学ぶ</a></li>
 </ul>
@@ -496,11 +467,11 @@ $</p>
     
 
     
-    <a href="https://art-of-life.jp/posts/my-motivation/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="https://art-of-life.jp/posts/stochastic-signal/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">
           Newer
       </strong>
-      <div class="article-nav-title">攻撃再開 2019 X ～破滅に向かって～</div>
+      <div class="article-nav-title">確率信号</div>
     </a>
     
 </nav>
@@ -554,7 +525,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
                     audio
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -562,7 +533,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
                     computer-sience
                 </a>
-                <span class="category-list-count">4</span>
+                <span class="category-list-count">10</span>
             </li>
             
             <li class="category-list-item">
@@ -578,7 +549,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -594,7 +565,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">15</span>
             </li>
             
             <li class="category-list-item">
@@ -602,15 +573,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
                     multimedia
                 </a>
-                <span class="category-list-count">5</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/categories/music">
-                    music
-                </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">8</span>
             </li>
             
             <li class="category-list-item">
@@ -634,7 +597,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">10</span>
+                <span class="category-list-count">14</span>
             </li>
             
             <li class="category-list-item">
@@ -664,6 +627,30 @@ $</p>
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/aac">
+                    aac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/adpcm">
+                    adpcm
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/advanced-audio-coding">
+                    advanced-audio-coding
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/algorithm">
                     algorithm
                 </a>
@@ -672,8 +659,32 @@ $</p>
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/c">
+                    c
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/celp">
+                    celp
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
                     ci
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/correlation-function">
+                    correlation-function
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -707,7 +718,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
                     digital-signal-processing
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">7</span>
             </li>
             
             <li class="category-list-item">
@@ -771,13 +782,29 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
                     javascript
                 </a>
-                <span class="category-list-count">3</span>
+                <span class="category-list-count">4</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
                     laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-interpolation">
+                    linear-interpolation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-prediction-analysis">
+                    linear-prediction-analysis
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -803,7 +830,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
                     mathematics
                 </a>
-                <span class="category-list-count">8</span>
+                <span class="category-list-count">9</span>
             </li>
             
             <li class="category-list-item">
@@ -811,7 +838,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
                     mdct
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
@@ -827,13 +854,29 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">
                     modified-discrete-cosine-transform
                 </a>
-                <span class="category-list-count">1</span>
+                <span class="category-list-count">2</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/mp3">
                     mp3
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-1-audio">
+                    mpeg-1-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-audio">
+                    mpeg-2-audio
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -864,16 +907,80 @@ $</p>
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/noise-suppressor">
+                    noise-suppressor
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
                     pcm
                 </a>
-                <span class="category-list-count">2</span>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/resampling">
+                    resampling
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/sampling-theorem">
+                    sampling-theorem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/spectrum-subtraction">
+                    spectrum-subtraction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/stochastic-signal">
+                    stochastic-signal
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/time-stretch">
+                    time-stretch
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
                     wave
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/web-audio-api">
+                    web-audio-api
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webassembly">
+                    webassembly
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -919,10 +1026,28 @@ $</p>
     <div class="widget tagcloud">
         
         
+        <a href="https://art-of-life.jp/tags/aac" style="font-size: 12px;">aac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/adpcm" style="font-size: 12px;">adpcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/advanced-audio-coding" style="font-size: 12px;">advanced-audio-coding</a>
+        
+        
         <a href="https://art-of-life.jp/tags/algorithm" style="font-size: 12px;">algorithm</a>
         
         
+        <a href="https://art-of-life.jp/tags/c" style="font-size: 12px;">c</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/celp" style="font-size: 12px;">celp</a>
+        
+        
         <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/correlation-function" style="font-size: 12px;">correlation-function</a>
         
         
         <a href="https://art-of-life.jp/tags/data-structures" style="font-size: 12px;">data-structures</a>
@@ -964,6 +1089,12 @@ $</p>
         <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
         
         
+        <a href="https://art-of-life.jp/tags/linear-interpolation" style="font-size: 12px;">linear-interpolation</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linear-prediction-analysis" style="font-size: 12px;">linear-prediction-analysis</a>
+        
+        
         <a href="https://art-of-life.jp/tags/linux" style="font-size: 12px;">linux</a>
         
         
@@ -985,6 +1116,12 @@ $</p>
         <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
         
         
+        <a href="https://art-of-life.jp/tags/mpeg-1-audio" style="font-size: 12px;">mpeg-1-audio</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-audio" style="font-size: 12px;">mpeg-2-audio</a>
+        
+        
         <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
         
         
@@ -994,10 +1131,34 @@ $</p>
         <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
         
         
+        <a href="https://art-of-life.jp/tags/noise-suppressor" style="font-size: 12px;">noise-suppressor</a>
+        
+        
         <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
         
         
+        <a href="https://art-of-life.jp/tags/resampling" style="font-size: 12px;">resampling</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/sampling-theorem" style="font-size: 12px;">sampling-theorem</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/spectrum-subtraction" style="font-size: 12px;">spectrum-subtraction</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/stochastic-signal" style="font-size: 12px;">stochastic-signal</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/time-stretch" style="font-size: 12px;">time-stretch</a>
+        
+        
         <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/web-audio-api" style="font-size: 12px;">web-audio-api</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webassembly" style="font-size: 12px;">webassembly</a>
         
         
         <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
@@ -1025,8 +1186,8 @@ $</p>
 <footer id="footer">
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019
-      Copyright &copy; <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+      &copy; 2020
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
     </div>
   </div>
 </footer>
@@ -1051,7 +1212,7 @@ if (!doNotTrack) {
 
 
 <script>hljs.initHighlightingOnLoad();</script>
-<script>jQuery('.article-type-page a:not([target])').attr('target', '_blank');</script>
+<script>jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank');</script>
 
 
 <script type="text/x-mathjax-config">
