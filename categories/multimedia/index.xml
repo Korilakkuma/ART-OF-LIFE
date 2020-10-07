@@ -66,15 +66,6 @@
     </item>
     
     <item>
-      <title>hls.js のコントリビューターになろう</title>
-      <link>https://art-of-life.jp/posts/hlsjs-contributor/</link>
-      <pubDate>Wed, 12 Jun 2019 23:30:29 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/hlsjs-contributor/</guid>
-      <description>HLS 正式には, HTTP Live Streaming の略で, Apple が開発したストリーミングプロトコルです. ストリーミングとは, 動画のように容量の大きなデータをすべてダウンロードし</description>
-    </item>
-    
-    <item>
       <title>WebRTC の概要</title>
       <link>https://art-of-life.jp/posts/webrtc-overview/</link>
       <pubDate>Wed, 29 May 2019 20:00:59 +0900</pubDate>
