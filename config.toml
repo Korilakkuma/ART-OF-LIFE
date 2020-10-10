@@ -23,7 +23,7 @@ hasCJKLanguage = true
 [params]
     # Tell me who you are
     author = "Korilakkuma"
-    bio = "Audio Programmer. As a graduate student, I plan to study Audio Signal Processing for Music from 2022. C/C++, UNIX system call 💖🎸🎹"
+    bio = "I' m disseminating Web Music and interested in C/C++, PDP 11/40 Assembly, UNIX V6, Audio Signal Processing and Music 💖🎸🎹"
     location = "Tokyo (sometimes Osaka), JAPAN"
     site_description = "ART (Computer Science と Music) についての Blog"
     copyright  = "Copyright (c) <a href=\"/about/\">Korilakkuma</a>"
