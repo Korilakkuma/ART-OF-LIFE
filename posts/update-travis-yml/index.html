@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>.travis.yml の更新 &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="generator" content="Hugo 0.76.3" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,13 +30,14 @@
     
     <meta itemprop="name" content=".travis.yml の更新">
 <meta itemprop="description" content="Travis CI でエラー 昨日, Travis CI でビルドしたら, ソースコード・テストコードとも何も変更していないのに, 2 つのエラーが発生するようになりました &hellip; Can&#39;t open /etc/init.d/xvfb テ">
-<meta itemprop="datePublished" content="2019-07-26T05:27:00&#43;09:00" />
-<meta itemprop="dateModified" content="2019-07-26T05:27:00&#43;09:00" />
+<meta itemprop="datePublished" content="2019-07-26T05:27:00+09:00" />
+<meta itemprop="dateModified" content="2019-07-26T05:27:00+09:00" />
 <meta itemprop="wordCount" content="481">
 
 
 
 <meta itemprop="keywords" content="CI," />
+
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=".travis.yml の更新"/>
 <meta name="twitter:description" content="Travis CI でエラー 昨日, Travis CI でビルドしたら, ソースコード・テストコードとも何も変更していないのに, 2 つのエラーが発生するようになりました &hellip; Can&#39;t open /etc/init.d/xvfb テ"/>
@@ -314,47 +315,47 @@
 <li>テストの実行でタイムアウトエラー</li>
 </ul>
 <p>ちなみに, それまでパスしていた .travis.yml は以下のような記述です.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">sudo</span>: <span style="color:#66d9ef">true</span>
-<span style="color:#66d9ef">language</span>: node_js
-<span style="color:#66d9ef">node_js</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">sudo</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#f92672">language</span>: <span style="color:#ae81ff">node_js</span>
+<span style="color:#f92672">node_js</span>:
   - <span style="color:#ae81ff">10.0</span>
-<span style="color:#66d9ef">before_install</span>:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:<span style="color:#ae81ff">99.0</span>
-  - sh -e /etc/init.d/xvfb start
-<span style="color:#66d9ef">script</span>:
-  - karma start --single-run
+<span style="color:#f92672">before_install</span>:
+  - <span style="color:#ae81ff">export CHROME_BIN=chromium-browser</span>
+  - <span style="color:#ae81ff">export DISPLAY=:99.0</span>
+  - <span style="color:#ae81ff">sh -e /etc/init.d/xvfb start</span>
+<span style="color:#f92672">script</span>:
+  - <span style="color:#ae81ff">karma start --single-run</span>
 </code></pre></div><p>簡単に説明すると, テストランナーに Karma を利用して, Chromium 環境でブラウザ JavaScript をテストするというものです.</p>
 <h2 id="cant-open-etcinitdxvfb">Can&rsquo;t open /etc/init.d/xvfb`</h2>
 <p>このエラーを解決するには, .travis.yml の記述を以下のように修正します.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">sudo</span>: <span style="color:#66d9ef">true</span>
-<span style="color:#66d9ef">language</span>: node_js
-<span style="color:#66d9ef">node_js</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">sudo</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#f92672">language</span>: <span style="color:#ae81ff">node_js</span>
+<span style="color:#f92672">node_js</span>:
   - <span style="color:#ae81ff">10.0</span>
-<span style="color:#66d9ef">services</span>:
-  - xvfb
-<span style="color:#66d9ef">before_install</span>:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:<span style="color:#ae81ff">99.0</span>
-<span style="color:#66d9ef">script</span>:
-  - karma start --single-run
+<span style="color:#f92672">services</span>:
+  - <span style="color:#ae81ff">xvfb</span>
+<span style="color:#f92672">before_install</span>:
+  - <span style="color:#ae81ff">export CHROME_BIN=chromium-browser</span>
+  - <span style="color:#ae81ff">export DISPLAY=:99.0</span>
+<span style="color:#f92672">script</span>:
+  - <span style="color:#ae81ff">karma start --single-run</span>
 </code></pre></div><p><code>services:</code> に <code>xvdb</code> を指定することで解決できます. 原因は, あくまで推測ですが, Travis CI のアップデートによるものでしょうか &hellip; ?</p>
 <h2 id="テストの実行でタイムアウトエラー">テストの実行でタイムアウトエラー</h2>
 <p>この原因は, 環境変数 <code>CHROME_BIN</code> に設定している, <code>chromium-browser</code> のパスが見つからなくなっていることにより発生していました (URL が削除されたのでしょうか &hellip; ?).</p>
 <p>このエラーを解決するには, .travis.yml の記述を以下のように修正します.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">sudo</span>: <span style="color:#66d9ef">true</span>
-<span style="color:#66d9ef">language</span>: node_js
-<span style="color:#66d9ef">node_js</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">sudo</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#f92672">language</span>: <span style="color:#ae81ff">node_js</span>
+<span style="color:#f92672">node_js</span>:
   - <span style="color:#ae81ff">10.0</span>
-<span style="color:#66d9ef">services</span>:
-  - xvfb
-<span style="color:#66d9ef">addons</span>:
-  <span style="color:#66d9ef">chrome</span>: stable
-<span style="color:#66d9ef">before_install</span>:
-  - export CHROME_BIN=google-chrome-stable
-  - export DISPLAY=:<span style="color:#ae81ff">99.0</span>
-<span style="color:#66d9ef">script</span>:
-  - karma start --single-run
+<span style="color:#f92672">services</span>:
+  - <span style="color:#ae81ff">xvfb</span>
+<span style="color:#f92672">addons</span>:
+  <span style="color:#f92672">chrome</span>: <span style="color:#ae81ff">stable</span>
+<span style="color:#f92672">before_install</span>:
+  - <span style="color:#ae81ff">export CHROME_BIN=google-chrome-stable</span>
+  - <span style="color:#ae81ff">export DISPLAY=:99.0</span>
+<span style="color:#f92672">script</span>:
+  - <span style="color:#ae81ff">karma start --single-run</span>
 </code></pre></div><p>取得可能な Chrome の <code>stable</code> 版 (または, <code>beta</code> 版) をインストールして, <code>CHROME_BIN</code> にそのパスを指定します.</p>
 <p>以上で, 無事 CI がパスしました.</p>
 

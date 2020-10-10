@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
     <title>Audio Processing by WebAssembly &middot; ART OF LIFE</title>
-    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="generator" content="Hugo 0.76.3" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
@@ -30,13 +30,14 @@
     
     <meta itemprop="name" content="Audio Processing by WebAssembly">
 <meta itemprop="description" content="WebAssembly でオーディオ処理を実装する">
-<meta itemprop="datePublished" content="2020-02-02T17:27:52&#43;09:00" />
-<meta itemprop="dateModified" content="2020-02-02T17:27:52&#43;09:00" />
+<meta itemprop="datePublished" content="2020-02-02T17:27:52+09:00" />
+<meta itemprop="dateModified" content="2020-02-02T17:27:52+09:00" />
 <meta itemprop="wordCount" content="3711">
 
 
 
 <meta itemprop="keywords" content="JavaScript,WebAssembly,Web Audio API,C," />
+
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Audio Processing by WebAssembly"/>
 <meta name="twitter:description" content="WebAssembly でオーディオ処理を実装する"/>
@@ -445,11 +446,11 @@ EMSCRIPTEN_KEEPALIVE
 <p>実装が完了したら, 以下のコマンドを実行して, WebAssembly のためのバイナリを生成します.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ emcc noise.c -s WASM<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> -o noise.js
 </code></pre></div><p>次に, WebAssembly を利用して, 生成したバイナリを JavaScript から利用できるようにします.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupWASM</span>(<span style="color:#a6e22e">wasm</span>) {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setupWASM</span>(<span style="color:#a6e22e">wasm</span>) {
   <span style="color:#66d9ef">try</span> {
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`./</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">wasm</span><span style="color:#e6db74">}</span><span style="color:#e6db74">.wasm`</span>)
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bytes</span>    <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">arrayBuffer</span>();
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">module</span>   <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">compile</span>(<span style="color:#a6e22e">bytes</span>);
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`./</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">wasm</span><span style="color:#e6db74">}</span><span style="color:#e6db74">.wasm`</span>)
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bytes</span>    <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">arrayBuffer</span>();
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">module</span>   <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">compile</span>(<span style="color:#a6e22e">bytes</span>);
 
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">imports</span> <span style="color:#f92672">=</span> {};
 
@@ -465,7 +466,7 @@ EMSCRIPTEN_KEEPALIVE
       <span style="color:#a6e22e">imports</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">table</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">Table</span>({ <span style="color:#a6e22e">initial</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">maximum</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">element</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;anyfunc&#39;</span> });
     }
 
-    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">instance</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">instantiate</span>(<span style="color:#a6e22e">bytes</span>, <span style="color:#a6e22e">imports</span>);
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">instance</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">WebAssembly</span>.<span style="color:#a6e22e">instantiate</span>(<span style="color:#a6e22e">bytes</span>, <span style="color:#a6e22e">imports</span>);
 
     <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">module</span>, <span style="color:#a6e22e">instance</span>, <span style="color:#a6e22e">bytes</span> };
   } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {

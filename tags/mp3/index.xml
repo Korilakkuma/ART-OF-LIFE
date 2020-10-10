@@ -6,11 +6,7 @@
     <description>Recent content in MP3 on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Wed, 28 Aug 2019 05:27:13 +0900</lastBuildDate>
-    
-	<atom:link href="https://art-of-life.jp/tags/mp3/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 28 Aug 2019 05:27:13 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/tags/mp3/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MP3 の圧縮符号化方式</title>
       <link>https://art-of-life.jp/posts/mp3/</link>

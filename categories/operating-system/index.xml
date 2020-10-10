@@ -6,11 +6,7 @@
     <description>Recent content in Operating System on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Fri, 28 Jun 2019 17:27:34 +0900</lastBuildDate>
-    
-	<atom:link href="https://art-of-life.jp/categories/operating-system/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 28 Jun 2019 17:27:34 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/categories/operating-system/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Development on Windows</title>
       <link>https://art-of-life.jp/posts/development-on-windows/</link>

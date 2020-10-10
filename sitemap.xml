@@ -68,11 +68,6 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/tags/c/</loc>
-    <lastmod>2020-05-02T08:52:00+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://art-of-life.jp/tags/correlation-function/</loc>
     <lastmod>2020-05-02T08:52:00+09:00</lastmod>
   </url>
@@ -124,6 +119,11 @@
   
   <url>
     <loc>https://art-of-life.jp/posts/audio-processing-by-wasm/</loc>
+    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/c/</loc>
     <lastmod>2020-02-02T17:27:52+09:00</lastmod>
   </url>
   

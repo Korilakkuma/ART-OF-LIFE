@@ -6,11 +6,7 @@
     <description>Recent content in WebRTC on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Wed, 29 May 2019 20:00:59 +0900</lastBuildDate>
-    
-	<atom:link href="https://art-of-life.jp/tags/webrtc/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 29 May 2019 20:00:59 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/tags/webrtc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WebRTC の概要</title>
       <link>https://art-of-life.jp/posts/webrtc-overview/</link>

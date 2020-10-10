@@ -6,11 +6,7 @@
     <description>Recent content in Tags on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 07 Jun 2020 02:57:12 +0900</lastBuildDate>
-    
-	<atom:link href="https://art-of-life.jp/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 07 Jun 2020 02:57:12 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Digital Signal Processing</title>
       <link>https://art-of-life.jp/tags/digital-signal-processing/</link>
@@ -48,15 +44,6 @@
     </item>
     
     <item>
-      <title>C</title>
-      <link>https://art-of-life.jp/tags/c/</link>
-      <pubDate>Sat, 02 May 2020 08:52:00 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/tags/c/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Correlation function</title>
       <link>https://art-of-life.jp/tags/correlation-function/</link>
       <pubDate>Sat, 02 May 2020 08:52:00 +0900</pubDate>
@@ -89,6 +76,15 @@
       <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
       
       <guid>https://art-of-life.jp/tags/spectrum-subtraction/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C</title>
+      <link>https://art-of-life.jp/tags/c/</link>
+      <pubDate>Sun, 02 Feb 2020 17:27:52 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/c/</guid>
       <description></description>
     </item>
     
