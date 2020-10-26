@@ -138,6 +138,9 @@ code {
   font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
   background-color: #f8f8f8;
 }
+code.language-TypeScript {
+  background-color: #272822;
+}
 .outer {
   max-width: 1320px;
   margin: 0 auto;

@@ -4,12 +4,52 @@
   
   <url>
     <loc>https://art-of-life.jp/</loc>
-    <lastmod>2020-06-07T02:57:12+09:00</lastmod>
+    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/audio/</loc>
+    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/</loc>
-    <lastmod>2020-06-07T02:57:12+09:00</lastmod>
+    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/how-to-use-xsound-as-module-base/</loc>
+    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/javascript/</loc>
+    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/</loc>
+    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/programming/</loc>
+    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/</loc>
+    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/web-audio-api/</loc>
+    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/xsound/</loc>
+    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
   </url>
   
   <url>
@@ -38,16 +78,6 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/posts/</loc>
-    <lastmod>2020-06-07T02:57:12+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/programming/</loc>
-    <lastmod>2020-06-07T02:57:12+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://art-of-life.jp/tags/resampling/</loc>
     <lastmod>2020-06-07T02:57:12+09:00</lastmod>
   </url>
@@ -59,11 +89,6 @@
   
   <url>
     <loc>https://art-of-life.jp/tags/sampling-theorem/</loc>
-    <lastmod>2020-06-07T02:57:12+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/</loc>
     <lastmod>2020-06-07T02:57:12+09:00</lastmod>
   </url>
   
@@ -113,27 +138,12 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/categories/audio/</loc>
-    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://art-of-life.jp/posts/audio-processing-by-wasm/</loc>
     <lastmod>2020-02-02T17:27:52+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/tags/c/</loc>
-    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/javascript/</loc>
-    <lastmod>2020-02-02T17:27:52+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/web-audio-api/</loc>
     <lastmod>2020-02-02T17:27:52+09:00</lastmod>
   </url>
   
