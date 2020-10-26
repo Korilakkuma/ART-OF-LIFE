@@ -1,0 +1,203 @@
++++
+banner = ""
+categories = ["Programming", "Audio"]
+date = 2020-10-25T23:50:24+09:00
+description = "モジュールベースの XSound"
+images = []
+menu = ""
+tags = ["JavaScript", "Web Audio API", "XSound"]
+title = "How to Use XSound as Module Base"
++++
+
+# XSound とは ?
+
+[@Korilakkuma](https://github.com/Korilakkuma/XSound) が実装している Web Audio API ライブラリです. 以下のような豊富な機能が利用可能で, **オーディオ技術のないエンジニアにも利用しやすいライブラリ**をコンセプトにしています.
+
+- サウンドの生成
+- ワンショットオーディオの再生
+- オーディオデータの再生
+- HTMLMediaElement の再生
+- WebRTC による外部オーディオインターフェースへのアクセス
+- Web MIDI API による, MIDI メッセージング
+- MML (Music Macro Language) による自動再生
+- エフェクター
+- ビジュアライゼーション
+- マルチトラックレコーダー
+- WebSocket によるバイナリメッセージング
+- Media Sound Extensions によるオーディオストリーミング
+- ビジュアルオーディオスプライト
+
+[9 libraries to kickstart your Web Audio stuff](https://dev.to/areknawo/9-libraries-to-kickstart-your-web-audio-stuff-460p) にも,
+
+<blockquote>XSound is a batteries-included library for everything audio. From basic management and loading through streaming, effects, ending with visualizations and recording, this libraries provides almost everything! It also has nice, semi-chainable API with solid documentation.</blockquote>
+
+と記載されています.
+
+# モジュールベースの XSound とは ?
+
+## フルスタックベースの API
+
+v2.20.0 までは, フルスタックベースのみの API が実装されていました. フルスタックベースと言っても, 伝わりにくいので, コードで説明すると, 例えば, コーラスエフェクターをかけてオシレーターでサウンド生成する場合,
+
+```JavaScript
+const params = {
+  time : 0.025,
+  depth: 0.5,
+  rate : 2.5,
+  mix  : 0.5
+};
+
+X('oscillator').setup(true);
+X('oscillator').module('chorus').param(params);
+X('oscillator').module('chorus').state(true);
+X('oscillator').start(440);
+```
+
+このように, オシレーターの管理からエフェクターの管理まで, Web Audio API が関わる処理はすべて XSound がめんどうをみる ... という感じの API でした.
+
+しかしながら, フルスタックベースの API だと, **バニラな Web Audio API のコードと組み合わせにくい**, あるいは, **既存のプロダクトに XSound を導入しにくい** ... といった問題点がありました.
+
+## モジュールベースの API
+
+v2.20.0 以降は, これらの問題を解決するために, モジュールベースの API も併用可能にしました. 例えば, 先ほどのコードを, モジュールベースで実装する場合,
+
+```JavaScript
+const params = {
+  time : 0.025,
+  depth: 0.5,
+  rate : 2.5,
+  mix  : 0.5
+};
+
+const context = X.get();
+
+const chorus = new X.Chorus(context, 0);
+
+const oscillator = context.createOscillator();
+
+oscillator.connect(chorus.INPUT);
+chorus.OUTPUT.connect(context.destination);
+
+chorus.param(params);
+chorus.state(true);
+
+oscillator.start(0);
+```
+
+このように, バニラな Web Audio API のコードに XSound のモジュールを組み込んでいることがわかります. さらに, このような API であれば, 既存のプロダクトに XSound を導入するということも, これまでよりは敷居が下がると思われます.
+
+## 背景
+
+XSound をローンチした 2012 年は, まだ jQuery が当然のように利用されている時代でした. そこで, XSound も jQuery ライクな API にすれば利用しやすいかもという考えで, フルスタックベースの API が実装されました (また, 実装も jQuery の影響を受けています).
+
+2015 年以降, React に代表される Virtual DOM を備えた UI Component Library の普及とともに, 直接 DOM を操作することは少なくなり, 脱 jQuery が進みました. さらに, npm によるエコシステムの発展によって, パッケージを組み合わせてプロダクトを実装することが普及しました.
+
+遅ればせながら, XSound もこの時代背景に追従しました.
+
+# モジュールベースの実装
+
+モジュールベースで利用可能なモジュールは, [Connectable](https://github.com/Korilakkuma/XSound/blob/master/src/interfaces/Connectable.js) インタフェースを実装したクラスです.
+
+... といっても, それはコードを知っている必要があるので, v2.20.0 の時点でモジュールベースで利用可能なモジュールと, コンストラクタのシグネチャは以下のとおりです.
+
+```TypeScript
+type BufferSize = 0 | 256 | 512 | 1024 | 2048 | 4096 | 8192 | 16384;
+
+X.Autopanner(context: AudioContext, size: BufferSize);
+X.Chorus(context: AudioContext, size: BufferSize);
+X.Compressor(context: AudioContext, size: BufferSize);
+X.Delay(context: AudioContext, size: BufferSize);
+X.Distortion(context: AudioContext, size: BufferSize);
+X.Equalizer(context: AudioContext, size: BufferSize);
+X.Filter(context: AudioContext, size: BufferSize);
+X.Flanger(context: AudioContext, size: BufferSize);
+X.Listener(context: AudioContext, size: BufferSize);
+X.Panner(context: AudioContext, size: BufferSize);
+X.Phaser(context: AudioContext, size: BufferSize);
+X.PitchShifter(context: AudioContext, size: BufferSize);
+X.Reverb(context: AudioContext, size: BufferSize);
+X.Ringmodulator(context: AudioContext, size: BufferSize);
+X.Stereo(context: AudioContext, size, size: BufferSize);
+X.Tremolo(context: AudioContext, size: BufferSize);
+X.Wah(context: AudioContext, size: BufferSize);
+
+X.Analyser(context: AudioContext);
+
+X.Recorder(context: AudioContext, size: BufferSize, numberOfInputs: number, numberOfOutputs: number);
+
+X.Session(context: AudioContext, size: BufferSize, numberOfInputs: number, numberOfOutputs, analyser: X.Analyser);
+```
+
+Connectable インターフェースを実装したクラスのインスタンスは, `INPUT`, `OUTPUT` というコネクターがあります (実体は, `AudioNode` のゲッターです). これが, バニラな Web Audio API のコードと組み合わせるときに重要となり, `AudioNode` を `INPUT` に接続して `OUTPUT` から `AudioNode` に接続することで, XSound との組み合わせが可能になります.
+
+## エフェクター
+
+モジュールベースで利用可能なエフェクターは以下のとおりで, コンストラクタのシグネチャもすべて同じです (第 1 引数に, `AudioContext` インスタンス, 第 2 引数に `ScriptProcessorNode` のバッファサイズを指定します (0 指定で問題ないでしょう)).
+
+```TypeScript
+type BufferSize = 0 | 256 | 512 | 1024 | 2048 | 4096 | 8192 | 16384;
+
+X.Autopanner(context: AudioContext, size: BufferSize);
+X.Chorus(context: AudioContext, size: BufferSize);
+X.Compressor(context: AudioContext, size: BufferSize);
+X.Delay(context: AudioContext, size: BufferSize);
+X.Distortion(context: AudioContext, size: BufferSize);
+X.Equalizer(context: AudioContext, size: BufferSize);
+X.Filter(context: AudioContext, size: BufferSize);
+X.Flanger(context: AudioContext, size: BufferSize);
+X.Listener(context: AudioContext, size: BufferSize);
+X.Panner(context: AudioContext, size: BufferSize);
+X.Phaser(context: AudioContext, size: BufferSize);
+X.PitchShifter(context: AudioContext, size: BufferSize);
+X.Reverb(context: AudioContext, size: BufferSize);
+X.Ringmodulator(context: AudioContext, size: BufferSize);
+X.Stereo(context: AudioContext, size, size: BufferSize);
+X.Tremolo(context: AudioContext, size: BufferSize);
+X.Wah(context: AudioContext, size: BufferSize);
+```
+
+モジュールベースでエフェクターを利用する場合, 必要なメソッドは, `param` と `state` です. それぞれ, エフェクターのパラメータの設定 or 取得, エフェクターのバイパスを切り替えるメソッドです.
+
+```JavaScript
+const params = {
+  time    : 0.025,
+  depth   : 0.5,
+  rate    : 2.5,
+  mix     : 0.5,
+  feedback: 0.9
+};
+
+const context = X.get();
+
+const flanger = new X.Flanger(context, 0);
+
+const oscillator = context.createOscillator();
+
+oscillator.connect(flanger.INPUT);
+flanger.OUTPUT.connect(context.destination);
+
+flanger.param(params);
+flanger.state(true);
+
+oscillator.start(0);
+```
+
+上記のコードは, モジュールベースでフランジャーを利用する例ですが, コーラスを利用する場合とほとんど同じコードであることがわかるかと思います (ただし, 設定可能なパラメータは, エフェクターごとで大きく異なるので, 詳細は, [API Documentation](https://xsound.dev) を参考にしていください).
+
+## ビジュアライゼーション
+
+WIP
+
+## レコーダー
+
+WIP
+
+## セッション
+
+WIP
+
+# 関連リンク
+
+- [API Documentation](https://xsound.dev)
+- [XSound Playground](https://xsound.jp/playground/)
+- [XSound.app](https://xsound.app)
