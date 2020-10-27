@@ -32,7 +32,7 @@
 <meta itemprop="description" content="モジュールベースの XSound">
 <meta itemprop="datePublished" content="2020-10-25T23:50:24+09:00" />
 <meta itemprop="dateModified" content="2020-10-25T23:50:24+09:00" />
-<meta itemprop="wordCount" content="1873">
+<meta itemprop="wordCount" content="2405">
 
 
 
@@ -270,10 +270,10 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2020-10-25 23:50:24 &#43;0900 JST" itemprop="datePublished">2020-10-25</time>
             &middot;
-            1873
+            2405
             words
             &middot;
-            4
+            5
             minute read
         </div>
         
@@ -385,7 +385,7 @@
 <p>遅ればせながら, XSound もこの時代背景に追従しました.</p>
 <h1 id="モジュールベースの実装">モジュールベースの実装</h1>
 <p>モジュールベースで利用可能なモジュールは, <a href="https://github.com/Korilakkuma/XSound/blob/master/src/interfaces/Connectable.js">Connectable</a> インタフェースを実装したクラスです.</p>
-<p>&hellip; といっても, それはコードを知っている必要があるので, v2.20.0 の時点でモジュールベースで利用可能なモジュールと, コンストラクタのシグネチャは以下のとおりです.</p>
+<p>&hellip; といっても, それはコードを知っている必要があるので, <a href="https://github.com/Korilakkuma/XSound/releases/tag/v2.20.0">v2.20.0</a> の時点でモジュールベースで利用可能なモジュールと, コンストラクタのシグネチャは以下のとおりです.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BufferSize</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">256</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">512</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">1024</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">2048</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">4096</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">8192</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">16384</span>;
 
 <span style="color:#a6e22e">X</span>.<span style="color:#a6e22e">Autopanner</span>(<span style="color:#a6e22e">context</span>: <span style="color:#66d9ef">AudioContext</span>, <span style="color:#a6e22e">size</span>: <span style="color:#66d9ef">BufferSize</span>);
@@ -459,8 +459,49 @@
 <h2 id="ビジュアライゼーション">ビジュアライゼーション</h2>
 <p>WIP</p>
 <h2 id="レコーダー">レコーダー</h2>
-<p>WIP</p>
-<h2 id="セッション">セッション</h2>
+<p>コンストラクタの第 1 引数は <code>AudioContext</code> インスタンス, 第 2 引数は <code>ScriptProcessorNode</code> のバッファサイズ, 第 3 引数は <code>ScriptProcessorNode</code> の入力チャンネル数, 第 4 引数は <code>ScriptProcessorNode</code> の出力チャンネル数を指定します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">X</span>.<span style="color:#a6e22e">Recorder</span>(<span style="color:#a6e22e">context</span>: <span style="color:#66d9ef">AudioContext</span>, <span style="color:#a6e22e">size</span>: <span style="color:#66d9ef">BufferSize</span>, <span style="color:#a6e22e">numberOfInputs</span>: <span style="color:#66d9ef">number</span>, <span style="color:#a6e22e">numberOfOutputs</span>: <span style="color:#66d9ef">number</span>);
+</code></pre></div><h3 id="setup">setup</h3>
+<p>レコーディングに利用する, トラック数を指定します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFRecorder</span> {
+  <span style="color:#a6e22e">setup</span>(<span style="color:#a6e22e">numberOfTracks</span>: <span style="color:#66d9ef">number</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Recorder</span>;
+}
+</code></pre></div><h3 id="ready">ready</h3>
+<p>レコーディング対象のトラック番号 (<code>0</code> ~) を指定します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFRecorder</span> {
+  <span style="color:#a6e22e">ready</span>(<span style="color:#a6e22e">track</span>: <span style="color:#66d9ef">number</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Recorder</span>;
+}
+</code></pre></div><h3 id="start">start</h3>
+<p>レコーディングを開始します. 引数はありません.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFRecorder</span> {
+  <span style="color:#a6e22e">start</span>(<span style="color:#66d9ef">void</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Recorder</span>;
+}
+</code></pre></div><h3 id="stop">stop</h3>
+<p>レコーディングを停止します. 引数はありません.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFRecorder</span> {
+  <span style="color:#a6e22e">stop</span>(<span style="color:#66d9ef">void</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Recorder</span>;
+}
+</code></pre></div><h3 id="param">param</h3>
+<p>レコーディングのパラメータを指定します. 現状は, 左右のゲインのみです.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFRecorder</span> {
+  <span style="color:#a6e22e">param</span>(<span style="color:#a6e22e">key</span>: <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">number</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">number</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">Recorder</span>;
+}
+</code></pre></div><h3 id="clear">clear</h3>
+<p>引数に指定したトラック (<code>0</code> ~) に格納されているデータをクリアします. <code>'all'</code> を指定するとすべてのトラックをクリアします.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFRecorder</span> {
+  <span style="color:#a6e22e">clear</span>(<span style="color:#a6e22e">track</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;all&#39;</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Recorder</span>;
+}
+</code></pre></div><h3 id="create">create</h3>
+<p>レコードしたデータを, WAVE ファイルとしてエクスポートします. 第 1 引数は, 対象のトラック (<code>0</code> ~, <code>'all'</code> を指定するとすべてのトラックのデータをミックスします), 第 2 引数は, モノラル (<code>1</code>) or ステレオ (<code>2</code>), 第 3 引数は, 量子化ビット (8 bit or 16 bit), 第 4 引数は, エクスポートするデータ形式を指定します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFRecorder</span> {
+  <span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">track</span>: <span style="color:#66d9ef">number</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;all&#39;</span>, <span style="color:#a6e22e">numberOfChannels</span>: <span style="color:#66d9ef">1</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">qbit</span>: <span style="color:#66d9ef">8</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">16</span>, <span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;base64&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;dataurl&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;blob&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;objecturl&#39;</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">string</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">Blob</span>;
+}
+</code></pre></div><h3 id="getactivetrack">getActiveTrack</h3>
+<p>レコード対象となっているトラック番号 (<code>0</code> ~) を取得します. レコード対象がなければ <code>-1</code> を返します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFRecorder</span> {
+  <span style="color:#a6e22e">getActiveTrack</span>(<span style="color:#66d9ef">void</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">number</span>;
+}
+</code></pre></div><h2 id="セッション">セッション</h2>
 <p>WIP</p>
 <h1 id="関連リンク">関連リンク</h1>
 <ul>
