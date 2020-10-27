@@ -98,7 +98,7 @@ XSound をローンチした 2012 年は, まだ jQuery が当然のように利
 
 モジュールベースで利用可能なモジュールは, [Connectable](https://github.com/Korilakkuma/XSound/blob/master/src/interfaces/Connectable.js) インタフェースを実装したクラスです.
 
-... といっても, それはコードを知っている必要があるので, v2.20.0 の時点でモジュールベースで利用可能なモジュールと, コンストラクタのシグネチャは以下のとおりです.
+... といっても, それはコードを知っている必要があるので, [v2.20.0](https://github.com/Korilakkuma/XSound/releases/tag/v2.20.0) の時点でモジュールベースで利用可能なモジュールと, コンストラクタのシグネチャは以下のとおりです.
 
 ```TypeScript
 type BufferSize = 0 | 256 | 512 | 1024 | 2048 | 4096 | 8192 | 16384;
@@ -190,7 +190,91 @@ WIP
 
 ## レコーダー
 
-WIP
+コンストラクタの第 1 引数は `AudioContext` インスタンス, 第 2 引数は `ScriptProcessorNode` のバッファサイズ, 第 3 引数は `ScriptProcessorNode` の入力チャンネル数, 第 4 引数は `ScriptProcessorNode` の出力チャンネル数を指定します.
+
+```TypeScript
+X.Recorder(context: AudioContext, size: BufferSize, numberOfInputs: number, numberOfOutputs: number);
+```
+
+### setup
+
+レコーディングに利用する, トラック数を指定します.
+
+```TypeScript
+interfaces IFRecorder {
+  setup(numberOfTracks: number): Recorder;
+}
+```
+
+### ready
+
+レコーディング対象のトラック番号 (`0` ~) を指定します.
+
+```TypeScript
+interfaces IFRecorder {
+  ready(track: number): Recorder;
+}
+```
+
+### start
+
+レコーディングを開始します. 引数はありません.
+
+```TypeScript
+interfaces IFRecorder {
+  start(void): Recorder;
+}
+```
+
+### stop
+
+レコーディングを停止します. 引数はありません.
+
+```TypeScript
+interfaces IFRecorder {
+  stop(void): Recorder;
+}
+```
+
+### param
+
+レコーディングのパラメータを指定します. 現状は, 左右のゲインのみです.
+
+```TypeScript
+interfaces IFRecorder {
+  param(key: string, value: number): number | Recorder;
+}
+```
+
+### clear
+
+引数に指定したトラック (`0` ~) に格納されているデータをクリアします. `'all'` を指定するとすべてのトラックをクリアします.
+
+```TypeScript
+interfaces IFRecorder {
+  clear(track: number | 'all'): Recorder;
+}
+```
+
+### create
+
+レコードしたデータを, WAVE ファイルとしてエクスポートします. 第 1 引数は, 対象のトラック (`0` ~, `'all'` を指定するとすべてのトラックのデータをミックスします), 第 2 引数は, モノラル (`1`) or ステレオ (`2`), 第 3 引数は, 量子化ビット (8 bit or 16 bit), 第 4 引数は, エクスポートするデータ形式を指定します.
+
+```TypeScript
+interfaces IFRecorder {
+  create(track: number | 'all', numberOfChannels: 1 | 2, qbit: 8 | 16, type: 'base64' | 'dataurl' | 'blob' | 'objecturl'): string | Blob;
+}
+```
+
+### getActiveTrack
+
+レコード対象となっているトラック番号 (`0` ~) を取得します. レコード対象がなければ `-1` を返します.
+
+```TypeScript
+interfaces IFRecorder {
+  getActiveTrack(void): number;
+}
+```
 
 ## セッション
 
