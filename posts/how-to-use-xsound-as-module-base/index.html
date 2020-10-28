@@ -32,7 +32,7 @@
 <meta itemprop="description" content="モジュールベースの XSound">
 <meta itemprop="datePublished" content="2020-10-25T23:50:24+09:00" />
 <meta itemprop="dateModified" content="2020-10-25T23:50:24+09:00" />
-<meta itemprop="wordCount" content="2405">
+<meta itemprop="wordCount" content="2792">
 
 
 
@@ -270,10 +270,10 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2020-10-25 23:50:24 &#43;0900 JST" itemprop="datePublished">2020-10-25</time>
             &middot;
-            2405
+            2792
             words
             &middot;
-            5
+            6
             minute read
         </div>
         
@@ -502,8 +502,47 @@
   <span style="color:#a6e22e">getActiveTrack</span>(<span style="color:#66d9ef">void</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">number</span>;
 }
 </code></pre></div><h2 id="セッション">セッション</h2>
-<p>WIP</p>
-<h1 id="関連リンク">関連リンク</h1>
+<p>コンストラクタの第 1 引数は <code>AudioContext</code> インスタンス, 第 2 引数は <code>ScriptProcessorNode</code> のバッファサイズ, 第 3 引数は <code>ScriptProcessorNode</code> の入力チャンネル数, 第 4 引数は (XSound が実装する) <code>Analyser</code> インスタンスを指定します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">X</span>.<span style="color:#a6e22e">Session</span>(<span style="color:#a6e22e">context</span>: <span style="color:#66d9ef">AudioContext</span>, <span style="color:#a6e22e">size</span>: <span style="color:#66d9ef">BufferSize</span>, <span style="color:#a6e22e">numberOfInputs</span>: <span style="color:#66d9ef">number</span>, <span style="color:#a6e22e">numberOfOutputs</span>, <span style="color:#a6e22e">analyser</span>: <span style="color:#66d9ef">X.Analyser</span>);
+</code></pre></div><h3 id="setup-1">setup</h3>
+<p>第 1 引数は <code>wss</code> (TLS) を利用する場合 <code>true</code> を指定します. 第 2 引数は WebSocket サーバーのホスト名, 第 3 引数はポート番号, 第 4 引数はパス名, 第 5, 6, 7 引数はイベントハンドラとなる関数を指定します (WebSocket の <code>onopen</code>, <code>onclose</code>, <code>onerror</code> に対応します).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFSession</span> {
+  <span style="color:#a6e22e">setup</span>(
+    <span style="color:#a6e22e">tls</span>: <span style="color:#66d9ef">boolean</span>,
+    <span style="color:#a6e22e">host</span>: <span style="color:#66d9ef">string</span>,
+    <span style="color:#a6e22e">port</span>: <span style="color:#66d9ef">number</span>,
+    <span style="color:#a6e22e">path</span>: <span style="color:#66d9ef">string</span>,
+    <span style="color:#a6e22e">open</span>: <span style="color:#66d9ef">Function</span>,
+    <span style="color:#a6e22e">close</span>: <span style="color:#66d9ef">Function</span>,
+    <span style="color:#a6e22e">error</span>: <span style="color:#66d9ef">Function</span>
+  )<span style="color:#f92672">:</span> <span style="color:#a6e22e">Session</span>;
+}
+</code></pre></div><h3 id="start-1">start</h3>
+<p>セッション (WebSocket によるバイナリメッセージング) を開始します. 引数はありません.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFSession</span> {
+  <span style="color:#a6e22e">start</span>(<span style="color:#66d9ef">void</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Session</span>;
+}
+</code></pre></div><h3 id="close">close</h3>
+<p>セッションのコネクションをクローズします. 引数はありません.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFSession</span> {
+  <span style="color:#a6e22e">stop</span>(<span style="color:#66d9ef">void</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Session</span>;
+}
+</code></pre></div><h3 id="get">get</h3>
+<p>WebSocket インスタンスを取得します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFSession</span> {
+  <span style="color:#66d9ef">get</span>(<span style="color:#66d9ef">void</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">WebSocket</span>;
+}
+</code></pre></div><h3 id="isconnected">isConnected</h3>
+<p>セッションのコネクションが存在していれば, <code>true</code> を返します.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFSession</span> {
+  <span style="color:#a6e22e">isConnected</span>(<span style="color:#66d9ef">void</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">boolean</span>;
+}
+</code></pre></div><h3 id="state">state</h3>
+<p>セッションの状態を取得, または, セッションの有効 or 無効を切り替えます.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-TypeScript" data-lang="TypeScript"><span style="color:#a6e22e">interfaces</span> <span style="color:#a6e22e">IFSession</span> {
+  <span style="color:#a6e22e">state</span>(<span style="color:#a6e22e">isActive?</span>: <span style="color:#66d9ef">boolean</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">boolean</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">Session</span>;
+}
+</code></pre></div><h1 id="関連リンク">関連リンク</h1>
 <ul>
 <li><a href="https://xsound.dev">API Documentation</a></li>
 <li><a href="https://xsound.jp/playground/">XSound Playground</a></li>
