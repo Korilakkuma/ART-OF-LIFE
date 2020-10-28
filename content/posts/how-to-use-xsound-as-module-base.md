@@ -278,7 +278,79 @@ interfaces IFRecorder {
 
 ## セッション
 
-WIP
+コンストラクタの第 1 引数は `AudioContext` インスタンス, 第 2 引数は `ScriptProcessorNode` のバッファサイズ, 第 3 引数は `ScriptProcessorNode` の入力チャンネル数, 第 4 引数は (XSound が実装する) `Analyser` インスタンスを指定します.
+
+```TypeScript
+X.Session(context: AudioContext, size: BufferSize, numberOfInputs: number, numberOfOutputs, analyser: X.Analyser);
+```
+
+### setup
+
+第 1 引数は `wss` (TLS) を利用する場合 `true` を指定します. 第 2 引数は WebSocket サーバーのホスト名, 第 3 引数はポート番号, 第 4 引数はパス名, 第 5, 6, 7 引数はイベントハンドラとなる関数を指定します (WebSocket の `onopen`, `onclose`, `onerror` に対応します).
+
+```TypeScript
+interfaces IFSession {
+  setup(
+    tls: boolean,
+    host: string,
+    port: number,
+    path: string,
+    open: Function,
+    close: Function,
+    error: Function
+  ): Session;
+}
+```
+
+### start
+
+セッション (WebSocket によるバイナリメッセージング) を開始します. 引数はありません.
+
+```TypeScript
+interfaces IFSession {
+  start(void): Session;
+}
+```
+
+### close
+
+セッションのコネクションをクローズします. 引数はありません.
+
+```TypeScript
+interfaces IFSession {
+  stop(void): Session;
+}
+```
+
+### get
+
+WebSocket インスタンスを取得します.
+
+```TypeScript
+interfaces IFSession {
+  get(void): WebSocket;
+}
+```
+
+### isConnected
+
+セッションのコネクションが存在していれば, `true` を返します.
+
+```TypeScript
+interfaces IFSession {
+  isConnected(void): boolean;
+}
+```
+
+### state
+
+セッションの状態を取得, または, セッションの有効 or 無効を切り替えます.
+
+```TypeScript
+interfaces IFSession {
+  state(isActive?: boolean): boolean | Session;
+}
+```
 
 # 関連リンク
 
