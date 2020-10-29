@@ -186,7 +186,51 @@ oscillator.start(0);
 
 ## ビジュアライゼーション
 
-WIP
+コンストラクタの引数は, `AudioContext` インスタンスです.
+
+```TypeScript
+X.Analyser(context: AudioContext);
+```
+
+### domain
+
+ビジュアライゼーションの対象となるドメインを第 1 引数に指定します. 第 2 引数は, チャンネルです.
+
+```TypeScript
+interface IFAnalyser {
+  domain(domain: 'timeoverview' | 'time' | 'fft', channel: 0 | 1): Visualizer;
+}
+```
+
+### Visualizer#setup
+
+`HTMLCanvasElement` または, `SVGElement` を指定します.
+
+```TypeScript
+interface IFVisualizer {
+  setup(element: HTMLCanvasElement | SVGElement): Visualizer;
+}
+```
+
+### Visualizer#param
+
+描画のスタイルなどを設定します.
+
+```TypeScript
+interface IFVisualizer {
+  param(key: string, value: number | string | Array<object>): number | string | Array<object> | Visualizer;
+}
+```
+
+### Visualizer#state
+
+ビジュアライゼーションの状態を取得, または, ビジュアライゼーションの有効 or 無効を切り替えます.
+
+```TypeScript
+interface IFVisualizer {
+  state(isActive?: boolean): boolean | Visualizer;
+}
+```
 
 ## レコーダー
 
@@ -201,7 +245,7 @@ X.Recorder(context: AudioContext, size: BufferSize, numberOfInputs: number, numb
 レコーディングに利用する, トラック数を指定します.
 
 ```TypeScript
-interfaces IFRecorder {
+interface IFRecorder {
   setup(numberOfTracks: number): Recorder;
 }
 ```
@@ -211,7 +255,7 @@ interfaces IFRecorder {
 レコーディング対象のトラック番号 (`0` ~) を指定します.
 
 ```TypeScript
-interfaces IFRecorder {
+interface IFRecorder {
   ready(track: number): Recorder;
 }
 ```
@@ -221,7 +265,7 @@ interfaces IFRecorder {
 レコーディングを開始します. 引数はありません.
 
 ```TypeScript
-interfaces IFRecorder {
+interface IFRecorder {
   start(void): Recorder;
 }
 ```
@@ -231,7 +275,7 @@ interfaces IFRecorder {
 レコーディングを停止します. 引数はありません.
 
 ```TypeScript
-interfaces IFRecorder {
+interface IFRecorder {
   stop(void): Recorder;
 }
 ```
@@ -241,7 +285,7 @@ interfaces IFRecorder {
 レコーディングのパラメータを指定します. 現状は, 左右のゲインのみです.
 
 ```TypeScript
-interfaces IFRecorder {
+interface IFRecorder {
   param(key: string, value: number): number | Recorder;
 }
 ```
@@ -251,7 +295,7 @@ interfaces IFRecorder {
 引数に指定したトラック (`0` ~) に格納されているデータをクリアします. `'all'` を指定するとすべてのトラックをクリアします.
 
 ```TypeScript
-interfaces IFRecorder {
+interface IFRecorder {
   clear(track: number | 'all'): Recorder;
 }
 ```
@@ -261,7 +305,7 @@ interfaces IFRecorder {
 レコードしたデータを, WAVE ファイルとしてエクスポートします. 第 1 引数は, 対象のトラック (`0` ~, `'all'` を指定するとすべてのトラックのデータをミックスします), 第 2 引数は, モノラル (`1`) or ステレオ (`2`), 第 3 引数は, 量子化ビット (8 bit or 16 bit), 第 4 引数は, エクスポートするデータ形式を指定します.
 
 ```TypeScript
-interfaces IFRecorder {
+interface IFRecorder {
   create(track: number | 'all', numberOfChannels: 1 | 2, qbit: 8 | 16, type: 'base64' | 'dataurl' | 'blob' | 'objecturl'): string | Blob;
 }
 ```
@@ -271,7 +315,7 @@ interfaces IFRecorder {
 レコード対象となっているトラック番号 (`0` ~) を取得します. レコード対象がなければ `-1` を返します.
 
 ```TypeScript
-interfaces IFRecorder {
+interface IFRecorder {
   getActiveTrack(void): number;
 }
 ```
@@ -289,7 +333,7 @@ X.Session(context: AudioContext, size: BufferSize, numberOfInputs: number, numbe
 第 1 引数は `wss` (TLS) を利用する場合 `true` を指定します. 第 2 引数は WebSocket サーバーのホスト名, 第 3 引数はポート番号, 第 4 引数はパス名, 第 5, 6, 7 引数はイベントハンドラとなる関数を指定します (WebSocket の `onopen`, `onclose`, `onerror` に対応します).
 
 ```TypeScript
-interfaces IFSession {
+interface IFSession {
   setup(
     tls: boolean,
     host: string,
@@ -307,7 +351,7 @@ interfaces IFSession {
 セッション (WebSocket によるバイナリメッセージング) を開始します. 引数はありません.
 
 ```TypeScript
-interfaces IFSession {
+interface IFSession {
   start(void): Session;
 }
 ```
@@ -317,7 +361,7 @@ interfaces IFSession {
 セッションのコネクションをクローズします. 引数はありません.
 
 ```TypeScript
-interfaces IFSession {
+interface IFSession {
   stop(void): Session;
 }
 ```
@@ -327,7 +371,7 @@ interfaces IFSession {
 WebSocket インスタンスを取得します.
 
 ```TypeScript
-interfaces IFSession {
+interface IFSession {
   get(void): WebSocket;
 }
 ```
@@ -337,7 +381,7 @@ interfaces IFSession {
 セッションのコネクションが存在していれば, `true` を返します.
 
 ```TypeScript
-interfaces IFSession {
+interface IFSession {
   isConnected(void): boolean;
 }
 ```
@@ -347,7 +391,7 @@ interfaces IFSession {
 セッションの状態を取得, または, セッションの有効 or 無効を切り替えます.
 
 ```TypeScript
-interfaces IFSession {
+interface IFSession {
   state(isActive?: boolean): boolean | Session;
 }
 ```
