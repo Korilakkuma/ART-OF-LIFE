@@ -139,6 +139,8 @@ code {
   background-color: #f8f8f8;
 }
 code.language-TypeScript {
+  margin: 0;
+  padding: 0;
   background-color: #272822;
 }
 .outer {
