@@ -101,7 +101,6 @@ XSound をローンチした 2012 年は, まだ jQuery が当然のように利
 ... といっても, それはコードを知っている必要があるので, [v2.20.0](https://github.com/Korilakkuma/XSound/releases/tag/v2.20.0) の時点でモジュールベースで利用可能なモジュールと, コンストラクタのシグネチャは以下のとおりです.
 
 ```TypeScript
-
 type BufferSize = 0 | 256 | 512 | 1024 | 2048 | 4096 | 8192 | 16384;
 
 X.Autopanner(context: AudioContext, size: BufferSize);
@@ -136,7 +135,6 @@ Connectable インターフェースを実装したクラスのインスタン�
 モジュールベースで利用可能なエフェクターは以下のとおりで, コンストラクタのシグネチャもすべて同じです (第 1 引数に, `AudioContext` インスタンス, 第 2 引数に `ScriptProcessorNode` のバッファサイズを指定します (0 指定で問題ないでしょう)).
 
 ```TypeScript
-
 type BufferSize = 0 | 256 | 512 | 1024 | 2048 | 4096 | 8192 | 16384;
 
 X.Autopanner(context: AudioContext, size: BufferSize);
@@ -191,7 +189,6 @@ oscillator.start(0);
 コンストラクタの引数は, `AudioContext` インスタンスです.
 
 ```TypeScript
-
 X.Analyser(context: AudioContext);
 ```
 
@@ -200,7 +197,6 @@ X.Analyser(context: AudioContext);
 ビジュアライゼーションの対象となるドメインを第 1 引数に指定します. 第 2 引数は, チャンネルです.
 
 ```TypeScript
-
 interface IFAnalyser {
   domain(domain: 'timeoverview' | 'time' | 'fft', channel: 0 | 1): Visualizer;
 }
@@ -211,7 +207,6 @@ interface IFAnalyser {
 `HTMLCanvasElement` または, `SVGElement` を指定します.
 
 ```TypeScript
-
 interface IFVisualizer {
   setup(element: HTMLCanvasElement | SVGElement): Visualizer;
 }
@@ -222,7 +217,6 @@ interface IFVisualizer {
 描画のスタイルなどを設定します.
 
 ```TypeScript
-
 interface IFVisualizer {
   param(key: string, value: number | string | Array<object>): number | string | Array<object> | Visualizer;
 }
@@ -233,7 +227,6 @@ interface IFVisualizer {
 ビジュアライゼーションの状態を取得, または, ビジュアライゼーションの有効 or 無効を切り替えます.
 
 ```TypeScript
-
 interface IFVisualizer {
   state(isActive?: boolean): boolean | Visualizer;
 }
@@ -244,7 +237,6 @@ interface IFVisualizer {
 コンストラクタの第 1 引数は `AudioContext` インスタンス, 第 2 引数は `ScriptProcessorNode` のバッファサイズ, 第 3 引数は `ScriptProcessorNode` の入力チャンネル数, 第 4 引数は `ScriptProcessorNode` の出力チャンネル数を指定します.
 
 ```TypeScript
-
 X.Recorder(context: AudioContext, size: BufferSize, numberOfInputs: number, numberOfOutputs: number);
 ```
 
@@ -253,7 +245,6 @@ X.Recorder(context: AudioContext, size: BufferSize, numberOfInputs: number, numb
 レコーディングに利用する, トラック数を指定します.
 
 ```TypeScript
-
 interface IFRecorder {
   setup(numberOfTracks: number): Recorder;
 }
@@ -264,7 +255,6 @@ interface IFRecorder {
 レコーディング対象のトラック番号 (`0` ~) を指定します.
 
 ```TypeScript
-
 interface IFRecorder {
   ready(track: number): Recorder;
 }
@@ -275,7 +265,6 @@ interface IFRecorder {
 レコーディングを開始します. 引数はありません.
 
 ```TypeScript
-
 interface IFRecorder {
   start(void): Recorder;
 }
@@ -286,7 +275,6 @@ interface IFRecorder {
 レコーディングを停止します. 引数はありません.
 
 ```TypeScript
-
 interface IFRecorder {
   stop(void): Recorder;
 }
@@ -297,7 +285,6 @@ interface IFRecorder {
 レコーディングのパラメータを指定します. 現状は, 左右のゲインのみです.
 
 ```TypeScript
-
 interface IFRecorder {
   param(key: string, value: number): number | Recorder;
 }
@@ -308,7 +295,6 @@ interface IFRecorder {
 引数に指定したトラック (`0` ~) に格納されているデータをクリアします. `'all'` を指定するとすべてのトラックをクリアします.
 
 ```TypeScript
-
 interface IFRecorder {
   clear(track: number | 'all'): Recorder;
 }
@@ -319,7 +305,6 @@ interface IFRecorder {
 レコードしたデータを, WAVE ファイルとしてエクスポートします. 第 1 引数は, 対象のトラック (`0` ~, `'all'` を指定するとすべてのトラックのデータをミックスします), 第 2 引数は, モノラル (`1`) or ステレオ (`2`), 第 3 引数は, 量子化ビット (8 bit or 16 bit), 第 4 引数は, エクスポートするデータ形式を指定します.
 
 ```TypeScript
-
 interface IFRecorder {
   create(track: number | 'all', numberOfChannels: 1 | 2, qbit: 8 | 16, type: 'base64' | 'dataurl' | 'blob' | 'objecturl'): string | Blob;
 }
@@ -330,7 +315,6 @@ interface IFRecorder {
 レコード対象となっているトラック番号 (`0` ~) を取得します. レコード対象がなければ `-1` を返します.
 
 ```TypeScript
-
 interface IFRecorder {
   getActiveTrack(void): number;
 }
@@ -341,7 +325,6 @@ interface IFRecorder {
 コンストラクタの第 1 引数は `AudioContext` インスタンス, 第 2 引数は `ScriptProcessorNode` のバッファサイズ, 第 3 引数は `ScriptProcessorNode` の入力チャンネル数, 第 4 引数は (XSound が実装する) `Analyser` インスタンスを指定します.
 
 ```TypeScript
-
 X.Session(context: AudioContext, size: BufferSize, numberOfInputs: number, numberOfOutputs, analyser: X.Analyser);
 ```
 
@@ -350,7 +333,6 @@ X.Session(context: AudioContext, size: BufferSize, numberOfInputs: number, numbe
 第 1 引数は `wss` (TLS) を利用する場合 `true` を指定します. 第 2 引数は WebSocket サーバーのホスト名, 第 3 引数はポート番号, 第 4 引数はパス名, 第 5, 6, 7 引数はイベントハンドラとなる関数を指定します (WebSocket の `onopen`, `onclose`, `onerror` に対応します).
 
 ```TypeScript
-
 interface IFSession {
   setup(
     tls: boolean,
@@ -369,7 +351,6 @@ interface IFSession {
 セッション (WebSocket によるバイナリメッセージング) を開始します. 引数はありません.
 
 ```TypeScript
-
 interface IFSession {
   start(void): Session;
 }
@@ -380,7 +361,6 @@ interface IFSession {
 セッションのコネクションをクローズします. 引数はありません.
 
 ```TypeScript
-
 interface IFSession {
   stop(void): Session;
 }
@@ -391,7 +371,6 @@ interface IFSession {
 WebSocket インスタンスを取得します.
 
 ```TypeScript
-
 interface IFSession {
   get(void): WebSocket;
 }
@@ -402,7 +381,6 @@ interface IFSession {
 セッションのコネクションが存在していれば, `true` を返します.
 
 ```TypeScript
-
 interface IFSession {
   isConnected(void): boolean;
 }
@@ -413,7 +391,6 @@ interface IFSession {
 セッションの状態を取得, または, セッションの有効 or 無効を切り替えます.
 
 ```TypeScript
-
 interface IFSession {
   state(isActive?: boolean): boolean | Session;
 }
