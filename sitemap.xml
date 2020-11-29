@@ -4,17 +4,57 @@
   
   <url>
     <loc>https://art-of-life.jp/</loc>
-    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
+    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/audio/</loc>
-    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
+    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/</loc>
-    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
+    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/computer-sience/</loc>
+    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/hls.js/</loc>
+    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/id3-tag/</loc>
+    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/id3-tag/</loc>
+    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/mp3/</loc>
+    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/multimedia/</loc>
+    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/</loc>
+    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/</loc>
+    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
   </url>
   
   <url>
@@ -28,17 +68,7 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/posts/</loc>
-    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://art-of-life.jp/categories/programming/</loc>
-    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/</loc>
     <lastmod>2020-10-25T23:50:24+09:00</lastmod>
   </url>
   
@@ -50,11 +80,6 @@
   <url>
     <loc>https://art-of-life.jp/tags/xsound/</loc>
     <lastmod>2020-10-25T23:50:24+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/computer-sience/</loc>
-    <lastmod>2020-06-07T02:57:12+09:00</lastmod>
   </url>
   
   <url>
@@ -164,11 +189,6 @@
   
   <url>
     <loc>https://art-of-life.jp/tags/linear-prediction-analysis/</loc>
-    <lastmod>2020-01-12T17:27:07+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/multimedia/</loc>
     <lastmod>2020-01-12T17:27:07+09:00</lastmod>
   </url>
   
@@ -330,11 +350,6 @@
   <url>
     <loc>https://art-of-life.jp/tags/mpeg-2-audio/</loc>
     <lastmod>2019-09-09T17:02:55+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/mp3/</loc>
-    <lastmod>2019-08-28T05:27:13+09:00</lastmod>
   </url>
   
   <url>

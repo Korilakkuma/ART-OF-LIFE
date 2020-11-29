@@ -6,7 +6,16 @@
     <description>Recent content in Multimedia on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 12 Jan 2020 17:27:07 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/categories/multimedia/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Nov 2020 17:25:45 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/categories/multimedia/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ID3 Tag</title>
+      <link>https://art-of-life.jp/posts/id3-tag/</link>
+      <pubDate>Sun, 29 Nov 2020 17:25:45 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/id3-tag/</guid>
+      <description>ID3 タグとは ? ID3 タグとは, オーディオデータの圧縮形式である MP3 に書き込まれている, 楽曲タイトルやアーティスト名などのメタデータのことです. ID3 タグ</description>
+    </item>
+    
     <item>
       <title>CELP</title>
       <link>https://art-of-life.jp/posts/celp/</link>

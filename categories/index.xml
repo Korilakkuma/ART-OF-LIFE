@@ -6,13 +6,31 @@
     <description>Recent content in Categories on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 25 Oct 2020 23:50:24 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Nov 2020 17:25:45 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Audio</title>
       <link>https://art-of-life.jp/categories/audio/</link>
-      <pubDate>Sun, 25 Oct 2020 23:50:24 +0900</pubDate>
+      <pubDate>Sun, 29 Nov 2020 17:25:45 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/audio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Computer Sience</title>
+      <link>https://art-of-life.jp/categories/computer-sience/</link>
+      <pubDate>Sun, 29 Nov 2020 17:25:45 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/computer-sience/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Multimedia</title>
+      <link>https://art-of-life.jp/categories/multimedia/</link>
+      <pubDate>Sun, 29 Nov 2020 17:25:45 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/categories/multimedia/</guid>
       <description></description>
     </item>
     
@@ -22,15 +40,6 @@
       <pubDate>Sun, 25 Oct 2020 23:50:24 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Computer Sience</title>
-      <link>https://art-of-life.jp/categories/computer-sience/</link>
-      <pubDate>Sun, 07 Jun 2020 02:57:12 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/computer-sience/</guid>
       <description></description>
     </item>
     
@@ -58,15 +67,6 @@
       <pubDate>Sun, 22 Mar 2020 15:22:00 +0900</pubDate>
       
       <guid>https://art-of-life.jp/categories/jobs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Multimedia</title>
-      <link>https://art-of-life.jp/categories/multimedia/</link>
-      <pubDate>Sun, 12 Jan 2020 17:27:07 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/categories/multimedia/</guid>
       <description></description>
     </item>
     
