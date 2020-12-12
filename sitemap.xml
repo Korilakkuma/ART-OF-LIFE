@@ -4,17 +4,52 @@
   
   <url>
     <loc>https://art-of-life.jp/</loc>
-    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
+    <lastmod>2020-12-12T23:12:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/audio/</loc>
-    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
+    <lastmod>2020-12-12T23:12:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/audioworklet/</loc>
+    <lastmod>2020-12-12T23:12:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/audio-worklet/</loc>
+    <lastmod>2020-12-12T23:12:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://art-of-life.jp/categories/</loc>
-    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
+    <lastmod>2020-12-12T23:12:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/javascript/</loc>
+    <lastmod>2020-12-12T23:12:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/posts/</loc>
+    <lastmod>2020-12-12T23:12:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/categories/programming/</loc>
+    <lastmod>2020-12-12T23:12:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/</loc>
+    <lastmod>2020-12-12T23:12:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://art-of-life.jp/tags/web-audio-api/</loc>
+    <lastmod>2020-12-12T23:12:00+09:00</lastmod>
   </url>
   
   <url>
@@ -48,32 +83,7 @@
   </url>
   
   <url>
-    <loc>https://art-of-life.jp/posts/</loc>
-    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/</loc>
-    <lastmod>2020-11-29T17:25:45+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://art-of-life.jp/posts/how-to-use-xsound-as-module-base/</loc>
-    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/javascript/</loc>
-    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/categories/programming/</loc>
-    <lastmod>2020-10-25T23:50:24+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://art-of-life.jp/tags/web-audio-api/</loc>
     <lastmod>2020-10-25T23:50:24+09:00</lastmod>
   </url>
   

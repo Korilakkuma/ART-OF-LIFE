@@ -6,7 +6,16 @@
     <description>Recent content on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 29 Nov 2020 17:25:45 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Dec 2020 23:12:00 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AudioWorklet</title>
+      <link>https://art-of-life.jp/posts/audio-worklet/</link>
+      <pubDate>Sat, 12 Dec 2020 23:12:00 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/audio-worklet/</guid>
+      <description>AudioWorklet とは ? 概要 Web Audio が定義する標準のノード (GainNode, DelayNode, BiquadFilterNode など) の組み合わせでは不可能な音響処理 (ピッチシフターやノイズサプレッサなど) を直接サウンドデー</description>
+    </item>
+    
     <item>
       <title>ID3 Tag</title>
       <link>https://art-of-life.jp/posts/id3-tag/</link>
