@@ -26,7 +26,7 @@ Web Audio が定義する標準のノード (`GainNode`, `DelayNode`, `BiquadFil
   <dd>メインスレッドで実行されるので, UI や再生されるサウンドに問題を引き起こす</dt>
 </dl>
 
-AudioWorklet ではこれらの問題を解決するために, メインスレッドとは別に**オーディオスレッドで動作**するように仕様策定され, そして, [Chrome 64](https://developers.google.com/web/updates/2017/12/audio-worklet) で実装されました.
+AudioWorklet はこれらの問題を解決するために, メインスレッドとは別に, **オーディオスレッドで動作**するように仕様策定され, そして, [Chrome 64](https://developers.google.com/web/updates/2017/12/audio-worklet) で実装されました.
 
 # AudioWorklet を構成するクラス
 
@@ -207,6 +207,8 @@ AudioWorklet を構成するクラスの概要をもとに, 実装例をとお�
 
 まずは, ウォーミングアップです. 特に意味のない処理ですが, 入力されたオシレーターをそのまま出力するだけです.
 
+[Bypass デモ](https://korilakkuma.github.io/audio-worklet-samples/samples/bypass)
+
 メインスレッドの処理は, 概要を把握できていればそれほど難しいことはないと思います.
 
 main-scripts/bypass.js
@@ -259,7 +261,7 @@ promise
 
  したがって, チャンネルごとの `Float32Array` を走査して, 出力となる `Float32Array` の要素を格納していきます.
 
-1 つ注意点としては, 入力データは必ずしも格納されているわけではないので, 条件判定で, `undefined` でないか判定しています.
+1 つ注意点としては, 入力データは必ずしも格納されているわけではないので, 条件判定で `undefined` でないか判定しています.
 
 worklet-scripts/bypass.js
 
@@ -294,10 +296,14 @@ registerProcessor('bypass', Bypass);
 
 ## オシレーター
 
+[オシレーター デモ](https://korilakkuma.github.io/audio-worklet-samples/samples/oscillator)
+
 メインスレッドで注目したいのは,
 
-- `AudioParamDescriptor` を利用して, `AudioParam` を取得し, 独自パラメータのオートメーションを実行している
+- `AudioParamDescriptor` によって定義された `AudioParam` を `AudioParamMap` (`AudioWorkletNode` の `parameters` プロパティ) として参照している
 - `MessagePort` を利用して, オシレーターの波形 (文字列) をオーディオスレッドに送信している
+
+`AudioParamMap` は, `AudioParam` を要素にもつ `Map` なので, `Map` がもつメソッドを利用して, `AudioParam` を取得可能です.
 
 main-scripts/oscillator.js
 
@@ -360,10 +366,12 @@ promise
 
 オーディオスレッドで注目したいのは,
 
-- `parameterDescriptors` メソッドで, 独自のパラメータを `AudioParam` として定義している
+- `parameterDescriptors` メソッドで, 独自パラメータを `AudioParam` として定義している
 - `process` メソッドの第 3 引数に `parameters` がわたされている
 
 `process` メソッドの第 3 引数の `parameters` は, **オートメーションが実行されている場合**, 値の変化を **128 サンプル**ごとに格納しています. ただし, そうでない場合は, `0` 番目に固定値が格納されているだけです. したがって, そのサイズを判定することで, オートメーションが実行されているかを判定できます.
+
+ちなみに, 変数 `sampleRate` は, `AudioWorkletGlobalScope` に定義されている変数です.
 
 worklet-scripts/oscillator.js
 
@@ -371,14 +379,12 @@ worklet-scripts/oscillator.js
 'use strict';
 
 class Oscillator extends AudioWorkletProcessor {
-  static SAMPLE_RATE = 44100;
-
   static get parameterDescriptors() {
     return [{
       name          : 'frequency',
       defaultValue  : 440,
       minValue      : 20,
-      maxValue      : Oscillator.SAMPLE_RATE / 2,
+      maxValue      : sampleRate / 2,
       automationRate: 'a-rate'
     }];
   }
@@ -408,14 +414,14 @@ class Oscillator extends AudioWorkletProcessor {
       for (let i = 0, len = outputChannel.length; i < len; i++) {
         // Has automation ?
         const frequency = parameters.frequency.length > 1 ? parameters.frequency[i] : parameters.frequency[0];
-        const t0        = Oscillator.SAMPLE_RATE / frequency;
+        const t0        = sampleRate / frequency;
 
         let output = 0;
         let s      = 0;
 
         switch (this.type) {
           case 'sine':
-            output = Math.sin((2 * Math.PI * frequency * this.n) / Oscillator.SAMPLE_RATE);
+            output = Math.sin((2 * Math.PI * frequency * this.n) / sampleRate);
             break;
           case 'square':
             output = (this.n < (t0 / 2)) ? 1 : -1;
@@ -453,7 +459,9 @@ registerProcessor('oscillator', Oscillator);
 
 ## ボーカルキャンセラ
 
-独自パラメータであるボーカルキャンセラの `depth` を, `AudioParamDescriptor` を利用することで, `AudioParam` として機能させていることに着目してください.
+[ボーカルキャンセラ デモ](https://korilakkuma.github.io/audio-worklet-samples/samples/vocal-canceler)
+
+独自パラメータであるボーカルキャンセラの `depth` も `AudioParamDescriptor` で定義したことにより, `AudioWorkletNode` インスタンスから `parameters` プロパティとして参照可能となります.
 
 main-scripts/vocal-canceler.js
 
@@ -567,6 +575,5 @@ registerProcessor('vocal-canceler', VocalCanceler);
 - [W3C](https://www.w3.org/TR/webaudio/#audioworklet)
 - [Enter Audio Worklet](https://developers.google.com/web/updates/2017/12/audio-worklet)
 - [AudioWorklet の導入](https://qiita.com/ryoyakawai/items/1160586653330ccbf4a4)
-- [AudioWorklet で遊ぶ](https://weblike-curtaincall.ssl-lolipop.jp/blog/?p=2027)
-  - 著者が以前に投稿したブログをリニューアルしています.
+- [AudioWorklet で遊ぶ](https://weblike-curtaincall.ssl-lolipop.jp/blog/?p=2027) (著者が以前に投稿したブログをリニューアルしています)
 - [サンプルプログラムリポジトリ](https://github.com/Korilakkuma/audio-worklet-samples)
