@@ -32,7 +32,7 @@
 <meta itemprop="description" content="2020&#39;s AudioWorklet">
 <meta itemprop="datePublished" content="2020-12-12T23:12:00+09:00" />
 <meta itemprop="dateModified" content="2020-12-12T23:12:00+09:00" />
-<meta itemprop="wordCount" content="3280">
+<meta itemprop="wordCount" content="3360">
 
 
 
@@ -270,7 +270,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2020-12-12 23:12:00 &#43;0900 JST" itemprop="datePublished">2020-12-12</time>
             &middot;
-            3280
+            3360
             words
             &middot;
             7
@@ -331,7 +331,7 @@
   <dt>ジャンク</dt>
   <dd>メインスレッドで実行されるので, UI や再生されるサウンドに問題を引き起こす</dt>
 </dl>
-<p>AudioWorklet ではこれらの問題を解決するために, メインスレッドとは別に<strong>オーディオスレッドで動作</strong>するように仕様策定され, そして, <a href="https://developers.google.com/web/updates/2017/12/audio-worklet">Chrome 64</a> で実装されました.</p>
+<p>AudioWorklet はこれらの問題を解決するために, メインスレッドとは別に, <strong>オーディオスレッドで動作</strong>するように仕様策定され, そして, <a href="https://developers.google.com/web/updates/2017/12/audio-worklet">Chrome 64</a> で実装されました.</p>
 <h1 id="audioworklet-を構成するクラス">AudioWorklet を構成するクラス</h1>
 <p>AudioWorklet が実現する機能は, いくつかのクラス (オブジェクト) によって構成されています.</p>
 <h2 id="audioworklet">AudioWorklet</h2>
@@ -467,6 +467,7 @@
 <p>AudioWorklet を構成するクラスの概要をもとに, 実装例をとおして AudioWorklet の理解を深めます.</p>
 <h2 id="bypass">Bypass</h2>
 <p>まずは, ウォーミングアップです. 特に意味のない処理ですが, 入力されたオシレーターをそのまま出力するだけです.</p>
+<p><a href="https://korilakkuma.github.io/audio-worklet-samples/samples/bypass">Bypass デモ</a></p>
 <p>メインスレッドの処理は, 概要を把握できていればそれほど難しいことはないと思います.</p>
 <p>main-scripts/bypass.js</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#e6db74">&#39;use strict&#39;</span>;
@@ -510,7 +511,7 @@
 <p><code>process</code> メソッドには, 第 1 引数に入力となる配列, 第 2 引数に出力となる配列が引数としてわたされます. これらの配列の構造は同じとなっており, 多次元配列の要素として <code>Float32Array</code> が格納されています. そして, これが, 入力, または, 出力のサウンドデータとなります. 実は, オーディオ処理の実装の理解としては <code>ScriptProcessorNode</code> と大差ありません.</p>
 <p>多次元配列なので, まずは, <code>0</code> 番目の要素にアクセスして要素となっている配列を取得します (この処理は, 特に理屈なく, こうするものだと理解してだいじょうぶでしょう). 取得した配列は, チャンネルごとに <strong>128 サンプル</strong>の <code>Float32Array</code> が格納されています.</p>
 <p>したがって, チャンネルごとの <code>Float32Array</code> を走査して, 出力となる <code>Float32Array</code> の要素を格納していきます.</p>
-<p>1 つ注意点としては, 入力データは必ずしも格納されているわけではないので, 条件判定で, <code>undefined</code> でないか判定しています.</p>
+<p>1 つ注意点としては, 入力データは必ずしも格納されているわけではないので, 条件判定で <code>undefined</code> でないか判定しています.</p>
 <p>worklet-scripts/bypass.js</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#e6db74">&#39;use strict&#39;</span>;
 
@@ -539,11 +540,13 @@
 
 <span style="color:#a6e22e">registerProcessor</span>(<span style="color:#e6db74">&#39;bypass&#39;</span>, <span style="color:#a6e22e">Bypass</span>);
 </code></pre></div><h2 id="オシレーター">オシレーター</h2>
+<p><a href="https://korilakkuma.github.io/audio-worklet-samples/samples/oscillator">オシレーター デモ</a></p>
 <p>メインスレッドで注目したいのは,</p>
 <ul>
-<li><code>AudioParamDescriptor</code> を利用して, <code>AudioParam</code> を取得し, 独自パラメータのオートメーションを実行している</li>
+<li><code>AudioParamDescriptor</code> によって定義された <code>AudioParam</code> を <code>AudioParamMap</code> (<code>AudioWorkletNode</code> の <code>parameters</code> プロパティ) として参照している</li>
 <li><code>MessagePort</code> を利用して, オシレーターの波形 (文字列) をオーディオスレッドに送信している</li>
 </ul>
+<p><code>AudioParamMap</code> は, <code>AudioParam</code> を要素にもつ <code>Map</code> なので, <code>Map</code> がもつメソッドを利用して, <code>AudioParam</code> を取得可能です.</p>
 <p>main-scripts/oscillator.js</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#e6db74">&#39;use strict&#39;</span>;
 
@@ -601,22 +604,21 @@
   .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>);
 </code></pre></div><p>オーディオスレッドで注目したいのは,</p>
 <ul>
-<li><code>parameterDescriptors</code> メソッドで, 独自のパラメータを <code>AudioParam</code> として定義している</li>
+<li><code>parameterDescriptors</code> メソッドで, 独自パラメータを <code>AudioParam</code> として定義している</li>
 <li><code>process</code> メソッドの第 3 引数に <code>parameters</code> がわたされている</li>
 </ul>
 <p><code>process</code> メソッドの第 3 引数の <code>parameters</code> は, <strong>オートメーションが実行されている場合</strong>, 値の変化を <strong>128 サンプル</strong>ごとに格納しています. ただし, そうでない場合は, <code>0</code> 番目に固定値が格納されているだけです. したがって, そのサイズを判定することで, オートメーションが実行されているかを判定できます.</p>
+<p>ちなみに, 変数 <code>sampleRate</code> は, <code>AudioWorkletGlobalScope</code> に定義されている変数です.</p>
 <p>worklet-scripts/oscillator.js</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#e6db74">&#39;use strict&#39;</span>;
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Oscillator</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AudioWorkletProcessor</span> {
-  <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">SAMPLE_RATE</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">44100</span>;
-
   <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">parameterDescriptors</span>() {
     <span style="color:#66d9ef">return</span> [{
       <span style="color:#a6e22e">name</span>          <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;frequency&#39;</span>,
       <span style="color:#a6e22e">defaultValue</span>  <span style="color:#f92672">:</span> <span style="color:#ae81ff">440</span>,
       <span style="color:#a6e22e">minValue</span>      <span style="color:#f92672">:</span> <span style="color:#ae81ff">20</span>,
-      <span style="color:#a6e22e">maxValue</span>      <span style="color:#f92672">:</span> <span style="color:#a6e22e">Oscillator</span>.<span style="color:#a6e22e">SAMPLE_RATE</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>,
+      <span style="color:#a6e22e">maxValue</span>      <span style="color:#f92672">:</span> <span style="color:#a6e22e">sampleRate</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>,
       <span style="color:#a6e22e">automationRate</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;a-rate&#39;</span>
     }];
   }
@@ -646,14 +648,14 @@
 </span><span style="color:#75715e"></span>      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">len</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">outputChannel</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">len</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
         <span style="color:#75715e">// Has automation ?
 </span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">frequency</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">parameters</span>.<span style="color:#a6e22e">frequency</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">parameters</span>.<span style="color:#a6e22e">frequency</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">:</span> <span style="color:#a6e22e">parameters</span>.<span style="color:#a6e22e">frequency</span>[<span style="color:#ae81ff">0</span>];
-        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">t0</span>        <span style="color:#f92672">=</span> <span style="color:#a6e22e">Oscillator</span>.<span style="color:#a6e22e">SAMPLE_RATE</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">frequency</span>;
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">t0</span>        <span style="color:#f92672">=</span> <span style="color:#a6e22e">sampleRate</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">frequency</span>;
 
         <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">output</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
         <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">s</span>      <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
         <span style="color:#66d9ef">switch</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">type</span>) {
           <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;sine&#39;</span><span style="color:#f92672">:</span>
-            <span style="color:#a6e22e">output</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">sin</span>((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">PI</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">frequency</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">n</span>) <span style="color:#f92672">/</span> <span style="color:#a6e22e">Oscillator</span>.<span style="color:#a6e22e">SAMPLE_RATE</span>);
+            <span style="color:#a6e22e">output</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">sin</span>((<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> Math.<span style="color:#a6e22e">PI</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">frequency</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">n</span>) <span style="color:#f92672">/</span> <span style="color:#a6e22e">sampleRate</span>);
             <span style="color:#66d9ef">break</span>;
           <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;square&#39;</span><span style="color:#f92672">:</span>
             <span style="color:#a6e22e">output</span> <span style="color:#f92672">=</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">n</span> <span style="color:#f92672">&lt;</span> (<span style="color:#a6e22e">t0</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
@@ -688,7 +690,8 @@
 
 <span style="color:#a6e22e">registerProcessor</span>(<span style="color:#e6db74">&#39;oscillator&#39;</span>, <span style="color:#a6e22e">Oscillator</span>);
 </code></pre></div><h2 id="ボーカルキャンセラ">ボーカルキャンセラ</h2>
-<p>独自パラメータであるボーカルキャンセラの <code>depth</code> を, <code>AudioParamDescriptor</code> を利用することで, <code>AudioParam</code> として機能させていることに着目してください.</p>
+<p><a href="https://korilakkuma.github.io/audio-worklet-samples/samples/vocal-canceler">ボーカルキャンセラ デモ</a></p>
+<p>独自パラメータであるボーカルキャンセラの <code>depth</code> も <code>AudioParamDescriptor</code> で定義したことにより, <code>AudioWorkletNode</code> インスタンスから <code>parameters</code> プロパティとして参照可能となります.</p>
 <p>main-scripts/vocal-canceler.js</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#e6db74">&#39;use strict&#39;</span>;
 
@@ -792,11 +795,7 @@
 <li><a href="https://www.w3.org/TR/webaudio/#audioworklet">W3C</a></li>
 <li><a href="https://developers.google.com/web/updates/2017/12/audio-worklet">Enter Audio Worklet</a></li>
 <li><a href="https://qiita.com/ryoyakawai/items/1160586653330ccbf4a4">AudioWorklet の導入</a></li>
-<li><a href="https://weblike-curtaincall.ssl-lolipop.jp/blog/?p=2027">AudioWorklet で遊ぶ</a>
-<ul>
-<li>著者が以前に投稿したブログをリニューアルしています.</li>
-</ul>
-</li>
+<li><a href="https://weblike-curtaincall.ssl-lolipop.jp/blog/?p=2027">AudioWorklet で遊ぶ</a> (著者が以前に投稿したブログをリニューアルしています)</li>
 <li><a href="https://github.com/Korilakkuma/audio-worklet-samples">サンプルプログラムリポジトリ</a></li>
 </ul>
 
