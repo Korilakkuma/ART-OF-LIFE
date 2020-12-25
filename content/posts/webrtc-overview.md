@@ -6,7 +6,7 @@ description = "WebRTC による P2P の概要を整理してみた"
 images = []
 menu = ""
 tags = ["JavaScript", "WebRTC"]
-title = "WebRTC の概要"
+title = "WebRTC"
 +++
 
 # WebRTC
@@ -156,22 +156,20 @@ ICE (Interactive Connective Establishment) とは, WebRTC の通信経路候補�
 以下のコードは, WebSocket を利用した簡易的なシグナリングサーバーの実装例です.
 
 ```JavaScript
-const WebSocketServer = require('ws').Server;
+const WebSocket = require('ws');
+const WebSocketServer = WebSocket.Server;
 const port = (process.argv[2] > 0) && (process.argv[2] <= 65535) ? process.argv[2] : 3000;
 
 const ws = new WebSocketServer({ port });
 
 console.log(`Wait port (${port}) ...`);
 
-const sockets = [];
-
 ws.on('connection', (socket) => {
-  sockets.push(socket);
-
   socket.on('message', (message) => {
     ws.clients.forEach((client) => {
-      if (socket !== client) {
+      if ((socket !== client) && (socket.readyState === WebSocket.OPEN)) {
         client.send(message);
+        console.log('--- Sent ---');
       } else {
         console.log('--- Skip Sender ---');
       }
@@ -225,7 +223,9 @@ class SignalingChannel {
   }
 
   send(sessionDescription) {
-    this.websocket.send(JSON.stringify(sessionDescription));
+    if (this.websocket.readyState === WebSocket.OPEN) {
+      this.websocket.send(JSON.stringify(sessionDescription));
+    }
   }
 
   message(offer, answer, candidate) {
@@ -315,9 +315,15 @@ const offer = (message) => {
     });
 };
 
-const answer = (message) => peerConnection.setRemoteDescription(message);
+const answer = (message) => {
+  peerConnection.setRemoteDescription(message);
+};
 
-const candidate = (message) => peerConnection.addIceCandidate(message);
+const candidate = (message) => {
+  if (message.ice) {
+    peerConnection.addIceCandidate(message.ice);
+  }
+};
 
 signalingChannel.message(offer, answer, candidate);
 ```
