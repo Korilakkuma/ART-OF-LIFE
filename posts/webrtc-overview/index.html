@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
 <head>
-    <title>WebRTC の概要 &middot; ART OF LIFE</title>
+    <title>WebRTC &middot; ART OF LIFE</title>
     <meta name="generator" content="Hugo 0.76.3" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -20,7 +20,7 @@
     
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-    <meta property="og:title" content="WebRTC の概要" />
+    <meta property="og:title" content="WebRTC" />
 <meta property="og:description" content="WebRTC による P2P の概要を整理してみた" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://art-of-life.jp/posts/webrtc-overview/" />
@@ -28,18 +28,18 @@
 <meta property="article:modified_time" content="2019-05-29T20:00:59+09:00" />
 
     
-    <meta itemprop="name" content="WebRTC の概要">
+    <meta itemprop="name" content="WebRTC">
 <meta itemprop="description" content="WebRTC による P2P の概要を整理してみた">
 <meta itemprop="datePublished" content="2019-05-29T20:00:59+09:00" />
 <meta itemprop="dateModified" content="2019-05-29T20:00:59+09:00" />
-<meta itemprop="wordCount" content="2700">
+<meta itemprop="wordCount" content="2720">
 
 
 
 <meta itemprop="keywords" content="JavaScript,WebRTC," />
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="WebRTC の概要"/>
+<meta name="twitter:title" content="WebRTC"/>
 <meta name="twitter:description" content="WebRTC による P2P の概要を整理してみた"/>
 <meta name="twitter:site" content="@xmusicjp"/>
 
@@ -260,7 +260,7 @@
         <header class="article-header">
     <a href="https://art-of-life.jp/posts/webrtc-overview/">
     <h1 class="article-title" itemprop="name">
-        WebRTC の概要
+        WebRTC
     </h1>
     </a>
     <div class="article-meta">
@@ -270,7 +270,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2019-05-29 20:00:59 &#43;0900 JST" itemprop="datePublished">2019-05-29</time>
             &middot;
-            2700
+            2720
             words
             &middot;
             6
@@ -431,22 +431,20 @@ UDP は, TCP とは対照的です.</p>
 <h4 id="シグナリング">シグナリング</h4>
 <p>シグナリングとは, P2P 通信を確立するための手順です.  一般的には, シグナリングサーバーを構築します. 通信開始時点では, 通信相手となるホストの情報がわからないので, シグナリングサーバーに探してもらう必要があります.</p>
 <p>以下のコードは, WebSocket を利用した簡易的なシグナリングサーバーの実装例です.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">WebSocketServer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;ws&#39;</span>).<span style="color:#a6e22e">Server</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">WebSocket</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;ws&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">WebSocketServer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">WebSocket</span>.<span style="color:#a6e22e">Server</span>;
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">argv</span>[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">argv</span>[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">65535</span>) <span style="color:#f92672">?</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">argv</span>[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">:</span> <span style="color:#ae81ff">3000</span>;
 
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ws</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">WebSocketServer</span>({ <span style="color:#a6e22e">port</span> });
 
 <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Wait port (</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">port</span><span style="color:#e6db74">}</span><span style="color:#e6db74">) ...`</span>);
 
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sockets</span> <span style="color:#f92672">=</span> [];
-
 <span style="color:#a6e22e">ws</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;connection&#39;</span>, (<span style="color:#a6e22e">socket</span>) =&gt; {
-  <span style="color:#a6e22e">sockets</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">socket</span>);
-
   <span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;message&#39;</span>, (<span style="color:#a6e22e">message</span>) =&gt; {
     <span style="color:#a6e22e">ws</span>.<span style="color:#a6e22e">clients</span>.<span style="color:#a6e22e">forEach</span>((<span style="color:#a6e22e">client</span>) =&gt; {
-      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">socket</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">client</span>) {
+      <span style="color:#66d9ef">if</span> ((<span style="color:#a6e22e">socket</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">client</span>) <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">readyState</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">WebSocket</span>.<span style="color:#a6e22e">OPEN</span>)) {
         <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">message</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;--- Sent ---&#39;</span>);
       } <span style="color:#66d9ef">else</span> {
         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;--- Skip Sender ---&#39;</span>);
       }
@@ -491,7 +489,9 @@ UDP は, TCP とは対照的です.</p>
   }
 
   <span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">sessionDescription</span>) {
-    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">websocket</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">sessionDescription</span>));
+    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">websocket</span>.<span style="color:#a6e22e">readyState</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">WebSocket</span>.<span style="color:#a6e22e">OPEN</span>) {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">websocket</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">sessionDescription</span>));
+    }
   }
 
   <span style="color:#a6e22e">message</span>(<span style="color:#a6e22e">offer</span>, <span style="color:#a6e22e">answer</span>, <span style="color:#a6e22e">candidate</span>) {
@@ -570,9 +570,15 @@ UDP は, TCP とは対照的です.</p>
     });
 };
 
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">answer</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">setRemoteDescription</span>(<span style="color:#a6e22e">message</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">answer</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">message</span>) =&gt; {
+  <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">setRemoteDescription</span>(<span style="color:#a6e22e">message</span>);
+};
 
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">candidate</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">addIceCandidate</span>(<span style="color:#a6e22e">message</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">candidate</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">message</span>) =&gt; {
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">message</span>.<span style="color:#a6e22e">ice</span>) {
+    <span style="color:#a6e22e">peerConnection</span>.<span style="color:#a6e22e">addIceCandidate</span>(<span style="color:#a6e22e">message</span>.<span style="color:#a6e22e">ice</span>);
+  }
+};
 
 <span style="color:#a6e22e">signalingChannel</span>.<span style="color:#a6e22e">message</span>(<span style="color:#a6e22e">offer</span>, <span style="color:#a6e22e">answer</span>, <span style="color:#a6e22e">candidate</span>);
 </code></pre></div><h4 id="ontrack">ontrack</h4>
