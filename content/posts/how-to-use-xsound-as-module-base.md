@@ -25,7 +25,7 @@ title = "How to Use XSound as Module Base"
 - マルチトラックレコーダー
 - WebSocket によるバイナリメッセージング
 - Media Sound Extensions によるオーディオストリーミング
-- ビジュアルオーディオスプライト
+- オーディオスプライト
 
 [9 libraries to kickstart your Web Audio stuff](https://dev.to/areknawo/9-libraries-to-kickstart-your-web-audio-stuff-460p) にも,
 
@@ -84,7 +84,7 @@ chorus.state(true);
 oscillator.start(0);
 ```
 
-このように, バニラな Web Audio API のコードに XSound のモジュールを組み込んでいることがわかります. さらに, このような API であれば, 既存のプロダクトに XSound を導入するということも, これまでよりは敷居が下がると思われます.
+このように, バニラな Web Audio API のコードに XSound のモジュールを組み込んでいることがわかります. さらに, このような API であれば, 既存のプロダクトに XSound を導入するということも, これまでよりはハードルが下がると思われます.
 
 ## 背景
 
@@ -128,11 +128,29 @@ X.Recorder(context: AudioContext, size: BufferSize, numberOfInputs: number, numb
 X.Session(context: AudioContext, size: BufferSize, numberOfInputs: number, numberOfOutputs, analyser: X.Analyser);
 ```
 
-Connectable インターフェースを実装したクラスのインスタンスは, `INPUT`, `OUTPUT` というコネクターがあります (実体は, `AudioNode` のゲッターです). これが, バニラな Web Audio API のコードと組み合わせるときに重要となり, `AudioNode` を `INPUT` に接続して `OUTPUT` から `AudioNode` に接続することで, XSound との組み合わせが可能になります.
+`Connectable` インターフェースを実装したクラスは, コネクターとなる `INPUT` と `OUTPUT` プロパティが使えます (どちらも実体は `AudioNode` のゲッターです). これらが, バニラな Web Audio API のコードと組み合わせるときに重要となり, `AudioNode` を `INPUT` に接続して `OUTPUT` から `AudioNode` に接続することで, XSound との組み合わせが可能になります.
 
 ## エフェクター
 
-モジュールベースで利用可能なエフェクターは以下のとおりで, コンストラクタのシグネチャもすべて同じです (第 1 引数に, `AudioContext` インスタンス, 第 2 引数に `ScriptProcessorNode` のバッファサイズを指定します (0 指定で問題ないでしょう)).
+モジュールベースで利用可能なエフェクターは以下のとおりです.
+
+- オートパン
+- コーラス
+- コンプレッサー
+- ディレイ
+- ディストーション
+- イコライザ
+- フィルタ
+- フランジャー
+- パンナー / リスナー
+- ピッチシフター
+- リバーブ
+- リングモジュレーター
+- 擬似ステレオ
+- トレモロ
+- ワウ
+
+コンストラクタのシグネチャはすべて同じです (第 1 引数に `AudioContext` インスタンス, 第 2 引数に `ScriptProcessorNode` のバッファサイズを指定します (`0` 指定で問題ないでしょう)).
 
 ```TypeScript
 type BufferSize = 0 | 256 | 512 | 1024 | 2048 | 4096 | 8192 | 16384;
@@ -182,11 +200,11 @@ flanger.state(true);
 oscillator.start(0);
 ```
 
-上記のコードは, モジュールベースでフランジャーを利用する例ですが, コーラスを利用する場合とほとんど同じコードであることがわかるかと思います (ただし, 設定可能なパラメータは, エフェクターごとで大きく異なるので, 詳細は, [API Documentation](https://xsound.dev) を参考にしていください).
+上記のコードは, (モジュールベースで) フランジャーを利用する例ですが, 先ほどのコーラスを利用する場合とほとんど同じコードであることがわかるかと思います (`param` メソッドで設定可能なパラメータは, エフェクターごとで大きく異なるので, 詳細は, [API Documentation](https://xsound.dev) を参考にしていください).
 
 ## ビジュアライゼーション
 
-コンストラクタの引数は, `AudioContext` インスタンスです.
+コンストラクタの引数は `AudioContext` インスタンスです.
 
 ```TypeScript
 X.Analyser(context: AudioContext);
@@ -217,8 +235,38 @@ interface IFVisualizer {
 描画のスタイルなどを設定します.
 
 ```TypeScript
+type GradientParams = {
+  offset: number,
+  color: string
+};
+
+type FontParams = {
+  family: string,
+  size: string,
+  style: string
+};
+
+interface VisualizerParams {
+  shape: 'line' | 'rect';
+  grad: GradientParams[];
+  wave: string;
+  grid: string;
+  text: string;
+  font: FontParams;
+  width: number;
+  cap: 'round' | 'butt' | 'square';
+  join: 'miter' | 'bevel' | 'round';
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}
+
 interface IFVisualizer {
-  param(key: string, value: number | string | Array<object>): number | string | Array<object> | Visualizer;
+  param(
+    key: string | VisualizerParams,
+    value?: number | string | GradientParams[] | FontParams
+  ): number | string | GradientParams[] | FontParams | Visualizer;
 }
 ```
 
@@ -234,7 +282,7 @@ interface IFVisualizer {
 
 ## レコーダー
 
-コンストラクタの第 1 引数は `AudioContext` インスタンス, 第 2 引数は `ScriptProcessorNode` のバッファサイズ, 第 3 引数は `ScriptProcessorNode` の入力チャンネル数, 第 4 引数は `ScriptProcessorNode` の出力チャンネル数を指定します.
+コンストラクタの第 1 引数には `AudioContext` インスタンス, 第 2 引数には `ScriptProcessorNode` のバッファサイズ, 第 3 引数には `ScriptProcessorNode` の入力チャンネル数, 第 4 引数には `ScriptProcessorNode` の出力チャンネル数を指定します.
 
 ```TypeScript
 X.Recorder(context: AudioContext, size: BufferSize, numberOfInputs: number, numberOfOutputs: number);
@@ -302,7 +350,7 @@ interface IFRecorder {
 
 ### create
 
-レコードしたデータを, WAVE ファイルとしてエクスポートします. 第 1 引数は, 対象のトラック (`0` ~, `'all'` を指定するとすべてのトラックのデータをミックスします), 第 2 引数は, モノラル (`1`) or ステレオ (`2`), 第 3 引数は, 量子化ビット (8 bit or 16 bit), 第 4 引数は, エクスポートするデータ形式を指定します.
+レコードしたデータを, WAVE ファイルとしてエクスポートします. 第 1 引数は, 対象のトラック (`0` ~, `'all'` を指定するとすべてのトラックのデータをミックスします), 第 2 引数は, モノラル (`1`), または, ステレオ (`2`), 第 3 引数は, 量子化ビット (8 bit or 16 bit), 第 4 引数は, エクスポートするデータ形式を指定します.
 
 ```TypeScript
 interface IFRecorder {
@@ -312,7 +360,7 @@ interface IFRecorder {
 
 ### getActiveTrack
 
-レコード対象となっているトラック番号 (`0` ~) を取得します. レコード対象がなければ `-1` を返します.
+レコード対象となっているトラック番号 (`0` ~) を取得します. 対象がなければ `-1` を返します.
 
 ```TypeScript
 interface IFRecorder {
@@ -322,15 +370,15 @@ interface IFRecorder {
 
 ## セッション
 
-コンストラクタの第 1 引数は `AudioContext` インスタンス, 第 2 引数は `ScriptProcessorNode` のバッファサイズ, 第 3 引数は `ScriptProcessorNode` の入力チャンネル数, 第 4 引数は (XSound が実装する) `Analyser` インスタンスを指定します.
+コンストラクタの第 1 引数には `AudioContext` インスタンス, 第 2 引数には `ScriptProcessorNode` のバッファサイズ, 第 3 引数には `ScriptProcessorNode` の入力チャンネル数, 第 4 引数には `ScriptProcessorNode` の出力チャンネル数, 第 5 引数には XSound が実装する `Analyser` インスタンスを指定します.
 
 ```TypeScript
-X.Session(context: AudioContext, size: BufferSize, numberOfInputs: number, numberOfOutputs, analyser: X.Analyser);
+X.Session(context: AudioContext, size: BufferSize, numberOfInputs: number, numberOfOutputs: number, analyser: X.Analyser);
 ```
 
 ### setup
 
-第 1 引数は `wss` (TLS) を利用する場合 `true` を指定します. 第 2 引数は WebSocket サーバーのホスト名, 第 3 引数はポート番号, 第 4 引数はパス名, 第 5, 6, 7 引数はイベントハンドラとなる関数を指定します (WebSocket の `onopen`, `onclose`, `onerror` に対応します).
+第 1 引数には `wss` (TLS) を利用する場合に `true` を指定します. 第 2 引数には WebSocket サーバーのホスト名, 第 3 引数にはポート番号, 第 4 引数にはパス名, 第 5, 6, 7 引数にはイベントハンドラを指定します (WebSocket の `onopen`, `onclose`, `onerror` に対応します).
 
 ```TypeScript
 interface IFSession {
@@ -339,9 +387,9 @@ interface IFSession {
     host: string,
     port: number,
     path: string,
-    open: Function,
-    close: Function,
-    error: Function
+    open?: Function,
+    close?: Function,
+    error?: Function
   ): Session;
 }
 ```
@@ -362,7 +410,7 @@ interface IFSession {
 
 ```TypeScript
 interface IFSession {
-  stop(void): Session;
+  close(void): Session;
 }
 ```
 
