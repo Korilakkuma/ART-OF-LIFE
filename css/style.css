@@ -118,7 +118,8 @@ body,
 body {
   color: #565a5f;
   background: #f5f8f9;
-  font: 14px "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font: 12px "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font-size: calc(4 * ((100vw - 320px) / 960) + 12px);
   -webkit-text-size-adjust: 100%;
 }
 a {
@@ -228,7 +229,7 @@ code.language-TypeScript {
 .widget-title {
   line-height: 1em;
   text-decoration: none;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 #header,
 #profile .inner,
@@ -278,7 +279,7 @@ code.language-TypeScript {
 .widget em,
 .article-entry cite,
 .widget cite {
-  font-style: italic;
+  /* font-style: italic; */
 }
 .article-entry sup,
 .widget sup,
@@ -721,7 +722,7 @@ code.language-TypeScript {
 #profile .inner .article-info .article-info-block span {
   display: block;
   font-size: 14px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 #profile .inner .article-info .article-info-block:first-child {
   border-right: 1px solid #eceff2;
@@ -757,7 +758,7 @@ code.language-TypeScript {
   white-space: nowrap;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   -webkit-box-shadow: 0 0 2px rgba(0,0,0,0.2);
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
   z-index: 1;
@@ -1132,7 +1133,7 @@ a.article-title:hover {
   line-height: 1em;
   font-weight: bold;
   color: #565a5f;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 #article-nav-newer .article-nav-caption {
   margin-right: -2px;
@@ -1898,7 +1899,7 @@ ol.toc {
 #recent-post li .item-inner a,
 #recent-post li .item-inner .item-category {
   font-size: 13px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 #recent-post li .item-inner a a,
 #recent-post li .item-inner .item-category a {
@@ -1927,7 +1928,7 @@ ol.toc {
 #recent-post li .item-inner .item-date {
   color: #aaa;
   font-size: 13px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 #recent-post li:hover .item-thumbnail {
   opacity: 0.8;

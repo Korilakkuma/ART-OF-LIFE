@@ -10,6 +10,9 @@
       <meta name="description" content="FIR Filter の概要">
     
     
+      <link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/index.xml%20https://art-of-life.jp/index.xml%7d" rel="alternate" type="application/rss+xml" title="ART OF LIFE" />
+      <link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/index.xml%20https://art-of-life.jp/index.xml%7d" rel="feed" type="application/rss+xml" title="ART OF LIFE" />
+    
     <link rel="canonical" href="https://art-of-life.jp/posts/fir-filter/"/>
     <link rel="icon" href="https://art-of-life.jp/favicon.ico">
     <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
@@ -46,9 +49,15 @@
     
 
     
+    <style>
+        #main {
+            width: calc(300px + 52.307692307692314%) !important;
+        }
+    </style>
+    
 
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha256-ImQvICV38LovIsvla2zykaCTdEh1Z801Y+DSop91wMU=" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
@@ -93,7 +102,7 @@
       </nav>
         <nav id="sub-nav">
           <div class="profile" id="profile-nav">
-            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.jpeg"><i class="fa fa-caret-down"></i></a>
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&amp;d=identicon"><i class="fa fa-caret-down"></i></a>
           </div>
         </nav>
         <div id="search-form-wrap">
@@ -150,106 +159,6 @@
    	
    	<div class="outer">
    	
-    	<aside id="profile">
-  <div class="inner profile-inner">
-    <div class="base-info profile-block">
-      
-      <img id="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&d=identicon"/>
-      
-      <h2 id="name">Korilakkuma</h2>
-      <h3 id="title">I&#39; m disseminating Web Music and interested in C/C&#43;&#43;, PDP 11/40 Assembly, UNIX V6, Audio Signal Processing and Music 💖🎸🎹</h3>
-      <span id="location"><i class="fa fa-map-marker"></i>Tokyo (sometimes Osaka), JAPAN</span>
-      
-          <a id="follow" href="https://github.com/Korilakkuma">
-              Follow
-          </a>
-      
-    </div>
-    <div class="article-info profile-block">
-      <div class="article-info-block">
-        0
-        <span>Posts</span>
-      </div>
-      <div class="article-info-block">
-        
-          50
-        
-        <span>
-            Tags
-        </span>
-      </div>
-    </div>
-    <div class="profile-block social-links">
-      <table>
-        <tr>
-          
-<td><a href="//github.com/Korilakkuma" target="_blank" title="GitHub"><i class="fa fa-github"></i></a></td>
-
-
-
-
-
-
-
-
-
-<td><a href="//codepen.io/Korilakkuma" target="_blank" title="CodePen"><i class="fa fa-codepen"></i></a></td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<td><a href="//youtube.com/rilakkuma3xjapan" target="_blank" title="YouTube"><i class="fa fa-youtube"></i></a></td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<td><a href="//twitter.com/xmusicjp" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
-
-
-          <td><a href="https://art-of-life.jp/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</aside>
-
-    
 
     <section id="main">
     
@@ -981,6 +890,7 @@ $</p>
 </section>
 
 
+
     </section>
 
    	
@@ -1064,7 +974,7 @@ $</p>
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">15</span>
+                <span class="category-list-count">14</span>
             </li>
             
             <li class="category-list-item">
@@ -1144,14 +1054,6 @@ $</p>
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/celp">
                     celp
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
-                    ci
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -1530,9 +1432,6 @@ $</p>
         <a href="https://art-of-life.jp/tags/celp" style="font-size: 12px;">celp</a>
         
         
-        <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
-        
-        
         <a href="https://art-of-life.jp/tags/correlation-function" style="font-size: 12px;">correlation-function</a>
         
         
@@ -1701,7 +1600,6 @@ if (!doNotTrack) {
 
 
 <script>hljs.initHighlightingOnLoad();</script>
-<script>jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank');</script>
 
 
 <script type="text/x-mathjax-config">
@@ -1713,6 +1611,9 @@ MathJax.Hub.Config({
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
+<script>
+  jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank').attr('rel', 'noopener noreferrer');
+</script>
 
 
 </body>

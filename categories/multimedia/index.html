@@ -10,8 +10,8 @@
       <meta name="description" content="ART (Computer Science と Music) についての Blog">
     
     
-      <link href="https://art-of-life.jp/categories/multimedia/index.xml" rel="alternate" type="application/rss+xml" title="ART OF LIFE" />
-      <link href="https://art-of-life.jp/categories/multimedia/index.xml" rel="feed" type="application/rss+xml" title="ART OF LIFE" />
+      <link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/index.xml%20https://art-of-life.jp/index.xml%7d" rel="alternate" type="application/rss+xml" title="ART OF LIFE" />
+      <link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/index.xml%20https://art-of-life.jp/index.xml%7d" rel="feed" type="application/rss+xml" title="ART OF LIFE" />
     
     <link rel="canonical" href="https://art-of-life.jp/categories/multimedia/"/>
     <link rel="icon" href="https://art-of-life.jp/favicon.ico">
@@ -43,7 +43,7 @@
     
 
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha256-ImQvICV38LovIsvla2zykaCTdEh1Z801Y+DSop91wMU=" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
@@ -88,7 +88,7 @@
       </nav>
         <nav id="sub-nav">
           <div class="profile" id="profile-nav">
-            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://art-of-life.jp/css/images/avatar.jpeg"><i class="fa fa-caret-down"></i></a>
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=100&amp;d=identicon"><i class="fa fa-caret-down"></i></a>
           </div>
         </nav>
         <div id="search-form-wrap">
@@ -167,7 +167,7 @@
       </div>
       <div class="article-info-block">
         
-          50
+          49
         
         <span>
             Tags
@@ -237,7 +237,7 @@
 <td><a href="//twitter.com/xmusicjp" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></td>
 
 
-          <td><a href="https://art-of-life.jp/index.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+          <td><a href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/index.xml%20https://art-of-life.jp/index.xml%7d" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
         </tr>
       </table>
     </div>
@@ -525,7 +525,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">15</span>
+                <span class="category-list-count">14</span>
             </li>
             
             <li class="category-list-item">
@@ -605,14 +605,6 @@
                 
                 <a class="category-list-link" href="https://art-of-life.jp/tags/celp">
                     celp
-                </a>
-                <span class="category-list-count">1</span>
-            </li>
-            
-            <li class="category-list-item">
-                
-                <a class="category-list-link" href="https://art-of-life.jp/tags/ci">
-                    ci
                 </a>
                 <span class="category-list-count">1</span>
             </li>
@@ -991,9 +983,6 @@
         <a href="https://art-of-life.jp/tags/celp" style="font-size: 12px;">celp</a>
         
         
-        <a href="https://art-of-life.jp/tags/ci" style="font-size: 12px;">ci</a>
-        
-        
         <a href="https://art-of-life.jp/tags/correlation-function" style="font-size: 12px;">correlation-function</a>
         
         
@@ -1162,7 +1151,6 @@ if (!doNotTrack) {
 
 
 <script>hljs.initHighlightingOnLoad();</script>
-<script>jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank');</script>
 
 
 <script type="text/x-mathjax-config">
@@ -1174,6 +1162,9 @@ MathJax.Hub.Config({
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
+<script>
+  jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank').attr('rel', 'noopener noreferrer');
+</script>
 
 
 </body>
