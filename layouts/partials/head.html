@@ -2,7 +2,7 @@
 <html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
 <head>
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} &middot; {{ .Site.Title }}{{ end }}</title>
-    {{ .Hugo.Generator }}
+    {{ hugo.Generator }}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
@@ -11,7 +11,7 @@
     {{ else }}
       <meta name="description" content="{{ .Site.Params.site_description }}">
     {{ end }}
-    {{ with .RSSLink }}
+    {{ with .Site.Home.AlternativeOutputFormats.Get "RSS" }}
       <link href="{{ . }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
       <link href="{{ . }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
     {{ end }}
@@ -33,16 +33,16 @@
     {{ template "_internal/twitter_cards.html" . }}
     {{ partial "head_custom" . }}
 
-    {{ if .Params.disable_profile | and .Params.disable_widgets }}
+    {{ if .Params.disable_profile }}
     <style>
-        .full-width {
-            width: 100% !important;
+        #main {
+            width: calc(300px + 52.307692307692314%) !important;
         }
     </style>
     {{ end }}
 
     <!-- needs to be loaded first for following scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha256-ImQvICV38LovIsvla2zykaCTdEh1Z801Y+DSop91wMU=" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
