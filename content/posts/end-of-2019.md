@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = []
 title = "2019 年度の ART OF LIFE ふりかえり"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # Overview

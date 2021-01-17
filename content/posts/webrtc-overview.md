@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["JavaScript", "WebRTC"]
 title = "WebRTC"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # WebRTC

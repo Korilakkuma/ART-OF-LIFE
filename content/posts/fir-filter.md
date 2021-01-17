@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Digital Signal Processing", "Mathematics", "Z-Transform", "Digital Filter"]
 title = "FIR Filter"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # FIR フィルタとは ?

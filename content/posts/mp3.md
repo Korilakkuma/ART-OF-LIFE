@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["MPEG-1 Audio", "MP3", "PCM", "Mathematics", "Fourier Transform", "Modified Discrete Cosine Transform", "MDCT"]
 title = "MP3 の圧縮符号化方式"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # MP3 とは ?

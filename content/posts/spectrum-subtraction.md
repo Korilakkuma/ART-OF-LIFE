@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Digital Signal Processing", "Spectrum Subtraction", "Noise Suppressor"]
 title = "Spectrum Subtraction"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # スペクトルサブトラクションとは

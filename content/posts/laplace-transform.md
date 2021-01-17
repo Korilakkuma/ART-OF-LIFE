@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Digital Signal Processing", "Mathematics", "Laplace Transform", "Z-Transform"]
 title = "Laplace Transform"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # ラプラス変換

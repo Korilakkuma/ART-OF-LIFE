@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["JavaScript", "WebAssembly", "Web Audio API", "C"]
 title = "Audio Processing by WebAssembly"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # WebAssembly とは

@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Algorithm", "Data Structures"]
 title = "ホワイトボードコーディングを支える技術"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # ホワイトボードコーディングとは ?

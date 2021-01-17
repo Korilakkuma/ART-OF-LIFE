@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["WAVE", "PCM"]
 title = "WAVE ファイルの構成"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # WAVE ファイルとは ?

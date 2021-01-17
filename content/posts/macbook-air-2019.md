@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Mac", "dotfiles"]
 title = "Macbook Air 2019"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # MacBook Air 2019 を買いました

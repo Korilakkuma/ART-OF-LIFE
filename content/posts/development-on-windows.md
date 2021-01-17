@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Windows", "Linux"]
 title = "Development on Windows"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # まえおき

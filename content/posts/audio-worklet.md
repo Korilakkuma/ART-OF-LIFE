@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["JavaScript", "AudioWorklet", "Web Audio API"]
 title = "AudioWorklet"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # AudioWorklet とは ?

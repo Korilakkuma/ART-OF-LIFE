@@ -8,6 +8,9 @@ menu = ""
 tags = []
 title = "攻撃再開 2019 X ～破滅に向かって～"
 draft = true
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # 転職決定までの経緯

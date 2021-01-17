@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Linear Prediction Analysis", "CELP"]
 title = "CELP"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # 分析合成方式

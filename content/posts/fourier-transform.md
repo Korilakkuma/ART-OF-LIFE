@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Mathematics", "Fourier Transform", "Discrete Fourier Transform", "DFT", "Modified Discrete Cosine Transform", "MDCT"]
 title = "Fourier Transform"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # フーリエ変換

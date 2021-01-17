@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Digital Signal Processing", "Resampling", "Linear Interpolation", "Sampling Theorem"]
 title = "Resampling"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # リサンプリング

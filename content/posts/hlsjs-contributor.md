@@ -8,6 +8,9 @@ menu = ""
 tags = ["JavaScript", "Media Source Extensions", "hls.js"]
 title = "hls.js のコントリビューターになろう"
 draft = true
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # HLS

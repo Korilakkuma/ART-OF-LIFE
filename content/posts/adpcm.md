@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["ADPCM", "PCM"]
 title = "ADPCM"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # PCM

@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["MPEG-2 Systems", "MPEG-2 PS", "MPEG-2 TS"]
 title = "MPEG-2 Systems"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # MPEG-2 Systems とは ?

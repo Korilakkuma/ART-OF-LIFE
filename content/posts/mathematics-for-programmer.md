@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Mathematics", "Discrete Mathematics"]
 title = "Mathematics for Programmer"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # プログラマに必要な数学

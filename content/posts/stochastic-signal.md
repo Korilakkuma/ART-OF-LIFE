@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Digital Signal Processing", "Mathematics", "Stochastic Signal"]
 title = "確率信号"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 音声信号などにおいて, ある時刻における振幅を知りたい場合, 実際に発音してからでないと知ることはできません. しかしながら, ある程度の時間をかけて, 音声信号を観測すると, 統計的な性質がつかめます.

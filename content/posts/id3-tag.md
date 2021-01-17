@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["MP3", "ID3 Tag", "hls.js"]
 title = "ID3 Tag"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # ID3 タグとは ?

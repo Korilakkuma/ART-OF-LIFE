@@ -7,6 +7,10 @@ images = []
 menu = ""
 tags = ["CI"]
 title = ".travis.yml の更新"
+draft = true
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # Travis CI でエラー

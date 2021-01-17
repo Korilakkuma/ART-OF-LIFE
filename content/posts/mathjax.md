@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["JavaScript", "Mathematics"]
 title = "MathJax で数式を表示する"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # MathJax

@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Digital Signal Processing", "Mathematics", "Z-Transform", "Digital Filter"]
 title = "IIR Filter"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # IIR フィルタとは ?

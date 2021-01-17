@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["JavaScript", "Web Audio API", "XSound"]
 title = "How to Use XSound as Module Base"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # XSound とは ?

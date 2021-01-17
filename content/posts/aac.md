@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["MPEG-2 Audio", "AAC", "Advanced Audio Coding"]
 title = "AAC の圧縮符号化方式"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # MPEG-2 オーディオ

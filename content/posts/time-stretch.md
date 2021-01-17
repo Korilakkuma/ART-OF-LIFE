@@ -7,6 +7,9 @@ images = []
 menu = ""
 tags = ["Digital Signal Processing", "Time Stretch", "Correlation function"]
 title = "Time Stretch"
+disable_comments = false
+disable_profile = true
+disable_widgets = false
 +++
 
 # タイムストレッチ
