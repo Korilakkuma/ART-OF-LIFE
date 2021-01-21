@@ -133,14 +133,5 @@
       <description>プログラマに必要な数学 一般的なプログラマに必要な数学は, 離散数学と呼ばれる数学です. もちろん, メディア (音・画像・動画) をあつかうエンジニア</description>
     </item>
     
-    <item>
-      <title>MathJax で数式を表示する</title>
-      <link>https://art-of-life.jp/posts/mathjax/</link>
-      <pubDate>Tue, 28 May 2019 19:46:00 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/mathjax/</guid>
-      <description>MathJax Overview Web ページ (HTML) で数式を表示するための JavaScript ライブラリです. 同様のものに, jsLatex がありますが, こちらは jQuery のプラグインであるので, jQuery を利用しないことが多</description>
-    </item>
-    
   </channel>
 </rss>

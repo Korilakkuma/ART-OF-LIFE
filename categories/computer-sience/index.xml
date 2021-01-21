@@ -97,14 +97,5 @@
       <description>MP3 とは ? MPEG メディアデータ (動画や音声, 画像など) は, テキストデータと比較すると非常に大きなデータサイズです. したがって, データを小さくする (</description>
     </item>
     
-    <item>
-      <title>ホワイトボードコーディングを支える技術</title>
-      <link>https://art-of-life.jp/posts/coding-exam/</link>
-      <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/coding-exam/</guid>
-      <description>ホワイトボードコーディングとは ? プログラマとして就職活動や転職活動をしていると頻繁に課される選考試験の 1 つです. その名前のとおり, ひととおり</description>
-    </item>
-    
   </channel>
 </rss>

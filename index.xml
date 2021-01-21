@@ -53,24 +53,6 @@
     </item>
     
     <item>
-      <title>2019 年度の ART OF LIFE ふりかえり</title>
-      <link>https://art-of-life.jp/posts/end-of-2019/</link>
-      <pubDate>Tue, 31 Mar 2020 22:53:57 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/end-of-2019/</guid>
-      <description>Overview 2019 年度は, 社会人になってから (上京してから) もっとも激動の 1 年間だったように思います. サイバーエージェント退職 (April) 東京大学 Software Design Media (SDM) 研究室 のお</description>
-    </item>
-    
-    <item>
-      <title>3 月 22 日の誓い</title>
-      <link>https://art-of-life.jp/posts/20150322-20200322/</link>
-      <pubDate>Sun, 22 Mar 2020 15:22:00 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/20150322-20200322/</guid>
-      <description>旅立ちの日 2015 年 3 月 22 日から 5 年 (1827 日) が経過しました &amp;hellip; 2015 年 3 月 22 日は, わたしが 4 年間過ごした, 大阪の部屋とお別れした日です &amp;hellip; この部屋には, たく</description>
-    </item>
-    
-    <item>
       <title>Spectrum Subtraction</title>
       <link>https://art-of-life.jp/posts/spectrum-subtraction/</link>
       <pubDate>Tue, 11 Feb 2020 17:27:52 +0900</pubDate>
@@ -197,15 +179,6 @@
     </item>
     
     <item>
-      <title>Macbook Air 2019</title>
-      <link>https://art-of-life.jp/posts/macbook-air-2019/</link>
-      <pubDate>Sun, 28 Jul 2019 17:27:12 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/macbook-air-2019/</guid>
-      <description>MacBook Air 2019 を買いました 開封の儀 🎉 使用感 久々に, MacBook Air に復帰したこともあり, やはりボディの薄さとバッテリーのもちはよく, 神出鬼没にコーディングしたり</description>
-    </item>
-    
-    <item>
       <title>Mathematics for Programmer</title>
       <link>https://art-of-life.jp/posts/mathematics-for-programmer/</link>
       <pubDate>Sun, 14 Jul 2019 17:27:13 +0900</pubDate>
@@ -215,48 +188,12 @@
     </item>
     
     <item>
-      <title>Development on Windows</title>
-      <link>https://art-of-life.jp/posts/development-on-windows/</link>
-      <pubDate>Fri, 28 Jun 2019 17:27:34 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/development-on-windows/</guid>
-      <description>まえおき 諸事情でしばらく Mac が使えなくなったので, しぶしぶ Windows でしばらく開発することにしました. ハードウェア・OS は以下のとおりです. ideapad 710S Plus - 13lSK</description>
-    </item>
-    
-    <item>
-      <title>ホワイトボードコーディングを支える技術</title>
-      <link>https://art-of-life.jp/posts/coding-exam/</link>
-      <pubDate>Tue, 04 Jun 2019 22:28:54 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/coding-exam/</guid>
-      <description>ホワイトボードコーディングとは ? プログラマとして就職活動や転職活動をしていると頻繁に課される選考試験の 1 つです. その名前のとおり, ひととおり</description>
-    </item>
-    
-    <item>
       <title>WebRTC</title>
       <link>https://art-of-life.jp/posts/webrtc-overview/</link>
       <pubDate>Wed, 29 May 2019 20:00:59 +0900</pubDate>
       
       <guid>https://art-of-life.jp/posts/webrtc-overview/</guid>
       <description>WebRTC Overview WebRTC (Web Real-Time Communication) は, ブラウザ (ピア) での音声・動画通信, データ共有を可能にする技術です. したがって, 様々な標準プロトコル (UDP など) や JavaScript API の集合体で</description>
-    </item>
-    
-    <item>
-      <title>MathJax で数式を表示する</title>
-      <link>https://art-of-life.jp/posts/mathjax/</link>
-      <pubDate>Tue, 28 May 2019 19:46:00 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/mathjax/</guid>
-      <description>MathJax Overview Web ページ (HTML) で数式を表示するための JavaScript ライブラリです. 同様のものに, jsLatex がありますが, こちらは jQuery のプラグインであるので, jQuery を利用しないことが多</description>
-    </item>
-    
-    <item>
-      <title>2019 年度の ART OF LIFE</title>
-      <link>https://art-of-life.jp/posts/art-of-2019/</link>
-      <pubDate>Sun, 26 May 2019 23:58:23 +0900</pubDate>
-      
-      <guid>https://art-of-life.jp/posts/art-of-2019/</guid>
-      <description>Technology (技術) 動画 WebRTC hls.js コンテナ・コーデックの知識 可能であれば業務で WebRTC を利用したいです. hls.js は, src 以下への contribute を増やすこと. WebRTC を利用するにも, hls.js へ contribute す</description>
     </item>
     
   </channel>
