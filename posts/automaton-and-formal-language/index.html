@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+    <title>Automaton and Formal Language &middot; ART OF LIFE</title>
+    <meta name="generator" content="Hugo 0.76.3" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Korilakkuma">
+    
+      <meta name="description" content="オートマトンと形式言語概要と簡易 MML パーサの実装">
+    
+    
+      <link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/index.xml%20https://art-of-life.jp/index.xml%7d" rel="alternate" type="application/rss+xml" title="ART OF LIFE" />
+      <link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/index.xml%20https://art-of-life.jp/index.xml%7d" rel="feed" type="application/rss+xml" title="ART OF LIFE" />
+    
+    <link rel="canonical" href="https://art-of-life.jp/posts/automaton-and-formal-language/"/>
+    <link rel="icon" href="https://art-of-life.jp/favicon.ico">
+    <link rel="apple-touch-icon" href="https://art-of-life.jp/apple-touch-icon.png"/>
+    <link rel="stylesheet" href="https://art-of-life.jp/css/style.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/css/monokai.css">
+    <link rel="stylesheet" href="https://art-of-life.jp/fancybox/jquery.fancybox.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <meta property="og:title" content="Automaton and Formal Language" />
+<meta property="og:description" content="オートマトンと形式言語概要と簡易 MML パーサの実装" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://art-of-life.jp/posts/automaton-and-formal-language/" />
+<meta property="article:published_time" content="2021-03-07T17:25:12+09:00" />
+<meta property="article:modified_time" content="2021-03-07T17:25:12+09:00" />
+
+    
+    <meta itemprop="name" content="Automaton and Formal Language">
+<meta itemprop="description" content="オートマトンと形式言語概要と簡易 MML パーサの実装">
+<meta itemprop="datePublished" content="2021-03-07T17:25:12+09:00" />
+<meta itemprop="dateModified" content="2021-03-07T17:25:12+09:00" />
+<meta itemprop="wordCount" content="6637">
+
+
+
+<meta itemprop="keywords" content="Automaton,Formal Language,Finite Automaton,Regular Language,Pushdown Automaton,Context Free Language," />
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Automaton and Formal Language"/>
+<meta name="twitter:description" content="オートマトンと形式言語概要と簡易 MML パーサの実装"/>
+<meta name="twitter:site" content="@xmusicjp"/>
+
+    
+
+    
+    <style>
+        @media screen and (min-width: 1200px) {
+            #main {
+                width: 75% !important;
+            }
+        }
+    </style>
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha256-ImQvICV38LovIsvla2zykaCTdEh1Z801Y+DSop91wMU=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+
+
+<div id="container">
+	<header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="https://art-of-life.jp/" id="logo">
+          
+          <i class="logo" style="background-image: url('https://art-of-life.jp/css/images/logo.png')"></i>
+          
+          <span class="site-title">ART OF LIFE</span>
+      </a>
+      <nav id="main-nav">
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/">Home</a>
+          
+          
+          
+          
+          
+          
+
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/about/">About</a>
+          
+
+          
+          
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/tags/">Tags</a>
+          
+          
+          
+          <a class="main-nav-link" href="https://art-of-life.jp/categories/">Categories</a>
+          
+          
+      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="https://www.gravatar.com/avatar/2ec58acf24bf70ddd571739af8e934e7?s=256&amp;d=identicon"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+              <input type="search" name="q" class="search-form-input" placeholder="Search">
+              <button type="submit" class="search-form-submit">
+              </button>
+              <input type="hidden" name="sitesearch" value="https://art-of-life.jp/" />
+         </form>
+        </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tbody>
+          <tr>
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/">Home</a></td>
+          
+          
+          
+          
+          
+          
+
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/about/">About</a></td>
+          
+
+          
+          
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/tags/">Tags</a></td>
+          
+          
+          
+          <td><a class="main-nav-link" href="https://art-of-life.jp/categories/">Categories</a></td>
+          
+          
+          <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+          <input type="search" name="q" class="search-form-input" placeholder="Search">
+          <input type="hidden" name="sitesearch" value="https://art-of-life.jp/" />
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</header>
+
+   	
+   	<div class="outer">
+   	
+
+    <section id="main">
+    
+    <article id="page-undefined" class="article article-type-page" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+
+        <header class="article-header">
+    <a href="https://art-of-life.jp/posts/automaton-and-formal-language/">
+    <h1 class="article-title" itemprop="name">
+        Automaton and Formal Language
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2021-03-07 17:25:12 &#43;0900 JST" itemprop="datePublished">2021-03-07</time>
+            &middot;
+            6637
+            words
+            &middot;
+            14
+            minute read
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/computer-sience">Computer Sience</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/automaton">Automaton</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/language-theory">Language Theory</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/automaton">Automaton</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/formal-language">Formal Language</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/finite-automaton">Finite Automaton</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/regular-language">Regular Language</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/pushdown-automaton">Pushdown Automaton</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/context-free-language">Context Free Language</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="オートマトンと形式言語とは-">オートマトンと形式言語とは ?</h1>
+<p>オートマトンと形式言語は, <a href="https://www.jitec.ipa.go.jp/1_13download/syllabus_fe_ver7_1.pdf">基本情報技術者試験</a>でもピックアップされる情報科学の基礎理論ですが, 実際のところなんのための理論なのかは説明されていないことも多く, とりあえず, 与えられた記号列が受理できるかどうかを判定して問題が解けるぐらいでとどまっていることも多いかと思います.</p>
+<p>この記事では, オートマトンと形式言語について, 基本情報技術者試験などでピックアップされる内容よりは, もう少し深く, その概要を解説します. もっとも, 数学的証明などは, それをピックアップするだけでも 1 つの記事になるので, 詳細はリファレンスを参考にしてください.</p>
+<p>ちなみに, この分野における (理論的な理解の) 数学的準備としては, <strong>集合</strong>, <strong>写像</strong>, <strong>数学的帰納法</strong>, <strong>背理法</strong> などが必要になります.</p>
+<p>後半では, 理論の実践として, 仕様をかなり限定した <strong>MML</strong> (<strong>Music Macro Language</strong>) パーサの実装をしてみます.</p>
+<h2 id="オートマトンと形式言語が基礎となっている技術">オートマトンと形式言語が基礎となっている技術</h2>
+<p>Web マイニングやコンパイラ・文書解析, 果ては, 生命科学におけるタンパク質の構造や遺伝子構造の記述・推定などの基礎になっています. 詳細は, のちのセクションで解説しますが, <strong>正規表現</strong> (正規言語: 有限オートマトンが受理する記号列) や,  C・Java などの<strong>汎用プログラミング言語</strong>や, Tex・HTML をはじめとする<strong>マークアップ言語</strong> (文脈自由言語: プッシュダウンオートマトンが受理する記号列) などは, すべて, オートマトンと形式言語が基礎となって成立している技術です.</p>
+<p>情報科学から離れたとこでは, 自然言語 (日本語や英語), 数式などもオートマトンと形式言語で表現することができます.</p>
+<h2 id="オートマトンとは-">オートマトンとは ?</h2>
+<p><strong>オートマトン</strong> (automaton) とは, 計算をしたり, ある文が言語に属するかを判断したり, 文を生成したりする抽象的機械で, かつ, <strong>状態機械</strong> (state machine) のことです. 状態機械とは, 以下の性質を有しています.</p>
+<ul>
+<li><strong>内部に状態をもっており</strong>, 入力に応じて状態を変える</li>
+<li>入力と状態に応じて出力するかもしれない</li>
+</ul>
+<p>オートマトンは状態機械なので, 以下のような, 状態遷移図 (state transition diagram) で表現されることが多いです.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/110212241-c43aeb80-7edd-11eb-83f4-970987d00d46.png" alt="状態遷移図"></p>
+<p>形式言語を考える場合は, 出力を考えず, ある特別の状態にたどり着くことのみを目的とします. その特別な状態を<strong>受理状態</strong> (accepting) と言います. そして, 受理状態にたどり着くような記号列のすべての集まりを, オートマトンが<strong>受理する言語</strong> (accepting language) , あるいは, オートマトンの<strong>受理言語</strong>と言います.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/110212240-c309be80-7edd-11eb-9373-376b5ba5a4ce.png" alt="オートマトンの例 (受理状態を 2 重線で表現しています)"></p>
+<p>上記の (有限) オートマトンの場合, <code>ab</code> または, <code>acd</code> で終了, もしくはその後に, <code>0</code> ~ <code>9</code> の数字いずれかで終了する入力記号列 (例 <code>ab0123456789</code>) は受理する言語となります. 逆に, <code>a</code> で開始しない入力記号列や, <code>b</code> または, <code>d</code>, または, 数字で終了しない入力記号列は受理されない言語ということになります.</p>
+<h2 id="形式言語とは-">形式言語とは ?</h2>
+<p><strong>形式言語</strong> (formal language) とは, <strong>形式文法</strong>にしたがって生成される記号列の全体集合のことです. <strong>形式文法</strong>とは, 特定の言語に属する文と属さない文を区別する規則の集合です. たとえば,</p>
+<ul>
+<li>文は, 主部と述部からなる</li>
+<li>主部は, 名詞句と格助詞からなる</li>
+<li>述部は, 副詞句と述語からなる</li>
+</ul>
+<p>&hellip;</p>
+<p>などです. 自然言語の文法や計算機言語の文法, さらには, DNA 系列やタンパク質の構造そのものの文法などもこのような規則の集合とみなせます.</p>
+<h2 id="オートマトンと形式言語の関係">オートマトンと形式言語の関係</h2>
+<p>オートマトンが受理する言語と形式言語には以下の関係があります.</p>
+<table>
+  <caption>オートマトンと形式言語の関係</caption>
+  <thead><tr><th scope="col">オートマトン</th><th scope="col">形式言語</th></tr></thead>
+  <tbody>
+  <tr><td>有限オートマトン</td><td>正規言語 (3 型言語)</td></tr>
+  <tr><td>プッシュダウンオートマトン</td><td>文脈自由言語 (2 型言語)</td></tr>
+  <tr><td>線形拘束オートマトン</td><td>文脈依存言語 (1 型言語)</td></tr>
+  <tr><td>チューリングマシン</td><td>句構造言語 (0 型言語)</td></tr>
+  </tbody>
+</table>
+<h2 id="受理言語能力">受理言語能力</h2>
+<p>オートマトンの種類によって, 受理できる言語能力に差があります.</p>
+<h3 id="有限オートマトン">有限オートマトン</h3>
+<p>最も低い受理言語能力は, 有限オートマトン (Finite Automaton) が受理する<strong>正規言語</strong> (Regular Language)であり, その代表格が<strong>正規表現</strong> (Regular Expression)です.</p>
+<p>正規表現は, <strong>連結</strong> (Concatenation), <strong>選択</strong> (Union), <strong>閉包</strong> (Closure, クリーネ閉包とも呼ばれます) の 3 つで構成されており, これらは, 有限オートマトンで表現可能です. 以下は, その例です.</p>
+<ul>
+<li>連結 <code>[abcd][0-9]</code></li>
+<li>選択 <code>[abcd]</code></li>
+<li>閉包 <code>[abcd][0-9]*</code></li>
+</ul>
+<p>プッシュダウンオートマトンやチューリングマシンでは, 状態遷移のほかに補助記憶として, スタックや左右に移動可能な無限長のテープをもつことを考えます. この補助記憶によって, 有限オートマトンよりも受理言語の能力が広がります.</p>
+<h3 id="プッシュダウンオートマトン">プッシュダウンオートマトン</h3>
+<p><strong>プッシュダウンオートマトン</strong> (Pushdown Automaton) は, <strong>スタック</strong>を補助記憶としてもつことで, <strong>文脈自由言語</strong> (Context Free Language) を受理します (<strong>プッシュダウン</strong>は, スタックに由来します). 汎用プログラミング言語 (C, Java など) や, Tex・HTML といったマークアップ言語, 英語や日本語などの自然言語も, すべて文脈自由言語です.</p>
+<h4 id="例-html-の定義">例: HTML の定義</h4>
+<p>HTML は大きく, 以下の 6 つのトークン (意味のある記号列のまとまり) に分類することが可能です.</p>
+<table>
+<thead>
+<tr>
+<th>HTML トークンの種類</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文書型定義 (DTD)</td>
+<td><code>&lt;!DOCTYPE html&gt;</code></td>
+</tr>
+<tr>
+<td>開始タグ</td>
+<td><code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;main&gt;</code> など</td>
+</tr>
+<tr>
+<td>終了タグ</td>
+<td><code>&lt;/head&gt;</code>, <code>&lt;/body&gt;</code>, <code>&lt;/main&gt;</code> など</td>
+</tr>
+<tr>
+<td>テキスト</td>
+<td>タグを含まない任意の記号列</td>
+</tr>
+<tr>
+<td>コメント</td>
+<td><code>&lt;!-- --&gt;</code> で囲まれた記号列. 解析上は意味をもたない</td>
+</tr>
+<tr>
+<td>EOS</td>
+<td>End Of String (HTML の終端)</td>
+</tr>
+</tbody>
+</table>
+<p>テキスト <code>&lt;</code>, <code>&gt;</code> そのものは <code>&amp;lt:</code> と <code>&amp;gt:</code> で表現する (<strong>実体参照</strong>) ので, テキストの中にタグが入ることはありません. これは<strong>正規表現で表現可能</strong>です. しかしながら, 開始タグと終了タグの対が正しい構造を成しているかは, 正規表現 (正規言語) では表現できず, <strong>文脈自由言語であれば表現可能</strong>です (具体的には, <strong>挿入モード</strong> (The insertion mode) などをスタックにプッシュしておくことで, 表現が可能になります).</p>
+<h3 id="チューリングマシン">チューリングマシン</h3>
+<p><strong>チューリングマシン</strong> (Turing Machine) は, <strong>左右にも読み込み可能で, 無限長のテープ</strong>を補助記憶としてもつことで, <strong>句構造言語</strong> (Phrase Structure Language) を受理します. 句構造言語は, 文脈依存言語を含めた, 文脈自由言語, 正規言語すべてを受理します (各言語クラスは, <strong>真の包含関係</strong>にあります).</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/110229062-f124e800-7f49-11eb-83f1-f8a6b2408352.png" alt="言語クラスの包含関係"></p>
+<h4 id="チャーチの提唱">チャーチの提唱</h4>
+<blockquote>
+<p>計算できる関数とは, その関数を計算するチューリングマシンが存在する関数のことである</p>
+</blockquote>
+<h3 id="チューリングマシンの停止問題">チューリングマシンの停止問題</h3>
+<h4 id="決定問題">決定問題</h4>
+<p><strong>決定問題</strong>とは, 解が <code>true</code> または <code>false</code> のいずれかである問題のことです. 例えば,</p>
+<p>$Q$: $n$ 変数の多項方程式 $f(x_{1}, \cdots, x_{n})=0$ を与えたとき, その方程式が整数解をもつか ?</p>
+<p>この問題 $Q$ は, 決定問題です.</p>
+<p>決定問題の具体的な個々の問題を $Q$ の<strong>インスタンス</strong>と呼びます. 例えば, 「$x^4+3xy+y^2=0$ が整数解をもつか ? 」は, $Q$ のインスタンスと言えます.</p>
+<h4 id="決定可能性と決定不能性">決定可能性と決定不能性</h4>
+<p>決定問題が<strong>決定可能</strong>であるとは, あるチューリングマシン $M$ が存在して, 任意のインスタンス $\omega$ に対して, M は $\omega$ を入力として与えられたとき, $\omega$ の答えを出力してチューリングマシンが停止 (受理) するときのことです.</p>
+<p>そうでない場合, <strong>決定不能</strong>であると表現します.</p>
+<p>チューリングマシンの停止問題は, <strong>決定不能</strong>です.</p>
+<p>証明は背理法によって可能です. 以前, ブログでも紹介しておりますので, 参考までに (<a href="https://art-of-life.jp/posts/mathematics-for-programmer/#%E5%81%9C%E6%AD%A2%E5%88%A4%E5%AE%9A%E5%95%8F%E9%A1%8C">Mathematics for Programmer</a>).</p>
+<h4 id="計算時間">計算時間</h4>
+<p>入力 $\omega$ に対する, チューリングマシン $M$ の計算時間とは, $M$ が $\omega$ を受理にかかわらず, $M$ が停止するまでのステップ数 (停止しない場合は, 無限大) として定義されます. 例えば, チューリングマシン $M$ が, 長さ $n$ の任意の語に対する計算時間が, 最大 $T(n)$ であるとき, $M$ の<strong>時間計算量</strong> (Time Complexity) は $T(n)$ と表現します.</p>
+<h4 id="多項式時間で解ける問題">多項式時間で解ける問題</h4>
+<p>問題 $P$ に対し, それを解くチューリングマシン $M$ が存在し, かつ, 多項式 $Q(x)$ が存在し, 長さ $n$ の任意の入力に対して最大 $Q(n)$ のステップで $M$ が停止するとき, $P$ は<strong>多項式時間で解ける</strong>と表現します.</p>
+<h4 id="クラス-p-と-クラス-np">クラス $P$ と クラス $NP$</h4>
+<p>決定性 (遷移先がだた 1 つに決まる) のチューリングマシンで, 多項式時間で解ける問題のクラスを$P$ (Polynomial) と表現します. ある言語 $L$ が, $P$ に属するとは, $L$ を受理する決定性チューリングマシン $M$ と, 多項式 $Q(x)$ が存在して, M は, 長さ $n$ の任意の入力に対して, 最大 $Q(n)$ のステップで停止する場合, <strong>実行可能</strong>であると表現 (そうでない場合, <strong>実行不能</strong>と表現) し, <strong>$P$ に属する</strong>と表現します.</p>
+<p>一方で, 非決定性 (遷移先がだた 1 つに決まらない) のチューリングマシンで, 多項式時間で解ける問題のクラスを $NP$ (Non Deterministic Polynomial) と表現します. ある言語 $L$ が, $NP$ に属するとは, $L$ を受理する非決定性チューリングマシン $M$ と, 多項式 $T(n)$ が存在して, M は, 長さ $n$ の任意の入力に対して, 動作系列の長さが $T(n)$ 超えない場合となります.</p>
+<p>クラス $NP$ はあきらかに, クラス $P$ を含みますが, $P$ に含まれない $NP$ の要素が存在するか否か &hellip; いわゆる,</p>
+<p><strong>$P$$\neq$$NP$ 問題</strong>は, <strong>未解決問題</strong>です.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/110218531-99608f80-7efd-11eb-91db-7874ba351d93.png" alt="$P$$\neq$$NP$ 問題"></p>
+<!--
+## 有限オートマトンと正規言語
+
+### 決定性有限オートマトン
+
+状態機械のうち, 以下の 3 つの制約をつけた状態機械を**決定性有限オートマトン** (Deterministic Finite Automaion, 以下 DFA と表現します) と呼びます.
+
+- 状態の個数が有限である
+- 各状態に対して, どの記号が入力として与えられても, 遷移先の状態が一意に決まる
+- 状態のうち, 初期状態と受理状態という状態がある. 初期状態は必ず 1 つ存在し, 受理状態は 0 個以上存在する
+
+![DFA の状態遷移図の例]()
+
+数学的に定義すると, DFA $M$ は以下の 5 つ組 (5 - tuple) です.
+
+$M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
+
+- $Q$ は, 状態の有限集合
+- ${\sum}$ は, 入力記号の有限集合
+- ${\delta}$ は, **状態遷移関数** (transition function)
+- $q_{0}$ は, $Q$ の 1 要素で, **初期状態** (initial state)
+- $F$ は, $Q$ のある部分集合で, **受理状態** (accepting state)
+
+記号列 (**語**) ${\omega}$ を左から順に 1 つずつ読んでは, 現在の状態と読んだ文字 (入力) に応じた状態に遷移, ${\omega}$ を読みきったときに受理状態であれば, $M$ (DFA) は ${\omega}$ を受理する. このような語の集合が, DFA が受理する言語となります.
+
+![DFA が受理する言語例]()
+
+### 非決定性有限オートマトン
+
+### 正規表現
+
+### 状態数最小のオートマトン
+
+### 正規言語
+
+### ポンプの補題
+
+## プッシュダウンオートマトンと文脈自由言語
+
+### 決定性プッシュダウンオートマトン
+
+### 非決定性プッシュダウンオートマトン
+
+### 文脈自由言語
+
+#### 簡素化と標準形
+
+### 構文解析
+
+#### 下降型構文解析
+
+#### 上昇型構文解析
+
+#### 文法のあいまいさ
+
+### ポンプの補題
+
+## チューリングマシン
+
+### 線形拘束オートマトン
+
+### 文脈依存言語
+
+### 句構造言語
+
+## チョムスキーの階層
+
+## チューリングマシンの停止問題
+-->
+<h1 id="mml-パーサの実装">MML パーサの実装</h1>
+<h2 id="mml-とは-">MML とは ?</h2>
+<p><strong>MML</strong> (<strong>Music Macro Language</strong>) とは, 音楽演奏情報を表現する形式言語の 1 種です (同じ略語に, <strong>Music Markup Language</strong> がありますが, これは別物なので注意してください). 例えると, 楽譜を ASCII 文字列で表現した言語と言えます.</p>
+<p>MML は, プログラミング言語やマークアップ言語のような厳格な仕様はなく, また, WHATWG のような規格・標準化を図る組織も存在しません. 一応, 以下のような, なんとなくの仕様があります.</p>
+<ul>
+<li><code>T</code> テンポ (BPM) を表現します.</li>
+<li><code>O</code> オクターブを表現します.</li>
+<li><code>C</code> <code>D</code> <code>E</code> <code>F</code> <code>G</code> <code>A</code> <code>B</code> それぞれ, ド・レ・ミ・ファ・ソ・ラ・シ の音を表現します.</li>
+<li><code>+</code> (<code>#</code>), <code>-</code> シャープ, または, フラット. つまり, 半音の上げ下げを表現します.</li>
+<li><code>R</code> 休符を表現します.</li>
+<li><code>0</code> <code>1</code> <code>2</code> <code>3</code> <code>4</code> <code>5</code> <code>6</code> <code>7</code> <code>8</code> <code>9</code> 音符や休符の長さを表現します. <code>4</code> が 4 分音符です.</li>
+<li><code>.</code> 付点音符・付点休符を表現します.</li>
+<li><code>&amp;</code> タイ (2 つの音符を連結) を表現します.</li>
+</ul>
+<p>他にも, ボリュームの指定記号 (<code>V</code>) があったり, 音色の指定記号 (<code>@</code>) があったりします.</p>
+<h2 id="mml-の言語仕様">MML の言語仕様</h2>
+<p>ここで, ミニマムな MML の言語仕様を決定しましょう. 音楽情報として成り立つためには, 音を表現する <code>C</code> ~ <code>B</code> と半音を制御する, <code>+</code> (<code>#</code>) と <code>-</code>, その長さ <code>0</code> - <code>9</code> と <code>.</code> の記号, そして, 休符の <code>R</code> が必要なことが考えられます.</p>
+<p>ただし, これだけだと, 時間の算出が不便なので, テンポを表現する <code>T</code> もあるとよさそうです. また, 1 オクターブ分の音程だと表現できる音楽に, かなり制限がかかるので, オクターブを制御する <code>O</code> も追加します.</p>
+<p>方言 (仕様のちがい) が MML において大きいので, <strong>コード (和音) は, 表現不可能</strong>とします.</p>
+<p>他にも, スラーやスタッカートなど音楽記号がありますが, なくても, コンピュータに演奏させるにはそれほど不自然でなかったり, 他の用途で代替可能 (スタッカートであれば, 音の長さを半分にして, 休符を追加する) と思われます.</p>
+<p>可読性のために, 最終的な構文の間にスペースは (MML パーサのアルゴリズムとして) いくつでも許容します (もちろん, メモリは有限なので, リソース的には無限というわけにはいきませんが &hellip;).</p>
+<p>例えば, 以下の MML は (構文的に) 等価です.</p>
+<p><code>T60O3R16A16B-16O4D16F12A12O5F12.C2C2R4D2.</code>
+<code>   T60   O3 R16      A16 B-16 O4 D16    F12 A12 O5 F12. C2 C2 R4 D2.   </code></p>
+<p>逆に, 許容できなスペースの例です.</p>
+<ul>
+<li>BPM 72 を意図してる <code>T 7 2</code></li>
+<li>付点二分音符を意図している <code>D2 .</code></li>
+<li>C# (C の半音上げ) を意図している <code>C + 4</code></li>
+</ul>
+<p>決定した, ミニマムな MML の入力記号列をまとめると, 以下の表のようになります.</p>
+<table>
+<thead>
+<tr>
+<th>記号</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>T</code></td>
+<td>テンポ (BPM)</td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>オクターブ</td>
+</tr>
+<tr>
+<td><code>C</code> <code>D</code> <code>E</code> <code>F</code> <code>G</code> <code>A</code> <code>B</code></td>
+<td>ド・レ・ミ・ファ・ソ・ラ・シ (単音のみ)</td>
+</tr>
+<tr>
+<td><code>+</code> <code>-</code></td>
+<td>半音制御 (<code>#</code> はミニマムにするためなしとします)</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>休符</td>
+</tr>
+<tr>
+<td><code>0</code> <code>1</code> <code>2</code> <code>3</code> <code>4</code> <code>5</code> <code>6</code> <code>7</code> <code>8</code> <code>9</code></td>
+<td>音の長さ</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>音の長さを 1.5 倍にのばす</td>
+</tr>
+<tr>
+<td>スペース</td>
+<td>可読性の確保. 構文の間であればいくでも許容する</td>
+</tr>
+</tbody>
+</table>
+<p>また, 区別をつけるため, この仕様の MML を以降は, <strong>X-MML</strong> と呼ぶことにします.</p>
+<h2 id="x-mml-の有限オートマトン">X-MML の有限オートマトン</h2>
+<p>入力記号 (列) が決定しただけでは, 言語としては成立しません. 一定の規則, つまり, 文法にしたがった記号列かどうかを判定する必要があります.</p>
+<p>結論から先に述べますと, X-MML は, スタックや無限長のテープなどの補助記憶は必要としません. すなわち, <strong>有限オートマトンで受理できる記号列</strong>であり, 言語クラスの包含関係から, 正規言語であり, 文脈自由言語であり, 文脈依存言語であり, 句構造言語でもあります.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/110229062-f124e800-7f49-11eb-83f1-f8a6b2408352.png" alt="言語クラスの包含関係"></p>
+<p>それでは, X-MML の有限オートマトンを考えます.</p>
+<p>まず, 1 つの遷移ルール (状態遷移関数) として, 必ずはじめに <code>T</code> が入力記号にくる必要があるとします. 言い換えれば, <code>T</code> から開始していない入力記号列は, 受理されない, すなわち, X-MML ではありません.</p>
+<p>また, テンポには, 数値が必要なので, <code>T</code> の後には必ず <code>0</code> ~ <code>9</code> の数字が 1 つ以上入力される必要があります.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/110208904-14f61880-7ecd-11eb-91a0-e006ff143b87.png" alt="X-MML の有限オートマトン テンポ"></p>
+<p>次に, 音の高さを決める記号列が続きますが, オクターブが最初に決まっていると, 音の高さが算出しやすいので, <code>C</code> ~ <code>B</code> が最初に入力されるより前に. <code>O</code> の記号が入力されている必要があるという遷移ルール (状態遷移関数) を追加します. さらに,<code>O</code> の後には必ず <code>0</code> ~ <code>9</code> の数字が 1 つ以上入力される必要があります.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/110208901-132c5500-7ecd-11eb-9c8e-75c9cb414942.png" alt="X-MML の有限オートマトン オクターブ"></p>
+<p>そして, 音の高さと音の長さを決定する遷移ルール (状態遷移関数) を追加します. <code>C</code> ~ <code>B</code> のいずれかで開始して, 必要であれば, <code>+</code> or <code>-</code> の半音制御の記号, 音の長さを表現する <code>0</code> - <code>9</code> の記号, または, 付点を表現する <code>.</code> が終了するとします.</p>
+<p>コードは表現できない仕様 (単音のみの仕様) なので, <code>C</code> ~ <code>B</code> のいずれかが入力記号にあると, その後には, <code>+</code> or <code>-</code>, あるいは, <code>0</code> - <code>9</code> の数字のいずれかが入力記号としてあるはずです.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/110210905-4bd12c00-7ed7-11eb-8a03-078ea344bbed.png" alt="X-MML の有限オートマトン 音の高さと音の長さ"></p>
+<p>休符の場合はよりシンプルで, <code>R</code> のあとは, 必ず, <code>0</code> - <code>9</code> の数字が 1 つ以上, 入力記号になります.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/110208903-145d8200-7ecd-11eb-9d75-1c36dabe4033.png" alt="X-MML の有限オートマトン 休符"></p>
+<p>まとめると, X-MML の有限オートマトンは以下のような状態遷移図となるはずです.
+直感的に, <strong>テンポで開始していない, または, 音符か休符で終了していない記号列は, 受理されない</strong>ことがわかるかと思います
+.
+<img src="https://user-images.githubusercontent.com/4006693/110209824-f1819c80-7ed1-11eb-97c4-fcafb6efe523.png" alt="X-MML の有限オートマトン (T は T と数字, O は O と数字, N は C ~ B, (+, -) と数字, R は R と数字)"></p>
+<h2 id="x-mml-の実装">X-MML の実装</h2>
+<p>まずは, 入力記号となる, MML トークンを列挙体に定義します. <code>+</code>, <code>-</code> は, <code>NOTE</code>, <code>.</code> は <code>NUMBER</code>  に関わるのでそれらに含めておきます (実装としてどのように落とし込むかのちがいなので別でも問題ありません). MML トークンとして認識できない文字のために <code>UNKNOWN_TOKEN_ERROR</code>, また, 字句解析中のためのバッファオーバーフローを識別するために <code>BUFFER_OVERFLOW_ERROR</code> を定義しています.</p>
+<p>また, 入力記号から, MML トークンを引き出せるように, <code>TokenMap</code> という構造体 (辞書, マップ &hellip; etc) を定義しています.</p>
+<p>さらに, トークンに関する情報をまとめて格納できるように, <code>Token</code> 構造体を定義しています.</p>
+<p>X-MML トークンの定義</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#define TOKEN_LENGTH 64
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> {
+  TEMPO,
+  OCTAVE,
+  NOTE,
+  REST,
+  NUMBER,
+  BUFFER_OVERFLOW_ERROR,
+  UNKNOWN_TOKEN_ERROR,
+  EOM  <span style="color:#75715e">// End Of MML
+</span><span style="color:#75715e"></span>} TokenTypes;
+
+<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> {
+  <span style="color:#66d9ef">char</span> token;
+  TokenTypes type;
+} TokenMap;
+
+<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> {
+  TokenTypes type;
+  <span style="color:#66d9ef">char</span> token[TOKEN_LENGTH];  <span style="color:#75715e">// トークン対象の文字列
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> value;                 <span style="color:#75715e">// `NUMBER` の場合に有用な値となる
+</span><span style="color:#75715e"></span>} Token;
+
+<span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">tokenize</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>in, Token <span style="color:#f92672">*</span>token);
+</code></pre></div><p>まず, 内部結合の関数 (プライベート関数) <code>getTokenType</code> は, 文字を入力としてうけとると, <code>TokenMap</code> を参照して, 対応する <code>TokenTypes</code> を戻り値として返します.</p>
+<p>Tokenization (字句解析の実体) は, <code>tokenize</code> 関数です. 入力文字列と, トークン情報を格納する <code>Token</code> 構造体へのポインタを引数にとり, 次に字句解析を開始する文字列へのポインタ (文字列の先頭アドレス) を返します.</p>
+<p>最初に, トークンの対象とならないスペースを読みとばします (スペースであれば <code>char *</code> 1 つぶん, ポインタを進めます).</p>
+<p>スペースでなければ, 現在の文字からトークンの種別を取得します.</p>
+<p>ここで, <code>EOM</code>, つまり, 文字列の終端を表すヌル文字 (<code>\0</code>) であれば, <code>Token</code> 構造体に情報を格納して字句解析終了です.</p>
+<p>簡単なトークンから解説すると, トークンタイプが <code>TEMPO</code>, <code>OCTAVE</code>, <code>REST</code> であれば, <code>Token</code> 構造体にその情報を格納するだけです.</p>
+<p><code>NOTE</code> の場合は, 次の文字が <code>+</code> or <code>-</code> であるかどうかの判定をするために, 1 文字先読みします (先読みするためにポインタを進めるので, 対象の文字でなかった場合は, ポインタを戻します).</p>
+<p><code>NUMBER</code> の場合も, 同じく先読みして, <code>NUMBER</code> であるかぎり, 次の 1 文字を先読みし続けます (ただし, バッファオーバーフローをしないかチェックし, そうであれば, <code>BUFFER_OVERFLOW_ERROR</code> を格納して終了します). 数字を読み終えたら, 文字列を <code>strtol</code> 関数で, 数値 (<code>int</code>) に変換します (ただし, <code>.</code> は無視されます).</p>
+<p>X-MML Tokenization (字句解析)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;token.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">static</span> TokenTypes <span style="color:#a6e22e">getTokenType</span>(<span style="color:#66d9ef">char</span> c);
+
+<span style="color:#66d9ef">static</span> TokenMap tokenMap[] <span style="color:#f92672">=</span> {
+    {<span style="color:#e6db74">&#39;T&#39;</span>, TEMPO},  {<span style="color:#e6db74">&#39;O&#39;</span>, OCTAVE}, {<span style="color:#e6db74">&#39;C&#39;</span>, NOTE},   {<span style="color:#e6db74">&#39;D&#39;</span>, NOTE},   {<span style="color:#e6db74">&#39;E&#39;</span>, NOTE},
+    {<span style="color:#e6db74">&#39;F&#39;</span>, NOTE},   {<span style="color:#e6db74">&#39;G&#39;</span>, NOTE},   {<span style="color:#e6db74">&#39;A&#39;</span>, NOTE},   {<span style="color:#e6db74">&#39;B&#39;</span>, NOTE},   {<span style="color:#e6db74">&#39;+&#39;</span>, NOTE},
+    {<span style="color:#e6db74">&#39;-&#39;</span>, NOTE},   {<span style="color:#e6db74">&#39;R&#39;</span>, REST},   {<span style="color:#e6db74">&#39;0&#39;</span>, NUMBER}, {<span style="color:#e6db74">&#39;1&#39;</span>, NUMBER}, {<span style="color:#e6db74">&#39;2&#39;</span>, NUMBER},
+    {<span style="color:#e6db74">&#39;3&#39;</span>, NUMBER}, {<span style="color:#e6db74">&#39;4&#39;</span>, NUMBER}, {<span style="color:#e6db74">&#39;5&#39;</span>, NUMBER}, {<span style="color:#e6db74">&#39;6&#39;</span>, NUMBER}, {<span style="color:#e6db74">&#39;7&#39;</span>, NUMBER},
+    {<span style="color:#e6db74">&#39;8&#39;</span>, NUMBER}, {<span style="color:#e6db74">&#39;9&#39;</span>, NUMBER}, {<span style="color:#e6db74">&#39;.&#39;</span>, NUMBER}, {<span style="color:#e6db74">&#39;\0&#39;</span>, EOM}};
+
+<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">tokenize</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>in, Token <span style="color:#f92672">*</span>token) {
+  <span style="color:#66d9ef">while</span> (<span style="color:#f92672">*</span>in <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39; &#39;</span>) {
+    <span style="color:#f92672">++</span>in;
+  }
+
+  TokenTypes t <span style="color:#f92672">=</span> getTokenType(<span style="color:#f92672">*</span>in);
+
+  <span style="color:#66d9ef">if</span> (t <span style="color:#f92672">==</span> EOM) {
+    token<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">=</span> EOM;
+    token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>in;
+    <span style="color:#66d9ef">return</span> in;
+  }
+
+  <span style="color:#66d9ef">switch</span> (t) {
+    <span style="color:#66d9ef">case</span> TEMPO:
+      token<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">=</span> t;
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>in;
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+      <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">case</span> OCTAVE:
+      token<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">=</span> t;
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>in;
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+      <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">case</span> NOTE:
+      token<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">=</span> t;
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>in;
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+
+      <span style="color:#75715e">// Look-ahead
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">++</span>in;
+
+      <span style="color:#66d9ef">if</span> ((<span style="color:#f92672">*</span>in <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;+&#39;</span>) <span style="color:#f92672">||</span> (<span style="color:#f92672">*</span>in <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;-&#39;</span>)) {
+        token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>in;
+        token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+      } <span style="color:#66d9ef">else</span> {
+        <span style="color:#75715e">// Look-behind
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">--</span>in;
+      }
+
+      <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">case</span> REST:
+      token<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">=</span> t;
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>in;
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+      <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">case</span> NUMBER:
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>in;
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+
+      <span style="color:#75715e">// Look-ahead
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">while</span> ((<span style="color:#f92672">*</span>(<span style="color:#f92672">++</span>in) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>) <span style="color:#f92672">&amp;&amp;</span> (getTokenType(<span style="color:#f92672">*</span>in) <span style="color:#f92672">==</span> NUMBER)) {
+        size_t len <span style="color:#f92672">=</span> strlen(token<span style="color:#f92672">-&gt;</span>token);
+
+        <span style="color:#66d9ef">if</span> (len <span style="color:#f92672">&lt;</span> (TOKEN_LENGTH <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)) {
+          token<span style="color:#f92672">-&gt;</span>token[len <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>in;
+          token<span style="color:#f92672">-&gt;</span>token[len <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+        } <span style="color:#66d9ef">else</span> {
+          token<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">=</span> BUFFER_OVERFLOW_ERROR;
+          token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>in;
+          token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+
+          <span style="color:#66d9ef">return</span> in;
+        }
+      }
+
+      token<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">=</span> NUMBER;
+      token<span style="color:#f92672">-&gt;</span>value <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)strtol(token<span style="color:#f92672">-&gt;</span>token, NULL, <span style="color:#ae81ff">10</span>);
+
+      <span style="color:#75715e">// Look-behind
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">--</span>in;
+
+      <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+      token<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">=</span> UNKNOWN_TOKEN_ERROR;
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>in;
+      token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+      <span style="color:#66d9ef">break</span>;
+  }
+
+  <span style="color:#66d9ef">return</span> <span style="color:#f92672">++</span>in;
+}
+
+<span style="color:#66d9ef">static</span> TokenTypes <span style="color:#a6e22e">getTokenType</span>(<span style="color:#66d9ef">char</span> c) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; tokenMap[i].token <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">==</span> tokenMap[i].token) {
+      <span style="color:#66d9ef">return</span> tokenMap[i].type;
+    }
+  }
+
+  <span style="color:#66d9ef">return</span> UNKNOWN_TOKEN_ERROR;
+}
+</code></pre></div><h2 id="x-mml-の構文解析">X-MML の構文解析</h2>
+<p>TODO &hellip;</p>
+<p><a href="https://github.com/Korilakkuma/MML">MML パーサ ソースコード</a></p>
+<h1 id="リファレンス">リファレンス</h1>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E4%BE%8B%E8%A7%A3%E5%9B%B3%E8%AA%AC-%E3%82%AA%E3%83%BC%E3%83%88%E3%83%9E%E3%83%88%E3%83%B3%E3%81%A8%E5%BD%A2%E5%BC%8F%E8%A8%80%E8%AA%9E%E5%85%A5%E9%96%80-%E5%B2%A1%E7%95%99-%E5%89%9B/dp/4627852711">例解図説 オートマトンと形式言語入門</a></li>
+<li><a href="https://www.amazon.co.jp/%E6%98%8E%E5%BF%AB%E5%85%A5%E9%96%80-%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9%E3%83%BB%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%97%E3%83%AA%E3%82%BF%E9%96%8B%E7%99%BA-C%E5%87%A6%E7%90%86%E7%B3%BB%E3%82%92%E4%BD%9C%E3%82%8A%E3%81%AA%E3%81%8C%E3%82%89%E5%AD%A6%E3%81%B6-%E6%9E%97%E6%99%B4%E6%AF%94%E5%8F%A4%E5%AE%9F%E7%94%A8%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9E%97-%E6%99%B4%E6%AF%94%E5%8F%A4-ebook/dp/B00V7Y9MIO">明快入門 コンパイラ・インタプリタ開発　C処理系を作りながら学ぶ</a></li>
+<li><a href="https://qiita.com/namusyaka/items/f10ce88e6f8bf322b0ff">WHATWG Living StandardとHTMLパーサ</a></li>
+<li><a href="https://github.com/Korilakkuma/XSound/tree/main/src/MML">XSound MML</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+    <a data-url="https://art-of-life.jp/posts/automaton-and-formal-language/" data-id="9d8d0ad5856e05c19afd6e3097d32b24" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+    <a href="https://art-of-life.jp/posts/automaton-and-formal-language/#disqus_thread" class="article-comment-link">
+        Comments
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+
+    
+<nav id="article-nav">
+    
+    <a href="https://art-of-life.jp/posts/audio-worklet/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">
+          Older
+      </strong>
+      <div class="article-nav-title">AudioWorklet</div>
+    </a>
+    
+
+    
+</nav>
+
+
+</article>
+
+
+<section id="comments">
+    <div id="disqus_thread">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Korilakkuma" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+</section>
+
+
+
+    </section>
+
+   	
+    	<aside id="sidebar">
+    
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/audio">
+                    audio
+                </a>
+                <span class="category-list-count">11</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/automaton">
+                    automaton
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/computer-sience">
+                    computer-sience
+                </a>
+                <span class="category-list-count">11</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
+                    digital-signal-processing
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/language-theory">
+                    language-theory
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/mathematics">
+                    mathematics
+                </a>
+                <span class="category-list-count">14</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/multimedia">
+                    multimedia
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
+                    programming
+                </a>
+                <span class="category-list-count">12</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/categories/video">
+                    video
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="widget">
+        <ul class="category-list">
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/aac">
+                    aac
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/adpcm">
+                    adpcm
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/advanced-audio-coding">
+                    advanced-audio-coding
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/audioworklet">
+                    audioworklet
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/automaton">
+                    automaton
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/c">
+                    c
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/celp">
+                    celp
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/context-free-language">
+                    context-free-language
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/correlation-function">
+                    correlation-function
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/dft">
+                    dft
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/digital-filter">
+                    digital-filter
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/digital-signal-processing">
+                    digital-signal-processing
+                </a>
+                <span class="category-list-count">7</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/discrete-fourier-transform">
+                    discrete-fourier-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/discrete-mathematics">
+                    discrete-mathematics
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fast-fourier-transform">
+                    fast-fourier-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fft">
+                    fft
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/finite-automaton">
+                    finite-automaton
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/formal-language">
+                    formal-language
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/fourier-transform">
+                    fourier-transform
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/hls.js">
+                    hls.js
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/id3-tag">
+                    id3-tag
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/javascript">
+                    javascript
+                </a>
+                <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/laplace-transform">
+                    laplace-transform
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-interpolation">
+                    linear-interpolation
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/linear-prediction-analysis">
+                    linear-prediction-analysis
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mathematics">
+                    mathematics
+                </a>
+                <span class="category-list-count">8</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mdct">
+                    mdct
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/modified-discrete-cosine-transform">
+                    modified-discrete-cosine-transform
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mp3">
+                    mp3
+                </a>
+                <span class="category-list-count">2</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-1-audio">
+                    mpeg-1-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-audio">
+                    mpeg-2-audio
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-ps">
+                    mpeg-2-ps
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-systems">
+                    mpeg-2-systems
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/mpeg-2-ts">
+                    mpeg-2-ts
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/noise-suppressor">
+                    noise-suppressor
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/pcm">
+                    pcm
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/pushdown-automaton">
+                    pushdown-automaton
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/regular-language">
+                    regular-language
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/resampling">
+                    resampling
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/sampling-theorem">
+                    sampling-theorem
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/spectrum-subtraction">
+                    spectrum-subtraction
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/stochastic-signal">
+                    stochastic-signal
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/time-stretch">
+                    time-stretch
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
+                    wave
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/web-audio-api">
+                    web-audio-api
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webassembly">
+                    webassembly
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/webrtc">
+                    webrtc
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/xsound">
+                    xsound
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/z-transform">
+                    z-transform
+                </a>
+                <span class="category-list-count">3</span>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+    
+
+
+<div class="widget-wrap">
+    <h3 class="widget-title">
+        Tag cloud
+    </h3>
+    <div class="widget tagcloud">
+        
+        
+        <a href="https://art-of-life.jp/tags/aac" style="font-size: 12px;">aac</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/adpcm" style="font-size: 12px;">adpcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/advanced-audio-coding" style="font-size: 12px;">advanced-audio-coding</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/audioworklet" style="font-size: 12px;">audioworklet</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/automaton" style="font-size: 12px;">automaton</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/c" style="font-size: 12px;">c</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/celp" style="font-size: 12px;">celp</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/context-free-language" style="font-size: 12px;">context-free-language</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/correlation-function" style="font-size: 12px;">correlation-function</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/dft" style="font-size: 12px;">dft</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/digital-filter" style="font-size: 12px;">digital-filter</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/digital-signal-processing" style="font-size: 12px;">digital-signal-processing</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/discrete-fourier-transform" style="font-size: 12px;">discrete-fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/discrete-mathematics" style="font-size: 12px;">discrete-mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fast-fourier-transform" style="font-size: 12px;">fast-fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fft" style="font-size: 12px;">fft</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/finite-automaton" style="font-size: 12px;">finite-automaton</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/formal-language" style="font-size: 12px;">formal-language</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/fourier-transform" style="font-size: 12px;">fourier-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/hls.js" style="font-size: 12px;">hls.js</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/id3-tag" style="font-size: 12px;">id3-tag</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/javascript" style="font-size: 12px;">javascript</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linear-interpolation" style="font-size: 12px;">linear-interpolation</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/linear-prediction-analysis" style="font-size: 12px;">linear-prediction-analysis</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mathematics" style="font-size: 12px;">mathematics</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mdct" style="font-size: 12px;">mdct</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/modified-discrete-cosine-transform" style="font-size: 12px;">modified-discrete-cosine-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mp3" style="font-size: 12px;">mp3</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-1-audio" style="font-size: 12px;">mpeg-1-audio</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-audio" style="font-size: 12px;">mpeg-2-audio</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-ps" style="font-size: 12px;">mpeg-2-ps</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-systems" style="font-size: 12px;">mpeg-2-systems</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/mpeg-2-ts" style="font-size: 12px;">mpeg-2-ts</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/noise-suppressor" style="font-size: 12px;">noise-suppressor</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/pcm" style="font-size: 12px;">pcm</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/pushdown-automaton" style="font-size: 12px;">pushdown-automaton</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/regular-language" style="font-size: 12px;">regular-language</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/resampling" style="font-size: 12px;">resampling</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/sampling-theorem" style="font-size: 12px;">sampling-theorem</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/spectrum-subtraction" style="font-size: 12px;">spectrum-subtraction</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/stochastic-signal" style="font-size: 12px;">stochastic-signal</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/time-stretch" style="font-size: 12px;">time-stretch</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/web-audio-api" style="font-size: 12px;">web-audio-api</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webassembly" style="font-size: 12px;">webassembly</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/webrtc" style="font-size: 12px;">webrtc</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/xsound" style="font-size: 12px;">xsound</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/z-transform" style="font-size: 12px;">z-transform</a>
+        
+    </div>
+</div>
+
+
+
+
+
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+    
+	</div>
+</div>
+
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021
+      Copyright (c) <a href="https://art-of-life.jp/about/">Korilakkuma</a>
+    </div>
+  </div>
+</footer>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-41390233-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+<script src="https://art-of-life.jp/fancybox/jquery.fancybox.pack.js"></script>
+<script src="https://art-of-life.jp/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<script>
+  jQuery('.article-type-page a:not([href*="https://art-of-life.jp/"])').attr('target', '_blank').attr('rel', 'noopener noreferrer');
+</script>
+
+
+</body>
+</html>

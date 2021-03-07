@@ -6,7 +6,16 @@
     <description>Recent content in Posts on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sat, 12 Dec 2020 23:12:00 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Mar 2021 17:25:12 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Automaton and Formal Language</title>
+      <link>https://art-of-life.jp/posts/automaton-and-formal-language/</link>
+      <pubDate>Sun, 07 Mar 2021 17:25:12 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/posts/automaton-and-formal-language/</guid>
+      <description>オートマトンと形式言語とは ? オートマトンと形式言語は, 基本情報技術者試験でもピックアップされる情報科学の基礎理論ですが, 実際のところなんのた</description>
+    </item>
+    
     <item>
       <title>AudioWorklet</title>
       <link>https://art-of-life.jp/posts/audio-worklet/</link>
