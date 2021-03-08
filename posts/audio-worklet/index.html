@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Korilakkuma">
     
-      <meta name="description" content="2020&#39;s AudioWorklet">
+      <meta name="description" content="The latest AudioWorklet">
     
     
       <link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/index.xml%20https://art-of-life.jp/index.xml%7d" rel="alternate" type="application/rss+xml" title="ART OF LIFE" />
@@ -24,7 +24,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <meta property="og:title" content="AudioWorklet" />
-<meta property="og:description" content="2020&#39;s AudioWorklet" />
+<meta property="og:description" content="The latest AudioWorklet" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://art-of-life.jp/posts/audio-worklet/" />
 <meta property="article:published_time" content="2020-12-12T23:12:00+09:00" />
@@ -32,7 +32,7 @@
 
     
     <meta itemprop="name" content="AudioWorklet">
-<meta itemprop="description" content="2020&#39;s AudioWorklet">
+<meta itemprop="description" content="The latest AudioWorklet">
 <meta itemprop="datePublished" content="2020-12-12T23:12:00+09:00" />
 <meta itemprop="dateModified" content="2020-12-12T23:12:00+09:00" />
 <meta itemprop="wordCount" content="3360">
@@ -43,7 +43,7 @@
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AudioWorklet"/>
-<meta name="twitter:description" content="2020&#39;s AudioWorklet"/>
+<meta name="twitter:description" content="The latest AudioWorklet"/>
 <meta name="twitter:site" content="@xmusicjp"/>
 
     
@@ -286,7 +286,8 @@
 
 <span style="color:#75715e">// `AudioWorkletGlobalScope` に登録される
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">registerProcessor</span>(<span style="color:#e6db74">&#39;custom-worklet-processor&#39;</span>, <span style="color:#a6e22e">CustomAudioWorkletProcessor</span>);
-</code></pre></div><h2 id="audioparamdescriptor">AudioParamDescriptor</h2>
+</code></pre></div><p><img src="https://user-images.githubusercontent.com/4006693/110239596-27368c00-7f8b-11eb-89de-93da23b8f41e.png" alt="メインスレッドと WebAudio レンダースレッド"></p>
+<h2 id="audioparamdescriptor">AudioParamDescriptor</h2>
 <p><code>AudioParamDescriptor</code> は <code>AudioParam</code> で管理される独自パラメータを定義することを可能にします. つまり, <code>AudioParam</code> がもつオートメーションのメソッド (<code>linearRampToValueAtTime</code> メソッドなど) を, 独自パラメータにも適用することが可能になります.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomAudioWorkletProcessor</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AudioWorkletProcessor</span> {
   <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">parameterDescriptors</span>() {
@@ -332,7 +333,8 @@
   .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>);
 </code></pre></div><h2 id="messageport">MessagePort</h2>
 <p><code>AudioParamDescriptor</code> で定義できる値は, 数値 (<code>number</code>, つまり, 浮動小数点数) のみです. したがって, メインスレッドで変更した任意のデータをオーディオスレッドに送信する, 逆に, オーディオスレッドで変更した任意のデータをメインスレッドで受信するというケース &hellip;</p>
-<p>すなわち, <code>AudioWorkletNode</code> と <code>AudioWorkletProcessor</code> の双方向で任意のデータを送受信可能にするために, <code>MessagePort</code> が定義されています.</p>
+<p>すなわち, <code>AudioWorkletNode</code> と <code>AudioWorkletProcessor</code> の双方向で任意のデータを送受信可能にするために, <code>MessagePort</code> が定義されています.
+<img src="https://user-images.githubusercontent.com/4006693/110239595-269df580-7f8b-11eb-94f0-1a2b9d7486fc.png" alt="MessagePort"></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">context</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AudioContext</span>();
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promise</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">audioWorklet</span>.<span style="color:#a6e22e">addModule</span>(<span style="color:#e6db74">&#39;Woklet スクリプトのパス&#39;</span>);
 
@@ -421,6 +423,7 @@
 </code></pre></div><p>重要なのは, オーディオ処理の実装, すなわち <code>AudioWorkletProcessor</code> の <code>process</code> メソッドです.</p>
 <p><code>process</code> メソッドには, 第 1 引数に入力となる配列, 第 2 引数に出力となる配列が引数としてわたされます. これらの配列の構造は同じとなっており, 多次元配列の要素として <code>Float32Array</code> が格納されています. そして, これが, 入力, または, 出力のサウンドデータとなります. 実は, オーディオ処理の実装の理解としては <code>ScriptProcessorNode</code> と大差ありません.</p>
 <p>多次元配列なので, まずは, <code>0</code> 番目の要素にアクセスして要素となっている配列を取得します (この処理は, 特に理屈なく, こうするものだと理解してだいじょうぶでしょう). 取得した配列は, チャンネルごとに <strong>128 サンプル</strong>の <code>Float32Array</code> が格納されています.</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/110239593-256cc880-7f8b-11eb-879b-f8af1726af29.png" alt="128 samples の Float32Array がチャンネル順に格納されている"></p>
 <p>したがって, チャンネルごとの <code>Float32Array</code> を走査して, 出力となる <code>Float32Array</code> の要素を格納していきます.</p>
 <p>1 つ注意点としては, 入力データは必ずしも格納されているわけではないので, 条件判定で <code>undefined</code> でないか判定しています.</p>
 <p>worklet-scripts/bypass.js</p>
