@@ -2,7 +2,7 @@
 banner = ""
 categories = ["Programming", "Audio"]
 date = 2020-12-12T23:12:00+09:00
-description = "2020's AudioWorklet"
+description = "The latest AudioWorklet"
 images = []
 menu = ""
 tags = ["JavaScript", "AudioWorklet", "Web Audio API"]
@@ -97,6 +97,8 @@ class CustomAudioWorkletProcessor extends AudioWorkletProcessor {
 registerProcessor('custom-worklet-processor', CustomAudioWorkletProcessor);
 ```
 
+![メインスレッドと WebAudio レンダースレッド](https://user-images.githubusercontent.com/4006693/110239596-27368c00-7f8b-11eb-89de-93da23b8f41e.png)
+
 ## AudioParamDescriptor
 
 `AudioParamDescriptor` は `AudioParam` で管理される独自パラメータを定義することを可能にします. つまり, `AudioParam` がもつオートメーションのメソッド (`linearRampToValueAtTime` メソッドなど) を, 独自パラメータにも適用することが可能になります.
@@ -154,6 +156,7 @@ promise
 `AudioParamDescriptor` で定義できる値は, 数値 (`number`, つまり, 浮動小数点数) のみです. したがって, メインスレッドで変更した任意のデータをオーディオスレッドに送信する, 逆に, オーディオスレッドで変更した任意のデータをメインスレッドで受信するというケース ...
 
 すなわち, `AudioWorkletNode` と `AudioWorkletProcessor` の双方向で任意のデータを送受信可能にするために, `MessagePort` が定義されています.
+![MessagePort](https://user-images.githubusercontent.com/4006693/110239595-269df580-7f8b-11eb-94f0-1a2b9d7486fc.png)
 
 ```JavaScript
 const context = new AudioContext();
@@ -262,7 +265,9 @@ promise
 
 多次元配列なので, まずは, `0` 番目の要素にアクセスして要素となっている配列を取得します (この処理は, 特に理屈なく, こうするものだと理解してだいじょうぶでしょう). 取得した配列は, チャンネルごとに **128 サンプル**の `Float32Array` が格納されています.
 
- したがって, チャンネルごとの `Float32Array` を走査して, 出力となる `Float32Array` の要素を格納していきます.
+![128 samples の Float32Array がチャンネル順に格納されている](https://user-images.githubusercontent.com/4006693/110239593-256cc880-7f8b-11eb-879b-f8af1726af29.png)
+
+したがって, チャンネルごとの `Float32Array` を走査して, 出力となる `Float32Array` の要素を格納していきます.
 
 1 つ注意点としては, 入力データは必ずしも格納されているわけではないので, 条件判定で `undefined` でないか判定しています.
 
