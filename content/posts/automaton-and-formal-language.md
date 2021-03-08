@@ -1,7 +1,7 @@
 +++
 banner = ""
 categories = ["Computer Sience", "Automaton", "Language Theory"]
-date = 2021-03-07T17:25:12+09:00
+date = 2021-03-07T20:00:00+09:00
 description = "オートマトンと形式言語概要と簡易 MML パーサの実装"
 images = []
 menu = ""
@@ -35,7 +35,7 @@ Web マイニングやコンパイラ・文書解析, 果ては, 生命科学に
 - **内部に状態をもっており**, 入力に応じて状態を変える
 - 入力と状態に応じて出力するかもしれない
 
-オートマトンは状態機械なので, 以下のような, 状態遷移図 (state transition diagram) で表現されることが多いです.
+オートマトンは状態機械なので, 以下のような, **状態遷移図** (State Transition Diagram) で表現されることが多いです.
 
 ![状態遷移図](https://user-images.githubusercontent.com/4006693/110212241-c43aeb80-7edd-11eb-83f4-970987d00d46.png)
 
@@ -488,7 +488,68 @@ static TokenTypes getTokenType(char c) {
 
 ## X-MML の構文解析
 
-TODO ...
+X-MML 構文解析
+```c++
+#include "token.h"
+
+#define TRUE 1
+#define FALSE 0
+
+int parse(Token *tokens, Token *tree, int length) {
+  if (length < 6) {
+    return FALSE;
+  }
+
+  if (((tokens + 0)->type != TEMPO) || ((tokens + 1)->type != NUMBER)) {
+    return FALSE;
+  }
+
+  if (((tokens + 2)->type != OCTAVE) || ((tokens + 3)->type != NUMBER)) {
+    return FALSE;
+  }
+
+  if ((((tokens + 4)->type != NOTE) && ((tokens + 4)->type != REST)) ||
+      ((tokens + 5)->type != NUMBER)) {
+    return FALSE;
+  }
+
+  int p = 0;
+
+  tree[p++] = tokens[0];
+  tree[p++] = tokens[1];
+  tree[p++] = tokens[2];
+  tree[p++] = tokens[3];
+  tree[p++] = tokens[4];
+  tree[p++] = tokens[5];
+
+  while (p < length) {
+    switch ((tokens + p)->type) {
+      case TEMPO:
+      case OCTAVE:
+      case NOTE:
+      case REST:
+        tree[p + 0] = tokens[p + 0];
+        tree[p + 1] = tokens[p + 1];
+        break;
+      case EOM:
+      default:
+        break;
+    }
+
+    p += 2;
+  }
+
+  if (((tree + p - 2)->type != NOTE) && ((tree + p - 2)->type != REST)) {
+    return FALSE;
+  }
+
+  if (((tree + p - 1)->type != NUMBER)) {
+    return FALSE;
+  }
+
+  return TRUE;
+}
+```
 
 [MML パーサ ソースコード](https://github.com/Korilakkuma/MML)
 
