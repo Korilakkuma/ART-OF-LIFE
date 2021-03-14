@@ -16,9 +16,9 @@ disable_widgets = false
 
 ## 概要
 
-Web Audio が定義する標準のノード (`GainNode`, `DelayNode`, `BiquadFilterNode` など) の組み合わせでは不可能な音響処理 (ピッチシフターやノイズサプレッサなど) を直接サウンドデータにアクセスして演算することによって実装するためのクラス (`AudioWorkletNode`, `AudioWorkletProcessor` など) です.
+Web Audio API が定義する標準のノード (`GainNode`, `DelayNode`, `BiquadFilterNode` など) の組み合わせでは不可能な音響処理 (ピッチシフターやノイズサプレッサなど) を直接サウンドデータにアクセスして演算することによって実装するためのクラス (`AudioWorkletNode`, `AudioWorkletProcessor` など) です. Web Audio API が誕生してから, AudioWorklet が仕様策定されるまで, **直接サウンドデータにアクセスして音響演算する**という処理は `ScriptProcessorNode` の役割でした.
 
-これまでは, 直接サウンドデータにアクセスして演算するという処理は `ScriptProcessorNode` の役割でした. では, なぜ AudioWorklet に役割が置き換わるのでしょうか ? `ScriptProcessorNode` には実装当初から常に 2 つの問題を抱えていました.
+なぜ AudioWorklet に役割が置き換わるのでしょうか ? `ScriptProcessorNode` は実装当初から 2 つの問題を抱えていました.
 
 ## ScriptProcessorNode の問題
 
@@ -46,7 +46,7 @@ const promise = context.audioWorklet.addModule('Woklet スクリプトのパス'
 
 ## AudioWorkletNode
 
-メインスレッドで主役となるクラスです. Global Scope (`window` オブジェクト) で動作します. `AudioNode` を継承しており, 生成したインスタンスは, 標準のノードと同じく, `connect` / `disconnect` して利用します. コンストラクタの第 1 引数には `AudioContext` インスタンスを, 第 2 引数には, Worklet で登録した (`AudioWorkletGlobalScope` に登録された) 文字列を指定します.
+メインスレッドで主役となるクラスです. Global Scope (`window` オブジェクト) で動作します. `AudioNode` を継承しており, 生成したインスタンスは, `connect` / `disconnect` して利用します. コンストラクタの第 1 引数には `AudioContext` インスタンスを, 第 2 引数には, Worklet で登録した (`AudioWorkletGlobalScope` に登録された) 文字列を指定します.
 
 ```JavaScript
 const context = new AudioContext();
@@ -73,7 +73,7 @@ class CustomAudioWorkletNode extends AudioWorkletNode {
 
 ## AudioWorkletGlobalScope
 
-オーディオスレッドにおける (Worklet における) Global Scope です. `AudioWorkletProcessor` が動作し, `registerProcessor` メソッドによって, `AudioWorkletProcessor` と指定された文字列を関連づけて登録します.
+オーディオスレッドにおける (Worklet における) Global Scope です. `AudioWorkletProcessor` が動作して, `registerProcessor` メソッドによって, `AudioWorkletProcessor` と指定された文字列を関連づけて登録します.
 
 ## AudioWorkletProcessor
 
@@ -101,7 +101,7 @@ registerProcessor('custom-worklet-processor', CustomAudioWorkletProcessor);
 
 ## AudioParamDescriptor
 
-`AudioParamDescriptor` は `AudioParam` で管理される独自パラメータを定義することを可能にします. つまり, `AudioParam` がもつオートメーションのメソッド (`linearRampToValueAtTime` メソッドなど) を, 独自パラメータにも適用することが可能になります.
+`AudioParamDescriptor` は `AudioParam` で管理される独自パラメータを定義することを可能にします. すなわち, `AudioParam` がもつオートメーションのメソッド (`linearRampToValueAtTime` メソッドなど) を, 独自パラメータにも適用することができます.
 
 ```JavaScript
 class CustomAudioWorkletProcessor extends AudioWorkletProcessor {
@@ -153,7 +153,7 @@ promise
 
 ## MessagePort
 
-`AudioParamDescriptor` で定義できる値は, 数値 (`number`, つまり, 浮動小数点数) のみです. したがって, メインスレッドで変更した任意のデータをオーディオスレッドに送信する, 逆に, オーディオスレッドで変更した任意のデータをメインスレッドで受信するというケース ...
+`AudioParamDescriptor` で定義できる値は, 数値 (`number`, つまり, 64 bit 浮動小数点数) のみです. したがって, メインスレッドで変更した任意のデータをオーディオスレッドに送信する, 逆に, オーディオスレッドで変更した任意のデータをメインスレッドで受信するというケース ...
 
 すなわち, `AudioWorkletNode` と `AudioWorkletProcessor` の双方向で任意のデータを送受信可能にするために, `MessagePort` が定義されています.
 ![MessagePort](https://user-images.githubusercontent.com/4006693/110239595-269df580-7f8b-11eb-94f0-1a2b9d7486fc.png)
@@ -261,9 +261,11 @@ promise
 
 重要なのは, オーディオ処理の実装, すなわち `AudioWorkletProcessor` の `process` メソッドです.
 
-`process` メソッドには, 第 1 引数に入力となる配列, 第 2 引数に出力となる配列が引数としてわたされます. これらの配列の構造は同じとなっており, 多次元配列の要素として `Float32Array` が格納されています. そして, これが, 入力, または, 出力のサウンドデータとなります. 実は, オーディオ処理の実装の理解としては `ScriptProcessorNode` と大差ありません.
+`process` メソッドには, 第 1 引数に入力となる配列, 第 2 引数に出力となる配列が引数としてわたされます. これら引数の配列の構造は同じとなっており, 多次元配列の要素として `Float32Array` が格納されています. これが, 入力, または, 出力のサウンドデータとなります. 実は, オーディオ処理の実装の理解としては `ScriptProcessorNode` と大差ありません.
 
-多次元配列なので, まずは, `0` 番目の要素にアクセスして要素となっている配列を取得します (この処理は, 特に理屈なく, こうするものだと理解してだいじょうぶでしょう). 取得した配列は, チャンネルごとに **128 サンプル**の `Float32Array` が格納されています.
+まずは, `0` 番目の要素にアクセスして `Float32Array` が各要素となっている配列を取得します (この処理に関しては, 特に理屈なく, こうするものだと理解してだいじょうぶでしょう).
+
+そして, 取得した配列は, チャンネルごとに **128 サンプル**の `Float32Array` が格納されています.
 
 ![128 samples の Float32Array がチャンネル順に格納されている](https://user-images.githubusercontent.com/4006693/110239593-256cc880-7f8b-11eb-879b-f8af1726af29.png)
 
@@ -308,7 +310,7 @@ registerProcessor('bypass', Bypass);
 
 メインスレッドで注目したいのは,
 
-- `AudioParamDescriptor` によって定義された `AudioParam` を `AudioParamMap` (`AudioWorkletNode` の `parameters` プロパティ) として参照している
+- `AudioParamDescriptor` によって定義された (独自パラメータの) `AudioParam` を `AudioParamMap` (`AudioWorkletNode` の `parameters` プロパティ) として参照している
 - `MessagePort` を利用して, オシレーターの波形 (文字列) をオーディオスレッドに送信している
 
 `AudioParamMap` は, `AudioParam` を要素にもつ `Map` なので, `Map` がもつメソッドを利用して, `AudioParam` を取得可能です.
@@ -469,7 +471,7 @@ registerProcessor('oscillator', Oscillator);
 
 [ボーカルキャンセラ デモ](https://korilakkuma.github.io/audio-worklet-samples/samples/vocal-canceler)
 
-独自パラメータであるボーカルキャンセラの `depth` も `AudioParamDescriptor` で定義したことにより, `AudioWorkletNode` インスタンスから `parameters` プロパティとして参照可能となります.
+独自パラメータである, ボーカルキャンセラの `depth` も `AudioParamDescriptor` で定義することによって, `AudioWorkletNode` インスタンスから `parameters` プロパティとして参照可能となります.
 
 main-scripts/vocal-canceler.js
 
