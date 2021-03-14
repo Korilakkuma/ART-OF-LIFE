@@ -35,7 +35,7 @@
 <meta itemprop="description" content="The latest AudioWorklet">
 <meta itemprop="datePublished" content="2020-12-12T23:12:00+09:00" />
 <meta itemprop="dateModified" content="2020-12-12T23:12:00+09:00" />
-<meta itemprop="wordCount" content="3360">
+<meta itemprop="wordCount" content="3376">
 
 
 
@@ -181,7 +181,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2020-12-12 23:12:00 &#43;0900 JST" itemprop="datePublished">2020-12-12</time>
             &middot;
-            3360
+            3376
             words
             &middot;
             7
@@ -233,8 +233,8 @@
         <div class="article-entry" itemprop="articleBody">
             <h1 id="audioworklet-とは-">AudioWorklet とは ?</h1>
 <h2 id="概要">概要</h2>
-<p>Web Audio が定義する標準のノード (<code>GainNode</code>, <code>DelayNode</code>, <code>BiquadFilterNode</code> など) の組み合わせでは不可能な音響処理 (ピッチシフターやノイズサプレッサなど) を直接サウンドデータにアクセスして演算することによって実装するためのクラス (<code>AudioWorkletNode</code>, <code>AudioWorkletProcessor</code> など) です.</p>
-<p>これまでは, 直接サウンドデータにアクセスして演算するという処理は <code>ScriptProcessorNode</code> の役割でした. では, なぜ AudioWorklet に役割が置き換わるのでしょうか ? <code>ScriptProcessorNode</code> には実装当初から常に 2 つの問題を抱えていました.</p>
+<p>Web Audio API が定義する標準のノード (<code>GainNode</code>, <code>DelayNode</code>, <code>BiquadFilterNode</code> など) の組み合わせでは不可能な音響処理 (ピッチシフターやノイズサプレッサなど) を直接サウンドデータにアクセスして演算することによって実装するためのクラス (<code>AudioWorkletNode</code>, <code>AudioWorkletProcessor</code> など) です. Web Audio API が誕生してから, AudioWorklet が仕様策定されるまで, <strong>直接サウンドデータにアクセスして音響演算する</strong>という処理は <code>ScriptProcessorNode</code> の役割でした.</p>
+<p>なぜ AudioWorklet に役割が置き換わるのでしょうか ? <code>ScriptProcessorNode</code> は実装当初から 2 つの問題を抱えていました.</p>
 <h2 id="scriptprocessornode-の問題">ScriptProcessorNode の問題</h2>
 <dl>
   <dt>グリッチ</dt>
@@ -250,7 +250,7 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">context</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AudioContext</span>();
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promise</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">audioWorklet</span>.<span style="color:#a6e22e">addModule</span>(<span style="color:#e6db74">&#39;Woklet スクリプトのパス&#39;</span>);
 </code></pre></div><h2 id="audioworkletnode">AudioWorkletNode</h2>
-<p>メインスレッドで主役となるクラスです. Global Scope (<code>window</code> オブジェクト) で動作します. <code>AudioNode</code> を継承しており, 生成したインスタンスは, 標準のノードと同じく, <code>connect</code> / <code>disconnect</code> して利用します. コンストラクタの第 1 引数には <code>AudioContext</code> インスタンスを, 第 2 引数には, Worklet で登録した (<code>AudioWorkletGlobalScope</code> に登録された) 文字列を指定します.</p>
+<p>メインスレッドで主役となるクラスです. Global Scope (<code>window</code> オブジェクト) で動作します. <code>AudioNode</code> を継承しており, 生成したインスタンスは, <code>connect</code> / <code>disconnect</code> して利用します. コンストラクタの第 1 引数には <code>AudioContext</code> インスタンスを, 第 2 引数には, Worklet で登録した (<code>AudioWorkletGlobalScope</code> に登録された) 文字列を指定します.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">context</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AudioContext</span>();
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">promise</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">audioWorklet</span>.<span style="color:#a6e22e">addModule</span>(<span style="color:#e6db74">&#39;Woklet スクリプトのパス&#39;</span>);
 
@@ -268,7 +268,7 @@
   }
 }
 </code></pre></div><h2 id="audioworkletglobalscope">AudioWorkletGlobalScope</h2>
-<p>オーディオスレッドにおける (Worklet における) Global Scope です. <code>AudioWorkletProcessor</code> が動作し, <code>registerProcessor</code> メソッドによって, <code>AudioWorkletProcessor</code> と指定された文字列を関連づけて登録します.</p>
+<p>オーディオスレッドにおける (Worklet における) Global Scope です. <code>AudioWorkletProcessor</code> が動作して, <code>registerProcessor</code> メソッドによって, <code>AudioWorkletProcessor</code> と指定された文字列を関連づけて登録します.</p>
 <h2 id="audioworkletprocessor">AudioWorkletProcessor</h2>
 <p>オーディオ処理を担うクラスです (つまり, <code>ScriptProcessorNode</code> の役割は, <code>AudioWorkletProcessor</code> に移ったと言えます). <code>process</code> メソッドで実行され, アプリケーション開発者は, この <code>process</code> メソッドを実装する必要があります.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomAudioWorkletProcessor</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AudioWorkletProcessor</span> {
@@ -288,7 +288,7 @@
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">registerProcessor</span>(<span style="color:#e6db74">&#39;custom-worklet-processor&#39;</span>, <span style="color:#a6e22e">CustomAudioWorkletProcessor</span>);
 </code></pre></div><p><img src="https://user-images.githubusercontent.com/4006693/110239596-27368c00-7f8b-11eb-89de-93da23b8f41e.png" alt="メインスレッドと WebAudio レンダースレッド"></p>
 <h2 id="audioparamdescriptor">AudioParamDescriptor</h2>
-<p><code>AudioParamDescriptor</code> は <code>AudioParam</code> で管理される独自パラメータを定義することを可能にします. つまり, <code>AudioParam</code> がもつオートメーションのメソッド (<code>linearRampToValueAtTime</code> メソッドなど) を, 独自パラメータにも適用することが可能になります.</p>
+<p><code>AudioParamDescriptor</code> は <code>AudioParam</code> で管理される独自パラメータを定義することを可能にします. すなわち, <code>AudioParam</code> がもつオートメーションのメソッド (<code>linearRampToValueAtTime</code> メソッドなど) を, 独自パラメータにも適用することができます.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomAudioWorkletProcessor</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AudioWorkletProcessor</span> {
   <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">parameterDescriptors</span>() {
     <span style="color:#66d9ef">return</span> [{
@@ -332,7 +332,7 @@
   })
   .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>);
 </code></pre></div><h2 id="messageport">MessagePort</h2>
-<p><code>AudioParamDescriptor</code> で定義できる値は, 数値 (<code>number</code>, つまり, 浮動小数点数) のみです. したがって, メインスレッドで変更した任意のデータをオーディオスレッドに送信する, 逆に, オーディオスレッドで変更した任意のデータをメインスレッドで受信するというケース &hellip;</p>
+<p><code>AudioParamDescriptor</code> で定義できる値は, 数値 (<code>number</code>, つまり, 64 bit 浮動小数点数) のみです. したがって, メインスレッドで変更した任意のデータをオーディオスレッドに送信する, 逆に, オーディオスレッドで変更した任意のデータをメインスレッドで受信するというケース &hellip;</p>
 <p>すなわち, <code>AudioWorkletNode</code> と <code>AudioWorkletProcessor</code> の双方向で任意のデータを送受信可能にするために, <code>MessagePort</code> が定義されています.
 <img src="https://user-images.githubusercontent.com/4006693/110239595-269df580-7f8b-11eb-94f0-1a2b9d7486fc.png" alt="MessagePort"></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">context</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AudioContext</span>();
@@ -421,8 +421,9 @@
   })
   .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>);
 </code></pre></div><p>重要なのは, オーディオ処理の実装, すなわち <code>AudioWorkletProcessor</code> の <code>process</code> メソッドです.</p>
-<p><code>process</code> メソッドには, 第 1 引数に入力となる配列, 第 2 引数に出力となる配列が引数としてわたされます. これらの配列の構造は同じとなっており, 多次元配列の要素として <code>Float32Array</code> が格納されています. そして, これが, 入力, または, 出力のサウンドデータとなります. 実は, オーディオ処理の実装の理解としては <code>ScriptProcessorNode</code> と大差ありません.</p>
-<p>多次元配列なので, まずは, <code>0</code> 番目の要素にアクセスして要素となっている配列を取得します (この処理は, 特に理屈なく, こうするものだと理解してだいじょうぶでしょう). 取得した配列は, チャンネルごとに <strong>128 サンプル</strong>の <code>Float32Array</code> が格納されています.</p>
+<p><code>process</code> メソッドには, 第 1 引数に入力となる配列, 第 2 引数に出力となる配列が引数としてわたされます. これら引数の配列の構造は同じとなっており, 多次元配列の要素として <code>Float32Array</code> が格納されています. これが, 入力, または, 出力のサウンドデータとなります. 実は, オーディオ処理の実装の理解としては <code>ScriptProcessorNode</code> と大差ありません.</p>
+<p>まずは, <code>0</code> 番目の要素にアクセスして <code>Float32Array</code> が各要素となっている配列を取得します (この処理に関しては, 特に理屈なく, こうするものだと理解してだいじょうぶでしょう).</p>
+<p>そして, 取得した配列は, チャンネルごとに <strong>128 サンプル</strong>の <code>Float32Array</code> が格納されています.</p>
 <p><img src="https://user-images.githubusercontent.com/4006693/110239593-256cc880-7f8b-11eb-879b-f8af1726af29.png" alt="128 samples の Float32Array がチャンネル順に格納されている"></p>
 <p>したがって, チャンネルごとの <code>Float32Array</code> を走査して, 出力となる <code>Float32Array</code> の要素を格納していきます.</p>
 <p>1 つ注意点としては, 入力データは必ずしも格納されているわけではないので, 条件判定で <code>undefined</code> でないか判定しています.</p>
@@ -457,7 +458,7 @@
 <p><a href="https://korilakkuma.github.io/audio-worklet-samples/samples/oscillator">オシレーター デモ</a></p>
 <p>メインスレッドで注目したいのは,</p>
 <ul>
-<li><code>AudioParamDescriptor</code> によって定義された <code>AudioParam</code> を <code>AudioParamMap</code> (<code>AudioWorkletNode</code> の <code>parameters</code> プロパティ) として参照している</li>
+<li><code>AudioParamDescriptor</code> によって定義された (独自パラメータの) <code>AudioParam</code> を <code>AudioParamMap</code> (<code>AudioWorkletNode</code> の <code>parameters</code> プロパティ) として参照している</li>
 <li><code>MessagePort</code> を利用して, オシレーターの波形 (文字列) をオーディオスレッドに送信している</li>
 </ul>
 <p><code>AudioParamMap</code> は, <code>AudioParam</code> を要素にもつ <code>Map</code> なので, <code>Map</code> がもつメソッドを利用して, <code>AudioParam</code> を取得可能です.</p>
@@ -605,7 +606,7 @@
 <span style="color:#a6e22e">registerProcessor</span>(<span style="color:#e6db74">&#39;oscillator&#39;</span>, <span style="color:#a6e22e">Oscillator</span>);
 </code></pre></div><h2 id="ボーカルキャンセラ">ボーカルキャンセラ</h2>
 <p><a href="https://korilakkuma.github.io/audio-worklet-samples/samples/vocal-canceler">ボーカルキャンセラ デモ</a></p>
-<p>独自パラメータであるボーカルキャンセラの <code>depth</code> も <code>AudioParamDescriptor</code> で定義したことにより, <code>AudioWorkletNode</code> インスタンスから <code>parameters</code> プロパティとして参照可能となります.</p>
+<p>独自パラメータである, ボーカルキャンセラの <code>depth</code> も <code>AudioParamDescriptor</code> で定義することによって, <code>AudioWorkletNode</code> インスタンスから <code>parameters</code> プロパティとして参照可能となります.</p>
 <p>main-scripts/vocal-canceler.js</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#e6db74">&#39;use strict&#39;</span>;
 

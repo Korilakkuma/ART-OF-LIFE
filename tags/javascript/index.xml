@@ -13,7 +13,7 @@
       <pubDate>Sat, 12 Dec 2020 23:12:00 +0900</pubDate>
       
       <guid>https://art-of-life.jp/posts/audio-worklet/</guid>
-      <description>AudioWorklet とは ? 概要 Web Audio が定義する標準のノード (GainNode, DelayNode, BiquadFilterNode など) の組み合わせでは不可能な音響処理 (ピッチシフターやノイズサプレッサなど) を直接サウンドデー</description>
+      <description>AudioWorklet とは ? 概要 Web Audio API が定義する標準のノード (GainNode, DelayNode, BiquadFilterNode など) の組み合わせでは不可能な音響処理 (ピッチシフターやノイズサプレッサなど) を直接サウンドデ</description>
     </item>
     
     <item>
