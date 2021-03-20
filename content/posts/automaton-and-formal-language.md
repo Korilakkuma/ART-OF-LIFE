@@ -356,11 +356,12 @@ typedef struct {
 
 typedef struct {
   TokenTypes type;
-  char token[TOKEN_LENGTH];  // トークン対象の文字列
-  int value;                 // `NUMBER` の場合に有用な値となる
+  char token[TOKEN_LENGTH];
+  int value;
 } Token;
 
 extern char *tokenize(char *in, Token *token);
+extern void tokenize_print(char *in, Token *tokens);
 ```
 
 まず, 内部結合の関数 (プライベート関数) `getTokenType` は, 文字を入力としてうけとると, `TokenMap` を参照して, 対応する `TokenTypes` を戻り値として返します.
@@ -379,6 +380,8 @@ Tokenization (字句解析の実体) は, `tokenize` 関数です. 入力文字�
 
 `NUMBER` の場合も, 同じく先読みして, `NUMBER` であるかぎり, 次の 1 文字を先読みし続けます (ただし, バッファオーバーフローをしないかチェックし, そうであれば, `BUFFER_OVERFLOW_ERROR` を格納して終了します). 数字を読み終えたら, 文字列を `strtol` 関数で, 数値 (`int`) に変換します (ただし, `.` は無視されます).
 
+`tokenize_print` は, 字句解析したトークンの情報を出力する関数です.
+
 X-MML Tokenization (字句解析)
 ```c++
 #include "token.h"
@@ -386,11 +389,31 @@ X-MML Tokenization (字句解析)
 static TokenTypes getTokenType(char c);
 
 static TokenMap tokenMap[] = {
-    {'T', TEMPO},  {'O', OCTAVE}, {'C', NOTE},   {'D', NOTE},   {'E', NOTE},
-    {'F', NOTE},   {'G', NOTE},   {'A', NOTE},   {'B', NOTE},   {'+', NOTE},
-    {'-', NOTE},   {'R', REST},   {'0', NUMBER}, {'1', NUMBER}, {'2', NUMBER},
-    {'3', NUMBER}, {'4', NUMBER}, {'5', NUMBER}, {'6', NUMBER}, {'7', NUMBER},
-    {'8', NUMBER}, {'9', NUMBER}, {'.', NUMBER}, {'\0', EOM}};
+  {'T', TEMPO},
+  {'O', OCTAVE},
+  {'C', NOTE},
+  {'D', NOTE},
+  {'E', NOTE},
+  {'F', NOTE},
+  {'G', NOTE},
+  {'A', NOTE},
+  {'B', NOTE},
+  {'+', NOTE},
+  {'-', NOTE},
+  {'R', REST},
+  {'0', NUMBER},
+  {'1', NUMBER},
+  {'2', NUMBER},
+  {'3', NUMBER},
+  {'4', NUMBER},
+  {'5', NUMBER},
+  {'6', NUMBER},
+  {'7', NUMBER},
+  {'8', NUMBER},
+  {'9', NUMBER},
+  {'.', NUMBER},
+  {'\0', EOM}
+};
 
 char *tokenize(char *in, Token *token) {
   while (*in == ' ') {
@@ -400,24 +423,24 @@ char *tokenize(char *in, Token *token) {
   TokenTypes t = getTokenType(*in);
 
   if (t == EOM) {
-    token->type = EOM;
+    token->type     = EOM;
     token->token[0] = *in;
     return in;
   }
 
   switch (t) {
     case TEMPO:
-      token->type = t;
+      token->type     = t;
       token->token[0] = *in;
       token->token[1] = '\0';
       break;
     case OCTAVE:
-      token->type = t;
+      token->type     = t;
       token->token[0] = *in;
       token->token[1] = '\0';
       break;
     case NOTE:
-      token->type = t;
+      token->type     = t;
       token->token[0] = *in;
       token->token[1] = '\0';
 
@@ -434,7 +457,7 @@ char *tokenize(char *in, Token *token) {
 
       break;
     case REST:
-      token->type = t;
+      token->type     = t;
       token->token[0] = *in;
       token->token[1] = '\0';
       break;
@@ -450,7 +473,7 @@ char *tokenize(char *in, Token *token) {
           token->token[len + 0] = *in;
           token->token[len + 1] = '\0';
         } else {
-          token->type = BUFFER_OVERFLOW_ERROR;
+          token->type     = BUFFER_OVERFLOW_ERROR;
           token->token[0] = *in;
           token->token[1] = '\0';
 
@@ -458,7 +481,7 @@ char *tokenize(char *in, Token *token) {
         }
       }
 
-      token->type = NUMBER;
+      token->type  = NUMBER;
       token->value = (int)strtol(token->token, NULL, 10);
 
       // Look-behind
@@ -466,7 +489,7 @@ char *tokenize(char *in, Token *token) {
 
       break;
     default:
-      token->type = UNKNOWN_TOKEN_ERROR;
+      token->type     = UNKNOWN_TOKEN_ERROR;
       token->token[0] = *in;
       token->token[1] = '\0';
       break;
@@ -475,7 +498,69 @@ char *tokenize(char *in, Token *token) {
   return ++in;
 }
 
+void tokenize_print(char *in, Token *tokens) {
+  while (1) {
+    Token token;
+
+    token.type     = UNKNOWN_TOKEN_ERROR;
+    token.token[0] = '\0';
+    token.value    = -1;
+
+    char *type;
+
+    in = tokenize(in, &token);
+
+    switch (token.type) {
+      case BUFFER_OVERFLOW_ERROR:
+        fprintf(stderr, "Error: Buffer Overflow\n");
+        exit(EXIT_FAILURE);
+      case UNKNOWN_TOKEN_ERROR:
+        fprintf(stderr, "Error: %s is Unknown Token\n", token.token);
+        exit(EXIT_FAILURE);
+      default:
+        switch (token.type) {
+          case TEMPO:
+            type = "TEMPO";
+            break;
+          case OCTAVE:
+            type = "OCTAVE";
+            break;
+          case NOTE:
+            type = "NOTE";
+            break;
+          case REST:
+            type = "REST";
+            break;
+          case NUMBER:
+            type = "NUMBER";
+            break;
+          case BUFFER_OVERFLOW_ERROR:
+          case UNKNOWN_TOKEN_ERROR:
+            exit(EXIT_FAILURE);
+          case EOM:
+          default :
+            type = "EOM";
+            break;
+        }
+
+        fprintf(stdout, "%-6s %4s (value=%3d)\n", type, token.token, token.value);
+
+        *tokens++ = token;
+
+        break;
+    }
+
+    if (token.type == EOM) {
+      break;
+    }
+  }
+}
+
 static TokenTypes getTokenType(char c) {
+  if (c == '\0') {
+    return EOM;
+  }
+
   for (int i = 0; tokenMap[i].token != '\0'; i++) {
     if (c == tokenMap[i].token) {
       return tokenMap[i].type;
@@ -488,66 +573,227 @@ static TokenTypes getTokenType(char c) {
 
 ## X-MML の構文解析
 
+### 再帰的下向き構文解析 (下降型構文解析)
+
+**再帰的下向き構文解析**とは, (Yacc のような自動生成ツールを使わずに) 構文解析を実装する場合, 主流となっている構文解析の方法です. 主流となっている理由は簡単に説明すると,
+
+- 構文規則と 1 対 1 に対応したコードを実装するのでわかりやすい
+- 演算子の優先順位を考慮する必要がない
+- 一般文の解析にも使うことができて, 適用範囲が広い
+
+といったことがあげられます.
+
+再帰的下向き構文解析では, 構文図や BNF (バッカス記法) で表現される構文規則をそのまま適用します. したがって, 先ほど定義した, X-MML の有限オートマトンと 1 対 1 に対応するようにコードを実装すれば, 再帰的下向き構文解析となります.
+
+![X-MML の有限オートマトン (構文図)](https://user-images.githubusercontent.com/4006693/110209824-f1819c80-7ed1-11eb-97c4-fcafb6efe523.png)
+
+再帰的下向き構文解析を実装する場合, 構文規則は以下の 2 つの条件を満たす必要があります.
+
+- 次のトークンを取得したときに, 構文規則として何をすべきかが一意に決定される
+- 左再帰性をもたない (左再帰性を除去する)
+
+前者の条件が必要な理由は直感的にも理解できるかと思います. オートマトンで遷移する場合, 一意に遷移先が決定できないと, 次の状態を決定できないはずです (一意に決まらない遷移 (**$\epsilon$ 遷移**) をもつオートマトンは, **非決定性オートマトン**と呼ばれます).
+
+後者の条件が必要な理由は簡単で, 無限ループをつくらないためです. X-MML のテンポで説明します. BNF (バッカス記法) で表現すると, 左再帰性をもたないテンポは, 以下のようになります.
+
+```
+<TEMPO> ::= T<Digits>
+<Digits> ::= <Digits>|0|1|2|3|4|5|6|7|9
+```
+
+ここで, 左再帰性をもつようにしてしまうと, 左辺の `<TEMPO>` を右辺で置換したときに, 再び `<TEMPO>` が出現するので, 永遠に終端記号にたどりつくことができずに, 無限ループとなってしまいます.
+
+```
+<TEMPO> ::= T<Digits><TEMPO>
+<Digits> ::= <Digits>|0|1|2|3|4|5|6|7|9
+```
+
+### 構文木
+
+先ほどの BNF のように, 構文規則の左辺を右辺で置換していく処理を繰り返すことが実は構文解析でもあります. 左辺を右辺に変換する処理を, **導出**, **生成**, **書き換え**などと表現します.
+
+そして, このような導出過程の表現形式として**木構造**が適しており, 構文解析過程を保持する木構造を**解析木**と呼びます. ただし, 解析木は, 実際のコード生成には無駄な情報も含んでいるので, 解析木からコード生成に必要な要素のみ抽出した木構造を**構文木** (**抽象構文木**) と呼びます.
+
+結論から見せますと, X-MML の構文木は以下のようになります (EOM は **E**nd **O**f **M**ML で MML の終端を意味します).
+
+<img src="https://user-images.githubusercontent.com/4006693/111919331-d4052300-8acc-11eb-8b43-c3b036f2daca.png" alt="X-MML の構文木 (X-MML の実行結果)" style="max-width: 100%;" />
+
+この構文木を, 行きがけ順 (preorder), つまり,
+
+1. 根
+1. 左部分木
+1. 右部分木
+
+の順で走査していくと, 入力された MML を構築できることがわかるかと思います.
+
+
+それでは, 実際の構文解析のコードを解説します.
+
+`Tree` は, 木構造のノード (根, 葉を含む) を表現する構造体です, トークンと, 左の子, 右の子をもつ**二分木**となります.
+
 X-MML 構文解析
 ```c++
-#include "token.h"
+#include "../tokenizer/token.h"
 
-#define TRUE 1
-#define FALSE 0
+typedef struct Tree {
+  Token *token;
+  struct Tree *left;
+  struct Tree *right;
+} Tree;
 
-int parse(Token *tokens, Token *tree, int length) {
-  if (length < 6) {
-    return FALSE;
+extern void tree_construct(Token *tokens, Tree *trees);
+extern void tree_destruct(Tree *trees);
+extern void tree_print(Tree *trees);
+```
+
+`tree_construct` が, 構文解析のメインルーチンです. 関数が終了しても, ノードは保持しておく必要があるので, メモリを動的に確保しています. また, 根となるテンポ以外では, 1 つ前のポインタ (ノード) を参照して, 現在のノードを右の子 (右部分木) として連結している処理に着目してください.
+
+そして, 再帰呼び出しで, 根から葉に向かって, つまり, **下向き**に構文木を生成します.
+
+ちなみに, `default` ラベルの処理は, 字句解析が正しく実行されていれば, 実行されることはないはずです.
+
+`tree_destruct` は, `tree_construct` で確保したノードのための動的メモリを解放するルーチンです. 再帰呼び出しで, 右部分木の葉まで, ポインタを進めて, そのあとは, 1 つずつポインタを戻して, 左の子, 右の子のメモリを解放していきます.
+
+`tree_print` は, 構文解析した構文木を出力する関数です.
+
+```c++
+#include "tree.h"
+
+void tree_construct(Token *tokens, Tree *trees) {
+  Tree *tree  = (Tree *)malloc(sizeof(Tree));
+  Tree *left  = (Tree *)malloc(sizeof(Tree));
+  Tree *right = (Tree *)malloc(sizeof(Tree));
+
+  switch (tokens->type) {
+    case TEMPO:
+      // Left leaf
+      left->token = tokens + 1;  // Look-ahead
+      left->left  = NULL;
+      left->right = NULL;
+
+      // Right partial tree
+      right->left  = NULL;
+      right->right = NULL;
+
+      // Root
+      tree->token = tokens;
+      tree->left  = left;
+      tree->right = right;
+      break;
+    case OCTAVE:
+      // Left leaf
+      left->token = tokens + 1;  // Look-ahead
+      left->left  = NULL;
+      left->right = NULL;
+
+      // Right partial tree
+      right->left  = NULL;
+      right->right = NULL;
+
+      // Root
+      tree->token = tokens;
+      tree->left  = left;
+      tree->right = right;
+
+      // Concat partial tree
+      (trees - 1)->right = tree;
+      break;
+    case NOTE:
+    case REST:
+      // Left leaf
+      left->token = tokens + 1;  // Look-ahead
+      left->left  = NULL;
+      left->right = NULL;
+
+      // Right partial tree
+      right->left  = NULL;
+      right->right = NULL;
+
+      // Root
+      tree->token = tokens;
+      tree->left  = left;
+      tree->right = right;
+
+      // Concat partial tree
+      (trees - 1)->right = tree;
+      break;
+    case EOM:
+      // Root and Right leaf
+      tree->token = tokens;
+      tree->left  = NULL;
+      tree->right = NULL;
+
+      // Concat partial tree
+      (trees - 1)->right = tree;
+
+      *trees = *tree;
+      return;
+    default:
+      tree->token = tokens;
+      tree->left  = NULL;
+      tree->right = NULL;
+
+      *trees = *tree;
+      return;
   }
 
-  if (((tokens + 0)->type != TEMPO) || ((tokens + 1)->type != NUMBER)) {
-    return FALSE;
-  }
+  *trees++ = *tree;
 
-  if (((tokens + 2)->type != OCTAVE) || ((tokens + 3)->type != NUMBER)) {
-    return FALSE;
-  }
+  tokens += 2;
 
-  if ((((tokens + 4)->type != NOTE) && ((tokens + 4)->type != REST)) ||
-      ((tokens + 5)->type != NUMBER)) {
-    return FALSE;
-  }
+  tree_construct(tokens, trees);
+}
 
-  int p = 0;
+void tree_destruct(Tree *trees) {
+ if (trees->right == NULL) {
+   // Bottom up pointer
+   --trees;
 
-  tree[p++] = tokens[0];
-  tree[p++] = tokens[1];
-  tree[p++] = tokens[2];
-  tree[p++] = tokens[3];
-  tree[p++] = tokens[4];
-  tree[p++] = tokens[5];
+   free(trees->left);
+   free(trees->right);
 
-  while (p < length) {
-    switch ((tokens + p)->type) {
-      case TEMPO:
-      case OCTAVE:
-      case NOTE:
-      case REST:
-        tree[p + 0] = tokens[p + 0];
-        tree[p + 1] = tokens[p + 1];
-        break;
-      case EOM:
-      default:
-        break;
+   if (trees->token->type == TEMPO) {
+     free(trees);
+   }
+
+   return;
+ }
+
+ // Increment until pointing the right leaf by recursive call
+ tree_destruct(++trees);
+}
+
+void tree_print(Tree *trees) {
+  int indent = 0;
+
+  while (trees->right != NULL) {
+    for (int i = 0; i < indent; i++) {
+      fputs("    ", stdout);
     }
 
-    p += 2;
+    fprintf(stdout, "   %-2s\n", trees->token->token);
+
+    for (int i = 0; i < indent; i++) {
+      fputs("    ", stdout);
+    }
+
+    fputs("  / \\\n", stdout);
+
+    for (int i = 0; i < indent; i++) {
+      fputs("    ", stdout);
+    }
+
+    if ((trees + 1)->right == NULL) {
+      fprintf(stdout, "%s", trees->left->token->token);
+    } else {
+      fprintf(stdout, "%s\n", trees->left->token->token);
+    }
+
+    ++trees;
+    ++indent;
   }
 
-  if (((tree + p - 2)->type != NOTE) && ((tree + p - 2)->type != REST)) {
-    return FALSE;
-  }
-
-  if (((tree + p - 1)->type != NUMBER)) {
-    return FALSE;
-  }
-
-  return TRUE;
+  fputs("  EOM\n", stdout);
 }
 ```
 
