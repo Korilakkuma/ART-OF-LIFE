@@ -67,7 +67,7 @@ hasCJKLanguage = true
 
 # Enter a link for the follow button on the left
 [params.profile]
-    follow_button = "https://github.com/Korilakkuma"
+    # follow_button = "https://github.com/Korilakkuma"
 
 
 [social]
