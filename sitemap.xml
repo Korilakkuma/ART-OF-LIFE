@@ -1,440 +1,266 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://art-of-life.jp/posts/20150322-20210322/</loc>
     <lastmod>2021-03-22T16:35:29+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/</loc>
     <lastmod>2021-03-22T16:35:29+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/categories/</loc>
     <lastmod>2021-03-22T16:35:29+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/categories/jobs/</loc>
     <lastmod>2021-03-22T16:35:29+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/</loc>
     <lastmod>2021-03-22T16:35:29+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/automaton/</loc>
     <lastmod>2021-03-07T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/categories/automaton/</loc>
     <lastmod>2021-03-07T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/automaton-and-formal-language/</loc>
     <lastmod>2021-03-07T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/categories/computer-sience/</loc>
     <lastmod>2021-03-07T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/context-free-language/</loc>
     <lastmod>2021-03-07T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/finite-automaton/</loc>
     <lastmod>2021-03-07T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/formal-language/</loc>
     <lastmod>2021-03-07T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/categories/language-theory/</loc>
     <lastmod>2021-03-07T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/pushdown-automaton/</loc>
     <lastmod>2021-03-07T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/regular-language/</loc>
     <lastmod>2021-03-07T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/</loc>
     <lastmod>2021-03-07T20:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/categories/audio/</loc>
     <lastmod>2020-12-12T23:12:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/audioworklet/</loc>
     <lastmod>2020-12-12T23:12:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/audio-worklet/</loc>
     <lastmod>2020-12-12T23:12:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/javascript/</loc>
     <lastmod>2020-12-12T23:12:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/categories/programming/</loc>
     <lastmod>2020-12-12T23:12:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/web-audio-api/</loc>
     <lastmod>2020-12-12T23:12:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/hls.js/</loc>
     <lastmod>2020-11-29T17:25:45+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/id3-tag/</loc>
     <lastmod>2020-11-29T17:25:45+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/id3-tag/</loc>
     <lastmod>2020-11-29T17:25:45+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/mp3/</loc>
     <lastmod>2020-11-29T17:25:45+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/categories/multimedia/</loc>
     <lastmod>2020-11-29T17:25:45+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/how-to-use-xsound-as-module-base/</loc>
     <lastmod>2020-10-25T23:50:24+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/xsound/</loc>
     <lastmod>2020-10-25T23:50:24+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/digital-signal-processing/</loc>
     <lastmod>2020-06-07T02:57:12+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/categories/digital-signal-processing/</loc>
     <lastmod>2020-06-07T02:57:12+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/linear-interpolation/</loc>
     <lastmod>2020-06-07T02:57:12+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/categories/mathematics/</loc>
     <lastmod>2020-06-07T02:57:12+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/resampling/</loc>
     <lastmod>2020-06-07T02:57:12+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/resampling/</loc>
     <lastmod>2020-06-07T02:57:12+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/sampling-theorem/</loc>
     <lastmod>2020-06-07T02:57:12+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/correlation-function/</loc>
     <lastmod>2020-05-02T08:52:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/time-stretch/</loc>
     <lastmod>2020-05-02T08:52:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/time-stretch/</loc>
     <lastmod>2020-05-02T08:52:00+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/noise-suppressor/</loc>
     <lastmod>2020-02-11T17:27:52+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/spectrum-subtraction/</loc>
     <lastmod>2020-02-11T17:27:52+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/spectrum-subtraction/</loc>
     <lastmod>2020-02-11T17:27:52+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/audio-processing-by-wasm/</loc>
     <lastmod>2020-02-02T17:27:52+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/c/</loc>
     <lastmod>2020-02-02T17:27:52+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/webassembly/</loc>
     <lastmod>2020-02-02T17:27:52+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/celp/</loc>
     <lastmod>2020-01-12T17:27:07+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/celp/</loc>
     <lastmod>2020-01-12T17:27:07+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/linear-prediction-analysis/</loc>
     <lastmod>2020-01-12T17:27:07+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/adpcm/</loc>
     <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/adpcm/</loc>
     <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/pcm/</loc>
     <lastmod>2019-11-21T20:52:27+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/mathematics/</loc>
     <lastmod>2019-10-20T17:02:31+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/stochastic-signal/</loc>
     <lastmod>2019-10-20T17:02:31+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/stochastic-signal/</loc>
     <lastmod>2019-10-20T17:02:31+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/laplace-transform/</loc>
     <lastmod>2019-10-05T18:00:22+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/laplace-transform/</loc>
     <lastmod>2019-10-05T18:00:22+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/z-transform/</loc>
     <lastmod>2019-10-05T18:00:22+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/digital-filter/</loc>
     <lastmod>2019-09-29T17:51:06+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/iir-filter/</loc>
     <lastmod>2019-09-29T17:51:06+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/fir-filter/</loc>
     <lastmod>2019-09-28T17:02:03+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/fast-fourier-transform/</loc>
     <lastmod>2019-09-22T17:02:42+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/fft/</loc>
     <lastmod>2019-09-22T17:02:42+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/fft/</loc>
     <lastmod>2019-09-22T17:02:42+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/dft/</loc>
     <lastmod>2019-09-21T17:27:49+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/discrete-fourier-transform/</loc>
     <lastmod>2019-09-21T17:27:49+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/fourier-transform/</loc>
     <lastmod>2019-09-21T17:27:49+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/fourier-transform/</loc>
     <lastmod>2019-09-21T17:27:49+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/mdct/</loc>
     <lastmod>2019-09-21T17:27:49+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/modified-discrete-cosine-transform/</loc>
     <lastmod>2019-09-21T17:27:49+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/wave/</loc>
     <lastmod>2019-09-11T17:25:18+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/wave/</loc>
     <lastmod>2019-09-11T17:25:18+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/mpeg-2-ps/</loc>
     <lastmod>2019-09-10T23:27:21+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/mpeg-2-systems/</loc>
     <lastmod>2019-09-10T23:27:21+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/mpeg2-systems/</loc>
     <lastmod>2019-09-10T23:27:21+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/mpeg-2-ts/</loc>
     <lastmod>2019-09-10T23:27:21+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/categories/video/</loc>
     <lastmod>2019-09-10T23:27:21+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/aac/</loc>
     <lastmod>2019-09-09T17:02:55+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/aac/</loc>
     <lastmod>2019-09-09T17:02:55+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/advanced-audio-coding/</loc>
     <lastmod>2019-09-09T17:02:55+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/mpeg-2-audio/</loc>
     <lastmod>2019-09-09T17:02:55+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/mp3/</loc>
     <lastmod>2019-08-28T05:27:13+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/mpeg-1-audio/</loc>
     <lastmod>2019-08-28T05:27:13+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/discrete-mathematics/</loc>
     <lastmod>2019-07-14T17:27:13+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/mathematics-for-programmer/</loc>
     <lastmod>2019-07-14T17:27:13+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/tags/webrtc/</loc>
     <lastmod>2019-05-29T20:00:59+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/posts/webrtc-overview/</loc>
     <lastmod>2019-05-29T20:00:59+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://art-of-life.jp/about/</loc>
     <lastmod>2019-05-26T17:27:00+09:00</lastmod>
   </url>
-  
 </urlset>
