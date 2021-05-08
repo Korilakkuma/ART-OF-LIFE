@@ -43,6 +43,14 @@
     </style>
     {{ end }}
 
+
+    {{ if .Params.disable_profile | or .Site.Params.icarus_disable_profile }}
+    <style>
+        #profile { display: none!important; }
+        #profile.card { display: block!important; }
+    </style>
+    {{ end }}
+
     <!-- needs to be loaded first for following scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha256-ImQvICV38LovIsvla2zykaCTdEh1Z801Y+DSop91wMU=" crossorigin="anonymous"></script>
 </head>
