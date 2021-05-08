@@ -647,7 +647,7 @@ $M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
 
 <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">tokenize</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>in, Token <span style="color:#f92672">*</span>token);
 <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">tokenize_print</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>in, Token <span style="color:#f92672">*</span>tokens);
-</code></pre></div><p>まず, 内部結合の関数 (プライベート関数) <code>getTokenType</code> は, 文字を入力としてうけとると, <code>TokenMap</code> を参照して, 対応する <code>TokenTypes</code> を戻り値として返します.</p>
+</code></pre></div><p>まず, 内部結合の関数 (プライベート関数) <code>get_token_type</code> は, 文字を入力としてうけとると, <code>TokenMap</code> を参照して, 対応する <code>TokenTypes</code> を戻り値として返します.</p>
 <p>Tokenization (字句解析の実体) は, <code>tokenize</code> 関数です. 入力文字列と, トークン情報を格納する <code>Token</code> 構造体へのポインタを引数にとり, 次に字句解析を開始する文字列へのポインタ (文字列の先頭アドレス) を返します.</p>
 <p>最初に, トークンの対象とならないスペースを読みとばします (スペースであれば <code>char *</code> 1 つぶん, ポインタを進めます).</p>
 <p>スペースでなければ, 現在の文字からトークンの種別を取得します.</p>
@@ -659,9 +659,9 @@ $M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
 <p>X-MML Tokenization (字句解析)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;token.h&#34;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">static</span> TokenTypes <span style="color:#a6e22e">getTokenType</span>(<span style="color:#66d9ef">char</span> c);
+<span style="color:#66d9ef">static</span> TokenTypes <span style="color:#a6e22e">get_token_type</span>(<span style="color:#66d9ef">char</span> c);
 
-<span style="color:#66d9ef">static</span> TokenMap tokenMap[] <span style="color:#f92672">=</span> {
+<span style="color:#66d9ef">static</span> TokenMap token_map[] <span style="color:#f92672">=</span> {
   {<span style="color:#e6db74">&#39;T&#39;</span>, TEMPO},
   {<span style="color:#e6db74">&#39;O&#39;</span>, OCTAVE},
   {<span style="color:#e6db74">&#39;C&#39;</span>, NOTE},
@@ -693,7 +693,7 @@ $M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
     <span style="color:#f92672">++</span>in;
   }
 
-  TokenTypes t <span style="color:#f92672">=</span> getTokenType(<span style="color:#f92672">*</span>in);
+  TokenTypes t <span style="color:#f92672">=</span> get_token_type(<span style="color:#f92672">*</span>in);
 
   <span style="color:#66d9ef">if</span> (t <span style="color:#f92672">==</span> EOM) {
     token<span style="color:#f92672">-&gt;</span>type     <span style="color:#f92672">=</span> EOM;
@@ -739,7 +739,7 @@ $M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
       token<span style="color:#f92672">-&gt;</span>token[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
 
       <span style="color:#75715e">// Look-ahead
-</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">while</span> ((<span style="color:#f92672">*</span>(<span style="color:#f92672">++</span>in) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>) <span style="color:#f92672">&amp;&amp;</span> (getTokenType(<span style="color:#f92672">*</span>in) <span style="color:#f92672">==</span> NUMBER)) {
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">while</span> ((<span style="color:#f92672">*</span>(<span style="color:#f92672">++</span>in) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>) <span style="color:#f92672">&amp;&amp;</span> (get_token_type(<span style="color:#f92672">*</span>in) <span style="color:#f92672">==</span> NUMBER)) {
         size_t len <span style="color:#f92672">=</span> strlen(token<span style="color:#f92672">-&gt;</span>token);
 
         <span style="color:#66d9ef">if</span> (len <span style="color:#f92672">&lt;</span> (TOKEN_LENGTH <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)) {
@@ -829,14 +829,14 @@ $M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
   }
 }
 
-<span style="color:#66d9ef">static</span> TokenTypes <span style="color:#a6e22e">getTokenType</span>(<span style="color:#66d9ef">char</span> c) {
+<span style="color:#66d9ef">static</span> TokenTypes <span style="color:#a6e22e">get_token_type</span>(<span style="color:#66d9ef">char</span> c) {
   <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\0&#39;</span>) {
     <span style="color:#66d9ef">return</span> EOM;
   }
 
-  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; tokenMap[i].token <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>; i<span style="color:#f92672">++</span>) {
-    <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">==</span> tokenMap[i].token) {
-      <span style="color:#66d9ef">return</span> tokenMap[i].type;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; token_map[i].token <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">==</span> token_map[i].token) {
+      <span style="color:#66d9ef">return</span> token_map[i].type;
     }
   }
 
