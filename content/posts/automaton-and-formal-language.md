@@ -364,7 +364,7 @@ extern char *tokenize(char *in, Token *token);
 extern void tokenize_print(char *in, Token *tokens);
 ```
 
-まず, 内部結合の関数 (プライベート関数) `getTokenType` は, 文字を入力としてうけとると, `TokenMap` を参照して, 対応する `TokenTypes` を戻り値として返します.
+まず, 内部結合の関数 (プライベート関数) `get_token_type` は, 文字を入力としてうけとると, `TokenMap` を参照して, 対応する `TokenTypes` を戻り値として返します.
 
 Tokenization (字句解析の実体) は, `tokenize` 関数です. 入力文字列と, トークン情報を格納する `Token` 構造体へのポインタを引数にとり, 次に字句解析を開始する文字列へのポインタ (文字列の先頭アドレス) を返します.
 
@@ -386,9 +386,9 @@ X-MML Tokenization (字句解析)
 ```c++
 #include "token.h"
 
-static TokenTypes getTokenType(char c);
+static TokenTypes get_token_type(char c);
 
-static TokenMap tokenMap[] = {
+static TokenMap token_map[] = {
   {'T', TEMPO},
   {'O', OCTAVE},
   {'C', NOTE},
@@ -420,7 +420,7 @@ char *tokenize(char *in, Token *token) {
     ++in;
   }
 
-  TokenTypes t = getTokenType(*in);
+  TokenTypes t = get_token_type(*in);
 
   if (t == EOM) {
     token->type     = EOM;
@@ -466,7 +466,7 @@ char *tokenize(char *in, Token *token) {
       token->token[1] = '\0';
 
       // Look-ahead
-      while ((*(++in) != '\0') && (getTokenType(*in) == NUMBER)) {
+      while ((*(++in) != '\0') && (get_token_type(*in) == NUMBER)) {
         size_t len = strlen(token->token);
 
         if (len < (TOKEN_LENGTH - 1)) {
@@ -556,14 +556,14 @@ void tokenize_print(char *in, Token *tokens) {
   }
 }
 
-static TokenTypes getTokenType(char c) {
+static TokenTypes get_token_type(char c) {
   if (c == '\0') {
     return EOM;
   }
 
-  for (int i = 0; tokenMap[i].token != '\0'; i++) {
-    if (c == tokenMap[i].token) {
-      return tokenMap[i].type;
+  for (int i = 0; token_map[i].token != '\0'; i++) {
+    if (c == token_map[i].token) {
+      return token_map[i].type;
     }
   }
 
