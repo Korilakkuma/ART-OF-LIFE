@@ -35,7 +35,7 @@
     <meta itemprop="name" content="Automaton and Formal Language">
 <meta itemprop="description" content="オートマトンと形式言語概要と簡易 MML パーサの実装"><meta itemprop="datePublished" content="2021-03-07T20:00:00&#43;09:00" />
 <meta itemprop="dateModified" content="2021-03-07T20:00:00&#43;09:00" />
-<meta itemprop="wordCount" content="8574">
+<meta itemprop="wordCount" content="8572">
 <meta itemprop="keywords" content="Automaton,Formal Language,Finite Automaton,Regular Language,Pushdown Automaton,Context Free Language," />
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Automaton and Formal Language"/>
@@ -266,7 +266,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2021-03-07 20:00:00 &#43;0900 JST" itemprop="datePublished">2021-03-07</time>
             &middot;
-            8574
+            8572
             words
             &middot;
             18
@@ -335,7 +335,7 @@
             <h1 id="オートマトンと形式言語とは-">オートマトンと形式言語とは ?</h1>
 <p>オートマトンと形式言語は, <a href="https://www.jitec.ipa.go.jp/1_13download/syllabus_fe_ver7_1.pdf">基本情報技術者試験</a>でもピックアップされる情報科学の基礎理論ですが, 実際のところなんのための理論なのかは説明されていないことも多く, とりあえず, 与えられた記号列が受理できるかどうかを判定して問題が解けるぐらいでとどまっていることも多いかと思います.</p>
 <p>この記事では, オートマトンと形式言語について, 基本情報技術者試験などでピックアップされる内容よりは, もう少し深く, その概要を解説します. もっとも, 数学的証明などは, それをピックアップするだけでも 1 つの記事になるので, 詳細はリファレンスを参考にしてください.</p>
-<p>ちなみに, この分野における (理論的な理解の) 数学的準備としては, <strong>集合</strong>, <strong>写像</strong>, <strong>数学的帰納法</strong>, <strong>背理法</strong> などが必要になります.</p>
+<p>ちなみに, この分野における (理論的な理解の) 数学的準備としては, <strong>集合</strong>, <strong>写像</strong>, <strong>数学的帰納法</strong>, <strong>背理法</strong>などが必要になります.</p>
 <p>後半では, 理論の実践として, 仕様をかなり限定した <strong>MML</strong> (<strong>Music Macro Language</strong>) パーサの実装をしてみます.</p>
 <h2 id="オートマトンと形式言語が基礎となっている技術">オートマトンと形式言語が基礎となっている技術</h2>
 <p>Web マイニングやコンパイラ・文書解析, 果ては, 生命科学におけるタンパク質の構造や遺伝子構造の記述・推定などの基礎になっています. 詳細は, のちのセクションで解説しますが, <strong>正規表現</strong> (正規言語: 有限オートマトンが受理する記号列) や,  C・Java などの<strong>汎用プログラミング言語</strong>や, Tex・HTML をはじめとする<strong>マークアップ言語</strong> (文脈自由言語: プッシュダウンオートマトンが受理する記号列) などは, すべて, オートマトンと形式言語が基礎となって成立している技術です.</p>
@@ -378,9 +378,9 @@
 <p>最も低い受理言語能力は, 有限オートマトン (Finite Automaton) が受理する<strong>正規言語</strong> (Regular Language)であり, その代表格が<strong>正規表現</strong> (Regular Expression)です.</p>
 <p>正規表現は, <strong>連結</strong> (Concatenation), <strong>選択</strong> (Union), <strong>閉包</strong> (Closure, クリーネ閉包とも呼ばれます) の 3 つで構成されており, これらは, 有限オートマトンで表現可能です. 以下は, その例です.</p>
 <ul>
-<li>連結 <code>[abcd][0-9]</code></li>
-<li>選択 <code>[abcd]</code></li>
-<li>閉包 <code>[abcd][0-9]*</code></li>
+<li>連結 <code>ab</code></li>
+<li>選択 <code>[ab]</code></li>
+<li>閉包 <code>(ab)*</code></li>
 </ul>
 <p>プッシュダウンオートマトンやチューリングマシンでは, 状態遷移のほかに補助記憶として, スタックや左右に移動可能な無限長のテープをもつことを考えます. この補助記憶によって, 有限オートマトンよりも受理言語の能力が広がります.</p>
 <h3 id="プッシュダウンオートマトン">プッシュダウンオートマトン</h3>
@@ -421,10 +421,10 @@
 </tr>
 </tbody>
 </table>
-<p>テキスト <code>&lt;</code>, <code>&gt;</code> そのものは <code>&amp;lt:</code> と <code>&amp;gt:</code> で表現する (<strong>実体参照</strong>) ので, テキストの中にタグが入ることはありません. これは<strong>正規表現で表現可能</strong>です. しかしながら, 開始タグと終了タグの対が正しい構造を成しているかは, 正規表現 (正規言語) では表現できず, <strong>文脈自由言語であれば表現可能</strong>です (具体的には, <strong>挿入モード</strong> (The insertion mode) などをスタックにプッシュしておくことで, 表現が可能になります).</p>
+<p>テキスト <code>&lt;</code>, <code>&gt;</code> そのものは <code>&amp;lt:</code> と <code>&amp;gt:</code> で表現する (<strong>実体参照</strong>) ので, テキストの中にタグが入ることはありません. これは<strong>正規表現で表現可能</strong>です. しかしながら, 開始タグと終了タグの対が正しい構造を成しているかは, 正規表現 (正規言語) では表現不可能で, <strong>文脈自由言語であれば表現可能</strong>です (具体的には, 開始タグをスタックにプッシュ (The stack of open elements) しておくことで, 表現が可能になります).</p>
 <h3 id="チューリングマシン">チューリングマシン</h3>
-<p><strong>チューリングマシン</strong> (Turing Machine) は, <strong>左右にも読み込み可能で, 無限長のテープ</strong>を補助記憶としてもつことで, <strong>句構造言語</strong> (Phrase Structure Language) を受理します. 句構造言語は, 文脈依存言語を含めた, 文脈自由言語, 正規言語すべてを受理します (各言語クラスは, <strong>真の包含関係</strong>にあります).</p>
-<p><img src="https://user-images.githubusercontent.com/4006693/110229062-f124e800-7f49-11eb-83f1-f8a6b2408352.png" alt="言語クラスの包含関係"></p>
+<p><strong>チューリングマシン</strong> (Turing Machine) は, <strong>左右にも読み込み可能で, 無限長のテープ</strong>を補助記憶としてもつことで, <strong>句構造言語</strong> (Phrase Structure Language) を受理します. 句構造言語は, 文脈依存言語を含めた, 文脈自由言語, 正規言語すべてを受理します (各言語クラスは, <strong>真の包含関係</strong>にあります (チョムスキー階層)).</p>
+<p><img src="https://user-images.githubusercontent.com/4006693/110229062-f124e800-7f49-11eb-83f1-f8a6b2408352.png" alt="言語クラスの包含関係 (チョムスキー階層)"></p>
 <h4 id="チャーチの提唱">チャーチの提唱</h4>
 <blockquote>
 <p>計算できる関数とは, その関数を計算するチューリングマシンが存在する関数のことである</p>
@@ -538,8 +538,8 @@ $M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
 <p>ここで, ミニマムな MML の言語仕様を決定しましょう. 音楽情報として成り立つためには, 音を表現する <code>C</code> ~ <code>B</code> と半音を制御する, <code>+</code> (<code>#</code>) と <code>-</code>, その長さ <code>0</code> - <code>9</code> と <code>.</code> の記号, そして, 休符の <code>R</code> が必要なことが考えられます.</p>
 <p>ただし, これだけだと, 時間の算出が不便なので, テンポを表現する <code>T</code> もあるとよさそうです. また, 1 オクターブ分の音程だと表現できる音楽に, かなり制限がかかるので, オクターブを制御する <code>O</code> も追加します.</p>
 <p>方言 (仕様のちがい) が MML において大きいので, <strong>コード (和音) は, 表現不可能</strong>とします.</p>
-<p>他にも, スラーやスタッカートなど音楽記号がありますが, なくても, コンピュータに演奏させるにはそれほど不自然でなかったり, 他の用途で代替可能 (スタッカートであれば, 音の長さを半分にして, 休符を追加する) と思われます.</p>
-<p>可読性のために, 最終的な構文の間にスペースは (MML パーサのアルゴリズムとして) いくつでも許容します (もちろん, メモリは有限なので, リソース的には無限というわけにはいきませんが &hellip;).</p>
+<p>他にも, スラーやスタッカートなど音楽記号がありますが, なくても, コンピュータに演奏させるにはさほど不自然でなかったり, 他の用途で代替可能 (スタッカートであれば, 音の長さを半分にして, 休符を追加する) と思われます.</p>
+<p>可読性のために, 最終的な構文の間にスペースは (MML パーサのアルゴリズムとして) いくつでも許容します (もちろん, メモリは有限なので, リソース的に無限というわけにはいきませんが &hellip;).</p>
 <p>例えば, 以下の MML は (構文的に) 等価です.</p>
 <p><code>T60O3R16A16B-16O4D16F12A12O5F12.C2C2R4D2.</code>
 <code>   T60   O3 R16      A16 B-16 O4 D16    F12 A12 O5 F12. C2 C2 R4 D2.   </code></p>
@@ -588,7 +588,7 @@ $M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
 </tr>
 <tr>
 <td>スペース</td>
-<td>可読性の確保. 構文の間であればいくでも許容する</td>
+<td>可読性の確保. 構文の間であればいくつでも許容する</td>
 </tr>
 </tbody>
 </table>
@@ -613,8 +613,8 @@ $M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
 .
 <img src="https://user-images.githubusercontent.com/4006693/110209824-f1819c80-7ed1-11eb-97c4-fcafb6efe523.png" alt="X-MML の有限オートマトン (T は T と数字, O は O と数字, N は C ~ B, (+, -) と数字, R は R と数字)"></p>
 <h2 id="x-mml-の実装">X-MML の実装</h2>
-<p>まずは, 入力記号となる, MML トークンを列挙体に定義します. <code>+</code>, <code>-</code> は, <code>NOTE</code>, <code>.</code> は <code>NUMBER</code>  に関わるのでそれらに含めておきます (実装としてどのように落とし込むかのちがいなので別でも問題ありません). MML トークンとして認識できない文字のために <code>UNKNOWN_TOKEN_ERROR</code>, また, 字句解析中のためのバッファオーバーフローを識別するために <code>BUFFER_OVERFLOW_ERROR</code> を定義しています.</p>
-<p>また, 入力記号から, MML トークンを引き出せるように, <code>TokenMap</code> という構造体 (辞書, マップ &hellip; etc) を定義しています.</p>
+<p>まずは, 入力記号となる, MML トークンを列挙体に定義します. <code>+</code>, <code>-</code> は, <code>NOTE</code>, <code>.</code> は <code>NUMBER</code>  に関わるのでそれらに含めておきます (実装としてどのように落とし込むかのちがいなので別でも問題ありません). MML トークンとして認識できない文字のために <code>UNKNOWN_TOKEN_ERROR</code>, 字句解析中のバッファオーバーフローを識別するために <code>BUFFER_OVERFLOW_ERROR</code> をそれぞれ定義しています.</p>
+<p>また, 入力記号から, MML トークンを引き出せるように, <code>TokenMap</code> という構造体を定義しています.</p>
 <p>さらに, トークンに関する情報をまとめて格納できるように, <code>Token</code> 構造体を定義しています.</p>
 <p>X-MML トークンの定義</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
