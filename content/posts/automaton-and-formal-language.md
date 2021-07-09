@@ -415,6 +415,20 @@ static TokenMap token_map[] = {
   {'\0', EOM}
 };
 
+static TokenTypes get_token_type(char c) {
+  if (c == '\0') {
+    return EOM;
+  }
+
+  for (int i = 0; token_map[i].token != '\0'; i++) {
+    if (c == token_map[i].token) {
+      return token_map[i].type;
+    }
+  }
+
+  return UNKNOWN_TOKEN_ERROR;
+}
+
 char *tokenize(char *in, Token *token) {
   while (*in == ' ') {
     ++in;
@@ -555,20 +569,6 @@ void tokenize_print(char *in, Token *tokens) {
     }
   }
 }
-
-static TokenTypes get_token_type(char c) {
-  if (c == '\0') {
-    return EOM;
-  }
-
-  for (int i = 0; token_map[i].token != '\0'; i++) {
-    if (c == token_map[i].token) {
-      return token_map[i].type;
-    }
-  }
-
-  return UNKNOWN_TOKEN_ERROR;
-}
 ```
 
 ## X-MML の構文解析
@@ -594,7 +594,7 @@ static TokenTypes get_token_type(char c) {
 
 前者の条件が必要な理由は直感的にも理解できるかと思います. オートマトンで遷移する場合, 一意に遷移先が決定できないと, 次の状態を決定できないはずです (一意に決まらない遷移 (**$\epsilon$ 遷移**) をもつオートマトンは, **非決定性オートマトン**と呼ばれます).
 
-後者の条件が必要な理由は簡単で, 無限ループをつくらないためです. X-MML のテンポで説明します. BNF (バッカス記法) で表現すると, 左再帰性をもたないテンポは, 以下のようになります.
+後者の条件が必要な理由は, 無限ループをつくらないためです. X-MML のテンポで説明します. BNF (バッカス記法) で表現すると, 左再帰性をもたないテンポは, 以下のようになります.
 
 ```
 <TEMPO> ::= T<Digits>
