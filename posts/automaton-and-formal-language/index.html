@@ -35,7 +35,7 @@
     <meta itemprop="name" content="Automaton and Formal Language">
 <meta itemprop="description" content="オートマトンと形式言語概要と簡易 MML パーサの実装"><meta itemprop="datePublished" content="2021-03-07T20:00:00&#43;09:00" />
 <meta itemprop="dateModified" content="2021-03-07T20:00:00&#43;09:00" />
-<meta itemprop="wordCount" content="8572">
+<meta itemprop="wordCount" content="8569">
 <meta itemprop="keywords" content="Automaton,Formal Language,Finite Automaton,Regular Language,Pushdown Automaton,Context Free Language," />
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Automaton and Formal Language"/>
@@ -266,7 +266,7 @@
             <i class="fa fa-calendar"></i>
             <time datetime="2021-03-07 20:00:00 &#43;0900 JST" itemprop="datePublished">2021-03-07</time>
             &middot;
-            8572
+            8569
             words
             &middot;
             18
@@ -688,6 +688,20 @@ $M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
   {<span style="color:#e6db74">&#39;\0&#39;</span>, EOM}
 };
 
+<span style="color:#66d9ef">static</span> TokenTypes <span style="color:#a6e22e">get_token_type</span>(<span style="color:#66d9ef">char</span> c) {
+  <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\0&#39;</span>) {
+    <span style="color:#66d9ef">return</span> EOM;
+  }
+
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; token_map[i].token <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">==</span> token_map[i].token) {
+      <span style="color:#66d9ef">return</span> token_map[i].type;
+    }
+  }
+
+  <span style="color:#66d9ef">return</span> UNKNOWN_TOKEN_ERROR;
+}
+
 <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">tokenize</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>in, Token <span style="color:#f92672">*</span>token) {
   <span style="color:#66d9ef">while</span> (<span style="color:#f92672">*</span>in <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39; &#39;</span>) {
     <span style="color:#f92672">++</span>in;
@@ -828,20 +842,6 @@ $M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
     }
   }
 }
-
-<span style="color:#66d9ef">static</span> TokenTypes <span style="color:#a6e22e">get_token_type</span>(<span style="color:#66d9ef">char</span> c) {
-  <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\0&#39;</span>) {
-    <span style="color:#66d9ef">return</span> EOM;
-  }
-
-  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; token_map[i].token <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>; i<span style="color:#f92672">++</span>) {
-    <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">==</span> token_map[i].token) {
-      <span style="color:#66d9ef">return</span> token_map[i].type;
-    }
-  }
-
-  <span style="color:#66d9ef">return</span> UNKNOWN_TOKEN_ERROR;
-}
 </code></pre></div><h2 id="x-mml-の構文解析">X-MML の構文解析</h2>
 <h3 id="再帰的下向き構文解析-下降型構文解析">再帰的下向き構文解析 (下降型構文解析)</h3>
 <p><strong>再帰的下向き構文解析</strong>とは, (Yacc のような自動生成ツールを使わずに) 構文解析を実装する場合, 主流となっている構文解析の方法です. 主流となっている理由は簡単に説明すると,</p>
@@ -859,7 +859,7 @@ $M={\langle}Q, {\sum}, {\delta}, q_{0}, F{\rangle}$,
 <li>左再帰性をもたない (左再帰性を除去する)</li>
 </ul>
 <p>前者の条件が必要な理由は直感的にも理解できるかと思います. オートマトンで遷移する場合, 一意に遷移先が決定できないと, 次の状態を決定できないはずです (一意に決まらない遷移 (<strong>$\epsilon$ 遷移</strong>) をもつオートマトンは, <strong>非決定性オートマトン</strong>と呼ばれます).</p>
-<p>後者の条件が必要な理由は簡単で, 無限ループをつくらないためです. X-MML のテンポで説明します. BNF (バッカス記法) で表現すると, 左再帰性をもたないテンポは, 以下のようになります.</p>
+<p>後者の条件が必要な理由は, 無限ループをつくらないためです. X-MML のテンポで説明します. BNF (バッカス記法) で表現すると, 左再帰性をもたないテンポは, 以下のようになります.</p>
 <pre><code>&lt;TEMPO&gt; ::= T&lt;Digits&gt;
 &lt;Digits&gt; ::= &lt;Digits&gt;|0|1|2|3|4|5|6|7|9
 </code></pre><p>ここで, 左再帰性をもつようにしてしまうと, 左辺の <code>&lt;TEMPO&gt;</code> を右辺で置換したときに, 再び <code>&lt;TEMPO&gt;</code> が出現するので, 永遠に終端記号にたどりつくことができずに, 無限ループとなってしまいます.</p>
