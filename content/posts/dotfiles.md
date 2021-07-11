@@ -1,13 +1,12 @@
 +++
 banner = ""
 categories = ["Programming", "Development"]
-date = 2021-05-09T15:07:47+09:00
+date = 2021-07-11T23:12:00+09:00
 description = "dotfiles を更新しました"
 images = []
 menu = ""
 tags = ["dotfiles", "Zsh", "Vim", "Language Protocol Server", "Tmux"]
 title = "Update dotfiles"
-draft = true
 disable_comments = false
 disable_profile = true
 disable_widgets = false
