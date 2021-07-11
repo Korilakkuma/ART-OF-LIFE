@@ -6,14 +6,14 @@
     <description>Recent content in dotfiles on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 28 Jul 2019 17:27:12 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/tags/dotfiles/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Jul 2021 23:12:00 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/tags/dotfiles/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Macbook Air 2019</title>
-      <link>https://art-of-life.jp/posts/macbook-air-2019/</link>
-      <pubDate>Sun, 28 Jul 2019 17:27:12 +0900</pubDate>
+      <title>Update dotfiles</title>
+      <link>https://art-of-life.jp/posts/dotfiles/</link>
+      <pubDate>Sun, 11 Jul 2021 23:12:00 +0900</pubDate>
       
-      <guid>https://art-of-life.jp/posts/macbook-air-2019/</guid>
-      <description>MacBook Air 2019 を買いました 開封の儀 🎉 使用感 久々に, MacBook Air に復帰したこともあり, やはりボディの薄さとバッテリーのもちはよく, 神出鬼没にコーディングしたり</description>
+      <guid>https://art-of-life.jp/posts/dotfiles/</guid>
+      <description>dotfiles Zsh zhs プライグインマネージャの導入 zsh プライグインの導入 コマンド入力支援 テーマ, カラー Vim LSP の導入 Language Protocol Server 編集支援 git 連携 ユーテリティ カラースキーマ</description>
     </item>
     
   </channel>

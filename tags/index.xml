@@ -6,7 +6,52 @@
     <description>Recent content in Tags on ART OF LIFE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 07 Mar 2021 20:00:00 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Jul 2021 23:12:00 +0900</lastBuildDate><atom:link href="https://art-of-life.jp/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dotfiles</title>
+      <link>https://art-of-life.jp/tags/dotfiles/</link>
+      <pubDate>Sun, 11 Jul 2021 23:12:00 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/dotfiles/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Language Protocol Server</title>
+      <link>https://art-of-life.jp/tags/language-protocol-server/</link>
+      <pubDate>Sun, 11 Jul 2021 23:12:00 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/language-protocol-server/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tmux</title>
+      <link>https://art-of-life.jp/tags/tmux/</link>
+      <pubDate>Sun, 11 Jul 2021 23:12:00 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/tmux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>https://art-of-life.jp/tags/vim/</link>
+      <pubDate>Sun, 11 Jul 2021 23:12:00 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Zsh</title>
+      <link>https://art-of-life.jp/tags/zsh/</link>
+      <pubDate>Sun, 11 Jul 2021 23:12:00 +0900</pubDate>
+      
+      <guid>https://art-of-life.jp/tags/zsh/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Automaton</title>
       <link>https://art-of-life.jp/tags/automaton/</link>

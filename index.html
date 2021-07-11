@@ -239,6 +239,171 @@
         </a>
 
         <header class="article-header">
+    <a href="https://art-of-life.jp/posts/dotfiles/">
+    <h1 class="article-title" itemprop="name">
+        Update dotfiles
+    </h1>
+    </a>
+    <div class="article-meta">
+
+        
+        <div class="article-date">
+            <i class="fa fa-calendar"></i>
+            <time datetime="2021-07-11 23:12:00 &#43;0900 JST" itemprop="datePublished">2021-07-11</time>
+            &middot;
+            118
+            words
+            &middot;
+            1
+            minute read
+        </div>
+        
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-folder"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/programming">Programming</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/categories/development">Development</a>
+                
+                
+            </div>
+            
+        
+
+        
+            
+            
+            <div class="article-category">
+                <i class="fa fa-tags"></i>
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/dotfiles">dotfiles</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/zsh">Zsh</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/vim">Vim</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/language-protocol-server">Language Protocol Server</a>
+                &middot;
+                
+                
+                <a class="article-category-link" href="https://art-of-life.jp/tags/tmux">Tmux</a>
+                
+                
+            </div>
+            
+        
+    </div>
+</header>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>
+                dotfiles を更新しました
+            </p>
+            <p class="article-more-link">
+                <a href="https://art-of-life.jp/posts/dotfiles/">
+                    Read more
+                </a>
+            </p>
+        </div>
+        <footer class="article-footer">
+    <a data-url="https://art-of-life.jp/posts/dotfiles/" data-id="22831f3682873967feb16840764ed0e9" class="article-share-link">
+        <i class="fa fa-share"></i>
+        Share
+    </a>
+    
+    <a href="https://art-of-life.jp/posts/dotfiles/#disqus_thread" class="article-comment-link">
+        Comments
+    </a>
+    
+
+    <script>
+    (function ($) {
+        
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+    </script>
+</footer>
+
+    </div>
+</article>
+
+<article class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        </a>
+
+        <header class="article-header">
     <a href="https://art-of-life.jp/posts/automaton-and-formal-language/">
     <h1 class="article-title" itemprop="name">
         Automaton and Formal Language
@@ -1702,167 +1867,6 @@
     </div>
 </article>
 
-<article class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        </a>
-
-        <header class="article-header">
-    <a href="https://art-of-life.jp/posts/adpcm/">
-    <h1 class="article-title" itemprop="name">
-        ADPCM
-    </h1>
-    </a>
-    <div class="article-meta">
-
-        
-        <div class="article-date">
-            <i class="fa fa-calendar"></i>
-            <time datetime="2019-11-21 20:52:27 &#43;0900 JST" itemprop="datePublished">2019-11-21</time>
-            &middot;
-            3210
-            words
-            &middot;
-            7
-            minute read
-        </div>
-        
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-folder"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/multimedia">Multimedia</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/audio">Audio</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/computer-sience">Computer Sience</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/categories/mathematics">Mathematics</a>
-                
-                
-            </div>
-            
-        
-
-        
-            
-            
-            <div class="article-category">
-                <i class="fa fa-tags"></i>
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/adpcm">ADPCM</a>
-                &middot;
-                
-                
-                <a class="article-category-link" href="https://art-of-life.jp/tags/pcm">PCM</a>
-                
-                
-            </div>
-            
-        
-    </div>
-</header>
-
-        <div class="article-entry" itemprop="articleBody">
-            <p>
-                ADPCM (適応差分パルス変調) の概要
-            </p>
-            <p class="article-more-link">
-                <a href="https://art-of-life.jp/posts/adpcm/">
-                    Read more
-                </a>
-            </p>
-        </div>
-        <footer class="article-footer">
-    <a data-url="https://art-of-life.jp/posts/adpcm/" data-id="9d928ff9bded2731e3c2b6065701568f" class="article-share-link">
-        <i class="fa fa-share"></i>
-        Share
-    </a>
-    
-    <a href="https://art-of-life.jp/posts/adpcm/#disqus_thread" class="article-comment-link">
-        Comments
-    </a>
-    
-
-    <script>
-    (function ($) {
-        
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-    </script>
-</footer>
-
-    </div>
-</article>
-
 
 <nav id="page-nav">
 
@@ -1917,6 +1921,14 @@
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/categories/development">
+                    development
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/categories/digital-signal-processing">
                     digital-signal-processing
                 </a>
@@ -1952,7 +1964,7 @@
                 <a class="category-list-link" href="https://art-of-life.jp/categories/programming">
                     programming
                 </a>
-                <span class="category-list-count">12</span>
+                <span class="category-list-count">13</span>
             </li>
             
             <li class="category-list-item">
@@ -2094,6 +2106,14 @@
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/dotfiles">
+                    dotfiles
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/fast-fourier-transform">
                     fast-fourier-transform
                 </a>
@@ -2154,6 +2174,14 @@
                     javascript
                 </a>
                 <span class="category-list-count">4</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/language-protocol-server">
+                    language-protocol-server
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
             <li class="category-list-item">
@@ -2326,6 +2354,22 @@
             
             <li class="category-list-item">
                 
+                <a class="category-list-link" href="https://art-of-life.jp/tags/tmux">
+                    tmux
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/vim">
+                    vim
+                </a>
+                <span class="category-list-count">1</span>
+            </li>
+            
+            <li class="category-list-item">
+                
                 <a class="category-list-link" href="https://art-of-life.jp/tags/wave">
                     wave
                 </a>
@@ -2370,6 +2414,14 @@
                     z-transform
                 </a>
                 <span class="category-list-count">3</span>
+            </li>
+            
+            <li class="category-list-item">
+                
+                <a class="category-list-link" href="https://art-of-life.jp/tags/zsh">
+                    zsh
+                </a>
+                <span class="category-list-count">1</span>
             </li>
             
         </ul>
@@ -2431,6 +2483,9 @@
         <a href="https://art-of-life.jp/tags/discrete-mathematics" style="font-size: 12px;">discrete-mathematics</a>
         
         
+        <a href="https://art-of-life.jp/tags/dotfiles" style="font-size: 12px;">dotfiles</a>
+        
+        
         <a href="https://art-of-life.jp/tags/fast-fourier-transform" style="font-size: 12px;">fast-fourier-transform</a>
         
         
@@ -2453,6 +2508,9 @@
         
         
         <a href="https://art-of-life.jp/tags/javascript" style="font-size: 12px;">javascript</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/language-protocol-server" style="font-size: 12px;">language-protocol-server</a>
         
         
         <a href="https://art-of-life.jp/tags/laplace-transform" style="font-size: 12px;">laplace-transform</a>
@@ -2518,6 +2576,12 @@
         <a href="https://art-of-life.jp/tags/time-stretch" style="font-size: 12px;">time-stretch</a>
         
         
+        <a href="https://art-of-life.jp/tags/tmux" style="font-size: 12px;">tmux</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/vim" style="font-size: 12px;">vim</a>
+        
+        
         <a href="https://art-of-life.jp/tags/wave" style="font-size: 12px;">wave</a>
         
         
@@ -2534,6 +2598,9 @@
         
         
         <a href="https://art-of-life.jp/tags/z-transform" style="font-size: 12px;">z-transform</a>
+        
+        
+        <a href="https://art-of-life.jp/tags/zsh" style="font-size: 12px;">zsh</a>
         
     </div>
 </div>
